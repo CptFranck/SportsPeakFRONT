@@ -1,0 +1,45 @@
+<div class="container p-4">
+  <div *ngIf="error">
+    <p>Error : {{ error }}</p>
+  </div>
+
+  <div class="container-fluid">
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Name</th>
+          <th scope="col">Goal</th>
+          <th scope="col">Description</th>
+          <th scope="col">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let exercise of exercises">
+          <td>{{ exercise.name }}</td>
+          <td>{{ exercise.goal }}</td>
+          <td>{{ exercise.description }}</td>
+          <td>
+            <div class="btn-group" role="group">
+              <div class="col p-1">
+                <i class="fa-solid fa-eye fa-lg text-secondary"></i>
+              </div>
+              <div class="col p-1">
+                <i class="fa-solid fa-pen-to-square fa-lg text-secondary"></i>
+              </div>
+              <div class="col p-1">
+                <i class="fa-solid fa-trash fa-lg text-danger"></i>
+              </div>
+            </div>
+          </td>
+          <div class="collapse" id="collapseExample">
+            <div class="card card-body">
+              Some placeholder content for the collapse component. This panel is
+              hidden by default but revealed when the user activates the
+              relevant trigger.
+            </div>
+          </div>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
