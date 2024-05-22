@@ -1,0 +1,58 @@
+<nav
+  class="navbar bg-dark navbar-expand-lg bg-body-tertiary border-body"
+  data-bs-theme="dark"
+>
+  <div class="container-fluid">
+    <a class="navbar-brand" routerLink="/">Sports Peak</a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarText"
+      aria-controls="navbarText"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+      <ul class="navbar-nav mx-auto h4">
+        <li class="nav-item">
+          <a
+            class="nav-link py-auto"
+            routerLink="/exercises"
+            routerLinkActive="active"
+          >
+            Exercises</a
+          >
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link py-auto"
+            routerLink="/exercise-types"
+            routerLinkActive="active"
+          >
+            Exercise Types
+          </a>
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link py-auto"
+            routerLink="/muscles"
+            routerLinkActive="active"
+          >
+            Muscles
+          </a>
+        </li>
+      </ul>
+      <ul class="navbar-nav h4">
+        <li class="nav-item px-0">
+          <a class="nav-link">FR</a>
+        </li>
+        <li class="nav-item px-0">
+          <a class="nav-link">EN</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
