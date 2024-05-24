@@ -1,1 +1,6 @@
-/* You can add global styles to this file, and also import other style files */
+.truncate {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  max-width: 1px;
+}

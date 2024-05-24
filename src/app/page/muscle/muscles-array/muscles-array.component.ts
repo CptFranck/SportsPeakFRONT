@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {NgForOf, NgIf} from "@angular/common";
+import {Muscle} from "../../../interface/dto/muscle";
 
 @Component({
   selector: 'app-muscles-array',
@@ -11,11 +12,11 @@ import {NgForOf, NgIf} from "@angular/common";
   templateUrl: './muscles-array.component.html',
 })
 export class MusclesArrayComponent implements OnInit {
-  @Input() muscles!: any[];
-  showDetails: { [key: string]: boolean } = {};
+  @Input() muscles!: Muscle[];
+  showDetails: { [id: string]: boolean } = {};
 
   ngOnInit(): void {
-    this.muscles.map(value => this.showDetails[value.id] = false)
+    this.muscles.map(muscle => this.showDetails[muscle.id] = false)
   }
 
   expendDetails(id: string): void {

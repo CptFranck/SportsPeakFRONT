@@ -14,15 +14,13 @@
   <tr *ngFor="let muscle of muscles">
     <td>{{ muscle.name }}</td>
 
-    <td *ngIf="!showDetails[muscle.id]"
-        style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden; max-width:1px;">
+    <td *ngIf="!showDetails[muscle.id]" class="truncate">
       {{ muscle.function }}
     </td>
     <td *ngIf="showDetails[muscle.id]">
       {{ muscle.function }}
     </td>
-    <td *ngIf="!showDetails[muscle.id]"
-        style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden; max-width:1px;">
+    <td *ngIf="!showDetails[muscle.id]" class="truncate">
       {{ muscle.description }}
     </td>
     <td *ngIf="showDetails[muscle.id]">
@@ -43,7 +41,6 @@
           (click)="expendDetails(muscle.id)"
           [attr.aria-expanded]="expendDetails"
           [attr.data-bs-target]="'#' + muscle.id "
-          aria-controls="collapseExample"
           class="btn btn-secondary"
           data-bs-toggle="collapse" type="button"
         >
