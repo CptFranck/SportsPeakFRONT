@@ -1,0 +1,76 @@
+<table class="table">
+  <thead>
+  <tr>
+    <th class="col-1" scope="col">Name</th>
+    <th class="col-5" scope="col">Function</th>
+    <th class="col-5" scope="col">Description</th>
+    <th class="col" scope="col">Used in</th>
+    <th class="col-1 text-center" scope="col">Details</th>
+    <th class="col-1 text-center" scope="col">Modify</th>
+    <th class="col-1 text-center" scope="col">Delete</th>
+  </tr>
+  </thead>
+  <tbody class="table-group-divider">
+  <tr *ngFor="let muscle of muscles">
+    <td>{{ muscle.name }}</td>
+
+    <td *ngIf="!showDetails[muscle.id]"
+        style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden; max-width:1px;">
+      {{ muscle.function }}
+    </td>
+    <td *ngIf="showDetails[muscle.id]">
+      {{ muscle.function }}
+    </td>
+    <td *ngIf="!showDetails[muscle.id]"
+        style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden; max-width:1px;">
+      {{ muscle.description }}
+    </td>
+    <td *ngIf="showDetails[muscle.id]">
+      {{ muscle.description }}
+    </td>
+    <td>
+      <ul class="list-group list-group-flush">
+        <li
+          *ngFor="let exercise of muscle.exercises"
+          class="list-group-item">
+          {{ exercise.name }}
+        </li>
+      </ul>
+    </td>
+    <td>
+      <div class="col p-1 text-center">
+        <button
+          (click)="expendDetails(muscle.id)"
+          [attr.aria-expanded]="expendDetails"
+          [attr.data-bs-target]="'#' + muscle.id "
+          aria-controls="collapseExample"
+          class="btn btn-secondary"
+          data-bs-toggle="collapse" type="button"
+        >
+          <i class="fa-solid fa-eye"></i>
+        </button>
+      </div>
+    </td>
+    <td>
+      <div class="col p-1 text-center">
+        <button
+          class="btn btn-secondary"
+          type="button"
+        >
+          <i class="fa-solid fa-pen-to-square"></i>
+        </button>
+      </div>
+    </td>
+    <td>
+      <div class="col p-1 text-center">
+        <button
+          class="btn btn-danger"
+          type="button"
+        >
+          <i class="fa-solid fa-trash"></i>
+        </button>
+      </div>
+    </td>
+  </tr>
+  </tbody>
+</table>

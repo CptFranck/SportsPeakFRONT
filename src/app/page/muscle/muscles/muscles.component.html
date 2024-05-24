@@ -1,0 +1,25 @@
+<div class="container p-4">
+  <div *ngIf="error">
+    <p>Error : {{ error }}</p>
+  </div>
+
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col">
+        <h2>Muscles saved in databases</h2>
+      </div>
+      <div class="col-2">
+        <button
+          class="btn btn-success"
+          data-bs-target="#exampleModal"
+          data-bs-toggle="modal"
+          type="button"
+        >
+          Add new <i class="fa-regular fa-square-plus"></i>
+        </button>
+        <app-modal title="New muscle :"/>
+      </div>
+    </div>
+    <app-muscles-array [muscles]="muscles"/>
+  </div>
+</div>

@@ -1,17 +1,17 @@
 import {Component, OnInit} from '@angular/core';
 import {Apollo} from 'apollo-angular';
-import {GET_MUSCLES} from '../../graphql/grapgql.operations';
+import {GET_MUSCLES} from '../../../graphql/grapgql.operations';
 import {CommonModule} from '@angular/common';
-import {ModalComponent} from "../../components/modal/modal.component";
+import {ModalComponent} from "../../../components/modal/modal.component";
+import {MusclesArrayComponent} from "../muscles-array/muscles-array.component";
 
 @Component({
   selector: 'app-muscles',
   standalone: true,
-  imports: [CommonModule, ModalComponent],
+  imports: [CommonModule, ModalComponent, MusclesArrayComponent],
   templateUrl: './muscles.component.html',
 })
 export class MusclesComponent implements OnInit {
-  showDetails: { [key: string]: boolean } = {};
   muscles: any[] = [];
   error: any;
 
@@ -26,11 +26,8 @@ export class MusclesComponent implements OnInit {
       .valueChanges.subscribe(({data, error}: any) => {
       this.muscles = data.getMuscles;
       this.error = error;
-      this.muscles.map(value => this.showDetails[value.id] = false)
     });
   }
 
-  expendDetails(id: string): void {
-    this.showDetails[id] = !this.showDetails[id]
-  }
+
 }
