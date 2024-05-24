@@ -9,11 +9,12 @@ import {GraphqlError} from "../../../interface/graphql/graphqlError";
 import {GraphqlResponse} from "../../../interface/graphql/graphqlResponse";
 import {MuscleFormComponent} from "../muscle-form/muscle-form.component";
 import {ModalButtonComponent} from "../../../components/button/modalButton/modal-button.component";
+import {MultiSelectComponent} from "../../../components/select/multi-select/multi-select.component";
 
 @Component({
   selector: 'app-muscles',
   standalone: true,
-  imports: [CommonModule, ModalComponent, MusclesArrayComponent, MuscleFormComponent, ModalButtonComponent],
+  imports: [CommonModule, ModalComponent, MusclesArrayComponent, MuscleFormComponent, ModalButtonComponent, MultiSelectComponent],
   templateUrl: './muscles.component.html',
 })
 export class MusclesComponent implements OnInit {
