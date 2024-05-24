@@ -4,16 +4,21 @@ import {GET_MUSCLES} from '../../../graphql/grapgql.operations';
 import {CommonModule} from '@angular/common';
 import {ModalComponent} from "../../../components/modal/modal.component";
 import {MusclesArrayComponent} from "../muscles-array/muscles-array.component";
+import {Muscle} from "../../../interface/dto/muscle";
+import {GraphqlError} from "../../../interface/graphql/graphqlError";
+import {GraphqlResponse} from "../../../interface/graphql/graphqlResponse";
+import {MuscleFormComponent} from "../muscle-form/muscle-form.component";
 
 @Component({
   selector: 'app-muscles',
   standalone: true,
-  imports: [CommonModule, ModalComponent, MusclesArrayComponent],
+  imports: [CommonModule, ModalComponent, MusclesArrayComponent, MuscleFormComponent],
   templateUrl: './muscles.component.html',
 })
 export class MusclesComponent implements OnInit {
-  muscles: any[] = [];
-  error: any;
+  muscles: Muscle[] = [];
+  error?: GraphqlError;
+  modalId: string = "muscleModal"
 
   constructor(private apollo: Apollo) {
   }
@@ -23,11 +28,9 @@ export class MusclesComponent implements OnInit {
       .watchQuery({
         query: GET_MUSCLES,
       })
-      .valueChanges.subscribe(({data, error}: any) => {
+      .valueChanges.subscribe(({data, error}: GraphqlResponse): void => {
       this.muscles = data.getMuscles;
       this.error = error;
     });
   }
-
-
 }

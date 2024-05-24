@@ -10,14 +10,16 @@
       </div>
       <div class="col-2">
         <button
+          [attr.data-bs-target]="'#' +modalId"
           class="btn btn-success"
-          data-bs-target="#exampleModal"
           data-bs-toggle="modal"
           type="button"
         >
           Add new <i class="fa-regular fa-square-plus"></i>
         </button>
-        <app-modal title="New muscle :"/>
+        <app-modal [id]="modalId" title="New muscle :" validateNameButton="Create">
+          <app-muscle-form/>
+        </app-modal>
       </div>
     </div>
     <app-muscles-array [muscles]="muscles"/>

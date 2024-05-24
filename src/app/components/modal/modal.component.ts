@@ -7,5 +7,16 @@ import {Component, Input} from '@angular/core';
   templateUrl: './modal.component.html',
 })
 export class ModalComponent {
-  @Input() title!: string;
+  @Input()
+  id!: string;
+  @Input()
+  title!: string;
+  @Input()
+  closeNameButton?: string = "Cancel";
+  @Input()
+  validateNameButton?: string = "Save";
+  @Input()
+  closeActionButton!: () => void;
+  @Input()
+  validateActionButton!: () => void;
 }
