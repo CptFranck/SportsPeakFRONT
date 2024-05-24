@@ -8,11 +8,12 @@ import {Muscle} from "../../../interface/dto/muscle";
 import {GraphqlError} from "../../../interface/graphql/graphqlError";
 import {GraphqlResponse} from "../../../interface/graphql/graphqlResponse";
 import {MuscleFormComponent} from "../muscle-form/muscle-form.component";
+import {ButtonComponent} from "../../../components/button/button/button.component";
 
 @Component({
   selector: 'app-muscles',
   standalone: true,
-  imports: [CommonModule, ModalComponent, MusclesArrayComponent, MuscleFormComponent],
+  imports: [CommonModule, ModalComponent, MusclesArrayComponent, MuscleFormComponent, ButtonComponent],
   templateUrl: './muscles.component.html',
 })
 export class MusclesComponent implements OnInit {

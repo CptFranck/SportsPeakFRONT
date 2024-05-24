@@ -9,14 +9,9 @@
         <h2>Muscles saved in databases</h2>
       </div>
       <div class="col-2">
-        <button
-          [attr.data-bs-target]="'#' +modalId"
-          class="btn btn-success"
-          data-bs-toggle="modal"
-          type="button"
-        >
+        <app-button [id]="modalId">
           Add new <i class="fa-regular fa-square-plus"></i>
-        </button>
+        </app-button>
         <app-modal [id]="modalId" title="New muscle :" validateNameButton="Create">
           <app-muscle-form/>
         </app-modal>
