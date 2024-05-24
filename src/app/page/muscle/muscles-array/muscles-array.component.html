@@ -2,8 +2,8 @@
   <thead>
   <tr>
     <th class="col-1" scope="col">Name</th>
-    <th class="col-5" scope="col">Function</th>
     <th class="col-5" scope="col">Description</th>
+    <th class="col-5" scope="col">Function</th>
     <th class="col" scope="col">Used in</th>
     <th class="col-1 text-center" scope="col">Details</th>
     <th class="col-1 text-center" scope="col">Modify</th>
@@ -13,19 +13,19 @@
   <tbody class="table-group-divider">
   <tr *ngFor="let muscle of muscles">
     <td>{{ muscle.name }}</td>
+    <td *ngIf="!showDetails[muscle.id]" class="truncate">
+      {{ muscle.description }}
+    </td>
+    <td *ngIf="showDetails[muscle.id]">
+      {{ muscle.description }}
+    </td>
+    <td *ngIf="!showDetails[muscle.id]" class="truncate">
+      {{ muscle.function }}
+    </td>
+    <td *ngIf="showDetails[muscle.id]">
+      {{ muscle.function }}
+    </td>
 
-    <td *ngIf="!showDetails[muscle.id]" class="truncate">
-      {{ muscle.function }}
-    </td>
-    <td *ngIf="showDetails[muscle.id]">
-      {{ muscle.function }}
-    </td>
-    <td *ngIf="!showDetails[muscle.id]" class="truncate">
-      {{ muscle.description }}
-    </td>
-    <td *ngIf="showDetails[muscle.id]">
-      {{ muscle.description }}
-    </td>
     <td>
       <ul class="list-group list-group-flush">
         <li
