@@ -4,41 +4,39 @@
   </div>
 
   <div class="container-fluid">
-    <table class="table">
+    <table class="table caption-top align-middle">
+      <caption>Liste de tout les exercices</caption>
       <thead>
-        <tr>
-          <th scope="col">Name</th>
-          <th scope="col">Goal</th>
-          <th scope="col">Description</th>
-          <th scope="col">Action</th>
-        </tr>
+      <tr>
+        <th class="col-auto" scope="col">Name</th>
+        <th class="col" scope="col">Goal</th>
+        <th class="col" scope="col">Description</th>
+        <th class="col-1 text-center" scope="col">Details</th>
+        <th class="col-1 text-center" scope="col">Modify</th>
+        <th class="col-1 text-center" scope="col">Delete</th>
+      </tr>
       </thead>
-      <tbody>
-        <tr *ngFor="let exercise of exercises">
-          <td>{{ exercise.name }}</td>
-          <td>{{ exercise.goal }}</td>
-          <td>{{ exercise.description }}</td>
-          <td>
-            <div class="btn-group" role="group">
-              <div class="col p-1">
-                <i class="fa-solid fa-eye fa-lg text-secondary"></i>
-              </div>
-              <div class="col p-1">
-                <i class="fa-solid fa-pen-to-square fa-lg text-secondary"></i>
-              </div>
-              <div class="col p-1">
-                <i class="fa-solid fa-trash fa-lg text-danger"></i>
-              </div>
-            </div>
-          </td>
-          <div class="collapse" id="collapseExample">
-            <div class="card card-body">
-              Some placeholder content for the collapse component. This panel is
-              hidden by default but revealed when the user activates the
-              relevant trigger.
-            </div>
+      <tbody class="table-group-divider">
+      <tr *ngFor="let exercise of exercises">
+        <td> {{ exercise.name }}</td>
+        <td>{{ exercise.goal }}</td>
+        <td>{{ exercise.description }}</td>
+        <td>
+          <div class="col p-1 text-center">
+            <i class="fa-solid fa-eye fa-lg text-secondary"></i>
           </div>
-        </tr>
+        </td>
+        <td>
+          <div class="col p-1 text-center">
+            <i class="fa-solid fa-pen-to-square fa-lg text-secondary"></i>
+          </div>
+        </td>
+        <td>
+          <div class="col p-1 text-center">
+            <i class="fa-solid fa-trash fa-lg text-danger"></i>
+          </div>
+        </td>
+      </tr>
       </tbody>
     </table>
   </div>

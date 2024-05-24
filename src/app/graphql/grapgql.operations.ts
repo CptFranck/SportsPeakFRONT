@@ -1,4 +1,4 @@
-import { gql } from 'apollo-angular';
+import {gql} from 'apollo-angular';
 
 const GET_EXERCISES = gql`
   query GetExercises {
@@ -31,6 +31,7 @@ const GET_MUSCLES = gql`
       function
       exercises {
         id
+        name
       }
     }
   }
@@ -50,4 +51,4 @@ const GET_EXERCISETYPES = gql`
   }
 `;
 
-export { GET_EXERCISES, GET_MUSCLES, GET_EXERCISETYPES };
+export {GET_EXERCISES, GET_MUSCLES, GET_EXERCISETYPES};
