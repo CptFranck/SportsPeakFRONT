@@ -1,5 +1,5 @@
 import { ApplicationConfig } from '@angular/core';
-import { HttpClientModule, provideHttpClient } from '@angular/common/http';
+import { provideHttpClient } from '@angular/common/http';
 import { importProvidersFrom } from '@angular/core';
 import {
   RouterLink,
