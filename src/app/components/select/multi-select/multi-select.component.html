@@ -1,12 +1,68 @@
-<select class="form-select" data-placeholder="Choose one thing" id="basic-usage">
-  <option></option>
-  <option>Reactive</option>
-  <option>Solution</option>
-  <option>Conglomeration</option>
-  <option>Algoritm</option>
-  <option>Holistic</option>
-</select>
+<!--<ul class="list-group">-->
+<!--  <select (ngModelChange)="onSelect($event)" [ngModel]="selectedDevice" aria-label="Default select example"-->
+<!--          class="form-select">-->
+<!--    <option selected>Open this select menu</option>-->
+<!--    <option *ngFor="let element of list" [value]="element.id">{{ element.value }}</option>-->
+<!--  </select>-->
+<!--  <li *ngFor="let element of selectedDevices" class="list-group-item d-flex ">-->
+<!--    <p class=" p-0 m-0 flex-grow-1 flex">-->
+<!--      {{ element.value }}-->
+<!--    </p>-->
+<!--    <button (click)="delete(element.id)" class="btn btn-danger">DELETE</button>-->
+<!--  </li>-->
+<!--</ul>-->
 
-<script>
+<br/>
+<br/>
+<br/>
 
-</script>
+<div class="container">
+  <div class="custom-select">
+    <!-- OPEN REMOVED -->
+    <div (click)="onCLickSelect($event)" class="select-box">
+      <input class="tags_input" hidden name="tags" type="text"/>
+      <div class="selected-options">
+        <!--        <span *ngFor="let element of list" class="tag">-->
+        <!--          {{ element.value }}-->
+        <!--          <span class="remove-tag">X</span>-->
+        <!--        </span>-->
+        <!--        <span class="tag">+5</span>-->
+      </div>
+      <div class="arrow">
+        <i class="fa fa-angle-down"></i>
+      </div>
+    </div>
+    <div class="options">
+      <div class="option-search-tags">
+        <input
+          (click)="onInputSearch()"
+          class="search-tags"
+          placeholder="Search tags..."
+          type="text"
+        />
+        <button (click)="onClickClear()" class="clear" type="button">
+          <i class="fa fa-close"></i>
+        </button>
+      </div>
+      <div (click)="onClickAllOption()" class="option all-tags" data-value="All">Select All</div>
+      <!-- REMOVED ACTIVE -->
+      <!--      <div class="option" data-value="6">Six</div>-->
+      <!--      <div class="option" data-value="5">Cinq</div>-->
+      <!--      <div class="option" data-value="4">Quatre</div>-->
+      <!--      <div class="option" data-value="3">Trois</div>-->
+      <!--      <div class="option" data-value="2">Deux</div>-->
+      <!--      <div class="option" data-value="1">Un</div>-->
+      <div (click)="onClickOption($event)" *ngFor="let element of list" [attr.data-value]="element.id" class="option">
+        {{ element.value }}
+      </div>
+      <div class="no-result-message" style="display: none">
+        <!-- ADDED style="display: none" -->
+        No result match
+      </div>
+    </div>
+    <span class="tag_error_msg error">
+          <!-- REMOVED This filed is required  -->
+    </span>
+  </div>
+  <input class="btn_submit" type="button" value="Submit"/>
+</div>
