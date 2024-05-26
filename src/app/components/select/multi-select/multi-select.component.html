@@ -1,42 +1,25 @@
-<!--<ul class="list-group">-->
-<!--  <select (ngModelChange)="onSelect($event)" [ngModel]="selectedDevice" aria-label="Default select example"-->
-<!--          class="form-select">-->
-<!--    <option selected>Open this select menu</option>-->
-<!--    <option *ngFor="let element of list" [value]="element.id">{{ element.value }}</option>-->
-<!--  </select>-->
-<!--  <li *ngFor="let element of selectedDevices" class="list-group-item d-flex ">-->
-<!--    <p class=" p-0 m-0 flex-grow-1 flex">-->
-<!--      {{ element.value }}-->
-<!--    </p>-->
-<!--    <button (click)="delete(element.id)" class="btn btn-danger">DELETE</button>-->
-<!--  </li>-->
-<!--</ul>-->
-
-<br/>
-<br/>
-<br/>
-
 <div class="container">
   <div class="custom-select">
-    <!-- OPEN REMOVED -->
-    <div (click)="onCLickSelect($event)" class="select-box">
+    <div (click)="onCLickSelect($event)" class="select-box form-control">
       <input class="tags_input" hidden name="tags" type="text"/>
       <div class="selected-options">
-        <!--        <span *ngFor="let element of list" class="tag">-->
-        <!--          {{ element.value }}-->
-        <!--          <span class="remove-tag">X</span>-->
-        <!--        </span>-->
-        <!--        <span class="tag">+5</span>-->
+        <span *ngIf="selectedOptions.length === 0">Select tags</span>
+        <span *ngFor="let option of selectedOptions" class="tag">
+          {{ option.text }}
+          <span (click)="onCLickRemoveTag($event)" [attr.data-value]="option.value" class="remove-tag">
+            <i class="fa fa-close"></i>
+          </span>
+        </span>
       </div>
       <div class="arrow">
         <i class="fa fa-angle-down"></i>
       </div>
     </div>
-    <div class="options">
+    <div class="options dropdown-menu">
       <div class="option-search-tags">
         <input
-          (click)="onInputSearch()"
-          class="search-tags"
+          (input)="onInputSearch()"
+          class="search-tags form-control"
           placeholder="Search tags..."
           type="text"
         />
@@ -44,24 +27,25 @@
           <i class="fa fa-close"></i>
         </button>
       </div>
-      <div (click)="onClickAllOption()" class="option all-tags" data-value="All">Select All</div>
-      <!-- REMOVED ACTIVE -->
-      <!--      <div class="option" data-value="6">Six</div>-->
-      <!--      <div class="option" data-value="5">Cinq</div>-->
-      <!--      <div class="option" data-value="4">Quatre</div>-->
-      <!--      <div class="option" data-value="3">Trois</div>-->
-      <!--      <div class="option" data-value="2">Deux</div>-->
-      <!--      <div class="option" data-value="1">Un</div>-->
-      <div (click)="onClickOption($event)" *ngFor="let element of list" [attr.data-value]="element.id" class="option">
-        {{ element.value }}
+      <div (click)="onClickOption($event)"
+           [class]="'option all-tags' + ('')"
+           data-value="All"
+      >
+
+        Select All
+      </div>
+      <div (click)="onClickOption($event)"
+           *ngFor="let option of listOptions"
+           [attr.data-value]="option.id"
+           class="option"
+      >
+        {{ option.value }}
       </div>
       <div class="no-result-message" style="display: none">
-        <!-- ADDED style="display: none" -->
         No result match
       </div>
     </div>
     <span class="tag_error_msg error">
-          <!-- REMOVED This filed is required  -->
     </span>
   </div>
   <input class="btn_submit" type="button" value="Submit"/>

@@ -1,5 +1,5 @@
-import {Component, ElementRef, OnInit} from '@angular/core';
-import {NgForOf} from "@angular/common";
+import {AfterViewInit, Component, ElementRef} from '@angular/core';
+import {NgForOf, NgIf} from "@angular/common";
 import {FormsModule} from "@angular/forms";
 
 @Component({
@@ -8,68 +8,110 @@ import {FormsModule} from "@angular/forms";
   imports: [
     NgForOf,
     FormsModule,
+    NgIf,
   ],
   templateUrl: './multi-select.component.html',
   styleUrl: './multi-select.component.css'
 })
-export class MultiSelectComponent implements OnInit {
-  list: any = [
+export class MultiSelectComponent implements AfterViewInit {
+  listOptions: any = [
     {id: 1, value: "un"},
     {id: 2, value: "deux"},
     {id: 3, value: "trois"},
     {id: 4, value: "quatre"},
+    {id: 5, value: "cinq"},
+    {id: 6, value: "six"},
+    {id: 7, value: "sept"},
+    {id: 8, value: "huit"},
   ]
-  selectedDevice: any = 1;
-  selectedDevices: any = [...this.list];
+  selectedOptions: {
+    value: string,
+    text: string,
+  }[] =
+    [
+      {value: "1", text: "un"},
+      {value: "2", text: "deux"},
+      {value: "3", text: "trois"},
+      {value: "4", text: "quatre"},
+      {value: "5", text: "cinq"},
+      {value: "6", text: "six"},
+      {value: "7", text: "sept"},
+      {value: "8", text: "huit"}
+    ];
 
+  // displayedSelectedOptions: {
+  //   value: string,
+  //   text: string,
+  // }[] = [];
+  private customSelect: any;
   private searchInput: any;
   private optionsContainer: any;
   private options: any;
   private allTagsOption: any;
   private noResultMessage: any;
-
+  private selectBox: any;
 
   constructor(private elem: ElementRef) {
   }
 
-  ngOnInit(): void {
-    this.searchInput = this.elem.nativeElement.querySelector(".search-tags");
-    this.optionsContainer = this.elem.nativeElement.querySelector(".options");
-    this.options = this.elem.nativeElement.querySelectorAll('.option');
-    this.allTagsOption = this.elem.nativeElement.querySelector(".option.all-tags");
-    this.noResultMessage = this.elem.nativeElement.querySelector(".no-result-message");
+  ngAfterViewInit(): void {
+    this.customSelect = this.elem.nativeElement;
+    this.selectBox = this.customSelect.querySelector(".select-box");
+    this.searchInput = this.customSelect.querySelector(".search-tags");
+    this.optionsContainer = this.customSelect.querySelector(".options");
+    this.options = this.customSelect.querySelectorAll('.option');
+    this.allTagsOption = this.customSelect.querySelector(".option.all-tags");
+    this.noResultMessage = this.customSelect.querySelector(".no-result-message");
 
+    let allTagsUsed = true;
+    this.options.forEach((opt: Element) => {
+      if (!opt.classList.contains("all-tags")) {
+        if (this.selectedOptions.find(so =>
+          so.value === opt.getAttribute("data-value"))) {
+          opt.classList.toggle("active")
+        } else {
+          allTagsUsed = false
+        }
+      }
+    })
+    if (allTagsUsed) {
+      this.allTagsOption.classList.toggle("active");
+    }
+    document.addEventListener("click", (event) => {
+      if (!(event.target instanceof HTMLElement)) {
+        return;
+      }
+      if (
+        !event.target.closest(".custom-select")
+        && !event.target.classList.contains("remove-tag")
+        && !event.target.classList.contains("fa-close")
+      ) {
+        this.selectBox.classList.remove("open");
+      }
+    });
   }
 
-  ///////////////////////
-  //
-  // onSelect(id: string) {
-  //   let idBis = parseInt(id)
-  //   let obj = this.list.find((e: any) => e.id === idBis)
-  //   if (!this.selectedDevices.some((e: any) => e.id === idBis)) {
-  //     console.log(obj)
-  //     this.selectedDevices.push(obj)
-  //   }
-  // }
-  //
-  // delete(id: number) {
-  //   this.selectedDevices = this.selectedDevices.filter((item: { id: number; }) => item.id !== id);
-  // }
-  ///////////////////////
+  updateSelectedOptions() {
+    this.selectedOptions = Array.from(this.options)
+      .filter((option) => (option as HTMLElement).classList.contains("active"))
+      .filter((option) => !(option as HTMLElement).classList.contains("all-tags"))
+      .map((option: any) => {
+        return {
+          value: option.getAttribute("data-value"),
+          text: option.textContent === null ? "" : option.textContent.trim(),
+        };
+      });
+    console.log(this.selectedOptions)
+  }
 
   onCLickSelect($event: MouseEvent) {
-    const selectBox = $event.currentTarget
+    const selectBox = $event.target
+    console.log(selectBox)
     if (!(selectBox instanceof Element)) {
       return;
     }
     if (!selectBox.closest(".tag")) {
-      if (selectBox.parentNode === null) {
-        return;
-      }
-      if (!(selectBox.parentNode instanceof Element)) {
-        return;
-      }
-      selectBox.parentNode.classList.toggle("open");
+      this.selectBox.parentNode.classList.toggle("open");
     }
   }
 
@@ -84,7 +126,6 @@ export class MultiSelectComponent implements OnInit {
     });
 
     const anyOptionsMatch = Array.from(this.options).some(
-      ////???????????????????????
       (option) => ((option as HTMLElement).style.display === "block")
     );
     this.noResultMessage.style.display = anyOptionsMatch ? "none" : "block";
@@ -114,7 +155,7 @@ export class MultiSelectComponent implements OnInit {
     const isActive = this.allTagsOption.classList.contains("active");
     this.options.forEach((option: HTMLElement) => {
       if (option !== this.allTagsOption) {
-        option.classList.toggle("active", !isActive);
+        option.classList.toggle("active", isActive);
       }
     });
     this.updateSelectedOptions();
@@ -124,6 +165,9 @@ export class MultiSelectComponent implements OnInit {
     const option = mouseEvent.currentTarget
     if (option instanceof HTMLElement) {
       option.classList.toggle("active");
+      if (option.classList.contains("all-tags")) {
+        this.onClickAllOption()
+      }
       this.updateSelectedOptions();
     }
   }
@@ -158,68 +202,13 @@ export class MultiSelectComponent implements OnInit {
     this.updateSelectedOptions();
   }
 
-  resetCustomSelect() {
-    const customSelect = this.elem.nativeElement;
-    customSelect.querySelectorAll(".option.active").forEach((option: HTMLElement) => {
-      option.classList.remove("active");
-    });
-    customSelect.querySelector(".option.all-tags").classList.remove("active");
-    this.updateSelectedOptions();
-  }
-
-  updateSelectedOptions() {
-    const customSelect = this.elem.nativeElement;
-    const selectedOptions = Array.from(
-      customSelect.querySelectorAll(".option.active")
-    )
-      .filter(
-        (option) => option !== customSelect.querySelector(".option.all-tags")
-      )
-      .map((option: any) => {
-        return {
-          value: option.getAttribute("data-value"),
-          text: option.textContent === null ? "" : option.textContent.trim(),
-        };
-      });
-
-    const selectedValues = selectedOptions.map((option) => {
-      return option.value;
-    });
-
-    const tagsInput = customSelect.querySelector(".tags_input")
-    if (tagsInput === null || !(tagsInput instanceof HTMLInputElement)) {
-      return;
-    }
-    tagsInput.value = selectedValues.join(", ");
-
-    let tagsHTML = "";
-
-    if (selectedValues.length === 0) {
-      tagsHTML = '<span class="placeholder">Select tags</span>';
-    } else {
-      const maxTagsToShow = 4;
-      let additionalTagsCount = 0;
-
-      selectedOptions.forEach((option, index) => {
-        if (index < maxTagsToShow) {
-          tagsHTML +=
-            '<span class="tag">' +
-            option.text +
-            '<span class="remove-tag" data-value="' +
-            option.value +
-            '"><i class="fa fa-close"></i></span>' +
-            "</span>";
-        } else {
-          additionalTagsCount++;
-        }
-      });
-
-      if (additionalTagsCount > 0) {
-        tagsHTML += '<span class="tag">+' + additionalTagsCount + "</span>";
-      }
-    }
-    this.elem.nativeElement.querySelector(".selected-options").innerHTML = tagsHTML;
-  }
+  // resetCustomSelect() {
+  //   this.customSelect.querySelectorAll(".option.active").forEach((option: HTMLElement) => {
+  //     option.classList.remove("active");
+  //   });
+  //   this.customSelect.querySelector(".option.all-tags").classList.remove("active");
+  //   this.updateSelectedOptions();
+  // }
 }
 
 
