@@ -27,17 +27,17 @@ export class MultiSelectComponent implements AfterViewInit {
   selectedOptions: {
     value: string,
     text: string,
-  }[] =
-    [
-      {value: "1", text: "un"},
-      {value: "2", text: "deux"},
-      {value: "3", text: "trois"},
-      {value: "4", text: "quatre"},
-      {value: "5", text: "cinq"},
-      {value: "6", text: "six"},
-      {value: "7", text: "sept"},
-      {value: "8", text: "huit"}
-    ];
+  }[] = []
+  // [
+  //   {value: "1", text: "un"},
+  //   {value: "2", text: "deux"},
+  //   {value: "3", text: "trois"},
+  //   {value: "4", text: "quatre"},
+  //   {value: "5", text: "cinq"},
+  //   {value: "6", text: "six"},
+  //   {value: "7", text: "sept"},
+  //   {value: "8", text: "huit"}
+  // ];
 
   // displayedSelectedOptions: {
   //   value: string,
@@ -86,7 +86,7 @@ export class MultiSelectComponent implements AfterViewInit {
         && !event.target.classList.contains("remove-tag")
         && !event.target.classList.contains("fa-close")
       ) {
-        this.selectBox.classList.remove("open");
+        this.selectBox.parentNode.classList.remove("open");
       }
     });
   }
@@ -106,10 +106,11 @@ export class MultiSelectComponent implements AfterViewInit {
 
   onCLickSelect($event: MouseEvent) {
     const selectBox = $event.target
-    console.log(selectBox)
     if (!(selectBox instanceof Element)) {
       return;
     }
+
+    console.log(!selectBox.closest(".tag"))
     if (!selectBox.closest(".tag")) {
       this.selectBox.parentNode.classList.toggle("open");
     }

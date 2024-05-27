@@ -22,18 +22,21 @@
 
 .custom-select {
   position: relative;
-  min-width: 300px;
-  width: auto;
+  /*display: inline-block;*/
+  /*min-width: 300px;*/
+  /*min-height: 100px;*/
 }
 
 .select-box {
-  /*background-color: #ffffff;*/
   /*border: 1px solid #ced4da;*/
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 50px;
-  padding: 0 10px;
+  /*height: 50px;*/
+  /*padding: 0 10px;*/
+  /*min-height: 40px;*/
+  /*min-width: 300px;*/
+  padding: 0px 10px;
   cursor: pointer;
 }
 
@@ -48,7 +51,7 @@
   background-color: #f2f2f2;
   color: #000;
   border-radius: 5px;
-  margin-right: 5px;
+  margin: 2px;
   padding: 6px 14px;
   display: flex;
   align-items: center;
@@ -68,7 +71,6 @@
   font-size: 20px;
   /* font-size: 30px; */
 }
-
 
 .options {
   display: none;
@@ -90,10 +92,10 @@
 .option-search-tags {
   background-color: #ffffff;
   margin: 10px;
+  /*padding: 8px 0px;*/
+  /*border: 1px solid #ced4da;*/
 }
 
-/*padding: 8px 0px;*/
-/*border: 1px solid #ced4da;*/
 
 /*.search-tags {*/
 /*  width: 100%;*/

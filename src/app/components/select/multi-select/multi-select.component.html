@@ -1,52 +1,50 @@
-<div class="container">
-  <div class="custom-select">
-    <div (click)="onCLickSelect($event)" class="select-box form-control">
-      <input class="tags_input" hidden name="tags" type="text"/>
-      <div class="selected-options">
-        <span *ngIf="selectedOptions.length === 0">Select tags</span>
-        <span *ngFor="let option of selectedOptions" class="tag">
+<div class="custom-select">
+  <div (click)="onCLickSelect($event)" class="select-box form-control">
+    <input class="tags_input" hidden name="tags" type="text"/>
+    <div class="selected-options ">
+      <span *ngIf="selectedOptions.length === 0">Select tags</span>
+      <span *ngFor="let option of selectedOptions" class="tag">
           {{ option.text }}
-          <span (click)="onCLickRemoveTag($event)" [attr.data-value]="option.value" class="remove-tag">
+        <span (click)="onCLickRemoveTag($event)" [attr.data-value]="option.value" class="remove-tag">
             <i class="fa fa-close"></i>
           </span>
         </span>
-      </div>
-      <div class="arrow">
-        <i class="fa fa-angle-down"></i>
-      </div>
     </div>
-    <div class="options dropdown-menu">
-      <div class="option-search-tags">
-        <input
-          (input)="onInputSearch()"
-          class="search-tags form-control"
-          placeholder="Search tags..."
-          type="text"
-        />
-        <button (click)="onClickClear()" class="clear" type="button">
-          <i class="fa fa-close"></i>
-        </button>
-      </div>
-      <div (click)="onClickOption($event)"
-           [class]="'option all-tags' + ('')"
-           data-value="All"
-      >
-
-        Select All
-      </div>
-      <div (click)="onClickOption($event)"
-           *ngFor="let option of listOptions"
-           [attr.data-value]="option.id"
-           class="option"
-      >
-        {{ option.value }}
-      </div>
-      <div class="no-result-message" style="display: none">
-        No result match
-      </div>
+    <div class="arrow">
+      <i class="fa fa-angle-down"></i>
     </div>
-    <span class="tag_error_msg error">
-    </span>
   </div>
-  <input class="btn_submit" type="button" value="Submit"/>
+  <div class="options dropdown-menu">
+    <div class="option-search-tags">
+      <input
+        (input)="onInputSearch()"
+        class="search-tags form-control"
+        placeholder="Search tags..."
+        type="text"
+      />
+      <button (click)="onClickClear()" class="clear" type="button">
+        <i class="fa fa-close"></i>
+      </button>
+    </div>
+    <div (click)="onClickOption($event)"
+         [class]="'option all-tags' + ('')"
+         data-value="All"
+    >
+
+      Select All
+    </div>
+    <div (click)="onClickOption($event)"
+         *ngFor="let option of listOptions"
+         [attr.data-value]="option.id"
+         class="option"
+    >
+      {{ option.value }}
+    </div>
+    <div class="no-result-message" style="display: none">
+      No result match
+    </div>
+  </div>
+  <span class="tag_error_msg error">
+</span>
+  <!--<input class="btn_submit" type="button" value="Submit"/>-->
 </div>
