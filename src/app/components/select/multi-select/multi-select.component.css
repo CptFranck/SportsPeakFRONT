@@ -26,10 +26,10 @@
   border-radius: 5px;
   margin: 4px;
   padding: 6px 14px;
-  /*align-items: center;*/
-  /*overflow: hidden;*/
-  /*white-space: wrap;*/
-  /*text-overflow: ellipsis;*/
+  align-items: center;
+  overflow: hidden;
+  white-space: wrap;
+  text-overflow: ellipsis;
 }
 
 /*.tag-text {*/
