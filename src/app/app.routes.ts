@@ -7,5 +7,5 @@ export const routes: Routes = [
   {path: 'exercises', component: ExercisesComponent},
   {path: 'exercise-types', component: ExerciseTypesComponent},
   {path: 'muscles', component: MusclesComponent},
-  {path: '', redirectTo: '/exercises', pathMatch: 'full'},
+  {path: '', redirectTo: '/muscles', pathMatch: 'full'},
 ];
