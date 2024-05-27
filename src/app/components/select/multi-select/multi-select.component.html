@@ -1,18 +1,21 @@
 <div class="custom-select">
   <div (click)="onCLickSelect($event)" class="select-box form-control">
     <input class="tags_input" hidden name="tags" type="text"/>
+
     <div class="selected-options ">
       <span *ngIf="selectedOptions.length === 0">Select tags</span>
-      <span *ngFor="let option of selectedOptions" class="tag">
-          {{ option.text }}
+      <span *ngFor="let option of displayedSelectedOptions" class="tag">
+        <span class="truncate"> {{ option.text }}</span>
         <span (click)="onCLickRemoveTag($event)" [attr.data-value]="option.value" class="remove-tag">
-            <i class="fa fa-close"></i>
-          </span>
+          <i class="fa fa-close"></i>
         </span>
+      </span>
     </div>
+
     <div class="arrow">
       <i class="fa fa-angle-down"></i>
     </div>
+
   </div>
   <div class="options dropdown-menu">
     <div class="option-search-tags">
@@ -30,7 +33,6 @@
          [class]="'option all-tags' + ('')"
          data-value="All"
     >
-
       Select All
     </div>
     <div (click)="onClickOption($event)"
@@ -38,7 +40,7 @@
          [attr.data-value]="option.id"
          class="option"
     >
-      {{ option.value }}
+      <div class="truncate"> {{ option.value }}</div>
     </div>
     <div class="no-result-message" style="display: none">
       No result match

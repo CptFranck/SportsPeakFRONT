@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, ElementRef} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, Input} from '@angular/core';
 import {NgForOf, NgIf} from "@angular/common";
 import {FormsModule} from "@angular/forms";
 
@@ -18,7 +18,7 @@ export class MultiSelectComponent implements AfterViewInit {
     {id: 1, value: "un"},
     {id: 2, value: "deux"},
     {id: 3, value: "trois"},
-    {id: 4, value: "quatre"},
+    {id: 4, value: "quatrequatrequatrequatrequatre"},
     {id: 5, value: "cinq"},
     {id: 6, value: "six"},
     {id: 7, value: "sept"},
@@ -27,22 +27,24 @@ export class MultiSelectComponent implements AfterViewInit {
   selectedOptions: {
     value: string,
     text: string,
-  }[] = []
-  // [
-  //   {value: "1", text: "un"},
-  //   {value: "2", text: "deux"},
-  //   {value: "3", text: "trois"},
-  //   {value: "4", text: "quatre"},
-  //   {value: "5", text: "cinq"},
-  //   {value: "6", text: "six"},
-  //   {value: "7", text: "sept"},
-  //   {value: "8", text: "huit"}
-  // ];
+  }[] =
+    [
+      {value: "1", text: "un"},
+      {value: "2", text: "deux"},
+      {value: "3", text: "trois"},
+      {value: "4", text: "quatrequatrequatrequatrequatre"},
+      {value: "5", text: "cinq"},
+      {value: "6", text: "six"},
+      {value: "7", text: "sept"},
+      {value: "8", text: "huit"}
+    ];
 
-  // displayedSelectedOptions: {
-  //   value: string,
-  //   text: string,
-  // }[] = [];
+  @Input()
+  limitOfDisplayedSelectedOptions: number = 2;
+  displayedSelectedOptions: {
+    value: string,
+    text: string,
+  }[] = [];
 
   private readonly customSelect: HTMLElement;
   private selectBox: HTMLElement | null = null;
@@ -54,6 +56,7 @@ export class MultiSelectComponent implements AfterViewInit {
 
   constructor(private elem: ElementRef) {
     this.customSelect = this.elem.nativeElement;
+
   }
 
   ngAfterViewInit(): void {
@@ -65,8 +68,10 @@ export class MultiSelectComponent implements AfterViewInit {
     this.allTagsOption = this.customSelect.querySelector(".option.all-tags");
     this.noResultMessage = this.customSelect.querySelector(".no-result-message");
 
+    this.updateDisplayedSelectedOptions()
+
     let allTagsUsed = true;
-    this.options.forEach((opt: Element) => {
+    this.options.forEach((opt) => {
       if (!opt.classList.contains("all-tags")) {
         if (this.selectedOptions.find(so =>
           so.value === opt.getAttribute("data-value"))) {
@@ -94,19 +99,38 @@ export class MultiSelectComponent implements AfterViewInit {
     });
   }
 
+  ///////////////////////////////////////////////////////////////////
+
+  updateDisplayedSelectedOptions(): void {
+    if (this.limitOfDisplayedSelectedOptions === 0) {
+      this.displayedSelectedOptions = [...this.selectedOptions];
+    } else {
+      let length = this.selectedOptions.length;
+      this.displayedSelectedOptions = [...this.selectedOptions].slice(0, this.limitOfDisplayedSelectedOptions);
+      if (length > this.limitOfDisplayedSelectedOptions) {
+        this.displayedSelectedOptions.push({
+          value: "more",
+          text: '+' + (length - this.limitOfDisplayedSelectedOptions).toString()
+        });
+      }
+    }
+  }
+
   updateSelectedOptions() {
     if (!this.options) {
       return
     }
     this.selectedOptions = Array.from(this.options)
-      .filter((option) => (option as HTMLElement).classList.contains("active"))
-      .filter((option) => !(option as HTMLElement).classList.contains("all-tags"))
+      .filter((option) => option.classList.contains("active"))
+      .filter((option) => !option.classList.contains("all-tags"))
       .map((option: any) => {
         return {
           value: option.getAttribute("data-value"),
           text: option.textContent === null ? "" : option.textContent.trim(),
         };
       });
+
+    this.updateDisplayedSelectedOptions()
     console.log(this.selectedOptions)
   }
 
