@@ -43,19 +43,21 @@ export class MultiSelectComponent implements AfterViewInit {
   //   value: string,
   //   text: string,
   // }[] = [];
-  private customSelect: any;
-  private searchInput: any;
-  private optionsContainer: any;
-  private options: any;
-  private allTagsOption: any;
-  private noResultMessage: any;
-  private selectBox: any;
+
+  private readonly customSelect: HTMLElement;
+  private selectBox: HTMLElement | null = null;
+  private searchInput: HTMLElement | null = null;
+  private optionsContainer: HTMLElement | null = null;
+  private options: NodeListOf<HTMLElement> | null = null;
+  private allTagsOption: HTMLElement | null = null;
+  private noResultMessage: HTMLElement | null = null;
 
   constructor(private elem: ElementRef) {
+    this.customSelect = this.elem.nativeElement;
   }
 
   ngAfterViewInit(): void {
-    this.customSelect = this.elem.nativeElement;
+
     this.selectBox = this.customSelect.querySelector(".select-box");
     this.searchInput = this.customSelect.querySelector(".search-tags");
     this.optionsContainer = this.customSelect.querySelector(".options");
@@ -74,7 +76,7 @@ export class MultiSelectComponent implements AfterViewInit {
         }
       }
     })
-    if (allTagsUsed) {
+    if (allTagsUsed && this.allTagsOption) {
       this.allTagsOption.classList.toggle("active");
     }
     document.addEventListener("click", (event) => {
@@ -85,6 +87,7 @@ export class MultiSelectComponent implements AfterViewInit {
         !event.target.closest(".custom-select")
         && !event.target.classList.contains("remove-tag")
         && !event.target.classList.contains("fa-close")
+        && this.selectBox?.parentNode instanceof HTMLElement
       ) {
         this.selectBox.parentNode.classList.remove("open");
       }
@@ -92,6 +95,9 @@ export class MultiSelectComponent implements AfterViewInit {
   }
 
   updateSelectedOptions() {
+    if (!this.options) {
+      return
+    }
     this.selectedOptions = Array.from(this.options)
       .filter((option) => (option as HTMLElement).classList.contains("active"))
       .filter((option) => !(option as HTMLElement).classList.contains("all-tags"))
@@ -111,18 +117,28 @@ export class MultiSelectComponent implements AfterViewInit {
     }
 
     console.log(!selectBox.closest(".tag"))
-    if (!selectBox.closest(".tag")) {
+    if (!selectBox.closest(".tag") &&
+      this.selectBox?.parentNode instanceof Element
+    ) {
       this.selectBox.parentNode.classList.toggle("open");
     }
   }
 
   onInputSearch() {
+    if (!(this.searchInput instanceof HTMLInputElement)
+      || !(this.options instanceof NodeList)
+      || !(this.optionsContainer instanceof HTMLElement)
+      || !(this.allTagsOption instanceof HTMLElement)
+      || !(this.noResultMessage instanceof HTMLElement)
+    ) {
+      return
+    }
     const searchTerm = this.searchInput.value.toLowerCase();
-    this.options.forEach((option: HTMLElement) => {
+    this.options.forEach((option) => {
       if (option.textContent) {
         const optionText = option.textContent.trim().toLocaleString().toLowerCase();
         const shouldShow = optionText.includes(searchTerm);
-        option.style.display = shouldShow ? "block" : "none";
+        (option as HTMLElement).style.display = shouldShow ? "block" : "none";
       }
     });
 
@@ -145,6 +161,11 @@ export class MultiSelectComponent implements AfterViewInit {
   }
 
   onClickClear() {
+    if (!(this.searchInput instanceof HTMLInputElement)
+      || !(this.noResultMessage instanceof HTMLElement)
+      || !(this.options instanceof NodeList)) {
+      return
+    }
     this.searchInput.value = "";
     this.options.forEach((option: HTMLElement) => {
       option.style.display = "block";
@@ -153,6 +174,10 @@ export class MultiSelectComponent implements AfterViewInit {
   }
 
   onClickAllOption() {
+    if (!(this.allTagsOption instanceof HTMLElement)
+      || !(this.options instanceof NodeList)) {
+      return;
+    }
     const isActive = this.allTagsOption.classList.contains("active");
     this.options.forEach((option: HTMLElement) => {
       if (option !== this.allTagsOption) {
@@ -197,7 +222,7 @@ export class MultiSelectComponent implements AfterViewInit {
     const otherSelectedOptions = customSelect.querySelectorAll(
       ".option.active:not(.all-tags)"
     );
-    if (otherSelectedOptions.length === 0) {
+    if (otherSelectedOptions.length === 0 && this.allTagsOption) {
       this.allTagsOption.classList.remove("active");
     }
     this.updateSelectedOptions();
