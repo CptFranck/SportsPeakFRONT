@@ -1,53 +1,23 @@
-/** {*/
-/*  font-size: 14px;*/
-/*  font-family: helvetica;*/
-/*  box-sizing: border-box;*/
-/*  margin: 0;*/
-/*  padding: 0;*/
-/*}*/
-
-/*body {*/
-/*  background-color: #f5f5f5;*/
-/*  display: flex;*/
-/*  justify-content: center;*/
-/*  align-self: center;*/
-/*  height: 100vh;*/
-/*}*/
-
-/*.container {*/
-/*  display: flex;*/
-/*  align-items: flex-start;*/
-/*  gap: 20px;*/
-/*}*/
-
 .custom-select {
   position: relative;
-  display: inline-block;
   width: 100%;
-  /*min-width: 300px;*/
-  /*min-height: 100px;*/
 }
 
 .select-box {
-  /*border: 1px solid #ced4da;*/
-  display: inline-block;
+  display: flex;
   justify-content: space-between;
   align-items: center;
-  /*height: 50px;*/
-  /*padding: 0 10px;*/
-  /*min-height: 38px;*/
-  /*min-width: 250px;*/
-  /*padding: 0px 5px;*/
   margin-bottom: 2px;
   cursor: pointer;
 }
 
 .selected-options {
-  font-size: 14px;
   display: flex;
   flex-wrap: wrap;
-  margin-bottom: 4px;
-  margin-top: 4px;
+  overflow: hidden;
+  font-size: 14px;
+  margin-bottom: 2px;
+  margin-top: 2px;
 }
 
 .tag {
@@ -56,27 +26,33 @@
   border-radius: 5px;
   margin: 4px;
   padding: 6px 14px;
-  display: inline-block;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  align-items: center;
+  /*align-items: center;*/
+  /*overflow: hidden;*/
+  /*white-space: wrap;*/
+  /*text-overflow: ellipsis;*/
 }
+
+/*.tag-text {*/
+/*  width: calc(100% - 15px);*/
+/*}*/
 
 .remove-tag {
   margin-left: 6px;
   cursor: pointer;
 }
 
+/*//////////////////////////////////////////////*/
+
 .arrow {
-  display: inline-block;
+  display: flex;
   padding: 0 10px;
 }
 
 .fa-angle-down {
   color: #404040;
   font-size: 20px;
-  /* font-size: 30px; */
 }
+
 
 .options {
   display: none;
@@ -97,34 +73,7 @@
 .option-search-tags {
   background-color: #ffffff;
   padding: 10px;
-  /*display: inline-block;*/
-  /*padding: 8px 0px;*/
-  /*border: 1px solid #ced4da;*/
 }
-
-
-/*.search-tags {*/
-/*  width: 100%;*/
-/*  border: none;*/
-/*  outline: none;*/
-/*  padding: 8px;*/
-/*  font-size: 14px;*/
-/*}*/
-
-/*.clear {*/
-/*  position: absolute;*/
-/*  border: none;*/
-/*  background-color: transparent;*/
-/*  cursor: pointer;*/
-/*  font-size: 14px;*/
-/*  padding: 0;*/
-/*  color: #000;*/
-/*  top: 20px;*/
-/*  left: auto;*/
-/*  right: 30px;*/
-/*  font-weight: 600; */
-/*}*/
-
 
 .option {
   padding: 12px;

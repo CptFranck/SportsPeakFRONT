@@ -28,17 +28,17 @@ export class MultiSelectComponent implements AfterViewInit {
     value: string,
     text: string,
   }[] =
-    [];
-  // [
-  //   {value: "1", text: "un"},
-  //   {value: "2", text: "deux"},
-  //   {value: "3", text: "trois"},
-  //   {value: "4", text: "quatrequatrequatrequatrequatre"},
-  //   {value: "5", text: "cinq"},
-  //   {value: "6", text: "six"},
-  //   {value: "7", text: "sept"},
-  //   {value: "8", text: "huit"}
-  // ];
+    // [];
+    [
+      {value: "1", text: "un"},
+      {value: "2", text: "deux"},
+      {value: "3", text: "trois"},
+      {value: "4", text: "quatrequatrequatrequatrequatre"},
+      {value: "5", text: "cinq"},
+      {value: "6", text: "six"},
+      {value: "7", text: "sept"},
+      {value: "8", text: "huit"}
+    ];
 
   @Input()
   limitOfDisplayedSelectedOptions: number = 0;
