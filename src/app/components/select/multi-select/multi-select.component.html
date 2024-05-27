@@ -1,31 +1,37 @@
 <div class="custom-select">
-  <div (click)="onCLickSelect($event)" class="select-box form-control">
-    <input class="tags_input" hidden name="tags" type="text"/>
-
-    <div class="selected-options ">
+  <div (click)="onCLickSelect($event)"
+       class="select-box form-control"
+  >
+    <input class="tags_input"
+           hidden
+           name="tags"
+           type="text"
+    />
+    <div class="selected-options">
       <span *ngIf="selectedOptions.length === 0">Select tags</span>
       <span *ngFor="let option of displayedSelectedOptions" class="tag">
-        <span class="truncate"> {{ option.text }}</span>
-        <span (click)="onCLickRemoveTag($event)" [attr.data-value]="option.value" class="remove-tag">
+                      {{ option.text }}
+        <span (click)="onCLickRemoveTag($event)"
+              [attr.data-value]="option.value"
+              class="remove-tag"
+        >
           <i class="fa fa-close"></i>
         </span>
       </span>
     </div>
-
     <div class="arrow">
       <i class="fa fa-angle-down"></i>
     </div>
-
   </div>
-  <div class="options dropdown-menu">
-    <div class="option-search-tags">
+  <div class="options rounded">
+    <div class="option-search-tags input-group">
       <input
         (input)="onInputSearch()"
-        class="search-tags form-control"
+        class="search-tags form-control "
         placeholder="Search tags..."
         type="text"
       />
-      <button (click)="onClickClear()" class="clear" type="button">
+      <button (click)="onClickClear()" class="btn border" type="button">
         <i class="fa fa-close"></i>
       </button>
     </div>

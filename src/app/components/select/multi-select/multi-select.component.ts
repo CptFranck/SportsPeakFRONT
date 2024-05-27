@@ -28,19 +28,20 @@ export class MultiSelectComponent implements AfterViewInit {
     value: string,
     text: string,
   }[] =
-    [
-      {value: "1", text: "un"},
-      {value: "2", text: "deux"},
-      {value: "3", text: "trois"},
-      {value: "4", text: "quatrequatrequatrequatrequatre"},
-      {value: "5", text: "cinq"},
-      {value: "6", text: "six"},
-      {value: "7", text: "sept"},
-      {value: "8", text: "huit"}
-    ];
+    [];
+  // [
+  //   {value: "1", text: "un"},
+  //   {value: "2", text: "deux"},
+  //   {value: "3", text: "trois"},
+  //   {value: "4", text: "quatrequatrequatrequatrequatre"},
+  //   {value: "5", text: "cinq"},
+  //   {value: "6", text: "six"},
+  //   {value: "7", text: "sept"},
+  //   {value: "8", text: "huit"}
+  // ];
 
   @Input()
-  limitOfDisplayedSelectedOptions: number = 2;
+  limitOfDisplayedSelectedOptions: number = 0;
   displayedSelectedOptions: {
     value: string,
     text: string,
@@ -68,8 +69,6 @@ export class MultiSelectComponent implements AfterViewInit {
     this.allTagsOption = this.customSelect.querySelector(".option.all-tags");
     this.noResultMessage = this.customSelect.querySelector(".no-result-message");
 
-    this.updateDisplayedSelectedOptions()
-
     let allTagsUsed = true;
     this.options.forEach((opt) => {
       if (!opt.classList.contains("all-tags")) {
@@ -81,9 +80,11 @@ export class MultiSelectComponent implements AfterViewInit {
         }
       }
     })
+
     if (allTagsUsed && this.allTagsOption) {
       this.allTagsOption.classList.toggle("active");
     }
+
     document.addEventListener("click", (event) => {
       if (!(event.target instanceof HTMLElement)) {
         return;
@@ -97,9 +98,9 @@ export class MultiSelectComponent implements AfterViewInit {
         this.selectBox.parentNode.classList.remove("open");
       }
     });
-  }
 
-  ///////////////////////////////////////////////////////////////////
+    this.updateDisplayedSelectedOptions()
+  }
 
   updateDisplayedSelectedOptions(): void {
     if (this.limitOfDisplayedSelectedOptions === 0) {
@@ -131,7 +132,6 @@ export class MultiSelectComponent implements AfterViewInit {
       });
 
     this.updateDisplayedSelectedOptions()
-    console.log(this.selectedOptions)
   }
 
   onCLickSelect($event: MouseEvent) {

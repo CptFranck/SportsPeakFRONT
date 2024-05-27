@@ -22,21 +22,23 @@
 
 .custom-select {
   position: relative;
-  /*display: inline-block;*/
+  display: inline-block;
+  width: 100%;
   /*min-width: 300px;*/
   /*min-height: 100px;*/
 }
 
 .select-box {
   /*border: 1px solid #ced4da;*/
-  display: flex;
+  display: inline-block;
   justify-content: space-between;
   align-items: center;
   /*height: 50px;*/
   /*padding: 0 10px;*/
-  min-height: 38px;
-  min-width: 250px;
-  padding: 0px 5px;
+  /*min-height: 38px;*/
+  /*min-width: 250px;*/
+  /*padding: 0px 5px;*/
+  margin-bottom: 2px;
   cursor: pointer;
 }
 
@@ -54,7 +56,9 @@
   border-radius: 5px;
   margin: 4px;
   padding: 6px 14px;
-  display: flex;
+  display: inline-block;
+  overflow: hidden;
+  text-overflow: ellipsis;
   align-items: center;
 }
 
@@ -64,7 +68,8 @@
 }
 
 .arrow {
-  margin: 0 10px;
+  display: inline-block;
+  padding: 0 10px;
 }
 
 .fa-angle-down {
@@ -79,8 +84,7 @@
   width: 100%;
   background-color: #ffffff;
   border: 1px solid #ced4da;
-  border-top: none;
-  max-height: 225px;
+  max-height: 200px;
   overflow-y: auto;
   z-index: 1;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
@@ -92,7 +96,8 @@
 
 .option-search-tags {
   background-color: #ffffff;
-  margin: 10px;
+  padding: 10px;
+  /*display: inline-block;*/
   /*padding: 8px 0px;*/
   /*border: 1px solid #ced4da;*/
 }
@@ -106,19 +111,19 @@
 /*  font-size: 14px;*/
 /*}*/
 
-.clear {
-  position: absolute;
-  border: none;
-  background-color: transparent;
-  cursor: pointer;
-  font-size: 14px;
-  padding: 0;
-  color: #000;
-  top: 26px;
-  left: auto;
-  right: 30px;
-  /* font-weight: 600; */
-}
+/*.clear {*/
+/*  position: absolute;*/
+/*  border: none;*/
+/*  background-color: transparent;*/
+/*  cursor: pointer;*/
+/*  font-size: 14px;*/
+/*  padding: 0;*/
+/*  color: #000;*/
+/*  top: 20px;*/
+/*  left: auto;*/
+/*  right: 30px;*/
+/*  font-weight: 600; */
+/*}*/
 
 
 .option {
