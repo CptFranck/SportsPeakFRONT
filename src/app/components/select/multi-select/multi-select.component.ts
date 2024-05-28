@@ -51,14 +51,12 @@ export class MultiSelectComponent implements OnInit, AfterViewInit {
   @Input()
   showLog: boolean = false;
 
-  // @ViewChild('allTagsOption') allTags!: ElementRef;
   @ViewChild('allTagsOption') allTagsOption!: ElementRef;
 
   readonly customSelect: HTMLElement;
   selectBox: HTMLElement | null = null;
   searchInput: HTMLElement | null = null;
   options: NodeListOf<HTMLElement> | null = null;
-  // allTagsOption: HTMLElement | null = null;
   noResultMessage: HTMLElement | null = null;
 
   constructor(private elem: ElementRef) {
@@ -73,8 +71,6 @@ export class MultiSelectComponent implements OnInit, AfterViewInit {
     this.selectBox = this.customSelect.querySelector(".select-box");
     this.searchInput = this.customSelect.querySelector(".search-tags");
     this.options = this.customSelect.querySelectorAll('.option');
-    // this.allTagsOption = this.customSelect.querySelector(".option.all-tags");
-    // this.allTagsOption = this.allTags.nativeElement;
     this.noResultMessage = this.customSelect.querySelector(".no-result-message");
 
     let allTagsUsed = true;
@@ -161,7 +157,6 @@ export class MultiSelectComponent implements OnInit, AfterViewInit {
   onInputSearch() {
     if (!(this.searchInput instanceof HTMLInputElement)
       || !(this.options instanceof NodeList)
-      // || !(this.allTagsOption instanceof HTMLElement)
       || !(this.noResultMessage instanceof HTMLElement)
     ) {
       return
