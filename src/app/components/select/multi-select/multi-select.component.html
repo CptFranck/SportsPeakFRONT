@@ -1,12 +1,55 @@
-<select class="form-select" data-placeholder="Choose one thing" id="basic-usage">
-  <option></option>
-  <option>Reactive</option>
-  <option>Solution</option>
-  <option>Conglomeration</option>
-  <option>Algoritm</option>
-  <option>Holistic</option>
-</select>
-
-<script>
-
-</script>
+<div class="custom-select">
+  <div (click)="onCLickSelect($event)"
+       class="select-box form-control"
+  >
+    <input class="tags_input"
+           hidden
+           name="tags"
+           type="text"
+    />
+    <div class="selected-options">
+      <span *ngIf="selectedOptions.length === 0">Select tags</span>
+      <span *ngFor="let option of displayedSelectedOptions" class="tag">
+        {{ option.text }}
+        <i (click)="onCLickRemoveTag($event)"
+           [attr.data-value]="option.value"
+           class="fa fa-close remove-tag"></i>
+      </span>
+      <!--      <div class="arrow col-sm-auto align-items-center">-->
+      <!--        <i class="fa fa-angle-down"></i>-->
+      <!--      </div>-->
+    </div>
+  </div>
+  <div class="options rounded">
+    <div class="option-search-tags input-group">
+      <input
+        (input)="onInputSearch()"
+        class="search-tags form-control "
+        placeholder="Search tags..."
+        type="text"
+      />
+      <button (click)="onClickClear()" class="btn border" type="button">
+        <i class="fa fa-close"></i>
+      </button>
+    </div>
+    <div (click)="onClickOption($event)"
+         [class]="'option all-tags' + ('')"
+         data-value="All"
+    >
+      Select All
+    </div>
+    <div (click)="onClickOption($event)"
+         *ngFor="let option of listOptions"
+         [attr.data-value]="option.id"
+         class="option"
+    >
+      <div class="text-truncate"> {{ option.value }}</div>
+    </div>
+    <div class="no-result-message" style="display: none">
+      No result match
+    </div>
+  </div>
+  <span class="tag_error_msg error">
+</span>
+  <!--<input class="btn_submit" type="button" value="Submit"/>-->
+</div>
