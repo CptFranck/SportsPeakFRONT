@@ -9,10 +9,10 @@
     />
     <div class="selected-options">
       <span *ngIf="selectedOptions.length === 0">Select tags</span>
-      <span *ngFor="let option of displayedSelectedOptions" class="tag">
-        {{ option.text }}
+      <span *ngFor="let optionSelected of displayedSelectedOptions" class="tag">
+        {{ optionSelected.text }}
         <i (click)="onCLickRemoveTag($event)"
-           [attr.data-value]="option.value"
+           [attr.data-value]="optionSelected.id"
            class="fa fa-close remove-tag"></i>
       </span>
       <!--      <div class="arrow col-sm-auto align-items-center">-->
