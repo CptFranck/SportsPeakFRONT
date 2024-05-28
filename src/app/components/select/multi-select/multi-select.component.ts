@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, Input, OnInit, QueryList, ViewChild, ViewChildren} from '@angular/core';
 import {NgForOf, NgIf} from "@angular/common";
 import {FormsModule} from "@angular/forms";
 import {Option} from "../../../interface/multiSelect/option";
@@ -52,12 +52,11 @@ export class MultiSelectComponent implements OnInit, AfterViewInit {
   showLog: boolean = false;
 
   @ViewChild('allTagsOption') allTagsOption!: ElementRef;
-
+  @ViewChild('selectBox') selectBox!: ElementRef;
+  @ViewChild('noResultMessage') noResultMessage!: ElementRef;
+  @ViewChild('searchInput') searchInput!: ElementRef;
+  @ViewChildren('option') options!: QueryList<ElementRef>;
   readonly customSelect: HTMLElement;
-  selectBox: HTMLElement | null = null;
-  searchInput: HTMLElement | null = null;
-  options: NodeListOf<HTMLElement> | null = null;
-  noResultMessage: HTMLElement | null = null;
 
   constructor(private elem: ElementRef) {
     this.customSelect = this.elem.nativeElement;
@@ -68,20 +67,15 @@ export class MultiSelectComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    this.selectBox = this.customSelect.querySelector(".select-box");
-    this.searchInput = this.customSelect.querySelector(".search-tags");
-    this.options = this.customSelect.querySelectorAll('.option');
-    this.noResultMessage = this.customSelect.querySelector(".no-result-message");
-
     let allTagsUsed = true;
     if (!this.options) {
       return;
     }
     this.options.forEach((opt) => {
-      if (!opt.classList.contains("all-tags")) {
+      if (!opt.nativeElement.classList.contains("all-tags")) {
         if (this.selectedOptions.find(so =>
-          so.id === opt.getAttribute("data-value"))) {
-          opt.classList.toggle("active")
+          so.id === opt.nativeElement.getAttribute("data-value"))) {
+          opt.nativeElement.classList.toggle("active")
         } else {
           allTagsUsed = false
         }
@@ -100,9 +94,8 @@ export class MultiSelectComponent implements OnInit, AfterViewInit {
         !event.target.closest(".custom-select")
         && !event.target.classList.contains("remove-tag")
         && !event.target.classList.contains("fa-close")
-        && this.selectBox?.parentNode instanceof HTMLElement
       ) {
-        this.selectBox.parentNode.classList.remove("open");
+        this.selectBox.nativeElement.parentNode.classList.remove("open");
       }
     });
   }
@@ -123,19 +116,13 @@ export class MultiSelectComponent implements OnInit, AfterViewInit {
   }
 
   updateSelectedOptions() {
-    if (this.showLog)
-      console.log(this.options)
-
-    if (!this.options) {
-      return
-    }
     this.selectedOptions = Array.from(this.options)
-      .filter((option) => option.classList.contains("active"))
-      .filter((option) => !option.classList.contains("all-tags"))
-      .map((option: any) => {
+      .filter((option) => option.nativeElement.classList.contains("active"))
+      .filter((option) => !option.nativeElement.classList.contains("all-tags"))
+      .map((option) => {
         return {
-          id: option.getAttribute("data-value"),
-          title: option.textContent === null ? "" : option.textContent.trim(),
+          id: option.nativeElement.getAttribute("data-value"),
+          title: option.nativeElement.textContent === null ? "" : option.nativeElement.textContent.trim(),
         };
       });
 
@@ -147,35 +134,27 @@ export class MultiSelectComponent implements OnInit, AfterViewInit {
     if (!(selectBox instanceof Element)) {
       return;
     }
-    if (!selectBox.closest(".tag") &&
-      this.selectBox?.parentNode instanceof Element
-    ) {
-      this.selectBox.parentNode.classList.toggle("open");
+    if (!selectBox.closest(".tag")) {
+      this.selectBox.nativeElement.parentNode.classList.toggle("open");
     }
   }
 
   onInputSearch() {
-    if (!(this.searchInput instanceof HTMLInputElement)
-      || !(this.options instanceof NodeList)
-      || !(this.noResultMessage instanceof HTMLElement)
-    ) {
-      return
-    }
-
-    const searchTerm = this.searchInput.value.toLowerCase();
-    console.log(searchTerm)
+    const searchTerm = this.searchInput.nativeElement.value.toLowerCase();
     this.options.forEach((option) => {
-      if (option.textContent) {
-        const optionText = option.textContent.trim().toLocaleString().toLowerCase();
+      if (option.nativeElement.textContent) {
+        const optionText = option.nativeElement.textContent.trim().toLocaleString().toLowerCase();
         const shouldShow = optionText.includes(searchTerm);
-        (option as HTMLElement).style.display = shouldShow ? "block" : "none";
+        option.nativeElement.style.display = shouldShow ? "block" : "none";
       }
     });
 
     const anyOptionsMatch = Array.from(this.options).some(
-      (option) => ((option as HTMLElement).style.display === "block")
+      (option) =>
+        (option.nativeElement.style.display === "block")
     );
-    this.noResultMessage.style.display = anyOptionsMatch ? "none" : "block";
+    this.noResultMessage.nativeElement.style.display =
+      anyOptionsMatch ? "none" : "block";
 
     if (searchTerm.length !== 0) {
       this.allTagsOption.nativeElement.style.display = "none";
@@ -185,26 +164,18 @@ export class MultiSelectComponent implements OnInit, AfterViewInit {
   }
 
   onClickClear() {
-    if (!(this.searchInput instanceof HTMLInputElement)
-      || !(this.noResultMessage instanceof HTMLElement)
-      || !(this.options instanceof NodeList)) {
-      return
-    }
-    this.searchInput.value = "";
-    this.options.forEach((option: HTMLElement) => {
-      option.style.display = "block";
+    this.searchInput.nativeElement.value = "";
+    this.options.forEach((option) => {
+      option.nativeElement.style.display = "block";
     });
-    this.noResultMessage.style.display = "none";
+    this.noResultMessage.nativeElement.style.display = "none";
   }
 
   onClickAllOption() {
-    if (!(this.options instanceof NodeList)) {
-      return;
-    }
     const isActive = this.allTagsOption.nativeElement.classList.contains("active");
-    this.options.forEach((option: HTMLElement) => {
+    this.options.forEach((option) => {
       if (option !== this.allTagsOption.nativeElement) {
-        option.classList.toggle("active", isActive);
+        option.nativeElement.classList.toggle("active", isActive);
       }
     });
     this.updateSelectedOptions();
@@ -242,9 +213,8 @@ export class MultiSelectComponent implements OnInit, AfterViewInit {
       return;
     }
     optionToRemove.classList.remove("active");
-    const otherSelectedOptions = customSelect.querySelectorAll(
-      ".option.active:not(.all-tags)"
-    );
+    const otherSelectedOptions =
+      customSelect.querySelectorAll(".option.active:not(.all-tags)");
     if (otherSelectedOptions.length === 0) {
       this.allTagsOption.nativeElement.classList.remove("active");
     }

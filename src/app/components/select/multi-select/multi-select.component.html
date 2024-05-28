@@ -1,5 +1,6 @@
 <div class="custom-select">
-  <div (click)="onCLickSelect($event)"
+  <div #selectBox
+       (click)="onCLickSelect($event)"
        class="select-box form-control"
   >
     <input class="tags_input"
@@ -23,6 +24,7 @@
   <div class="options rounded">
     <div class="option-search-tags input-group">
       <input
+        #searchInput
         (input)="onInputSearch()"
         class="search-tags form-control "
         placeholder="Search tags..."
@@ -33,20 +35,22 @@
       </button>
     </div>
     <div #allTagsOption
+         #option
          (click)="onClickOption($event)"
          class="option all-tags"
          data-value="All"
     >
       Select All
     </div>
-    <div (click)="onClickOption($event)"
+    <div #option
+         (click)="onClickOption($event)"
          *ngFor="let option of listOptions"
          [attr.data-value]="option.id"
          class="option"
     >
       <div class="text-truncate"> {{ option.title }}</div>
     </div>
-    <div class="no-result-message" style="display: none">
+    <div #noResultMessage class="no-result-message" style="display: none">
       No result match
     </div>
   </div>
