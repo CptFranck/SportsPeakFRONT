@@ -1,4 +1,7 @@
 <div class="container p-4">
+  <div *ngIf="loading">
+    <p>Loading</p>
+  </div>
   <div *ngIf="error">
     <p>Error : {{ error }}</p>
   </div>
@@ -22,17 +25,6 @@
         <app-modal [id]="modalId" title="New muscle :" validateNameButton="Create">
           <app-muscle-form/>
         </app-modal>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-1">
-        <app-multi-select/>
-      </div>
-      <div class="col-3">
-        <app-multi-select/>
-      </div>
-      <div class="col-5">
-        <app-multi-select/>
       </div>
     </div>
     <app-muscles-array [muscles]="muscles"/>

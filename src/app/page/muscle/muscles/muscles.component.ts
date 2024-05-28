@@ -19,6 +19,7 @@ import {MultiSelectComponent} from "../../../components/select/multi-select/mult
 })
 export class MusclesComponent implements OnInit {
   muscles: Muscle[] = [];
+  loading = true;
   error?: GraphqlError;
   modalId: string = "muscleModal"
 
@@ -30,9 +31,10 @@ export class MusclesComponent implements OnInit {
       .watchQuery({
         query: GET_MUSCLES,
       })
-      .valueChanges.subscribe(({data, error}: GraphqlResponse): void => {
-      this.muscles = data.getMuscles;
-      this.error = error;
+      .valueChanges.subscribe((result: GraphqlResponse): void => {
+      this.muscles = result.data.getMuscles;
+      this.loading = result.loading;
+      this.error = result.error;
     });
   }
 }
