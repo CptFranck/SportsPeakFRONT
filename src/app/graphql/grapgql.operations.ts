@@ -37,7 +37,7 @@ const GET_MUSCLES = gql`
   }
 `;
 
-const GET_EXERCISETYPES = gql`
+const GET_EXERCISE_TYPES = gql`
   query getExType {
     getExerciseTypes {
       id
@@ -51,4 +51,4 @@ const GET_EXERCISETYPES = gql`
   }
 `;
 
-export {GET_EXERCISES, GET_MUSCLES, GET_EXERCISETYPES};
+export {GET_EXERCISES, GET_MUSCLES, GET_EXERCISE_TYPES};

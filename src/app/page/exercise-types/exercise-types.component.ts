@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { Apollo } from 'apollo-angular';
-import { GET_EXERCISETYPES } from '../../graphql/grapgql.operations';
-import { CommonModule } from '@angular/common';
+import {Component, OnInit} from '@angular/core';
+import {Apollo} from 'apollo-angular';
+import {GET_EXERCISE_TYPES} from '../../graphql/grapgql.operations';
+import {CommonModule} from '@angular/common';
 
 @Component({
   selector: 'app-exercise-types',
@@ -13,16 +13,17 @@ export class ExerciseTypesComponent implements OnInit {
   exerciseTypes: any[] = [];
   error: any;
 
-  constructor(private apollo: Apollo) {}
+  constructor(private apollo: Apollo) {
+  }
 
   ngOnInit(): void {
     this.apollo
       .watchQuery({
-        query: GET_EXERCISETYPES,
+        query: GET_EXERCISE_TYPES,
       })
-      .valueChanges.subscribe(({ data, error }: any) => {
-        this.exerciseTypes = data.getExerciseTypes;
-        this.error = error;
-      });
+      .valueChanges.subscribe(({data, error}: any) => {
+      this.exerciseTypes = data.getExerciseTypes;
+      this.error = error;
+    });
   }
 }
