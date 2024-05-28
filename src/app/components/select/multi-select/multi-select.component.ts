@@ -1,6 +1,8 @@
 import {AfterViewInit, Component, ElementRef, Input} from '@angular/core';
 import {NgForOf, NgIf} from "@angular/common";
 import {FormsModule} from "@angular/forms";
+import {listOption} from "../../../interface/multiSelect/listOption";
+import {listOptionSelected} from "../../../interface/multiSelect/listOptionSelected";
 
 @Component({
   selector: 'app-multi-select',
@@ -14,38 +16,33 @@ import {FormsModule} from "@angular/forms";
   styleUrl: './multi-select.component.css'
 })
 export class MultiSelectComponent implements AfterViewInit {
-  listOptions: any = [
-    {id: 1, value: "un"},
-    {id: 2, value: "deux"},
-    {id: 3, value: "trois"},
-    {id: 4, value: "quatrequatrequatrequatrequatre"},
-    {id: 5, value: "cinq"},
-    {id: 6, value: "six"},
-    {id: 7, value: "sept"},
-    {id: 8, value: "huit"},
+  @Input()
+  listOptions: listOption[] = [
+    {id: 1, text: "un", value: "un"},
+    {id: 2, text: "deux", value: "deux"},
+    {id: 3, text: "trois", value: "trois"},
+    {id: 4, text: "quatrequatrequatrequatrequatre", value: "quatre"},
+    {id: 5, text: "cinq", value: "cinq"},
+    {id: 6, text: "six", value: "six"},
+    {id: 7, text: "sept", value: "sept"},
+    {id: 8, text: "huit", value: "huit"},
   ]
-  selectedOptions: {
-    value: string,
-    text: string,
-  }[] =
-    // [];
+  @Input()
+  selectedOptions: listOptionSelected[] =
     [
-      {value: "1", text: "un"},
-      {value: "2", text: "deux"},
-      {value: "3", text: "trois"},
-      {value: "4", text: "quatrequatrequatrequatrequatre"},
-      {value: "5", text: "cinq"},
-      {value: "6", text: "six"},
-      {value: "7", text: "sept"},
-      {value: "8", text: "huit"}
+      {id: "1", text: "un"},
+      {id: "2", text: "deux"},
+      {id: "3", text: "trois"},
+      {id: "4", text: "quatrequatrequatrequatrequatre"},
+      {id: "5", text: "cinq"},
+      {id: "6", text: "six"},
+      {id: "7", text: "sept"},
+      {id: "8", text: "huit"}
     ];
 
   @Input()
-  limitOfDisplayedSelectedOptions: number = 0;
-  displayedSelectedOptions: {
-    value: string,
-    text: string,
-  }[] = [];
+  limitOfDisplayedSelectedOptions: number = 3;
+  displayedSelectedOptions: listOptionSelected[] = [];
 
   private readonly customSelect: HTMLElement;
   private selectBox: HTMLElement | null = null;
@@ -73,7 +70,7 @@ export class MultiSelectComponent implements AfterViewInit {
     this.options.forEach((opt) => {
       if (!opt.classList.contains("all-tags")) {
         if (this.selectedOptions.find(so =>
-          so.value === opt.getAttribute("data-value"))) {
+          so.id === opt.getAttribute("data-value"))) {
           opt.classList.toggle("active")
         } else {
           allTagsUsed = false
@@ -110,7 +107,7 @@ export class MultiSelectComponent implements AfterViewInit {
       this.displayedSelectedOptions = [...this.selectedOptions].slice(0, this.limitOfDisplayedSelectedOptions);
       if (length > this.limitOfDisplayedSelectedOptions) {
         this.displayedSelectedOptions.push({
-          value: "more",
+          id: "more",
           text: '+' + (length - this.limitOfDisplayedSelectedOptions).toString()
         });
       }
@@ -126,7 +123,7 @@ export class MultiSelectComponent implements AfterViewInit {
       .filter((option) => !option.classList.contains("all-tags"))
       .map((option: any) => {
         return {
-          value: option.getAttribute("data-value"),
+          id: option.getAttribute("data-value"),
           text: option.textContent === null ? "" : option.textContent.trim(),
         };
       });
