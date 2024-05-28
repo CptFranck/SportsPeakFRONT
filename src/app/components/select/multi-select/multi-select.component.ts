@@ -1,4 +1,14 @@
-import {AfterViewInit, Component, ElementRef, Input, OnInit, QueryList, ViewChild, ViewChildren} from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  Input,
+  OnChanges,
+  OnInit,
+  QueryList,
+  ViewChild,
+  ViewChildren
+} from '@angular/core';
 import {NgForOf, NgIf} from "@angular/common";
 import {FormsModule} from "@angular/forms";
 import {Option} from "../../../interface/multiSelect/option";
@@ -15,10 +25,9 @@ import {OptionSelected} from "../../../interface/multiSelect/optionSelected";
   templateUrl: './multi-select.component.html',
   styleUrl: './multi-select.component.css'
 })
-export class MultiSelectComponent implements OnInit, AfterViewInit {
+export class MultiSelectComponent implements OnInit, OnChanges, AfterViewInit {
   @Input()
-  listOptions: Option[] =
-    // []
+  optionList: Option[] =
     [
       {id: "1", title: "un", value: "un"},
       {id: "2", title: "deux", value: "deux"},
@@ -31,7 +40,6 @@ export class MultiSelectComponent implements OnInit, AfterViewInit {
     ];
   @Input()
   selectedOptions: OptionSelected[] =
-    // []
     [
       {id: "1", title: "un"},
       {id: "2", title: "deux"},
@@ -62,34 +70,23 @@ export class MultiSelectComponent implements OnInit, AfterViewInit {
     this.customSelect = this.elem.nativeElement;
   }
 
-  ngOnInit(): void {
+  ngOnInit() {
+    this.updateDisplayedSelectedOptions()
+  }
+
+  ngOnChanges(): void {
     this.updateDisplayedSelectedOptions()
   }
 
   ngAfterViewInit() {
-    let allTagsUsed = true;
-    if (!this.options) {
-      return;
-    }
-    this.options.forEach((opt) => {
-      if (!opt.nativeElement.classList.contains("all-tags")) {
-        if (this.selectedOptions.find(so =>
-          so.id === opt.nativeElement.getAttribute("data-value"))) {
-          opt.nativeElement.classList.toggle("active")
-        } else {
-          allTagsUsed = false
-        }
-      }
-    })
 
-    if (allTagsUsed) {
-      this.allTagsOption.nativeElement.classList.toggle("active");
-    }
+    this.setSelectedOptionActive()
+    this.options.changes.subscribe(() => {
+      this.setSelectedOptionActive()
+    });
 
     document.addEventListener("click", (event) => {
-      if (!(event.target instanceof HTMLElement)) {
-        return;
-      }
+      if (!(event.target instanceof HTMLElement)) return
       if (
         !event.target.closest(".custom-select")
         && !event.target.classList.contains("remove-tag")
@@ -98,6 +95,30 @@ export class MultiSelectComponent implements OnInit, AfterViewInit {
         this.selectBox.nativeElement.parentNode.classList.remove("open");
       }
     });
+  }
+
+  setSelectedOptionActive(): void {
+    this.options.forEach((option) => option.nativeElement.focus())
+    if (this.showLog)
+      console.log(this.options.length)
+
+    let allTagsUsed = true;
+    this.options.forEach((option) => {
+      if (!option.nativeElement.classList.contains("all-tags")) {
+        let isSelected =
+          this.selectedOptions.find(selectedOption =>
+            (selectedOption.id).toString() === option.nativeElement.getAttribute("data-value"))
+        if (isSelected) {
+          option.nativeElement.classList.toggle("active")
+        } else {
+          allTagsUsed = false
+        }
+      }
+    });
+
+    if (allTagsUsed && !this.allTagsOption.nativeElement.classList.contains("active")) {
+      this.allTagsOption.nativeElement.classList.toggle("active");
+    }
   }
 
   updateDisplayedSelectedOptions(): void {

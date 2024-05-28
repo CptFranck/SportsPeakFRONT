@@ -44,7 +44,7 @@
     </div>
     <div #option
          (click)="onClickOption($event)"
-         *ngFor="let option of listOptions"
+         *ngFor="let option of optionList"
          [attr.data-value]="option.id"
          class="option"
     >
