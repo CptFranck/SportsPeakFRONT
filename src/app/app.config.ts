@@ -1,15 +1,9 @@
-import { ApplicationConfig } from '@angular/core';
-import { provideHttpClient } from '@angular/common/http';
-import { importProvidersFrom } from '@angular/core';
-import {
-  RouterLink,
-  RouterLinkActive,
-  RouterOutlet,
-  provideRouter,
-} from '@angular/router';
+import {ApplicationConfig, importProvidersFrom} from '@angular/core';
+import {HttpClientModule, provideHttpClient} from '@angular/common/http';
+import {provideRouter, RouterLink, RouterLinkActive, RouterOutlet,} from '@angular/router';
 
-import { routes } from './app.routes';
-import { graphqlProvider } from './graphql/graphql.provider';
+import {routes} from './app.routes';
+import {graphqlProvider} from './graphql/graphql.provider';
 
 export const appConfig: ApplicationConfig = {
   providers: [
