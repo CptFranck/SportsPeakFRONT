@@ -57,7 +57,6 @@ export class MultiSelectComponent implements OnInit, AfterViewInit {
   readonly customSelect: HTMLElement;
   selectBox: HTMLElement | null = null;
   searchInput: HTMLElement | null = null;
-  optionsContainer: HTMLElement | null = null;
   options: NodeListOf<HTMLElement> | null = null;
   // allTagsOption: HTMLElement | null = null;
   noResultMessage: HTMLElement | null = null;
@@ -73,7 +72,6 @@ export class MultiSelectComponent implements OnInit, AfterViewInit {
   ngAfterViewInit() {
     this.selectBox = this.customSelect.querySelector(".select-box");
     this.searchInput = this.customSelect.querySelector(".search-tags");
-    this.optionsContainer = this.customSelect.querySelector(".options");
     this.options = this.customSelect.querySelectorAll('.option');
     // this.allTagsOption = this.customSelect.querySelector(".option.all-tags");
     // this.allTagsOption = this.allTags.nativeElement;
@@ -163,13 +161,14 @@ export class MultiSelectComponent implements OnInit, AfterViewInit {
   onInputSearch() {
     if (!(this.searchInput instanceof HTMLInputElement)
       || !(this.options instanceof NodeList)
-      || !(this.optionsContainer instanceof HTMLElement)
-      || !(this.allTagsOption instanceof HTMLElement)
+      // || !(this.allTagsOption instanceof HTMLElement)
       || !(this.noResultMessage instanceof HTMLElement)
     ) {
       return
     }
+
     const searchTerm = this.searchInput.value.toLowerCase();
+    console.log(searchTerm)
     this.options.forEach((option) => {
       if (option.textContent) {
         const optionText = option.textContent.trim().toLocaleString().toLowerCase();
@@ -183,16 +182,10 @@ export class MultiSelectComponent implements OnInit, AfterViewInit {
     );
     this.noResultMessage.style.display = anyOptionsMatch ? "none" : "block";
 
-    if (searchTerm) {
-      this.optionsContainer.classList.add("option-search-active");
-    } else {
-      this.optionsContainer.classList.remove("option-search-active");
-    }
-
     if (searchTerm.length !== 0) {
-      this.allTagsOption.style.display = "none";
+      this.allTagsOption.nativeElement.style.display = "none";
     } else {
-      this.allTagsOption.style.display = "block";
+      this.allTagsOption.nativeElement.style.display = "block";
     }
   }
 
