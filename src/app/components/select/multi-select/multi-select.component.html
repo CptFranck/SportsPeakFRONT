@@ -9,10 +9,10 @@
     />
     <div class="selected-options">
       <span *ngIf="selectedOptions.length === 0">Select tags</span>
-      <span *ngFor="let optionSelected of displayedSelectedOptions" class="tag">
-        {{ optionSelected.text }}
+      <span *ngFor="let selectedOption of displayedSelectedOptions" class="tag">
+        {{ selectedOption.title }}
         <i (click)="onCLickRemoveTag($event)"
-           [attr.data-value]="optionSelected.id"
+           [attr.data-value]="selectedOption.id"
            class="fa fa-close remove-tag"></i>
       </span>
       <!--      <div class="arrow col-sm-auto align-items-center">-->
@@ -32,8 +32,9 @@
         <i class="fa fa-close"></i>
       </button>
     </div>
-    <div (click)="onClickOption($event)"
-         [class]="'option all-tags' + ('')"
+    <div #allTagsOption
+         (click)="onClickOption($event)"
+         class="option all-tags"
          data-value="All"
     >
       Select All
@@ -43,7 +44,7 @@
          [attr.data-value]="option.id"
          class="option"
     >
-      <div class="text-truncate"> {{ option.value }}</div>
+      <div class="text-truncate"> {{ option.title }}</div>
     </div>
     <div class="no-result-message" style="display: none">
       No result match

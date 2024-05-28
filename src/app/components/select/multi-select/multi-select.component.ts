@@ -1,8 +1,8 @@
-import {AfterViewInit, Component, ElementRef, Input} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
 import {NgForOf, NgIf} from "@angular/common";
 import {FormsModule} from "@angular/forms";
-import {listOption} from "../../../interface/multiSelect/listOption";
-import {listOptionSelected} from "../../../interface/multiSelect/listOptionSelected";
+import {Option} from "../../../interface/multiSelect/option";
+import {OptionSelected} from "../../../interface/multiSelect/optionSelected";
 
 @Component({
   selector: 'app-multi-select',
@@ -15,58 +15,74 @@ import {listOptionSelected} from "../../../interface/multiSelect/listOptionSelec
   templateUrl: './multi-select.component.html',
   styleUrl: './multi-select.component.css'
 })
-export class MultiSelectComponent implements AfterViewInit {
+export class MultiSelectComponent implements OnInit, AfterViewInit {
   @Input()
-  listOptions: listOption[] = [
-    {id: 1, text: "un", value: "un"},
-    {id: 2, text: "deux", value: "deux"},
-    {id: 3, text: "trois", value: "trois"},
-    {id: 4, text: "quatrequatrequatrequatrequatre", value: "quatre"},
-    {id: 5, text: "cinq", value: "cinq"},
-    {id: 6, text: "six", value: "six"},
-    {id: 7, text: "sept", value: "sept"},
-    {id: 8, text: "huit", value: "huit"},
-  ]
-  @Input()
-  selectedOptions: listOptionSelected[] =
+  listOptions: Option[] =
+    // []
     [
-      {id: "1", text: "un"},
-      {id: "2", text: "deux"},
-      {id: "3", text: "trois"},
-      {id: "4", text: "quatrequatrequatrequatrequatre"},
-      {id: "5", text: "cinq"},
-      {id: "6", text: "six"},
-      {id: "7", text: "sept"},
-      {id: "8", text: "huit"}
+      {id: "1", title: "un", value: "un"},
+      {id: "2", title: "deux", value: "deux"},
+      {id: "3", title: "trois", value: "trois"},
+      {id: "4", title: "quatrequatrequatrequatrequatre", value: "quatre"},
+      {id: "5", title: "cinq", value: "cinq"},
+      {id: "6", title: "six", value: "six"},
+      {id: "7", title: "sept", value: "sept"},
+      {id: "8", title: "huit", value: "huit"},
+    ];
+  @Input()
+  selectedOptions: OptionSelected[] =
+    // []
+    [
+      {id: "1", title: "un"},
+      {id: "2", title: "deux"},
+      {id: "3", title: "trois"},
+      {id: "4", title: "quatrequatrequatrequatrequatre"},
+      {id: "5", title: "cinq"},
+      {id: "6", title: "six"},
+      {id: "7", title: "sept"},
+      {id: "8", title: "huit"}
     ];
 
-  @Input()
-  limitOfDisplayedSelectedOptions: number = 3;
-  displayedSelectedOptions: listOptionSelected[] = [];
+  displayedSelectedOptions: OptionSelected[] = [];
 
-  private readonly customSelect: HTMLElement;
-  private selectBox: HTMLElement | null = null;
-  private searchInput: HTMLElement | null = null;
-  private optionsContainer: HTMLElement | null = null;
-  private options: NodeListOf<HTMLElement> | null = null;
-  private allTagsOption: HTMLElement | null = null;
-  private noResultMessage: HTMLElement | null = null;
+  @Input()
+  limitOfDisplayedSelectedOptions: number = 0;
+
+  @Input()
+  showLog: boolean = false;
+
+  // @ViewChild('allTagsOption') allTags!: ElementRef;
+  @ViewChild('allTagsOption') allTagsOption!: ElementRef;
+
+  readonly customSelect: HTMLElement;
+  selectBox: HTMLElement | null = null;
+  searchInput: HTMLElement | null = null;
+  optionsContainer: HTMLElement | null = null;
+  options: NodeListOf<HTMLElement> | null = null;
+  // allTagsOption: HTMLElement | null = null;
+  noResultMessage: HTMLElement | null = null;
 
   constructor(private elem: ElementRef) {
     this.customSelect = this.elem.nativeElement;
-
   }
 
-  ngAfterViewInit(): void {
+  ngOnInit(): void {
+    this.updateDisplayedSelectedOptions()
+  }
 
+  ngAfterViewInit() {
     this.selectBox = this.customSelect.querySelector(".select-box");
     this.searchInput = this.customSelect.querySelector(".search-tags");
     this.optionsContainer = this.customSelect.querySelector(".options");
     this.options = this.customSelect.querySelectorAll('.option');
-    this.allTagsOption = this.customSelect.querySelector(".option.all-tags");
+    // this.allTagsOption = this.customSelect.querySelector(".option.all-tags");
+    // this.allTagsOption = this.allTags.nativeElement;
     this.noResultMessage = this.customSelect.querySelector(".no-result-message");
 
     let allTagsUsed = true;
+    if (!this.options) {
+      return;
+    }
     this.options.forEach((opt) => {
       if (!opt.classList.contains("all-tags")) {
         if (this.selectedOptions.find(so =>
@@ -78,8 +94,8 @@ export class MultiSelectComponent implements AfterViewInit {
       }
     })
 
-    if (allTagsUsed && this.allTagsOption) {
-      this.allTagsOption.classList.toggle("active");
+    if (allTagsUsed) {
+      this.allTagsOption.nativeElement.classList.toggle("active");
     }
 
     document.addEventListener("click", (event) => {
@@ -95,8 +111,6 @@ export class MultiSelectComponent implements AfterViewInit {
         this.selectBox.parentNode.classList.remove("open");
       }
     });
-
-    this.updateDisplayedSelectedOptions()
   }
 
   updateDisplayedSelectedOptions(): void {
@@ -108,13 +122,16 @@ export class MultiSelectComponent implements AfterViewInit {
       if (length > this.limitOfDisplayedSelectedOptions) {
         this.displayedSelectedOptions.push({
           id: "more",
-          text: '+' + (length - this.limitOfDisplayedSelectedOptions).toString()
+          title: '+' + (length - this.limitOfDisplayedSelectedOptions).toString()
         });
       }
     }
   }
 
   updateSelectedOptions() {
+    if (this.showLog)
+      console.log(this.options)
+
     if (!this.options) {
       return
     }
@@ -124,7 +141,7 @@ export class MultiSelectComponent implements AfterViewInit {
       .map((option: any) => {
         return {
           id: option.getAttribute("data-value"),
-          text: option.textContent === null ? "" : option.textContent.trim(),
+          title: option.textContent === null ? "" : option.textContent.trim(),
         };
       });
 
@@ -136,8 +153,6 @@ export class MultiSelectComponent implements AfterViewInit {
     if (!(selectBox instanceof Element)) {
       return;
     }
-
-    console.log(!selectBox.closest(".tag"))
     if (!selectBox.closest(".tag") &&
       this.selectBox?.parentNode instanceof Element
     ) {
@@ -195,13 +210,12 @@ export class MultiSelectComponent implements AfterViewInit {
   }
 
   onClickAllOption() {
-    if (!(this.allTagsOption instanceof HTMLElement)
-      || !(this.options instanceof NodeList)) {
+    if (!(this.options instanceof NodeList)) {
       return;
     }
-    const isActive = this.allTagsOption.classList.contains("active");
+    const isActive = this.allTagsOption.nativeElement.classList.contains("active");
     this.options.forEach((option: HTMLElement) => {
-      if (option !== this.allTagsOption) {
+      if (option !== this.allTagsOption.nativeElement) {
         option.classList.toggle("active", isActive);
       }
     });
@@ -243,8 +257,8 @@ export class MultiSelectComponent implements AfterViewInit {
     const otherSelectedOptions = customSelect.querySelectorAll(
       ".option.active:not(.all-tags)"
     );
-    if (otherSelectedOptions.length === 0 && this.allTagsOption) {
-      this.allTagsOption.classList.remove("active");
+    if (otherSelectedOptions.length === 0) {
+      this.allTagsOption.nativeElement.classList.remove("active");
     }
     this.updateSelectedOptions();
   }
