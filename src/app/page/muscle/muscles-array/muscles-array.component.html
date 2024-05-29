@@ -13,13 +13,13 @@
   <tbody class="table-group-divider">
   <tr *ngFor="let muscle of muscles">
     <td>{{ muscle.name }}</td>
-    <td *ngIf="!showDetails[muscle.id]" class="truncate">
+    <td *ngIf="!showDetails[muscle.id]" class="truncate-td">
       {{ muscle.description }}
     </td>
     <td *ngIf="showDetails[muscle.id]">
       {{ muscle.description }}
     </td>
-    <td *ngIf="!showDetails[muscle.id]" class="truncate">
+    <td *ngIf="!showDetails[muscle.id]" class="truncate-td">
       {{ muscle.function }}
     </td>
     <td *ngIf="showDetails[muscle.id]">
