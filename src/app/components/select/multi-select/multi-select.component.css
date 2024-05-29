@@ -32,27 +32,10 @@
   text-overflow: ellipsis;
 }
 
-/*.tag-text {*/
-/*  width: calc(100% - 15px);*/
-/*}*/
-
 .remove-tag {
   margin-left: 6px;
   cursor: pointer;
 }
-
-/*//////////////////////////////////////////////*/
-
-.arrow {
-  display: flex;
-  padding: 0 10px;
-}
-
-.fa-angle-down {
-  color: #404040;
-  font-size: 20px;
-}
-
 
 .options {
   display: none;
@@ -98,18 +81,4 @@
 .error {
   color: #ff1a2a;
   margin-top: 8px;
-}
-
-.btn_submit {
-  height: 50px;
-  padding: 17px 24px;
-  background-color: #4caf50;
-  color: #ffffff;
-  border: none;
-  cursor: pointer;
-  font-size: 14px;
-}
-
-.btn_submit:hover {
-  background-color: darkgreen;
 }

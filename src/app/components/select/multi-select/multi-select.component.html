@@ -48,13 +48,12 @@
          [attr.data-value]="option.id"
          class="option"
     >
-      <div class="text-truncate"> {{ option.title }}</div>
+      <div class="text-truncate"> {{ option.title }} {{ addDescriptionToOption ? ":" : "" }}</div>
+      <div *ngIf="addDescriptionToOption" class="text-truncate"> {{ option.description }}</div>
     </div>
     <div #noResultMessage class="no-result-message" style="display: none">
       No result match
     </div>
   </div>
-  <span class="tag_error_msg error">
-</span>
-  <!--<input class="btn_submit" type="button" value="Submit"/>-->
+  <span class="tag_error_msg error"></span>
 </div>
