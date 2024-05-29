@@ -49,7 +49,7 @@
          class="option"
     >
       <div class="text-truncate"> {{ option.title }} {{ addDescriptionToOption ? ":" : "" }}</div>
-      <div *ngIf="addDescriptionToOption" class="text-truncate"> {{ option.description }}</div>
+      <div *ngIf="addDescriptionToOption"> {{ option.description }}</div>
     </div>
     <div #noResultMessage class="no-result-message" style="display: none">
       No result match
