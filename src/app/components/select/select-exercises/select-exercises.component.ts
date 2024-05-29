@@ -31,15 +31,15 @@ export class SelectExercisesComponent implements OnInit {
       .valueChanges.subscribe(({data, error}: any) => {
       let options: Option[] = []
       data.getExercises.forEach((exercise: Exercise) => {
-        options.push({id: exercise.id, title: exercise.name, value: exercise});
+        options.push({id: exercise.id, title: exercise.name, value: exercise, description: exercise.description});
       });
       this.exercises = [...options];
       this.error = error;
 
-      this.exercises.forEach(exercise => this.selectedExercises.push(
-        {id: exercise.id, title: exercise.title}));
-      console.log("exercises", this.exercises)
-      console.log("selection", this.selectedExercises)
+      // this.exercises.forEach(exercise => this.selectedExercises.push(
+      //   {id: exercise.id, title: exercise.title}));
+      // console.log("exercises", this.exercises)
+      // console.log("selection", this.selectedExercises)
     });
   }
 }

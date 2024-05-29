@@ -1,13 +1,7 @@
-<div class="row">
-  <div class="col">
-    <app-multi-select [optionList]="exercises"
-                      [selectedOptions]="selectedExercises"
-                      [showLog]="true"
-    />
-  </div>
-  <div class="col">
-    <app-multi-select/>
-  </div>
-</div>
+<app-multi-select [addDescriptionToOption]="true"
+                  [optionList]="exercises"
+                  [selectedOptions]="selectedExercises"
+/>
+
 
 
