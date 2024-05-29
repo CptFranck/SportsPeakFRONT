@@ -4,7 +4,6 @@ import {GET_EXERCISES} from "../../../graphql/grapgql.operations";
 import {MultiSelectComponent} from "../multi-select/multi-select.component";
 import {Exercise} from "../../../interface/dto/exercise";
 import {Option} from "../../../interface/multiSelect/option";
-import {OptionSelected} from "../../../interface/multiSelect/optionSelected";
 
 @Component({
   selector: 'app-select-exercises',
@@ -18,7 +17,7 @@ export class SelectExercisesComponent implements OnInit {
   exercises: Option[] = [];
   error: any;
   @Input()
-  selectedExercises: OptionSelected[] = [];
+  selectedExercises: number[] = [];
 
   constructor(private apollo: Apollo) {
   }
@@ -35,7 +34,6 @@ export class SelectExercisesComponent implements OnInit {
       });
       this.exercises = [...options];
       this.error = error;
-
       // this.exercises.forEach(exercise => this.selectedExercises.push(
       //   {id: exercise.id, title: exercise.title}));
       // console.log("exercises", this.exercises)
