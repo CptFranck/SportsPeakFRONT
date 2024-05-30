@@ -1,7 +1,7 @@
 <div class="container p-4">
   <app-loading [loading]="loading"/>
-  <div *ngIf="error">
-    <p>Error : {{ error }}</p>
+  <div *ngFor="let alert of alerts">
+    <app-alert (removedAlert)="removeAlert($event)" [alert]="alert"/>
   </div>
   <div class="container-fluid">
     <div class="row">
@@ -10,10 +10,14 @@
       </div>
       <div class="col-2">
         <app-modal-button [id]="modalId">
-          Add new <i class="fa-regular fa-square-plus"></i>
+          Add new
+          <i class="fa-regular fa-square-plus"></i>
         </app-modal-button>
         <app-modal [id]="modalId" title="New muscle :">
-          <app-muscle-form/>
+          <app-muscle-form
+            (errorOccurred)="setAlertError($event)"
+            (newMuscleAdded)="setAlertSuccess($event)"
+          />
         </app-modal>
       </div>
     </div>
