@@ -1,0 +1,11 @@
+<div *ngIf="formGroup.controls[fieldName].valid"
+     class="text-success"
+>
+  Looks good!
+</div>
+<div *ngIf="formGroup.controls[fieldName].invalid &&
+                formGroup.controls[fieldName].touched"
+     class="text-danger"
+>
+  {{ errorMessage }}
+</div>
