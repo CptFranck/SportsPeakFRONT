@@ -1,19 +1,16 @@
 <div class="container p-4">
   <div *ngIf="loading">
-    <p>Loading</p>
+    <div class="text-center">
+      <div class="spinner-border" role="status">
+        <strong class="sr-only">Loading...</strong>
+      </div>
+    </div>
   </div>
   <div *ngIf="error">
     <p>Error : {{ error }}</p>
   </div>
 
   <div class="container-fluid">
-    <br/>
-    <br/>
-    <br/>
-    <app-select-exercises/>
-    <br/>
-    <br/>
-    <br/>
     <div class="row">
       <div class="col">
         <h2>Muscles saved in databases</h2>
