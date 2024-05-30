@@ -5,24 +5,7 @@
         <h1 class="modal-title fs-5">{{ title }}</h1>
         <button aria-label="Close" class="btn-close" data-bs-dismiss="modal" type="button"></button>
       </div>
-      <div class="modal-body">
-        <ng-content/>
-      </div>
-      <div class="modal-footer">
-        <button (click)="closeActionButton()"
-                class="btn btn-danger"
-                data-bs-dismiss="modal"
-                type="button"
-        >
-          {{ closeNameButton }}
-        </button>
-        <button (click)="validateActionButton()"
-                class="btn btn-success"
-                type="button"
-        >
-          {{ validateNameButton }}
-        </button>
-      </div>
+      <ng-content/>
     </div>
   </div>
 </div>

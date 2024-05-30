@@ -1,22 +1,19 @@
 import {Component, Input} from '@angular/core';
+import {NgTemplateOutlet} from "@angular/common";
 
 @Component({
   selector: 'app-modal',
   standalone: true,
-  imports: [],
+  imports: [
+    NgTemplateOutlet
+  ],
   templateUrl: './modal.component.html',
 })
 export class ModalComponent {
+
   @Input()
   id!: string;
   @Input()
   title!: string;
-  @Input()
-  closeNameButton?: string = "Cancel";
-  @Input()
-  validateNameButton?: string = "Save";
-  @Input()
-  closeActionButton!: () => void;
-  @Input()
-  validateActionButton!: () => void;
+  
 }
