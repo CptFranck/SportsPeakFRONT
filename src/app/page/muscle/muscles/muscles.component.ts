@@ -11,11 +11,12 @@ import {MuscleFormComponent} from "../muscle-form/muscle-form.component";
 import {ModalButtonComponent} from "../../../components/button/modalButton/modal-button.component";
 import {MultiSelectComponent} from "../../../components/select/multi-select/multi-select.component";
 import {SelectExercisesComponent} from "../../../components/select/select-exercises/select-exercises.component";
+import {LoadingComponent} from "../../../components/loading/loading.component";
 
 @Component({
   selector: 'app-muscles',
   standalone: true,
-  imports: [CommonModule, ModalComponent, MusclesArrayComponent, MuscleFormComponent, ModalButtonComponent, MultiSelectComponent, SelectExercisesComponent],
+  imports: [CommonModule, ModalComponent, MusclesArrayComponent, MuscleFormComponent, ModalButtonComponent, MultiSelectComponent, SelectExercisesComponent, LoadingComponent],
   templateUrl: './muscles.component.html',
 })
 export class MusclesComponent implements OnInit {

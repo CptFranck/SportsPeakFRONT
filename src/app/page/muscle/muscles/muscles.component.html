@@ -1,15 +1,8 @@
 <div class="container p-4">
-  <div *ngIf="loading">
-    <div class="text-center">
-      <div class="spinner-border" role="status">
-        <strong class="sr-only">Loading...</strong>
-      </div>
-    </div>
-  </div>
+  <app-loading [loading]="loading"/>
   <div *ngIf="error">
     <p>Error : {{ error }}</p>
   </div>
-
   <div class="container-fluid">
     <div class="row">
       <div class="col">
