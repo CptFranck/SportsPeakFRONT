@@ -1,35 +1,42 @@
 <div class="modal-body">
-  <form [formGroup]="muscleForm" class="container-fluid">
+  <form *ngIf="muscleForm" [formGroup]="muscleForm" class="container-fluid">
     <div class="mb-3">
       <label class="form-label">Name :</label>
       <input class="form-control" formControlName="name" required type="text">
-      <app-input-control [formGroup]="muscleForm" fieldName="name" rules="min : 3; max 50"/>
+      <app-input-control
+        [formGroup]="muscleForm"
+        fieldName="name"
+        rules="min : 3; max 50"
+      />
     </div>
 
     <div class="mb-3">
       <label class="form-label">Description :</label>
       <textarea aria-label="textarea" class="form-control" formControlName="description"></textarea>
-      <app-input-control [formGroup]="muscleForm" fieldName="description" rules="min : 3; max 2000"/>
+      <app-input-control
+        [formGroup]="muscleForm"
+        fieldName="description"
+        rules="min : 3; max 2000"
+      />
     </div>
 
     <div class="mb-3">
       <label class="form-label">Function :</label>
       <textarea aria-label="textarea" class="form-control" formControlName="function"></textarea>
-      <app-input-control [formGroup]="muscleForm" fieldName="function"/>
+      <app-input-control
+        [formGroup]="muscleForm"
+        fieldName="function"
+        rules="min : 3; max 2000"
+      />
     </div>
     <div class="mb-3">
       <label class="form-label">Exercises :</label>
-      <app-select-exercises [exerciseIds]="newMuscle.exerciseIds" formControlName="exerciseIds"/>
-      <app-input-control [formGroup]="muscleForm" fieldName="function" rules="min : 3; max 2000"/>
-      <div *ngIf="muscleForm.controls['exerciseIds'].valid"
-           class="text-success"
-      >
-        Looks good!
-      </div>
-      <app-input-control [formGroup]="muscleForm"
-                         errorMessage="Attention no exercises use this muscle !"
-                         fieldName="function"
-                         rules="min : 3; max 2000"
+      <app-select-exercises [exerciseIds]='muscleForm.controls["exerciseIds"].value' formControlName="exerciseIds"/>
+      <app-input-control
+        [formGroup]="muscleForm"
+        errorMessage="Please select exercises that use this muscle"
+        fieldName="exerciseIds"
+        rules="min : 1"
       />
     </div>
   </form>
