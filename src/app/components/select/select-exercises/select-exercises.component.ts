@@ -1,6 +1,6 @@
 import {Component, forwardRef, Input, OnInit} from '@angular/core';
 import {Apollo} from "apollo-angular";
-import {GET_EXERCISES} from "../../../graphql/grapgql.operations";
+import {GET_EXERCISES} from "../../../graphql/exercise/exercise.operations";
 import {MultiSelectComponent} from "../multi-select/multi-select.component";
 import {Exercise} from "../../../interface/dto/exercise";
 import {Option} from "../../../interface/multiSelect/option";

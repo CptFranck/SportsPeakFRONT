@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Apollo} from 'apollo-angular';
-import {GET_MUSCLES} from '../../../graphql/grapgql.operations';
+import {GET_MUSCLES} from "../../../graphql/muscle/muscle.operations";
 import {CommonModule} from '@angular/common';
 import {ModalComponent} from "../../../components/modal/modal.component";
 import {MusclesArrayComponent} from "../muscles-array/muscles-array.component";
