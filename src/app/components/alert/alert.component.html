@@ -1,0 +1,9 @@
+<div [class]="'alert ' + type + ' alert-dismissible fade show'" role="alert">
+  <strong>{{ title }}</strong>
+  <div class="col">
+    <p>{{ text }}</p>
+  </div>
+  <div class="col-1 align-items-center">
+    <button aria-label="Close" class="btn-close" data-bs-dismiss="alert" type="button"></button>
+  </div>
+</div>
