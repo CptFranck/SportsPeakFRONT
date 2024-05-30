@@ -1,26 +1,40 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, forwardRef, Input, OnInit} from '@angular/core';
 import {Apollo} from "apollo-angular";
 import {GET_EXERCISES} from "../../../graphql/grapgql.operations";
 import {MultiSelectComponent} from "../multi-select/multi-select.component";
 import {Exercise} from "../../../interface/dto/exercise";
 import {Option} from "../../../interface/multiSelect/option";
+import {ControlValueAccessor, NG_VALUE_ACCESSOR} from "@angular/forms";
 
 @Component({
   selector: 'app-select-exercises',
   standalone: true,
   imports: [
-    MultiSelectComponent
+    MultiSelectComponent,
+  ],
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => SelectExercisesComponent),
+      multi: true,
+    }
   ],
   templateUrl: './select-exercises.component.html',
 })
-export class SelectExercisesComponent implements OnInit {
-  exercises: Option[] = [];
+export class SelectExercisesComponent implements OnInit, ControlValueAccessor {
   error: any;
+  exercises: Option[] = [];
   @Input()
-  selectedExercises: number[] = [];
+  exerciseIds: number[] = [];
 
   constructor(private apollo: Apollo) {
   }
+
+  onChange: (value: number[]) => void = () => {
+  };
+
+  onTouched: ($event: boolean) => void = () => {
+  };
 
   ngOnInit(): void {
     this.apollo
@@ -34,10 +48,23 @@ export class SelectExercisesComponent implements OnInit {
       });
       this.exercises = [...options];
       this.error = error;
-      // this.exercises.forEach(exercise => this.selectedExercises.push(
-      //   {id: exercise.id, title: exercise.title}));
-      // console.log("exercises", this.exercises)
-      // console.log("selection", this.selectedExercises)
     });
+  }
+
+  writeValue(exerciseIds: number[]): void {
+    this.exerciseIds = exerciseIds;
+  }
+
+  registerOnChange(fn: (value: number[]) => void): void {
+    this.onChange = fn
+  }
+
+  registerOnTouched(fn: () => void): void {
+    this.onTouched = fn
+  }
+
+  setExerciseIds(exerciseIds: number[]) {
+    this.exerciseIds = exerciseIds;
+    this.onChange(exerciseIds);
   }
 }
