@@ -72,7 +72,6 @@ export class MultiSelectComponent implements OnInit, OnChanges, AfterViewInit {
       ) {
         this.selectBox.nativeElement.parentNode.classList.remove("open");
       }
-      this.onTouched.emit(true)
     });
   }
 
@@ -137,6 +136,7 @@ export class MultiSelectComponent implements OnInit, OnChanges, AfterViewInit {
       });
     this.selectedOptions = newSelectedOptions
     this.onChange.emit(newSelectedOptions);
+    this.onTouched.emit(true)
     this.updateDisplayedSelectedOptions()
   }
 
