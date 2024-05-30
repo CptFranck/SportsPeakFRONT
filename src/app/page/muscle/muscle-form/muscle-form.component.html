@@ -1,20 +1,51 @@
-<form class="container-fluid">
-  <div class="mb-3">
-    <label class="form-label">Name :</label>
-    <input class="form-control" type="text">
-  </div>
+<div class="modal-body">
+  <form [formGroup]="muscleForm" class="container-fluid">
+    <div class="mb-3">
+      <label class="form-label">Name :</label>
+      <input class="form-control" formControlName="name" required type="text">
+      <app-input-control [formGroup]="muscleForm" fieldName="name" rules="min : 3; max 50"/>
+    </div>
 
-  <div class="mb-3">
-    <label class="form-label">Description :</label>
-    <textarea aria-label="textarea" class="form-control"></textarea>
-  </div>
+    <div class="mb-3">
+      <label class="form-label">Description :</label>
+      <textarea aria-label="textarea" class="form-control" formControlName="description"></textarea>
+      <app-input-control [formGroup]="muscleForm" fieldName="description" rules="min : 3; max 2000"/>
+    </div>
 
-  <div class="mb-3">
-    <label class="form-label">Function :</label>
-    <textarea aria-label="textarea" class="form-control"></textarea>
-  </div>
-  <div class="mb-3">
-    <label class="form-label">Exercises :</label>
-    <app-multi-select/>
-  </div>
-</form>
+    <div class="mb-3">
+      <label class="form-label">Function :</label>
+      <textarea aria-label="textarea" class="form-control" formControlName="function"></textarea>
+      <app-input-control [formGroup]="muscleForm" fieldName="function"/>
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Exercises :</label>
+      <app-select-exercises [exerciseIds]="newMuscle.exerciseIds" formControlName="exerciseIds"/>
+      <app-input-control [formGroup]="muscleForm" fieldName="function" rules="min : 3; max 2000"/>
+      <div *ngIf="muscleForm.controls['exerciseIds'].valid"
+           class="text-success"
+      >
+        Looks good!
+      </div>
+      <app-input-control [formGroup]="muscleForm"
+                         errorMessage="Attention no exercises use this muscle !"
+                         fieldName="function"
+                         rules="min : 3; max 2000"
+      />
+    </div>
+  </form>
+</div>
+<div class="modal-footer">
+  <button class="btn btn-danger"
+          data-bs-dismiss="modal"
+          type="button"
+  >
+    Cancel
+  </button>
+  <button (click)="onSubmit()"
+          class="btn btn-success"
+          type="button"
+  >
+    Create
+  </button>
+</div>
+
