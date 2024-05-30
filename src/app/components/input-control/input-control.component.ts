@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {NgIf} from "@angular/common";
 import {FormGroup} from "@angular/forms";
 
@@ -10,9 +10,19 @@ import {FormGroup} from "@angular/forms";
   ],
   templateUrl: './input-control.component.html',
 })
-export class InputControlComponent {
+export class InputControlComponent implements OnInit {
   @Input() formGroup!: FormGroup
   @Input() fieldName!: string
   @Input() rules!: string
-  @Input() errorMessage: string = "Please write a correct " + this.fieldName + " (" + this.rules + ")."
+  @Input() errorMessage: string = ""
+
+  constructor() {
+  }
+
+  ngOnInit() {
+    if (this.errorMessage === "")
+      this.errorMessage = "Please write a correct " + this.fieldName + " (" + this.rules + ")."
+    else
+      this.errorMessage += " (" + this.rules + ")."
+  }
 }
