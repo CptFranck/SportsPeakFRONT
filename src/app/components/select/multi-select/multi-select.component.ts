@@ -2,9 +2,11 @@ import {
   AfterViewInit,
   Component,
   ElementRef,
+  EventEmitter,
   Input,
   OnChanges,
   OnInit,
+  Output,
   QueryList,
   ViewChild,
   ViewChildren
@@ -26,34 +28,26 @@ import {OptionSelected} from "../../../interface/multiSelect/optionSelected";
   styleUrl: './multi-select.component.css'
 })
 export class MultiSelectComponent implements OnInit, OnChanges, AfterViewInit {
-  @Input()
-  optionList: Option[] = [
+  displayedSelectedOptions: OptionSelected[] = [];
+  @Input() selectedOptions: number[] = [1, 2, 3, 4];
+  @Output() onChange: EventEmitter<number[]> = new EventEmitter<number[]>();
+  @Input() optionList: Option[] = [
     {id: "1", title: "un", value: "un", description: "ceci est un chiffre, 123456789"},
     {id: "2", title: "deux", value: "deux", description: "ceci est un chiffre"},
     {id: "3", title: "trois", value: "trois", description: "ceci est un chiffre"},
     {id: "4", title: "quatrequatrequatrequatre", value: "quatre", description: "ceci est un chiffre"},
-    {id: "5", title: "cinq", value: "cinq", description: "ceci est un chiffre"},
-    {id: "6", title: "six", value: "six", description: "ceci est un chiffre"},
-    {id: "7", title: "sept", value: "sept", description: "ceci est un chiffre"},
-    {id: "8", title: "huit", value: "huit", description: "ceci est un chiffre"},
   ];
-  @Input()
-  selectedOptions: number[] = [];
-  // [1,2,3,4,,6,7,8];
-
-  displayedSelectedOptions: OptionSelected[] = [];
-  @Input()
-  addDescriptionToTag: boolean = false; // can add description to the tag
-  @Input()
-  addDescriptionToOption: boolean = false; // can add description to option field
-  @Input()
-  limitOfDisplayedSelectedOptions: number = 0;
+  @Input() addDescriptionToTag: boolean = false; // can add description to the tag
+  @Input() addDescriptionToOption: boolean = false; // can add description to option field
+  @Input() limitOfDisplayedSelectedOptions: number = 0;
 
   @ViewChild('allTagsOption') allTagsOption!: ElementRef;
   @ViewChild('selectBox') selectBox!: ElementRef;
   @ViewChild('noResultMessage') noResultMessage!: ElementRef;
   @ViewChild('searchInput') searchInput!: ElementRef;
   @ViewChildren('option') options!: QueryList<ElementRef>;
+
+  @Output() onTouched = new EventEmitter<boolean>();
 
   ngOnInit() {
     this.updateDisplayedSelectedOptions()
@@ -134,21 +128,24 @@ export class MultiSelectComponent implements OnInit, OnChanges, AfterViewInit {
   }
 
   updateSelectedOptions() {
-    this.selectedOptions = Array.from(this.options)
+    let newSelectedOptions = Array.from(this.options)
       .filter((option) => option.nativeElement.classList.contains("active"))
       .filter((option) => !option.nativeElement.classList.contains("all-tags"))
       .map((option) => {
         return option.nativeElement.getAttribute("data-value");
       });
-
+    this.selectedOptions = newSelectedOptions
+    this.onChange.emit(newSelectedOptions);
     this.updateDisplayedSelectedOptions()
   }
 
   onCLickSelect($event: MouseEvent) {
     const selectBox = $event.target
     if (!(selectBox instanceof Element)) return;
-    if (!selectBox.closest(".tag"))
-      this.selectBox.nativeElement.parentNode.classList.toggle("open");
+    if (!selectBox.closest(".tag")) {
+      this.selectBox.nativeElement.parentNode.classList.toggle("open")
+      this.onTouched.emit(true)
+    }
   }
 
   onInputSearch() {
