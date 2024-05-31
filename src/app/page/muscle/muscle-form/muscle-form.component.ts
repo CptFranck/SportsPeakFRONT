@@ -6,7 +6,6 @@ import {InputMuscle} from "../../../interface/input/muscle";
 import {NgIf, NgTemplateOutlet} from "@angular/common";
 import {InputControlComponent} from "../../../components/input-control/input-control.component";
 import {Apollo} from "apollo-angular";
-import {ADD_MUSCLES} from "../../../graphql/muscle/muscle.operations";
 import {Muscle} from "../../../interface/dto/muscle";
 import {GraphQLError} from "graphql/error";
 
@@ -24,25 +23,24 @@ import {GraphQLError} from "graphql/error";
   templateUrl: './muscle-form.component.html',
 })
 export class MuscleFormComponent implements OnInit {
-  @Input()
-  newMuscle: InputMuscle | undefined
-  //   = {
-  //   id: "",
-  //   name: "NewMuscleTest",
-  //   description: "NewMuscleTestDescription",
-  //   function: "NewMuscleTestFunction",
-  //   exerciseIds: [4]
-  // }
-  @Input()
-  isAdmin: boolean = false;
+
+  @Input() newMuscle: InputMuscle | undefined
+    = {
+    id: "",
+    name: "NewMuscleTest",
+    description: "NewMuscleTestDescription",
+    function: "NewMuscleTestFunction",
+    exerciseIds: [4]
+  }
+
+  @Input() isAdmin: boolean = false;
+  @Output() newMuscleAdded: EventEmitter<Muscle> = new EventEmitter<Muscle>();
+  @Output() errorOccurred: EventEmitter<GraphQLError> = new EventEmitter<GraphQLError>();
 
   muscleForm: FormGroup | null = null;
   isFormSubmitted: boolean = false;
-
-  @Output()
-  newMuscleAdded: EventEmitter<Muscle> = new EventEmitter<Muscle>();
-  @Output()
-  errorOccurred: EventEmitter<GraphQLError> = new EventEmitter<GraphQLError>();
+  submitInvalidForm: boolean = false;
+  @Input() modalId!: string;
 
   constructor(private apollo: Apollo) {
   }
@@ -50,11 +48,10 @@ export class MuscleFormComponent implements OnInit {
   ngOnInit() {
     const exerciseIdsValidator =
       this.isAdmin ? null : Validators.required
-    const muscleId = this.newMuscle ? this.newMuscle.id : "";
     const muscleName = this.newMuscle ? this.newMuscle.name : "";
     const muscleDescription = this.newMuscle ? this.newMuscle.description : "";
     const muscleFunction = this.newMuscle ? this.newMuscle.function : "";
-    const muscleExerciseIds = this.newMuscle ? this.newMuscle.exerciseIds : [4, 1];
+    const muscleExerciseIds = this.newMuscle ? this.newMuscle.exerciseIds : [];
 
     this.muscleForm = new FormGroup({
       name: new FormControl(muscleName,
@@ -77,33 +74,40 @@ export class MuscleFormComponent implements OnInit {
     });
 
     if (this.newMuscle)
-      this.muscleForm.addControl("id", new FormControl(muscleId))
+      this.muscleForm.addControl("id", new FormControl(this.newMuscle.id))
   }
 
   onSubmit() {
     if (!this.muscleForm) return
     if (this.muscleForm.valid) {
-      console.log(this.muscleForm.value)
-      console.log("test")
-      this.apollo
-        .mutate({
-          mutation: ADD_MUSCLES,
-          variables: {
-            inputNewMuscle: this.muscleForm.value,
-          },
-        })
-        .subscribe(({data, error}: any) => {
-          console.log("test")
-          if (data) {
-            console.log(data);
-            this.newMuscleAdded.emit(data.addMuscle)
-          }
-          if (error) {
-            console.log(error);
-            this.errorOccurred.emit(error);
-          }
-        });
+      // this.submitInvalidForm = false;
+      // this.apollo
+      //   .mutate({
+      //     mutation: ADD_MUSCLES,
+      //     variables: {
+      //       inputNewMuscle: this.muscleForm.value,
+      //     },
+      //   })
+      //   .subscribe(({data, error}: any) => {
+      //     if (data) {
+      //       this.newMuscleAdded.emit(data.addMuscle)
+      //     }
+      //     if (error) {
+      //       this.errorOccurred.emit(error);
+      //     }
+      //   });
+      const newMuscleAdded: Muscle
+        = {
+        id: "",
+        name: "NewMuscleTest",
+        description: "NewMuscleTestDescription",
+        function: "NewMuscleTestFunction",
+        exercises: []
+      }
+      this.newMuscleAdded.emit(newMuscleAdded)
       this.isFormSubmitted = true;
+    } else {
+      this.submitInvalidForm = true;
     }
   }
 }

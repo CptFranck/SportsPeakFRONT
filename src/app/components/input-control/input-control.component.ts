@@ -15,6 +15,7 @@ export class InputControlComponent implements OnInit {
   @Input() fieldName!: string
   @Input() rules!: string
   @Input() errorMessage: string = ""
+  @Input() submitInvalid!: boolean;
 
   constructor() {
   }
