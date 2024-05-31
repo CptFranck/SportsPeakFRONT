@@ -17,15 +17,16 @@ import {GraphQLError} from "graphql/error";
 import {Alert} from "../../../interface/utils/alert";
 import {ModalAndButtonComponent} from "../../../components/modal/modal-and-button/modal-and-button.component";
 import {MuscleDetailsComponent} from "../muscle-details/muscle-details.component";
+import {DeleteMuscleComponent} from "../delete-muscle/delete-muscle.component";
 
 @Component({
   selector: 'app-muscles',
   standalone: true,
-  imports: [CommonModule, ModalComponent, MusclesArrayComponent, MuscleFormComponent, ModalButtonComponent, MultiSelectComponent, SelectExercisesComponent, LoadingComponent, AlertComponent, ModalAndButtonComponent, MuscleDetailsComponent],
+  imports: [CommonModule, ModalComponent, MusclesArrayComponent, MuscleFormComponent, ModalButtonComponent, MultiSelectComponent, SelectExercisesComponent, LoadingComponent, AlertComponent, ModalAndButtonComponent, MuscleDetailsComponent, DeleteMuscleComponent],
   templateUrl: './muscles.component.html',
 })
 export class MusclesComponent implements OnInit {
-  modify: boolean = true;
+  action: string = "create";
   muscle: Muscle | undefined;
   newMuscle: Muscle = {
     id: "",
@@ -67,35 +68,61 @@ export class MusclesComponent implements OnInit {
     this.alertId += 1;
   }
 
-  setAlertSuccess(muscle: Muscle) {
+  setAlertSuccessAdded(muscle: Muscle) {
     this.alerts.push({
       id: this.alertId,
-      title: "Successfully set",
-      message: "New muscle " + muscle.name + "added successfully.",
+      title: "Muscle successfully created",
+      message: "New muscle " + muscle.name + "been successfully added.",
       type: alertType.success
     })
     this.alertId += 1;
   }
 
-  removeAlert($event: Alert) {
-    this.alerts.filter(alert => alert.id === $event.id);
+  setAlertSuccessUpdated(muscle: Muscle) {
+    this.alerts.push({
+      id: this.alertId,
+      title: "Muscle successfully updated",
+      message: "Muscle " + muscle.name + "been successfully updated.",
+      type: alertType.success
+    })
+    this.alertId += 1;
   }
 
-  setNewMuscle($muscle: Muscle) {
+  setAlertSuccessDeleted(muscle: Muscle) {
+    this.alerts.push({
+      id: this.alertId,
+      title: "Muscle successfully deleted",
+      message: "Muscle " + muscle.name + "been successfully deleted.",
+      type: alertType.success
+    })
+    this.alertId += 1;
+  }
+
+  removeAlert(event: Alert) {
+    this.alerts.filter(alert => alert.id === event.id);
+  }
+
+  setNewMuscle(muscle: Muscle) {
     this.modalTitle = "Add new muscle"
-    this.modify = true
-    this.muscle = $muscle
+    this.action = "create"
+    this.muscle = muscle
   }
 
-  updateMuscle($muscle: Muscle) {
-    this.modalTitle = $muscle.name
-    this.modify = true
-    this.muscle = $muscle
+  observeMuscle(muscle: Muscle) {
+    this.modalTitle = muscle.name
+    this.action = "look"
+    this.muscle = muscle
   }
 
-  observeMuscle($muscle: Muscle) {
-    this.modalTitle = $muscle.name
-    this.modify = false
-    this.muscle = $muscle
+  updateMuscle(muscle: Muscle) {
+    this.modalTitle = muscle.name
+    this.action = "modify"
+    this.muscle = muscle
+  }
+
+  deleteMuscle(muscle: Muscle) {
+    this.modalTitle = muscle.name
+    this.action = "delete"
+    this.muscle = muscle
   }
 }

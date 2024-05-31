@@ -19,6 +19,7 @@ import {SelectExercisesComponent} from "../../../components/select/select-exerci
 })
 export class MuscleDetailsComponent {
   muscle: Muscle | undefined;
+  @Input() action!: string;
 
   @Input() set muscleInput(value: Muscle | undefined) {
     this.muscle = value;
