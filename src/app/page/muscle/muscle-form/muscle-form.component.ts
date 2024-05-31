@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {MultiSelectComponent} from "../../../components/select/multi-select/multi-select.component";
 import {SelectExercisesComponent} from "../../../components/select/select-exercises/select-exercises.component";
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
@@ -8,6 +8,7 @@ import {InputControlComponent} from "../../../components/input-control/input-con
 import {Apollo} from "apollo-angular";
 import {Muscle} from "../../../interface/dto/muscle";
 import {GraphQLError} from "graphql/error";
+import {ADD_MUSCLES} from "../../../graphql/muscle/muscle.operations";
 
 @Component({
   selector: 'app-muscle-form',
@@ -36,13 +37,14 @@ export class MuscleFormComponent implements OnInit {
   @Input() isAdmin: boolean = false;
   @Output() newMuscleAdded: EventEmitter<Muscle> = new EventEmitter<Muscle>();
   @Output() errorOccurred: EventEmitter<GraphQLError> = new EventEmitter<GraphQLError>();
+  @Input() modalRef!: ElementRef | null;
+
+  @ViewChild('btnClose') btnClose!: ElementRef
 
   muscleForm: FormGroup | null = null;
-  isFormSubmitted: boolean = false;
   submitInvalidForm: boolean = false;
-  @Input() modalId!: string;
 
-  constructor(private apollo: Apollo) {
+  constructor(private apollo: Apollo, private ref: ElementRef) {
   }
 
   ngOnInit() {
@@ -80,34 +82,23 @@ export class MuscleFormComponent implements OnInit {
   onSubmit() {
     if (!this.muscleForm) return
     if (this.muscleForm.valid) {
-      // this.submitInvalidForm = false;
-      // this.apollo
-      //   .mutate({
-      //     mutation: ADD_MUSCLES,
-      //     variables: {
-      //       inputNewMuscle: this.muscleForm.value,
-      //     },
-      //   })
-      //   .subscribe(({data, error}: any) => {
-      //     if (data) {
-      //       this.newMuscleAdded.emit(data.addMuscle)
-      //     }
-      //     if (error) {
-      //       this.errorOccurred.emit(error);
-      //     }
-      //   });
-      const newMuscleAdded: Muscle
-        = {
-        id: "",
-        name: "NewMuscleTest",
-        description: "NewMuscleTestDescription",
-        function: "NewMuscleTestFunction",
-        exercises: []
-      }
-      this.newMuscleAdded.emit(newMuscleAdded)
-      this.isFormSubmitted = true;
-    } else {
-      this.submitInvalidForm = true;
+      this.submitInvalidForm = false;
+      this.apollo
+        .mutate({
+          mutation: ADD_MUSCLES,
+          variables: {
+            inputNewMuscle: this.muscleForm.value,
+          },
+        })
+        .subscribe(({data, error}: any) => {
+          if (data) {
+            this.newMuscleAdded.emit(data.addMuscle)
+          }
+          if (error) {
+            this.errorOccurred.emit(error);
+          }
+        });
+      this.btnClose.nativeElement.click()
     }
   }
 }

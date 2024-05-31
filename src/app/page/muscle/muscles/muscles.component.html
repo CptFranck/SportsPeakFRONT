@@ -9,14 +9,11 @@
         <h2>Muscles saved in databases</h2>
       </div>
       <div class="col-2">
-        <app-modal-button [id]="modalId">
-          Add new
-          <i class="fa-regular fa-square-plus"></i>
-        </app-modal-button>
-        <app-modal [id]="modalId" title="New muscle :">
+        <app-modal [modalId]="muscleModalId" title="New muscle :">
           <app-muscle-form
             (errorOccurred)="setAlertError($event)"
             (newMuscleAdded)="setAlertSuccess($event)"
+            [modalRef]="muscleModalRef"
           />
         </app-modal>
       </div>
