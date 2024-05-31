@@ -52,7 +52,7 @@
     <td>
       <div class="col p-1 text-center">
         <app-modal-button
-          (onCLickModalButton)="setMuscle($event)"
+          (onCLickModalButton)="showMuscleDetails($event)"
           [modalId]="modalId"
           [modalValue]="muscle"
           btnClass="btn-info"
@@ -64,7 +64,7 @@
     <td>
       <div class="col p-1 text-center">
         <app-modal-button
-          (onCLickModalButton)="setMuscle($event)"
+          (onCLickModalButton)="modifyMuscle($event)"
           [modalId]="modalId"
           [modalValue]="muscle"
           btnClass="btn-warning"
@@ -75,12 +75,14 @@
     </td>
     <td>
       <div class="col p-1 text-center">
-        <button
-          class="btn btn-danger"
-          type="button"
+        <app-modal-button
+          (onCLickModalButton)="delMuscle($event)"
+          [modalId]="modalId"
+          [modalValue]="muscle"
+          btnClass="btn-danger"
         >
           <i class="fa-solid fa-trash"></i>
-        </button>
+        </app-modal-button>
       </div>
     </td>
   </tr>

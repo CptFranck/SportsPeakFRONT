@@ -17,6 +17,8 @@ export class MusclesArrayComponent implements OnInit {
   @Input() muscles!: Muscle[];
   @Input() modalId!: string;
   @Output() updateMuscle: EventEmitter<Muscle> = new EventEmitter();
+  @Output() detailsMuscle: EventEmitter<Muscle> = new EventEmitter();
+  @Output() deleteMuscle: EventEmitter<Muscle> = new EventEmitter();
   showDetails: { [id: string]: boolean } = {};
 
   ngOnInit(): void {
@@ -27,15 +29,15 @@ export class MusclesArrayComponent implements OnInit {
     this.showDetails[id] = !this.showDetails[id]
   }
 
-  showMuscleDetails(id: string): void {
-    this.showDetails[id] = !this.showDetails[id]
+  showMuscleDetails(muscle: Muscle): void {
+    this.detailsMuscle.emit(muscle)
   }
 
-  modifyMuscle(id: string): void {
-    this.showDetails[id] = !this.showDetails[id]
-  }
-
-  setMuscle(muscle: Muscle) {
+  modifyMuscle(muscle: Muscle) {
     this.updateMuscle.emit(muscle);
+  }
+
+  delMuscle(muscle: Muscle) {
+    this.deleteMuscle.emit(muscle);
   }
 }
