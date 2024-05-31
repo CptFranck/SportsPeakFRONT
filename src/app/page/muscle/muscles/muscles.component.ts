@@ -1,4 +1,4 @@
-import {Component, ElementRef, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Apollo} from 'apollo-angular';
 import {GET_MUSCLES} from "../../../graphql/muscle/muscle.operations";
 import {CommonModule} from '@angular/common';
@@ -16,18 +16,28 @@ import {alertType} from "../../../enum/alert-type";
 import {GraphQLError} from "graphql/error";
 import {Alert} from "../../../interface/utils/alert";
 import {ModalAndButtonComponent} from "../../../components/modal/modal-and-button/modal-and-button.component";
+import {MuscleDetailsComponent} from "../muscle-details/muscle-details.component";
 
 @Component({
   selector: 'app-muscles',
   standalone: true,
-  imports: [CommonModule, ModalComponent, MusclesArrayComponent, MuscleFormComponent, ModalButtonComponent, MultiSelectComponent, SelectExercisesComponent, LoadingComponent, AlertComponent, ModalAndButtonComponent],
+  imports: [CommonModule, ModalComponent, MusclesArrayComponent, MuscleFormComponent, ModalButtonComponent, MultiSelectComponent, SelectExercisesComponent, LoadingComponent, AlertComponent, ModalAndButtonComponent, MuscleDetailsComponent],
   templateUrl: './muscles.component.html',
 })
 export class MusclesComponent implements OnInit {
+  modify: boolean = true;
+  muscle: Muscle | undefined;
+  newMuscle: Muscle = {
+    id: "",
+    name: "",
+    description: "",
+    function: "",
+    exercises: []
+  };
   muscles: Muscle[] = [];
   loading = true;
+  modalTitle: string = "";
   muscleModalId: string = "muscleModal"
-  muscleModalRef: ElementRef | null = null;
   alertId: number = 0;
   alerts: Alert[] = [];
 
@@ -69,5 +79,23 @@ export class MusclesComponent implements OnInit {
 
   removeAlert($event: Alert) {
     this.alerts.filter(alert => alert.id === $event.id);
+  }
+
+  setNewMuscle($muscle: Muscle) {
+    this.modalTitle = "Add new muscle"
+    this.modify = true
+    this.muscle = $muscle
+  }
+
+  updateMuscle($muscle: Muscle) {
+    this.modalTitle = $muscle.name
+    this.modify = true
+    this.muscle = $muscle
+  }
+
+  observeMuscle($muscle: Muscle) {
+    this.modalTitle = $muscle.name
+    this.modify = false
+    this.muscle = $muscle
   }
 }
