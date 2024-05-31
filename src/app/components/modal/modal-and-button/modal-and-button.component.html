@@ -1,0 +1,10 @@
+<app-modal-button [modalId]="modalId">
+  {{ buttonTitle }}
+  <i class="fa-regular fa-square-plus"></i>
+</app-modal-button>
+<app-modal [modalId]="modalId"
+           [staticBackdrop]="staticBackdrop"
+           [title]="title"
+>
+  <ng-content/>
+</app-modal>

@@ -1,10 +1,16 @@
-<app-modal-button [id]="modalId">
-  Add new
-  <i class="fa-regular fa-square-plus"></i>
-</app-modal-button>
-<app-modal-body [id]="modalId"
-                [staticBackdrop]="staticBackdrop"
-                [title]="title"
+<div [attr.data-bs-backdrop]="staticBackdrop ? 'static' : null"
+     [id]="modalId"
+     aria-hidden="true"
+     class="modal fade"
+     tabindex="-1"
 >
-  <ng-content/>
-</app-modal-body>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5">{{ title }}</h1>
+        <button aria-label="Close" class="btn-close" data-bs-dismiss="modal" type="button"></button>
+      </div>
+      <ng-content/>
+    </div>
+  </div>
+</div>
