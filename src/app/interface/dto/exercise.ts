@@ -6,6 +6,6 @@ export interface Exercise {
   name: string
   goal: string
   description: string
-  muscles: Muscle[]
-  exerciseTypes: ExerciseType[]
+  muscles?: Muscle[]
+  exerciseTypes?: ExerciseType[]
 }

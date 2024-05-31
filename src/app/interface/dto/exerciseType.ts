@@ -4,5 +4,5 @@ export interface ExerciseType {
   id: string
   name: string
   goal: string
-  exercises: Exercise[]
+  exercises?: Exercise[]
 }
