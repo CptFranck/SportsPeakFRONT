@@ -7,6 +7,7 @@ import {InputControlComponent} from "../../../components/input-control/input-con
 import {Apollo} from "apollo-angular";
 import {Muscle} from "../../../interface/dto/muscle";
 import {GraphQLError} from "graphql/error";
+import {ADD_MUSCLES, MOD_MUSCLES} from "../../../graphql/muscle/muscle.operations";
 
 @Component({
   selector: 'app-muscle-form',
@@ -29,6 +30,7 @@ export class MuscleFormComponent implements OnInit {
 
   @Input() isAdmin: boolean = false;
   @Output() newMuscleAdded: EventEmitter<Muscle> = new EventEmitter<Muscle>();
+  @Output() muscleUpdated: EventEmitter<Muscle> = new EventEmitter<Muscle>();
   @Output() errorOccurred: EventEmitter<GraphQLError> = new EventEmitter<GraphQLError>();
 
   @ViewChild('btnClose') btnClose!: ElementRef
@@ -81,23 +83,41 @@ export class MuscleFormComponent implements OnInit {
   onSubmit() {
     if (!this.muscleForm) return
     if (this.muscleForm.valid) {
-      // this.submitInvalidForm = false;
-      // this.apollo
-      //   .mutate({
-      //     mutation: ADD_MUSCLES,
-      //     variables: {
-      //       inputNewMuscle: this.muscleForm.value,
-      //     },
-      //   })
-      //   .subscribe(({data, error}: any) => {
-      //     if (data) {
-      //       this.newMuscleAdded.emit(data.addMuscle)
-      //     }
-      //     if (error) {
-      //       this.errorOccurred.emit(error);
-      //     }
-      //   });
-      // this.btnClose.nativeElement.click()
+      this.submitInvalidForm = false;
+      if (this.muscleForm.value.id === "") {
+        this.apollo
+          .mutate({
+            mutation: ADD_MUSCLES,
+            variables: {
+              inputNewMuscle: this.muscleForm.value,
+            },
+          })
+          .subscribe(({data, error}: any) => {
+            if (data) {
+              this.newMuscleAdded.emit(data.addMuscle)
+            }
+            if (error) {
+              this.errorOccurred.emit(error);
+            }
+          });
+      } else {
+        this.apollo
+          .mutate({
+            mutation: MOD_MUSCLES,
+            variables: {
+              inputMuscle: this.muscleForm.value,
+            },
+          })
+          .subscribe(({data, error}: any) => {
+            if (data) {
+              this.muscleUpdated.emit(data.modifyMuscle)
+            }
+            if (error) {
+              this.errorOccurred.emit(error);
+            }
+          });
+      }
+      this.btnClose.nativeElement.click()
     } else {
       this.submitInvalidForm = true
     }

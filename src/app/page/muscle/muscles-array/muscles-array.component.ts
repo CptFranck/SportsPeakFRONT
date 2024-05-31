@@ -2,6 +2,7 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {NgForOf, NgIf} from "@angular/common";
 import {Muscle} from "../../../interface/dto/muscle";
 import {ModalButtonComponent} from "../../../components/modal/modal-button/modal-button.component";
+import {ModalComponent} from "../../../components/modal/modal/modal.component";
 
 @Component({
   selector: 'app-muscles-array',
@@ -9,7 +10,8 @@ import {ModalButtonComponent} from "../../../components/modal/modal-button/modal
   imports: [
     NgForOf,
     NgIf,
-    ModalButtonComponent
+    ModalButtonComponent,
+    ModalComponent
   ],
   templateUrl: './muscles-array.component.html',
 })
