@@ -46,18 +46,11 @@
   </form>
 </div>
 <div class="modal-footer">
-  <button #btnClose
-          class="btn btn-danger"
-          data-bs-dismiss="modal"
-          type="button"
-  >
+  <button #btnClose class="btn btn-secondary" data-bs-dismiss="modal" type="button">
     Cancel
   </button>
-  <button (click)="onSubmit()"
-          class="btn btn-success"
-          type="button"
-  >
-    Create
+  <button (click)="onSubmit()" class="btn btn-success" type="button">
+    {{ this.muscle?.id === "" ? "Create" : "Update" }}
   </button>
 </div>
 
