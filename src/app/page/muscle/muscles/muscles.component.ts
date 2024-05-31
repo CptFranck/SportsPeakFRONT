@@ -2,7 +2,7 @@ import {Component, ElementRef, OnInit} from '@angular/core';
 import {Apollo} from 'apollo-angular';
 import {GET_MUSCLES} from "../../../graphql/muscle/muscle.operations";
 import {CommonModule} from '@angular/common';
-import {ModalBodyComponent} from "../../../components/modal/modalBody/modal-body.component";
+import {ModalComponent} from "../../../components/modal/modal/modal.component";
 import {MusclesArrayComponent} from "../muscles-array/muscles-array.component";
 import {Muscle} from "../../../interface/dto/muscle";
 import {GraphqlResponse} from "../../../interface/graphql/graphqlResponse";
@@ -15,12 +15,12 @@ import {AlertComponent} from "../../../components/alert/alert.component";
 import {alertType} from "../../../enum/alert-type";
 import {GraphQLError} from "graphql/error";
 import {Alert} from "../../../interface/utils/alert";
-import {ModalComponent} from "../../../components/modal/modal/modal.component";
+import {ModalAndButtonComponent} from "../../../components/modal/modal-and-button/modal-and-button.component";
 
 @Component({
   selector: 'app-muscles',
   standalone: true,
-  imports: [CommonModule, ModalBodyComponent, MusclesArrayComponent, MuscleFormComponent, ModalButtonComponent, MultiSelectComponent, SelectExercisesComponent, LoadingComponent, AlertComponent, ModalComponent],
+  imports: [CommonModule, ModalComponent, MusclesArrayComponent, MuscleFormComponent, ModalButtonComponent, MultiSelectComponent, SelectExercisesComponent, LoadingComponent, AlertComponent, ModalAndButtonComponent],
   templateUrl: './muscles.component.html',
 })
 export class MusclesComponent implements OnInit {

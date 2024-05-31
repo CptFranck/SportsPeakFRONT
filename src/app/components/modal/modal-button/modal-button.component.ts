@@ -7,9 +7,6 @@ import {Component, Input} from '@angular/core';
   templateUrl: './modal-button.component.html',
 })
 export class ModalButtonComponent {
-  @Input()
-  id?: string = ""
-
-  @Input()
-  btnClass?: string = "btn-success"
+  @Input() modalId!: string;
+  @Input() btnClass?: string = "btn-success"
 }

@@ -9,7 +9,14 @@
         <h2>Muscles saved in databases</h2>
       </div>
       <div class="col-2">
-        <app-modal [modalId]="muscleModalId" title="New muscle :">
+        <app-modal-button [modalId]="muscleModalId">
+          Add new
+          <i class="fa-regular fa-square-plus"></i>
+        </app-modal-button>
+        <app-modal [modalId]="muscleModalId"
+                   [staticBackdrop]="true"
+                   title="Add new muscle"
+        >
           <app-muscle-form
             (errorOccurred)="setAlertError($event)"
             (newMuscleAdded)="setAlertSuccess($event)"
@@ -18,6 +25,6 @@
         </app-modal>
       </div>
     </div>
-    <app-muscles-array [muscles]="muscles"/>
+    <app-muscles-array [id]="muscleModalId" [muscles]="muscles"/>
   </div>
 </div>
