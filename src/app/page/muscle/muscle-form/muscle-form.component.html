@@ -2,7 +2,7 @@
   <form *ngIf="muscleForm" [formGroup]="muscleForm" class="container-fluid">
     <div class="mb-3">
       <label class="form-label">Name :</label>
-      <input class="form-control" formControlName="name" required type="text">
+      <input class="form-control" formControlName="name" type="text">
       <app-input-control
         [formGroup]="muscleForm"
         [submitInvalid]="submitInvalidForm"
