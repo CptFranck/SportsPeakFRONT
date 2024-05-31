@@ -1,5 +1,6 @@
 <button
-  [attr.data-bs-target]="'#' +modalId"
+  (click)="onClick()"
+  [attr.data-bs-target]="'#' + modalId"
   [class]="'btn ' + btnClass"
   data-bs-toggle="modal"
   type="button"

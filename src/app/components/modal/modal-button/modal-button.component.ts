@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 
 @Component({
   selector: 'app-modal-button',
@@ -9,4 +9,13 @@ import {Component, Input} from '@angular/core';
 export class ModalButtonComponent {
   @Input() modalId!: string;
   @Input() btnClass?: string = "btn-success"
+  @Input() modalValue?: any;
+
+  @Output() onCLickModalButton: EventEmitter<any> = new EventEmitter();
+
+  onClick() {
+    if (this.onCLickModalButton && this.modalValue) {
+      this.onCLickModalButton.emit(this.modalValue)
+    }
+  }
 }
