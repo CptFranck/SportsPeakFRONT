@@ -5,6 +5,7 @@
     <th class="col-5" scope="col">Description</th>
     <th class="col-5" scope="col">Function</th>
     <th class="col" scope="col">Used in</th>
+    <th class="col-1 text-center" scope="col">Collapse</th>
     <th class="col-1 text-center" scope="col">Details</th>
     <th class="col-1 text-center" scope="col">Modify</th>
     <th class="col-1 text-center" scope="col">Delete</th>
@@ -38,24 +39,38 @@
     <td>
       <div class="col p-1 text-center">
         <button
-          (click)="expendDetails(muscle.id)"
-          [attr.aria-expanded]="expendDetails"
+          (click)="expendMuscleDetails(muscle.id)"
+          [attr.aria-expanded]="expendMuscleDetails"
           [attr.data-bs-target]="'#' + muscle.id "
           class="btn btn-secondary"
           data-bs-toggle="collapse" type="button"
         >
-          <i class="fa-solid fa-eye"></i>
+          <i class="fa-solid fa-angle-down"></i>
         </button>
       </div>
     </td>
     <td>
       <div class="col p-1 text-center">
-        <button
-          class="btn btn-secondary"
-          type="button"
+        <app-modal-button
+          (onCLickModalButton)="setMuscle($event)"
+          [modalId]="modalId"
+          [modalValue]="muscle"
+          btnClass="btn-info"
+        >
+          <i class="fa-solid fa-eye"></i>
+        </app-modal-button>
+      </div>
+    </td>
+    <td>
+      <div class="col p-1 text-center">
+        <app-modal-button
+          (onCLickModalButton)="setMuscle($event)"
+          [modalId]="modalId"
+          [modalValue]="muscle"
+          btnClass="btn-warning"
         >
           <i class="fa-solid fa-pen-to-square"></i>
-        </button>
+        </app-modal-button>
       </div>
     </td>
     <td>
