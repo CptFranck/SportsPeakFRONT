@@ -1,4 +1,9 @@
-<div [id]="id" aria-hidden="true" class="modal fade" tabindex="-1">
+<div [attr.data-bs-backdrop]="staticBackdrop ? 'static' : null"
+     [id]="id"
+     aria-hidden="true"
+     class="modal fade"
+     tabindex="-1"
+>
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
