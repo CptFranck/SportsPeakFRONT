@@ -11,6 +11,7 @@ export const GET_MUSCLES = gql`
         id
         name
         goal
+        description
       }
     }
   }
