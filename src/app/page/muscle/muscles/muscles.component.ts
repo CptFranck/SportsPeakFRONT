@@ -18,6 +18,8 @@ import {Alert} from "../../../interface/utils/alert";
 import {ModalAndButtonComponent} from "../../../components/modal/modal-and-button/modal-and-button.component";
 import {MuscleDetailsComponent} from "../muscle-details/muscle-details.component";
 import {DeleteMuscleComponent} from "../delete-muscle/delete-muscle.component";
+import {FormIndicator} from "../../../interface/utils/form-indicator";
+import {ActionType} from "../../../enum/action-type";
 
 @Component({
   selector: 'app-muscles',
@@ -26,7 +28,7 @@ import {DeleteMuscleComponent} from "../delete-muscle/delete-muscle.component";
   templateUrl: './muscles.component.html',
 })
 export class MusclesComponent implements OnInit {
-  action: string = "create";
+  action: ActionType = ActionType.create;
   muscle: Muscle | undefined;
   newMuscle: Muscle = {
     id: "",
@@ -41,6 +43,7 @@ export class MusclesComponent implements OnInit {
   muscleModalId: string = "muscleModal"
   alertId: number = 0;
   alerts: Alert[] = [];
+  protected readonly ActionType = ActionType;
 
   constructor(private apollo: Apollo) {
   }
@@ -103,26 +106,14 @@ export class MusclesComponent implements OnInit {
   }
 
   setNewMuscle(muscle: Muscle) {
-    this.modalTitle = "Add new muscle"
-    this.action = "create"
     this.muscle = muscle
+    this.action = ActionType.create
+    this.modalTitle = "Add new muscle";
   }
 
-  observeMuscle(muscle: Muscle) {
-    this.modalTitle = muscle.name
-    this.action = "look"
-    this.muscle = muscle
-  }
-
-  updateMuscle(muscle: Muscle) {
-    this.modalTitle = muscle.name
-    this.action = "modify"
-    this.muscle = muscle
-  }
-
-  deleteMuscle(muscle: Muscle) {
-    this.modalTitle = muscle.name
-    this.action = "delete"
-    this.muscle = muscle
+  setMuscle(formIndicator: FormIndicator) {
+    this.muscle = formIndicator.object
+    this.action = formIndicator.actionType
+    this.modalTitle = formIndicator.object.name
   }
 }

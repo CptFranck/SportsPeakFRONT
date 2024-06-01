@@ -3,6 +3,8 @@ import {NgForOf, NgIf} from "@angular/common";
 import {Muscle} from "../../../interface/dto/muscle";
 import {ModalButtonComponent} from "../../../components/modal/modal-button/modal-button.component";
 import {ModalComponent} from "../../../components/modal/modal/modal.component";
+import {FormIndicator} from "../../../interface/utils/form-indicator";
+import {ActionType} from "../../../enum/action-type";
 
 @Component({
   selector: 'app-muscles-array',
@@ -18,9 +20,7 @@ import {ModalComponent} from "../../../components/modal/modal/modal.component";
 export class MusclesArrayComponent implements OnInit {
   @Input() muscles!: Muscle[];
   @Input() modalId!: string;
-  @Output() updateMuscle: EventEmitter<Muscle> = new EventEmitter();
-  @Output() detailsMuscle: EventEmitter<Muscle> = new EventEmitter();
-  @Output() deleteMuscle: EventEmitter<Muscle> = new EventEmitter();
+  @Output() actionMuscle = new EventEmitter<FormIndicator>();
   showDetails: { [id: string]: boolean } = {};
 
   ngOnInit(): void {
@@ -32,14 +32,23 @@ export class MusclesArrayComponent implements OnInit {
   }
 
   showMuscleDetails(muscle: Muscle): void {
-    this.detailsMuscle.emit(muscle)
+    this.actionMuscle.emit({
+      actionType: ActionType.read,
+      object: muscle
+    })
   }
 
   modifyMuscle(muscle: Muscle) {
-    this.updateMuscle.emit(muscle);
+    this.actionMuscle.emit({
+      actionType: ActionType.update,
+      object: muscle
+    })
   }
 
   delMuscle(muscle: Muscle) {
-    this.deleteMuscle.emit(muscle);
+    this.actionMuscle.emit({
+      actionType: ActionType.delete,
+      object: muscle
+    })
   }
 }

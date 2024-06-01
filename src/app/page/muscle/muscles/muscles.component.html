@@ -22,20 +22,19 @@
           <app-muscle-form (errorOccurred)="setAlertError($event)"
                            (muscleUpdated)="setAlertSuccessUpdated($event)"
                            (newMuscleAdded)="setAlertSuccessAdded($event)"
-                           *ngIf="action === 'create' || action === 'modify'"
+                           *ngIf="action === ActionType.create || action === ActionType.update"
                            [muscleInput]="muscle"
           />
-          <app-muscle-details *ngIf="action === 'look'" [muscleInput]="muscle"
+          <app-muscle-details *ngIf="action === ActionType.read" [muscleInput]="muscle"
           />
           <app-delete-muscle (errorOccurred)="setAlertSuccessDeleted($event)"
                              (muscleDelete)="setAlertSuccessDeleted($event)"
+                             *ngIf="action === ActionType.delete"
                              [muscle]="muscle"/>
         </app-modal>
       </div>
     </div>
-    <app-muscles-array (deleteMuscle)="deleteMuscle($event)"
-                       (detailsMuscle)="observeMuscle($event)"
-                       (updateMuscle)="updateMuscle($event)"
+    <app-muscles-array (actionMuscle)="setMuscle($event)"
                        [modalId]="muscleModalId"
                        [muscles]="muscles"/>
   </div>
