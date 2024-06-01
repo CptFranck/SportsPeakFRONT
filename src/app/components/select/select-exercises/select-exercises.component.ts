@@ -3,7 +3,7 @@ import {Apollo} from "apollo-angular";
 import {GET_EXERCISES} from "../../../graphql/exercise/exercise.operations";
 import {MultiSelectComponent} from "../multi-select/multi-select.component";
 import {Exercise} from "../../../interface/dto/exercise";
-import {Option} from "../../../interface/multiSelect/option";
+import {Option} from "../../../interface/multi-select/option";
 import {ControlValueAccessor, NG_VALUE_ACCESSOR} from "@angular/forms";
 
 @Component({

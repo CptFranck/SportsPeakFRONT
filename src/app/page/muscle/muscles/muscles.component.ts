@@ -12,7 +12,7 @@ import {MultiSelectComponent} from "../../../components/select/multi-select/mult
 import {SelectExercisesComponent} from "../../../components/select/select-exercises/select-exercises.component";
 import {LoadingComponent} from "../../../components/loading/loading.component";
 import {AlertComponent} from "../../../components/alert/alert.component";
-import {alertType} from "../../../enum/alert-type";
+import {AlertType} from "../../../enum/alert-type";
 import {GraphQLError} from "graphql/error";
 import {Alert} from "../../../interface/utils/alert";
 import {ModalAndButtonComponent} from "../../../components/modal/modal-and-button/modal-and-button.component";
@@ -64,7 +64,7 @@ export class MusclesComponent implements OnInit {
       id: this.alertId,
       title: "Unsuccessfully set",
       message: "Error has occurred: " + graphQLError.message,
-      type: alertType.success
+      type: AlertType.success
     })
     this.alertId += 1;
   }
@@ -74,7 +74,7 @@ export class MusclesComponent implements OnInit {
       id: this.alertId,
       title: "Muscle successfully created",
       message: "New muscle " + muscle.name + "been successfully added.",
-      type: alertType.success
+      type: AlertType.success
     })
     this.alertId += 1;
   }
@@ -84,7 +84,7 @@ export class MusclesComponent implements OnInit {
       id: this.alertId,
       title: "Muscle successfully updated",
       message: "Muscle " + muscle.name + "been successfully updated.",
-      type: alertType.success
+      type: AlertType.success
     })
     this.alertId += 1;
   }
@@ -94,7 +94,7 @@ export class MusclesComponent implements OnInit {
       id: this.alertId,
       title: "Muscle successfully deleted",
       message: "Muscle " + muscle.name + "been successfully deleted.",
-      type: alertType.success
+      type: AlertType.success
     })
     this.alertId += 1;
   }

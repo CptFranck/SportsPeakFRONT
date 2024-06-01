@@ -13,8 +13,8 @@ import {
 } from '@angular/core';
 import {NgForOf, NgIf} from "@angular/common";
 import {FormsModule} from "@angular/forms";
-import {Option} from "../../../interface/multiSelect/option";
-import {OptionSelected} from "../../../interface/multiSelect/optionSelected";
+import {Option} from "../../../interface/multi-select/option";
+import {OptionSelected} from "../../../interface/multi-select/optionSelected";
 
 @Component({
   selector: 'app-multi-select',
