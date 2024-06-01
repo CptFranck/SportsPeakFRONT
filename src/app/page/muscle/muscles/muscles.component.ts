@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, TemplateRef, ViewChild} from '@angular/core';
 import {Apollo} from 'apollo-angular';
 import {GET_MUSCLES} from "../../../graphql/muscle/muscle.operations";
 import {CommonModule} from '@angular/common';
@@ -28,21 +28,19 @@ import {ActionType} from "../../../enum/action-type";
   templateUrl: './muscles.component.html',
 })
 export class MusclesComponent implements OnInit {
-  action: ActionType = ActionType.create;
-  muscle: Muscle | undefined;
-  newMuscle: Muscle = {
-    id: "",
-    name: "",
-    description: "",
-    function: "",
-    exercises: []
-  };
   muscles: Muscle[] = [];
+  muscle: Muscle | undefined;
+  newMuscle: Muscle = {id: "", name: "", description: "", function: "", exercises: []};
   loading = true;
+  action: ActionType = ActionType.create;
   modalTitle: string = "";
+  validateClassButton: string = "btn-success";
+  validateTitleButton: string = "";
   muscleModalId: string = "muscleModal"
   alertId: number = 0;
   alerts: Alert[] = [];
+  @ViewChild("modalTemplate") modalTemplate!: TemplateRef<any>
+  isForm: boolean = true;
   protected readonly ActionType = ActionType;
 
   constructor(private apollo: Apollo) {
@@ -106,14 +104,25 @@ export class MusclesComponent implements OnInit {
   }
 
   setNewMuscle(muscle: Muscle) {
+    this.isForm = true
     this.muscle = muscle
+    this.validateClassButton = "btn-success";
     this.action = ActionType.create
     this.modalTitle = "Add new muscle";
+    this.validateTitleButton = "Create"
   }
 
   setMuscle(formIndicator: FormIndicator) {
     this.muscle = formIndicator.object
     this.action = formIndicator.actionType
     this.modalTitle = formIndicator.object.name
+    this.validateTitleButton = formIndicator.actionType
+    this.isForm = formIndicator.actionType !== ActionType.read;
+
+    if (formIndicator.actionType === ActionType.delete) {
+      this.validateClassButton = "btn-danger"
+    } else {
+      this.validateClassButton = "btn-success";
+    }
   }
 }

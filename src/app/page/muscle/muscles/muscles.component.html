@@ -15,23 +15,33 @@
           Add new
           <i class="fa-regular fa-square-plus"></i>
         </app-modal-button>
-        <app-modal [modalId]="muscleModalId"
+        <app-modal [contentTemplate]="modalTemplate"
+                   [isFormModal]="isForm"
+                   [modalId]="muscleModalId"
                    [staticBackdrop]="true"
                    [title]="modalTitle"
+                   [validateClassButton]="validateClassButton"
+                   [validateTitleButton]="validateTitleButton"
         >
+        </app-modal>
+        <ng-template #modalTemplate let-btnClose="btnClose" let-eventsSubject="eventsSubject">
           <app-muscle-form (errorOccurred)="setAlertError($event)"
                            (muscleUpdated)="setAlertSuccessUpdated($event)"
                            (newMuscleAdded)="setAlertSuccessAdded($event)"
                            *ngIf="action === ActionType.create || action === ActionType.update"
+                           [btnCloseRef]="btnClose"
+                           [eventsSubject]="eventsSubject"
                            [muscleInput]="muscle"
           />
-          <app-muscle-details *ngIf="action === ActionType.read" [muscleInput]="muscle"
-          />
+          <app-muscle-details *ngIf="action === ActionType.read"
+                              [muscleInput]="muscle"/>
           <app-delete-muscle (errorOccurred)="setAlertSuccessDeleted($event)"
                              (muscleDelete)="setAlertSuccessDeleted($event)"
                              *ngIf="action === ActionType.delete"
+                             [btnCloseRef]="btnClose"
+                             [eventsSubject]="eventsSubject"
                              [muscle]="muscle"/>
-        </app-modal>
+        </ng-template>
       </div>
     </div>
     <app-muscles-array (actionMuscle)="setMuscle($event)"

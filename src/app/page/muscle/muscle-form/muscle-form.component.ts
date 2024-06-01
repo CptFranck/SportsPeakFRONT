@@ -1,4 +1,4 @@
-import {Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {MultiSelectComponent} from "../../../components/select/multi-select/multi-select.component";
 import {SelectExercisesComponent} from "../../../components/select/select-exercises/select-exercises.component";
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
@@ -8,6 +8,7 @@ import {Apollo} from "apollo-angular";
 import {Muscle} from "../../../interface/dto/muscle";
 import {GraphQLError} from "graphql/error";
 import {ADD_MUSCLES, MOD_MUSCLES} from "../../../graphql/muscle/muscle.operations";
+import {Observable, Subscription} from "rxjs";
 
 @Component({
   selector: 'app-muscle-form',
@@ -22,7 +23,7 @@ import {ADD_MUSCLES, MOD_MUSCLES} from "../../../graphql/muscle/muscle.operation
   ],
   templateUrl: './muscle-form.component.html',
 })
-export class MuscleFormComponent implements OnInit {
+export class MuscleFormComponent implements OnInit, AfterViewInit {
 
   muscle: Muscle | undefined
   muscleForm: FormGroup | null = null;
@@ -33,9 +34,11 @@ export class MuscleFormComponent implements OnInit {
   @Output() muscleUpdated: EventEmitter<Muscle> = new EventEmitter<Muscle>();
   @Output() errorOccurred: EventEmitter<GraphQLError> = new EventEmitter<GraphQLError>();
 
-  @ViewChild('btnClose') btnClose!: ElementRef
+  @Input() btnCloseRef!: HTMLButtonElement;
+  @Input() eventsSubject!: Observable<void> | undefined;
+  eventsSubscription!: Subscription;
 
-  constructor(private apollo: Apollo, private ref: ElementRef) {
+  constructor(private apollo: Apollo) {
   }
 
   @Input() set muscleInput(value: Muscle | undefined) {
@@ -45,6 +48,11 @@ export class MuscleFormComponent implements OnInit {
 
   ngOnInit() {
     this.initializeMuscleForm()
+  }
+
+  ngAfterViewInit() {
+    if (this.eventsSubject)
+      this.eventsSubscription = this.eventsSubject.subscribe(() => this.onSubmit());
   }
 
   initializeMuscleForm() {
@@ -117,7 +125,7 @@ export class MuscleFormComponent implements OnInit {
             }
           });
       }
-      this.btnClose.nativeElement.click()
+      this.btnCloseRef.click()
     } else {
       this.submitInvalidForm = true
     }
