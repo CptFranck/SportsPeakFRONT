@@ -8,7 +8,8 @@
     <div class="modal-content">
       <div class="modal-header">
         <h4 class="fw-bold">{{ title }}</h4>
-        <button aria-label="Close" class="btn-close" data-bs-dismiss="modal" type="button"></button>
+        <button aria-label="Close" class="btn-close" data-bs-dismiss="modal" type="button">
+        </button>
       </div>
       <div class="modal-body">
         <ng-container [ngTemplateOutletContext]="{eventsSubject: eventsSubject, btnClose:btnClose}"

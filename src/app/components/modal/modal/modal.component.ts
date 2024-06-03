@@ -54,5 +54,7 @@ export class ModalComponent {
 
   onSubmit() {
     this.eventsSubject.next();
+    if (this.btnClose && this.action === undefined)
+      this.btnClose.nativeElement.click();
   }
 }
