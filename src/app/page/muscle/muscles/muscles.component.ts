@@ -6,7 +6,7 @@ import {ModalComponent} from "../../../components/modal/modal/modal.component";
 import {MusclesArrayComponent} from "../muscles-array/muscles-array.component";
 import {Muscle} from "../../../interface/dto/muscle";
 import {GraphqlResponse} from "../../../interface/graphql/graphqlResponse";
-import {MuscleEntityFormComponent} from "../muscle-entity-form/muscle-entity-form.component";
+import {MuscleEntityFormComponent} from "../msucle-modal-compoents/muscle-entity-form/muscle-entity-form.component";
 import {ModalButtonComponent} from "../../../components/modal/modal-button/modal-button.component";
 import {MultiSelectComponent} from "../../../components/select/multi-select/multi-select.component";
 import {SelectExercisesComponent} from "../../../components/select/select-exercises/select-exercises.component";
@@ -16,8 +16,10 @@ import {AlertType} from "../../../enum/alert-type";
 import {GraphQLError} from "graphql/error";
 import {Alert} from "../../../interface/utils/alert";
 import {ModalAndButtonComponent} from "../../../components/modal/modal-and-button/modal-and-button.component";
-import {MuscleDetailsDisplayComponent} from "../muscle-details-display/muscle-details-display.component";
-import {muscleDeleteFormComponent} from "../muscle-delete-form/muscle-delete-form.component";
+import {
+  MuscleDetailsDisplayComponent
+} from "../msucle-modal-compoents/muscle-details-display/muscle-details-display.component";
+import {muscleDeleteFormComponent} from "../msucle-modal-compoents/muscle-delete-form/muscle-delete-form.component";
 import {FormIndicator} from "../../../interface/utils/form-indicator";
 import {ActionType} from "../../../enum/action-type";
 

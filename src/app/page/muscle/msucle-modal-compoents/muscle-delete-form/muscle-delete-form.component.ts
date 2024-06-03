@@ -1,8 +1,9 @@
 import {AfterViewInit, Component, ElementRef, EventEmitter, Input, Output} from '@angular/core';
 import {NgForOf} from "@angular/common";
-import {Muscle} from "../../../interface/dto/muscle";
+import {Muscle} from "../../../../interface/dto/muscle";
 import {Apollo} from "apollo-angular";
 import {Observable, Subscription} from "rxjs";
+import {GraphQLError} from "graphql/error";
 
 @Component({
   selector: 'app-muscle-delete-form',
@@ -14,7 +15,7 @@ import {Observable, Subscription} from "rxjs";
 })
 export class muscleDeleteFormComponent implements AfterViewInit {
   @Input() muscle!: Muscle | undefined;
-  @Output() errorOccurred: EventEmitter<Muscle> = new EventEmitter<Muscle>();
+  @Output() errorOccurred: EventEmitter<GraphQLError> = new EventEmitter<GraphQLError>();
   @Output() muscleDelete: EventEmitter<Muscle> = new EventEmitter<Muscle>();
   @Input() btnCloseRef!: HTMLButtonElement;
   @Input() eventsSubject!: Observable<void> | undefined;

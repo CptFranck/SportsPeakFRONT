@@ -1,0 +1,46 @@
+<form *ngIf="muscleForm" [formGroup]="muscleForm" class="container-fluid">
+  <div class="mb-3">
+    <label class="form-label">Name :</label>
+    <input class="form-control" formControlName="name" type="text">
+    <app-input-control
+      [formGroup]="muscleForm"
+      [submitInvalid]="submitInvalidForm"
+      fieldName="name"
+      rules="min : 3; max 50"
+    />
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label">Description :</label>
+    <textarea aria-label="textarea" class="form-control" formControlName="description"></textarea>
+    <app-input-control
+      [formGroup]="muscleForm"
+      [submitInvalid]="submitInvalidForm"
+      fieldName="description"
+      rules="min : 3; max 2000"
+    />
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label">Function :</label>
+    <textarea aria-label="textarea" class="form-control" formControlName="function"></textarea>
+    <app-input-control
+      [formGroup]="muscleForm"
+      [submitInvalid]="submitInvalidForm"
+      fieldName="function"
+      rules="min : 3; max 2000"
+    />
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Exercises :</label>
+    <app-select-exercises [exerciseIds]='muscleForm.controls["exerciseIds"].value' formControlName="exerciseIds"/>
+    <app-input-control
+      [formGroup]="muscleForm"
+      [submitInvalid]="submitInvalidForm"
+      errorMessage="Please select exercises that use this muscle"
+      fieldName="exerciseIds"
+      rules="min : 1"
+    />
+  </div>
+</form>
+

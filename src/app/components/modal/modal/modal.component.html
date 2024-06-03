@@ -10,14 +10,14 @@
         <h4 class="fw-bold">{{ title }}</h4>
         <button aria-label="Close" class="btn-close" data-bs-dismiss="modal" type="button"></button>
       </div>
-      <ng-container [ngTemplateOutletContext]="{eventsSubject: eventsSubject, btnClose:btnClose}"
-                    [ngTemplateOutlet]=" contentTemplate || defaultModalNgTemplate">
-      </ng-container>
-      <ng-template #defaultModalNgTemplate>
-        <div class="modal-body">
-          Here is the default ngModalTemplate...
-        </div>
-      </ng-template>
+      <div class="modal-body">
+        <ng-container [ngTemplateOutletContext]="{eventsSubject: eventsSubject, btnClose:btnClose}"
+                      [ngTemplateOutlet]=" contentTemplate || defaultModalNgTemplate">
+        </ng-container>
+        <ng-template #defaultModalNgTemplate>
+          <ng-content/>
+        </ng-template>
+      </div>
       <div class="modal-footer">
         <button #btnClose class="btn btn-secondary" data-bs-dismiss="modal" type="button">
           Cancel

@@ -11,7 +11,8 @@
       <div class="col-2">
         <app-modal-button (onCLickModalButton)="setNewMuscle($event)"
                           [modalId]="muscleModalId"
-                          [modalValue]="newMuscle">
+                          [modalValue]="newMuscle"
+        >
           Add new
           <i class="fa-regular fa-square-plus"></i>
         </app-modal-button>
@@ -35,7 +36,7 @@
           />
           <app-muscle-details-display *ngIf="action === ActionType.read"
                                       [muscleInput]="muscle"/>
-          <app-muscle-delete-form (errorOccurred)="setAlertSuccessDeleted($event)"
+          <app-muscle-delete-form (errorOccurred)="setAlertError($event)"
                                   (muscleDelete)="setAlertSuccessDeleted($event)"
                                   *ngIf="action === ActionType.delete"
                                   [btnCloseRef]="btnClose"

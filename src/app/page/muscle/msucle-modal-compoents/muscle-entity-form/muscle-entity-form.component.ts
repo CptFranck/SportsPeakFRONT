@@ -1,13 +1,13 @@
 import {AfterViewInit, Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {MultiSelectComponent} from "../../../components/select/multi-select/multi-select.component";
-import {SelectExercisesComponent} from "../../../components/select/select-exercises/select-exercises.component";
+import {MultiSelectComponent} from "../../../../components/select/multi-select/multi-select.component";
+import {SelectExercisesComponent} from "../../../../components/select/select-exercises/select-exercises.component";
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {NgIf, NgTemplateOutlet} from "@angular/common";
-import {InputControlComponent} from "../../../components/input-control/input-control.component";
+import {InputControlComponent} from "../../../../components/input-control/input-control.component";
 import {Apollo} from "apollo-angular";
-import {Muscle} from "../../../interface/dto/muscle";
+import {Muscle} from "../../../../interface/dto/muscle";
 import {GraphQLError} from "graphql/error";
-import {ADD_MUSCLES, MOD_MUSCLES} from "../../../graphql/muscle/muscle.operations";
+import {ADD_MUSCLES, MOD_MUSCLES} from "../../../../graphql/muscle/muscle.operations";
 import {Observable, Subscription} from "rxjs";
 
 @Component({
