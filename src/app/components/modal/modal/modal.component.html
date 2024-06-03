@@ -20,10 +20,14 @@
       </div>
       <div class="modal-footer">
         <button #btnClose class="btn btn-secondary" data-bs-dismiss="modal" type="button">
-          Cancel
+          {{ closeButtonTitle }}
         </button>
-        <button (click)="onSubmit()" *ngIf="isFormModal" [class]="'btn ' + validateClassButton" type="button">
-          {{ validateTitleButton }}
+        <button (click)="onSubmit()"
+                *ngIf="action !== ActionType.read"
+                [class]="'btn ' + validateButtonClass"
+                type="button"
+        >
+          {{ validationButtonTitle }}
         </button>
       </div>
     </div>

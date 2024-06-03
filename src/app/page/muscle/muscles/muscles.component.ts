@@ -15,7 +15,6 @@ import {AlertComponent} from "../../../components/alert/alert.component";
 import {AlertType} from "../../../enum/alert-type";
 import {GraphQLError} from "graphql/error";
 import {Alert} from "../../../interface/utils/alert";
-import {ModalAndButtonComponent} from "../../../components/modal/modal-and-button/modal-and-button.component";
 import {
   MuscleDetailsDisplayComponent
 } from "../msucle-modal-compoents/muscle-details-display/muscle-details-display.component";
@@ -26,7 +25,18 @@ import {ActionType} from "../../../enum/action-type";
 @Component({
   selector: 'app-muscles',
   standalone: true,
-  imports: [CommonModule, ModalComponent, MusclesArrayComponent, MuscleEntityFormComponent, ModalButtonComponent, MultiSelectComponent, SelectExercisesComponent, LoadingComponent, AlertComponent, ModalAndButtonComponent, MuscleDetailsDisplayComponent, muscleDeleteFormComponent],
+  imports: [
+    CommonModule,
+    ModalComponent,
+    MusclesArrayComponent,
+    MuscleEntityFormComponent,
+    ModalButtonComponent,
+    MultiSelectComponent,
+    SelectExercisesComponent,
+    LoadingComponent,
+    AlertComponent,
+    MuscleDetailsDisplayComponent,
+    muscleDeleteFormComponent],
   templateUrl: './muscles.component.html',
 })
 export class MusclesComponent implements OnInit {

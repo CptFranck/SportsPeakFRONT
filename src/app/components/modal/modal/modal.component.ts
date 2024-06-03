@@ -1,6 +1,7 @@
 import {Component, ElementRef, Input, TemplateRef, ViewChild} from '@angular/core';
 import {NgIf, NgTemplateOutlet} from "@angular/common";
 import {Subject} from "rxjs";
+import {ActionType} from "../../../enum/action-type";
 
 @Component({
   selector: 'app-modal',
@@ -12,20 +13,46 @@ import {Subject} from "rxjs";
   templateUrl: './modal.component.html',
 })
 export class ModalComponent {
-
+  action!: ActionType | undefined;
   @Input() modalId!: string;
   @Input() title!: string;
-  @Input() validateClassButton: string = "btn-success";
-  @Input() validateTitleButton: string = "Validate";
-  @Input() isFormModal: boolean = false;
   @Input() staticBackdrop: boolean = false;
   @Input() contentTemplate: TemplateRef<any> | undefined;
-
   @ViewChild("btnClose") btnClose: ElementRef | undefined;
+
   eventsSubject: Subject<void> = new Subject<void>();
+  closeButtonTitle: string = "Close";
+  validateButtonClass: string = "btn-success";
+  validationButtonTitle: string = "Ok";
+  readonly ActionType = ActionType;
+
+  @Input() set actionType(action: ActionType | undefined) {
+    this.action = action;
+    switch (this.action) {
+      case ActionType.read:
+        this.closeButtonTitle = "Close";
+        return
+      case ActionType.create:
+        this.validationButtonTitle = "Create";
+        this.validateButtonClass = "btn-success";
+        this.closeButtonTitle = "Cancel";
+        return
+      case ActionType.update:
+        this.validationButtonTitle = "Update";
+        this.validateButtonClass = "btn-success";
+        this.closeButtonTitle = "Cancel";
+        return
+      case ActionType.delete:
+        this.validationButtonTitle = "Delete";
+        this.validateButtonClass = "btn-danger";
+        this.closeButtonTitle = "Cancel";
+        return
+      default:
+        return
+    }
+  }
 
   onSubmit() {
-    if (this.isFormModal)
-      this.eventsSubject.next();
+    this.eventsSubject.next();
   }
 }

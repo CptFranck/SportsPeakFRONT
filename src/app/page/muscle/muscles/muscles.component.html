@@ -16,13 +16,10 @@
           Add new
           <i class="fa-regular fa-square-plus"></i>
         </app-modal-button>
-        <app-modal [contentTemplate]="modalTemplate"
-                   [isFormModal]="isForm"
+        <app-modal [actionType]="action"
+                   [contentTemplate]="modalTemplate"
                    [modalId]="muscleModalId"
-                   [staticBackdrop]="true"
                    [title]="modalTitle"
-                   [validateClassButton]="validateClassButton"
-                   [validateTitleButton]="validateTitleButton"
         >
         </app-modal>
         <ng-template #modalTemplate let-btnClose="btnClose" let-eventsSubject="eventsSubject">
