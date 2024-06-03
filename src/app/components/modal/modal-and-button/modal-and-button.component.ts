@@ -1,7 +1,7 @@
 import {Component, Input} from '@angular/core';
 import {ModalComponent} from "../modal/modal.component";
 import {ModalButtonComponent} from "../modal-button/modal-button.component";
-import {MuscleFormComponent} from "../../../page/muscle/muscle-form/muscle-form.component";
+import {MuscleEntityFormComponent} from "../../../page/muscle/muscle-entity-form/muscle-entity-form.component";
 
 @Component({
   selector: 'app-modal-and-button',
@@ -9,7 +9,7 @@ import {MuscleFormComponent} from "../../../page/muscle/muscle-form/muscle-form.
   imports: [
     ModalComponent,
     ModalButtonComponent,
-    MuscleFormComponent
+    MuscleEntityFormComponent
   ],
   templateUrl: './modal-and-button.component.html',
 })

@@ -6,7 +6,7 @@ import {ReactiveFormsModule} from "@angular/forms";
 import {SelectExercisesComponent} from "../../../components/select/select-exercises/select-exercises.component";
 
 @Component({
-  selector: 'app-muscle-details',
+  selector: 'app-muscle-details-display',
   standalone: true,
   imports: [
     InputControlComponent,
@@ -15,9 +15,9 @@ import {SelectExercisesComponent} from "../../../components/select/select-exerci
     SelectExercisesComponent,
     NgForOf
   ],
-  templateUrl: './muscle-details.component.html',
+  templateUrl: './muscle-details-display.component.html',
 })
-export class MuscleDetailsComponent {
+export class MuscleDetailsDisplayComponent {
   muscle: Muscle | undefined;
   @Input() action!: string;
 

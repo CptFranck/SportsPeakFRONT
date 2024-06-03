@@ -11,7 +11,7 @@ import {ADD_MUSCLES, MOD_MUSCLES} from "../../../graphql/muscle/muscle.operation
 import {Observable, Subscription} from "rxjs";
 
 @Component({
-  selector: 'app-muscle-form',
+  selector: 'app-muscle-entity-form',
   standalone: true,
   imports: [
     MultiSelectComponent,
@@ -21,9 +21,9 @@ import {Observable, Subscription} from "rxjs";
     NgTemplateOutlet,
     InputControlComponent
   ],
-  templateUrl: './muscle-form.component.html',
+  templateUrl: './muscle-entity-form.component.html',
 })
-export class MuscleFormComponent implements OnInit, AfterViewInit {
+export class MuscleEntityFormComponent implements OnInit, AfterViewInit {
 
   muscle: Muscle | undefined
   muscleForm: FormGroup | null = null;

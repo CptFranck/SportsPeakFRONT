@@ -5,14 +5,14 @@ import {Apollo} from "apollo-angular";
 import {Observable, Subscription} from "rxjs";
 
 @Component({
-  selector: 'app-delete-muscle',
+  selector: 'app-muscle-delete-form',
   standalone: true,
   imports: [
     NgForOf
   ],
-  templateUrl: './delete-muscle.component.html',
+  templateUrl: './muscle-delete-form.component.html',
 })
-export class DeleteMuscleComponent implements AfterViewInit {
+export class muscleDeleteFormComponent implements AfterViewInit {
   @Input() muscle!: Muscle | undefined;
   @Output() errorOccurred: EventEmitter<Muscle> = new EventEmitter<Muscle>();
   @Output() muscleDelete: EventEmitter<Muscle> = new EventEmitter<Muscle>();

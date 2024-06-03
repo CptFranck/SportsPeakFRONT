@@ -25,22 +25,22 @@
         >
         </app-modal>
         <ng-template #modalTemplate let-btnClose="btnClose" let-eventsSubject="eventsSubject">
-          <app-muscle-form (errorOccurred)="setAlertError($event)"
-                           (muscleUpdated)="setAlertSuccessUpdated($event)"
-                           (newMuscleAdded)="setAlertSuccessAdded($event)"
-                           *ngIf="action === ActionType.create || action === ActionType.update"
-                           [btnCloseRef]="btnClose"
-                           [eventsSubject]="eventsSubject"
-                           [muscleInput]="muscle"
+          <app-muscle-entity-form (errorOccurred)="setAlertError($event)"
+                                  (muscleUpdated)="setAlertSuccessUpdated($event)"
+                                  (newMuscleAdded)="setAlertSuccessAdded($event)"
+                                  *ngIf="action === ActionType.create || action === ActionType.update"
+                                  [btnCloseRef]="btnClose"
+                                  [eventsSubject]="eventsSubject"
+                                  [muscleInput]="muscle"
           />
-          <app-muscle-details *ngIf="action === ActionType.read"
-                              [muscleInput]="muscle"/>
-          <app-delete-muscle (errorOccurred)="setAlertSuccessDeleted($event)"
-                             (muscleDelete)="setAlertSuccessDeleted($event)"
-                             *ngIf="action === ActionType.delete"
-                             [btnCloseRef]="btnClose"
-                             [eventsSubject]="eventsSubject"
-                             [muscle]="muscle"/>
+          <app-muscle-details-display *ngIf="action === ActionType.read"
+                                      [muscleInput]="muscle"/>
+          <app-muscle-delete-form (errorOccurred)="setAlertSuccessDeleted($event)"
+                                  (muscleDelete)="setAlertSuccessDeleted($event)"
+                                  *ngIf="action === ActionType.delete"
+                                  [btnCloseRef]="btnClose"
+                                  [eventsSubject]="eventsSubject"
+                                  [muscle]="muscle"/>
         </ng-template>
       </div>
     </div>

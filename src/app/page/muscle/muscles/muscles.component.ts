@@ -6,7 +6,7 @@ import {ModalComponent} from "../../../components/modal/modal/modal.component";
 import {MusclesArrayComponent} from "../muscles-array/muscles-array.component";
 import {Muscle} from "../../../interface/dto/muscle";
 import {GraphqlResponse} from "../../../interface/graphql/graphqlResponse";
-import {MuscleFormComponent} from "../muscle-form/muscle-form.component";
+import {MuscleEntityFormComponent} from "../muscle-entity-form/muscle-entity-form.component";
 import {ModalButtonComponent} from "../../../components/modal/modal-button/modal-button.component";
 import {MultiSelectComponent} from "../../../components/select/multi-select/multi-select.component";
 import {SelectExercisesComponent} from "../../../components/select/select-exercises/select-exercises.component";
@@ -16,15 +16,15 @@ import {AlertType} from "../../../enum/alert-type";
 import {GraphQLError} from "graphql/error";
 import {Alert} from "../../../interface/utils/alert";
 import {ModalAndButtonComponent} from "../../../components/modal/modal-and-button/modal-and-button.component";
-import {MuscleDetailsComponent} from "../muscle-details/muscle-details.component";
-import {DeleteMuscleComponent} from "../delete-muscle/delete-muscle.component";
+import {MuscleDetailsDisplayComponent} from "../muscle-details-display/muscle-details-display.component";
+import {muscleDeleteFormComponent} from "../muscle-delete-form/muscle-delete-form.component";
 import {FormIndicator} from "../../../interface/utils/form-indicator";
 import {ActionType} from "../../../enum/action-type";
 
 @Component({
   selector: 'app-muscles',
   standalone: true,
-  imports: [CommonModule, ModalComponent, MusclesArrayComponent, MuscleFormComponent, ModalButtonComponent, MultiSelectComponent, SelectExercisesComponent, LoadingComponent, AlertComponent, ModalAndButtonComponent, MuscleDetailsComponent, DeleteMuscleComponent],
+  imports: [CommonModule, ModalComponent, MusclesArrayComponent, MuscleEntityFormComponent, ModalButtonComponent, MultiSelectComponent, SelectExercisesComponent, LoadingComponent, AlertComponent, ModalAndButtonComponent, MuscleDetailsDisplayComponent, muscleDeleteFormComponent],
   templateUrl: './muscles.component.html',
 })
 export class MusclesComponent implements OnInit {
