@@ -1,0 +1,3 @@
+<div *ngFor="let alert of alerts">
+  <app-alert (removedAlert)="removeAlert($event)" [alert]="alert"/>
+</div>
