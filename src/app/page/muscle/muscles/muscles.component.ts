@@ -12,7 +12,6 @@ import {MultiSelectComponent} from "../../../components/select/multi-select/mult
 import {SelectExercisesComponent} from "../../../components/select/select-exercises/select-exercises.component";
 import {LoadingComponent} from "../../../components/loading/loading.component";
 import {AlertComponent} from "../../../components/alert/alert.component";
-import {AlertType} from "../../../enum/alert-type";
 import {GraphQLError} from "graphql/error";
 import {Alert} from "../../../interface/utils/alert";
 import {
@@ -23,6 +22,7 @@ import {FormIndicator} from "../../../interface/utils/form-indicator";
 import {ActionType} from "../../../enum/action-type";
 import {MuscleModalComponent} from "../muscle-modal/muscle-modal.component";
 import {AlertDisplayComponent} from "../../../components/crud-alert/alert-display.component";
+import {setAlertError} from "../../../components/utils/alertFunction";
 
 @Component({
   selector: 'app-muscles',
@@ -63,6 +63,7 @@ export class MusclesComponent implements OnInit {
     this.apollo
       .watchQuery({
         query: GET_MUSCLES,
+        errorPolicy: 'all',
       })
       .valueChanges.subscribe((result: GraphqlResponse): void => {
       this.muscles = result.data.getMuscles;
@@ -73,49 +74,8 @@ export class MusclesComponent implements OnInit {
   }
 
   setAlertError(graphQLError: GraphQLError) {
-    this.alerts.push({
-      id: this.alertId,
-      title: "Unsuccessfully set",
-      message: "Error has occurred: " + graphQLError.message,
-      type: AlertType.success
-    })
-    this.alertId += 1;
-  }
-
-  setAlertSuccessAdded(muscle: Muscle) {
-    this.alerts.push({
-      id: this.alertId,
-      title: "Muscle successfully created",
-      message: "New muscle " + muscle.name + "been successfully added.",
-      type: AlertType.success
-    })
-    this.alertId += 1;
-  }
-
-  setAlertSuccessUpdated(muscle: Muscle) {
-    this.alerts.push({
-      id: this.alertId,
-      title: "Muscle successfully updated",
-      message: "Muscle " + muscle.name + "been successfully updated.",
-      type: AlertType.success
-    })
-    this.alertId += 1;
-  }
-
-  setAlertSuccessDeleted(muscle: Muscle) {
-    this.alerts.push({
-      id: this.alertId,
-      title: "Muscle successfully deleted",
-      message: "Muscle " + muscle.name + "been successfully deleted.",
-      type: AlertType.success
-    })
-    this.alertId += 1;
-  }
-
-  setNewMuscle(muscle: Muscle) {
-    this.muscle = muscle
-    this.action = ActionType.create
-    this.modalTitle = "Add new muscle";
+    let message: string = "Error has occurred: " + graphQLError.message;
+    setAlertError(this.alerts, this.alertId, message);
   }
 
   setMuscle(formIndicator: FormIndicator) {
