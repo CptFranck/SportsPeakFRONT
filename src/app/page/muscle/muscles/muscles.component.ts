@@ -21,6 +21,8 @@ import {
 import {muscleDeleteFormComponent} from "../msucle-modal-compoents/muscle-delete-form/muscle-delete-form.component";
 import {FormIndicator} from "../../../interface/utils/form-indicator";
 import {ActionType} from "../../../enum/action-type";
+import {MuscleModalComponent} from "../muscle-modal/muscle-modal.component";
+import {AlertDisplayComponent} from "../../../components/crud-alert/alert-display.component";
 
 @Component({
   selector: 'app-muscles',
@@ -36,24 +38,23 @@ import {ActionType} from "../../../enum/action-type";
     LoadingComponent,
     AlertComponent,
     MuscleDetailsDisplayComponent,
-    muscleDeleteFormComponent],
+    muscleDeleteFormComponent,
+    MuscleModalComponent,
+    AlertDisplayComponent
+  ],
   templateUrl: './muscles.component.html',
 })
 export class MusclesComponent implements OnInit {
-  muscles: Muscle[] = [];
-  muscle: Muscle | undefined;
-  newMuscle: Muscle = {id: "", name: "", description: "", function: "", exercises: []};
   loading = true;
-  action: ActionType = ActionType.create;
-  modalTitle: string = "";
-  validateClassButton: string = "btn-success";
-  validateTitleButton: string = "";
-  muscleModalId: string = "muscleModal"
   alertId: number = 0;
   alerts: Alert[] = [];
+  muscles: Muscle[] = [];
+  muscle: Muscle | undefined;
+  action: ActionType = ActionType.create;
+  modalTitle: string = "";
+  muscleModalId: string = "muscleModal"
   @ViewChild("modalTemplate") modalTemplate!: TemplateRef<any>
-  isForm: boolean = true;
-  protected readonly ActionType = ActionType;
+  readonly ActionType = ActionType;
 
   constructor(private apollo: Apollo) {
   }
@@ -111,30 +112,15 @@ export class MusclesComponent implements OnInit {
     this.alertId += 1;
   }
 
-  removeAlert(event: Alert) {
-    this.alerts.filter(alert => alert.id === event.id);
-  }
-
   setNewMuscle(muscle: Muscle) {
-    this.isForm = true
     this.muscle = muscle
-    this.validateClassButton = "btn-success";
     this.action = ActionType.create
     this.modalTitle = "Add new muscle";
-    this.validateTitleButton = "Create"
   }
 
   setMuscle(formIndicator: FormIndicator) {
     this.muscle = formIndicator.object
     this.action = formIndicator.actionType
     this.modalTitle = formIndicator.object.name
-    this.validateTitleButton = formIndicator.actionType
-    this.isForm = formIndicator.actionType !== ActionType.read;
-
-    if (formIndicator.actionType === ActionType.delete) {
-      this.validateClassButton = "btn-danger"
-    } else {
-      this.validateClassButton = "btn-success";
-    }
   }
 }
