@@ -18,7 +18,7 @@ export class AlertDisplayComponent {
   alertService: AlertService = inject(AlertService);
 
   constructor() {
-    this.alertService.getAlerts().subscribe(als => {
+    this.alertService.getAlertsSubject().subscribe(als => {
       this.alerts = als;
     })
   }

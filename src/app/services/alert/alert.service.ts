@@ -9,18 +9,18 @@ import {Subject} from "rxjs";
 export class AlertService {
   private alertId: number = 0;
   private alerts: Alert[] = [];
-  private alertsObservable: Subject<Alert[]> = new Subject<Alert[]>();
+  private alertsSubject: Subject<Alert[]> = new Subject<Alert[]>();
 
   constructor() {
     this.updateAlert()
   }
 
   updateAlert() {
-    this.alertsObservable.next(this.alerts.filter(al => !al.closed));
+    this.alertsSubject.next(this.getAllAlert().filter(al => !al.closed));
   }
 
-  getAlerts(): Subject<Alert[]> {
-    return this.alertsObservable;
+  getAlertsSubject(): Subject<Alert[]> {
+    return this.alertsSubject;
   }
 
   getAllAlert() {
