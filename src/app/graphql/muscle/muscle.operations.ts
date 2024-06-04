@@ -1,7 +1,7 @@
 import {gql} from "apollo-angular";
 
 export const GET_MUSCLES = gql`
-  query getMus {
+  query {
     getMuscles {
       id
       name
