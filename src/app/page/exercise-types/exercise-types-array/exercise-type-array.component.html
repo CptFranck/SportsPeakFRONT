@@ -1,0 +1,82 @@
+<table class="table">
+  <thead>
+  <tr>
+    <th class="col-auto" scope="col">Name</th>
+    <th class="col" scope="col">Goal</th>
+    <th class="col" scope="col">Used in</th>
+    <th class="col-1 text-center" scope="col">Collapse</th>
+    <th class="col-1 text-center" scope="col">Details</th>
+    <th class="col-1 text-center" scope="col">Modify</th>
+    <th class="col-1 text-center" scope="col">Delete</th>
+  </tr>
+  </thead>
+  <tbody class="table-group-divider">
+  <tr *ngFor="let exerciseType of exerciseTypes">
+    <td>{{ exerciseType.name }}</td>
+    <td *ngIf="!showDetails[exerciseType.id]" class="truncate-td">
+      {{ exerciseType.goal }}
+    </td>
+    <td *ngIf="showDetails[exerciseType.id]">
+      {{ exerciseType.goal }}
+    </td>
+    <td>
+      <ul class="list-group list-group-flush">
+        <li
+          *ngFor="let exercise of exerciseType.exercises"
+          class="list-group-item">
+          {{ exercise.name }}
+        </li>
+      </ul>
+    </td>
+    <td>
+      <div class="col p-1 text-center">
+        <button
+          (click)="expendExerciseTypeDetails(exerciseType.id)"
+          [attr.aria-expanded]="expendExerciseTypeDetails"
+          [attr.data-bs-target]="'#' + exerciseType.id "
+          class="btn btn-secondary"
+          data-bs-toggle="collapse" type="button"
+        >
+          <i class="fa-solid fa-angle-down"></i>
+        </button>
+      </div>
+    </td>
+    <td>
+      <div class="col p-1 text-center">
+        <app-modal-button
+          (onCLickModalButton)="showExerciseTypeDetails($event)"
+          [modalId]="modalId"
+          [modalValue]="exerciseType"
+          btnClass="btn-info"
+        >
+          <i class="fa-solid fa-eye"></i>
+        </app-modal-button>
+      </div>
+    </td>
+    <td>
+      <div class="col p-1 text-center">
+        <app-modal-button
+          (onCLickModalButton)="modifyExerciseType($event)"
+          [modalId]="modalId"
+          [modalValue]="exerciseType"
+          btnClass="btn-warning"
+        >
+          <i class="fa-solid fa-pen-to-square"></i>
+        </app-modal-button>
+      </div>
+    </td>
+    <td>
+      <div class="col p-1 text-center">
+        <app-modal-button
+          (onCLickModalButton)="delExerciseType($event)"
+          [modalId]="modalId"
+          [modalValue]="exerciseType"
+          btnClass="btn-danger"
+        >
+          <i class="fa-solid fa-trash"></i>
+        </app-modal-button>
+      </div>
+    </td>
+  </tr>
+  </tbody>
+</table>
