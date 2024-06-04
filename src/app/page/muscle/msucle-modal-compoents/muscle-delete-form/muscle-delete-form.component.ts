@@ -1,9 +1,9 @@
-import {AfterViewInit, Component, ElementRef, EventEmitter, Input, Output} from '@angular/core';
+import {AfterViewInit, Component, EventEmitter, inject, Input, Output} from '@angular/core';
 import {NgForOf} from "@angular/common";
 import {Muscle} from "../../../../interface/dto/muscle";
-import {Apollo} from "apollo-angular";
 import {Observable, Subscription} from "rxjs";
 import {GraphQLError} from "graphql/error";
+import {MuscleService} from "../../../../services/muscle/muscle.service";
 
 @Component({
   selector: 'app-muscle-delete-form',
@@ -14,15 +14,16 @@ import {GraphQLError} from "graphql/error";
   templateUrl: './muscle-delete-form.component.html',
 })
 export class muscleDeleteFormComponent implements AfterViewInit {
-  @Input() muscle!: Muscle | undefined;
-  @Output() errorOccurred: EventEmitter<GraphQLError> = new EventEmitter<GraphQLError>();
-  @Output() muscleDelete: EventEmitter<Muscle> = new EventEmitter<Muscle>();
-  @Input() btnCloseRef!: HTMLButtonElement;
-  @Input() eventsSubject!: Observable<void> | undefined;
   eventsSubscription!: Subscription;
 
-  constructor(private apollo: Apollo, private ref: ElementRef) {
-  }
+  @Input() muscle!: Muscle | undefined;
+  @Input() btnCloseRef!: HTMLButtonElement;
+  @Input() eventsSubject!: Observable<void> | undefined;
+
+  @Output() errorOccurred: EventEmitter<GraphQLError> = new EventEmitter<GraphQLError>();
+  @Output() muscleDelete: EventEmitter<Muscle> = new EventEmitter<Muscle>();
+
+  muscleService: MuscleService = inject(MuscleService);
 
   ngAfterViewInit() {
     if (this.eventsSubject)
@@ -30,20 +31,15 @@ export class muscleDeleteFormComponent implements AfterViewInit {
   }
 
   onSubmit() {
-    // this.apollo
-    //   .mutate({
-    //     mutation: DEL_MUSCLES,
-    //     variables: {
-    //       muscleId: this.muscle?.id,
-    //     },
-    //   })
-    //   .subscribe(({data, error}: any) => {
-    //     if (error) {
-    //       this.errorOccurred.emit(error);
-    //     } else {
-    //       this.muscleDelete.emit(muscle);
-    //     }
-    //   });
+    if (!this.muscle) return;
+    this.muscleService.deleteMuscle(this.muscle.id)
+      .subscribe(({error}: any) => {
+        if (error) {
+          this.errorOccurred.emit(error);
+        } else {
+          this.muscleDelete.emit(this.muscle);
+        }
+      });
     this.btnCloseRef.click()
   }
 }

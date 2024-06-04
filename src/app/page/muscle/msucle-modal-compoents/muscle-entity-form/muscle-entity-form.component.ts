@@ -1,14 +1,13 @@
-import {AfterViewInit, Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {AfterViewInit, Component, EventEmitter, inject, Input, OnInit, Output} from '@angular/core';
 import {MultiSelectComponent} from "../../../../components/select/multi-select/multi-select.component";
 import {SelectExercisesComponent} from "../../../../components/select/select-exercises/select-exercises.component";
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {NgIf, NgTemplateOutlet} from "@angular/common";
 import {InputControlComponent} from "../../../../components/input-control/input-control.component";
-import {Apollo} from "apollo-angular";
 import {Muscle} from "../../../../interface/dto/muscle";
 import {GraphQLError} from "graphql/error";
-import {ADD_MUSCLES, MOD_MUSCLES} from "../../../../graphql/muscle/muscle.operations";
 import {Observable, Subscription} from "rxjs";
+import {MuscleService} from "../../../../services/muscle/muscle.service";
 
 @Component({
   selector: 'app-muscle-entity-form',
@@ -28,18 +27,17 @@ export class MuscleEntityFormComponent implements OnInit, AfterViewInit {
   muscle: Muscle | undefined
   muscleForm: FormGroup | null = null;
   submitInvalidForm: boolean = false;
+  eventsSubscription!: Subscription;
 
   @Input() isAdmin: boolean = false;
+  @Input() btnCloseRef!: HTMLButtonElement;
+  @Input() eventsSubject!: Observable<void> | undefined;
+
   @Output() newMuscleAdded: EventEmitter<Muscle> = new EventEmitter<Muscle>();
   @Output() muscleUpdated: EventEmitter<Muscle> = new EventEmitter<Muscle>();
   @Output() errorOccurred: EventEmitter<GraphQLError> = new EventEmitter<GraphQLError>();
 
-  @Input() btnCloseRef!: HTMLButtonElement;
-  @Input() eventsSubject!: Observable<void> | undefined;
-  eventsSubscription!: Subscription;
-
-  constructor(private apollo: Apollo) {
-  }
+  muscleService: MuscleService = inject(MuscleService);
 
   @Input() set muscleInput(value: Muscle | undefined) {
     this.muscle = value;
@@ -93,13 +91,7 @@ export class MuscleEntityFormComponent implements OnInit, AfterViewInit {
     if (this.muscleForm.valid) {
       this.submitInvalidForm = false;
       if (this.muscleForm.value.id === "") {
-        this.apollo
-          .mutate({
-            mutation: ADD_MUSCLES,
-            variables: {
-              inputNewMuscle: this.muscleForm.value,
-            },
-          })
+        this.muscleService.addMuscle(this.muscleForm)
           .subscribe(({data, error}: any) => {
             if (data) {
               this.newMuscleAdded.emit(data.addMuscle)
@@ -109,13 +101,7 @@ export class MuscleEntityFormComponent implements OnInit, AfterViewInit {
             }
           });
       } else {
-        this.apollo
-          .mutate({
-            mutation: MOD_MUSCLES,
-            variables: {
-              inputMuscle: this.muscleForm.value,
-            },
-          })
+        this.muscleService.modifyMuscle(this.muscleForm)
           .subscribe(({data, error}: any) => {
             if (data) {
               this.muscleUpdated.emit(data.modifyMuscle)

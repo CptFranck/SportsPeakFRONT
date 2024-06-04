@@ -1,6 +1,4 @@
 import {Component, inject, OnInit, TemplateRef, ViewChild} from '@angular/core';
-import {Apollo} from 'apollo-angular';
-import {GET_MUSCLES} from "../../../graphql/muscle/muscle.operations";
 import {CommonModule} from '@angular/common';
 import {ModalComponent} from "../../../components/modal/modal/modal.component";
 import {MusclesArrayComponent} from "../muscles-array/muscles-array.component";
@@ -19,9 +17,10 @@ import {FormIndicator} from "../../../interface/utils/form-indicator";
 import {ActionType} from "../../../enum/action-type";
 import {MuscleModalComponent} from "../muscle-modal/muscle-modal.component";
 import {AlertDisplayComponent} from "../../../components/crud-alert/alert-display.component";
-import {ApolloQueryResult} from "@apollo/client/core/types";
 import {GraphQLError} from "graphql/error";
 import {AlertService} from "../../../services/alert/alert.service";
+import {MuscleService} from "../../../services/muscle/muscle.service";
+import {ApolloQueryResult} from "@apollo/client";
 
 @Component({
   selector: 'app-muscles',
@@ -50,25 +49,19 @@ export class MusclesComponent implements OnInit {
   action: ActionType = ActionType.create;
   modalTitle: string = "";
   muscleModalId: string = "muscleModal"
+
   alertService: AlertService = inject(AlertService);
+  muscleService: MuscleService = inject(MuscleService);
   @ViewChild("modalTemplate") modalTemplate!: TemplateRef<any>
 
-  constructor(private apollo: Apollo) {
-  }
-
   ngOnInit(): void {
-    this.apollo
-      .watchQuery<Response>({
-        query: GET_MUSCLES,
-      })
-      .valueChanges.subscribe(
-      (result: ApolloQueryResult<any>): void => {
-        if (result.errors) {
-          result.errors.map(err => this.setAlertError(err))
-        }
-        this.muscles = result.data.getMuscles;
-        this.loading = result.loading;
-      });
+    this.muscleService.getMuscles().subscribe((result: ApolloQueryResult<any>): void => {
+      if (result.errors) {
+        result.errors.map(err => this.setAlertError(err))
+      }
+      this.muscles = result.data.getMuscles;
+      this.loading = result.loading;
+    });
   }
 
   setAlertError(graphQLError: GraphQLError) {

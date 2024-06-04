@@ -1,70 +1,48 @@
 import {inject, Injectable} from '@angular/core';
-import {Muscle} from "../../interface/dto/muscle";
-import {Apollo, MutationResult} from "apollo-angular";
-import {Observable, Subject} from "rxjs";
+import {Apollo} from "apollo-angular";
 import {ADD_MUSCLES, DEL_MUSCLES, GET_MUSCLES, MOD_MUSCLES} from "../../graphql/muscle/muscle.operations";
-import {ApolloQueryResult} from "@apollo/client/core/types";
 import {FormGroup} from "@angular/forms";
+import {Muscle} from "../../interface/dto/muscle";
+import {Subject} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
 })
 export class MuscleService {
   private apollo: Apollo = inject(Apollo);
-  private muscleSubject: Subject<Observable<ApolloQueryResult<Muscle[]>>> =
-    new Subject<Observable<ApolloQueryResult<Muscle[]>>>();
+  private musclesSubject: Subject<Muscle[]> = new Subject<Muscle[]>;
 
-  constructor() {
-    this.updateAlert();
-  }
-
-  updateAlert() {
-    this.muscleSubject.next(this.getMuscles());
-  }
-
-  getMuscleSubject(): Subject<Observable<ApolloQueryResult<Muscle[]>>> {
-    return this.muscleSubject;
-  }
-
-  getMuscles(): Observable<ApolloQueryResult<Muscle[]>> {
-    const observable = this.apollo.watchQuery<Muscle[]>({
+  getMuscles() {
+    return this.apollo.watchQuery({
       query: GET_MUSCLES,
     }).valueChanges;
-    this.updateAlert();
-    return observable;
   }
 
-  addMuscle(muscleForm: FormGroup): Observable<MutationResult<Muscle>> {
-    const observable = this.apollo.mutate<Muscle>({
+  addMuscle(muscleForm: FormGroup) {
+    return this.apollo.mutate({
       mutation: ADD_MUSCLES,
       variables: {
         inputNewMuscle: muscleForm.value,
       },
-    })
-    this.updateAlert();
-    return observable;
+    });
   }
 
-  modifyMuscle(muscleForm: FormGroup): Observable<MutationResult<Muscle>> {
-    const observable = this.apollo.mutate<Muscle>({
+  modifyMuscle(muscleForm: FormGroup) {
+    return this.apollo.mutate({
       mutation: MOD_MUSCLES,
       variables: {
         inputMuscle: muscleForm.value,
       },
-    })
-    this.updateAlert();
-    return observable;
+    });
   }
 
 
-  deleteMuscle(id: string): Observable<MutationResult<number>> {
-    const observable = this.apollo.mutate<number>({
+  deleteMuscle(id: string) {
+    return this.apollo.mutate({
       mutation: DEL_MUSCLES,
       variables: {
         muscleId: id,
       },
-    })
-    this.updateAlert();
-    return observable;
+    });
   }
 }
