@@ -5,14 +5,12 @@ import {CommonModule} from '@angular/common';
 import {ModalComponent} from "../../../components/modal/modal/modal.component";
 import {MusclesArrayComponent} from "../muscles-array/muscles-array.component";
 import {Muscle} from "../../../interface/dto/muscle";
-import {GraphqlResponse} from "../../../interface/graphql/graphqlResponse";
 import {MuscleEntityFormComponent} from "../msucle-modal-compoents/muscle-entity-form/muscle-entity-form.component";
 import {ModalButtonComponent} from "../../../components/modal/modal-button/modal-button.component";
 import {MultiSelectComponent} from "../../../components/select/multi-select/multi-select.component";
 import {SelectExercisesComponent} from "../../../components/select/select-exercises/select-exercises.component";
 import {LoadingComponent} from "../../../components/loading/loading.component";
 import {AlertComponent} from "../../../components/alert/alert.component";
-import {GraphQLError} from "graphql/error";
 import {Alert} from "../../../interface/utils/alert";
 import {
   MuscleDetailsDisplayComponent
@@ -23,6 +21,8 @@ import {ActionType} from "../../../enum/action-type";
 import {MuscleModalComponent} from "../muscle-modal/muscle-modal.component";
 import {AlertDisplayComponent} from "../../../components/crud-alert/alert-display.component";
 import {setAlertError} from "../../../components/utils/alertFunction";
+import {ApolloQueryResult} from "@apollo/client/core/types";
+import {GraphQLError} from "graphql/error";
 
 @Component({
   selector: 'app-muscles',
@@ -54,23 +54,23 @@ export class MusclesComponent implements OnInit {
   modalTitle: string = "";
   muscleModalId: string = "muscleModal"
   @ViewChild("modalTemplate") modalTemplate!: TemplateRef<any>
-  readonly ActionType = ActionType;
 
   constructor(private apollo: Apollo) {
   }
 
   ngOnInit(): void {
     this.apollo
-      .watchQuery({
+      .watchQuery<Response>({
         query: GET_MUSCLES,
-        errorPolicy: 'all',
       })
-      .valueChanges.subscribe((result: GraphqlResponse): void => {
-      this.muscles = result.data.getMuscles;
-      this.loading = result.loading;
-      if (result.error)
-        this.setAlertError(result.error)
-    });
+      .valueChanges.subscribe(
+      (result: ApolloQueryResult<any>): void => {
+        if (result.errors) {
+          result.errors.map(err => this.setAlertError(err))
+        }
+        this.muscles = result.data.getMuscles;
+        this.loading = result.loading;
+      });
   }
 
   setAlertError(graphQLError: GraphQLError) {
