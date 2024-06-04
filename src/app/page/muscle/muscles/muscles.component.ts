@@ -1,4 +1,4 @@
-import {Component, OnInit, TemplateRef, ViewChild} from '@angular/core';
+import {Component, inject, OnInit, TemplateRef, ViewChild} from '@angular/core';
 import {Apollo} from 'apollo-angular';
 import {GET_MUSCLES} from "../../../graphql/muscle/muscle.operations";
 import {CommonModule} from '@angular/common';
@@ -11,7 +11,6 @@ import {MultiSelectComponent} from "../../../components/select/multi-select/mult
 import {SelectExercisesComponent} from "../../../components/select/select-exercises/select-exercises.component";
 import {LoadingComponent} from "../../../components/loading/loading.component";
 import {AlertComponent} from "../../../components/alert/alert.component";
-import {Alert} from "../../../interface/utils/alert";
 import {
   MuscleDetailsDisplayComponent
 } from "../msucle-modal-compoents/muscle-details-display/muscle-details-display.component";
@@ -20,9 +19,9 @@ import {FormIndicator} from "../../../interface/utils/form-indicator";
 import {ActionType} from "../../../enum/action-type";
 import {MuscleModalComponent} from "../muscle-modal/muscle-modal.component";
 import {AlertDisplayComponent} from "../../../components/crud-alert/alert-display.component";
-import {setAlertError} from "../../../components/utils/alertFunction";
 import {ApolloQueryResult} from "@apollo/client/core/types";
 import {GraphQLError} from "graphql/error";
+import {AlertService} from "../../../services/alert/alert.service";
 
 @Component({
   selector: 'app-muscles',
@@ -46,13 +45,12 @@ import {GraphQLError} from "graphql/error";
 })
 export class MusclesComponent implements OnInit {
   loading = true;
-  alertId: number = 0;
-  alerts: Alert[] = [];
   muscles: Muscle[] = [];
   muscle: Muscle | undefined;
   action: ActionType = ActionType.create;
   modalTitle: string = "";
   muscleModalId: string = "muscleModal"
+  alertService: AlertService = inject(AlertService);
   @ViewChild("modalTemplate") modalTemplate!: TemplateRef<any>
 
   constructor(private apollo: Apollo) {
@@ -75,7 +73,7 @@ export class MusclesComponent implements OnInit {
 
   setAlertError(graphQLError: GraphQLError) {
     let message: string = "Error has occurred: " + graphQLError.message;
-    setAlertError(this.alerts, this.alertId, message);
+    this.alertService.createErrorAlert(message);
   }
 
   setMuscle(formIndicator: FormIndicator) {

@@ -1,7 +1,7 @@
 <div class="container p-4">
   <app-loading [loading]="loading"/>
   <div class="container-fluid">
-    <app-alert-display [alerts]="alerts"/>
+    <app-alert-display/>
   </div>
   <div class="container-fluid">
     <div class="row">
@@ -10,8 +10,6 @@
       </div>
       <div class="col-2">
         <app-muscle-modal [action]="action"
-                          [alertId]="alertId"
-                          [alerts]="alerts"
                           [modalTitle]="modalTitle"
                           [muscleModalId]="muscleModalId"
                           [muscle]="muscle"
