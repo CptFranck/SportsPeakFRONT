@@ -48,17 +48,17 @@ export class MuscleModalComponent {
   }
 
   setAlertSuccessAdded(muscle: Muscle) {
-    let message = "Muscle " + muscle.name + "been successfully created."
+    let message = "Muscle " + muscle.name + " been successfully created."
     this.alertService.createSuccessAlert(message);
   }
 
   setAlertSuccessUpdated(muscle: Muscle) {
-    let message = "Muscle " + muscle.name + "been successfully updated."
+    let message = "Muscle " + muscle.name + " been successfully updated."
     this.alertService.createSuccessAlert(message);
   }
 
   setAlertSuccessDeleted(muscle: Muscle) {
-    let message = "Muscle " + muscle.name + "been successfully deleted."
+    let message = "Muscle " + muscle.name + " been successfully deleted."
     this.alertService.createSuccessAlert(message);
   }
 }

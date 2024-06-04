@@ -18,12 +18,12 @@ export class AlertDisplayComponent {
   alertService: AlertService = inject(AlertService);
 
   constructor() {
-    this.alerts = this.alertService.getAlerts();
+    this.alertService.getAlerts().subscribe(als => {
+      this.alerts = als;
+    })
   }
 
-  removeAlert(event: Alert) {
-    this.alerts.filter(alert => alert.id === event.id);
+  removeAlert(alert: Alert) {
+    this.alertService.closeAlert(alert)
   }
-
-
 }
