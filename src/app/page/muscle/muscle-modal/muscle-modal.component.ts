@@ -35,11 +35,10 @@ export class MuscleModalComponent {
   @Input() muscle: Muscle | undefined;
   @Input() action!: ActionType;
   @ViewChild("modalTemplate") modalTemplate!: TemplateRef<any>
-  newMuscle: Muscle = {id: "", name: "", description: "", function: "", exercises: []};
   protected readonly ActionType = ActionType;
 
-  setNewMuscle(muscle: Muscle) {
-    this.muscle = muscle
+  onClick(value: undefined) {
+    this.muscle = value
     this.action = ActionType.create
     this.modalTitle = "Add new muscle";
   }
