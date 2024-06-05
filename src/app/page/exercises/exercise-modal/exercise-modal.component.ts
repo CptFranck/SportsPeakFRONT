@@ -63,17 +63,17 @@ export class ExerciseModalComponent {
   }
 
   setAlertSuccessAdded(exercise: Exercise) {
-    let message = "Muscle " + exercise.name + " been successfully created."
+    let message = "Exercise " + exercise.name + " been successfully created."
     this.alertService.addSuccessAlert(message);
   }
 
   setAlertSuccessUpdated(exercise: Exercise) {
-    let message = "Muscle " + exercise.name + " been successfully updated."
+    let message = "Exercise " + exercise.name + " been successfully updated."
     this.alertService.addSuccessAlert(message);
   }
 
   setAlertSuccessDeleted(exercise: Exercise) {
-    let message = "Muscle " + exercise.name + " been successfully deleted."
+    let message = "Exercise " + exercise.name + " been successfully deleted."
     this.alertService.addSuccessAlert(message);
   }
 }
