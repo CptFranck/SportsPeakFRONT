@@ -1,0 +1,36 @@
+<form *ngIf="exerciseTypeForm" [formGroup]="exerciseTypeForm" class="container-fluid">
+  <div class="mb-3">
+    <label class="form-label">Name :</label>
+    <input class="form-control" formControlName="name" type="text">
+    <app-input-control
+      [formGroup]="exerciseTypeForm"
+      [submitInvalid]="submitInvalidForm"
+      fieldName="name"
+      rules="min : 3; max 50"
+    />
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label">Goal :</label>
+    <textarea aria-label="textarea" class="form-control" formControlName="goal"></textarea>
+    <app-input-control
+      [formGroup]="exerciseTypeForm"
+      [submitInvalid]="submitInvalidForm"
+      fieldName="goal"
+      rules="min : 3; max 2000"
+    />
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label">Exercises :</label>
+    <app-select-exercises [exerciseIds]='exerciseTypeForm.controls["exerciseIds"].value' formControlName="exerciseIds"/>
+    <app-input-control
+      [formGroup]="exerciseTypeForm"
+      [submitInvalid]="submitInvalidForm"
+      errorMessage="Please select exercises whose category is this exerciseType"
+      fieldName="exerciseIds"
+      rules="min : 1"
+    />
+  </div>
+</form>
+
