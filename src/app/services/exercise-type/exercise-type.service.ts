@@ -14,7 +14,7 @@ import {
 export class ExerciseTypeService {
   private apollo: Apollo = inject(Apollo);
 
-  getExerciseType() {
+  getExerciseTypes() {
     return this.apollo.watchQuery({
       query: GET_EXERCISE_TYPES,
     }).valueChanges;

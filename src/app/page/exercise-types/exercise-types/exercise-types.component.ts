@@ -31,7 +31,7 @@ export class ExerciseTypesComponent implements OnInit {
   @ViewChild("modalTemplate") modalTemplate!: TemplateRef<any>
 
   ngOnInit(): void {
-    this.exerciseTypeService.getExerciseType().subscribe((result: ApolloQueryResult<any>): void => {
+    this.exerciseTypeService.getExerciseTypes().subscribe((result: ApolloQueryResult<any>): void => {
       if (result.errors) {
         result.errors.map(err => this.setAlertError(err))
       }
