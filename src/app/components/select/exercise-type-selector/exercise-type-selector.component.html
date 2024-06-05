@@ -1,0 +1,6 @@
+<app-multi-select (onChange)="setExerciseIds($event)"
+                  (onTouched)="onTouched($event)"
+                  [addDescriptionToOption]="true"
+                  [optionList]="exerciseTypes"
+                  [selectedOptions]="exerciseTypeIds"
+/>
