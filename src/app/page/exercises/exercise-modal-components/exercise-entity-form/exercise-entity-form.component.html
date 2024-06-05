@@ -31,27 +31,29 @@
       rules="min : 3; max 2000"
     />
   </div>
-  <!--  <div class="mb-3">-->
-  <!--    <label class="form-label">Exercises :</label>-->
-  <!--    <app-select-exercises [exerciseIds]='muscleForm.controls["exerciseIds"].value' formControlName="exerciseIds"/>-->
-  <!--    <app-input-control-->
-  <!--      [formGroup]="muscleForm"-->
-  <!--      [submitInvalid]="submitInvalidForm"-->
-  <!--      errorMessage="Please select exercises that use this muscle"-->
-  <!--      fieldName="exerciseIds"-->
-  <!--      rules="min : 1"-->
-  <!--    />-->
-  <!--  </div>-->
-  <!--  <div class="mb-3">-->
-  <!--    <label class="form-label">Exercises :</label>-->
-  <!--    <app-select-exercises [exerciseIds]='muscleForm.controls["exerciseIds"].value' formControlName="exerciseIds"/>-->
-  <!--    <app-input-control-->
-  <!--      [formGroup]="muscleForm"-->
-  <!--      [submitInvalid]="submitInvalidForm"-->
-  <!--      errorMessage="Please select exercises that use this muscle"-->
-  <!--      fieldName="exerciseIds"-->
-  <!--      rules="min : 1"-->
-  <!--    />-->
-  <!--  </div>-->
+  <div class="mb-3">
+    <label class="form-label">Muscle :</label>
+    <app-muscle-selector [muscleIds]='exerciseForm.controls["muscleIds"].value'
+                         formControlName="muscleIds"/>
+    <app-input-control
+      [formGroup]="exerciseForm"
+      [submitInvalid]="submitInvalidForm"
+      errorMessage="Please select muscles used in this exercise"
+      fieldName="muscleIds"
+      rules="min : 1"
+    />
+  </div>
+  <div class="mb-3">
+    <label class="form-label">ExerciseTypes :</label>
+    <app-exercise-type-selector [exerciseTypeIds]='exerciseForm.controls["exerciseTypeIds"].value'
+                                formControlName="exerciseTypeIds"/>
+    <app-input-control
+      [formGroup]="exerciseForm"
+      [submitInvalid]="submitInvalidForm"
+      errorMessage="Please select the exerciseType of this exercise"
+      fieldName="exerciseTypeIds"
+      rules="min : 1"
+    />
+  </div>
 </form>
 

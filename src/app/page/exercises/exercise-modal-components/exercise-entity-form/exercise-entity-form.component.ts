@@ -7,6 +7,10 @@ import {ExerciseService} from "../../../../services/exercise/exercise.service";
 import {InputControlComponent} from "../../../../components/input-control/input-control.component";
 import {NgIf} from "@angular/common";
 import {ExerciseSelectorComponent} from "../../../../components/select/exercises-selector/exercise-selector.component";
+import {MuscleSelectorComponent} from "../../../../components/select/muscle-selector/muscle-selector.component";
+import {
+  ExerciseTypeSelectorComponent
+} from "../../../../components/select/exercise-type-selector/exercise-type-selector.component";
 
 @Component({
   selector: 'app-exercise-entity-form',
@@ -16,7 +20,9 @@ import {ExerciseSelectorComponent} from "../../../../components/select/exercises
     InputControlComponent,
     NgIf,
     ReactiveFormsModule,
-    ExerciseSelectorComponent
+    ExerciseSelectorComponent,
+    MuscleSelectorComponent,
+    ExerciseTypeSelectorComponent
   ],
   templateUrl: './exercise-entity-form.component.html',
 })
@@ -76,10 +82,10 @@ export class ExerciseEntityFormComponent implements OnInit, AfterViewInit {
         [Validators.required,
           Validators.minLength(3),
           Validators.maxLength(2000)]),
-      exerciseMuscleIds: new FormControl(
+      muscleIds: new FormControl(
         exerciseMuscleIds, exerciseIdsValidator
       ),
-      exerciseExerciseTypeIds: new FormControl(
+      exerciseTypeIds: new FormControl(
         exerciseExerciseTypeIds, exerciseIdsValidator
       ),
     });
@@ -89,6 +95,8 @@ export class ExerciseEntityFormComponent implements OnInit, AfterViewInit {
   }
 
   onSubmit() {
+    console.log(this.exercise)
+    console.log(this.exerciseForm?.value)
     if (!this.exerciseForm) return
     if (this.exerciseForm.valid) {
       this.submitInvalidForm = false;
@@ -96,7 +104,7 @@ export class ExerciseEntityFormComponent implements OnInit, AfterViewInit {
         this.exerciseService.addExercise(this.exerciseForm)
           .subscribe(({data, error}: any) => {
             if (data) {
-              this.newExerciseAdded.emit(data.addMuscle)
+              this.newExerciseAdded.emit(data.addExercise)
             }
             if (error) {
               this.errorOccurred.emit(error);
