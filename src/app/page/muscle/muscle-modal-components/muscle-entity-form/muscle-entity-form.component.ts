@@ -90,7 +90,7 @@ export class MuscleEntityFormComponent implements OnInit, AfterViewInit {
     if (!this.muscleForm) return
     if (this.muscleForm.valid) {
       this.submitInvalidForm = false;
-      if (this.muscleForm.value.id === "") {
+      if (!this.muscleForm.value.id) {
         this.muscleService.addMuscle(this.muscleForm)
           .subscribe(({data, error}: any) => {
             if (data) {
