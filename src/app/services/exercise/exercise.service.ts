@@ -24,7 +24,7 @@ export class ExerciseService {
     return this.apollo.mutate({
       mutation: ADD_EXERCISE,
       variables: {
-        inputNewMuscle: exerciseForm.value,
+        inputNewExercise: exerciseForm.value,
       },
     });
   }
@@ -33,7 +33,7 @@ export class ExerciseService {
     return this.apollo.mutate({
       mutation: MOD_EXERCISE,
       variables: {
-        inputMuscle: exerciseForm.value,
+        inputExercise: exerciseForm.value,
       },
     });
   }
@@ -42,7 +42,7 @@ export class ExerciseService {
     return this.apollo.mutate({
       mutation: DEL_EXERCISE,
       variables: {
-        muscleId: id,
+        exerciseId: id,
       },
     });
   }
