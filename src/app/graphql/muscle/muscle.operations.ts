@@ -52,7 +52,7 @@ export const MOD_MUSCLES = gql`
 `;
 
 export const DEL_MUSCLES = gql`
-  mutation ($muscleId : ID!){
+  mutation ($muscleId : Int!){
     deleteMuscle(muscleId: $muscleId)
   }
 `;
