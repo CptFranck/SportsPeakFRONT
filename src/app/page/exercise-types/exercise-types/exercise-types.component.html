@@ -1,16 +1,16 @@
-<div class="container p-4">
+<div class="container">
   <app-loading [loading]="loading"/>
-  <div class="container-fluid">
-    <app-alert-display/>
-  </div>
-
   <div class="container-fluid">
     <div class="row">
       <div class="col">
-        <h2>ExerciseType saved in databases</h2>
+        <h2>ExerciseType saved in database</h2>
       </div>
       <div class="col-2">
-
+        <app-exercise-type-modal [action]="action"
+                                 [exerciseTypeModalId]="exerciseTypeModalId"
+                                 [exerciseType]="exerciseType"
+                                 [modalTitle]="modalTitle"
+        />
       </div>
     </div>
     <app-exercise-type-array (actionExerciseType)="setExerciseType($event)"
