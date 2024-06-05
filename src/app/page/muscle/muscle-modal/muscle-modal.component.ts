@@ -4,10 +4,10 @@ import {ModalButtonComponent} from "../../../components/modal/modal-button/modal
 import {ModalComponent} from "../../../components/modal/modal/modal.component";
 import {
   MuscleDetailsDisplayComponent
-} from "../msucle-modal-compoents/muscle-details-display/muscle-details-display.component";
-import {MuscleEntityFormComponent} from "../msucle-modal-compoents/muscle-entity-form/muscle-entity-form.component";
+} from "../muscle-modal-components/muscle-details-display/muscle-details-display.component";
+import {MuscleEntityFormComponent} from "../muscle-modal-components/muscle-entity-form/muscle-entity-form.component";
 import {NgIf} from "@angular/common";
-import {muscleDeleteFormComponent} from "../msucle-modal-compoents/muscle-delete-form/muscle-delete-form.component";
+import {muscleDeleteFormComponent} from "../muscle-modal-components/muscle-delete-form/muscle-delete-form.component";
 import {Muscle} from "../../../interface/dto/muscle";
 import {GraphQLError} from "graphql/error";
 import {AlertService} from "../../../services/alert/alert.service";
