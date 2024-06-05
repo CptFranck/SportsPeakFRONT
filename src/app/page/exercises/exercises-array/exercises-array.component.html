@@ -1,0 +1,99 @@
+<table class="table">
+  <thead>
+  <tr>
+    <th class="col-auto" scope="col">Name</th>
+    <th class="col-5" scope="col">Description</th>
+    <th class="col-5" scope="col">Goal</th>
+    <th class="col-auto" scope="col">Use</th>
+    <th class="col-auto" scope="col">Type of</th>
+    <th class="col-1 text-center" scope="col">Collapse</th>
+    <th class="col-1 text-center" scope="col">Details</th>
+    <th class="col-1 text-center" scope="col">Modify</th>
+    <th class="col-1 text-center" scope="col">Delete</th>
+  </tr>
+  </thead>
+  <tbody class="table-group-divider">
+  <tr *ngFor="let exercise of exercises">
+    <td>{{ exercise.name }}</td>
+    <td *ngIf="!showDetails[exercise.id]" class="truncate-td">
+      {{ exercise.description }}
+    </td>
+    <td *ngIf="showDetails[exercise.id]">
+      {{ exercise.description }}
+    </td>
+    <td *ngIf="!showDetails[exercise.id]" class="truncate-td">
+      {{ exercise.goal }}
+    </td>
+    <td *ngIf="showDetails[exercise.id]">
+      {{ exercise.goal }}
+    </td>
+    <td>
+      <ul class="list-group list-group-flush">
+        <li
+          *ngFor="let exercise of exercise.muscles"
+          class="list-group-item">
+          {{ exercise.name }}
+        </li>
+      </ul>
+    </td>
+    <td>
+      <ul class="list-group list-group-flush">
+        <li
+          *ngFor="let exercise of exercise.exerciseTypes"
+          class="list-group-item">
+          {{ exercise.name }}
+        </li>
+      </ul>
+    </td>
+    <td>
+      <div class="col p-1 text-center">
+        <button
+          (click)="expendExerciseDetails(exercise.id)"
+          [attr.aria-expanded]="expendExerciseDetails"
+          [attr.data-bs-target]="'#' + exercise.id "
+          class="btn btn-secondary"
+          data-bs-toggle="collapse" type="button"
+        >
+          <i class="fa-solid fa-angle-down"></i>
+        </button>
+      </div>
+    </td>
+    <td>
+      <div class="col p-1 text-center">
+        <app-modal-button
+          (onCLickModalButton)="showExerciseDetails($event)"
+          [modalId]="modalId"
+          [modalValue]="exercise"
+          btnClass="btn-info"
+        >
+          <i class="fa-solid fa-eye"></i>
+        </app-modal-button>
+      </div>
+    </td>
+    <td>
+      <div class="col p-1 text-center">
+        <app-modal-button
+          (onCLickModalButton)="modifyExercise($event)"
+          [modalId]="modalId"
+          [modalValue]="exercise"
+          btnClass="btn-warning"
+        >
+          <i class="fa-solid fa-pen-to-square"></i>
+        </app-modal-button>
+      </div>
+    </td>
+    <td>
+      <div class="col p-1 text-center">
+        <app-modal-button
+          (onCLickModalButton)="delExercise($event)"
+          [modalId]="modalId"
+          [modalValue]="exercise"
+          btnClass="btn-danger"
+        >
+          <i class="fa-solid fa-trash"></i>
+        </app-modal-button>
+      </div>
+    </td>
+  </tr>
+  </tbody>
+</table>
