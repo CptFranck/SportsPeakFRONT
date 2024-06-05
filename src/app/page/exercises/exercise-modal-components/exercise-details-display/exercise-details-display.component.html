@@ -9,7 +9,10 @@
   </div>
   <div class="mb-3">
     <label class="form-label fw-bold">Muscle :</label>
-    <ol class="list-group list-group-numbered">
+    <p *ngIf="exercise?.muscles?.length === 0">No muscle is used this exercise</p>
+    <ol *ngIf="exercise?.muscles?.length !== 0"
+        class="list-group list-group-numbered"
+    >
       <li *ngFor="let exercise of exercise?.muscles"
           class="list-group-item d-flex justify-content-between align-items-start"
       >
@@ -25,7 +28,10 @@
   </div>
   <div class="mb-3">
     <label class="form-label fw-bold">ExerciseTypes :</label>
-    <ol class="list-group list-group-numbered">
+    <p *ngIf="exercise?.exerciseTypes?.length === 0">This exercise has no type set</p>
+    <ol *ngIf="exercise?.exerciseTypes?.length !== 0"
+        class="list-group list-group-numbered"
+    >
       <li *ngFor="let exercise of exercise?.exerciseTypes"
           class="list-group-item d-flex justify-content-between align-items-start"
       >
