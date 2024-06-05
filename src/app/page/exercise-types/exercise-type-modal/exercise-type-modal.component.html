@@ -1,0 +1,30 @@
+<app-modal-button (onCLickModalButton)="onClick($event)"
+                  [modalId]="exerciseTypeModalId"
+>
+  Add new
+  <i class="fa-regular fa-square-plus"></i>
+</app-modal-button>
+<app-modal [actionType]="action"
+           [contentTemplate]="modalTemplate"
+           [modalId]="exerciseTypeModalId"
+           [title]="modalTitle"
+>
+</app-modal>
+<ng-template #modalTemplate let-btnClose="btnClose" let-eventsSubject="eventsSubject">
+  <app-exercise-type-entity-form (errorOccurred)="setAlertError($event)"
+                                 (exerciseTypeUpdated)="setAlertSuccessUpdated($event)"
+                                 (newExerciseTypeAdded)="setAlertSuccessAdded($event)"
+                                 *ngIf="action === ActionType.create || action === ActionType.update"
+                                 [btnCloseRef]="btnClose"
+                                 [eventsSubject]="eventsSubject"
+                                 [exerciseTypeInput]="exerciseType"
+  />
+  <app-exercise-type-details-display *ngIf="action === ActionType.read"
+                                     [exerciseTypeInput]="exerciseType"/>
+  <app-exercise-type-delete-form (errorOccurred)="setAlertError($event)"
+                                 (exerciseTypeDelete)="setAlertSuccessDeleted($event)"
+                                 *ngIf="action === ActionType.delete"
+                                 [btnCloseRef]="btnClose"
+                                 [eventsSubject]="eventsSubject"
+                                 [exerciseType]="exerciseType"/>
+</ng-template>
