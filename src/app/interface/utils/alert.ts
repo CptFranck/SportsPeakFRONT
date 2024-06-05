@@ -9,12 +9,11 @@ export interface Alert {
   type: AlertType;
   closed: boolean;
   errorInformation?: {
-    errorName: string,
+    errorName?: string,
     errorStack?: string,
     errorType?: AlertErrorType,
     errorLocation?: ReadonlyArray<SourceLocation>,
     errorPath?: ReadonlyArray<string | number>,
-    errorCause?: undefined,
   };
 }
 

@@ -7,7 +7,7 @@ import {ExerciseTypeService} from "../../../services/exercise-type/exercise-type
 import {ApolloQueryResult} from "@apollo/client";
 import {GraphQLError} from "graphql/error";
 import {FormIndicator} from "../../../interface/utils/form-indicator";
-import {AlertDisplayComponent} from "../../../components/crud-alert/alert-display.component";
+import {AlertDisplayComponent} from "../../../components/alert-display/alert-display.component";
 import {LoadingComponent} from "../../../components/loading/loading.component";
 import {ExerciseTypeArrayComponent} from "../exercise-types-array/exercise-type-array.component";
 import {ExerciseTypeModalComponent} from "../exercise-type-modal/exercise-type-modal.component";

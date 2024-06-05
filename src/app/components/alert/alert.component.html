@@ -1,7 +1,23 @@
 <div [class]="'alert ' + alert.type + ' alert-dismissible fade show'" role="alert">
-  <strong>{{ alert.title }}</strong>
-  <div class="col">
-    <p>{{ alert.message }}</p>
+  <h5><strong>{{ alert.title }}</strong></h5>
+  <div class="row ">
+    <div *ngIf="alert.errorInformation?.errorName" class="col-auto m-0">
+      <strong>ErrorName : </strong> {{ alert.errorInformation?.errorName }}
+    </div>
+    <div *ngIf="alert.errorInformation?.errorType" class="col-auto">
+      <strong>ErrorType : </strong> {{ alert.errorInformation?.errorType }}
+    </div>
+    <div *ngIf="alert.errorInformation?.errorPath" class="col-auto">
+      <strong>ErrorPath : </strong>{{ alert.errorInformation?.errorPath }}
+    </div>
+    <div *ngIf="alert.errorInformation?.errorStack" class="col-auto">
+      <strong>ErrorStack : </strong> {{ alert.errorInformation?.errorStack }}
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <strong>Message : </strong>{{ alert.message }}
+    </div>
   </div>
   <div class="col-1 align-items-center">
     <button (click)="removeAlert()" aria-label="Close" class="btn-close" data-bs-dismiss="alert"

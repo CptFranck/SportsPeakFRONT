@@ -15,7 +15,7 @@ import {muscleDeleteFormComponent} from "../muscle-modal-components/muscle-delet
 import {FormIndicator} from "../../../interface/utils/form-indicator";
 import {ActionType} from "../../../enum/action-type";
 import {MuscleModalComponent} from "../muscle-modal/muscle-modal.component";
-import {AlertDisplayComponent} from "../../../components/crud-alert/alert-display.component";
+import {AlertDisplayComponent} from "../../../components/alert-display/alert-display.component";
 import {GraphQLError} from "graphql/error";
 import {AlertService} from "../../../services/alert/alert.service";
 import {MuscleService} from "../../../services/muscle/muscle.service";

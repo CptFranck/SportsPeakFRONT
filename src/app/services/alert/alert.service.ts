@@ -69,7 +69,7 @@ export class AlertService {
   }
 
   createErrorAlert(error: Error): Alert {
-    const errorAlert = this.createAlert("Unsuccessful operation :'(", error.message, AlertType.error);
+    const errorAlert = this.createAlert("Unsuccessful operation :(", error.message, AlertType.error);
     errorAlert.errorInformation = {
       errorName: error.name,
       errorStack: error.stack,
