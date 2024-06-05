@@ -15,6 +15,7 @@ import {AlertService} from "../../services/alert/alert.service";
 })
 export class AlertDisplayComponent {
   alerts!: Alert[]
+  // alerts: Alert[]
   //   = [{
   //   "id": 0,
   //   "title": "Unsuccessful operation :(",
@@ -38,7 +39,6 @@ export class AlertDisplayComponent {
 
   constructor() {
     this.alertService.getAlertsSubject().subscribe(als => {
-      console.log(als)
       this.alerts = als;
     })
   }
