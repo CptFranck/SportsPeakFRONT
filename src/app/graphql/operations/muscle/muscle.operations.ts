@@ -17,7 +17,7 @@ export const GET_MUSCLES = gql`
   }
 `;
 
-export const ADD_MUSCLES = gql`
+export const ADD_MUSCLE = gql`
   mutation ($inputNewMuscle : InputNewMuscle!){
     addMuscle(inputNewMuscle: $inputNewMuscle) {
       id
@@ -34,7 +34,7 @@ export const ADD_MUSCLES = gql`
   }
 `;
 
-export const MOD_MUSCLES = gql`
+export const MOD_MUSCLE = gql`
   mutation ($inputMuscle : InputMuscle!){
     modifyMuscle(inputMuscle: $inputMuscle) {
       id
@@ -51,7 +51,7 @@ export const MOD_MUSCLES = gql`
   }
 `;
 
-export const DEL_MUSCLES = gql`
+export const DEL_MUSCLE = gql`
   mutation ($muscleId : Int!){
     deleteMuscle(muscleId: $muscleId)
   }

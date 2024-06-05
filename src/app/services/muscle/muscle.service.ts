@@ -1,6 +1,6 @@
 import {inject, Injectable} from '@angular/core';
 import {Apollo} from "apollo-angular";
-import {ADD_MUSCLES, DEL_MUSCLES, GET_MUSCLES, MOD_MUSCLES} from "../../graphql/operations/muscle/muscle.operations";
+import {ADD_MUSCLE, DEL_MUSCLE, GET_MUSCLES, MOD_MUSCLE} from "../../graphql/operations/muscle/muscle.operations";
 import {FormGroup} from "@angular/forms";
 
 @Injectable({
@@ -17,7 +17,7 @@ export class MuscleService {
 
   addMuscle(muscleForm: FormGroup) {
     return this.apollo.mutate({
-      mutation: ADD_MUSCLES,
+      mutation: ADD_MUSCLE,
       variables: {
         inputNewMuscle: muscleForm.value,
       },
@@ -26,7 +26,7 @@ export class MuscleService {
 
   modifyMuscle(muscleForm: FormGroup) {
     return this.apollo.mutate({
-      mutation: MOD_MUSCLES,
+      mutation: MOD_MUSCLE,
       variables: {
         inputMuscle: muscleForm.value,
       },
@@ -35,7 +35,7 @@ export class MuscleService {
 
   deleteMuscle(id: string) {
     return this.apollo.mutate({
-      mutation: DEL_MUSCLES,
+      mutation: DEL_MUSCLE,
       variables: {
         muscleId: id,
       },
