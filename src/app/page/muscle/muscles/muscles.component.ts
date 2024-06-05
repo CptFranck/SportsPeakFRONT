@@ -66,7 +66,7 @@ export class MusclesComponent implements OnInit {
 
   setAlertError(graphQLError: GraphQLError) {
     let message: string = "Error has occurred: " + graphQLError.message;
-    this.alertService.createErrorAlert(message);
+    this.alertService.addErrorAlert(message);
   }
 
   setMuscle(formIndicator: FormIndicator) {

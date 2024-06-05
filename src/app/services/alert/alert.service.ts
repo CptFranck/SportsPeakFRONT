@@ -2,6 +2,9 @@ import {Injectable} from '@angular/core';
 import {Alert} from "../../interface/utils/alert";
 import {AlertType} from "../../enum/alert-type";
 import {Subject} from "rxjs";
+import {GraphQLError} from "graphql/error";
+import {AlertErrorType} from "../../enum/alert-error-type";
+import {NetworkError} from "@apollo/client/errors";
 
 @Injectable({
   providedIn: 'root'
@@ -27,47 +30,74 @@ export class AlertService {
     return this.alerts;
   }
 
-  createSuccessAlert(message: string): void {
-    this.alerts.push({
+  createAlert(title: string, message: string, alertType: AlertType): Alert {
+    const alert = {
       id: this.alertId,
-      title: "Successful operation :D",
+      title: title,
       message: message,
-      type: AlertType.success,
+      type: alertType,
       closed: false
-    });
+    }
     this.alertId += 1;
-    this.updateAlert()
+    return alert;
   }
 
-  createWarningAlert(message: string): void {
-    this.alerts.push({
-      id: this.alertId,
-      title: "Unsuccessful operation :(",
-      message: message,
-      type: AlertType.error,
-      closed: false
-    });
-    this.alertId += 1;
-    this.updateAlert()
+  addSuccessAlert(message: string): void {
+    const successAlert = this.createAlert("Successful operation :D", message, AlertType.success);
+    this.alerts.push(successAlert);
+    this.updateAlert();
   }
 
-  createErrorAlert(message: string): void {
-    this.alerts.push({
-      id: this.alertId,
-      title: "Unsuccessful operation :(",
-      message: message,
-      type: AlertType.error,
-      closed: false
-    });
-    this.updateAlert()
-    this.alertId += 1;
+  addWarningAlert(message: string): void {
+    const successAlert = this.createAlert("Warning :/", message, AlertType.warning);
+    this.alerts.push(successAlert);
+    this.updateAlert();
+  }
+
+  addErrorAlert(message: string): void {
+    const successAlert = this.createAlert("Unsuccessful operation :(", message, AlertType.error);
+    this.alerts.push(successAlert);
+    this.updateAlert();
   }
 
   closeAlert(alert: Alert) {
     let localAlert = this.alerts.find(al => alert.id === al.id);
     if (localAlert) {
       localAlert.closed = true;
-      this.updateAlert()
+      this.updateAlert();
     }
+  }
+
+  createErrorAlert(error: Error): Alert {
+    const errorAlert = this.createAlert("Unsuccessful operation :'(", error.message, AlertType.error);
+    errorAlert.errorInformation = {
+      errorName: error.name,
+      errorStack: error.stack,
+    }
+    return errorAlert;
+  }
+
+  createApolloGraphQLErrorAlert(graphQLError: GraphQLError): void {
+    let graphQLAlert = this.createErrorAlert(graphQLError)
+    if (graphQLAlert.errorInformation) {
+      graphQLAlert.errorInformation["errorType"] = AlertErrorType.GraphQLError
+      graphQLAlert.errorInformation["errorLocation"] = graphQLError.locations
+      graphQLAlert.errorInformation["errorPath"] = graphQLError.path
+    }
+    this.alerts.push(graphQLAlert);
+    this.updateAlert()
+    this.alertId += 1;
+  }
+
+  createApolloNetWorkErrorAlert(networkError: NetworkError): void {
+    if (!networkError) return
+    console.log(networkError)
+    let networkAlert = this.createErrorAlert(networkError)
+    if (networkAlert.errorInformation) {
+      networkAlert.errorInformation["errorType"] = AlertErrorType.NetworkError
+    }
+    this.alerts.push(networkAlert);
+    this.updateAlert()
+    this.alertId += 1;
   }
 }

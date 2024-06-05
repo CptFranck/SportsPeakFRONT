@@ -42,7 +42,7 @@ export class ExerciseTypesComponent implements OnInit {
 
   setAlertError(graphQLError: GraphQLError) {
     let message: string = "Error has occurred: " + graphQLError.message;
-    this.alertService.createErrorAlert(message);
+    this.alertService.addErrorAlert(message);
   }
 
   setExerciseType(formIndicator: FormIndicator) {

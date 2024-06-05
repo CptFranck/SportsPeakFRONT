@@ -59,21 +59,21 @@ export class ExerciseTypeModalComponent {
 
   setAlertError(graphQLError: GraphQLError) {
     let message: string = "Error has occurred: " + graphQLError.message;
-    this.alertService.createErrorAlert(message);
+    this.alertService.addErrorAlert(message);
   }
 
   setAlertSuccessAdded(exerciseType: ExerciseType) {
     let message = "ExerciseType " + exerciseType.name + " been successfully created."
-    this.alertService.createSuccessAlert(message);
+    this.alertService.addSuccessAlert(message);
   }
 
   setAlertSuccessUpdated(exerciseType: ExerciseType) {
     let message = "ExerciseType " + exerciseType.name + " been successfully updated."
-    this.alertService.createSuccessAlert(message);
+    this.alertService.addSuccessAlert(message);
   }
 
   setAlertSuccessDeleted(exerciseType: ExerciseType) {
     let message = "ExerciseType " + exerciseType.name + " been successfully deleted."
-    this.alertService.createSuccessAlert(message);
+    this.alertService.addSuccessAlert(message);
   }
 }

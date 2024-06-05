@@ -44,21 +44,21 @@ export class MuscleModalComponent {
 
   setAlertError(graphQLError: GraphQLError) {
     let message: string = "Error has occurred: " + graphQLError.message;
-    this.alertService.createErrorAlert(message);
+    this.alertService.addErrorAlert(message);
   }
 
   setAlertSuccessAdded(muscle: Muscle) {
     let message = "Muscle " + muscle.name + " been successfully created."
-    this.alertService.createSuccessAlert(message);
+    this.alertService.addSuccessAlert(message);
   }
 
   setAlertSuccessUpdated(muscle: Muscle) {
     let message = "Muscle " + muscle.name + " been successfully updated."
-    this.alertService.createSuccessAlert(message);
+    this.alertService.addSuccessAlert(message);
   }
 
   setAlertSuccessDeleted(muscle: Muscle) {
     let message = "Muscle " + muscle.name + " been successfully deleted."
-    this.alertService.createSuccessAlert(message);
+    this.alertService.addSuccessAlert(message);
   }
 }
