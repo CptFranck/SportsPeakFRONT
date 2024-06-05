@@ -1,6 +1,6 @@
 import {Component, forwardRef, Input, OnInit} from '@angular/core';
 import {Apollo} from "apollo-angular";
-import {GET_EXERCISES} from "../../../graphql/exercise/exercise.operations";
+import {GET_EXERCISES} from "../../../graphql/operations/exercise/exercise.operations";
 import {MultiSelectComponent} from "../multi-select/multi-select.component";
 import {Exercise} from "../../../interface/dto/exercise";
 import {Option} from "../../../interface/multi-select/option";
@@ -24,9 +24,8 @@ import {ControlValueAccessor, NG_VALUE_ACCESSOR} from "@angular/forms";
 export class SelectExercisesComponent implements OnInit, ControlValueAccessor {
   error: any;
   exercises: Option[] = [];
-  @Input()
-  exerciseIds: number[] = [];
-
+  @Input() exerciseIds: number[] = [];
+  
   constructor(private apollo: Apollo) {
   }
 

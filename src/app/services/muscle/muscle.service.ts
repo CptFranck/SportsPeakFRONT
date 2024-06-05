@@ -1,6 +1,6 @@
 import {inject, Injectable} from '@angular/core';
 import {Apollo} from "apollo-angular";
-import {ADD_MUSCLES, DEL_MUSCLES, GET_MUSCLES, MOD_MUSCLES} from "../../graphql/muscle/muscle.operations";
+import {ADD_MUSCLES, DEL_MUSCLES, GET_MUSCLES, MOD_MUSCLES} from "../../graphql/operations/muscle/muscle.operations";
 import {FormGroup} from "@angular/forms";
 
 @Injectable({

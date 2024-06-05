@@ -6,7 +6,7 @@ import {
   DEL_EXERCISE_TYPES,
   GET_EXERCISE_TYPES,
   MOD_EXERCISE_TYPES
-} from "../../graphql/exerciseType/exercise-type.operation";
+} from "../../graphql/operations/exerciseType/exercise-type.operation";
 
 @Injectable({
   providedIn: 'root'
