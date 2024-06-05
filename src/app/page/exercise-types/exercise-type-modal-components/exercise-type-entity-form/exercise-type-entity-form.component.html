@@ -23,7 +23,8 @@
 
   <div class="mb-3">
     <label class="form-label">Exercises :</label>
-    <app-select-exercises [exerciseIds]='exerciseTypeForm.controls["exerciseIds"].value' formControlName="exerciseIds"/>
+    <app-exercise-selector [exerciseIds]='exerciseTypeForm.controls["exerciseIds"].value'
+                           formControlName="exerciseIds"/>
     <app-input-control
       [formGroup]="exerciseTypeForm"
       [submitInvalid]="submitInvalidForm"

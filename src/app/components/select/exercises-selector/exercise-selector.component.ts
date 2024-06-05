@@ -6,7 +6,7 @@ import {ControlValueAccessor, NG_VALUE_ACCESSOR} from "@angular/forms";
 import {ExerciseService} from "../../../services/exercise/exercise.service";
 
 @Component({
-  selector: 'app-select-exercises',
+  selector: 'app-exercise-selector',
   standalone: true,
   imports: [
     MultiSelectComponent,
@@ -14,13 +14,13 @@ import {ExerciseService} from "../../../services/exercise/exercise.service";
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => SelectExercisesComponent),
+      useExisting: forwardRef(() => ExerciseSelectorComponent),
       multi: true,
     }
   ],
-  templateUrl: './select-exercises.component.html',
+  templateUrl: './exercise-selector.component.html',
 })
-export class SelectExercisesComponent implements OnInit, ControlValueAccessor {
+export class ExerciseSelectorComponent implements OnInit, ControlValueAccessor {
   error: any;
   exercises: Option[] = [];
   @Input() exerciseIds: number[] = [];

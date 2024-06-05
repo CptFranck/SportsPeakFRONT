@@ -3,7 +3,7 @@ import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/
 import {Observable, Subscription} from "rxjs";
 import {GraphQLError} from "graphql/error";
 import {InputControlComponent} from "../../../../components/input-control/input-control.component";
-import {SelectExercisesComponent} from "../../../../components/select/select-exercises/select-exercises.component";
+import {ExerciseSelectorComponent} from "../../../../components/select/exercises-selector/exercise-selector.component";
 import {ExerciseType} from "../../../../interface/dto/exerciseType";
 import {NgIf} from "@angular/common";
 import {ExerciseTypeService} from "../../../../services/exercise-type/exercise-type.service";
@@ -14,7 +14,7 @@ import {ExerciseTypeService} from "../../../../services/exercise-type/exercise-t
   imports: [
     InputControlComponent,
     ReactiveFormsModule,
-    SelectExercisesComponent,
+    ExerciseSelectorComponent,
     NgIf
   ],
   templateUrl: './exercise-type-entity-form.component.html',

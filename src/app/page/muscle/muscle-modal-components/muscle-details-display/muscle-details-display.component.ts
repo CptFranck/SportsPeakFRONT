@@ -3,7 +3,7 @@ import {Muscle} from "../../../../interface/dto/muscle";
 import {InputControlComponent} from "../../../../components/input-control/input-control.component";
 import {NgForOf, NgIf} from "@angular/common";
 import {ReactiveFormsModule} from "@angular/forms";
-import {SelectExercisesComponent} from "../../../../components/select/select-exercises/select-exercises.component";
+import {ExerciseSelectorComponent} from "../../../../components/select/exercises-selector/exercise-selector.component";
 
 @Component({
   selector: 'app-muscle-details-display',
@@ -12,7 +12,7 @@ import {SelectExercisesComponent} from "../../../../components/select/select-exe
     InputControlComponent,
     NgIf,
     ReactiveFormsModule,
-    SelectExercisesComponent,
+    ExerciseSelectorComponent,
     NgForOf
   ],
   templateUrl: './muscle-details-display.component.html',

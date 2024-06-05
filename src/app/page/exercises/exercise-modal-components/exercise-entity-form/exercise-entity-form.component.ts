@@ -6,7 +6,7 @@ import {Exercise} from "../../../../interface/dto/exercise";
 import {ExerciseService} from "../../../../services/exercise/exercise.service";
 import {InputControlComponent} from "../../../../components/input-control/input-control.component";
 import {NgIf} from "@angular/common";
-import {SelectExercisesComponent} from "../../../../components/select/select-exercises/select-exercises.component";
+import {ExerciseSelectorComponent} from "../../../../components/select/exercises-selector/exercise-selector.component";
 
 @Component({
   selector: 'app-exercise-entity-form',
@@ -16,7 +16,7 @@ import {SelectExercisesComponent} from "../../../../components/select/select-exe
     InputControlComponent,
     NgIf,
     ReactiveFormsModule,
-    SelectExercisesComponent
+    ExerciseSelectorComponent
   ],
   templateUrl: './exercise-entity-form.component.html',
 })

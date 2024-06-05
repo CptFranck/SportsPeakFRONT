@@ -1,6 +1,6 @@
 import {AfterViewInit, Component, EventEmitter, inject, Input, OnInit, Output} from '@angular/core';
 import {MultiSelectComponent} from "../../../../components/select/multi-select/multi-select.component";
-import {SelectExercisesComponent} from "../../../../components/select/select-exercises/select-exercises.component";
+import {ExerciseSelectorComponent} from "../../../../components/select/exercises-selector/exercise-selector.component";
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {NgIf, NgTemplateOutlet} from "@angular/common";
 import {InputControlComponent} from "../../../../components/input-control/input-control.component";
@@ -14,7 +14,7 @@ import {MuscleService} from "../../../../services/muscle/muscle.service";
   standalone: true,
   imports: [
     MultiSelectComponent,
-    SelectExercisesComponent,
+    ExerciseSelectorComponent,
     ReactiveFormsModule,
     NgIf,
     NgTemplateOutlet,
