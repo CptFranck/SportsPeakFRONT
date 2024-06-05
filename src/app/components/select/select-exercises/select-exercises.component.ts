@@ -1,10 +1,9 @@
-import {Component, forwardRef, Input, OnInit} from '@angular/core';
-import {Apollo} from "apollo-angular";
-import {GET_EXERCISES} from "../../../graphql/operations/exercise/exercise.operations";
+import {Component, forwardRef, inject, Input, OnInit} from '@angular/core';
 import {MultiSelectComponent} from "../multi-select/multi-select.component";
 import {Exercise} from "../../../interface/dto/exercise";
 import {Option} from "../../../interface/multi-select/option";
 import {ControlValueAccessor, NG_VALUE_ACCESSOR} from "@angular/forms";
+import {ExerciseService} from "../../../services/exercise/exercise.service";
 
 @Component({
   selector: 'app-select-exercises',
@@ -25,9 +24,7 @@ export class SelectExercisesComponent implements OnInit, ControlValueAccessor {
   error: any;
   exercises: Option[] = [];
   @Input() exerciseIds: number[] = [];
-  
-  constructor(private apollo: Apollo) {
-  }
+  exerciseService: ExerciseService = inject(ExerciseService);
 
   onChange: (value: number[]) => void = () => {
   };
@@ -36,11 +33,7 @@ export class SelectExercisesComponent implements OnInit, ControlValueAccessor {
   };
 
   ngOnInit(): void {
-    this.apollo
-      .watchQuery({
-        query: GET_EXERCISES,
-      })
-      .valueChanges.subscribe(({data, error}: any) => {
+    this.exerciseService.getExercises().subscribe(({data, error}: any) => {
       let options: Option[] = []
       data.getExercises.forEach((exercise: Exercise) => {
         options.push({id: exercise.id, title: exercise.name, value: exercise, description: exercise.description});
