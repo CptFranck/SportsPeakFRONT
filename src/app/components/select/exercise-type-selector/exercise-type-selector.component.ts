@@ -4,6 +4,9 @@ import {ControlValueAccessor, NG_VALUE_ACCESSOR} from "@angular/forms";
 import {Option} from "../../../interface/multi-select/option";
 import {ExerciseTypeService} from "../../../services/exercise-type/exercise-type.service";
 import {ExerciseType} from "../../../interface/dto/exerciseType";
+import {AlertService} from "../../../services/alert/alert.service";
+import {GraphQLError} from "graphql/error";
+import {ApolloQueryResult} from "@apollo/client";
 
 @Component({
   selector: 'app-exercise-type-selector',
@@ -24,6 +27,7 @@ export class ExerciseTypeSelectorComponent implements OnInit, ControlValueAccess
   error: any;
   exerciseTypes: Option[] = [];
   @Input() exerciseTypeIds: number[] = [];
+  alertService: AlertService = inject(AlertService);
   exerciseTypeService: ExerciseTypeService = inject(ExerciseTypeService);
 
   onChange: (value: number[]) => void = () => {
@@ -33,19 +37,27 @@ export class ExerciseTypeSelectorComponent implements OnInit, ControlValueAccess
   };
 
   ngOnInit(): void {
-    this.exerciseTypeService.getExerciseTypes().subscribe(({data, error}: any) => {
-      let options: Option[] = []
-      data.getExerciseTypes.forEach((exerciseType: ExerciseType) => {
-        options.push({
-          id: exerciseType.id,
-          title: exerciseType.name,
-          value: exerciseType,
-          description: exerciseType.goal
+    this.exerciseTypeService.getExerciseTypes().subscribe((result: ApolloQueryResult<any>): void => {
+      if (result.errors) {
+        result.errors.map(err => this.setAlertError(err))
+      } else {
+        let options: Option[] = []
+        result.data.getExerciseTypes.forEach((exerciseType: ExerciseType) => {
+          options.push({
+            id: exerciseType.id,
+            title: exerciseType.name,
+            value: exerciseType,
+            description: exerciseType.goal
+          });
         });
-      });
-      this.exerciseTypes = [...options];
-      this.error = error;
+        this.exerciseTypes = [...options];
+      }
     });
+  }
+
+  setAlertError(graphQLError: GraphQLError) {
+    let message: string = "Error has occurred: " + graphQLError.message;
+    this.alertService.addErrorAlert(message);
   }
 
   writeValue(exerciseTypeIds: number[]): void {
