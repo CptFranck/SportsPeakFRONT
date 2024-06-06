@@ -95,8 +95,6 @@ export class ExerciseEntityFormComponent implements OnInit, AfterViewInit {
   }
 
   onSubmit() {
-    console.log(this.exercise)
-    console.log(this.exerciseForm?.value)
     if (!this.exerciseForm) return
     if (this.exerciseForm.valid) {
       this.submitInvalidForm = false;

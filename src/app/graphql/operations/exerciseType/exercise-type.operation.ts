@@ -20,14 +20,14 @@ export const ADD_EXERCISE_TYPES = gql`
   mutation ($inputNewExerciseType : InputNewExerciseType!){
     addExerciseType(inputNewExerciseType: $inputNewExerciseType) {
       id
+      name
+      goal
       exercises {
         id
         name
         goal
         description
       }
-      name
-      goal
     }
   }
 `;
@@ -36,14 +36,14 @@ export const MOD_EXERCISE_TYPES = gql`
   mutation ($inputExerciseType : InputExerciseType!){
     modifyExerciseType(inputExerciseType: $inputExerciseType) {
       id
+      name
+      goal
       exercises {
         id
         name
         goal
         description
       }
-      name
-      goal
     }
   }
 `;

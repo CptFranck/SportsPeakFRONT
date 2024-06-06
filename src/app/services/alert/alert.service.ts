@@ -93,7 +93,6 @@ export class AlertService {
 
   createNetWorkErrorAlert(networkError: NetworkError): void {
     if (!networkError) return
-    console.log(networkError)
     let networkAlert = this.createErrorAlert(networkError)
     if (networkAlert.errorInformation) {
       networkAlert.errorInformation["errorType"] = AlertErrorType.NetworkError
