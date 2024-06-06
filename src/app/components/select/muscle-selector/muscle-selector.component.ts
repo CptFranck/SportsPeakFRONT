@@ -6,7 +6,6 @@ import {Muscle} from "../../../interface/dto/muscle";
 import {ControlValueAccessor, NG_VALUE_ACCESSOR} from "@angular/forms";
 import {ApolloQueryResult} from "@apollo/client";
 import {AlertService} from "../../../services/alert/alert.service";
-import {GraphQLError} from "graphql/error";
 
 @Component({
   selector: 'app-muscle-selector',
@@ -39,7 +38,7 @@ export class MuscleSelectorComponent implements OnInit, ControlValueAccessor {
   ngOnInit(): void {
     this.muscleService.getMuscles().subscribe((result: ApolloQueryResult<any>): void => {
       if (result.errors) {
-        result.errors.map(err => this.setAlertError(err))
+        result.errors.map(err => this.alertService.createGraphQLErrorAlert(err))
       } else {
         let options: Option[] = []
         result.data.getMuscles.forEach((muscle: Muscle) => {
@@ -53,11 +52,6 @@ export class MuscleSelectorComponent implements OnInit, ControlValueAccessor {
         this.muscles = [...options];
       }
     });
-  }
-
-  setAlertError(graphQLError: GraphQLError) {
-    let message: string = "Error has occurred: " + graphQLError.message;
-    this.alertService.addErrorAlert(message);
   }
 
   writeValue(muscleIds: number[]): void {

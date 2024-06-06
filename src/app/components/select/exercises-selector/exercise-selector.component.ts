@@ -5,7 +5,6 @@ import {Option} from "../../../interface/multi-select/option";
 import {ControlValueAccessor, NG_VALUE_ACCESSOR} from "@angular/forms";
 import {ExerciseService} from "../../../services/exercise/exercise.service";
 import {ApolloQueryResult} from "@apollo/client";
-import {GraphQLError} from "graphql/error";
 import {AlertService} from "../../../services/alert/alert.service";
 
 @Component({
@@ -29,7 +28,7 @@ export class ExerciseSelectorComponent implements OnInit, ControlValueAccessor {
   @Input() exerciseIds: number[] = [];
   alertService: AlertService = inject(AlertService);
   exerciseService: ExerciseService = inject(ExerciseService);
-  
+
   onChange: (value: number[]) => void = () => {
   };
 
@@ -39,7 +38,7 @@ export class ExerciseSelectorComponent implements OnInit, ControlValueAccessor {
   ngOnInit(): void {
     this.exerciseService.getExercises().subscribe((result: ApolloQueryResult<any>): void => {
       if (result.errors) {
-        result.errors.map(err => this.setAlertError(err))
+        result.errors.map(err => this.alertService.createGraphQLErrorAlert(err))
       } else {
         let options: Option[] = []
         result.data.getExercises.forEach((exercise: Exercise) => {
@@ -53,11 +52,6 @@ export class ExerciseSelectorComponent implements OnInit, ControlValueAccessor {
         this.exercises = [...options];
       }
     });
-  }
-
-  setAlertError(graphQLError: GraphQLError) {
-    let message: string = "Error has occurred: " + graphQLError.message;
-    this.alertService.addErrorAlert(message);
   }
 
   writeValue(exerciseIds: number[]): void {

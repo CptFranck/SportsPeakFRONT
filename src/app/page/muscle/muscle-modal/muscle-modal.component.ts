@@ -43,8 +43,7 @@ export class MuscleModalComponent {
   }
 
   setAlertError(graphQLError: GraphQLError) {
-    let message: string = "Error has occurred: " + graphQLError.message;
-    this.alertService.addErrorAlert(message);
+    this.alertService.createGraphQLErrorAlert(graphQLError);
   }
 
   setAlertSuccessAdded(muscle: Muscle) {

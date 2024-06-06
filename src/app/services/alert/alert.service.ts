@@ -68,6 +68,8 @@ export class AlertService {
     }
   }
 
+  ///////////// APOLLO / GRAPHQL /////////////
+
   createErrorAlert(error: Error): Alert {
     const errorAlert = this.createAlert("Unsuccessful operation :(", error.message, AlertType.error);
     errorAlert.errorInformation = {
@@ -77,7 +79,7 @@ export class AlertService {
     return errorAlert;
   }
 
-  createApolloGraphQLErrorAlert(graphQLError: GraphQLError): void {
+  createGraphQLErrorAlert(graphQLError: GraphQLError): void {
     let graphQLAlert = this.createErrorAlert(graphQLError)
     if (graphQLAlert.errorInformation) {
       graphQLAlert.errorInformation["errorType"] = AlertErrorType.GraphQLError
@@ -89,7 +91,7 @@ export class AlertService {
     this.alertId += 1;
   }
 
-  createApolloNetWorkErrorAlert(networkError: NetworkError): void {
+  createNetWorkErrorAlert(networkError: NetworkError): void {
     if (!networkError) return
     console.log(networkError)
     let networkAlert = this.createErrorAlert(networkError)

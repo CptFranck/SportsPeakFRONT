@@ -5,7 +5,6 @@ import {ActionType} from "../../../enum/action-type";
 import {AlertService} from "../../../services/alert/alert.service";
 import {ExerciseTypeService} from "../../../services/exercise-type/exercise-type.service";
 import {ApolloQueryResult} from "@apollo/client";
-import {GraphQLError} from "graphql/error";
 import {FormIndicator} from "../../../interface/utils/form-indicator";
 import {AlertDisplayComponent} from "../../../components/alert-display/alert-display.component";
 import {LoadingComponent} from "../../../components/loading/loading.component";
@@ -32,17 +31,14 @@ export class ExerciseTypesComponent implements OnInit {
 
   ngOnInit(): void {
     this.exerciseTypeService.getExerciseTypes().subscribe((result: ApolloQueryResult<any>): void => {
+      console.log("reload ex")
       if (result.errors) {
-        result.errors.map(err => this.setAlertError(err))
+        result.errors.map(err => this.alertService.createGraphQLErrorAlert(err))
+      } else {
+        this.exerciseTypes = result.data.getExerciseTypes;
+        this.loading = result.loading;
       }
-      this.exerciseTypes = result.data.getExerciseTypes;
-      this.loading = result.loading;
     });
-  }
-
-  setAlertError(graphQLError: GraphQLError) {
-    let message: string = "Error has occurred: " + graphQLError.message;
-    this.alertService.addErrorAlert(message);
   }
 
   setExerciseType(formIndicator: FormIndicator) {

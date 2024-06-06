@@ -16,7 +16,6 @@ import {FormIndicator} from "../../../interface/utils/form-indicator";
 import {ActionType} from "../../../enum/action-type";
 import {MuscleModalComponent} from "../muscle-modal/muscle-modal.component";
 import {AlertDisplayComponent} from "../../../components/alert-display/alert-display.component";
-import {GraphQLError} from "graphql/error";
 import {AlertService} from "../../../services/alert/alert.service";
 import {MuscleService} from "../../../services/muscle/muscle.service";
 import {ApolloQueryResult} from "@apollo/client";
@@ -56,17 +55,13 @@ export class MusclesComponent implements OnInit {
 
   ngOnInit(): void {
     this.muscleService.getMuscles().subscribe((result: ApolloQueryResult<any>): void => {
+      console.log("reload")
       if (result.errors) {
-        result.errors.map(err => this.setAlertError(err))
+        result.errors.map(err => this.alertService.createGraphQLErrorAlert(err))
       }
       this.muscles = result.data.getMuscles;
       this.loading = result.loading;
     });
-  }
-
-  setAlertError(graphQLError: GraphQLError) {
-    let message: string = "Error has occurred: " + graphQLError.message;
-    this.alertService.addErrorAlert(message);
   }
 
   setMuscle(formIndicator: FormIndicator) {

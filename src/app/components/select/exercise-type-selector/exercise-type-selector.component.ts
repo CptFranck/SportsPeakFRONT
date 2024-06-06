@@ -5,7 +5,6 @@ import {Option} from "../../../interface/multi-select/option";
 import {ExerciseTypeService} from "../../../services/exercise-type/exercise-type.service";
 import {ExerciseType} from "../../../interface/dto/exerciseType";
 import {AlertService} from "../../../services/alert/alert.service";
-import {GraphQLError} from "graphql/error";
 import {ApolloQueryResult} from "@apollo/client";
 
 @Component({
@@ -39,7 +38,7 @@ export class ExerciseTypeSelectorComponent implements OnInit, ControlValueAccess
   ngOnInit(): void {
     this.exerciseTypeService.getExerciseTypes().subscribe((result: ApolloQueryResult<any>): void => {
       if (result.errors) {
-        result.errors.map(err => this.setAlertError(err))
+        result.errors.map(err => this.alertService.createGraphQLErrorAlert(err))
       } else {
         let options: Option[] = []
         result.data.getExerciseTypes.forEach((exerciseType: ExerciseType) => {
@@ -53,11 +52,6 @@ export class ExerciseTypeSelectorComponent implements OnInit, ControlValueAccess
         this.exerciseTypes = [...options];
       }
     });
-  }
-
-  setAlertError(graphQLError: GraphQLError) {
-    let message: string = "Error has occurred: " + graphQLError.message;
-    this.alertService.addErrorAlert(message);
   }
 
   writeValue(exerciseTypeIds: number[]): void {

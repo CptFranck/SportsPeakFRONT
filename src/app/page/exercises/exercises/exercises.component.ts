@@ -7,7 +7,6 @@ import {AlertService} from "../../../services/alert/alert.service";
 import {Exercise} from "../../../interface/dto/exercise";
 import {ExerciseService} from "../../../services/exercise/exercise.service";
 import {ApolloQueryResult} from "@apollo/client";
-import {GraphQLError} from "graphql/error";
 import {FormIndicator} from "../../../interface/utils/form-indicator";
 import {LoadingComponent} from "../../../components/loading/loading.component";
 import {MuscleModalComponent} from "../../muscle/muscle-modal/muscle-modal.component";
@@ -37,17 +36,13 @@ export class ExercisesComponent implements OnInit {
 
   ngOnInit(): void {
     this.exerciseService.getExercises().subscribe((result: ApolloQueryResult<any>): void => {
+      console.log("reload e")
       if (result.errors) {
-        result.errors.map(err => this.setAlertError(err))
+        result.errors.map(err => this.alertService.createGraphQLErrorAlert(err))
       }
       this.exercises = result.data.getExercises;
       this.loading = result.loading;
     });
-  }
-
-  setAlertError(graphQLError: GraphQLError) {
-    let message: string = "Error has occurred: " + graphQLError.message;
-    this.alertService.addErrorAlert(message);
   }
 
   setExercise(formIndicator: FormIndicator) {

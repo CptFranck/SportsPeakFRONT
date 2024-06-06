@@ -58,8 +58,7 @@ export class ExerciseModalComponent {
   }
 
   setAlertError(graphQLError: GraphQLError) {
-    let message: string = "Error has occurred: " + graphQLError.message;
-    this.alertService.addErrorAlert(message);
+    this.alertService.createGraphQLErrorAlert(graphQLError);
   }
 
   setAlertSuccessAdded(exercise: Exercise) {

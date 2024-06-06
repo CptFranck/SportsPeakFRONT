@@ -16,11 +16,11 @@ function apolloOptionsFactory(): ApolloClientOptions<any> {
   const errorLinkHandler = onError(({graphQLErrors, networkError}) => {
     if (graphQLErrors)
       graphQLErrors.map((graphQlError) =>
-        alertService.createApolloGraphQLErrorAlert(graphQlError)
+        alertService.createGraphQLErrorAlert(graphQlError)
       );
 
     if (networkError)
-      alertService.createApolloNetWorkErrorAlert(networkError)
+      alertService.createNetWorkErrorAlert(networkError)
   });
 
   const HttpLinkHandler = httpLink.create({uri})
