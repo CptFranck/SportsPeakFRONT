@@ -50,19 +50,19 @@ export class MultiSelectComponent implements OnInit, OnChanges, AfterViewInit {
   @Output() onTouched = new EventEmitter<boolean>();
 
   ngOnInit() {
-    this.updateDisplayedSelectedOptions()
+    this.updateDisplayedSelectedOptions();
   }
 
   ngOnChanges(): void {
-    this.updateDisplayedSelectedOptions()
+    if (this.options) {
+      this.resetSelectedOption();
+      this.setSelectedOptionActive();
+    }
+    this.updateDisplayedSelectedOptions();
   }
 
   ngAfterViewInit() {
-    this.setSelectedOptionActive()
-    this.options.changes.subscribe(() =>
-      this.setSelectedOptionActive()
-    );
-
+    this.setSelectedOptionActive();
     document.addEventListener("click", (event) => {
       if (!(event.target instanceof HTMLElement)) return
       if (
@@ -75,21 +75,22 @@ export class MultiSelectComponent implements OnInit, OnChanges, AfterViewInit {
     });
   }
 
+  resetSelectedOption(): void {
+    this.options.forEach((option) => option.nativeElement.classList.remove("active"));
+  }
+
   setSelectedOptionActive(): void {
     let allTagsUsed = true;
     this.options.forEach((option) => {
       if (!option.nativeElement.classList.contains("all-tags")) {
-        let isSelected =
-          this.selectedOptions.find(id =>
-            id.toString() === option.nativeElement.getAttribute("data-value"))?.toString()
-        if (isSelected) {
-          option.nativeElement.classList.toggle("active")
-        } else {
-          allTagsUsed = false
-        }
+        let isSelected = this.selectedOptions.find(id =>
+          id.toString() === option.nativeElement.getAttribute("data-value"))?.toString();
+        if (isSelected)
+          option.nativeElement.classList.toggle("active");
+        else
+          allTagsUsed = false;
       }
     });
-
     if (allTagsUsed && this.options.length > 1) {
       this.allTagsOption.nativeElement.classList.toggle("active");
     }
@@ -97,16 +98,17 @@ export class MultiSelectComponent implements OnInit, OnChanges, AfterViewInit {
 
   optionSelectedToDisplayed(): OptionSelected[] {
     return this.selectedOptions.map(id => {
-      let option = this.optionList.find(opt => {
-        return opt.id.toString() === id.toString()
-      })
-      return {id: id.toString(), title: option ? option.title : ""}
+      let option = this.optionList.find(opt => opt.id.toString() === id.toString())
+      return {
+        id: id.toString(),
+        title: option ? option.title : ""
+      }
     });
   }
 
   updateDisplayedSelectedOptions(): void {
     if (this.limitOfDisplayedSelectedOptions === 0) {
-      this.displayedSelectedOptions = this.optionSelectedToDisplayed()
+      this.displayedSelectedOptions = this.optionSelectedToDisplayed();
     } else {
       let length = this.selectedOptions.length;
       this.displayedSelectedOptions = this.optionSelectedToDisplayed().slice(0, this.limitOfDisplayedSelectedOptions);
