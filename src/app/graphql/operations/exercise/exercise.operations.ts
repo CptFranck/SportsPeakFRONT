@@ -26,6 +26,9 @@ export const ADD_EXERCISE = gql`
   mutation ($inputNewExercise : InputNewExercise!){
     addExercise(inputNewExercise: $inputNewExercise) {
       id
+      name
+      goal
+      description
       muscles {
         id
         name
@@ -36,8 +39,7 @@ export const ADD_EXERCISE = gql`
         name
         goal
       }
-      name
-      goal
+
     }
   }
 `;
@@ -46,6 +48,9 @@ export const MOD_EXERCISE = gql`
   mutation ($inputExercise : InputExercise!){
     modifyExercise(inputExercise: $inputExercise) {
       id
+      name
+      goal
+      description
       muscles {
         id
         name
@@ -56,8 +61,6 @@ export const MOD_EXERCISE = gql`
         name
         goal
       }
-      name
-      goal
     }
   }
 `;
