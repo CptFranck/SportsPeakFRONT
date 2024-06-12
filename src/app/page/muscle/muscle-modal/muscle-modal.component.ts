@@ -52,12 +52,12 @@ export class MuscleModalComponent {
   }
 
   setAlertSuccessUpdated(muscle: Muscle) {
-    let message = "Muscle " + muscle.name + " been successfully updated."
+    let message = "Muscle " + muscle.name + " has been successfully updated."
     this.alertService.addSuccessAlert(message);
   }
 
   setAlertSuccessDeleted(muscle: Muscle) {
-    let message = "Muscle " + muscle.name + " been successfully deleted."
+    let message = "Muscle " + muscle.name + " has been successfully deleted."
     this.alertService.addSuccessAlert(message);
   }
 }

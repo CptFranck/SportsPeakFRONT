@@ -67,12 +67,12 @@ export class ExerciseTypeModalComponent {
   }
 
   setAlertSuccessUpdated(exerciseType: ExerciseType) {
-    let message = "ExerciseType " + exerciseType.name + " been successfully updated."
+    let message = "ExerciseType " + exerciseType.name + " has been successfully updated."
     this.alertService.addSuccessAlert(message);
   }
 
   setAlertSuccessDeleted(exerciseType: ExerciseType) {
-    let message = "ExerciseType " + exerciseType.name + " been successfully deleted."
+    let message = "ExerciseType " + exerciseType.name + " has been successfully deleted."
     this.alertService.addSuccessAlert(message);
   }
 }
