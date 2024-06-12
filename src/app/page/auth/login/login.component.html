@@ -1,0 +1,28 @@
+<div class="small-middle-container">
+  <ul class="nav nav-tabs">
+    <li class="nav-item">
+      <button [attr.data-bs-target]="'#' + loginTabId" aria-controls="home" aria-selected="true" class="nav-link active"
+              data-bs-toggle="tab" id="home-tab"
+              type="button"
+      >
+        Login
+      </button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button [attr.data-bs-target]="'#' + registerTabId" aria-controls="profile" aria-selected="false" class="nav-link"
+              data-bs-toggle="tab" id="profile-tab"
+              type="button"
+      >
+        Register
+      </button>
+    </li>
+  </ul>
+  <div class="border-right-0 tab-content  rounded-bottom ">
+    <div [id]="loginTabId" class="tab-pane fade show active">
+      <app-login-form/>
+    </div>
+    <div [id]="registerTabId" class="tab-pane fade">
+      <app-register-form/>
+    </div>
+  </div>
+</div>
