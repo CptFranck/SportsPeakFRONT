@@ -1,0 +1,54 @@
+<form *ngIf="registerFormGroup" [formGroup]="registerFormGroup">
+  <div class="mb-3">
+    <label class="form-label">Email address</label>
+    <input class="form-control" formControlName="email" type="email">
+    <app-input-control
+      [formGroup]="registerFormGroup"
+      fieldName="email"
+    />
+  </div>
+  <div class="mb-3">
+    <label class="form-label">First Name</label>
+    <input class="form-control" formControlName="firstName">
+    <app-input-control
+      [formGroup]="registerFormGroup"
+      fieldName="firstName"
+    />
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Last Name</label>
+    <input class="form-control" formControlName="lastName">
+    <app-input-control
+      [formGroup]="registerFormGroup"
+      fieldName="lastName"
+    />
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Username</label>
+    <div class="input-group">
+      <span class="input-group-text">&#64;</span>
+      <input class="form-control" formControlName="username" type="text">
+    </div>
+    <app-input-control
+      [formGroup]="registerFormGroup"
+      fieldName="username"
+    />
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Password</label>
+    <input class="form-control" type="password">
+    <app-input-control
+      [formGroup]="registerFormGroup"
+      fieldName="password"
+    />
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Password bis</label>
+    <input class="form-control" type="password">
+    <app-input-control
+      [formGroup]="registerFormGroup"
+      fieldName="password"
+    />
+  </div>
+  <button (click)="onSubmitRegisterForm()" class="btn btn-primary" type="submit">Sign in</button>
+</form>
