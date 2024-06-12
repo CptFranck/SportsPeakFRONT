@@ -40,6 +40,7 @@ export class ExercisesComponent implements OnInit {
       if (result.errors) {
         result.errors.map(err => this.alertService.createGraphQLErrorAlert(err))
       }
+      console.log(result.data.getExercises)
       this.exercises = result.data.getExercises;
       this.loading = result.loading;
     });

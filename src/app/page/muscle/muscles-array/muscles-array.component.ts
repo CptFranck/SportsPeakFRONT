@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, Output} from '@angular/core';
 import {NgForOf, NgIf} from "@angular/common";
 import {Muscle} from "../../../interface/dto/muscle";
 import {ModalButtonComponent} from "../../../components/modal/modal-button/modal-button.component";
@@ -13,18 +13,18 @@ import {ActionType} from "../../../enum/action-type";
     NgForOf,
     NgIf,
     ModalButtonComponent,
-    ModalComponent
+    ModalComponent,
   ],
   templateUrl: './muscles-array.component.html',
 })
-export class MusclesArrayComponent implements OnInit {
+export class MusclesArrayComponent implements OnChanges {
   @Input() muscles!: Muscle[];
   @Input() modalId!: string;
   @Output() actionMuscle = new EventEmitter<FormIndicator>();
   showDetails: { [id: string]: boolean } = {};
 
-  ngOnInit(): void {
-    this.muscles.map(muscle => this.showDetails[muscle.id] = false)
+  ngOnChanges(): void {
+    this.muscles.forEach(muscle => this.showDetails[muscle.id] = false)
   }
 
   expendMuscleDetails(id: string): void {

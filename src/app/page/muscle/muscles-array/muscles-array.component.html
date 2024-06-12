@@ -2,8 +2,8 @@
   <thead>
   <tr>
     <th class="col-auto" scope="col">Name</th>
-    <th class="col-5" scope="col">Description</th>
-    <th class="col-5" scope="col">Function</th>
+    <th class="col-6" scope="col">Description</th>
+    <th class="col-6" scope="col">Function</th>
     <th class="col-auto" scope="col">Used in</th>
     <th class="col-1 text-center" scope="col">Collapse</th>
     <th class="col-1 text-center" scope="col">Details</th>
@@ -26,12 +26,11 @@
     <td *ngIf="showDetails[muscle.id]">
       {{ muscle.function }}
     </td>
-
     <td>
       <ul class="list-group list-group-flush">
         <li
           *ngFor="let exercise of muscle.exercises"
-          class="list-group-item">
+          class="list-group-item p-0">
           {{ exercise.name }}
         </li>
       </ul>

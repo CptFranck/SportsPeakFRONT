@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, Output} from '@angular/core';
 import {NgForOf, NgIf} from "@angular/common";
 import {FormIndicator} from "../../../interface/utils/form-indicator";
 import {ActionType} from "../../../enum/action-type";
@@ -15,14 +15,14 @@ import {ModalButtonComponent} from "../../../components/modal/modal-button/modal
   ],
   templateUrl: './exercises-array.component.html',
 })
-export class ExercisesArrayComponent implements OnInit {
+export class ExercisesArrayComponent implements OnChanges {
   @Input() exercises!: Exercise[];
   @Input() modalId!: string;
   @Output() actionExercise = new EventEmitter<FormIndicator>();
   showDetails: { [id: string]: boolean } = {};
 
-  ngOnInit(): void {
-    this.exercises.map(exercise => this.showDetails[exercise.id] = false)
+  ngOnChanges(): void {
+    this.exercises.forEach(exercise => this.showDetails[exercise.id] = false)
   }
 
   expendExerciseDetails(id: string): void {

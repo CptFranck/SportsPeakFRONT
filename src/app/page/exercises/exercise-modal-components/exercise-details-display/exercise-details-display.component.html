@@ -7,8 +7,8 @@
     <label class="form-label fw-bold">Goal :</label>
     <p>{{ exercise?.goal }}</p>
   </div>
-  <div class="mb-3">
-    <label class="form-label fw-bold">Muscle :</label>
+  <div class="mb-3 ">
+    <label class="form-label fw-bold">Muscle(s) :</label>
     <p *ngIf="exercise?.muscles?.length === 0">No muscle is used this exercise</p>
     <ol *ngIf="exercise?.muscles?.length !== 0"
         class="list-group list-group-numbered"
@@ -27,10 +27,11 @@
     </ol>
   </div>
   <div class="mb-3">
-    <label class="form-label fw-bold">ExerciseTypes :</label>
+    <label class="form-label fw-bold">ExerciseType(s) :</label>
     <p *ngIf="exercise?.exerciseTypes?.length === 0">This exercise has no type set</p>
     <ol *ngIf="exercise?.exerciseTypes?.length !== 0"
-        class="list-group list-group-numbered"
+        class="list-group list-group-numbered "
+
     >
       <li *ngFor="let exercise of exercise?.exerciseTypes"
           class="list-group-item d-flex justify-content-between align-items-start"

@@ -2,8 +2,8 @@
   <thead>
   <tr>
     <th class="col-auto" scope="col">Name</th>
-    <th class="col-5" scope="col">Description</th>
-    <th class="col-5" scope="col">Goal</th>
+    <th class="col-6" scope="col">Description</th>
+    <th class="col-6" scope="col">Goal</th>
     <th class="col-auto" scope="col">Use</th>
     <th class="col-auto" scope="col">Type of</th>
     <th class="col-1 text-center" scope="col">Collapse</th>
@@ -31,7 +31,7 @@
       <ul class="list-group list-group-flush">
         <li
           *ngFor="let exercise of exercise.muscles"
-          class="list-group-item">
+          class="list-group-item p-0">
           {{ exercise.name }}
         </li>
       </ul>
@@ -40,7 +40,7 @@
       <ul class="list-group list-group-flush">
         <li
           *ngFor="let exercise of exercise.exerciseTypes"
-          class="list-group-item">
+          class="list-group-item p-0">
           {{ exercise.name }}
         </li>
       </ul>

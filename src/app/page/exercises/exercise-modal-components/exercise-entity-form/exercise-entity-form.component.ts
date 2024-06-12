@@ -112,6 +112,7 @@ export class ExerciseEntityFormComponent implements OnInit, AfterViewInit {
         this.exerciseService.modifyExercise(this.exerciseForm)
           .subscribe(({data, error}: any) => {
             if (data) {
+              console.log(data.modifyExercise)
               this.exerciseUpdated.emit(data.modifyExercise)
             }
             if (error) {

@@ -36,6 +36,7 @@ export class ExerciseTypesComponent implements OnInit {
         result.errors.map(err => this.alertService.createGraphQLErrorAlert(err))
       } else {
         this.exerciseTypes = result.data.getExerciseTypes;
+        console.log(result.data.getExerciseTypes)
         this.loading = result.loading;
       }
     });
