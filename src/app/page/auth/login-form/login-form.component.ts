@@ -2,7 +2,6 @@ import {Component, inject, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {AlertService} from "../../../services/alert/alert.service";
 import {AuthService} from "../../../services/auth/auth.service";
-import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-login-form',
@@ -14,7 +13,6 @@ export class LoginFormComponent implements OnInit {
   loginForm: FormGroup | null = null;
   alertService: AlertService = inject(AlertService);
   authService: AuthService = inject(AuthService);
-  router: Router = new Router();
 
   ngOnInit() {
     this.initializeExerciseTypeForm()
