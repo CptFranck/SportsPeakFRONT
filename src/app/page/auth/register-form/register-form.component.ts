@@ -62,6 +62,7 @@ export class RegisterFormComponent implements OnInit {
         password: new FormControl("",
           [Validators.required,
             Validators.minLength(10),
+            Validators.maxLength(50),
             Validators.pattern('^(?=.*\\d)(?=.*[a-z]+)(?=.*[A-Z]+)[^\\s\\t\\n\\r]{10,}$')
           ]),
         confirmPassword: new FormControl(
