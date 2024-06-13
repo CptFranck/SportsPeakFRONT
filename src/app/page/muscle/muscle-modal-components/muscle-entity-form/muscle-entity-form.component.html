@@ -5,7 +5,7 @@
     <app-input-control
       [formGroup]="muscleForm"
       [submitInvalid]="submitInvalidForm"
-      fieldName="name"
+      formGroupFieldName="name"
       rules="min : 3; max 50"
     />
   </div>
@@ -16,7 +16,7 @@
     <app-input-control
       [formGroup]="muscleForm"
       [submitInvalid]="submitInvalidForm"
-      fieldName="description"
+      formGroupFieldName="description"
       rules="min : 3; max 2000"
     />
   </div>
@@ -27,7 +27,7 @@
     <app-input-control
       [formGroup]="muscleForm"
       [submitInvalid]="submitInvalidForm"
-      fieldName="function"
+      formGroupFieldName="function"
       rules="min : 3; max 2000"
     />
   </div>
@@ -38,7 +38,7 @@
       [formGroup]="muscleForm"
       [submitInvalid]="submitInvalidForm"
       errorMessage="Please select exercises that use this muscle"
-      fieldName="exerciseIds"
+      formGroupFieldName="exerciseIds"
       rules="min : 1"
     />
   </div>
