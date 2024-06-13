@@ -1,4 +1,4 @@
-<form *ngIf="loginForm" [formGroup]="loginForm">
+<form *ngIf="loginForm" [formGroup]="loginForm" class="d-flex flex-column">
   <div class="mb-3">
     <label class="form-label">Email address</label>
     <input aria-describedby="emailHelp" class="form-control" formControlName="email" type="email">
@@ -17,5 +17,5 @@
       formGroupFieldName="password"
     />
   </div>
-  <button (click)="onSubmitLoginForm()" class="btn btn-primary" type="submit">Sign in</button>
+  <button (click)="onSubmitLoginForm()" class="float-end ms-auto btn btn-secondary" type="submit">Sign in</button>
 </form>
