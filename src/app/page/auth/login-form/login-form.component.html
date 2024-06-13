@@ -4,6 +4,7 @@
     <input aria-describedby="emailHelp" class="form-control" formControlName="email" type="email">
     <app-input-control
       [formGroup]="loginForm"
+      [submitInvalid]="submitInvalidForm"
       formGroupFieldName="email"
     />
   </div>
@@ -12,6 +13,7 @@
     <input class="form-control" formControlName="password" type="password">
     <app-input-control
       [formGroup]="loginForm"
+      [submitInvalid]="submitInvalidForm"
       formGroupFieldName="password"
     />
   </div>

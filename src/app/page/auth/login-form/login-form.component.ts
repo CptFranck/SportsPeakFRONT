@@ -19,6 +19,7 @@ export class LoginFormComponent implements OnInit {
   loginForm: FormGroup | null = null;
   alertService: AlertService = inject(AlertService);
   authService: AuthService = inject(AuthService);
+  submitInvalidForm: boolean = false;
 
   ngOnInit() {
     this.initializeExerciseTypeForm()
@@ -38,6 +39,7 @@ export class LoginFormComponent implements OnInit {
   onSubmitLoginForm() {
     if (!this.loginForm) return
     if (this.loginForm.valid) {
+      this.submitInvalidForm = false;
       this.authService.login(this.loginForm)
         .subscribe(({data, error}: any) => {
           if (data) {
@@ -47,6 +49,8 @@ export class LoginFormComponent implements OnInit {
             this.alertService.createGraphQLErrorAlert(error);
           }
         });
+    } else {
+      this.submitInvalidForm = true;
     }
   }
 }
