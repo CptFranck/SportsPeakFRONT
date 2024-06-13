@@ -5,13 +5,13 @@
   <div class="container-fluid">
     <a class="navbar-brand" routerLink="/">Sports Peak</a>
     <button
-      class="navbar-toggler"
-      type="button"
-      data-bs-toggle="collapse"
-      data-bs-target="#navbarSupportedContent"
       aria-controls="navbarSupportedContent"
       aria-expanded="false"
       aria-label="Toggle navigation"
+      class="navbar-toggler"
+      data-bs-target="#navbarSupportedContent"
+      data-bs-toggle="collapse"
+      type="button"
     >
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -45,14 +45,17 @@
           </a>
         </li>
       </ul>
-      <ul class="navbar-nav h4">
-        <li class="nav-item px-0">
-          <a class="nav-link">FR</a>
-        </li>
-        <li class="nav-item px-0">
-          <a class="nav-link">EN</a>
-        </li>
-      </ul>
+      <!--      <ul class="navbar-nav h4">-->
+      <!--        <li class="nav-item px-0">-->
+      <!--          <a class="nav-link">FR</a>-->
+      <!--        </li>-->
+      <!--        <li class="nav-item px-0">-->
+      <!--          <a class="nav-link">EN</a>-->
+      <!--        </li>-->
+      <!--      </ul>-->
+      <div class="navbar-nav h4">
+        <a class="navbar-nav nav-link h4" routerLink="/login">Login</a>
+      </div>
     </div>
   </div>
 </nav>
