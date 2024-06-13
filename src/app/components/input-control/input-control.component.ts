@@ -11,11 +11,11 @@ import {FormGroup} from "@angular/forms";
   templateUrl: './input-control.component.html',
 })
 export class InputControlComponent implements OnInit {
-  @Input() formGroup!: FormGroup
-  @Input() formGroupFieldName!: string
-  @Input() displayedFieldName: string | undefined
-  @Input() rules: string | undefined
-  @Input() errorMessage: string = ""
+  @Input() formGroup!: FormGroup;
+  @Input() formGroupFieldName!: string;
+  @Input() displayedFieldName: string | undefined;
+  @Input() rules: string | undefined;
+  @Input() errorMessage: string = "";
   @Input() submitInvalid!: boolean;
 
   constructor() {
@@ -27,16 +27,15 @@ export class InputControlComponent implements OnInit {
     else
       this.rules = "";
 
-    let fieldName = ""
+    let fieldName = "";
     if (this.displayedFieldName !== undefined)
-      fieldName = this.displayedFieldName
+      fieldName = this.displayedFieldName;
     else
       fieldName = this.formGroupFieldName
 
-    if (this.displayedFieldName)
-      if (this.errorMessage === "")
-        this.errorMessage = "Please write a correct " + fieldName + this.rules
-      else
-        this.errorMessage += this.rules
+    if (this.errorMessage === "")
+      this.errorMessage = "Please write a correct " + fieldName + this.rules;
+    else
+      this.errorMessage += this.rules;
   }
 }
