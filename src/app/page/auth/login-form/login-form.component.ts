@@ -1,12 +1,18 @@
 import {Component, inject, OnInit} from '@angular/core';
-import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {AlertService} from "../../../services/alert/alert.service";
 import {AuthService} from "../../../services/auth/auth.service";
+import {InputControlComponent} from "../../../components/input-control/input-control.component";
+import {NgIf} from "@angular/common";
 
 @Component({
   selector: 'app-login-form',
   standalone: true,
-  imports: [],
+  imports: [
+    InputControlComponent,
+    NgIf,
+    ReactiveFormsModule
+  ],
   templateUrl: './login-form.component.html',
 })
 export class LoginFormComponent implements OnInit {
@@ -20,7 +26,7 @@ export class LoginFormComponent implements OnInit {
 
   initializeExerciseTypeForm() {
     this.loginForm = new FormGroup({
-      mail: new FormControl("",
+      email: new FormControl("",
         [Validators.required,
           Validators.email]),
       password: new FormControl(
@@ -32,17 +38,15 @@ export class LoginFormComponent implements OnInit {
   onSubmitLoginForm() {
     if (!this.loginForm) return
     if (this.loginForm.valid) {
-      if (!this.loginForm.value.mail) {
-        this.authService.login(this.loginForm)
-          .subscribe(({data, error}: any) => {
-            if (data) {
-              // this.router.navigateByUrl('/');
-            }
-            if (error) {
-              this.alertService.createGraphQLErrorAlert(error);
-            }
-          });
-      }
+      this.authService.login(this.loginForm)
+        .subscribe(({data, error}: any) => {
+          if (data) {
+            // this.router.navigateByUrl('/');
+          }
+          if (error) {
+            this.alertService.createGraphQLErrorAlert(error);
+          }
+        });
     }
   }
 }

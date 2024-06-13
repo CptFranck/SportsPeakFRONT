@@ -1,11 +1,19 @@
-<form>
+<form *ngIf="loginForm" [formGroup]="loginForm">
   <div class="mb-3">
-    <label class="form-label" for="exampleInputEmail1">Email address</label>
-    <input aria-describedby="emailHelp" class="form-control" id="exampleInputEmail1" type="email">
+    <label class="form-label">Email address</label>
+    <input aria-describedby="emailHelp" class="form-control" formControlName="email" type="email">
+    <app-input-control
+      [formGroup]="loginForm"
+      formGroupFieldName="email"
+    />
   </div>
   <div class="mb-3">
-    <label class="form-label" for="exampleInputPassword1">Password</label>
-    <input class="form-control" id="exampleInputPassword1" type="password">
+    <label class="form-label">Password</label>
+    <input class="form-control" formControlName="password" type="password">
+    <app-input-control
+      [formGroup]="loginForm"
+      formGroupFieldName="password"
+    />
   </div>
   <button (click)="onSubmitLoginForm()" class="btn btn-primary" type="submit">Sign in</button>
 </form>
