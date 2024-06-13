@@ -12,8 +12,9 @@ import {FormGroup} from "@angular/forms";
 })
 export class InputControlComponent implements OnInit {
   @Input() formGroup!: FormGroup
-  @Input() fieldName!: string
-  @Input() rules!: string
+  @Input() formGroupFieldName!: string
+  @Input() displayedFieldName: string | undefined
+  @Input() rules: string | undefined
   @Input() errorMessage: string = ""
   @Input() submitInvalid!: boolean;
 
@@ -21,9 +22,21 @@ export class InputControlComponent implements OnInit {
   }
 
   ngOnInit() {
-    if (this.errorMessage === "")
-      this.errorMessage = "Please write a correct " + this.fieldName + " (" + this.rules + ")."
+    if (this.rules !== undefined)
+      this.rules = " (" + this.rules + ")"
     else
-      this.errorMessage += " (" + this.rules + ")."
+      this.rules = "";
+
+    let fieldName = ""
+    if (this.displayedFieldName !== undefined)
+      fieldName = this.displayedFieldName
+    else
+      fieldName = this.formGroupFieldName
+
+    if (this.displayedFieldName)
+      if (this.errorMessage === "")
+        this.errorMessage = "Please write a correct " + fieldName + this.rules
+      else
+        this.errorMessage += this.rules
   }
 }
