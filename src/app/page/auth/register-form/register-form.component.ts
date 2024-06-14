@@ -32,8 +32,8 @@ export class RegisterFormComponent implements OnInit {
   draft = {
     "firstName": "Admin",
     "lastName": "Admin",
-    "username": "Admin",
-    "email": "Admin@sportspeak.com",
+    "username": "admin",
+    "email": "admin@sportspeak.com",
     "password": "ChangeMeInProd1!",
     "confirmPassword": "ChangeMeInProd1!"
   }
@@ -61,7 +61,8 @@ export class RegisterFormComponent implements OnInit {
           this.draft.username,
           [Validators.required,
             Validators.minLength(1),
-            Validators.maxLength(50)]),
+            Validators.maxLength(50),
+            Validators.pattern('([a-zA-Z0-9_]+)[^\\s\\t\\n\\r]{1,}')]),
         email: new FormControl(
           // "",
           this.draft.email,
