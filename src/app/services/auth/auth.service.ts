@@ -12,12 +12,12 @@ export class AuthService {
 
   login(loginForm: FormGroup) {
     console.log(loginForm.value)
-    return this.apollo.mutate({
-      mutation: LOGIN,
+    return this.apollo.watchQuery({
+      query: LOGIN,
       variables: {
         inputCredentials: loginForm.value,
       },
-    });
+    }).valueChanges;
   }
 
   register(registerFormGroup: FormGroup) {
