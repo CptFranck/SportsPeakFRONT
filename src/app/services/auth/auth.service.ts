@@ -21,11 +21,13 @@ export class AuthService {
   }
 
   register(registerFormGroup: FormGroup) {
-    console.log(registerFormGroup.value)
+    let inputNewUser = registerFormGroup.value
+    delete inputNewUser.confirmPassword
+    console.log(inputNewUser)
     return this.apollo.mutate({
       mutation: REGISTER,
       variables: {
-        inputNewUser: registerFormGroup.value,
+        inputNewUser: inputNewUser,
       },
     });
   }

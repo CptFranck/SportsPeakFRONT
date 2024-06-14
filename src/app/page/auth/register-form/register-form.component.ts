@@ -44,29 +44,40 @@ export class RegisterFormComponent implements OnInit {
 
   initializeExerciseTypeForm() {
     this.registerFormGroup = new FormGroup({
-        firstName: new FormControl("",
+        firstName: new FormControl(
+          // "",
+          this.draft.firstName,
           [Validators.required,
             Validators.minLength(1),
             Validators.maxLength(50)]),
-        lastName: new FormControl("",
+        lastName: new FormControl(
+          // "",
+          this.draft.lastName,
           [Validators.required,
             Validators.minLength(1),
             Validators.maxLength(50)]),
-        username: new FormControl("",
+        username: new FormControl(
+          // "",
+          this.draft.username,
           [Validators.required,
             Validators.minLength(1),
             Validators.maxLength(50)]),
-        email: new FormControl("",
+        email: new FormControl(
+          // "",
+          this.draft.email,
           [Validators.required,
             Validators.email]),
-        password: new FormControl("",
+        password: new FormControl(
+          // "",
+          this.draft.password,
           [Validators.required,
             Validators.minLength(10),
             Validators.maxLength(50),
             Validators.pattern('^(?=.*\\d)(?=.*[a-z]+)(?=.*[A-Z]+)[^\\s\\t\\n\\r]{10,}$')
           ]),
         confirmPassword: new FormControl(
-          "",
+          // "",
+          this.draft.confirmPassword,
           [Validators.required],
         ),
       },
