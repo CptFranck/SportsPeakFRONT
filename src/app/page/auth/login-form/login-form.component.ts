@@ -27,11 +27,14 @@ export class LoginFormComponent implements OnInit {
 
   initializeExerciseTypeForm() {
     this.loginForm = new FormGroup({
-      email: new FormControl("",
+      email: new FormControl(
+        // "",
+        "admin@sportspeak.com",
         [Validators.required,
           Validators.email]),
       password: new FormControl(
-        "",
+        // "",
+        "ChangeMeInProd1!",
         [Validators.required]),
     });
   }
