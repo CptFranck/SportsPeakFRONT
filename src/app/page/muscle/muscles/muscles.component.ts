@@ -55,7 +55,6 @@ export class MusclesComponent implements OnInit {
 
   ngOnInit(): void {
     this.muscleService.getMuscles().subscribe((result: ApolloQueryResult<any>): void => {
-      console.log("reload")
       if (result.errors) {
         result.errors.map(err => this.alertService.createGraphQLErrorAlert(err))
       }

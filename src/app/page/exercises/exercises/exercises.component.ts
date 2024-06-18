@@ -36,11 +36,9 @@ export class ExercisesComponent implements OnInit {
 
   ngOnInit(): void {
     this.exerciseService.getExercises().subscribe((result: ApolloQueryResult<any>): void => {
-      console.log("reload e")
       if (result.errors) {
         result.errors.map(err => this.alertService.createGraphQLErrorAlert(err))
       }
-      console.log(result.data.getExercises)
       this.exercises = result.data.getExercises;
       this.loading = result.loading;
     });
