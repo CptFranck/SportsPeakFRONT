@@ -2,16 +2,25 @@ import {inject, Injectable} from '@angular/core';
 import {Apollo} from "apollo-angular";
 import {FormGroup} from "@angular/forms";
 import {LOGIN, REGISTER} from "../../graphql/operations/auth/auth.operations";
+import {LocalStorageService} from "../localStorage/local-storage.service";
+import {BehaviorSubject} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  private apollo: Apollo = inject(Apollo);
+  isAuthenticated: BehaviorSubject<boolean> = new BehaviorSubject(false);
+  apollo: Apollo = inject(Apollo);
+  localStorageService: LocalStorageService = inject(LocalStorageService);
+
+  constructor() {
+    this.localStorageService.removeData("accessToken")
+    this.localStorageService.removeData("tokenType")
+    this.isAuthenticated.next(!!this.localStorageService.getData("accessToken"));
+  }
 
   login(loginForm: FormGroup) {
-    console.log(loginForm.value)
     return this.apollo.watchQuery({
       query: LOGIN,
       variables: {
@@ -30,5 +39,13 @@ export class AuthService {
         inputNewUser: inputNewUser,
       },
     });
+  }
+
+  logout() {
+    this.apollo.client.resetStore().then(() => {
+      this.localStorageService.removeData("accessToken")
+      this.localStorageService.removeData("tokenType")
+    });
+    this.isAuthenticated.next(false);
   }
 }
