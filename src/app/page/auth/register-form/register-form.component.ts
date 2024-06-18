@@ -12,6 +12,7 @@ import {AlertService} from "../../../services/alert/alert.service";
 import {AuthService} from "../../../services/auth/auth.service";
 import {InputControlComponent} from "../../../components/input-control/input-control.component";
 import {NgIf} from "@angular/common";
+import {LocalStorageService} from "../../../services/localStorage/local-storage.service";
 
 @Component({
   selector: 'app-register-form',
@@ -28,6 +29,7 @@ export class RegisterFormComponent implements OnInit {
   registerFormGroup: FormGroup | null = null;
   alertService: AlertService = inject(AlertService);
   authService: AuthService = inject(AuthService);
+  localStorageService: LocalStorageService = inject(LocalStorageService);
 
   draft = {
     "firstName": "Admin",
@@ -115,7 +117,10 @@ export class RegisterFormComponent implements OnInit {
       this.authService.register(this.registerFormGroup)
         .subscribe(({data, error}: any) => {
           if (data) {
-            // this.router.navigateByUrl('/');
+            console.log(data.register)
+            this.authService.isAuthenticated.next(true);
+            this.localStorageService.saveData("accessToken", data.register.accessToken);
+            this.localStorageService.saveData("tokenType", data.register.tokenType);
           }
           if (error) {
             this.alertService.createGraphQLErrorAlert(error);
