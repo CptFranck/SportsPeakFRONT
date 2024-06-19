@@ -11,7 +11,14 @@ export const LOGIN = gql`
         firstName
         lastName
         username
-        userRole
+        roles {
+          id
+          name
+          privileges {
+            id
+            name
+          }
+        }
       }
     }
   }`;
@@ -27,7 +34,14 @@ export const REGISTER = gql`
         firstName
         lastName
         username
-        userRole
+        roles {
+          id
+          name
+          privileges {
+            id
+            name
+          }
+        }
       }
     }
   }`;
