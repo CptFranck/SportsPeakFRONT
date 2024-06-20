@@ -40,7 +40,6 @@ export class AuthService {
         this.alertService.createGraphQLErrorAlert(error);
       }
     });
-    ;
   }
 
   register(registerFormGroup: FormGroup) {
@@ -60,11 +59,10 @@ export class AuthService {
         this.alertService.createGraphQLErrorAlert(error);
       }
     });
-    ;
   }
 
   logout() {
-    this.apollo.client.resetStore().then(r => {
+    this.apollo.client.resetStore().then(() => {
       this.userService.removeCurrentUser();
       this.isAuthenticated.next(false);
       this.tokenService.removeCurrentToken();
@@ -72,7 +70,7 @@ export class AuthService {
   }
 
   setDataAuth(data: Auth) {
-    this.router.navigateByUrl('/').then(r => {
+    this.router.navigateByUrl('/').then(() => {
       this.isAuthenticated.next(true);
       this.userService.setCurrentUser(data.user);
 
