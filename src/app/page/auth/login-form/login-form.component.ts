@@ -4,7 +4,6 @@ import {AlertService} from "../../../services/alert/alert.service";
 import {AuthService} from "../../../services/auth/auth.service";
 import {InputControlComponent} from "../../../components/input-control/input-control.component";
 import {NgIf} from "@angular/common";
-import {LocalStorageService} from "../../../services/localStorage/local-storage.service";
 
 @Component({
   selector: 'app-login-form',
@@ -18,9 +17,8 @@ import {LocalStorageService} from "../../../services/localStorage/local-storage.
 })
 export class LoginFormComponent implements OnInit {
   loginForm: FormGroup | null = null;
-  alertService: AlertService = inject(AlertService);
   authService: AuthService = inject(AuthService);
-  localStorageService: LocalStorageService = inject(LocalStorageService);
+  alertService: AlertService = inject(AlertService);
   submitInvalidForm: boolean = false;
 
   ngOnInit() {
@@ -46,18 +44,6 @@ export class LoginFormComponent implements OnInit {
     if (this.loginForm.valid) {
       this.submitInvalidForm = false;
       this.authService.login(this.loginForm)
-        .subscribe(({data, error}: any) => {
-          if (data) {
-            console.log(data.login)
-            this.authService.isAuthenticated.next(true);
-            this.localStorageService.saveData("accessToken", data.login.accessToken);
-            this.localStorageService.saveData("tokenType", data.login.tokenType);
-            // this.router.navigateByUrl('/');
-          }
-          if (error) {
-            this.alertService.createGraphQLErrorAlert(error);
-          }
-        });
     } else {
       this.submitInvalidForm = true;
     }

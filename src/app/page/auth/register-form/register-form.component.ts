@@ -115,17 +115,6 @@ export class RegisterFormComponent implements OnInit {
     if (this.registerFormGroup.valid) {
       this.submitInvalidForm = false;
       this.authService.register(this.registerFormGroup)
-        .subscribe(({data, error}: any) => {
-          if (data) {
-            console.log(data.register)
-            this.authService.isAuthenticated.next(true);
-            this.localStorageService.saveData("accessToken", data.register.accessToken);
-            this.localStorageService.saveData("tokenType", data.register.tokenType);
-          }
-          if (error) {
-            this.alertService.createGraphQLErrorAlert(error);
-          }
-        });
     } else {
       this.submitInvalidForm = true;
     }
