@@ -5,6 +5,7 @@ export const LOGIN = gql`
     login(inputCredentials: $inputCredentials){
       tokenType
       accessToken
+      expiration
       user {
         id
         email
@@ -28,6 +29,7 @@ export const REGISTER = gql`
     register(inputNewUser: $inputNewUser){
       tokenType
       accessToken
+      expiration
       user {
         id
         email
