@@ -2,7 +2,6 @@ import {Component, inject, OnInit} from '@angular/core';
 import {RouterModule} from '@angular/router';
 import {AuthService} from "../../services/auth/auth.service";
 import {NgForOf, NgIf} from "@angular/common";
-import {LocalStorageService} from "../../services/localStorage/local-storage.service";
 import {UserService} from "../../services/user/user.service";
 import {User} from "../../interface/dto/user";
 
@@ -18,7 +17,6 @@ export class NavBarComponent implements OnInit {
 
   authService: AuthService = inject(AuthService);
   userService: UserService = inject(UserService);
-  LocalStorageService: LocalStorageService = inject(LocalStorageService);
 
   ngOnInit() {
     this.authService.isAuthenticated.subscribe(value => {

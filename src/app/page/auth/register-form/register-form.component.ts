@@ -12,7 +12,6 @@ import {AlertService} from "../../../services/alert/alert.service";
 import {AuthService} from "../../../services/auth/auth.service";
 import {InputControlComponent} from "../../../components/input-control/input-control.component";
 import {NgIf} from "@angular/common";
-import {LocalStorageService} from "../../../services/localStorage/local-storage.service";
 
 @Component({
   selector: 'app-register-form',
@@ -27,9 +26,8 @@ import {LocalStorageService} from "../../../services/localStorage/local-storage.
 export class RegisterFormComponent implements OnInit {
   submitInvalidForm: boolean = false;
   registerFormGroup: FormGroup | null = null;
-  alertService: AlertService = inject(AlertService);
   authService: AuthService = inject(AuthService);
-  localStorageService: LocalStorageService = inject(LocalStorageService);
+  alertService: AlertService = inject(AlertService);
 
   draft = {
     "firstName": "Admin",
