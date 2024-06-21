@@ -69,7 +69,7 @@ export class ExerciseService {
         result.errors.map((err: GraphQLError) =>
           this.alertService.createGraphQLErrorAlert(err))
       } else {
-        let message: string = "Exercise " + result.data.deleteExercise.name + " has been successfully updated."
+        let message: string = "Exercise " + result.data.modifyExercise.name + " has been successfully updated."
         this.alertService.addSuccessAlert(message);
       }
     });
