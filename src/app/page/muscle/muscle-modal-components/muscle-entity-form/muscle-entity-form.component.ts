@@ -7,6 +7,7 @@ import {InputControlComponent} from "../../../../components/input-control/input-
 import {Muscle} from "../../../../interface/dto/muscle";
 import {Observable, Subscription} from "rxjs";
 import {MuscleService} from "../../../../services/muscle/muscle.service";
+import {Exercise} from "../../../../interface/dto/exercise";
 
 @Component({
   selector: 'app-muscle-entity-form',
@@ -51,11 +52,11 @@ export class MuscleEntityFormComponent implements OnInit, AfterViewInit {
   initializeMuscleForm() {
     const exerciseIdsValidator =
       this.isAdmin ? null : Validators.required
-    const muscleName = this.muscle ? this.muscle.name : "";
-    const muscleDescription = this.muscle ? this.muscle.description : "";
-    const muscleFunction = this.muscle ? this.muscle.function : "";
-    const muscleExerciseIds = this.muscle ?
-      this.muscle.exercises?.map(ex => ex.id) : [];
+    const muscleName: string = this.muscle ? this.muscle.name : "";
+    const muscleDescription: string = this.muscle ? this.muscle.description : "";
+    const muscleFunction: string = this.muscle ? this.muscle.function : "";
+    const muscleExerciseIds: string[] = this.muscle?.exercises ?
+      this.muscle.exercises?.map((ex: Exercise) => ex.id) : [];
 
     this.muscleForm = new FormGroup({
       name: new FormControl(muscleName,
