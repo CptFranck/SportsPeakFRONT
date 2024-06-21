@@ -20,35 +20,37 @@ import {ActionType} from "../../../enum/action-type";
 export class MusclesArrayComponent implements OnChanges {
   @Input() muscles!: Muscle[];
   @Input() modalId!: string;
-  @Output() actionMuscle = new EventEmitter<FormIndicator>();
+
+  @Output() actionMuscle: EventEmitter<FormIndicator> = new EventEmitter<FormIndicator>();
+
   showDetails: { [id: string]: boolean } = {};
 
   ngOnChanges(): void {
-    this.muscles.forEach(muscle => this.showDetails[muscle.id] = false)
+    this.muscles.forEach((muscle: Muscle) => this.showDetails[muscle.id] = false);
   }
 
   expendMuscleDetails(id: string): void {
-    this.showDetails[id] = !this.showDetails[id]
+    this.showDetails[id] = !this.showDetails[id];
   }
 
   showMuscleDetails(muscle: Muscle): void {
     this.actionMuscle.emit({
       actionType: ActionType.read,
       object: muscle
-    })
+    });
   }
 
   modifyMuscle(muscle: Muscle) {
     this.actionMuscle.emit({
       actionType: ActionType.update,
       object: muscle
-    })
+    });
   }
 
   delMuscle(muscle: Muscle) {
     this.actionMuscle.emit({
       actionType: ActionType.delete,
       object: muscle
-    })
+    });
   }
 }

@@ -19,7 +19,7 @@ export class muscleDeleteFormComponent implements AfterViewInit {
   @Input() btnCloseRef!: HTMLButtonElement;
   @Input() submitEvents!: Observable<void> | undefined;
 
-  muscleService: MuscleService = inject(MuscleService);
+  private muscleService: MuscleService = inject(MuscleService);
 
   ngAfterViewInit() {
     if (this.submitEvents)
@@ -28,7 +28,7 @@ export class muscleDeleteFormComponent implements AfterViewInit {
 
   onSubmit() {
     if (!this.muscle) return;
-    this.muscleService.deleteMuscle(this.muscle)
-    this.btnCloseRef.click()
+    this.muscleService.deleteMuscle(this.muscle);
+    this.btnCloseRef.click();
   }
 }

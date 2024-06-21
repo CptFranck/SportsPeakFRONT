@@ -24,7 +24,7 @@ import {Exercise} from "../../../../interface/dto/exercise";
 })
 export class MuscleEntityFormComponent implements OnInit, AfterViewInit {
 
-  muscle: Muscle | undefined
+  muscle: Muscle | undefined;
   muscleForm: FormGroup | null = null;
   submitInvalidForm: boolean = false;
   eventsSubscription!: Subscription;
@@ -33,7 +33,7 @@ export class MuscleEntityFormComponent implements OnInit, AfterViewInit {
   @Input() btnCloseRef!: HTMLButtonElement;
   @Input() submitEvents!: Observable<void> | undefined;
 
-  muscleService: MuscleService = inject(MuscleService);
+  private muscleService: MuscleService = inject(MuscleService);
 
   @Input() set muscleInput(value: Muscle | undefined) {
     this.muscle = value;
@@ -51,7 +51,7 @@ export class MuscleEntityFormComponent implements OnInit, AfterViewInit {
 
   initializeMuscleForm() {
     const exerciseIdsValidator =
-      this.isAdmin ? null : Validators.required
+      this.isAdmin ? null : Validators.required;
     const muscleName: string = this.muscle ? this.muscle.name : "";
     const muscleDescription: string = this.muscle ? this.muscle.description : "";
     const muscleFunction: string = this.muscle ? this.muscle.function : "";
@@ -79,7 +79,7 @@ export class MuscleEntityFormComponent implements OnInit, AfterViewInit {
     });
 
     if (this.muscle)
-      this.muscleForm.addControl("id", new FormControl(this.muscle.id))
+      this.muscleForm.addControl("id", new FormControl(this.muscle.id));
   }
 
   onSubmit() {
@@ -87,13 +87,13 @@ export class MuscleEntityFormComponent implements OnInit, AfterViewInit {
     if (this.muscleForm.valid) {
       this.submitInvalidForm = false;
       if (!this.muscleForm.value.id) {
-        this.muscleService.addMuscle(this.muscleForm)
+        this.muscleService.addMuscle(this.muscleForm);
       } else {
-        this.muscleService.modifyMuscle(this.muscleForm)
+        this.muscleService.modifyMuscle(this.muscleForm);
       }
-      this.btnCloseRef.click()
+      this.btnCloseRef.click();
     } else {
-      this.submitInvalidForm = true
+      this.submitInvalidForm = true;
     }
   }
 }

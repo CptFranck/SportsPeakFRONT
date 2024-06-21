@@ -33,7 +33,7 @@ export class MuscleSelectorComponent implements OnInit, ControlValueAccessor {
   };
 
   ngOnInit(): void {
-    this.muscleService.muscles.subscribe(muscles => {
+    this.muscleService.muscles.subscribe((muscles: Muscle[]) => {
       let options: Option[] = []
       muscles.forEach((muscle: Muscle) => {
         options.push({

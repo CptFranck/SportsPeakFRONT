@@ -45,19 +45,19 @@ export class MusclesComponent implements OnInit {
   muscle: Muscle | undefined;
   action: ActionType = ActionType.create;
   modalTitle: string = "";
-  muscleModalId: string = "muscleModal"
+  muscleModalId: string = "muscleModal";
+  @ViewChild("modalTemplate") modalTemplate!: TemplateRef<any>;
 
-  muscleService: MuscleService = inject(MuscleService);
-  @ViewChild("modalTemplate") modalTemplate!: TemplateRef<any>
+  private muscleService: MuscleService = inject(MuscleService);
 
   ngOnInit(): void {
-    this.muscleService.muscles.subscribe(muscles => this.muscles = muscles);
-    this.muscleService.isLoading.subscribe(isLoading => this.loading = isLoading);
+    this.muscleService.muscles.subscribe((muscles: Muscle[]) => this.muscles = muscles);
+    this.muscleService.isLoading.subscribe((isLoading: boolean) => this.loading = isLoading);
   }
 
   setMuscle(formIndicator: FormIndicator) {
-    this.muscle = formIndicator.object
-    this.action = formIndicator.actionType
-    this.modalTitle = formIndicator.object.name
+    this.muscle = formIndicator.object;
+    this.action = formIndicator.actionType;
+    this.modalTitle = formIndicator.object.name;
   }
 }
