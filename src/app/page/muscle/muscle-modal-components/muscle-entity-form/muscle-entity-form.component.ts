@@ -1,11 +1,10 @@
-import {AfterViewInit, Component, EventEmitter, inject, Input, OnInit, Output} from '@angular/core';
+import {AfterViewInit, Component, inject, Input, OnInit} from '@angular/core';
 import {MultiSelectComponent} from "../../../../components/select/multi-select/multi-select.component";
 import {ExerciseSelectorComponent} from "../../../../components/select/exercises-selector/exercise-selector.component";
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {NgIf, NgTemplateOutlet} from "@angular/common";
 import {InputControlComponent} from "../../../../components/input-control/input-control.component";
 import {Muscle} from "../../../../interface/dto/muscle";
-import {GraphQLError} from "graphql/error";
 import {Observable, Subscription} from "rxjs";
 import {MuscleService} from "../../../../services/muscle/muscle.service";
 
@@ -32,10 +31,6 @@ export class MuscleEntityFormComponent implements OnInit, AfterViewInit {
   @Input() isAdmin: boolean = false;
   @Input() btnCloseRef!: HTMLButtonElement;
   @Input() eventsSubject!: Observable<void> | undefined;
-
-  @Output() newMuscleAdded: EventEmitter<Muscle> = new EventEmitter<Muscle>();
-  @Output() muscleUpdated: EventEmitter<Muscle> = new EventEmitter<Muscle>();
-  @Output() errorOccurred: EventEmitter<GraphQLError> = new EventEmitter<GraphQLError>();
 
   muscleService: MuscleService = inject(MuscleService);
 
@@ -92,24 +87,8 @@ export class MuscleEntityFormComponent implements OnInit, AfterViewInit {
       this.submitInvalidForm = false;
       if (!this.muscleForm.value.id) {
         this.muscleService.addMuscle(this.muscleForm)
-          .subscribe(({data, error}: any) => {
-            if (data) {
-              this.newMuscleAdded.emit(data.addMuscle)
-            }
-            if (error) {
-              this.errorOccurred.emit(error);
-            }
-          });
       } else {
         this.muscleService.modifyMuscle(this.muscleForm)
-          .subscribe(({data, error}: any) => {
-            if (data) {
-              this.muscleUpdated.emit(data.modifyMuscle)
-            }
-            if (error) {
-              this.errorOccurred.emit(error);
-            }
-          });
       }
       this.btnCloseRef.click()
     } else {
