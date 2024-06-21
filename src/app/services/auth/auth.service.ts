@@ -17,7 +17,7 @@ import {ApolloQueryResult} from "@apollo/client";
 export class AuthService {
 
   isAuthenticated: BehaviorSubject<boolean> = new BehaviorSubject(false);
-  
+
   private router: Router = inject(Router);
   private apollo: Apollo = inject(Apollo);
   private userService: UserService = inject(UserService);
@@ -25,10 +25,13 @@ export class AuthService {
   private tokenService: TokenService = inject(TokenService);
 
   constructor() {
-    let isAuth: boolean = !!this.tokenService.getCurrentToken();
-    this.isAuthenticated.next(isAuth);
-    if (!isAuth)
+    let isTokenSaved: boolean = !!this.tokenService.getCurrentToken();
+    let isUserSaved: boolean = !!this.userService.getCurrentUser();
+    if (isTokenSaved && isUserSaved) {
+      this.isAuthenticated.next(true);
+    } else {
       this.removeDataAuth();
+    }
   }
 
   login(loginForm: FormGroup) {

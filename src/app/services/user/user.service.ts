@@ -12,11 +12,14 @@ export class UserService {
   private localStorageService: LocalStorageService = inject(LocalStorageService);
 
   constructor() {
-    let userJson: string | null = this.localStorageService.getData("user");
-    if (userJson) {
-      let user = JSON.parse(userJson);
+    let user: User | null = this.getSavedUser();
+    if (user) {
       this.currentUser.next(user);
     }
+  }
+
+  getCurrentUser() {
+    return this.currentUser.value;
   }
 
   setCurrentUser(user: User) {
@@ -28,5 +31,13 @@ export class UserService {
   removeCurrentUser() {
     this.currentUser.next(null);
     this.localStorageService.removeData("user");
+  }
+
+  private getSavedUser(): User | null {
+    let userJson: string | null = this.localStorageService.getData("user");
+    if (userJson) {
+      return JSON.parse(userJson);
+    }
+    return null;
   }
 }
