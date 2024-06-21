@@ -9,10 +9,10 @@ import {BehaviorSubject} from "rxjs";
 export class UserService {
 
   currentUser: BehaviorSubject<User | null> = new BehaviorSubject<User | null>(null);
-  localStorageService: LocalStorageService = inject(LocalStorageService);
+  private localStorageService: LocalStorageService = inject(LocalStorageService);
 
   constructor() {
-    let userJson = this.localStorageService.getData("user");
+    let userJson: string | null = this.localStorageService.getData("user");
     if (userJson) {
       let user = JSON.parse(userJson);
       this.currentUser.next(user);
@@ -21,7 +21,7 @@ export class UserService {
 
   setCurrentUser(user: User) {
     this.currentUser.next(user);
-    let userJson = JSON.stringify(user);
+    let userJson: string = JSON.stringify(user);
     this.localStorageService.saveData("user", userJson);
   }
 

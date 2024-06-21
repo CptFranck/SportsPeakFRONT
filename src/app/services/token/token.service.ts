@@ -9,7 +9,7 @@ import {AuthToken} from "../../interface/dto/token";
 export class TokenService {
 
   authToken: BehaviorSubject<AuthToken | null> = new BehaviorSubject<AuthToken | null>(null);
-  localStorageService: LocalStorageService = inject(LocalStorageService);
+  private localStorageService: LocalStorageService = inject(LocalStorageService);
 
   getCurrentToken() {
     return this.authToken.value;
