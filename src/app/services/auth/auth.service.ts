@@ -1,5 +1,5 @@
 import {inject, Injectable} from '@angular/core';
-import {Apollo} from "apollo-angular";
+import {Apollo, MutationResult} from "apollo-angular";
 import {FormGroup} from "@angular/forms";
 import {LOGIN, REGISTER} from "../../graphql/operations/auth/auth.operations";
 import {BehaviorSubject} from "rxjs";
@@ -9,6 +9,7 @@ import {Auth} from "../../interface/dto/auth";
 import {UserService} from "../user/user.service";
 import {TokenService} from "../token/token.service";
 import {AuthToken} from "../../interface/dto/token";
+import {ApolloQueryResult} from "@apollo/client";
 
 @Injectable({
   providedIn: 'root'
@@ -35,12 +36,11 @@ export class AuthService {
       variables: {
         inputCredentials: loginForm.value,
       },
-    }).subscribe(({data, error}: any) => {
-      if (data) {
-        this.setDataAuth(data.login);
-      }
-      if (error) {
-        this.alertService.createGraphQLErrorAlert(error);
+    }).subscribe((result: ApolloQueryResult<any>) => {
+      if (result.errors) {
+        this.alertService.graphQLErrorAlertHandler(result.errors);
+      } else {
+        this.setDataAuth(result.data.login);
       }
     });
   }
@@ -54,12 +54,12 @@ export class AuthService {
       variables: {
         inputNewUser: inputNewUser,
       },
-    }).subscribe(({data, error}: any) => {
-      if (data) {
-        this.setDataAuth(data.register);
+    }).subscribe((result: MutationResult) => {
+      if (result.errors) {
+        this.alertService.graphQLErrorAlertHandler(result.errors);
       }
-      if (error) {
-        this.alertService.createGraphQLErrorAlert(error);
+      if (result.data) {
+        this.setDataAuth(result.data.register);
       }
     });
   }
@@ -75,7 +75,7 @@ export class AuthService {
     this.router.navigateByUrl('/').then(() => {
       this.isAuthenticated.next(true);
       this.userService.setCurrentUser(auth.user);
-      let authToken = this.createAuthToken(auth)
+      let authToken = this.createAuthToken(auth);
       this.tokenService.setCurrentToken(authToken);
     });
   }
@@ -90,7 +90,7 @@ export class AuthService {
       tokenType: data.tokenType,
       accessToken: data.accessToken,
       expiration: new Date(data.expiration)
-    }
+    };
     return authToken;
   }
 }
