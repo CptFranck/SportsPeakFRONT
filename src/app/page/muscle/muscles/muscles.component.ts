@@ -16,9 +16,7 @@ import {FormIndicator} from "../../../interface/utils/form-indicator";
 import {ActionType} from "../../../enum/action-type";
 import {MuscleModalComponent} from "../muscle-modal/muscle-modal.component";
 import {AlertDisplayComponent} from "../../../components/alert-display/alert-display.component";
-import {AlertService} from "../../../services/alert/alert.service";
 import {MuscleService} from "../../../services/muscle/muscle.service";
-import {ApolloQueryResult} from "@apollo/client";
 import {Muscle} from "../../../interface/dto/muscle";
 
 @Component({
@@ -42,25 +40,19 @@ import {Muscle} from "../../../interface/dto/muscle";
   templateUrl: './muscles.component.html',
 })
 export class MusclesComponent implements OnInit {
-  loading = true;
+  loading: boolean = true;
   muscles: Muscle[] = [];
   muscle: Muscle | undefined;
   action: ActionType = ActionType.create;
   modalTitle: string = "";
   muscleModalId: string = "muscleModal"
 
-  alertService: AlertService = inject(AlertService);
   muscleService: MuscleService = inject(MuscleService);
   @ViewChild("modalTemplate") modalTemplate!: TemplateRef<any>
 
   ngOnInit(): void {
-    this.muscleService.getMuscles().subscribe((result: ApolloQueryResult<any>): void => {
-      if (result.errors) {
-        result.errors.map(err => this.alertService.createGraphQLErrorAlert(err))
-      }
-      this.muscles = result.data.getMuscles;
-      this.loading = result.loading;
-    });
+    this.muscleService.muscles.subscribe(muscles => this.muscles = muscles);
+    this.muscleService.isLoading.subscribe(isLoading => this.loading = isLoading);
   }
 
   setMuscle(formIndicator: FormIndicator) {
