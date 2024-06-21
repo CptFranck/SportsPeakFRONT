@@ -1,7 +1,6 @@
-import {AfterViewInit, Component, EventEmitter, inject, Input, OnInit, Output} from '@angular/core';
+import {AfterViewInit, Component, inject, Input, OnInit} from '@angular/core';
 import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
 import {Observable, Subscription} from "rxjs";
-import {GraphQLError} from "graphql/error";
 import {Exercise} from "../../../../interface/dto/exercise";
 import {ExerciseService} from "../../../../services/exercise/exercise.service";
 import {InputControlComponent} from "../../../../components/input-control/input-control.component";
@@ -11,6 +10,8 @@ import {MuscleSelectorComponent} from "../../../../components/select/muscle-sele
 import {
   ExerciseTypeSelectorComponent
 } from "../../../../components/select/exercise-type-selector/exercise-type-selector.component";
+import {Muscle} from "../../../../interface/dto/muscle";
+import {ExerciseType} from "../../../../interface/dto/exerciseType";
 
 @Component({
   selector: 'app-exercise-entity-form',
@@ -27,7 +28,7 @@ import {
   templateUrl: './exercise-entity-form.component.html',
 })
 export class ExerciseEntityFormComponent implements OnInit, AfterViewInit {
-  exercise: Exercise | undefined
+  exercise: Exercise | undefined;
   exerciseForm: FormGroup | null = null;
   submitInvalidForm: boolean = false;
   eventsSubscription!: Subscription;
@@ -36,11 +37,7 @@ export class ExerciseEntityFormComponent implements OnInit, AfterViewInit {
   @Input() btnCloseRef!: HTMLButtonElement;
   @Input() submitEvents!: Observable<void> | undefined;
 
-  @Output() newExerciseAdded: EventEmitter<Exercise> = new EventEmitter<Exercise>();
-  @Output() exerciseUpdated: EventEmitter<Exercise> = new EventEmitter<Exercise>();
-  @Output() errorOccurred: EventEmitter<GraphQLError> = new EventEmitter<GraphQLError>();
-
-  exerciseService: ExerciseService = inject(ExerciseService);
+  private exerciseService: ExerciseService = inject(ExerciseService);
 
   @Input() set exerciseInput(value: Exercise | undefined) {
     this.exercise = value;
@@ -59,13 +56,13 @@ export class ExerciseEntityFormComponent implements OnInit, AfterViewInit {
   initializeMuscleForm() {
     const exerciseIdsValidator =
       this.isAdmin ? null : Validators.required
-    const exerciseName = this.exercise ? this.exercise.name : "";
-    const exerciseDescription = this.exercise ? this.exercise.description : "";
-    const exerciseGoal = this.exercise ? this.exercise.goal : "";
-    const exerciseMuscleIds = this.exercise ?
-      this.exercise.muscles?.map(muscle => muscle.id) : [];
+    const exerciseName: string = this.exercise ? this.exercise.name : "";
+    const exerciseDescription: string = this.exercise ? this.exercise.description : "";
+    const exerciseGoal: string = this.exercise ? this.exercise.goal : "";
+    const exerciseMuscleIds: string[] = this.exercise?.muscles ?
+      this.exercise.muscles?.map((muscle: Muscle) => muscle.id) : [];
     const exerciseExerciseTypeIds = this.exercise ?
-      this.exercise.exerciseTypes?.map(exerciseType => exerciseType.id) : [];
+      this.exercise.exerciseTypes?.map((exerciseType: ExerciseType) => exerciseType.id) : [];
 
     this.exerciseForm = new FormGroup({
       name: new FormControl(exerciseName,
@@ -100,24 +97,8 @@ export class ExerciseEntityFormComponent implements OnInit, AfterViewInit {
       this.submitInvalidForm = false;
       if (!this.exerciseForm.value.id) {
         this.exerciseService.addExercise(this.exerciseForm)
-          .subscribe(({data, error}: any) => {
-            if (data) {
-              this.newExerciseAdded.emit(data.addExercise)
-            }
-            if (error) {
-              this.errorOccurred.emit(error);
-            }
-          });
       } else {
         this.exerciseService.modifyExercise(this.exerciseForm)
-          .subscribe(({data, error}: any) => {
-            if (data) {
-              this.exerciseUpdated.emit(data.modifyExercise)
-            }
-            if (error) {
-              this.errorOccurred.emit(error);
-            }
-          });
       }
       this.btnCloseRef.click()
     } else {
