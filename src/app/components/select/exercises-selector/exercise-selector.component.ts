@@ -23,8 +23,10 @@ import {ExerciseService} from "../../../services/exercise/exercise.service";
 export class ExerciseSelectorComponent implements OnInit, ControlValueAccessor {
   loading: boolean = true;
   exerciseOptions: Option[] = [];
+
   @Input() exerciseIds: number[] = [];
-  exerciseService: ExerciseService = inject(ExerciseService);
+
+  private exerciseService: ExerciseService = inject(ExerciseService);
 
   onChange: (value: number[]) => void = () => {
   };
@@ -45,7 +47,7 @@ export class ExerciseSelectorComponent implements OnInit, ControlValueAccessor {
       });
       this.exerciseOptions = [...options];
     });
-    this.exerciseService.isLoading.subscribe(value => this.loading = value);
+    this.exerciseService.isLoading.subscribe((loading: boolean) => this.loading = loading);
   }
 
   writeValue(exerciseIds: number[]): void {

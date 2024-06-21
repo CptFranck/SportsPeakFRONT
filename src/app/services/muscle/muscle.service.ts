@@ -28,7 +28,7 @@ export class MuscleService {
     }).valueChanges.subscribe((result: ApolloQueryResult<any>): void => {
       if (result.errors) {
         result.errors.map((err: GraphQLError) =>
-          this.alertService.createGraphQLErrorAlert(err))
+          this.alertService.createGraphQLErrorAlert(err));
       }
       this.muscles.next(result.data.getMuscles);
       this.isLoading.next(result.loading);
@@ -45,9 +45,9 @@ export class MuscleService {
       (result: MutationResult): void => {
         if (result.errors) {
           result.errors.map((err: GraphQLError) =>
-            this.alertService.createGraphQLErrorAlert(err))
+            this.alertService.createGraphQLErrorAlert(err));
         } else {
-          let message: string = "Muscle " + result.data.addMuscle.name + " been successfully created."
+          let message: string = "Muscle " + result.data.addMuscle.name + " been successfully created.";
           this.alertService.addSuccessAlert(message);
         }
       });
@@ -62,9 +62,9 @@ export class MuscleService {
     }).subscribe((result: MutationResult): void => {
       if (result.errors) {
         result.errors.map((err: GraphQLError) =>
-          this.alertService.createGraphQLErrorAlert(err))
+          this.alertService.createGraphQLErrorAlert(err));
       } else {
-        let message: string = "Muscle " + result.data.modifyMuscle.name + " been successfully updated."
+        let message: string = "Muscle " + result.data.modifyMuscle.name + " been successfully updated.";
         this.alertService.addSuccessAlert(message);
       }
     });
@@ -79,9 +79,9 @@ export class MuscleService {
     }).subscribe((result: MutationResult): void => {
       if (result.errors) {
         result.errors.map((err: GraphQLError) =>
-          this.alertService.createGraphQLErrorAlert(err))
+          this.alertService.createGraphQLErrorAlert(err));
       } else {
-        let message: string = "Muscle " + muscle.name + " has been successfully deleted."
+        let message: string = "Muscle " + muscle.name + " has been successfully deleted.";
         this.alertService.addSuccessAlert(message);
       }
     });

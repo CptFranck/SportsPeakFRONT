@@ -23,8 +23,10 @@ import {ControlValueAccessor, NG_VALUE_ACCESSOR} from "@angular/forms";
 export class MuscleSelectorComponent implements OnInit, ControlValueAccessor {
   loading: boolean = true;
   muscleOptions: Option[] = [];
+
   @Input() muscleIds: number[] = [];
-  muscleService: MuscleService = inject(MuscleService);
+
+  private muscleService: MuscleService = inject(MuscleService);
 
   onChange: (value: number[]) => void = () => {
   };
@@ -45,7 +47,7 @@ export class MuscleSelectorComponent implements OnInit, ControlValueAccessor {
       });
       this.muscleOptions = [...options];
     });
-    this.muscleService.isLoading.subscribe(value => this.loading = value);
+    this.muscleService.isLoading.subscribe((loading: boolean) => this.loading = loading);
   }
 
   writeValue(muscleIds: number[]): void {
