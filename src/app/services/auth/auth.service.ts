@@ -23,7 +23,10 @@ export class AuthService {
   tokenService: TokenService = inject(TokenService);
 
   constructor() {
-    this.isAuthenticated.next(!!this.tokenService.getCurrentToken());
+    let isAuth = !!this.tokenService.getCurrentToken()
+    this.isAuthenticated.next(isAuth);
+    if (!isAuth)
+      this.removeDataAuth()
   }
 
   login(loginForm: FormGroup) {
@@ -63,23 +66,31 @@ export class AuthService {
 
   logout() {
     this.apollo.client.resetStore().then(() => {
-      this.userService.removeCurrentUser();
+      this.removeDataAuth()
       this.isAuthenticated.next(false);
-      this.tokenService.removeCurrentToken();
     });
   }
 
-  setDataAuth(data: Auth) {
+  setDataAuth(auth: Auth) {
     this.router.navigateByUrl('/').then(() => {
       this.isAuthenticated.next(true);
-      this.userService.setCurrentUser(data.user);
-
-      let authToken: AuthToken = {
-        tokenType: data.tokenType,
-        accessToken: data.accessToken,
-        expiration: new Date(data.expiration)
-      }
+      this.userService.setCurrentUser(auth.user);
+      let authToken = this.createAuthToken(auth)
       this.tokenService.setCurrentToken(authToken);
     });
+  }
+
+  removeDataAuth() {
+    this.userService.removeCurrentUser();
+    this.tokenService.removeCurrentToken();
+  }
+
+  createAuthToken(data: Auth) {
+    const authToken: AuthToken = {
+      tokenType: data.tokenType,
+      accessToken: data.accessToken,
+      expiration: new Date(data.expiration)
+    }
+    return authToken;
   }
 }
