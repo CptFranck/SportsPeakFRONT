@@ -18,11 +18,13 @@ import {ModalButtonComponent} from "../../../components/modal/modal-button/modal
 export class ExercisesArrayComponent implements OnChanges {
   @Input() exercises!: Exercise[];
   @Input() modalId!: string;
-  @Output() actionExercise = new EventEmitter<FormIndicator>();
+
+  @Output() actionExercise: EventEmitter<FormIndicator> = new EventEmitter<FormIndicator>();
+
   showDetails: { [id: string]: boolean } = {};
 
   ngOnChanges(): void {
-    this.exercises.forEach(exercise => this.showDetails[exercise.id] = false)
+    this.exercises.forEach((exercise: Exercise) => this.showDetails[exercise.id] = false)
   }
 
   expendExerciseDetails(id: string): void {
