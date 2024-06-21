@@ -10,16 +10,16 @@
            [title]="modalTitle"
 >
 </app-modal>
-<ng-template #modalTemplate let-btnClose="btnClose" let-eventsSubject="eventsSubject">
+<ng-template #modalTemplate let-btnClose="btnClose" let-submitEvents="submitEvents">
   <app-muscle-entity-form *ngIf="action === ActionType.create || action === ActionType.update"
                           [btnCloseRef]="btnClose"
-                          [eventsSubject]="eventsSubject"
                           [muscleInput]="muscle"
+                          [submitEvents]="submitEvents"
   />
   <app-muscle-details-display *ngIf="action === ActionType.read"
                               [muscleInput]="muscle"/>
   <app-muscle-delete-form *ngIf="action === ActionType.delete"
                           [btnCloseRef]="btnClose"
-                          [eventsSubject]="eventsSubject"
-                          [muscle]="muscle"/>
+                          [muscle]="muscle"
+                          [submitEvents]="submitEvents"/>
 </ng-template>

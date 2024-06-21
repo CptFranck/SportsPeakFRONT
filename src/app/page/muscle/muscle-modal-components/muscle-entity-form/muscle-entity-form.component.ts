@@ -30,7 +30,7 @@ export class MuscleEntityFormComponent implements OnInit, AfterViewInit {
 
   @Input() isAdmin: boolean = false;
   @Input() btnCloseRef!: HTMLButtonElement;
-  @Input() eventsSubject!: Observable<void> | undefined;
+  @Input() submitEvents!: Observable<void> | undefined;
 
   muscleService: MuscleService = inject(MuscleService);
 
@@ -44,8 +44,8 @@ export class MuscleEntityFormComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    if (this.eventsSubject)
-      this.eventsSubscription = this.eventsSubject.subscribe(() => this.onSubmit());
+    if (this.submitEvents)
+      this.eventsSubscription = this.submitEvents.subscribe(() => this.onSubmit());
   }
 
   initializeMuscleForm() {
