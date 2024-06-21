@@ -15,15 +15,15 @@ export class NavBarComponent implements OnInit {
   user: User | null = null;
   isLogged: boolean = false;
 
-  authService: AuthService = inject(AuthService);
-  userService: UserService = inject(UserService);
+  private authService: AuthService = inject(AuthService);
+  private userService: UserService = inject(UserService);
 
   ngOnInit() {
-    this.authService.isAuthenticated.subscribe(value => {
-      this.isLogged = value
+    this.authService.isAuthenticated.subscribe((isLogged: boolean) => {
+      this.isLogged = isLogged;
     });
-    this.userService.currentUser.subscribe(value => {
-      this.user = value
+    this.userService.currentUser.subscribe((user: User | null) => {
+      this.user = user;
     })
   }
 

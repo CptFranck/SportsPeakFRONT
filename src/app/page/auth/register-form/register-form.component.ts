@@ -8,7 +8,6 @@ import {
   ValidatorFn,
   Validators
 } from "@angular/forms";
-import {AlertService} from "../../../services/alert/alert.service";
 import {AuthService} from "../../../services/auth/auth.service";
 import {InputControlComponent} from "../../../components/input-control/input-control.component";
 import {NgIf} from "@angular/common";
@@ -26,9 +25,6 @@ import {NgIf} from "@angular/common";
 export class RegisterFormComponent implements OnInit {
   submitInvalidForm: boolean = false;
   registerFormGroup: FormGroup | null = null;
-  authService: AuthService = inject(AuthService);
-  alertService: AlertService = inject(AlertService);
-
   draft = {
     "firstName": "Admin",
     "lastName": "Admin",
@@ -37,9 +33,10 @@ export class RegisterFormComponent implements OnInit {
     "password": "ChangeMeInProd1!",
     "confirmPassword": "ChangeMeInProd1!"
   }
+  private authService: AuthService = inject(AuthService);
 
   ngOnInit() {
-    this.initializeExerciseTypeForm()
+    this.initializeExerciseTypeForm();
   }
 
   initializeExerciseTypeForm() {
@@ -89,15 +86,15 @@ export class RegisterFormComponent implements OnInit {
 
   confirmValidator(controlName: string, matchingControlName: string): ValidatorFn {
     return (abstractControl: AbstractControl): ValidationErrors | null => {
-      const control = abstractControl.get(controlName);
-      const matchingControl = abstractControl.get(matchingControlName);
+      const control: AbstractControl | null = abstractControl.get(controlName);
+      const matchingControl: AbstractControl | null = abstractControl.get(matchingControlName);
 
       if (matchingControl!.errors && !matchingControl!.errors?.['confirmedValidator']) {
         return null;
       }
 
       if (control!.value !== matchingControl!.value) {
-        const error = {confirmedValidator: 'Passwords do not match'};
+        const error: ValidationErrors = {confirmedValidator: 'Passwords do not match'};
         matchingControl!.setErrors(error);
         return error;
       } else {
@@ -106,7 +103,6 @@ export class RegisterFormComponent implements OnInit {
       }
     }
   }
-
 
   onSubmitRegisterForm() {
     if (!this.registerFormGroup) return

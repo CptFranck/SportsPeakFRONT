@@ -1,6 +1,5 @@
 import {Component, inject, OnInit} from '@angular/core';
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
-import {AlertService} from "../../../services/alert/alert.service";
 import {AuthService} from "../../../services/auth/auth.service";
 import {InputControlComponent} from "../../../components/input-control/input-control.component";
 import {NgIf} from "@angular/common";
@@ -17,9 +16,9 @@ import {NgIf} from "@angular/common";
 })
 export class LoginFormComponent implements OnInit {
   loginForm: FormGroup | null = null;
-  authService: AuthService = inject(AuthService);
-  alertService: AlertService = inject(AlertService);
   submitInvalidForm: boolean = false;
+
+  private authService: AuthService = inject(AuthService);
 
   ngOnInit() {
     this.initializeExerciseTypeForm()
@@ -40,10 +39,10 @@ export class LoginFormComponent implements OnInit {
   }
 
   onSubmitLoginForm() {
-    if (!this.loginForm) return
+    if (!this.loginForm) return;
     if (this.loginForm.valid) {
       this.submitInvalidForm = false;
-      this.authService.login(this.loginForm)
+      this.authService.login(this.loginForm);
     } else {
       this.submitInvalidForm = true;
     }
