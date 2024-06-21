@@ -1,6 +1,5 @@
-import {AfterViewInit, Component, EventEmitter, inject, Input, Output} from '@angular/core';
+import {AfterViewInit, Component, inject, Input} from '@angular/core';
 import {Observable, Subscription} from "rxjs";
-import {GraphQLError} from "graphql/error";
 import {ExerciseType} from "../../../../interface/dto/exerciseType";
 import {ExerciseTypeService} from "../../../../services/exercise-type/exercise-type.service";
 
@@ -17,10 +16,7 @@ export class ExerciseTypeDeleteFormComponent implements AfterViewInit {
   @Input() btnCloseRef!: HTMLButtonElement;
   @Input() submitEvents!: Observable<void> | undefined;
 
-  @Output() errorOccurred: EventEmitter<GraphQLError> = new EventEmitter<GraphQLError>();
-  @Output() exerciseTypeDelete: EventEmitter<ExerciseType> = new EventEmitter<ExerciseType>();
-
-  exerciseTypeService: ExerciseTypeService = inject(ExerciseTypeService);
+  private exerciseTypeService: ExerciseTypeService = inject(ExerciseTypeService);
 
   ngAfterViewInit() {
     if (this.submitEvents)
@@ -29,14 +25,7 @@ export class ExerciseTypeDeleteFormComponent implements AfterViewInit {
 
   onSubmit() {
     if (!this.exerciseType) return;
-    this.exerciseTypeService.deleteExerciseType(this.exerciseType.id)
-      .subscribe(({error}: any) => {
-        if (error) {
-          this.errorOccurred.emit(error);
-        } else {
-          this.exerciseTypeDelete.emit(this.exerciseType);
-        }
-      });
-    this.btnCloseRef.click()
+    this.exerciseTypeService.deleteExerciseType(this.exerciseType);
+    this.btnCloseRef.click();
   }
 }
