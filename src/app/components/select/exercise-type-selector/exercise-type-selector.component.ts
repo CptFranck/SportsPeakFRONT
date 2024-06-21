@@ -4,8 +4,6 @@ import {ControlValueAccessor, NG_VALUE_ACCESSOR} from "@angular/forms";
 import {Option} from "../../../interface/multi-select/option";
 import {ExerciseTypeService} from "../../../services/exercise-type/exercise-type.service";
 import {ExerciseType} from "../../../interface/dto/exerciseType";
-import {AlertService} from "../../../services/alert/alert.service";
-import {ApolloQueryResult} from "@apollo/client";
 
 @Component({
   selector: 'app-exercise-type-selector',
@@ -23,11 +21,12 @@ import {ApolloQueryResult} from "@apollo/client";
   templateUrl: './exercise-type-selector.component.html',
 })
 export class ExerciseTypeSelectorComponent implements OnInit, ControlValueAccessor {
-  error: any;
+  loading: boolean = true;
   exerciseTypes: Option[] = [];
+
   @Input() exerciseTypeIds: number[] = [];
-  alertService: AlertService = inject(AlertService);
-  exerciseTypeService: ExerciseTypeService = inject(ExerciseTypeService);
+
+  private exerciseTypeService: ExerciseTypeService = inject(ExerciseTypeService);
 
   onChange: (value: number[]) => void = () => {
   };
@@ -36,22 +35,19 @@ export class ExerciseTypeSelectorComponent implements OnInit, ControlValueAccess
   };
 
   ngOnInit(): void {
-    this.exerciseTypeService.getExerciseTypes().subscribe((result: ApolloQueryResult<any>): void => {
-      if (result.errors) {
-        result.errors.map(err => this.alertService.createGraphQLErrorAlert(err))
-      } else {
-        let options: Option[] = []
-        result.data.getExerciseTypes.forEach((exerciseType: ExerciseType) => {
-          options.push({
-            id: exerciseType.id,
-            title: exerciseType.name,
-            value: exerciseType,
-            description: exerciseType.goal
-          });
+    this.exerciseTypeService.exerciseTypes.subscribe((exerciseTypes: ExerciseType[]): void => {
+      let options: Option[] = []
+      exerciseTypes.forEach((exerciseType: ExerciseType) => {
+        options.push({
+          id: exerciseType.id,
+          title: exerciseType.name,
+          value: exerciseType,
+          description: exerciseType.goal
         });
-        this.exerciseTypes = [...options];
-      }
+      });
+      this.exerciseTypes = [...options];
     });
+    this.exerciseTypeService.isLoading.subscribe((loading: boolean) => this.loading = loading);
   }
 
   writeValue(exerciseTypeIds: number[]): void {
