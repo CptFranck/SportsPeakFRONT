@@ -15,11 +15,7 @@ export class AlertService {
   private alertsSubject: Subject<Alert[]> = new Subject<Alert[]>();
 
   constructor() {
-    this.updateAlert()
-  }
-
-  updateAlert() {
-    this.alertsSubject.next(this.getAllAlert().filter(al => !al.closed));
+    this.updateAlert();
   }
 
   getAlertsSubject(): Subject<Alert[]> {
@@ -30,8 +26,56 @@ export class AlertService {
     return this.alerts;
   }
 
-  createAlert(title: string, message: string, alertType: AlertType): Alert {
-    const alert = {
+  addSuccessAlert(message: string): void {
+    const successAlert: Alert = this.createAlert("Successful operation :D", message, AlertType.success);
+    this.alerts.push(successAlert);
+    this.updateAlert();
+  }
+
+  addWarningAlert(message: string): void {
+    const successAlert: Alert = this.createAlert("Warning :/", message, AlertType.warning);
+    this.alerts.push(successAlert);
+    this.updateAlert();
+  }
+
+  addErrorAlert(message: string): void {
+    const successAlert: Alert = this.createAlert("Unsuccessful operation :(", message, AlertType.error);
+    this.alerts.push(successAlert);
+    this.updateAlert();
+  }
+
+  closeAlert(alert: Alert) {
+    let localAlert: Alert | undefined = this.alerts.find((al: Alert) => alert.id === al.id);
+    if (localAlert) {
+      localAlert.closed = true;
+      this.updateAlert();
+    }
+  }
+
+  ///////////// APOLLO / GRAPHQL /////////////
+
+  graphQLErrorAlertHandler(graphQLErrors: readonly GraphQLError[]): void {
+    graphQLErrors.map((err: GraphQLError) =>
+      this.createGraphQLErrorAlert(err));
+  }
+
+  createNetWorkErrorAlert(networkError: NetworkError): void {
+    if (!networkError) return
+    let networkAlert: Alert = this.createErrorAlert(networkError)
+    if (networkAlert.errorInformation) {
+      networkAlert.errorInformation["errorType"] = AlertErrorType.NetworkError;
+    }
+    this.alerts.push(networkAlert);
+    this.updateAlert()
+    this.alertId += 1;
+  }
+
+  private updateAlert() {
+    this.alertsSubject.next(this.alerts.filter((alert: Alert) => !alert.closed));
+  }
+
+  private createAlert(title: string, message: string, alertType: AlertType): Alert {
+    const alert: Alert = {
       id: this.alertId,
       title: title,
       message: message,
@@ -42,63 +86,24 @@ export class AlertService {
     return alert;
   }
 
-  addSuccessAlert(message: string): void {
-    const successAlert = this.createAlert("Successful operation :D", message, AlertType.success);
-    this.alerts.push(successAlert);
-    this.updateAlert();
-  }
-
-  addWarningAlert(message: string): void {
-    const successAlert = this.createAlert("Warning :/", message, AlertType.warning);
-    this.alerts.push(successAlert);
-    this.updateAlert();
-  }
-
-  addErrorAlert(message: string): void {
-    const successAlert = this.createAlert("Unsuccessful operation :(", message, AlertType.error);
-    this.alerts.push(successAlert);
-    this.updateAlert();
-  }
-
-  closeAlert(alert: Alert) {
-    let localAlert = this.alerts.find(al => alert.id === al.id);
-    if (localAlert) {
-      localAlert.closed = true;
-      this.updateAlert();
+  private createGraphQLErrorAlert(graphQLError: GraphQLError): void {
+    let graphQLAlert: Alert = this.createErrorAlert(graphQLError)
+    if (graphQLAlert.errorInformation) {
+      graphQLAlert.errorInformation["errorType"] = AlertErrorType.GraphQLError;
+      graphQLAlert.errorInformation["errorLocation"] = graphQLError.locations;
+      graphQLAlert.errorInformation["errorPath"] = graphQLError.path;
     }
+    this.alerts.push(graphQLAlert);
+    this.updateAlert();
+    this.alertId += 1;
   }
 
-  ///////////// APOLLO / GRAPHQL /////////////
-
-  createErrorAlert(error: Error): Alert {
-    const errorAlert = this.createAlert("Unsuccessful operation :(", error.message, AlertType.error);
+  private createErrorAlert(error: Error): Alert {
+    const errorAlert: Alert = this.createAlert("Unsuccessful operation :(", error.message, AlertType.error);
     errorAlert.errorInformation = {
       errorName: error.name,
       errorStack: error.stack,
     }
     return errorAlert;
-  }
-
-  createGraphQLErrorAlert(graphQLError: GraphQLError): void {
-    let graphQLAlert = this.createErrorAlert(graphQLError)
-    if (graphQLAlert.errorInformation) {
-      graphQLAlert.errorInformation["errorType"] = AlertErrorType.GraphQLError
-      graphQLAlert.errorInformation["errorLocation"] = graphQLError.locations
-      graphQLAlert.errorInformation["errorPath"] = graphQLError.path
-    }
-    this.alerts.push(graphQLAlert);
-    this.updateAlert()
-    this.alertId += 1;
-  }
-
-  createNetWorkErrorAlert(networkError: NetworkError): void {
-    if (!networkError) return
-    let networkAlert = this.createErrorAlert(networkError)
-    if (networkAlert.errorInformation) {
-      networkAlert.errorInformation["errorType"] = AlertErrorType.NetworkError
-    }
-    this.alerts.push(networkAlert);
-    this.updateAlert()
-    this.alertId += 1;
   }
 }

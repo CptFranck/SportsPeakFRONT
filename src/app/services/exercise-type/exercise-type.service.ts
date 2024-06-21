@@ -11,7 +11,6 @@ import {BehaviorSubject} from "rxjs";
 import {AlertService} from "../alert/alert.service";
 import {ExerciseType} from "../../interface/dto/exerciseType";
 import {ApolloQueryResult} from "@apollo/client";
-import {GraphQLError} from "graphql/error";
 
 @Injectable({
   providedIn: 'root'
@@ -20,6 +19,7 @@ export class ExerciseTypeService {
 
   exerciseTypes: BehaviorSubject<ExerciseType[]> = new BehaviorSubject<ExerciseType[]>([]);
   isLoading: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+
   private apollo: Apollo = inject(Apollo);
   private alertService: AlertService = inject(AlertService);
 
@@ -32,8 +32,7 @@ export class ExerciseTypeService {
       query: GET_EXERCISE_TYPES,
     }).valueChanges.subscribe((result: ApolloQueryResult<any>): void => {
       if (result.errors) {
-        result.errors.map((err: GraphQLError) =>
-          this.alertService.createGraphQLErrorAlert(err));
+        this.alertService.graphQLErrorAlertHandler(result.errors);
       } else {
         this.exerciseTypes.next(result.data.getExerciseTypes);
         this.isLoading.next(result.loading);
@@ -49,8 +48,7 @@ export class ExerciseTypeService {
       },
     }).subscribe((result: MutationResult) => {
       if (result.errors) {
-        result.errors.map((err: GraphQLError) =>
-          this.alertService.createGraphQLErrorAlert(err));
+        this.alertService.graphQLErrorAlertHandler(result.errors);
       } else {
         let message: string = "ExerciseType " + result.data.addExerciseType.name + " been successfully created.";
         this.alertService.addSuccessAlert(message);
@@ -66,8 +64,7 @@ export class ExerciseTypeService {
       },
     }).subscribe((result: MutationResult) => {
       if (result.errors) {
-        result.errors.map((err: GraphQLError) =>
-          this.alertService.createGraphQLErrorAlert(err));
+        this.alertService.graphQLErrorAlertHandler(result.errors);
       } else {
         let message: string = "ExerciseType " + result.data.modifyExerciseType.name + " has been successfully updated.";
         this.alertService.addSuccessAlert(message);
@@ -83,8 +80,7 @@ export class ExerciseTypeService {
       },
     }).subscribe((result: MutationResult) => {
       if (result.errors) {
-        result.errors.map((err: GraphQLError) =>
-          this.alertService.createGraphQLErrorAlert(err));
+        this.alertService.graphQLErrorAlertHandler(result.errors);
       } else {
         let message: string = "ExerciseType " + exerciseType.name + " has been successfully deleted.";
         this.alertService.addSuccessAlert(message);
