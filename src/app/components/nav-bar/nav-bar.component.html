@@ -81,18 +81,7 @@
             </li>
           </ul>
         </div>
-        <a *ngIf="!isLogged"
-           class="navbar-nav nav-link h4"
-           routerLink="/login"
-        >
-          Login
-        </a>
-        <button (click)="logout()"
-                *ngIf="isLogged"
-                class="navbar-nav nav-link h4"
-        >
-          Logout
-        </button>
+        <app-nav-bar-login/>
       </div>
     </div>
   </div>
