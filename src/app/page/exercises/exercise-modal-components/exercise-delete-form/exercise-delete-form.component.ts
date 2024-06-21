@@ -15,7 +15,7 @@ export class ExerciseDeleteFormComponent implements AfterViewInit {
 
   @Input() exercise!: Exercise | undefined;
   @Input() btnCloseRef!: HTMLButtonElement;
-  @Input() eventsSubject!: Observable<void> | undefined;
+  @Input() submitEvents!: Observable<void> | undefined;
 
   @Output() errorOccurred: EventEmitter<GraphQLError> = new EventEmitter<GraphQLError>();
   @Output() muscleDelete: EventEmitter<Exercise> = new EventEmitter<Exercise>();
@@ -23,8 +23,8 @@ export class ExerciseDeleteFormComponent implements AfterViewInit {
   exerciseService: ExerciseService = inject(ExerciseService);
 
   ngAfterViewInit() {
-    if (this.eventsSubject)
-      this.eventsSubscription = this.eventsSubject.subscribe(() => this.onSubmit());
+    if (this.submitEvents)
+      this.eventsSubscription = this.submitEvents.subscribe(() => this.onSubmit());
   }
 
   onSubmit() {

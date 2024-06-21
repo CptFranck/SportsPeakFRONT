@@ -34,7 +34,7 @@ export class ExerciseEntityFormComponent implements OnInit, AfterViewInit {
 
   @Input() isAdmin: boolean = false;
   @Input() btnCloseRef!: HTMLButtonElement;
-  @Input() eventsSubject!: Observable<void> | undefined;
+  @Input() submitEvents!: Observable<void> | undefined;
 
   @Output() newExerciseAdded: EventEmitter<Exercise> = new EventEmitter<Exercise>();
   @Output() exerciseUpdated: EventEmitter<Exercise> = new EventEmitter<Exercise>();
@@ -52,8 +52,8 @@ export class ExerciseEntityFormComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    if (this.eventsSubject)
-      this.eventsSubscription = this.eventsSubject.subscribe(() => this.onSubmit());
+    if (this.submitEvents)
+      this.eventsSubscription = this.submitEvents.subscribe(() => this.onSubmit());
   }
 
   initializeMuscleForm() {

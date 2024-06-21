@@ -10,14 +10,14 @@
            [title]="modalTitle"
 >
 </app-modal>
-<ng-template #modalTemplate let-btnClose="btnClose" let-eventsSubject="eventsSubject">
+<ng-template #modalTemplate let-btnClose="btnClose" let-submitEvents="submitEvents">
   <app-exercise-entity-form (errorOccurred)="setAlertError($event)"
                             (exerciseUpdated)="setAlertSuccessUpdated($event)"
                             (newExerciseAdded)="setAlertSuccessAdded($event)"
                             *ngIf="action === ActionType.create || action === ActionType.update"
                             [btnCloseRef]="btnClose"
-                            [eventsSubject]="eventsSubject"
                             [exerciseInput]="exercise"
+                            [submitEvents]="submitEvents"
   />
   <app-exercise-details-display *ngIf="action === ActionType.read"
                                 [exerciseInput]="exercise"/>
@@ -25,6 +25,6 @@
                             (muscleDelete)="setAlertSuccessDeleted($event)"
                             *ngIf="action === ActionType.delete"
                             [btnCloseRef]="btnClose"
-                            [eventsSubject]="eventsSubject"
-                            [exercise]="exercise"/>
+                            [exercise]="exercise"
+                            [submitEvents]="submitEvents"/>
 </ng-template>
