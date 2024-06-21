@@ -18,13 +18,14 @@ export class ModalComponent {
   @Input() title!: string;
   @Input() staticBackdrop: boolean = false;
   @Input() contentTemplate: TemplateRef<any> | undefined;
+
   @ViewChild("btnClose") btnClose: ElementRef | undefined;
 
-  eventsSubject: Subject<void> = new Subject<void>();
+  readonly ActionType = ActionType;
+  submitEvents: Subject<void> = new Subject<void>();
   closeButtonTitle: string = "Close";
   validateButtonClass: string = "btn-success";
   validationButtonTitle: string = "Ok";
-  readonly ActionType = ActionType;
 
   @Input() set actionType(action: ActionType | undefined) {
     this.action = action;
@@ -53,7 +54,7 @@ export class ModalComponent {
   }
 
   onSubmit() {
-    this.eventsSubject.next();
+    this.submitEvents.next();
     if (this.btnClose && this.action === undefined)
       this.btnClose.nativeElement.click();
   }

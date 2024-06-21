@@ -12,7 +12,7 @@
         </button>
       </div>
       <div class="modal-body">
-        <ng-container [ngTemplateOutletContext]="{eventsSubject: eventsSubject, btnClose:btnClose}"
+        <ng-container [ngTemplateOutletContext]="{submitEvents: submitEvents, btnClose:btnClose}"
                       [ngTemplateOutlet]=" contentTemplate || defaultModalNgTemplate">
         </ng-container>
         <ng-template #defaultModalNgTemplate>
