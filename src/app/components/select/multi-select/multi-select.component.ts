@@ -15,6 +15,7 @@ import {NgForOf, NgIf} from "@angular/common";
 import {FormsModule} from "@angular/forms";
 import {Option} from "../../../interface/multi-select/option";
 import {OptionSelected} from "../../../interface/multi-select/optionSelected";
+import {LoadingComponent} from "../../loading/loading.component";
 
 @Component({
   selector: 'app-multi-select',
@@ -23,6 +24,7 @@ import {OptionSelected} from "../../../interface/multi-select/optionSelected";
     NgForOf,
     FormsModule,
     NgIf,
+    LoadingComponent,
   ],
   templateUrl: './multi-select.component.html',
   styleUrl: './multi-select.component.css'
@@ -30,24 +32,25 @@ import {OptionSelected} from "../../../interface/multi-select/optionSelected";
 export class MultiSelectComponent implements OnInit, OnChanges, AfterViewInit {
   displayedSelectedOptions: OptionSelected[] = [];
   @Input() selectedOptions: number[] = [1, 2, 3, 4];
-  @Output() onChange: EventEmitter<number[]> = new EventEmitter<number[]>();
   @Input() optionList: Option[] = [
     {id: "1", title: "un", value: "un", description: "ceci est un chiffre, 123456789"},
     {id: "2", title: "deux", value: "deux", description: "ceci est un chiffre"},
     {id: "3", title: "trois", value: "trois", description: "ceci est un chiffre"},
     {id: "4", title: "quatrequatrequatrequatre", value: "quatre", description: "ceci est un chiffre"},
   ];
+  @Input() isLoading: boolean = true;
   @Input() addDescriptionToTag: boolean = false; // can add description to the tag
   @Input() addDescriptionToOption: boolean = false; // can add description to option field
   @Input() limitOfDisplayedSelectedOptions: number = 0;
+
+  @Output() onTouched: EventEmitter<boolean> = new EventEmitter<boolean>();
+  @Output() onChange: EventEmitter<number[]> = new EventEmitter<number[]>();
 
   @ViewChild('allTagsOption') allTagsOption!: ElementRef;
   @ViewChild('selectBox') selectBox!: ElementRef;
   @ViewChild('noResultMessage') noResultMessage!: ElementRef;
   @ViewChild('searchInput') searchInput!: ElementRef;
   @ViewChildren('option') options!: QueryList<ElementRef>;
-
-  @Output() onTouched = new EventEmitter<boolean>();
 
   ngOnInit() {
     this.updateDisplayedSelectedOptions();
