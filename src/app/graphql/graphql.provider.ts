@@ -1,26 +1,27 @@
 import {Apollo, APOLLO_OPTIONS} from 'apollo-angular';
-import {HttpLink} from 'apollo-angular/http';
+import {HttpLink, HttpLinkHandler} from 'apollo-angular/http';
 import {ApplicationConfig, inject} from '@angular/core';
 import {ApolloClientOptions, ApolloLink, InMemoryCache} from '@apollo/client/core';
 import {AlertService} from "../services/alert/alert.service";
-import {onError} from "@apollo/client/link/error";
+import {ErrorResponse, onError} from "@apollo/client/link/error";
 import {setContext} from "@apollo/client/link/context";
 import {TokenService} from "../services/token/token.service";
+import {AuthToken} from "../interface/dto/token";
 
 // URL of the GraphQL server here
-const uri = 'http://localhost:8080/service/api/graphql';
+const uri: string = 'http://localhost:8080/service/api/graphql';
 
 function apolloOptionsFactory(): ApolloClientOptions<any> {
-  const httpLink = inject(HttpLink);
-  const alertService = inject(AlertService)
-  const tokenService = inject(TokenService)
+  const httpLink: HttpLink = inject(HttpLink);
+  const alertService: AlertService = inject(AlertService)
+  const tokenService: TokenService = inject(TokenService)
 
-  const auth = setContext((operation, context) => {
-    const authToken = tokenService.getCurrentToken();
+  const auth: ApolloLink = setContext(() => {
+    const authToken: AuthToken | null = tokenService.getCurrentToken();
     if (!authToken) {
       return {};
     }
-    const isExpired = authToken.expiration < new Date();
+    const isExpired: boolean = authToken.expiration < new Date();
     if (isExpired) {
       return {};
     }
@@ -31,17 +32,14 @@ function apolloOptionsFactory(): ApolloClientOptions<any> {
     };
   });
 
-  const errorLinkHandler = onError(({graphQLErrors, networkError}) => {
-    if (graphQLErrors)
-      graphQLErrors.map((graphQlError) =>
-        alertService.createGraphQLErrorAlert(graphQlError)
-      );
-
-    if (networkError)
-      alertService.createNetWorkErrorAlert(networkError)
+  const errorLinkHandler: ApolloLink = onError((errorResponse: ErrorResponse) => {
+    if (errorResponse.graphQLErrors)
+      alertService.graphQLErrorAlertHandler(errorResponse.graphQLErrors);
+    if (errorResponse.networkError)
+      alertService.createNetWorkErrorAlert(errorResponse.networkError)
   });
 
-  const HttpLinkHandler = httpLink.create({uri})
+  const HttpLinkHandler: HttpLinkHandler = httpLink.create({uri})
   return {
     link: ApolloLink.from([
       auth,
