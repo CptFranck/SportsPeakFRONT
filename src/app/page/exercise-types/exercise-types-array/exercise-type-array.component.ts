@@ -18,35 +18,37 @@ import {ModalButtonComponent} from "../../../components/modal/modal-button/modal
 export class ExerciseTypeArrayComponent implements OnInit {
   @Input() exerciseTypes!: ExerciseType[];
   @Input() modalId!: string;
-  @Output() actionExerciseType = new EventEmitter<FormIndicator>();
+
+  @Output() actionExerciseType: EventEmitter<FormIndicator> = new EventEmitter<FormIndicator>();
+
   showDetails: { [id: string]: boolean } = {};
 
   ngOnInit(): void {
-    this.exerciseTypes.map(exerciseType => this.showDetails[exerciseType.id] = false)
+    this.exerciseTypes.map((exerciseType: ExerciseType) => this.showDetails[exerciseType.id] = false);
   }
 
   expendExerciseTypeDetails(id: string): void {
-    this.showDetails[id] = !this.showDetails[id]
+    this.showDetails[id] = !this.showDetails[id];
   }
 
   showExerciseTypeDetails(exerciseType: ExerciseType): void {
     this.actionExerciseType.emit({
       actionType: ActionType.read,
       object: exerciseType
-    })
+    });
   }
 
   modifyExerciseType(exerciseType: ExerciseType) {
     this.actionExerciseType.emit({
       actionType: ActionType.update,
       object: exerciseType
-    })
+    });
   }
 
   delExerciseType(exerciseType: ExerciseType) {
     this.actionExerciseType.emit({
       actionType: ActionType.delete,
       object: exerciseType
-    })
+    });
   }
 }
