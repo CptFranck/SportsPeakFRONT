@@ -1,6 +1,4 @@
-import {Component, inject, Input, TemplateRef, ViewChild} from '@angular/core';
-import {AlertService} from "../../../services/alert/alert.service";
-import {GraphQLError} from "graphql/error";
+import {Component, Input, TemplateRef, ViewChild} from '@angular/core';
 import {ModalButtonComponent} from "../../../components/modal/modal-button/modal-button.component";
 import {ModalComponent} from "../../../components/modal/modal/modal.component";
 import {
@@ -46,33 +44,14 @@ export class ExerciseModalComponent {
   @Input() exerciseModalId!: string;
   @Input() exercise: Exercise | undefined;
   @Input() action!: ActionType;
+
   @ViewChild("modalTemplate") modalTemplate!: TemplateRef<any>
 
-  alertService: AlertService = inject(AlertService);
   protected readonly ActionType = ActionType;
 
   onClick(value: undefined) {
     this.exercise = value
     this.action = ActionType.create
     this.modalTitle = "Add new Exercise";
-  }
-
-  setAlertError(graphQLError: GraphQLError) {
-    this.alertService.createGraphQLErrorAlert(graphQLError);
-  }
-
-  setAlertSuccessAdded(exercise: Exercise) {
-    let message = "Exercise " + exercise.name + " been successfully created."
-    this.alertService.addSuccessAlert(message);
-  }
-
-  setAlertSuccessUpdated(exercise: Exercise) {
-    let message = "Exercise " + exercise.name + " has been successfully updated."
-    this.alertService.addSuccessAlert(message);
-  }
-
-  setAlertSuccessDeleted(exercise: Exercise) {
-    let message = "Exercise " + exercise.name + " has been successfully deleted."
-    this.alertService.addSuccessAlert(message);
   }
 }
