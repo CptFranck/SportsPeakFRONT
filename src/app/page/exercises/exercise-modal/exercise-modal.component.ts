@@ -50,8 +50,8 @@ export class ExerciseModalComponent {
   protected readonly ActionType = ActionType;
 
   onClick(value: undefined) {
-    this.exercise = value
-    this.action = ActionType.create
+    this.exercise = value;
+    this.action = ActionType.create;
     this.modalTitle = "Add new Exercise";
   }
 }

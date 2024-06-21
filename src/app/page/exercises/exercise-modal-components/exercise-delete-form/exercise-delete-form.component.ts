@@ -26,6 +26,6 @@ export class ExerciseDeleteFormComponent implements AfterViewInit {
   onSubmit() {
     if (!this.exercise) return;
     this.exerciseService.deleteExercise(this.exercise);
-    this.btnCloseRef.click()
+    this.btnCloseRef.click();
   }
 }

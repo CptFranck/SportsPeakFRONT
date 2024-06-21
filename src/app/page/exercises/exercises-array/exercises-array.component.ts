@@ -24,31 +24,31 @@ export class ExercisesArrayComponent implements OnChanges {
   showDetails: { [id: string]: boolean } = {};
 
   ngOnChanges(): void {
-    this.exercises.forEach((exercise: Exercise) => this.showDetails[exercise.id] = false)
+    this.exercises.forEach((exercise: Exercise) => this.showDetails[exercise.id] = false);
   }
 
   expendExerciseDetails(id: string): void {
-    this.showDetails[id] = !this.showDetails[id]
+    this.showDetails[id] = !this.showDetails[id];
   }
 
   showExerciseDetails(exercise: Exercise): void {
     this.actionExercise.emit({
       actionType: ActionType.read,
       object: exercise
-    })
+    });
   }
 
   modifyExercise(exercise: Exercise) {
     this.actionExercise.emit({
       actionType: ActionType.update,
       object: exercise
-    })
+    });
   }
 
   delExercise(exercise: Exercise) {
     this.actionExercise.emit({
       actionType: ActionType.delete,
       object: exercise
-    })
+    });
   }
 }

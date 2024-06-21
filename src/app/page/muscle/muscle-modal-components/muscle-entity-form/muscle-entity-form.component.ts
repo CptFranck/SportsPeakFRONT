@@ -83,7 +83,7 @@ export class MuscleEntityFormComponent implements OnInit, AfterViewInit {
   }
 
   onSubmit() {
-    if (!this.muscleForm) return
+    if (!this.muscleForm) return;
     if (this.muscleForm.valid) {
       this.submitInvalidForm = false;
       if (!this.muscleForm.value.id) {

@@ -45,7 +45,7 @@ export class ExerciseEntityFormComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {
-    this.initializeMuscleForm()
+    this.initializeMuscleForm();
   }
 
   ngAfterViewInit() {
@@ -55,7 +55,7 @@ export class ExerciseEntityFormComponent implements OnInit, AfterViewInit {
 
   initializeMuscleForm() {
     const exerciseIdsValidator =
-      this.isAdmin ? null : Validators.required
+      this.isAdmin ? null : Validators.required;
     const exerciseName: string = this.exercise ? this.exercise.name : "";
     const exerciseDescription: string = this.exercise ? this.exercise.description : "";
     const exerciseGoal: string = this.exercise ? this.exercise.goal : "";
@@ -88,21 +88,21 @@ export class ExerciseEntityFormComponent implements OnInit, AfterViewInit {
     });
 
     if (this.exercise)
-      this.exerciseForm.addControl("id", new FormControl(this.exercise.id))
+      this.exerciseForm.addControl("id", new FormControl(this.exercise.id));
   }
 
   onSubmit() {
-    if (!this.exerciseForm) return
+    if (!this.exerciseForm) return;
     if (this.exerciseForm.valid) {
       this.submitInvalidForm = false;
       if (!this.exerciseForm.value.id) {
-        this.exerciseService.addExercise(this.exerciseForm)
+        this.exerciseService.addExercise(this.exerciseForm);
       } else {
-        this.exerciseService.modifyExercise(this.exerciseForm)
+        this.exerciseService.modifyExercise(this.exerciseForm);
       }
-      this.btnCloseRef.click()
+      this.btnCloseRef.click();
     } else {
-      this.submitInvalidForm = true
+      this.submitInvalidForm = true;
     }
   }
 }

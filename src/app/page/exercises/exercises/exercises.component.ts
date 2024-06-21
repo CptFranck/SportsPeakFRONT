@@ -29,13 +29,13 @@ export class ExercisesComponent implements OnInit {
   private exerciseService: ExerciseService = inject(ExerciseService);
 
   ngOnInit(): void {
-    this.exerciseService.exercises.subscribe(exercises => this.exercises = exercises);
-    this.exerciseService.isLoading.subscribe(isLoading => this.loading = isLoading);
+    this.exerciseService.exercises.subscribe((exercises: Exercise[]) => this.exercises = exercises);
+    this.exerciseService.isLoading.subscribe((isLoading: boolean) => this.loading = isLoading);
   }
 
   setExercise(formIndicator: FormIndicator) {
-    this.exercise = formIndicator.object
-    this.action = formIndicator.actionType
-    this.modalTitle = formIndicator.object.name
+    this.exercise = formIndicator.object;
+    this.action = formIndicator.actionType;
+    this.modalTitle = formIndicator.object.name;
   }
 }
