@@ -16,45 +16,9 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav mx-auto h4">
-        <li class="nav-item">
-          <a
-            class="nav-link py-auto"
-            routerLink="/exercises"
-            routerLinkActive="active"
-          >
-            Exercises
-          </a>
-        </li>
-        <li class="nav-item">
-          <a
-            class="nav-link py-auto"
-            routerLink="/exercise-types"
-            routerLinkActive="active"
-          >
-            Exercise Types
-          </a>
-        </li>
-        <li class="nav-item">
-          <a
-            class="nav-link py-auto"
-            routerLink="/muscles"
-            routerLinkActive="active"
-          >
-            Muscles
-          </a>
-        </li>
-
-      </ul>
-      <!--      <ul class="navbar-nav h4">-->
-      <!--        <li class="nav-item px-0">-->
-      <!--          <a class="nav-link">FR</a>-->
-      <!--        </li>-->
-      <!--        <li class="nav-item px-0">-->
-      <!--          <a class="nav-link">EN</a>-->
-      <!--        </li>-->
-      <!--      </ul>-->
-
+      <app-nav-bar-main-menu/>
+      <app-nav-bar-admin-menu/>
+      <app-nav-bar-language-selector/>
       <div class="navbar-nav h4">
         <app-nav-bar-user-menu/>
         <app-nav-bar-login/>
