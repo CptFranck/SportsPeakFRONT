@@ -1,8 +1,7 @@
-import {AfterViewInit, Component, EventEmitter, inject, Input, Output} from '@angular/core';
+import {AfterViewInit, Component, inject, Input} from '@angular/core';
 import {NgForOf} from "@angular/common";
 import {Muscle} from "../../../../interface/dto/muscle";
 import {Observable, Subscription} from "rxjs";
-import {GraphQLError} from "graphql/error";
 import {MuscleService} from "../../../../services/muscle/muscle.service";
 
 @Component({
@@ -20,9 +19,6 @@ export class muscleDeleteFormComponent implements AfterViewInit {
   @Input() btnCloseRef!: HTMLButtonElement;
   @Input() eventsSubject!: Observable<void> | undefined;
 
-  @Output() errorOccurred: EventEmitter<GraphQLError> = new EventEmitter<GraphQLError>();
-  @Output() muscleDelete: EventEmitter<Muscle> = new EventEmitter<Muscle>();
-
   muscleService: MuscleService = inject(MuscleService);
 
   ngAfterViewInit() {
@@ -32,14 +28,7 @@ export class muscleDeleteFormComponent implements AfterViewInit {
 
   onSubmit() {
     if (!this.muscle) return;
-    this.muscleService.deleteMuscle(this.muscle.id)
-      .subscribe(({error}: any) => {
-        if (error) {
-          this.errorOccurred.emit(error);
-        } else {
-          this.muscleDelete.emit(this.muscle);
-        }
-      });
+    this.muscleService.deleteMuscle(this.muscle)
     this.btnCloseRef.click()
   }
 }
