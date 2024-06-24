@@ -32,6 +32,16 @@ export class TokenService {
     this.localStorageService.removeData("authToken");
   }
 
+  isTokenExpired() {
+    if (this.authToken && this.authToken.value) {
+      const expirationDate: Date = new Date(this.authToken.value.expiration)
+      const isExpired: boolean = expirationDate < new Date();
+      if (isExpired)
+        return true
+    }
+    return false;
+  }
+
   private getSavedToken(): AuthToken | null {
     let authTokenJson: string | null = this.localStorageService.getData("authToken")
     if (authTokenJson) {
