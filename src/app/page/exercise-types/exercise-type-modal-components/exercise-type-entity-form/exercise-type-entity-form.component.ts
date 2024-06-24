@@ -2,7 +2,7 @@ import {AfterViewInit, Component, inject, Input, OnInit} from '@angular/core';
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {Observable, Subscription} from "rxjs";
 import {InputControlComponent} from "../../../../components/input-control/input-control.component";
-import {ExerciseSelectorComponent} from "../../../../components/select/exercises-selector/exercise-selector.component";
+import {ExerciseSelectorComponent} from "../../../../components/select/exercise-selector/exercise-selector.component";
 import {ExerciseType} from "../../../../interface/dto/exerciseType";
 import {NgIf} from "@angular/common";
 import {ExerciseTypeService} from "../../../../services/exercise-type/exercise-type.service";
