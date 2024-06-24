@@ -9,7 +9,6 @@ import {Auth} from "../../interface/dto/auth";
 import {UserLoggedService} from "../userLogged/user-logged.service";
 import {TokenService} from "../token/token.service";
 import {AuthToken} from "../../interface/dto/token";
-import {ApolloQueryResult} from "@apollo/client";
 
 @Injectable({
   providedIn: 'root'
@@ -52,12 +51,12 @@ export class AuthService {
   }
 
   login(loginForm: FormGroup) {
-    return this.apollo.query({
-      query: LOGIN,
+    return this.apollo.mutate({
+      mutation: LOGIN,
       variables: {
         inputCredentials: loginForm.value,
       },
-    }).subscribe((result: ApolloQueryResult<any>) => {
+    }).subscribe((result: MutationResult) => {
       if (result.errors) {
         this.alertService.graphQLErrorAlertHandler(result.errors);
       } else {

@@ -1,7 +1,7 @@
 import {gql} from "apollo-angular";
 
 export const LOGIN = gql`
-  query ($inputCredentials: InputCredentials!){
+  mutation ($inputCredentials: InputCredentials!){
     login(inputCredentials: $inputCredentials){
       tokenType
       accessToken
