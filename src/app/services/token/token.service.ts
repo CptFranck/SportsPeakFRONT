@@ -14,7 +14,8 @@ export class TokenService {
   constructor() {
     let token: AuthToken | null = this.getSavedToken();
     if (token)
-      this.authToken.next(token);
+      if (!this.isTokenExpired(token))
+        this.authToken.next(token);
   }
 
   getCurrentToken() {
@@ -32,10 +33,9 @@ export class TokenService {
     this.localStorageService.removeData("authToken");
   }
 
-  isTokenExpired() {
-    if (this.authToken && this.authToken.value) {
-      const expirationDate: Date = new Date(this.authToken.value.expiration)
-      const isExpired: boolean = expirationDate < new Date();
+  private isTokenExpired(authToken: AuthToken) {
+    if (authToken) {
+      const isExpired: boolean = new Date(authToken.expiration) < new Date();
       if (isExpired)
         return true
     }

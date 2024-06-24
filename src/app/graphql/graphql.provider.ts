@@ -21,10 +21,6 @@ function apolloOptionsFactory(): ApolloClientOptions<any> {
     if (!authToken) {
       return {};
     }
-    const isExpired: boolean = authToken.expiration < new Date();
-    if (isExpired) {
-      return {};
-    }
     return {
       headers: {
         Authorization: `${authToken.tokenType} ${authToken.accessToken}`,

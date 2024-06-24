@@ -25,10 +25,9 @@ export class AuthService {
   private tokenService: TokenService = inject(TokenService);
 
   constructor() {
-    let isTokenSaved: boolean = !!this.tokenService.getCurrentToken();
-    let isTokenExpired: boolean = this.tokenService.isTokenExpired();
+    let isValidTokenSaved: boolean = !!this.tokenService.getCurrentToken();
     let isUserSaved: boolean = !!this.userService.getCurrentUser();
-    if (isTokenSaved && isUserSaved && !isTokenExpired)
+    if (isValidTokenSaved && isUserSaved)
       this.isAuthenticated.next(true);
     else
       this.removeDataAuth();
@@ -37,7 +36,6 @@ export class AuthService {
   register(registerFormGroup: FormGroup) {
     let inputNewUser = registerFormGroup.value
     delete inputNewUser.confirmPassword
-    console.log(inputNewUser)
     return this.apollo.mutate({
       mutation: REGISTER,
       variables: {
