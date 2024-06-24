@@ -1,16 +1,23 @@
-import {Component, inject, Input, OnInit} from '@angular/core';
+import {Component, forwardRef, inject, Input, OnInit} from '@angular/core';
 import {Option} from "../../../interface/multi-select/option";
-import {ControlValueAccessor} from "@angular/forms";
+import {ControlValueAccessor, NG_VALUE_ACCESSOR} from "@angular/forms";
 import {RoleService} from "../../../services/role/role.service";
 import {MultiSelectComponent} from "../multi-select/multi-select.component";
 import {Role} from "../../../interface/dto/role";
 import {Privilege} from "../../../interface/dto/privilege";
 
 @Component({
-  selector: 'app-role-selector',
+  selector: 'app-roles-selector',
   standalone: true,
   imports: [
     MultiSelectComponent
+  ],
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => RoleSelectorComponent),
+      multi: true,
+    }
   ],
   templateUrl: './role-selector.component.html',
 })
@@ -39,14 +46,13 @@ export class RoleSelectorComponent implements OnInit, ControlValueAccessor {
           description: "Privilege(s) included : " + role.privileges.map((privilege: Privilege) => privilege.name).join(", ")
         });
       });
-      console.log(roles)
       this.roleOptions = [...options];
     });
     this.roleService.isLoading.subscribe((loading: boolean) => this.loading = loading);
   }
 
-  writeValue(exerciseIds: number[]): void {
-    this.roleIds = exerciseIds;
+  writeValue(roleIds: number[]): void {
+    this.roleIds = roleIds;
   }
 
   registerOnChange(fn: (value: number[]) => void): void {
