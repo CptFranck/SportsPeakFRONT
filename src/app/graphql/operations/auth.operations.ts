@@ -25,8 +25,8 @@ export const LOGIN = gql`
   }`;
 
 export const REGISTER = gql`
-  mutation ($inputNewUser : InputNewUser!) {
-    register(inputNewUser: $inputNewUser){
+  mutation ($inputRegisterNewUser : InputRegisterNewUser!) {
+    register(inputRegisterNewUser: $inputRegisterNewUser){
       tokenType
       accessToken
       expiration

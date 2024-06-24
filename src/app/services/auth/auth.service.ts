@@ -38,7 +38,7 @@ export class AuthService {
     return this.apollo.mutate({
       mutation: REGISTER,
       variables: {
-        inputNewUser: inputNewUser,
+        inputRegisterNewUser: inputNewUser,
       },
     }).subscribe((result: MutationResult) => {
       if (result.errors) {
