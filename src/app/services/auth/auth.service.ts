@@ -6,7 +6,7 @@ import {BehaviorSubject} from "rxjs";
 import {AlertService} from "../alert/alert.service";
 import {Router} from "@angular/router";
 import {Auth} from "../../interface/dto/auth";
-import {UserService} from "../user/user.service";
+import {UserLoggedService} from "../userLogged/user-logged.service";
 import {TokenService} from "../token/token.service";
 import {AuthToken} from "../../interface/dto/token";
 import {ApolloQueryResult} from "@apollo/client";
@@ -20,7 +20,7 @@ export class AuthService {
 
   private router: Router = inject(Router);
   private apollo: Apollo = inject(Apollo);
-  private userService: UserService = inject(UserService);
+  private userService: UserLoggedService = inject(UserLoggedService);
   private alertService: AlertService = inject(AlertService);
   private tokenService: TokenService = inject(TokenService);
 

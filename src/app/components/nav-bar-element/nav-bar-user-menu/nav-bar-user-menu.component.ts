@@ -1,6 +1,6 @@
 import {Component, inject, OnInit} from '@angular/core';
 import {User} from "../../../interface/dto/user";
-import {UserService} from "../../../services/user/user.service";
+import {UserLoggedService} from "../../../services/userLogged/user-logged.service";
 import {NgForOf, NgIf} from "@angular/common";
 
 @Component({
@@ -15,7 +15,7 @@ import {NgForOf, NgIf} from "@angular/common";
 export class NavBarUserMenuComponent implements OnInit {
   user: User | null = null;
 
-  private userService: UserService = inject(UserService);
+  private userService: UserLoggedService = inject(UserLoggedService);
 
   ngOnInit() {
     this.userService.currentUser.subscribe((user: User | null) => {
