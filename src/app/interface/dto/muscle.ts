@@ -5,5 +5,5 @@ export interface Muscle {
   name: string
   description: string
   function: string
-  exercises?: Exercise[]
+  exercises: Exercise[]
 }

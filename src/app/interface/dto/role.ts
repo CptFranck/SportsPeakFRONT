@@ -1,4 +1,7 @@
+import {Privilege} from "./privilege";
+
 export interface Role {
-  id: number,
-  name: String,
+  id: string,
+  name: string,
+  privileges: Privilege[],
 }
