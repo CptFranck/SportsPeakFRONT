@@ -1,0 +1,36 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-auto">
+      <p><label class="form-label fw-bold">Email : </label> {{ user?.email }}</p>
+    </div>
+    <div class="col-auto">
+      <p><label class="form-label fw-bold">Username : </label> {{ user?.username }}</p>
+    </div>
+    <div class="row">
+      <div class="col-auto">
+        <p><label class="form-label fw-bold">Firstname : </label> {{ user?.firstName }}</p>
+      </div>
+      <div class="col-auto">
+        <p><label class="form-label fw-bold">LastName : </label> {{ user?.lastName }}</p>
+      </div>
+    </div>
+  </div>
+  <div class="mb-3">
+    <label class="form-label fw-bold">Roles :</label>
+    <p *ngIf="user?.roles?.length === 0">No roles attributed to this user</p>
+    <ol *ngIf="user?.roles?.length !== 0"
+        class="list-group list-group-numbered"
+    >
+      <li *ngFor="let role of user?.roles"
+          class="list-group-item d-flex justify-content-between align-items-start"
+      >
+        <div class="ms-2 me-auto">
+          <p class="fw-bold">{{ role?.name }}</p>
+          <label class="form-label fw-bold">Privilege(s) :</label>
+          <p *ngIf="role?.privileges?.length === 0">No privileges attributed to this role</p>
+          <p *ngIf="role?.privileges?.length !== 0">{{ rolePrivileges[role.id] }}</p>
+        </div>
+      </li>
+    </ol>
+  </div>
+</div>
