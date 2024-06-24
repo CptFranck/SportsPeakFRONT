@@ -18,16 +18,13 @@ export class InputControlComponent implements OnInit {
   @Input() errorMessage: string = "";
   @Input() submitInvalid!: boolean;
 
-  constructor() {
-  }
-
   ngOnInit() {
     if (this.rules !== undefined)
       this.rules = " (" + this.rules + ")"
     else
       this.rules = "";
 
-    let fieldName = "";
+    let fieldName: string = "";
     if (this.displayedFieldName !== undefined)
       fieldName = this.displayedFieldName;
     else
