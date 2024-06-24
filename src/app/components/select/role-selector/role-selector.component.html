@@ -1,0 +1,7 @@
+<app-multi-select (onChange)="setRoleIds($event)"
+                  (onTouched)="onTouched($event)"
+                  [addDescriptionToOption]="true"
+                  [isLoading]="loading"
+                  [optionList]="roleOptions"
+                  [selectedOptions]="roleIds"
+/>
