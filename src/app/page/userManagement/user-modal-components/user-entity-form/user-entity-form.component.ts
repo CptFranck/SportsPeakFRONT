@@ -14,6 +14,7 @@ import {UserService} from "../../../../services/user/user.service";
 import {InputControlComponent} from "../../../../components/input-control/input-control.component";
 import {NgIf} from "@angular/common";
 import {Role} from "../../../../interface/dto/role";
+import {RoleSelectorComponent} from "../../../../components/select/role-selector-test/role-selector.component";
 
 @Component({
   selector: 'app-user-entity-form',
@@ -21,7 +22,8 @@ import {Role} from "../../../../interface/dto/role";
   imports: [
     InputControlComponent,
     NgIf,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    RoleSelectorComponent,
   ],
   templateUrl: './user-entity-form.component.html',
 })
@@ -52,7 +54,7 @@ export class UserEntityFormComponent implements OnInit, AfterViewInit {
   }
 
   initializeMuscleForm() {
-    const exerciseIdsValidator =
+    const roleIdsValidator =
       this.isAdmin ? null : Validators.required;
     const userFirstname: string = this.user ? this.user.firstName : "";
     const userLastname: string = this.user ? this.user.firstName : "";
@@ -84,6 +86,9 @@ export class UserEntityFormComponent implements OnInit, AfterViewInit {
           userEmail,
           [Validators.required,
             Validators.email]),
+        roleIds: new FormControl(
+          userRoleIds, roleIdsValidator
+        ),
         password: new FormControl(
           password,
           [Validators.required,
