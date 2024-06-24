@@ -1,0 +1,67 @@
+<table class="table">
+  <thead>
+  <tr>
+    <th class="col-auto" scope="col">Email</th>
+    <th class="col-auto" scope="col">FirstName</th>
+    <th class="col-auto" scope="col">LastName</th>
+    <th class="col-auto" scope="col">Username</th>
+    <th class="col-auto" scope="col">Roles</th>
+    <th class="col-1 text-center" scope="col">Details</th>
+    <th class="col-1 text-center" scope="col">Modify</th>
+    <th class="col-1 text-center" scope="col">Delete</th>
+  </tr>
+  </thead>
+  <tbody class="table-group-divider">
+  <tr *ngFor="let user of users">
+    <td>{{ user.email }}</td>
+    <td>{{ user.firstName }}</td>
+    <td>{{ user.lastName }}</td>
+    <td>{{ user.username }}</td>
+    <td>
+      <ul class="list-group list-group-flush">
+        <li
+          *ngFor="let role of user.roles"
+          class="list-group-item p-0">
+          {{ role.name }}
+        </li>
+      </ul>
+    </td>
+    <td>
+      <div class="col p-1 text-center">
+        <app-modal-button
+          (onCLickModalButton)="showUserDetails($event)"
+          [modalId]="modalId"
+          [modalValue]="user"
+          btnClass="btn-info"
+        >
+          <i class="fa-solid fa-eye"></i>
+        </app-modal-button>
+      </div>
+    </td>
+    <td>
+      <div class="col p-1 text-center">
+        <app-modal-button
+          (onCLickModalButton)="modifyUser($event)"
+          [modalId]="modalId"
+          [modalValue]="user"
+          btnClass="btn-warning"
+        >
+          <i class="fa-solid fa-pen-to-square"></i>
+        </app-modal-button>
+      </div>
+    </td>
+    <td>
+      <div class="col p-1 text-center">
+        <app-modal-button
+          (onCLickModalButton)="delUser($event)"
+          [modalId]="modalId"
+          [modalValue]="user"
+          btnClass="btn-danger"
+        >
+          <i class="fa-solid fa-trash"></i>
+        </app-modal-button>
+      </div>
+    </td>
+  </tr>
+  </tbody>
+</table>
