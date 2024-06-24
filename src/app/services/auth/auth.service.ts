@@ -26,27 +26,12 @@ export class AuthService {
 
   constructor() {
     let isTokenSaved: boolean = !!this.tokenService.getCurrentToken();
+    let isTokenExpired: boolean = this.tokenService.isTokenExpired();
     let isUserSaved: boolean = !!this.userService.getCurrentUser();
-    if (isTokenSaved && isUserSaved) {
+    if (isTokenSaved && isUserSaved && !isTokenExpired)
       this.isAuthenticated.next(true);
-    } else {
+    else
       this.removeDataAuth();
-    }
-  }
-
-  login(loginForm: FormGroup) {
-    return this.apollo.query({
-      query: LOGIN,
-      variables: {
-        inputCredentials: loginForm.value,
-      },
-    }).subscribe((result: ApolloQueryResult<any>) => {
-      if (result.errors) {
-        this.alertService.graphQLErrorAlertHandler(result.errors);
-      } else {
-        this.setDataAuth(result.data.login);
-      }
-    });
   }
 
   register(registerFormGroup: FormGroup) {
@@ -64,6 +49,21 @@ export class AuthService {
       }
       if (result.data) {
         this.setDataAuth(result.data.register);
+      }
+    });
+  }
+
+  login(loginForm: FormGroup) {
+    return this.apollo.query({
+      query: LOGIN,
+      variables: {
+        inputCredentials: loginForm.value,
+      },
+    }).subscribe((result: ApolloQueryResult<any>) => {
+      if (result.errors) {
+        this.alertService.graphQLErrorAlertHandler(result.errors);
+      } else {
+        this.setDataAuth(result.data.login);
       }
     });
   }
