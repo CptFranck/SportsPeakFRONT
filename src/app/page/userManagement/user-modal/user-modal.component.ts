@@ -48,6 +48,6 @@ export class UserModalComponent {
   onClick(value: undefined) {
     this.user = value;
     this.action = ActionType.create;
-    this.modalTitle = "Add new muscle";
+    this.modalTitle = "Add new user";
   }
 }

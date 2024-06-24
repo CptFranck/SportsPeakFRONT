@@ -58,9 +58,10 @@ export class UserEntityFormComponent implements OnInit, AfterViewInit {
     const userLastname: string = this.user ? this.user.firstName : "";
     const userEmail: string = this.user ? this.user.email : "";
     const userUsername: string = this.user ? this.user.username : "";
-    const userRole: string[] = this.user?.lastName ?
+    const userRoleIds: string[] = this.user?.lastName ?
       this.user.roles?.map((role: Role) => role.id) : [];
     const password: string = "";
+    const confirmPassword: string = "";
 
     this.userForm = new FormGroup({
         firstName: new FormControl(
@@ -91,6 +92,7 @@ export class UserEntityFormComponent implements OnInit, AfterViewInit {
             Validators.pattern('^(?=.*\\d)(?=.*[a-z]+)(?=.*[A-Z]+)[^\\s\\t\\n\\r]{10,}$')
           ]),
         confirmPassword: new FormControl(
+          confirmPassword,
           [Validators.required],
         ),
       },
