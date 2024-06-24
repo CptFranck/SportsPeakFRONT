@@ -1,12 +1,7 @@
 import {inject, Injectable} from '@angular/core';
 import {Apollo, MutationResult} from "apollo-angular";
 import {FormGroup} from "@angular/forms";
-import {
-  ADD_EXERCISE,
-  DEL_EXERCISE,
-  GET_EXERCISES,
-  MOD_EXERCISE
-} from "../../graphql/operations/exercise/exercise.operations";
+import {ADD_EXERCISE, DEL_EXERCISE, GET_EXERCISES, MOD_EXERCISE} from "../../graphql/operations/exercise.operations";
 import {BehaviorSubject} from "rxjs";
 import {AlertService} from "../alert/alert.service";
 import {Exercise} from "../../interface/dto/exercise";
@@ -53,7 +48,6 @@ export class ExerciseService {
         this.alertService.addSuccessAlert(message);
       }
     });
-    ;
   }
 
   modifyExercise(exerciseForm: FormGroup) {

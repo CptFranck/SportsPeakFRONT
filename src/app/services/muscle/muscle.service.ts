@@ -1,6 +1,6 @@
 import {inject, Injectable} from '@angular/core';
 import {Apollo, MutationResult} from "apollo-angular";
-import {ADD_MUSCLE, DEL_MUSCLE, GET_MUSCLES, MOD_MUSCLE} from "../../graphql/operations/muscle/muscle.operations";
+import {ADD_MUSCLE, DEL_MUSCLE, GET_MUSCLES, MOD_MUSCLE} from "../../graphql/operations/muscle.operations";
 import {FormGroup} from "@angular/forms";
 import {BehaviorSubject} from "rxjs";
 import {Muscle} from "../../interface/dto/muscle";
