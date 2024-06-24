@@ -8,7 +8,14 @@ export const GET_USERS = gql`
       firstName
       lastName
       username
-      token
+      roles {
+        id
+        name
+        privileges {
+          id
+          name
+        }
+      }
     }
   }
 `;
@@ -40,7 +47,14 @@ export const MOD_USER = gql`
       firstName
       lastName
       username
-      token
+      roles {
+        id
+        name
+        privileges {
+          id
+          name
+        }
+      }
     }
   }
 `;
