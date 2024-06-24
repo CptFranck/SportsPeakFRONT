@@ -20,7 +20,7 @@ export const GET_ROLES = gql`
   }
 `;
 
-export const ADD_ROLES = gql`
+export const ADD_ROLE = gql`
   mutation ($inputRole : InputRole!){
     addRole(inputNewRole: $inputNewRole) {
       id
@@ -40,7 +40,7 @@ export const ADD_ROLES = gql`
   }
 `;
 
-export const MOD_ROLES = gql`
+export const MOD_ROLE = gql`
   mutation ($inputRole : InputRole!){
     modifyRole(inputRole: $inputRole) {
       id
@@ -60,7 +60,7 @@ export const MOD_ROLES = gql`
   }
 `;
 
-export const DEL_ROLES = gql`
+export const DEL_ROLE = gql`
   mutation ($roleId : Int!){
     deleteRole(roleId: $roleId)
   }
