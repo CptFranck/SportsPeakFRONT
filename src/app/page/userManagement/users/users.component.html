@@ -1,0 +1,20 @@
+<div class="container">
+  <app-loading [loading]="loading"/>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col">
+        <h2>Users saved in database</h2>
+      </div>
+      <div class="col-2">
+        <app-user-modal [action]="action"
+                        [modalTitle]="modalTitle"
+                        [muscleModalId]="muscleModalId"
+                        [user]="user"
+        />
+      </div>
+    </div>
+    <app-users-array (actionUser)="setUser($event)"
+                     [modalId]="muscleModalId"
+                     [users]="users"/>
+  </div>
+</div>
