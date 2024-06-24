@@ -1,0 +1,69 @@
+<form *ngIf="userForm" [formGroup]="userForm" class="d-flex flex-column">
+  <div class="mb-3">
+    <label class="form-label">First Name :</label>
+    <input class="form-control" formControlName="firstName">
+    <app-input-control
+      [formGroup]="userForm"
+      [submitInvalid]="submitInvalidForm"
+      displayedFieldName="first name"
+      formGroupFieldName="firstName"
+      rules="min : 1 ; max : 50"
+    />
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Last Name :</label>
+    <input class="form-control" formControlName="lastName">
+    <app-input-control
+      [formGroup]="userForm"
+      [submitInvalid]="submitInvalidForm"
+      displayedFieldName="last name"
+      formGroupFieldName="lastName"
+      rules="min : 1 ; max : 50"
+    />
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Username :</label>
+    <div class="input-group">
+      <span class="input-group-text">&#64;</span>
+      <input class="form-control" formControlName="username" type="text">
+    </div>
+    <app-input-control
+      [formGroup]="userForm"
+      [submitInvalid]="submitInvalidForm"
+      formGroupFieldName="username"
+      rules="min : 1 ; max : 50 ; support only character, number or underscore ; must not already taken"
+    />
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Email address :</label>
+    <input class="form-control" formControlName="email" type="email">
+    <app-input-control
+      [formGroup]="userForm"
+      [submitInvalid]="submitInvalidForm"
+      formGroupFieldName="email"
+    />
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Password :</label>
+    <input class="form-control" formControlName="password" type="password">
+    <app-input-control
+      [formGroup]="userForm"
+      [submitInvalid]="submitInvalidForm"
+      formGroupFieldName="password"
+      rules="min : 10 ; max : 50 ; at least must contain 1 or more lowercase, uppercase and numeric characters"
+    />
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Confirm Password :</label>
+    <input class="form-control" formControlName="confirmPassword" type="password">
+    <app-input-control
+      [formGroup]="userForm"
+      [submitInvalid]="submitInvalidForm"
+      errorMessage="Passwords do not match"
+      formGroupFieldName="confirmPassword"
+    />
+  </div>
+  <button (click)="onSubmit()" class="float-end ms-auto btn btn-success" type="submit">
+    Register
+  </button>
+</form>
