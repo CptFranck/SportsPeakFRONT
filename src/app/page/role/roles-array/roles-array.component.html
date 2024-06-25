@@ -1,0 +1,71 @@
+<table class="table">
+  <thead>
+  <tr>
+    <th class="col-auto" scope="col">Name</th>
+    <th class="col" scope="col">Privilege(s)</th>
+    <th class="col" scope="col">Attributed to</th>
+    <th class="col-1 text-center" scope="col">Details</th>
+    <th class="col-1 text-center" scope="col">Modify</th>
+    <th class="col-1 text-center" scope="col">Delete</th>
+  </tr>
+  </thead>
+  <tbody class="table-group-divider">
+  <tr *ngFor="let role of roles">
+    <td>{{ role.name }}</td>
+    <td>
+      <ul class="list-group list-group-flush">
+        <li
+          *ngFor="let privilege of role.privileges"
+          class="list-group-item d-flex justify-content-center text-center p-0">
+          {{ privilege.name }}
+        </li>
+      </ul>
+    </td>
+    <td>
+      <ul class="list-group list-group-flush">
+        <li
+          *ngFor="let user of roleUsers[role.id]"
+          class="list-group-item d-flex justify-content-center text-center p-0">
+          {{ user }}
+        </li>
+      </ul>
+    </td>
+    <td>
+      <div class="col p-1 text-center">
+        <app-modal-button
+          (onCLickModalButton)="showRoleDetails($event)"
+          [modalId]="modalId"
+          [modalValue]="role"
+          btnClass="btn-info"
+        >
+          <i class="fa-solid fa-eye"></i>
+        </app-modal-button>
+      </div>
+    </td>
+    <td>
+      <div class="col p-1 text-center">
+        <app-modal-button
+          (onCLickModalButton)="modifyRole($event)"
+          [modalId]="modalId"
+          [modalValue]="role"
+          btnClass="btn-warning"
+        >
+          <i class="fa-solid fa-pen-to-square"></i>
+        </app-modal-button>
+      </div>
+    </td>
+    <td>
+      <div class="col p-1 text-center">
+        <app-modal-button
+          (onCLickModalButton)="delRole($event)"
+          [modalId]="modalId"
+          [modalValue]="role"
+          btnClass="btn-danger"
+        >
+          <i class="fa-solid fa-trash"></i>
+        </app-modal-button>
+      </div>
+    </td>
+  </tr>
+  </tbody>
+</table>
