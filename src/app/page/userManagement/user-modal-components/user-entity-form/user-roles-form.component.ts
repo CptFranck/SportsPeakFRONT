@@ -6,7 +6,7 @@ import {UserService} from "../../../../services/user/user.service";
 import {InputControlComponent} from "../../../../components/input-control/input-control.component";
 import {NgIf} from "@angular/common";
 import {Role} from "../../../../interface/dto/role";
-import {RoleSelectorComponent} from "../../../../components/select/role-selector-test/role-selector.component";
+import {RoleSelectorComponent} from "../../../../components/select/role-selector/role-selector.component";
 
 @Component({
   selector: 'app-user-roles-form',
