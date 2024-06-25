@@ -20,9 +20,9 @@ export const GET_USERS = gql`
   }
 `;
 
-export const ADD_USER = gql`
-  mutation ($inputNewUser : InputNewUser!) {
-    addUser(inputNewUser: $inputNewUser){
+export const MOD_USER_IDENTITY = gql`
+  mutation ($inputUserIdentity : InputUserIdentity!){
+    modifyUserIdentity(inputUserIdentity: $inputUserIdentity) {
       id
       email
       firstName
@@ -39,9 +39,9 @@ export const ADD_USER = gql`
     }
   }`;
 
-export const MOD_USER = gql`
-  mutation ($inputUser : InputUser!){
-    modifyUser(inputUser: $inputUser) {
+export const MOD_USER_ROLES = gql`
+  mutation ($inputUserRoles : InputUserRoles!){
+    modifyUserRoles(inputUserRoles: $inputUserRoles) {
       id
       email
       firstName
@@ -56,8 +56,64 @@ export const MOD_USER = gql`
         }
       }
     }
-  }
-`;
+  }`;
+
+export const MOD_USER_EMAIL = gql`
+  mutation ($inputUserEmail : InputUserEmail!){
+    modifyUserEmail(inputUserEmail: $inputUserEmail) {
+      id
+      email
+      firstName
+      lastName
+      username
+      roles {
+        id
+        name
+        privileges {
+          id
+          name
+        }
+      }
+    }
+  }`;
+
+export const MOD_USER_USERNAME = gql`
+  mutation ($inputUserUsername : InputUserUsername!){
+    modifyUserUsername(inputUserUsername: $inputUserUsername) {
+      id
+      email
+      firstName
+      lastName
+      username
+      roles {
+        id
+        name
+        privileges {
+          id
+          name
+        }
+      }
+    }
+  }`;
+
+export const MOD_USER_PASSWORD = gql`
+  mutation ($inputUserPassword : InputUserPassword!){
+    modifyUserPassword(inputUserPassword: $inputUserPassword) {
+      id
+      email
+      firstName
+      lastName
+      username
+      roles {
+        id
+        name
+        privileges {
+          id
+          name
+        }
+      }
+    }
+  }`;
 
 export const DEL_USER = gql`
   mutation ($userId : Int!){
