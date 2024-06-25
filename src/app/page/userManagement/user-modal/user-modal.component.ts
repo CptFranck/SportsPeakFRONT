@@ -17,7 +17,7 @@ import {UserDeleteFormComponent} from "../user-modal-components/user-delete-form
 import {
   UserDetailsDisplayComponent
 } from "../user-modal-components/user-details-display/user-details-display.component";
-import {UserEntityFormComponent} from "../user-modal-components/user-entity-form/user-entity-form.component";
+import {UserRolesFormComponent} from "../user-modal-components/user-entity-form/user-roles-form.component";
 
 @Component({
   selector: 'app-user-modal',
@@ -31,7 +31,7 @@ import {UserEntityFormComponent} from "../user-modal-components/user-entity-form
     muscleDeleteFormComponent,
     UserDeleteFormComponent,
     UserDetailsDisplayComponent,
-    UserEntityFormComponent
+    UserRolesFormComponent
   ],
   templateUrl: './user-modal.component.html',
 })

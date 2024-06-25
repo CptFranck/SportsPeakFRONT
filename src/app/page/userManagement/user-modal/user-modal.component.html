@@ -5,10 +5,10 @@
 >
 </app-modal>
 <ng-template #modalTemplate let-btnClose="btnClose" let-submitEvents="submitEvents">
-  <app-user-entity-form *ngIf="action === ActionType.create || action === ActionType.update"
-                        [btnCloseRef]="btnClose"
-                        [submitEvents]="submitEvents"
-                        [userInput]="user"
+  <app-user-roles-form *ngIf="action === ActionType.create || action === ActionType.update"
+                       [btnCloseRef]="btnClose"
+                       [submitEvents]="submitEvents"
+                       [userInput]="user"
   />
   <app-user-details-display *ngIf="action === ActionType.read"
                             [userInput]="user"/>
