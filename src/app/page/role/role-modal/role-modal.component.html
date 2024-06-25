@@ -1,0 +1,25 @@
+<app-modal-button (onCLickModalButton)="onClick($event)"
+                  [modalId]="roleModalId"
+>
+  Add new
+  <i class="fa-regular fa-square-plus"></i>
+</app-modal-button>
+<app-modal [actionType]="action"
+           [contentTemplate]="modalTemplate"
+           [modalId]="roleModalId"
+           [title]="modalTitle"
+>
+</app-modal>
+<ng-template #modalTemplate let-btnClose="btnClose" let-submitEvents="submitEvents">
+  <app-role-entity-form *ngIf="action === ActionType.create || action === ActionType.update"
+                        [btnCloseRef]="btnClose"
+                        [muscleInput]="role"
+                        [submitEvents]="submitEvents"
+  />
+  <app-role-details-display *ngIf="action === ActionType.read"
+                            [roleInput]="role"/>
+  <app-role-delete-form *ngIf="action === ActionType.delete"
+                        [btnCloseRef]="btnClose"
+                        [role]="role"
+                        [submitEvents]="submitEvents"/>
+</ng-template>
