@@ -1,0 +1,50 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-auto">
+      <p><label class="form-label fw-bold">Name : </label> {{ role?.name }}</p>
+    </div>
+  </div>
+  <div class="mb-3">
+    <label class="form-label fw-bold">Privilege(s) :</label>
+    <p *ngIf="role?.privileges?.length === 0">No roles attributed to this user</p>
+    <ol *ngIf="role?.privileges?.length !== 0"
+        class="list-group list-group-numbered"
+    >
+      <li *ngFor="let privilege of role?.privileges"
+          class="list-group-item d-flex justify-content-between align-items-start"
+      >
+        <div class="ms-2 me-auto">
+          <p class="fw-bold">{{ privilege?.name }}</p>
+        </div>
+      </li>
+    </ol>
+  </div>
+  <div class="mb-3">
+    <label class="form-label fw-bold">User(s) :</label>
+    <p *ngIf="role?.users?.length === 0">No roles attributed to this user</p>
+    <ol *ngIf="role?.users?.length !== 0"
+        class="list-group list-group-numbered"
+    >
+      <li *ngFor="let user of role?.users"
+          class="list-group-item d-flex justify-content-between align-items-start"
+      >
+        <div class="ms-2 me-auto">
+          <div class="row">
+            <div class="col-auto">
+              <p><label class="form-label fw-bold">Username : </label> {{ user?.username }}</p>
+            </div>
+            <div class="col-auto">
+              <p><label class="form-label fw-bold">First Name : </label> {{ user?.firstName }}</p>
+            </div>
+            <div class="col-auto">
+              <p><label class="form-label fw-bold">last Name : </label> {{ user?.lastName }}</p>
+            </div>
+            <div class="col-auto">
+              <p><label class="form-label fw-bold">Email : </label> {{ user?.email }}</p>
+            </div>
+          </div>
+        </div>
+      </li>
+    </ol>
+  </div>
+</div>
