@@ -35,7 +35,7 @@ export class PrivilegeService {
       if (result.errors) {
         this.alertService.graphQLErrorAlertHandler(result.errors);
       }
-      this.privileges.next(result.data.getRoles);
+      this.privileges.next(result.data.getPrivileges);
       this.isLoading.next(result.loading);
     });
   }
