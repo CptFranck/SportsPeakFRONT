@@ -6,7 +6,14 @@ import {DEL_MUSCLE} from "../../graphql/operations/muscle.operations";
 import {ApolloQueryResult} from "@apollo/client";
 import {FormGroup} from "@angular/forms";
 import {User} from "../../interface/dto/user";
-import {ADD_USER, GET_USERS, MOD_USER} from "../../graphql/operations/user.operations";
+import {
+  GET_USERS,
+  MOD_USER_EMAIL,
+  MOD_USER_IDENTITY,
+  MOD_USER_PASSWORD,
+  MOD_USER_ROLES,
+  MOD_USER_USERNAME
+} from "../../graphql/operations/user.operations";
 
 @Injectable({
   providedIn: 'root'
@@ -35,34 +42,81 @@ export class UserService {
     });
   }
 
-  addUser(userForm: FormGroup) {
+  modifyUserIdentity(userForm: FormGroup) {
     return this.apollo.mutate({
-      mutation: ADD_USER,
+      mutation: MOD_USER_IDENTITY,
       variables: {
-        inputNewUser: userForm.value,
-      },
-    }).subscribe(
-      (result: MutationResult): void => {
-        if (result.errors) {
-          this.alertService.graphQLErrorAlertHandler(result.errors);
-        } else {
-          let message: string = "User " + result.data.addUser.username + " been successfully created.";
-          this.alertService.addSuccessAlert(message);
-        }
-      });
-  }
-
-  modifyUser(userForm: FormGroup) {
-    return this.apollo.mutate({
-      mutation: MOD_USER,
-      variables: {
-        inputUser: userForm.value,
+        inputUserIdentity: userForm.value,
       },
     }).subscribe((result: MutationResult): void => {
       if (result.errors) {
         this.alertService.graphQLErrorAlertHandler(result.errors);
       } else {
-        let message: string = "User " + result.data.modifyUser.username + " been successfully updated.";
+        let message: string = "User " + result.data.modifyUserIdentity.username + " been successfully updated.";
+        this.alertService.addSuccessAlert(message);
+      }
+    });
+  }
+
+  modifyUserRoles(userForm: FormGroup) {
+    return this.apollo.mutate({
+      mutation: MOD_USER_ROLES,
+      variables: {
+        inputUserRoles: userForm.value,
+      },
+    }).subscribe((result: MutationResult): void => {
+      if (result.errors) {
+        this.alertService.graphQLErrorAlertHandler(result.errors);
+      } else {
+        let message: string = "User " + result.data.modifyUserRoles.username + " been successfully updated.";
+        this.alertService.addSuccessAlert(message);
+      }
+    });
+  }
+
+  modifyUserEmail(userForm: FormGroup) {
+    return this.apollo.mutate({
+      mutation: MOD_USER_EMAIL,
+      variables: {
+        inputUserEmail: userForm.value,
+      },
+    }).subscribe((result: MutationResult): void => {
+      if (result.errors) {
+        this.alertService.graphQLErrorAlertHandler(result.errors);
+      } else {
+        let message: string = "User " + result.data.modifyUserEmail.username + " been successfully updated.";
+        this.alertService.addSuccessAlert(message);
+      }
+    });
+  }
+
+  modifyUserUsername(userForm: FormGroup) {
+    return this.apollo.mutate({
+      mutation: MOD_USER_USERNAME,
+      variables: {
+        inputUserUsername: userForm.value,
+      },
+    }).subscribe((result: MutationResult): void => {
+      if (result.errors) {
+        this.alertService.graphQLErrorAlertHandler(result.errors);
+      } else {
+        let message: string = "User " + result.data.modifyUserUsername.username + " been successfully updated.";
+        this.alertService.addSuccessAlert(message);
+      }
+    });
+  }
+
+  modifyUserPassword(userForm: FormGroup) {
+    return this.apollo.mutate({
+      mutation: MOD_USER_PASSWORD,
+      variables: {
+        inputUserPassword: userForm.value,
+      },
+    }).subscribe((result: MutationResult): void => {
+      if (result.errors) {
+        this.alertService.graphQLErrorAlertHandler(result.errors);
+      } else {
+        let message: string = "User " + result.data.modifyUserPassword.username + " been successfully updated.";
         this.alertService.addSuccessAlert(message);
       }
     });
