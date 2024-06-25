@@ -1,0 +1,35 @@
+<form *ngIf="roleForm" [formGroup]="roleForm" class="container-fluid">
+  <div class="mb-3">
+    <label class="form-label">Name :</label>
+    <input class="form-control" formControlName="name" type="text">
+    <app-input-control
+      [formGroup]="roleForm"
+      [submitInvalid]="submitInvalidForm"
+      formGroupFieldName="name"
+      rules="min : 3; max : 50"
+    />
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Privilege(s) :</label>
+    <app-privilege-selector [privilegeIds]='roleForm.controls["privilegeIds"].value' formControlName="privilegeIds"/>
+    <app-input-control
+      [formGroup]="roleForm"
+      [submitInvalid]="submitInvalidForm"
+      errorMessage="Please select exercises that use this muscle"
+      formGroupFieldName="privilegeIds"
+      rules="min : 1"
+    />
+  </div>
+  <div class="mb-3">
+    <label class="form-label">User(s) :</label>
+    <app-user-selector [userIds]='roleForm.controls["userIds"].value' formControlName="userIds"/>
+    <app-input-control
+      [formGroup]="roleForm"
+      [submitInvalid]="submitInvalidForm"
+      errorMessage="Please select exercises that use this muscle"
+      formGroupFieldName="userIds"
+      rules="min : 1"
+    />
+  </div>
+</form>
+
