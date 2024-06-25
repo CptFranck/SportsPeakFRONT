@@ -34,11 +34,4 @@ export class UsersArrayComponent {
       object: user
     });
   }
-
-  delUser(user: User) {
-    this.actionUser.emit({
-      actionType: ActionType.delete,
-      object: user
-    });
-  }
 }

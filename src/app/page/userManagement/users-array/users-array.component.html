@@ -6,9 +6,8 @@
     <th class="col-auto" scope="col">LastName</th>
     <th class="col-auto" scope="col">Username</th>
     <th class="col-auto" scope="col">Roles</th>
-    <th class="col-1 text-center" scope="col">Details</th>
-    <th class="col-1 text-center" scope="col">Modify</th>
-    <th class="col-1 text-center" scope="col">Delete</th>
+    <th class="col-auto text-center" scope="col">Details</th>
+    <th class="col-auto text-center" scope="col">Modify Roles</th>
   </tr>
   </thead>
   <tbody class="table-group-divider">
@@ -47,18 +46,6 @@
           btnClass="btn-warning"
         >
           <i class="fa-solid fa-pen-to-square"></i>
-        </app-modal-button>
-      </div>
-    </td>
-    <td>
-      <div class="col p-1 text-center">
-        <app-modal-button
-          (onCLickModalButton)="delUser($event)"
-          [modalId]="modalId"
-          [modalValue]="user"
-          btnClass="btn-danger"
-        >
-          <i class="fa-solid fa-trash"></i>
         </app-modal-button>
       </div>
     </td>
