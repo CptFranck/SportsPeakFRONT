@@ -1,0 +1,20 @@
+<div class="container">
+  <app-loading [loading]="loading"/>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col">
+        <h2>Roles saved in database</h2>
+      </div>
+      <div class="col-2">
+        <app-role-modal [action]="action"
+                        [modalTitle]="modalTitle"
+                        [roleModalId]="muscleModalId"
+                        [role]="role"
+        />
+      </div>
+    </div>
+    <app-roles-array (actionRole)="setRole($event)"
+                     [modalId]="muscleModalId"
+                     [roles]="roles"/>
+  </div>
+</div>
