@@ -44,10 +44,4 @@ export class UserModalComponent {
   @ViewChild("modalTemplate") modalTemplate!: TemplateRef<any>;
 
   protected readonly ActionType = ActionType;
-
-  onClick(value: undefined) {
-    this.user = value;
-    this.action = ActionType.create;
-    this.modalTitle = "Add new user";
-  }
 }
