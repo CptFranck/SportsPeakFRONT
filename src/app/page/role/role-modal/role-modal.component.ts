@@ -48,6 +48,6 @@ export class RoleModalComponent {
   onClick(value: undefined) {
     this.role = value;
     this.action = ActionType.create;
-    this.modalTitle = "Add new muscle";
+    this.modalTitle = "Add new role";
   }
 }
