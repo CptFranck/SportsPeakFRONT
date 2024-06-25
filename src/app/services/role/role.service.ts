@@ -45,7 +45,7 @@ export class RoleService {
       if (result.errors) {
         this.alertService.graphQLErrorAlertHandler(result.errors);
       } else {
-        let message: string = "Exercise " + result.data.addRole.name + " been successfully created."
+        let message: string = "Role " + result.data.addRole.name + " been successfully created."
         this.alertService.addSuccessAlert(message);
       }
     });
@@ -61,7 +61,7 @@ export class RoleService {
       if (result.errors) {
         this.alertService.graphQLErrorAlertHandler(result.errors);
       } else {
-        let message: string = "Exercise " + result.data.modifyRole.name + " has been successfully updated."
+        let message: string = "Role " + result.data.modifyRole.name + " has been successfully updated."
         this.alertService.addSuccessAlert(message);
       }
     });
@@ -77,7 +77,7 @@ export class RoleService {
       if (result.errors) {
         this.alertService.graphQLErrorAlertHandler(result.errors);
       } else {
-        let message: string = "Exercise " + role.name + " has been successfully deleted."
+        let message: string = "Role " + role.name + " has been successfully deleted."
         this.alertService.addSuccessAlert(message);
       }
     });
