@@ -15,7 +15,7 @@
     <app-input-control
       [formGroup]="roleForm"
       [submitInvalid]="submitInvalidForm"
-      errorMessage="Please select exercises that use this muscle"
+      errorMessage="Please select the privileges this role must have"
       formGroupFieldName="privilegeIds"
       rules="min : 1"
     />
@@ -26,7 +26,7 @@
     <app-input-control
       [formGroup]="roleForm"
       [submitInvalid]="submitInvalidForm"
-      errorMessage="Please select exercises that use this muscle"
+      errorMessage="Please select users who must have this role"
       formGroupFieldName="userIds"
       rules="min : 1"
     />
