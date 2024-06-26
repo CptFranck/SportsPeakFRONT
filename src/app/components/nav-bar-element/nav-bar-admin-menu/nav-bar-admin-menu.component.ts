@@ -15,12 +15,12 @@ import {NgIf} from "@angular/common";
   templateUrl: './nav-bar-admin-menu.component.html',
 })
 export class NavBarAdminMenuComponent implements OnInit {
-  user: User | null = null;
+  user: User | undefined = undefined;
 
   private userService: UserLoggedService = inject(UserLoggedService);
 
   ngOnInit() {
-    this.userService.currentUser.subscribe((user: User | null) => {
+    this.userService.currentUser.subscribe((user: User | undefined) => {
       this.user = user;
     })
   }

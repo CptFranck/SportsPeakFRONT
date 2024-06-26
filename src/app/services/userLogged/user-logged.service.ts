@@ -8,7 +8,7 @@ import {BehaviorSubject} from "rxjs";
 })
 export class UserLoggedService {
 
-  currentUser: BehaviorSubject<User | null> = new BehaviorSubject<User | null>(null);
+  currentUser: BehaviorSubject<User | undefined> = new BehaviorSubject<User | undefined>(undefined);
   private localStorageService: LocalStorageService = inject(LocalStorageService);
 
   constructor() {
@@ -29,7 +29,7 @@ export class UserLoggedService {
   }
 
   removeCurrentUser() {
-    this.currentUser.next(null);
+    this.currentUser.next(undefined);
     this.localStorageService.removeData("user");
   }
 

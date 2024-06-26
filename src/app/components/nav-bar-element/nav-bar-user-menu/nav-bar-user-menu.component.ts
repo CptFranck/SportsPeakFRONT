@@ -2,23 +2,25 @@ import {Component, inject, OnInit} from '@angular/core';
 import {User} from "../../../interface/dto/user";
 import {UserLoggedService} from "../../../services/userLogged/user-logged.service";
 import {NgForOf, NgIf} from "@angular/common";
+import {RouterLink} from "@angular/router";
 
 @Component({
   selector: 'app-nav-bar-user-menu',
   standalone: true,
   imports: [
     NgForOf,
-    NgIf
+    NgIf,
+    RouterLink
   ],
   templateUrl: './nav-bar-user-menu.component.html',
 })
 export class NavBarUserMenuComponent implements OnInit {
-  user: User | null = null;
+  user: User | undefined = undefined;
 
   private userService: UserLoggedService = inject(UserLoggedService);
 
   ngOnInit() {
-    this.userService.currentUser.subscribe((user: User | null) => {
+    this.userService.currentUser.subscribe((user: User | undefined) => {
       this.user = user;
     })
   }
