@@ -8,7 +8,7 @@
     <p>{{ exerciseType?.goal }}</p>
   </div>
   <div class="mb-3">
-    <label class="form-label fw-bold">Exercises :</label>
+    <label class="form-label fw-bold">Exercise(s) :</label>
     <p *ngIf="exerciseType?.exercises?.length === 0">No exercise is type of this exercise type</p>
     <ol *ngIf="exerciseType?.exercises?.length !== 0"
         class="list-group list-group-numbered"
