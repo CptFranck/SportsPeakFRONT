@@ -1,0 +1,25 @@
+<app-modal-button (onCLickModalButton)="onClick($event)"
+                  [modalId]="privilegeModalId"
+>
+  Add new
+  <i class="fa-regular fa-square-plus"></i>
+</app-modal-button>
+<app-modal [actionType]="action"
+           [contentTemplate]="modalTemplate"
+           [modalId]="privilegeModalId"
+           [title]="modalTitle"
+>
+</app-modal>
+<ng-template #modalTemplate let-btnClose="btnClose" let-submitEvents="submitEvents">
+  <app-privilege-entity-form *ngIf="action === ActionType.create || action === ActionType.update"
+                             [btnCloseRef]="btnClose"
+                             [privilegeInput]="privilege"
+                             [submitEvents]="submitEvents"
+  />
+  <app-privilege-details-display *ngIf="action === ActionType.read"
+                                 [privilegeInput]="privilege"/>
+  <app-privilege-delete-forms *ngIf="action === ActionType.delete"
+                              [btnCloseRef]="btnClose"
+                              [privilege]="privilege"
+                              [submitEvents]="submitEvents"/>
+</ng-template>
