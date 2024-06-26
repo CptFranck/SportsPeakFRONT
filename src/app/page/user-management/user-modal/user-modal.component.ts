@@ -37,7 +37,7 @@ import {UserRolesFormComponent} from "../user-modal-components/user-entity-form/
 })
 export class UserModalComponent {
   @Input() modalTitle!: string;
-  @Input() muscleModalId!: string;
+  @Input() userModalId!: string;
   @Input() user: User | undefined;
   @Input() action!: ActionType;
 
