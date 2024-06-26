@@ -40,7 +40,7 @@ export class RoleEntityFormComponent implements OnInit, AfterViewInit {
 
   private roleService: RoleService = inject(RoleService);
 
-  @Input() set muscleInput(value: Role | undefined) {
+  @Input() set roleInput(value: Role | undefined) {
     this.role = value;
     this.initializeMuscleForm();
   }

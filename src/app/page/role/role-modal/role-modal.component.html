@@ -13,7 +13,7 @@
 <ng-template #modalTemplate let-btnClose="btnClose" let-submitEvents="submitEvents">
   <app-role-entity-form *ngIf="action === ActionType.create || action === ActionType.update"
                         [btnCloseRef]="btnClose"
-                        [muscleInput]="role"
+                        [roleInput]="role"
                         [submitEvents]="submitEvents"
   />
   <app-role-details-display *ngIf="action === ActionType.read"
