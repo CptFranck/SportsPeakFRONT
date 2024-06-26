@@ -1,6 +1,5 @@
 import {inject, Injectable} from '@angular/core';
 import {BehaviorSubject} from "rxjs";
-import {Role} from "../../interface/dto/role";
 import {Apollo, MutationResult} from "apollo-angular";
 import {AlertService} from "../alert/alert.service";
 import {ApolloQueryResult} from "@apollo/client";
@@ -72,7 +71,7 @@ export class PrivilegeService {
     });
   }
 
-  deletePrivilege(privilegeForm: Role) {
+  deletePrivilege(privilegeForm: Privilege) {
     return this.apollo.mutate({
       mutation: DEL_PRIVILEGE,
       variables: {
