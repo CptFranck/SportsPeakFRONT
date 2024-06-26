@@ -1,0 +1,29 @@
+<div class="md-3 border rounded border-1 p-3">
+  <div class="row align-items-center my-2">
+    <div class="col ">
+      <p class="my-auto"><label class="my-auto form-label fw-bold">Username : </label> {{ user?.username }}</p>
+    </div>
+    <div class="col-auto">
+      <button (click)="onChangeUsername()" class="btn btn-secondary"> Change username</button>
+    </div>
+  </div>
+  <div class="row align-items-center my-2">
+    <div class="col">
+      <p class="my-auto"><label class=" my-autoform-label fw-bold">Email : </label> {{ user?.email }}</p>
+    </div>
+    <div class="col-auto">
+      <button (click)="onChangeEmail()" class="btn btn-secondary"> Change email</button>
+    </div>
+  </div>
+  <div class="row align-items-center my-2">
+    <div class="col-auto">
+      <p class="my-auto"><label class="my-auto form-label fw-bold">Firstname : </label> {{ user?.firstName }}</p>
+    </div>
+    <div class="col">
+      <p class="my-auto"><label class="my-auto form-label fw-bold">LastName : </label> {{ user?.lastName }}</p>
+    </div>
+    <div class="col-auto">
+      <button (click)="onChangeName()" class="btn btn-secondary">Change name</button>
+    </div>
+  </div>
+</div>
