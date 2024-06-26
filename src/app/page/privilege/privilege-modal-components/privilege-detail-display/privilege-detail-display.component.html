@@ -1,0 +1,22 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-auto">
+      <p><label class="form-label fw-bold">Name : </label> {{ privilege?.name }}</p>
+    </div>
+  </div>
+  <div class="mb-3">
+    <label class="form-label fw-bold">Role(s) :</label>
+    <p *ngIf="privilege?.roles?.length === 0">No roles attributed to this user</p>
+    <ol *ngIf="privilege?.roles?.length !== 0"
+        class="list-group list-group-numbered"
+    >
+      <li *ngFor="let role of privilege?.roles"
+          class="list-group-item d-flex justify-content-between align-items-start"
+      >
+        <div class="ms-2 me-auto">
+          <p class="fw-bold">{{ role?.name }}</p>
+        </div>
+      </li>
+    </ol>
+  </div>
+</div>
