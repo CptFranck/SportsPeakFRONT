@@ -1,0 +1,20 @@
+<div class="container">
+  <app-loading [loading]="loading"/>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col">
+        <h2>Privileges saved in database</h2>
+      </div>
+      <div class="col-2">
+        <app-privilege-modal [action]="action"
+                             [modalTitle]="modalTitle"
+                             [privilegeModalId]="privilegeModalId"
+                             [privilege]="privilege"
+        />
+      </div>
+    </div>
+    <app-privileges-array (actionPrivilege)="setPrivilege($event)"
+                          [modalId]="privilegeModalId"
+                          [privileges]="privileges"/>
+  </div>
+</div>
