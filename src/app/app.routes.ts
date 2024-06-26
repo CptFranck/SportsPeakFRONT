@@ -3,7 +3,7 @@ import {ExercisesComponent} from './page/exercises/exercises/exercises.component
 import {ExerciseTypesComponent} from './page/exercise-types/exercise-types/exercise-types.component';
 import {MusclesComponent} from './page/muscle/muscles/muscles.component';
 import {LoginComponent} from "./page/auth/login/login.component";
-import {UsersComponent} from "./page/userManagement/users/users.component";
+import {UsersComponent} from "./page/user-management/users/users.component";
 import {RolesComponent} from "./page/role/roles/roles.component";
 import {PrivilegesComponent} from "./page/privilege/privileges/privileges.component";
 

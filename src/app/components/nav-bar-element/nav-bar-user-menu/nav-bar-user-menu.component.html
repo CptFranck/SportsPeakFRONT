@@ -6,21 +6,27 @@
       {{ user.username }}
     </a>
     <ul aria-labelledby="navbarDropdown" class="dropdown-menu">
-      <li><a class="dropdown-item" href="#">Action</a></li>
-      <li><a class="dropdown-item" href="#">Another action</a></li>
       <li>
-        <hr class="dropdown-divider">
-        <p class="dropdown-item m-0"> {{ user.firstName }}</p>
+        <a class="dropdown-item" href="#">User Profile</a>
       </li>
       <li>
-        <p class="dropdown-item m-0"> {{ user.lastName }}</p>
+        <a class="dropdown-item" href="#">User Account</a>
+      </li>
+      <li>
+        <a class="dropdown-item" href="#">Account settings</a>
+        <hr class="dropdown-divider">
+      </li>
+      <li>
+        <div class="dropdown-item ">
+          <p class="m-0"> Account : {{ user.firstName }} {{ user.lastName }} </p>
+        </div>
       </li>
       <li *ngIf="user?.roles">
         <hr class="dropdown-divider">
-        <p class="dropdown-item m-0"> Role : </p>
+        <p class="dropdown-item m-0 disabled"> Role : </p>
       </li>
       <li *ngFor="let role of user?.roles">
-        <p class="dropdown-item m-0"> {{ role.name }}</p>
+        <p class="dropdown-item m-0 disabled"> {{ role.name }}</p>
       </li>
     </ul>
   </li>
