@@ -1,5 +1,5 @@
 <nav
-  class="navbar bg-dark navbar-expand-lg bg-body-tertiary border-body"
+  class="navbar bg-dark navbar-expand-lg border-body"
   data-bs-theme="dark"
 >
   <div class="container-fluid">
@@ -15,11 +15,17 @@
     >
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <app-nav-bar-main-menu/>
-      <app-nav-bar-admin-menu/>
-      <app-nav-bar-language-selector/>
-      <div class="navbar-nav h4">
+    <div class="collapse navbar-collapse justify-content-center " id="navbarSupportedContent">
+      <div class="d-flex ms-auto">
+        <app-nav-bar-main-menu/>
+      </div>
+      <div class="d-flex me-auto">
+        <app-nav-bar-admin-menu/>
+      </div>
+      <div class="d-flex">
+        <app-nav-bar-language-selector/>
+      </div>
+      <div class="d-flex">
         <app-nav-bar-user-menu/>
         <app-nav-bar-login/>
       </div>

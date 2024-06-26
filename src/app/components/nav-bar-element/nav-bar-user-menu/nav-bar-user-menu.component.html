@@ -1,25 +1,27 @@
-<div *ngIf="user" class="nav-item dropdown">
-  <a aria-expanded="false" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#"
-     id="navbarDropdown"
-     role="button">
-    {{ user.username }}
-  </a>
-  <ul aria-labelledby="navbarDropdown" class="dropdown-menu">
-    <li><a class="dropdown-item" href="#">Action</a></li>
-    <li><a class="dropdown-item" href="#">Another action</a></li>
-    <li>
-      <hr class="dropdown-divider">
-      <p class="dropdown-item m-0"> {{ user.firstName }}</p>
-    </li>
-    <li>
-      <p class="dropdown-item m-0"> {{ user.lastName }}</p>
-    </li>
-    <li *ngIf="user?.roles">
-      <hr class="dropdown-divider">
-      <p class="dropdown-item m-0"> Role : </p>
-    </li>
-    <li *ngFor="let role of user?.roles">
-      <p class="dropdown-item m-0"> {{ role.name }}</p>
-    </li>
-  </ul>
-</div>
+<ul class="navbar-nav h4">
+  <li *ngIf="user" class="nav-item dropdown">
+    <a aria-expanded="false" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#"
+       id="navbarDropdown"
+       role="button">
+      {{ user.username }}
+    </a>
+    <ul aria-labelledby="navbarDropdown" class="dropdown-menu">
+      <li><a class="dropdown-item" href="#">Action</a></li>
+      <li><a class="dropdown-item" href="#">Another action</a></li>
+      <li>
+        <hr class="dropdown-divider">
+        <p class="dropdown-item m-0"> {{ user.firstName }}</p>
+      </li>
+      <li>
+        <p class="dropdown-item m-0"> {{ user.lastName }}</p>
+      </li>
+      <li *ngIf="user?.roles">
+        <hr class="dropdown-divider">
+        <p class="dropdown-item m-0"> Role : </p>
+      </li>
+      <li *ngFor="let role of user?.roles">
+        <p class="dropdown-item m-0"> {{ role.name }}</p>
+      </li>
+    </ul>
+  </li>
+</ul>

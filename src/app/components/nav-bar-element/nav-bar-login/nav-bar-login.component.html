@@ -1,14 +1,18 @@
-<div>
-  <a *ngIf="!isLogged"
-     class="navbar-nav nav-link h4"
-     routerLink="/login"
-  >
-    Login
-  </a>
-  <button (click)="logout()"
-          *ngIf="isLogged"
-          class="navbar-nav nav-link h4"
-  >
-    Logout
-  </button>
-</div>
+<ul class="navbar-nav h4">
+  <li class="nav-item px-0">
+    <a *ngIf="!isLogged"
+       class="nav-link py-auto"
+       routerLink="/login"
+    >
+      Login
+    </a>
+  </li>
+  <li class="nav-item px-0">
+    <button (click)="logout()"
+            *ngIf="isLogged"
+            class="nav-link py-auto"
+    >
+      Logout
+    </button>
+  </li>
+</ul>
