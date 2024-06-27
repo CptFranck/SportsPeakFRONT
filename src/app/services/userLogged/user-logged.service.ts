@@ -2,6 +2,7 @@ import {inject, Injectable} from '@angular/core';
 import {LocalStorageService} from "../localStorage/local-storage.service";
 import {User} from "../../interface/dto/user";
 import {BehaviorSubject} from "rxjs";
+import {Role} from "../../interface/dto/role";
 
 @Injectable({
   providedIn: 'root'
@@ -9,6 +10,7 @@ import {BehaviorSubject} from "rxjs";
 export class UserLoggedService {
 
   currentUser: BehaviorSubject<User | undefined> = new BehaviorSubject<User | undefined>(undefined);
+  private roles: string[] = [];
   private localStorageService: LocalStorageService = inject(LocalStorageService);
 
   constructor() {
@@ -16,6 +18,11 @@ export class UserLoggedService {
     if (user) {
       this.currentUser.next(user);
     }
+    this.currentUser.subscribe((user: User | undefined) => {
+      if (user) {
+        this.roles = user.roles.map((role: Role) => role.name);
+      }
+    })
   }
 
   getCurrentUser() {
@@ -31,6 +38,10 @@ export class UserLoggedService {
   removeCurrentUser() {
     this.currentUser.next(undefined);
     this.localStorageService.removeData("user");
+  }
+
+  isAdmin() {
+    return this.roles.includes("ROLE_ADMIN");
   }
 
   private getSavedUser(): User | null {
