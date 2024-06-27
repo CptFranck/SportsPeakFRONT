@@ -45,7 +45,11 @@ export class UserPasswordFormComponent implements OnInit, AfterViewInit {
 
   initializeMuscleForm() {
     this.userForm = new FormGroup({
-        password: new FormControl(
+        oldPassword: new FormControl(
+          "",
+          [Validators.required
+          ]),
+        newPassword: new FormControl(
           "",
           [Validators.required,
             Validators.minLength(10),
