@@ -13,7 +13,9 @@ import {NgIf} from "@angular/common";
 import {
   muscleDeleteFormComponent
 } from "../../muscle/muscle-modal-components/muscle-delete-form/muscle-delete-form.component";
-import {UserDeleteFormComponent} from "../user-modal-components/user-delete-form/user-delete-form.component";
+import {
+  UserDeleteFormComponent
+} from "../../user-account/user-modal-components/user-delete-form/user-delete-form.component";
 import {
   UserDetailsDisplayComponent
 } from "../user-modal-components/user-details-display/user-details-display.component";
