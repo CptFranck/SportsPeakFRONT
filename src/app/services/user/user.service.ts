@@ -29,7 +29,7 @@ export class UserService {
   private userLoggedService: UserLoggedService = inject(UserLoggedService);
 
   constructor() {
-    this.userLoggedService.currentUser.subscribe((user: User | undefined) => {
+    this.userLoggedService.currentUser.subscribe(() => {
       if (this.userLoggedService.isAdmin()) {
         this.getUsers();
       }
