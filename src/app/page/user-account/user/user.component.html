@@ -1,12 +1,17 @@
 <div class="container">
   <div class="container-fluid">
     <div class="row">
-      <h2>Account information's</h2>
+      <div class="col">
+        <h2>Account information's</h2>
+      </div>
+      <div class="col-2">
+        <app-user-modal [action]="action"
+                        [modalTitle]="modalTitle"
+                        [userModalId]="userModalId"
+                        [user]="user"
+        />
+      </div>
     </div>
-    <app-user-modal [action]="action"
-                    [modalTitle]="modalTitle"
-                    [userModalId]="userModalId"
-                    [user]="user"/>
     <app-user-information-display [modalId]="userModalId" [user]="user"/>
   </div>
 </div>

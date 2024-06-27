@@ -48,6 +48,4 @@ export class UserComponent {
       this.user = user;
     })
   }
-
-
 }
