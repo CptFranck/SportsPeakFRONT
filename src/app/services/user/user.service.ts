@@ -107,10 +107,12 @@ export class UserService {
   }
 
   modifyUserPassword(userForm: FormGroup) {
+    let inputUserPassword = userForm.value
+    delete inputUserPassword.confirmPassword
     return this.apollo.mutate({
       mutation: MOD_USER_PASSWORD,
       variables: {
-        inputUserPassword: userForm.value,
+        inputUserPassword: inputUserPassword,
       },
     }).subscribe((result: MutationResult): void => {
       if (result.errors) {
