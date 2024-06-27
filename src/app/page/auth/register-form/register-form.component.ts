@@ -1,16 +1,9 @@
 import {Component, inject, OnInit} from '@angular/core';
-import {
-  AbstractControl,
-  FormControl,
-  FormGroup,
-  ReactiveFormsModule,
-  ValidationErrors,
-  ValidatorFn,
-  Validators
-} from "@angular/forms";
+import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {AuthService} from "../../../services/auth/auth.service";
 import {InputControlComponent} from "../../../components/input-control/input-control.component";
 import {NgIf} from "@angular/common";
+import {confirmValidator} from "../../../utils/confirmValidator";
 
 @Component({
   selector: 'app-register-form',
@@ -80,28 +73,8 @@ export class RegisterFormComponent implements OnInit {
         ),
       },
       {
-        validators: this.confirmValidator('password', 'confirmPassword')
+        validators: confirmValidator('password', 'confirmPassword')
       });
-  }
-
-  confirmValidator(controlName: string, matchingControlName: string): ValidatorFn {
-    return (abstractControl: AbstractControl): ValidationErrors | null => {
-      const control: AbstractControl | null = abstractControl.get(controlName);
-      const matchingControl: AbstractControl | null = abstractControl.get(matchingControlName);
-
-      if (matchingControl!.errors && !matchingControl!.errors?.['confirmedValidator']) {
-        return null;
-      }
-
-      if (control!.value !== matchingControl!.value) {
-        const error: ValidationErrors = {confirmedValidator: 'Passwords do not match'};
-        matchingControl!.setErrors(error);
-        return error;
-      } else {
-        matchingControl!.setErrors(null);
-        return null;
-      }
-    }
   }
 
   onSubmitRegisterForm() {
