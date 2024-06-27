@@ -3,6 +3,7 @@ import {LocalStorageService} from "../localStorage/local-storage.service";
 import {User} from "../../interface/dto/user";
 import {BehaviorSubject} from "rxjs";
 import {Role} from "../../interface/dto/role";
+import {Router} from "@angular/router";
 
 @Injectable({
   providedIn: 'root'
@@ -11,10 +12,11 @@ export class UserLoggedService {
 
   currentUser: BehaviorSubject<User | undefined> = new BehaviorSubject<User | undefined>(undefined);
   private roles: string[] = [];
+  private router: Router = inject(Router);
   private localStorageService: LocalStorageService = inject(LocalStorageService);
 
   constructor() {
-    let user: User | null = this.getSavedUser();
+    let user: User | undefined | null = this.getSavedUser();
     if (user) {
       this.currentUser.next(user);
     }
@@ -30,14 +32,20 @@ export class UserLoggedService {
   }
 
   setCurrentUser(user: User) {
-    this.currentUser.next(user);
-    let userJson: string = JSON.stringify(user);
-    this.localStorageService.saveData("user", userJson);
+    if (user) {
+      this.currentUser.next(user);
+      let userJson: string = JSON.stringify(user);
+      this.localStorageService.saveData("user", userJson);
+    } else {
+      this.removeCurrentUser()
+    }
   }
 
   removeCurrentUser() {
+    this.roles = [];
     this.currentUser.next(undefined);
     this.localStorageService.removeData("user");
+    this.router.navigate([''])
   }
 
   isAdmin() {
