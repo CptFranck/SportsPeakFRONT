@@ -1,0 +1,30 @@
+<div class="md-3 border rounded border-1 p-3">
+  <div class="row align-items-center my-2">
+    <div class="col ">
+      <p class="my-auto"><label class="my-auto form-label fw-bold">Password </label></p>
+    </div>
+    <div class="col-auto">
+      <app-modal-button
+        (onCLickModalButton)="onChangePassword()"
+        [btnClass]="btnClass"
+        [modalId]="modalId"
+      >
+        Change password
+      </app-modal-button>
+    </div>
+  </div>
+  <div class="row align-items-center my-2">
+    <div class="col">
+      <p class="my-auto"><label class=" my-autoform-label fw-bold">Account </label></p>
+    </div>
+    <div class="col-auto">
+      <app-modal-button
+        (onCLickModalButton)="onDeleteAccount()"
+        [btnClass]="btnClass"
+        [modalId]="modalId"
+      >
+        Delete account
+      </app-modal-button>
+    </div>
+  </div>
+</div>
