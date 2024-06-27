@@ -14,6 +14,7 @@ import {
   MOD_USER_ROLES,
   MOD_USER_USERNAME
 } from "../../graphql/operations/user.operations";
+import {UserLoggedService} from "../userLogged/user-logged.service";
 
 @Injectable({
   providedIn: 'root'
@@ -25,9 +26,14 @@ export class UserService {
 
   private apollo: Apollo = inject(Apollo);
   private alertService: AlertService = inject(AlertService);
+  private userLoggedService: UserLoggedService = inject(UserLoggedService);
 
   constructor() {
-    this.getUsers();
+    this.userLoggedService.currentUser.subscribe((user: User | undefined) => {
+      if (this.userLoggedService.isAdmin()) {
+        this.getUsers();
+      }
+    })
   }
 
   getUsers() {

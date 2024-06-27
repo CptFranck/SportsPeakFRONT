@@ -11,6 +11,7 @@ import {
   GET_PRIVILEGES,
   MOD_PRIVILEGE
 } from "../../graphql/operations/privilege.operations";
+import {UserLoggedService} from "../userLogged/user-logged.service";
 
 @Injectable({
   providedIn: 'root'
@@ -22,9 +23,14 @@ export class PrivilegeService {
 
   private apollo: Apollo = inject(Apollo);
   private alertService: AlertService = inject(AlertService);
+  private userLoggedService: UserLoggedService = inject(UserLoggedService);
 
   constructor() {
-    this.getPrivileges();
+    this.userLoggedService.currentUser.subscribe(() => {
+      if (this.userLoggedService.isAdmin()) {
+        this.getPrivileges();
+      }
+    })
   }
 
   getPrivileges() {

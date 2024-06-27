@@ -7,6 +7,8 @@ import {ApolloQueryResult} from "@apollo/client";
 import {FormGroup} from "@angular/forms";
 import {Role} from "../../interface/dto/role";
 import {ADD_ROLE, GET_ROLES, MOD_ROLE} from "../../graphql/operations/role.operations";
+import {User} from "../../interface/dto/user";
+import {UserLoggedService} from "../userLogged/user-logged.service";
 
 @Injectable({
   providedIn: 'root'
@@ -18,9 +20,14 @@ export class RoleService {
 
   private apollo: Apollo = inject(Apollo);
   private alertService: AlertService = inject(AlertService);
+  private userLoggedService: UserLoggedService = inject(UserLoggedService);
 
   constructor() {
-    this.getRoles();
+    this.userLoggedService.currentUser.subscribe((user: User | undefined) => {
+      if (this.userLoggedService.isAdmin()) {
+        this.getRoles();
+      }
+    })
   }
 
   getRoles() {
