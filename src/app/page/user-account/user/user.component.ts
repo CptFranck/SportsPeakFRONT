@@ -7,16 +7,17 @@ import {
   UserDetailsDisplayComponent
 } from "../../user-management/user-modal-components/user-details-display/user-details-display.component";
 import {ModalComponent} from "../../../components/modal/modal/modal.component";
-import {UserInformationDisplayComponent} from "../user-information-display/user-information-display.component";
 import {
-  UserDeleteFormComponent
-} from "../../user-management/user-modal-components/user-delete-form/user-delete-form.component";
+  UserInformationDisplayComponent
+} from "../user-information/user-information-display/user-information-display.component";
+import {UserDeleteFormComponent} from "../user-modal-components/user-delete-form/user-delete-form.component";
 import {
   UserRolesFormComponent
 } from "../../user-management/user-modal-components/user-entity-form/user-roles-form.component";
 import {UserModalComponent} from "../user-modal/user-modal.component";
 import {FormIndicator} from "../../../interface/utils/form-indicator";
 import {ModificationField} from "../../../enum/modification-field";
+import {UserSecurityComponent} from "../user-information/user-security/user-security.component";
 
 @Component({
   selector: 'app-user',
@@ -28,7 +29,8 @@ import {ModificationField} from "../../../enum/modification-field";
     UserInformationDisplayComponent,
     UserDeleteFormComponent,
     UserRolesFormComponent,
-    UserModalComponent
+    UserModalComponent,
+    UserSecurityComponent
   ],
   templateUrl: './user.component.html',
 })
@@ -52,7 +54,7 @@ export class UserComponent {
 
   setUser(formIndicator: FormIndicator) {
     this.action = formIndicator.actionType;
-    
+
     if (formIndicator.modificationField)
       this.modificationField = formIndicator.modificationField;
 
