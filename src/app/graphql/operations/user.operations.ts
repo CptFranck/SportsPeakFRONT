@@ -61,17 +61,21 @@ export const MOD_USER_ROLES = gql`
 export const MOD_USER_EMAIL = gql`
   mutation ($inputUserEmail : InputUserEmail!){
     modifyUserEmail(inputUserEmail: $inputUserEmail) {
-      id
-      email
-      firstName
-      lastName
-      username
-      roles {
+      tokenType
+      accessToken
+      user {
         id
-        name
-        privileges {
+        email
+        firstName
+        lastName
+        username
+        roles {
           id
           name
+          privileges {
+            id
+            name
+          }
         }
       }
     }
