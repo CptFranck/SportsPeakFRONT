@@ -44,7 +44,7 @@ export class UserUsernameFormComponent implements OnInit, AfterViewInit {
 
   initializeMuscleForm() {
     this.userForm = new FormGroup({
-      username: new FormControl("",
+      newUsername: new FormControl("",
         [Validators.required,
           Validators.minLength(1),
           Validators.maxLength(50),

@@ -3,12 +3,12 @@
     <label class="form-label">New Username :</label>
     <div class="input-group">
       <span class="input-group-text">&#64;</span>
-      <input class="form-control" formControlName="username" type="text">
+      <input class="form-control" formControlName="newUsername" type="text">
     </div>
     <app-input-control
       [formGroup]="userForm"
       [submitInvalid]="submitInvalidForm"
-      formGroupFieldName="username"
+      formGroupFieldName="newUsername"
       rules="min : 1 ; max : 50 ; support only character, number or underscore ; must not already taken"
     />
   </div>
