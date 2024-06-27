@@ -19,13 +19,13 @@ export class AuthService {
 
   private router: Router = inject(Router);
   private apollo: Apollo = inject(Apollo);
-  private userService: UserLoggedService = inject(UserLoggedService);
   private alertService: AlertService = inject(AlertService);
   private tokenService: TokenService = inject(TokenService);
+  private userLoggedService: UserLoggedService = inject(UserLoggedService);
 
   constructor() {
     let isValidTokenSaved: boolean = !!this.tokenService.getCurrentToken();
-    let isUserSaved: boolean = !!this.userService.getCurrentUser();
+    let isUserSaved: boolean = !!this.userLoggedService.getCurrentUser();
     if (isValidTokenSaved && isUserSaved)
       this.isAuthenticated.next(true);
     else
@@ -45,7 +45,7 @@ export class AuthService {
         this.alertService.graphQLErrorAlertHandler(result.errors);
       }
       if (result.data) {
-        this.setDataAuth(result.data.register);
+        this.setDataAuth(result.data.register, true);
       }
     });
   }
@@ -60,7 +60,7 @@ export class AuthService {
       if (result.errors) {
         this.alertService.graphQLErrorAlertHandler(result.errors);
       } else {
-        this.setDataAuth(result.data.login);
+        this.setDataAuth(result.data.login, true);
       }
     });
   }
@@ -72,21 +72,22 @@ export class AuthService {
     });
   }
 
-  setDataAuth(auth: Auth) {
-    this.router.navigateByUrl('/').then(() => {
-      this.isAuthenticated.next(true);
-      this.userService.setCurrentUser(auth.user);
-      let authToken: AuthToken = this.createAuthToken(auth);
-      this.tokenService.setCurrentToken(authToken);
-    });
+  setDataAuth(auth: Auth, redirect: boolean = false) {
+    this.isAuthenticated.next(true);
+    this.userLoggedService.setCurrentUser(auth.user);
+    let authToken: AuthToken = this.createAuthToken(auth);
+    this.tokenService.setCurrentToken(authToken);
+    if (redirect) {
+      this.router.navigateByUrl('/')
+    }
   }
 
-  removeDataAuth() {
-    this.userService.removeCurrentUser();
+  private removeDataAuth() {
+    this.userLoggedService.removeCurrentUser();
     this.tokenService.removeCurrentToken();
   }
 
-  createAuthToken(data: Auth) {
+  private createAuthToken(data: Auth) {
     const authToken: AuthToken = {
       tokenType: data.tokenType,
       accessToken: data.accessToken,
