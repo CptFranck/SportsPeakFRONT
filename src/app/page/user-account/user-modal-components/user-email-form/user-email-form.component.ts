@@ -50,7 +50,7 @@ export class UserEmailFormComponent implements OnInit, AfterViewInit {
 
   initializeMuscleForm() {
     this.userForm = new FormGroup({
-      email: new FormControl("",
+      newEmail: new FormControl("",
         [Validators.required,
           Validators.email]),
       password: new FormControl(
