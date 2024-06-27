@@ -8,5 +8,15 @@
       formGroupFieldName="email"
     />
   </div>
+  <div class="mb-3">
+    <label class="form-label">Password :</label>
+    <input class="form-control" formControlName="password" type="password">
+    <app-input-control
+      [formGroup]="userForm"
+      [submitInvalid]="submitInvalidForm"
+      errorMessage="Passwords write your password"
+      formGroupFieldName="password"
+    />
+  </div>
 </form>
 

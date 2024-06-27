@@ -53,6 +53,10 @@ export class UserEmailFormComponent implements OnInit, AfterViewInit {
       email: new FormControl("",
         [Validators.required,
           Validators.email]),
+      password: new FormControl(
+        "",
+        [Validators.required],
+      ),
     });
 
     if (this.user)
