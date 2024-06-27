@@ -15,6 +15,8 @@ import {
   MOD_USER_USERNAME
 } from "../../graphql/operations/user.operations";
 import {UserLoggedService} from "../userLogged/user-logged.service";
+import {AuthService} from "../auth/auth.service";
+import {Auth} from "../../interface/dto/auth";
 
 @Injectable({
   providedIn: 'root'
@@ -25,6 +27,7 @@ export class UserService {
   isLoading: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   private apollo: Apollo = inject(Apollo);
+  private authService: AuthService = inject(AuthService);
   private alertService: AlertService = inject(AlertService);
   private userLoggedService: UserLoggedService = inject(UserLoggedService);
 
@@ -60,6 +63,7 @@ export class UserService {
       } else {
         let message: string = "User " + result.data.modifyUserIdentity.username + " been successfully updated.";
         this.alertService.addSuccessAlert(message);
+        this.userLoggedService.setCurrentUser(result.data.modifyUserIdentity);
       }
     });
   }
@@ -90,8 +94,11 @@ export class UserService {
       if (result.errors) {
         this.alertService.graphQLErrorAlertHandler(result.errors);
       } else {
-        let message: string = "User " + result.data.modifyUserEmail.username + " been successfully updated.";
+        const auth: Auth = result.data.modifyUserEmail;
+        let message: string = "User " + auth.user.username + " been successfully updated.";
         this.alertService.addSuccessAlert(message);
+        this.authService.setDataAuth(auth)
+        this.userLoggedService.setCurrentUser(auth.user);
       }
     });
   }
@@ -108,6 +115,7 @@ export class UserService {
       } else {
         let message: string = "User " + result.data.modifyUserUsername.username + " been successfully updated.";
         this.alertService.addSuccessAlert(message);
+        this.userLoggedService.setCurrentUser(result.data.modifyUserUsername);
       }
     });
   }
@@ -125,6 +133,7 @@ export class UserService {
         this.alertService.graphQLErrorAlertHandler(result.errors);
       } else {
         let message: string = "User " + result.data.modifyUserPassword.username + " been successfully updated.";
+        this.userLoggedService.setCurrentUser(result.data.modifyUserPassword);
         this.alertService.addSuccessAlert(message);
       }
     });
@@ -142,6 +151,7 @@ export class UserService {
       } else {
         let message: string = "User " + user.username + " has been successfully deleted.";
         this.alertService.addSuccessAlert(message);
+        this.authService.logout();
       }
     });
   }
