@@ -7,11 +7,12 @@
       <div class="col-2">
         <app-user-modal [action]="action"
                         [modalTitle]="modalTitle"
+                        [modification]="modificationField"
                         [userModalId]="userModalId"
                         [user]="user"
         />
       </div>
     </div>
-    <app-user-information-display [modalId]="userModalId" [user]="user"/>
+    <app-user-information-display (userAction)="setUser($event)" [modalId]="userModalId" [user]="user"/>
   </div>
 </div>
