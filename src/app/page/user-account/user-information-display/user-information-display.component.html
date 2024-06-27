@@ -4,7 +4,13 @@
       <p class="my-auto"><label class="my-auto form-label fw-bold">Username : </label> {{ user?.username }}</p>
     </div>
     <div class="col-auto">
-      <button (click)="onChangeUsername()" class="btn btn-secondary"> Change username</button>
+      <app-modal-button
+        (onCLickModalButton)="onChangeUsername()"
+        [btnClass]="btnClass"
+        [modalId]="modalId"
+      >
+        Change username
+      </app-modal-button>
     </div>
   </div>
   <div class="row align-items-center my-2">
@@ -12,7 +18,13 @@
       <p class="my-auto"><label class=" my-autoform-label fw-bold">Email : </label> {{ user?.email }}</p>
     </div>
     <div class="col-auto">
-      <button (click)="onChangeEmail()" class="btn btn-secondary"> Change email</button>
+      <app-modal-button
+        (onCLickModalButton)="onChangeEmail()"
+        [btnClass]="btnClass"
+        [modalId]="modalId"
+      >
+        Change email
+      </app-modal-button>
     </div>
   </div>
   <div class="row align-items-center my-2">
@@ -23,7 +35,13 @@
       <p class="my-auto"><label class="my-auto form-label fw-bold">LastName : </label> {{ user?.lastName }}</p>
     </div>
     <div class="col-auto">
-      <button (click)="onChangeName()" class="btn btn-secondary">Change name</button>
+      <app-modal-button
+        (onCLickModalButton)="onChangeName()"
+        [btnClass]="btnClass"
+        [modalId]="modalId"
+      >
+        Change name
+      </app-modal-button>
     </div>
   </div>
 </div>
