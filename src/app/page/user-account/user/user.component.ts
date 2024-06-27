@@ -52,6 +52,10 @@ export class UserComponent {
 
   setUser(formIndicator: FormIndicator) {
     this.action = formIndicator.actionType;
+    
+    if (formIndicator.modificationField)
+      this.modificationField = formIndicator.modificationField;
+
     switch (formIndicator.modificationField) {
       case ModificationField.username:
         this.modalTitle = formIndicator.object.username;
