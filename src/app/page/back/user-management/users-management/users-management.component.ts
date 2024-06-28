@@ -1,13 +1,13 @@
 import {Component, inject, OnInit, TemplateRef, ViewChild} from '@angular/core';
-import {LoadingComponent} from "../../../components/loading/loading.component";
-import {MuscleModalComponent} from "../../muscle/muscle-modal/muscle-modal.component";
-import {MusclesArrayComponent} from "../../muscle/muscles-array/muscles-array.component";
-import {ActionType} from "../../../enum/action-type";
-import {FormIndicator} from "../../../interface/utils/form-indicator";
-import {User} from "../../../interface/dto/user";
-import {UserService} from "../../../services/user/user.service";
-import {UsersArrayComponent} from "../users-array/users-array.component";
-import {UserModalComponent} from "../user-modal/user-modal.component";
+import {UsersManagementArrayComponent} from "../users-management-array/users-management-array.component";
+import {UsersManagementModalComponent} from "../user-management-modal/users-management-modal.component";
+import {LoadingComponent} from "../../../../components/loading/loading.component";
+import {MuscleModalComponent} from "../../../muscle/muscle-modal/muscle-modal.component";
+import {MusclesArrayComponent} from "../../../muscle/muscles-array/muscles-array.component";
+import {User} from "../../../../interface/dto/user";
+import {ActionType} from "../../../../enum/action-type";
+import {UserService} from "../../../../services/user/user.service";
+import {FormIndicator} from "../../../../interface/utils/form-indicator";
 
 @Component({
   selector: 'app-users',
@@ -16,12 +16,12 @@ import {UserModalComponent} from "../user-modal/user-modal.component";
     LoadingComponent,
     MuscleModalComponent,
     MusclesArrayComponent,
-    UsersArrayComponent,
-    UserModalComponent
+    UsersManagementArrayComponent,
+    UsersManagementModalComponent
   ],
-  templateUrl: './users.component.html',
+  templateUrl: './users-management.component.html',
 })
-export class UsersComponent implements OnInit {
+export class UsersManagementComponent implements OnInit {
   loading: boolean = true;
   users: User[] = [];
   user: User | undefined;

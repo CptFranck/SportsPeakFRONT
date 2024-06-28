@@ -1,9 +1,9 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {FormIndicator} from "../../../interface/utils/form-indicator";
-import {ActionType} from "../../../enum/action-type";
-import {User} from "../../../interface/dto/user";
-import {ModalButtonComponent} from "../../../components/modal/modal-button/modal-button.component";
 import {NgForOf, NgIf} from "@angular/common";
+import {ModalButtonComponent} from "../../../../components/modal/modal-button/modal-button.component";
+import {User} from "../../../../interface/dto/user";
+import {FormIndicator} from "../../../../interface/utils/form-indicator";
+import {ActionType} from "../../../../enum/action-type";
 
 @Component({
   selector: 'app-users-array',
@@ -13,9 +13,9 @@ import {NgForOf, NgIf} from "@angular/common";
     NgForOf,
     NgIf
   ],
-  templateUrl: './users-array.component.html',
+  templateUrl: './users-management-array.component.html',
 })
-export class UsersArrayComponent {
+export class UsersManagementArrayComponent {
   @Input() users!: User[];
   @Input() modalId!: string;
 

@@ -1,12 +1,12 @@
 import {AfterViewInit, Component, inject, Input, OnInit} from '@angular/core';
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {Observable, Subscription} from "rxjs";
-import {User} from "../../../../interface/dto/user";
-import {UserService} from "../../../../services/user/user.service";
-import {InputControlComponent} from "../../../../components/input-control/input-control.component";
 import {NgIf} from "@angular/common";
-import {Role} from "../../../../interface/dto/role";
-import {RoleSelectorComponent} from "../../../../components/select/role-selector/role-selector.component";
+import {InputControlComponent} from "../../../../../components/input-control/input-control.component";
+import {RoleSelectorComponent} from "../../../../../components/select/role-selector/role-selector.component";
+import {User} from "../../../../../interface/dto/user";
+import {UserService} from "../../../../../services/user/user.service";
+import {Role} from "../../../../../interface/dto/role";
 
 @Component({
   selector: 'app-user-roles-form',

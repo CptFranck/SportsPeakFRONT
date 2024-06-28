@@ -1,8 +1,8 @@
 import {Component, Input, OnChanges} from '@angular/core';
-import {User} from "../../../../interface/dto/user";
 import {NgForOf, NgIf} from "@angular/common";
-import {Privilege} from "../../../../interface/dto/privilege";
-import {Role} from "../../../../interface/dto/role";
+import {User} from "../../../../../interface/dto/user";
+import {Role} from "../../../../../interface/dto/role";
+import {Privilege} from "../../../../../interface/dto/privilege";
 
 @Component({
   selector: 'app-user-details-display',
