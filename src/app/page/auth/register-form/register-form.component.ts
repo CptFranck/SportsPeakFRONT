@@ -3,7 +3,7 @@ import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/
 import {AuthService} from "../../../services/auth/auth.service";
 import {InputControlComponent} from "../../../components/input-control/input-control.component";
 import {NgIf} from "@angular/common";
-import {confirmValidator} from "../../../utils/confirmValidator";
+import {confirmValidator} from "../../../validators/confirmValidator";
 
 @Component({
   selector: 'app-register-form',

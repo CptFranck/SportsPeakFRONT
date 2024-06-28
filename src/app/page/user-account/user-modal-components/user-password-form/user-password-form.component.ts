@@ -5,7 +5,7 @@ import {Observable, Subscription} from "rxjs";
 import {UserService} from "../../../../services/user/user.service";
 import {InputControlComponent} from "../../../../components/input-control/input-control.component";
 import {NgIf} from "@angular/common";
-import {confirmValidator} from "../../../../utils/confirmValidator";
+import {confirmValidator} from "../../../../validators/confirmValidator";
 
 @Component({
   selector: 'app-user-password-form',
@@ -62,7 +62,7 @@ export class UserPasswordFormComponent implements OnInit, AfterViewInit {
         ),
       },
       {
-        validators: confirmValidator('password', 'confirmPassword')
+        validators: confirmValidator('newPassword', 'confirmPassword')
       }
     );
 
