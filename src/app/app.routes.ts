@@ -4,7 +4,7 @@ import {ExerciseTypesComponent} from './page/exercise-types/exercise-types/exerc
 import {MusclesComponent} from './page/muscle/muscles/muscles.component';
 import {AuthComponent} from "./page/auth/auth/auth.component";
 import {UserComponent} from "./page/user-account/user/user.component";
-import {AuthGuard} from "./guards/auth/authGuard";
+import {AuthGuard} from "./guards/auth/auth.guard";
 import {BackGuard} from "./guards/back/back.guard";
 
 export const routes: Routes = [

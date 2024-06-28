@@ -3,7 +3,7 @@ import {inject} from "@angular/core";
 import {UserLoggedService} from "../../services/userLogged/user-logged.service";
 import {AuthService} from "../../services/auth/auth.service";
 
-export const BackGuard: CanActivateFn = (route, state) => {
+export const BackGuard: CanActivateFn = () => {
   const userLoggedService: UserLoggedService = inject(UserLoggedService)
   const authService: AuthService = inject(AuthService);
   const router: Router = inject(Router);
