@@ -1,9 +1,9 @@
 import {Component, forwardRef, inject, Input, OnInit} from '@angular/core';
-import {MultiSelectComponent} from "../multi-select/multi-select.component";
 import {Exercise} from "../../../interface/dto/exercise";
 import {Option} from "../../../interface/multi-select/option";
 import {ControlValueAccessor, NG_VALUE_ACCESSOR} from "@angular/forms";
 import {ExerciseService} from "../../../services/exercise/exercise.service";
+import {MultiSelectComponent} from "../../multi-select/multi-select.component";
 
 @Component({
   selector: 'app-exercise-selector',

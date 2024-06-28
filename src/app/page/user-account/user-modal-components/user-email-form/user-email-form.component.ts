@@ -4,11 +4,11 @@ import {Observable, Subscription} from "rxjs";
 import {User} from "../../../../interface/dto/user";
 import {InputControlComponent} from "../../../../components/input-control/input-control.component";
 import {NgIf} from "@angular/common";
+import {UserService} from "../../../../services/user/user.service";
 import {
   PrivilegeSelectorComponent
-} from "../../../../components/select/privilege-selector/privilege-selector.component";
-import {UserSelectorComponent} from "../../../../components/select/user-selector/user-selector.component";
-import {UserService} from "../../../../services/user/user.service";
+} from "../../../../components/selectors/privilege-selector/privilege-selector.component";
+import {UserSelectorComponent} from "../../../../components/selectors/user-selector/user-selector.component";
 
 @Component({
   selector: 'app-user-email-form',

@@ -2,9 +2,9 @@ import {Component, forwardRef, inject, Input, OnInit} from '@angular/core';
 import {Option} from "../../../interface/multi-select/option";
 import {ControlValueAccessor, NG_VALUE_ACCESSOR} from "@angular/forms";
 import {RoleService} from "../../../services/role/role.service";
-import {MultiSelectComponent} from "../multi-select/multi-select.component";
 import {Role} from "../../../interface/dto/role";
 import {Privilege} from "../../../interface/dto/privilege";
+import {MultiSelectComponent} from "../../multi-select/multi-select.component";
 
 @Component({
   selector: 'app-roles-selector',

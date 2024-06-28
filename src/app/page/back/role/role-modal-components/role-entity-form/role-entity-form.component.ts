@@ -1,19 +1,19 @@
 import {AfterViewInit, Component, inject, Input, OnInit} from '@angular/core';
 import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
 import {Observable, Subscription} from "rxjs";
-import {
-  ExerciseSelectorComponent
-} from "../../../../../components/select/exercise-selector/exercise-selector.component";
-import {InputControlComponent} from "../../../../../components/input-control/input-control.component";
 import {NgIf} from "@angular/common";
-import {
-  PrivilegeSelectorComponent
-} from "../../../../../components/select/privilege-selector/privilege-selector.component";
-import {UserSelectorComponent} from "../../../../../components/select/user-selector/user-selector.component";
 import {Role} from "../../../../../interface/dto/role";
 import {RoleService} from "../../../../../services/role/role.service";
 import {User} from "../../../../../interface/dto/user";
 import {Privilege} from "../../../../../interface/dto/privilege";
+import {
+  ExerciseSelectorComponent
+} from "../../../../../components/selectors/exercise-selector/exercise-selector.component";
+import {InputControlComponent} from "../../../../../components/input-control/input-control.component";
+import {
+  PrivilegeSelectorComponent
+} from "../../../../../components/selectors/privilege-selector/privilege-selector.component";
+import {UserSelectorComponent} from "../../../../../components/selectors/user-selector/user-selector.component";
 
 @Component({
   selector: 'app-role-entity-form',

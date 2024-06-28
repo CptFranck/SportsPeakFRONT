@@ -1,9 +1,9 @@
 import {Component, forwardRef, inject, Input, OnInit} from '@angular/core';
 import {Option} from "../../../interface/multi-select/option";
-import {MultiSelectComponent} from "../multi-select/multi-select.component";
 import {MuscleService} from "../../../services/muscle/muscle.service";
 import {Muscle} from "../../../interface/dto/muscle";
 import {ControlValueAccessor, NG_VALUE_ACCESSOR} from "@angular/forms";
+import {MultiSelectComponent} from "../../multi-select/multi-select.component";
 
 @Component({
   selector: 'app-muscle-selector',

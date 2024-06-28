@@ -5,13 +5,15 @@ import {Exercise} from "../../../../interface/dto/exercise";
 import {ExerciseService} from "../../../../services/exercise/exercise.service";
 import {InputControlComponent} from "../../../../components/input-control/input-control.component";
 import {NgIf} from "@angular/common";
-import {ExerciseSelectorComponent} from "../../../../components/select/exercise-selector/exercise-selector.component";
-import {MuscleSelectorComponent} from "../../../../components/select/muscle-selector/muscle-selector.component";
-import {
-  ExerciseTypeSelectorComponent
-} from "../../../../components/select/exercise-type-selector/exercise-type-selector.component";
 import {Muscle} from "../../../../interface/dto/muscle";
 import {ExerciseType} from "../../../../interface/dto/exerciseType";
+import {
+  ExerciseSelectorComponent
+} from "../../../../components/selectors/exercise-selector/exercise-selector.component";
+import {MuscleSelectorComponent} from "../../../../components/selectors/muscle-selector/muscle-selector.component";
+import {
+  ExerciseTypeSelectorComponent
+} from "../../../../components/selectors/exercise-type-selector/exercise-type-selector.component";
 
 @Component({
   selector: 'app-exercise-entity-form',

@@ -3,10 +3,10 @@ import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/
 import {Observable, Subscription} from "rxjs";
 import {NgIf} from "@angular/common";
 import {InputControlComponent} from "../../../../../components/input-control/input-control.component";
-import {RoleSelectorComponent} from "../../../../../components/select/role-selector/role-selector.component";
 import {User} from "../../../../../interface/dto/user";
 import {UserService} from "../../../../../services/user/user.service";
 import {Role} from "../../../../../interface/dto/role";
+import {RoleSelectorComponent} from "../../../../../components/selectors/role-selector/role-selector.component";
 
 @Component({
   selector: 'app-user-roles-form',

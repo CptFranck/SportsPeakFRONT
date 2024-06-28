@@ -4,8 +4,6 @@ import {ModalComponent} from "../../../components/modal/modal/modal.component";
 import {MusclesArrayComponent} from "../muscles-array/muscles-array.component";
 import {MuscleEntityFormComponent} from "../muscle-modal-components/muscle-entity-form/muscle-entity-form.component";
 import {ModalButtonComponent} from "../../../components/modal/modal-button/modal-button.component";
-import {MultiSelectComponent} from "../../../components/select/multi-select/multi-select.component";
-import {ExerciseSelectorComponent} from "../../../components/select/exercise-selector/exercise-selector.component";
 import {LoadingComponent} from "../../../components/loading/loading.component";
 import {AlertComponent} from "../../../components/alert/alert.component";
 import {
@@ -28,8 +26,6 @@ import {Muscle} from "../../../interface/dto/muscle";
     MusclesArrayComponent,
     MuscleEntityFormComponent,
     ModalButtonComponent,
-    MultiSelectComponent,
-    ExerciseSelectorComponent,
     LoadingComponent,
     AlertComponent,
     MuscleDetailsDisplayComponent,
