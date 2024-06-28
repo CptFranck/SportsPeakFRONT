@@ -11,32 +11,6 @@
   cursor: pointer;
 }
 
-.selected-options {
-  display: flex;
-  flex-wrap: wrap;
-  overflow: hidden;
-  font-size: 14px;
-  margin-bottom: 2px;
-  margin-top: 2px;
-}
-
-.tag {
-  background-color: #f2f2f2;
-  color: #000;
-  border-radius: 5px;
-  margin: 4px;
-  padding: 6px 14px;
-  align-items: center;
-  overflow: hidden;
-  white-space: wrap;
-  text-overflow: ellipsis;
-}
-
-.remove-tag {
-  margin-left: 6px;
-  cursor: pointer;
-}
-
 .options {
   display: none;
   position: absolute;
@@ -69,7 +43,6 @@
   border-bottom: 1px solid #eaeaea;
 }
 
-.tag:hover,
 .option:hover {
   background-color: #eaeaea;
 }

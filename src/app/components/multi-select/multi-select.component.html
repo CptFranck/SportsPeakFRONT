@@ -3,20 +3,12 @@
        (click)="onCLickSelect($event)"
        class="select-box form-control"
   >
-    <input class="tags_input"
-           hidden
-           name="tags"
-           type="text"
+    <input class="tags_input" hidden name="tags" type="text"
     />
-    <div class="selected-options">
-      <span *ngIf="selectedOptions.length === 0">Select tags</span>
-      <span *ngFor="let selectedOption of displayedSelectedOptions" class="tag">
-        {{ selectedOption.title }}
-        <i (click)="onCLickRemoveTag($event)"
-           [attr.data-value]="selectedOption.id"
-           class="fa fa-close remove-tag"></i>
-      </span>
-    </div>
+    <app-multi-select-selected-options (onRemoveTag)="onCLickRemoveTag($event)"
+                                       [displayedSelectedOptions]="displayedSelectedOptions"
+                                       [selectedOptions]="selectedOptions"
+    />
   </div>
   <div class="options rounded">
     <app-loading [loading]="isLoading"/>

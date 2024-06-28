@@ -13,9 +13,12 @@ import {
 } from '@angular/core';
 import {NgForOf, NgIf} from "@angular/common";
 import {FormsModule} from "@angular/forms";
-import {Option} from "../../../interface/multi-select/option";
-import {OptionSelected} from "../../../interface/multi-select/optionSelected";
-import {LoadingComponent} from "../../loading/loading.component";
+import {Option} from "../../interface/multi-select/option";
+import {OptionSelected} from "../../interface/multi-select/optionSelected";
+import {LoadingComponent} from "../loading/loading.component";
+import {
+  MultiSelectSelectedOptionsComponent
+} from "./multi-select-selected-options/multi-select-selected-options.component";
 
 @Component({
   selector: 'app-multi-select',
@@ -25,6 +28,7 @@ import {LoadingComponent} from "../../loading/loading.component";
     FormsModule,
     NgIf,
     LoadingComponent,
+    MultiSelectSelectedOptionsComponent,
   ],
   templateUrl: './multi-select.component.html',
   styleUrl: './multi-select.component.css'
