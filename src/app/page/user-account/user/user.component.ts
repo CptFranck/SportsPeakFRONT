@@ -3,9 +3,11 @@ import {UserLoggedService} from "../../../services/userLogged/user-logged.servic
 import {User} from "../../../interface/dto/user";
 import {ActionType} from "../../../enum/action-type";
 import {NgIf} from "@angular/common";
+import {ModificationField} from "../../../enum/modification-field";
+import {UserSecurityComponent} from "../user-information/user-security/user-security.component";
 import {
   UserDetailsDisplayComponent
-} from "../../user-management/user-modal-components/user-details-display/user-details-display.component";
+} from "../../back/user-management/user-modal-components/user-details-display/user-details-display.component";
 import {ModalComponent} from "../../../components/modal/modal/modal.component";
 import {
   UserInformationDisplayComponent
@@ -13,11 +15,9 @@ import {
 import {UserDeleteFormComponent} from "../user-modal-components/user-delete-form/user-delete-form.component";
 import {
   UserRolesFormComponent
-} from "../../user-management/user-modal-components/user-entity-form/user-roles-form.component";
+} from "../../back/user-management/user-modal-components/user-entity-form/user-roles-form.component";
 import {UserModalComponent} from "../user-modal/user-modal.component";
 import {FormIndicator} from "../../../interface/utils/form-indicator";
-import {ModificationField} from "../../../enum/modification-field";
-import {UserSecurityComponent} from "../user-information/user-security/user-security.component";
 
 @Component({
   selector: 'app-user',
