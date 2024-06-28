@@ -1,11 +1,11 @@
 import {Component, EventEmitter, Input, OnChanges, Output} from '@angular/core';
-import {FormIndicator} from "../../../interface/utils/form-indicator";
-import {ActionType} from "../../../enum/action-type";
-import {Role} from "../../../interface/dto/role";
-import {ModalButtonComponent} from "../../../components/modal/modal-button/modal-button.component";
 import {NgForOf, NgIf} from "@angular/common";
-import {Muscle} from "../../../interface/dto/muscle";
-import {User} from "../../../interface/dto/user";
+import {ModalButtonComponent} from "../../../../components/modal/modal-button/modal-button.component";
+import {Role} from "../../../../interface/dto/role";
+import {FormIndicator} from "../../../../interface/utils/form-indicator";
+import {User} from "../../../../interface/dto/user";
+import {Muscle} from "../../../../interface/dto/muscle";
+import {ActionType} from "../../../../enum/action-type";
 
 @Component({
   selector: 'app-roles-array',

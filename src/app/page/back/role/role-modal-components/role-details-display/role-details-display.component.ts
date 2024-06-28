@@ -1,6 +1,6 @@
 import {Component, Input} from '@angular/core';
 import {NgForOf, NgIf} from "@angular/common";
-import {Role} from "../../../../interface/dto/role";
+import {Role} from "../../../../../interface/dto/role";
 
 @Component({
   selector: 'app-role-details-display',
