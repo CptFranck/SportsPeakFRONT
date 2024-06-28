@@ -9,10 +9,10 @@ import {RegisterFormComponent} from "../register-form/register-form.component";
     LoginFormComponent,
     RegisterFormComponent
   ],
-  styleUrl: "login-component.css",
-  templateUrl: './login.component.html',
+  styleUrl: "auth.component.css",
+  templateUrl: './auth.component.html',
 })
-export class LoginComponent {
+export class AuthComponent {
   loginTabId: string = "loginTabId"
   registerTabId: string = "registerTabId"
 }
