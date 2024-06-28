@@ -1,7 +1,7 @@
 import {AfterViewInit, Component, inject, Input} from '@angular/core';
 import {Observable, Subscription} from "rxjs";
-import {Privilege} from "../../../../interface/dto/privilege";
-import {PrivilegeService} from "../../../../services/privilege/privilege.service";
+import {Privilege} from "../../../../../interface/dto/privilege";
+import {PrivilegeService} from "../../../../../services/privilege/privilege.service";
 
 @Component({
   selector: 'app-privilege-delete-forms',

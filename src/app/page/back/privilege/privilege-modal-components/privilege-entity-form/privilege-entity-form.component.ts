@@ -1,12 +1,12 @@
 import {AfterViewInit, Component, inject, Input, OnInit} from '@angular/core';
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {Observable, Subscription} from "rxjs";
-import {Privilege} from "../../../../interface/dto/privilege";
-import {PrivilegeService} from "../../../../services/privilege/privilege.service";
-import {Role} from "../../../../interface/dto/role";
-import {InputControlComponent} from "../../../../components/input-control/input-control.component";
-import {RoleSelectorComponent} from "../../../../components/select/role-selector/role-selector.component";
 import {NgIf} from "@angular/common";
+import {InputControlComponent} from "../../../../../components/input-control/input-control.component";
+import {RoleSelectorComponent} from "../../../../../components/select/role-selector/role-selector.component";
+import {Privilege} from "../../../../../interface/dto/privilege";
+import {PrivilegeService} from "../../../../../services/privilege/privilege.service";
+import {Role} from "../../../../../interface/dto/role";
 
 @Component({
   selector: 'app-privilege-entity-form',

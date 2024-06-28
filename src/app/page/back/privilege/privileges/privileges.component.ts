@@ -1,13 +1,13 @@
 import {Component, inject, OnInit, TemplateRef, ViewChild} from '@angular/core';
-import {ActionType} from "../../../enum/action-type";
-import {FormIndicator} from "../../../interface/utils/form-indicator";
-import {Privilege} from "../../../interface/dto/privilege";
-import {PrivilegeService} from "../../../services/privilege/privilege.service";
-import {LoadingComponent} from "../../../components/loading/loading.component";
-import {MuscleModalComponent} from "../../muscle/muscle-modal/muscle-modal.component";
-import {MusclesArrayComponent} from "../../muscle/muscles-array/muscles-array.component";
 import {PrivilegesArrayComponent} from "../privileges-array/privileges-array.component";
 import {PrivilegeModalComponent} from "../privilege-modal/privilege-modal.component";
+import {LoadingComponent} from "../../../../components/loading/loading.component";
+import {MuscleModalComponent} from "../../../muscle/muscle-modal/muscle-modal.component";
+import {MusclesArrayComponent} from "../../../muscle/muscles-array/muscles-array.component";
+import {Privilege} from "../../../../interface/dto/privilege";
+import {ActionType} from "../../../../enum/action-type";
+import {PrivilegeService} from "../../../../services/privilege/privilege.service";
+import {FormIndicator} from "../../../../interface/utils/form-indicator";
 
 @Component({
   selector: 'app-privileges',

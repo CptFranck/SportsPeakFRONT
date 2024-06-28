@@ -1,9 +1,9 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {FormIndicator} from "../../../interface/utils/form-indicator";
-import {ActionType} from "../../../enum/action-type";
-import {Privilege} from "../../../interface/dto/privilege";
-import {ModalButtonComponent} from "../../../components/modal/modal-button/modal-button.component";
 import {NgForOf, NgIf} from "@angular/common";
+import {ModalButtonComponent} from "../../../../components/modal/modal-button/modal-button.component";
+import {Privilege} from "../../../../interface/dto/privilege";
+import {FormIndicator} from "../../../../interface/utils/form-indicator";
+import {ActionType} from "../../../../enum/action-type";
 
 @Component({
   selector: 'app-privileges-array',

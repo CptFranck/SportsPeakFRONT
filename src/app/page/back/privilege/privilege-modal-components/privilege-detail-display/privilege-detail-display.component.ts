@@ -1,6 +1,6 @@
 import {Component, Input} from '@angular/core';
-import {Privilege} from "../../../../interface/dto/privilege";
 import {NgForOf, NgIf} from "@angular/common";
+import {Privilege} from "../../../../../interface/dto/privilege";
 
 @Component({
   selector: 'app-privilege-details-display',
