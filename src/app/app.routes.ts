@@ -4,12 +4,12 @@ import {ExerciseTypesComponent} from './page/exercise-types/exercise-types/exerc
 import {MusclesComponent} from './page/muscle/muscles/muscles.component';
 import {AuthComponent} from "./page/auth/auth/auth.component";
 import {AuthGuard} from "./guards/auth/auth.guard";
-import {BackGuard} from "./guards/back/back.guard";
 import {UserComponent} from "./page/user-account/user/user.component";
+import {BackGuard} from "./guards/back/back.guard";
 
 export const routes: Routes = [
   {path: '', redirectTo: '/muscles', pathMatch: 'full'},
-  {path: 'login', component: AuthComponent},
+  {path: 'auth', component: AuthComponent},
   {path: 'exercises', component: ExercisesComponent},
   {path: 'exercise-types', component: ExerciseTypesComponent},
   {path: 'muscles', component: MusclesComponent},
@@ -20,10 +20,12 @@ export const routes: Routes = [
   },
   {
     path: 'error',
+    pathMatch: 'prefix',
     loadChildren: () => import('./page/error/error.routes').then(value => value.ERROR_ROUTES)
   },
   {
     path: 'back',
+    pathMatch: 'prefix',
     loadChildren: () => import('./page/back/back.routes').then(value => value.BACK_ROUTES),
     canActivate: [AuthGuard, BackGuard]
   },
