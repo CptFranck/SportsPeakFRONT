@@ -48,6 +48,15 @@ export class UserLoggedService {
     this.router.navigate([''])
   }
 
+  isStaff() {
+    let isStaffOrHigher: boolean = false;
+    if (this.roles.includes("ROLE_ADMIN"))
+      isStaffOrHigher = true;
+    if (this.roles.includes("ROLE_STAFF"))
+      isStaffOrHigher = true;
+    return isStaffOrHigher;
+  }
+
   isAdmin() {
     return this.roles.includes("ROLE_ADMIN");
   }
