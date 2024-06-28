@@ -1,29 +1,26 @@
-<ul *ngIf="user" class="navbar-nav h4 ">
-  <li class="nav-item">
-    <a
-      class="nav-link"
-      routerLink="back/users"
-      routerLinkActive="active"
-    >
-      Users
+<div *ngIf="isAdmin" class="navbar-nav navbar-collapse h4 ">
+  <li class="dropdown">
+    <a [id]="navbarDropdownId" aria-expanded="false" aria-haspopup="true" class="nav-link dropdown-toggle"
+       data-bs-toggle="dropdown"
+       role="button">
+      User Management
     </a>
+    <ul [attr.aria-labelledby]="navbarDropdownId" class="dropdown-menu">
+      <li>
+        <a class="dropdown-item" routerLink="back/users" routerLinkActive="active">
+          Users
+        </a>
+      </li>
+      <li>
+        <a class="dropdown-item" routerLink="back/roles" routerLinkActive="active">
+          Roles
+        </a>
+      </li>
+      <li>
+        <a class="dropdown-item" routerLink="back/privileges" routerLinkActive="active">
+          Privileges
+        </a>
+      </li>
+    </ul>
   </li>
-  <li class="nav-item">
-    <a
-      class="nav-link"
-      routerLink="back/roles"
-      routerLinkActive="active"
-    >
-      Roles
-    </a>
-  </li>
-  <li class="nav-item">
-    <a
-      class="nav-link"
-      routerLink="back/privileges"
-      routerLinkActive="active"
-    >
-      Privileges
-    </a>
-  </li>
-</ul>
+</div>

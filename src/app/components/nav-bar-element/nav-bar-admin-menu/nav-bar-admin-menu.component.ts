@@ -1,8 +1,7 @@
 import {Component, inject, OnInit} from '@angular/core';
-import {User} from "../../../interface/dto/user";
 import {UserLoggedService} from "../../../services/userLogged/user-logged.service";
 import {RouterLink, RouterLinkActive} from "@angular/router";
-import {NgIf} from "@angular/common";
+import {NgForOf, NgIf} from "@angular/common";
 
 @Component({
   selector: 'app-nav-bar-admin-menu',
@@ -10,18 +9,19 @@ import {NgIf} from "@angular/common";
   imports: [
     RouterLink,
     RouterLinkActive,
-    NgIf
+    NgIf,
+    NgForOf
   ],
   templateUrl: './nav-bar-admin-menu.component.html',
 })
 export class NavBarAdminMenuComponent implements OnInit {
-  user: User | undefined = undefined;
-
-  private userService: UserLoggedService = inject(UserLoggedService);
+  isAdmin: boolean = false;
+  navbarDropdownId: string = "NavBarAdminMenu"
+  private userLoggedService: UserLoggedService = inject(UserLoggedService);
 
   ngOnInit() {
-    this.userService.currentUser.subscribe((user: User | undefined) => {
-      this.user = user;
+    this.userLoggedService.currentUser.subscribe(() => {
+      this.isAdmin = this.userLoggedService.isAdmin();
     })
   }
 }

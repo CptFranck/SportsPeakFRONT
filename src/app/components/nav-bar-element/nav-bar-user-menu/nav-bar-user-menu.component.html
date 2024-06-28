@@ -1,16 +1,18 @@
 <ul class="navbar-nav h4">
-  <li *ngIf="user" class="nav-item dropdown">
-    <a aria-expanded="false" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#"
-       id="navbarDropdown"
+  <li *ngIf="user" class="dropdown">
+    <a [id]="navbarDropdownId" aria-expanded="false" aria-haspopup="true" class="nav-link dropdown-toggle"
+       data-bs-toggle="dropdown"
        role="button">
       {{ user.username }}
     </a>
-    <ul aria-labelledby="navbarDropdown" class="dropdown-menu">
+    <ul [attr.aria-labelledby]="navbarDropdownId" class="dropdown-menu">
       <li>
-        <a class="dropdown-item" routerLink="/user">User Profile</a>
+        <a class="dropdown-item" routerLink="/user" routerLinkActive="active">User Profile</a>
       </li>
       <li>
-        <a class="dropdown-item" routerLink="/user">Account settings</a>
+        <a class="dropdown-item" routerLink="/user" routerLinkActive="active">Account settings</a>
+      </li>
+      <li>
         <hr class="dropdown-divider">
       </li>
       <li>
