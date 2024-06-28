@@ -67,7 +67,7 @@ export class AuthService {
 
   logout() {
     this.apollo.client.resetStore().then(() => {
-      this.removeDataAuth()
+      this.removeDataAuth(true)
       this.isAuthenticated.next(false);
     });
   }
@@ -82,9 +82,13 @@ export class AuthService {
     }
   }
 
-  private removeDataAuth() {
+  private removeDataAuth(redirect: boolean = false) {
+    console.log("authService")
     this.userLoggedService.removeCurrentUser();
     this.tokenService.removeCurrentToken();
+    if (redirect) {
+      this.router.navigateByUrl('/')
+    }
   }
 
   private createAuthToken(data: Auth) {

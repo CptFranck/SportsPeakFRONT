@@ -38,6 +38,7 @@ export class UserLoggedService {
       this.localStorageService.saveData("user", userJson);
     } else {
       this.removeCurrentUser()
+      this.router.navigate([''])
     }
   }
 
@@ -45,7 +46,6 @@ export class UserLoggedService {
     this.roles = [];
     this.currentUser.next(undefined);
     this.localStorageService.removeData("user");
-    this.router.navigate([''])
   }
 
   isStaff() {
