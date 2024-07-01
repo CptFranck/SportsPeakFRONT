@@ -1,0 +1,43 @@
+<h1>Welcome to Sport's Peak</h1>
+<div class="container">
+  <div class="row">
+    <app-horizontal-card [srcImage]="'assets/gif/just-do-it-shia-la-beouf.gif'" [title]="'Forge your program !'">
+      <ul>
+        <li class="card-text">Build with Sport's Peak your tailor-made sports program !</li>
+        <li class="card-text">Create sessions that meet to your needs !</li>
+        <li class="card-text">Adapt exercise to feet your limits !</li>
+        <li class="card-text">A wide choice of program to follow your desires of the moment !</li>
+
+      </ul>
+      <div class="justify-content-center">
+        <a class="btn btn-primary " routerLink="auth">Create your account</a>
+      </div>
+    </app-horizontal-card>
+  </div>
+  <div class="row">
+    <app-horizontal-card [srcImage]="'assets/gif/stickergiant-lets-check-it-out.gif'"
+                         [title]="'Programs already built for you !'">
+      <ul>
+        <li class="card-text">Newbie friendly !</li>
+        <li class="card-text">With or without equipment !</li>
+      </ul>
+      <div class="justify-content-center">
+        <a class="btn btn-primary m-1" routerLink="auth">Check out our programs</a>
+        <a class="btn btn-primary m-1" routerLink="auth">Check out our sessions</a>
+        <a class="btn btn-primary m-1" routerLink="auth">Check out our exercise</a>
+      </div>
+    </app-horizontal-card>
+  </div>
+  <div class="row">
+    <app-horizontal-card [srcImage]="'assets/gif/lotr-squad.gif'"
+                         [title]="'Community\'s programs !'">
+      <ul>
+        <li class="card-text">You will find for sure something for you !</li>
+        <li class="card-text">Many varied training no matter your goal !</li>
+      </ul>
+      <div class="justify-content-center">
+        <a class="btn btn-primary " routerLink="auth">Check it out</a>
+      </div>
+    </app-horizontal-card>
+  </div>
+</div>
