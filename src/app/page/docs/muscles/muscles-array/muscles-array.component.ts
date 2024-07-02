@@ -19,8 +19,8 @@ import {UserLoggedService} from "../../../../services/userLogged/user-logged.ser
   templateUrl: './muscles-array.component.html',
 })
 export class MusclesArrayComponent implements OnChanges {
-  showDetails: { [id: string]: boolean } = {};
   isAdmin: boolean = false;
+  showDetails: { [id: string]: boolean } = {};
 
   @Input() muscles!: Muscle[];
   @Input() modalId!: string;
@@ -29,12 +29,9 @@ export class MusclesArrayComponent implements OnChanges {
 
   private userLoggedService: UserLoggedService = inject(UserLoggedService);
 
-  constructor() {
-    this.isAdmin = this.userLoggedService.isAdmin()
-  }
-
   ngOnChanges(): void {
     this.muscles.forEach((muscle: Muscle) => this.showDetails[muscle.id] = false);
+    this.userLoggedService.currentUser.subscribe(() => this.isAdmin = this.userLoggedService.isAdmin());
   }
 
   expendMuscleDetails(id: string): void {

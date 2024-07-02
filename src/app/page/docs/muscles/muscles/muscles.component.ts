@@ -54,16 +54,13 @@ export class MusclesComponent implements OnInit {
   private muscleService: MuscleService = inject(MuscleService);
   private userLoggedService: UserLoggedService = inject(UserLoggedService);
 
-  constructor() {
-    this.isAdmin = this.userLoggedService.isAdmin()
-  }
-
   ngOnInit(): void {
     this.muscleService.muscles.subscribe((muscles: Muscle[]) => {
       this.muscles = muscles
       this.displayedMuscles = muscles
     });
     this.muscleService.isLoading.subscribe((isLoading: boolean) => this.loading = isLoading);
+    this.userLoggedService.currentUser.subscribe(() => this.isAdmin = this.userLoggedService.isAdmin());
   }
 
   setMuscle(formIndicator: FormIndicator) {
