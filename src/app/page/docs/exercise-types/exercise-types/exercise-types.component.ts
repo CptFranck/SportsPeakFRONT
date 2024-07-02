@@ -8,16 +8,21 @@ import {AlertDisplayComponent} from "../../../../components/alert-display/alert-
 import {LoadingComponent} from "../../../../components/loading/loading.component";
 import {ExerciseTypeArrayComponent} from "../exercise-types-array/exercise-type-array.component";
 import {ExerciseTypeModalComponent} from "../exercise-type-modal/exercise-type-modal.component";
+import {UserLoggedService} from "../../../../services/userLogged/user-logged.service";
+import {SearchBarComponent} from "../../../../components/search-bar/search-bar.component";
+import {Exercise} from "../../../../interface/dto/exercise";
 
 @Component({
   selector: 'app-exercise-types',
   standalone: true,
-  imports: [CommonModule, AlertDisplayComponent, LoadingComponent, ExerciseTypeArrayComponent, ExerciseTypeModalComponent],
+  imports: [CommonModule, AlertDisplayComponent, LoadingComponent, ExerciseTypeArrayComponent, ExerciseTypeModalComponent, SearchBarComponent],
   templateUrl: './exercise-types.component.html',
 })
 export class ExerciseTypesComponent implements OnInit {
+  isAdmin: boolean = false;
   loading: boolean = true;
   exerciseTypes: ExerciseType[] = [];
+  displayedExerciseTypes: ExerciseType[] = [];
   exerciseType: ExerciseType | undefined;
   action: ActionType = ActionType.create;
   modalTitle: string = "";
@@ -25,20 +30,46 @@ export class ExerciseTypesComponent implements OnInit {
 
   @ViewChild("modalTemplate") modalTemplate!: TemplateRef<any>
 
+  private userLoggedService: UserLoggedService = inject(UserLoggedService);
   private exerciseTypeService: ExerciseTypeService = inject(ExerciseTypeService);
 
   ngOnInit(): void {
-    this.exerciseTypeService.exerciseTypes.subscribe((exerciseType: ExerciseType[]) =>
-      this.exerciseTypes = exerciseType
-    )
-    this.exerciseTypeService.isLoading.subscribe((loading: boolean) =>
-      this.loading = loading
-    )
+    this.exerciseTypeService.exerciseTypes.subscribe((exerciseType: ExerciseType[]) => {
+      this.exerciseTypes = exerciseType;
+      this.displayedExerciseTypes = exerciseType;
+    });
+    this.exerciseTypeService.isLoading.subscribe((loading: boolean) => this.loading = loading)
+    this.userLoggedService.currentUser.subscribe(() => this.isAdmin = this.userLoggedService.isAdmin());
   }
 
   setExerciseType(formIndicator: FormIndicator) {
     this.exerciseType = formIndicator.object;
     this.action = formIndicator.actionType;
     this.modalTitle = formIndicator.object.name;
+  }
+
+  searchExerciseType(input: string) {
+    if (input === "") {
+      this.displayedExerciseTypes = this.exerciseTypes
+      return;
+    }
+
+    let localInput: string = input.toLowerCase();
+    let includeExerciseTypeExerciseName: boolean = false;
+
+    this.displayedExerciseTypes = this.exerciseTypes.filter((exerciseType: ExerciseType) => {
+      includeExerciseTypeExerciseName = false;
+      if (exerciseType.exercises) {
+        exerciseType.exercises.forEach((exercise: Exercise) => {
+          if (exercise.name.toLowerCase().includes(localInput)) {
+            includeExerciseTypeExerciseName = true;
+          }
+        })
+      }
+
+      return exerciseType.name.toLowerCase().includes(localInput) ||
+        exerciseType.goal.toLowerCase().includes(localInput) ||
+        includeExerciseTypeExerciseName;
+    });
   }
 }

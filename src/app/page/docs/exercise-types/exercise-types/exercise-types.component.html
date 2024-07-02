@@ -6,15 +6,19 @@
         <h2>ExerciseType saved in database</h2>
       </div>
       <div class="col-2">
-        <app-exercise-type-modal [action]="action"
+        <app-exercise-type-modal *ngIf="isAdmin"
+                                 [action]="action"
                                  [exerciseTypeModalId]="exerciseTypeModalId"
                                  [exerciseType]="exerciseType"
                                  [modalTitle]="modalTitle"
         />
       </div>
+      <div class="row">
+        <app-search-bar (onInput)="searchExerciseType($event)"/>
+      </div>
     </div>
     <app-exercise-type-array (actionExerciseType)="setExerciseType($event)"
-                             [exerciseTypes]="exerciseTypes"
+                             [exerciseTypes]="displayedExerciseTypes"
                              [modalId]="exerciseTypeModalId"/>
   </div>
 </div>
