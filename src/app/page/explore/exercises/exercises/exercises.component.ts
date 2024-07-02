@@ -1,13 +1,13 @@
 import {Component, inject, OnInit, TemplateRef, ViewChild} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {ExercisesArrayComponent} from "../exercises-array/exercises-array.component";
-import {ActionType} from "../../../enum/action-type";
-import {Exercise} from "../../../interface/dto/exercise";
-import {ExerciseService} from "../../../services/exercise/exercise.service";
-import {FormIndicator} from "../../../interface/utils/form-indicator";
-import {LoadingComponent} from "../../../components/loading/loading.component";
-import {MuscleModalComponent} from "../../muscle/muscle-modal/muscle-modal.component";
-import {MusclesArrayComponent} from "../../muscle/muscles-array/muscles-array.component";
+import {ActionType} from "../../../../enum/action-type";
+import {Exercise} from "../../../../interface/dto/exercise";
+import {ExerciseService} from "../../../../services/exercise/exercise.service";
+import {FormIndicator} from "../../../../interface/utils/form-indicator";
+import {LoadingComponent} from "../../../../components/loading/loading.component";
+import {MuscleModalComponent} from "../../../docs/muscles/muscle-modal/muscle-modal.component";
+import {MusclesArrayComponent} from "../../../docs/muscles/muscles-array/muscles-array.component";
 import {ExerciseModalComponent} from "../exercise-modal/exercise-modal.component";
 
 @Component({

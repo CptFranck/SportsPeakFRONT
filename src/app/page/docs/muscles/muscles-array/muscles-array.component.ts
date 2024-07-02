@@ -1,10 +1,10 @@
 import {Component, EventEmitter, Input, OnChanges, Output} from '@angular/core';
 import {NgForOf, NgIf} from "@angular/common";
-import {Muscle} from "../../../interface/dto/muscle";
-import {ModalButtonComponent} from "../../../components/modal/modal-button/modal-button.component";
-import {ModalComponent} from "../../../components/modal/modal/modal.component";
-import {FormIndicator} from "../../../interface/utils/form-indicator";
-import {ActionType} from "../../../enum/action-type";
+import {Muscle} from "../../../../interface/dto/muscle";
+import {ModalButtonComponent} from "../../../../components/modal/modal-button/modal-button.component";
+import {ModalComponent} from "../../../../components/modal/modal/modal.component";
+import {FormIndicator} from "../../../../interface/utils/form-indicator";
+import {ActionType} from "../../../../enum/action-type";
 
 @Component({
   selector: 'app-muscles-array',

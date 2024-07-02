@@ -1,11 +1,11 @@
 import {Component, Input} from '@angular/core';
-import {Muscle} from "../../../../interface/dto/muscle";
-import {InputControlComponent} from "../../../../components/input-control/input-control.component";
+import {Muscle} from "../../../../../interface/dto/muscle";
+import {InputControlComponent} from "../../../../../components/input-control/input-control.component";
 import {NgForOf, NgIf} from "@angular/common";
 import {ReactiveFormsModule} from "@angular/forms";
 import {
   ExerciseSelectorComponent
-} from "../../../../components/selectors/exercise-selector/exercise-selector.component";
+} from "../../../../../components/selectors/exercise-selector/exercise-selector.component";
 
 @Component({
   selector: 'app-muscle-details-display',

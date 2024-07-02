@@ -7,14 +7,14 @@ import {ModalButtonComponent} from "../../../../components/modal/modal-button/mo
 import {ModalComponent} from "../../../../components/modal/modal/modal.component";
 import {
   MuscleDetailsDisplayComponent
-} from "../../../muscle/muscle-modal-components/muscle-details-display/muscle-details-display.component";
+} from "../../../docs/muscles/muscle-modal-components/muscle-details-display/muscle-details-display.component";
 import {
   MuscleEntityFormComponent
-} from "../../../muscle/muscle-modal-components/muscle-entity-form/muscle-entity-form.component";
+} from "../../../docs/muscles/muscle-modal-components/muscle-entity-form/muscle-entity-form.component";
 import {NgIf} from "@angular/common";
 import {
   muscleDeleteFormComponent
-} from "../../../muscle/muscle-modal-components/muscle-delete-form/muscle-delete-form.component";
+} from "../../../docs/muscles/muscle-modal-components/muscle-delete-form/muscle-delete-form.component";
 import {
   UserDeleteFormComponent
 } from "../../../user-account/user-modal-components/user-delete-form/user-delete-form.component";

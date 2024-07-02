@@ -1,8 +1,8 @@
 import {AfterViewInit, Component, inject, Input} from '@angular/core';
 import {NgForOf} from "@angular/common";
-import {Muscle} from "../../../../interface/dto/muscle";
+import {Muscle} from "../../../../../interface/dto/muscle";
 import {Observable, Subscription} from "rxjs";
-import {MuscleService} from "../../../../services/muscle/muscle.service";
+import {MuscleService} from "../../../../../services/muscle/muscle.service";
 
 @Component({
   selector: 'app-muscle-delete-form',

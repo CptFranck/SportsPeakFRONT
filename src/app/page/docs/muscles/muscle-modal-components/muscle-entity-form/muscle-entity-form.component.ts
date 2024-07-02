@@ -1,15 +1,15 @@
 import {AfterViewInit, Component, inject, Input, OnInit} from '@angular/core';
-import {MultiSelectComponent} from "../../../../components/multi-select/multi-select.component";
+import {MultiSelectComponent} from "../../../../../components/multi-select/multi-select.component";
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {NgIf, NgTemplateOutlet} from "@angular/common";
-import {InputControlComponent} from "../../../../components/input-control/input-control.component";
-import {Muscle} from "../../../../interface/dto/muscle";
+import {InputControlComponent} from "../../../../../components/input-control/input-control.component";
+import {Muscle} from "../../../../../interface/dto/muscle";
 import {Observable, Subscription} from "rxjs";
-import {MuscleService} from "../../../../services/muscle/muscle.service";
-import {Exercise} from "../../../../interface/dto/exercise";
+import {MuscleService} from "../../../../../services/muscle/muscle.service";
+import {Exercise} from "../../../../../interface/dto/exercise";
 import {
   ExerciseSelectorComponent
-} from "../../../../components/selectors/exercise-selector/exercise-selector.component";
+} from "../../../../../components/selectors/exercise-selector/exercise-selector.component";
 
 @Component({
   selector: 'app-muscle-entity-form',

@@ -1,7 +1,7 @@
 import {AfterViewInit, Component, inject, Input} from '@angular/core';
 import {Observable, Subscription} from "rxjs";
-import {Exercise} from "../../../../interface/dto/exercise";
-import {ExerciseService} from "../../../../services/exercise/exercise.service";
+import {Exercise} from "../../../../../interface/dto/exercise";
+import {ExerciseService} from "../../../../../services/exercise/exercise.service";
 
 @Component({
   selector: 'app-exercise-delete-form',

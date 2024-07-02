@@ -1,18 +1,18 @@
 import {Component, Input, TemplateRef, ViewChild} from '@angular/core';
-import {ModalButtonComponent} from "../../../components/modal/modal-button/modal-button.component";
-import {ModalComponent} from "../../../components/modal/modal/modal.component";
+import {ModalButtonComponent} from "../../../../components/modal/modal-button/modal-button.component";
+import {ModalComponent} from "../../../../components/modal/modal/modal.component";
 import {
   MuscleDetailsDisplayComponent
-} from "../../muscle/muscle-modal-components/muscle-details-display/muscle-details-display.component";
+} from "../../../docs/muscles/muscle-modal-components/muscle-details-display/muscle-details-display.component";
 import {
   MuscleEntityFormComponent
-} from "../../muscle/muscle-modal-components/muscle-entity-form/muscle-entity-form.component";
+} from "../../../docs/muscles/muscle-modal-components/muscle-entity-form/muscle-entity-form.component";
 import {NgIf} from "@angular/common";
 import {
   muscleDeleteFormComponent
-} from "../../muscle/muscle-modal-components/muscle-delete-form/muscle-delete-form.component";
-import {ActionType} from "../../../enum/action-type";
-import {Exercise} from "../../../interface/dto/exercise";
+} from "../../../docs/muscles/muscle-modal-components/muscle-delete-form/muscle-delete-form.component";
+import {ActionType} from "../../../../enum/action-type";
+import {Exercise} from "../../../../interface/dto/exercise";
 import {
   ExerciseEntityFormComponent
 } from "../exercise-modal-components/exercise-entity-form/exercise-entity-form.component";

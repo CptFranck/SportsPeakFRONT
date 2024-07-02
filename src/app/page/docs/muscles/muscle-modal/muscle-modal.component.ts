@@ -1,14 +1,14 @@
 import {Component, Input, TemplateRef, ViewChild} from '@angular/core';
-import {ActionType} from "../../../enum/action-type";
-import {ModalButtonComponent} from "../../../components/modal/modal-button/modal-button.component";
-import {ModalComponent} from "../../../components/modal/modal/modal.component";
+import {ActionType} from "../../../../enum/action-type";
+import {ModalButtonComponent} from "../../../../components/modal/modal-button/modal-button.component";
+import {ModalComponent} from "../../../../components/modal/modal/modal.component";
 import {
   MuscleDetailsDisplayComponent
 } from "../muscle-modal-components/muscle-details-display/muscle-details-display.component";
 import {MuscleEntityFormComponent} from "../muscle-modal-components/muscle-entity-form/muscle-entity-form.component";
 import {NgIf} from "@angular/common";
 import {muscleDeleteFormComponent} from "../muscle-modal-components/muscle-delete-form/muscle-delete-form.component";
-import {Muscle} from "../../../interface/dto/muscle";
+import {Muscle} from "../../../../interface/dto/muscle";
 
 @Component({
   selector: 'app-muscle-modal',
