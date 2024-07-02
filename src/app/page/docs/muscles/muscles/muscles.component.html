@@ -13,8 +13,11 @@
         />
       </div>
     </div>
+    <div class="row">
+      <app-search-bar (onInput)="searchMuscle($event)"/>
+    </div>
     <app-muscles-array (actionMuscle)="setMuscle($event)"
                        [modalId]="muscleModalId"
-                       [muscles]="muscles"/>
+                       [muscles]="displayedMuscles"/>
   </div>
 </div>

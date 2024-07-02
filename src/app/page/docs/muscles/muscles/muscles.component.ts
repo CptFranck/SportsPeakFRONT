@@ -16,6 +16,8 @@ import {MuscleModalComponent} from "../muscle-modal/muscle-modal.component";
 import {AlertDisplayComponent} from "../../../../components/alert-display/alert-display.component";
 import {MuscleService} from "../../../../services/muscle/muscle.service";
 import {Muscle} from "../../../../interface/dto/muscle";
+import {SearchBarComponent} from "../../../../components/search-bar/search-bar.component";
+import {Exercise} from "../../../../interface/dto/exercise";
 
 @Component({
   selector: 'app-muscles',
@@ -31,23 +33,29 @@ import {Muscle} from "../../../../interface/dto/muscle";
     MuscleDetailsDisplayComponent,
     muscleDeleteFormComponent,
     MuscleModalComponent,
-    AlertDisplayComponent
+    AlertDisplayComponent,
+    SearchBarComponent
   ],
   templateUrl: './muscles.component.html',
 })
 export class MusclesComponent implements OnInit {
   loading: boolean = true;
   muscles: Muscle[] = [];
+  displayedMuscles: Muscle[] = [];
   muscle: Muscle | undefined;
   action: ActionType = ActionType.create;
   modalTitle: string = "";
   muscleModalId: string = "muscleModal";
+
   @ViewChild("modalTemplate") modalTemplate!: TemplateRef<any>;
 
   private muscleService: MuscleService = inject(MuscleService);
 
   ngOnInit(): void {
-    this.muscleService.muscles.subscribe((muscles: Muscle[]) => this.muscles = muscles);
+    this.muscleService.muscles.subscribe((muscles: Muscle[]) => {
+      this.muscles = muscles
+      this.displayedMuscles = muscles
+    });
     this.muscleService.isLoading.subscribe((isLoading: boolean) => this.loading = isLoading);
   }
 
@@ -55,5 +63,29 @@ export class MusclesComponent implements OnInit {
     this.muscle = formIndicator.object;
     this.action = formIndicator.actionType;
     this.modalTitle = formIndicator.object.name;
+  }
+
+  searchMuscle(input: string) {
+    if (input === "") {
+      this.displayedMuscles = this.muscles
+      return;
+    }
+
+    let localInput: string = input.toLowerCase();
+    let includeMuscleExerciseName: boolean = false;
+
+    this.displayedMuscles = this.muscles.filter((muscle: Muscle) => {
+      includeMuscleExerciseName = false;
+      muscle.exercises.forEach((exercise: Exercise) => {
+        if (exercise.name.toLowerCase().includes(localInput)) {
+          includeMuscleExerciseName = true;
+        }
+      })
+
+      return muscle.name.toLowerCase().includes(localInput) ||
+        muscle.description.toLowerCase().includes(localInput) ||
+        muscle.function.toLowerCase().includes(localInput) ||
+        includeMuscleExerciseName;
+    });
   }
 }
