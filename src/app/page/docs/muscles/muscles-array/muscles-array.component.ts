@@ -1,10 +1,11 @@
-import {Component, EventEmitter, Input, OnChanges, Output} from '@angular/core';
+import {Component, EventEmitter, inject, Input, OnChanges, Output} from '@angular/core';
 import {NgForOf, NgIf} from "@angular/common";
 import {Muscle} from "../../../../interface/dto/muscle";
 import {ModalButtonComponent} from "../../../../components/modal/modal-button/modal-button.component";
 import {ModalComponent} from "../../../../components/modal/modal/modal.component";
 import {FormIndicator} from "../../../../interface/utils/form-indicator";
 import {ActionType} from "../../../../enum/action-type";
+import {UserLoggedService} from "../../../../services/userLogged/user-logged.service";
 
 @Component({
   selector: 'app-muscles-array',
@@ -18,12 +19,19 @@ import {ActionType} from "../../../../enum/action-type";
   templateUrl: './muscles-array.component.html',
 })
 export class MusclesArrayComponent implements OnChanges {
+  showDetails: { [id: string]: boolean } = {};
+  isAdmin: boolean = false;
+
   @Input() muscles!: Muscle[];
   @Input() modalId!: string;
 
   @Output() actionMuscle: EventEmitter<FormIndicator> = new EventEmitter<FormIndicator>();
 
-  showDetails: { [id: string]: boolean } = {};
+  private userLoggedService: UserLoggedService = inject(UserLoggedService);
+
+  constructor() {
+    this.isAdmin = this.userLoggedService.isAdmin()
+  }
 
   ngOnChanges(): void {
     this.muscles.forEach((muscle: Muscle) => this.showDetails[muscle.id] = false);

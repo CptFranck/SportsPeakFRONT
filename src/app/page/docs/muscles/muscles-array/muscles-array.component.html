@@ -7,8 +7,8 @@
     <th class="col-auto" scope="col">Used in</th>
     <th class="col-1 text-center" scope="col">Collapse</th>
     <th class="col-1 text-center" scope="col">Details</th>
-    <th class="col-1 text-center" scope="col">Modify</th>
-    <th class="col-1 text-center" scope="col">Delete</th>
+    <th *ngIf="isAdmin" class="col-1 text-center" scope="col">Modify</th>
+    <th *ngIf="isAdmin" class="col-1 text-center" scope="col">Delete</th>
   </tr>
   </thead>
   <tbody class="table-group-divider">
@@ -30,7 +30,8 @@
       <ul class="list-group list-group-flush">
         <li
           *ngFor="let exercise of muscle.exercises"
-          class="list-group-item d-flex justify-content-center text-center p-0">
+          class="list-group-item d-flex justify-content-center text-center p-0"
+        >
           {{ exercise.name }}
         </li>
       </ul>
@@ -60,7 +61,7 @@
         </app-modal-button>
       </div>
     </td>
-    <td>
+    <td *ngIf="isAdmin">
       <div class="col p-1 text-center">
         <app-modal-button
           (onCLickModalButton)="modifyMuscle($event)"
@@ -72,7 +73,7 @@
         </app-modal-button>
       </div>
     </td>
-    <td>
+    <td *ngIf="isAdmin">
       <div class="col p-1 text-center">
         <app-modal-button
           (onCLickModalButton)="delMuscle($event)"
