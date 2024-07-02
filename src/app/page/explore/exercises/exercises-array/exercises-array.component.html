@@ -27,7 +27,23 @@
     <td *ngIf="showDetails[exercise.id]">
       {{ exercise.goal }}
     </td>
-    <td>
+    <td *ngIf="!showDetails[exercise.id]">
+      <ul class="list-group list-group-flush">
+        <li
+          *ngFor="let muscle of exercise.muscles?.slice(0,2)"
+          class="list-group-item d-flex justify-content-center text-center p-0"
+        >
+          {{ muscle.name }}
+        </li>
+        <li
+          *ngIf="exercise.muscles.length > 3"
+          class="list-group-item d-flex justify-content-center text-center p-0"
+        >
+          ...
+        </li>
+      </ul>
+    </td>
+    <td *ngIf="showDetails[exercise.id]">
       <ul class="list-group list-group-flush">
         <li
           *ngFor="let exercise of exercise.muscles"

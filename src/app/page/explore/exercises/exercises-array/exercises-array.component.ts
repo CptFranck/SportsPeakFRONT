@@ -18,6 +18,7 @@ import {UserLoggedService} from "../../../../services/userLogged/user-logged.ser
 })
 export class ExercisesArrayComponent implements OnChanges {
   isAdmin: boolean = false;
+  test: boolean = false;
   showDetails: { [id: string]: boolean } = {};
 
   @Input() exercises!: Exercise[];
@@ -30,6 +31,7 @@ export class ExercisesArrayComponent implements OnChanges {
   ngOnChanges(): void {
     this.exercises.forEach((exercise: Exercise) => this.showDetails[exercise.id] = false);
     this.userLoggedService.currentUser.subscribe(() => this.isAdmin = this.userLoggedService.isAdmin());
+    this.exercises.forEach(ex => console.log())
   }
 
   expendExerciseDetails(id: string): void {
