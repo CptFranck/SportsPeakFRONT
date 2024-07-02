@@ -6,9 +6,11 @@ import {AuthComponent} from "./page/auth/auth/auth.component";
 import {AuthGuard} from "./guards/auth/auth.guard";
 import {UserComponent} from "./page/user-account/user/user.component";
 import {BackGuard} from "./guards/back/back.guard";
+import {HomeComponent} from "./page/home/home.component";
 
 export const routes: Routes = [
-  {path: '', redirectTo: '/muscles', pathMatch: 'full'},
+  {path: '', redirectTo: '/home', pathMatch: 'full'},
+  {path: 'home', component: HomeComponent},
   {path: 'auth', component: AuthComponent},
   {path: 'exercises', component: ExercisesComponent},
   {path: 'exercise-types', component: ExerciseTypesComponent},
