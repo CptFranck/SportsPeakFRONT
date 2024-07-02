@@ -1,14 +1,14 @@
 import {AfterViewInit, Component, inject, Input, OnInit} from '@angular/core';
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {Observable, Subscription} from "rxjs";
-import {InputControlComponent} from "../../../../components/input-control/input-control.component";
-import {ExerciseType} from "../../../../interface/dto/exerciseType";
+import {InputControlComponent} from "../../../../../components/input-control/input-control.component";
+import {ExerciseType} from "../../../../../interface/dto/exerciseType";
 import {NgIf} from "@angular/common";
-import {ExerciseTypeService} from "../../../../services/exercise-type/exercise-type.service";
-import {Exercise} from "../../../../interface/dto/exercise";
+import {ExerciseTypeService} from "../../../../../services/exercise-type/exercise-type.service";
+import {Exercise} from "../../../../../interface/dto/exercise";
 import {
   ExerciseSelectorComponent
-} from "../../../../components/selectors/exercise-selector/exercise-selector.component";
+} from "../../../../../components/selectors/exercise-selector/exercise-selector.component";
 
 @Component({
   selector: 'app-exercise-type-entity-form',

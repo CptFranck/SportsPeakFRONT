@@ -1,9 +1,9 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {FormIndicator} from "../../../interface/utils/form-indicator";
-import {ActionType} from "../../../enum/action-type";
-import {ExerciseType} from "../../../interface/dto/exerciseType";
+import {FormIndicator} from "../../../../interface/utils/form-indicator";
+import {ActionType} from "../../../../enum/action-type";
+import {ExerciseType} from "../../../../interface/dto/exerciseType";
 import {NgForOf, NgIf} from "@angular/common";
-import {ModalButtonComponent} from "../../../components/modal/modal-button/modal-button.component";
+import {ModalButtonComponent} from "../../../../components/modal/modal-button/modal-button.component";
 
 @Component({
   selector: 'app-exercise-type-array',

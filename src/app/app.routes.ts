@@ -1,6 +1,6 @@
 import {Routes} from '@angular/router';
 import {ExercisesComponent} from './page/exercises/exercises/exercises.component';
-import {ExerciseTypesComponent} from './page/exercise-types/exercise-types/exercise-types.component';
+import {ExerciseTypesComponent} from './page/docs/exercise-types/exercise-types/exercise-types.component';
 import {MusclesComponent} from './page/muscle/muscles/muscles.component';
 import {AuthComponent} from "./page/auth/auth/auth.component";
 import {AuthGuard} from "./guards/auth/auth.guard";
