@@ -31,7 +31,6 @@ export class ExercisesArrayComponent implements OnChanges {
   ngOnChanges(): void {
     this.exercises.forEach((exercise: Exercise) => this.showDetails[exercise.id] = false);
     this.userLoggedService.currentUser.subscribe(() => this.isAdmin = this.userLoggedService.isAdmin());
-    this.exercises.forEach(ex => console.log())
   }
 
   expendExerciseDetails(id: string): void {
