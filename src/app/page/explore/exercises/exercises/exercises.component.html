@@ -3,18 +3,22 @@
   <div class="container-fluid">
     <div class="row">
       <div class="col">
-        <h2>Exercises saved in database</h2>
+        <h2>Exercises 📋</h2>
       </div>
       <div class="col-2">
-        <app-exercise-modal [action]="action"
+        <app-exercise-modal *ngIf="isAdmin"
+                            [action]="action"
                             [exerciseModalId]="exerciseModalId"
                             [exercise]="exercise"
                             [modalTitle]="modalTitle"
         />
       </div>
+      <div class="row">
+        <app-search-bar (onInput)="searchExercise($event)"/>
+      </div>
     </div>
     <app-exercises-array (actionExercise)="setExercise($event)"
-                         [exercises]="exercises"
+                         [exercises]="displayedExercises"
                          [modalId]="exerciseModalId"/>
   </div>
 </div>

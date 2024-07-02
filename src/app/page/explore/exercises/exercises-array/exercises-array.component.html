@@ -8,8 +8,8 @@
     <th class="col-auto" scope="col">Type of</th>
     <th class="col-1 text-center" scope="col">Collapse</th>
     <th class="col-1 text-center" scope="col">Details</th>
-    <th class="col-1 text-center" scope="col">Modify</th>
-    <th class="col-1 text-center" scope="col">Delete</th>
+    <th *ngIf="isAdmin" class="col-1 text-center" scope="col">Modify</th>
+    <th *ngIf="isAdmin" class="col-1 text-center" scope="col">Delete</th>
   </tr>
   </thead>
   <tbody class="table-group-divider">
@@ -70,7 +70,7 @@
         </app-modal-button>
       </div>
     </td>
-    <td>
+    <td *ngIf="isAdmin">
       <div class="col p-1 text-center">
         <app-modal-button
           (onCLickModalButton)="modifyExercise($event)"
@@ -82,7 +82,7 @@
         </app-modal-button>
       </div>
     </td>
-    <td>
+    <td *ngIf="isAdmin">
       <div class="col p-1 text-center">
         <app-modal-button
           (onCLickModalButton)="delExercise($event)"

@@ -1,9 +1,10 @@
-import {Component, EventEmitter, Input, OnChanges, Output} from '@angular/core';
+import {Component, EventEmitter, inject, Input, OnChanges, Output} from '@angular/core';
 import {NgForOf, NgIf} from "@angular/common";
 import {FormIndicator} from "../../../../interface/utils/form-indicator";
 import {ActionType} from "../../../../enum/action-type";
 import {Exercise} from "../../../../interface/dto/exercise";
 import {ModalButtonComponent} from "../../../../components/modal/modal-button/modal-button.component";
+import {UserLoggedService} from "../../../../services/userLogged/user-logged.service";
 
 @Component({
   selector: 'app-exercises-array',
@@ -16,15 +17,19 @@ import {ModalButtonComponent} from "../../../../components/modal/modal-button/mo
   templateUrl: './exercises-array.component.html',
 })
 export class ExercisesArrayComponent implements OnChanges {
+  isAdmin: boolean = false;
+  showDetails: { [id: string]: boolean } = {};
+
   @Input() exercises!: Exercise[];
   @Input() modalId!: string;
 
   @Output() actionExercise: EventEmitter<FormIndicator> = new EventEmitter<FormIndicator>();
 
-  showDetails: { [id: string]: boolean } = {};
+  private userLoggedService: UserLoggedService = inject(UserLoggedService);
 
   ngOnChanges(): void {
     this.exercises.forEach((exercise: Exercise) => this.showDetails[exercise.id] = false);
+    this.userLoggedService.currentUser.subscribe(() => this.isAdmin = this.userLoggedService.isAdmin());
   }
 
   expendExerciseDetails(id: string): void {
