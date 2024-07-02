@@ -9,7 +9,6 @@ import {LoadingComponent} from "../../../../components/loading/loading.component
 import {MuscleModalComponent} from "../../../docs/muscles/muscle-modal/muscle-modal.component";
 import {MusclesArrayComponent} from "../../../docs/muscles/muscles-array/muscles-array.component";
 import {ExerciseModalComponent} from "../exercise-modal/exercise-modal.component";
-import {UserLoggedService} from "../../../../services/userLogged/user-logged.service";
 import {SearchBarComponent} from "../../../../components/search-bar/search-bar.component";
 import {Muscle} from "../../../../interface/dto/muscle";
 import {ExerciseType} from "../../../../interface/dto/exerciseType";
@@ -21,7 +20,6 @@ import {ExerciseType} from "../../../../interface/dto/exerciseType";
   templateUrl: './exercises.component.html',
 })
 export class ExercisesComponent implements OnInit {
-  isAdmin: boolean = false;
   loading: boolean = true;
   exercises: Exercise[] = [];
   displayedExercises: Exercise[] = [];
@@ -33,7 +31,6 @@ export class ExercisesComponent implements OnInit {
   @ViewChild("modalTemplate") modalTemplate!: TemplateRef<any>
 
   private exerciseService: ExerciseService = inject(ExerciseService);
-  private userLoggedService: UserLoggedService = inject(UserLoggedService);
 
   ngOnInit(): void {
     this.exerciseService.exercises.subscribe((exercises: Exercise[]) => {
@@ -41,8 +38,6 @@ export class ExercisesComponent implements OnInit {
       this.displayedExercises = exercises;
     });
     this.exerciseService.isLoading.subscribe((isLoading: boolean) => this.loading = isLoading);
-    this.userLoggedService.currentUser.subscribe(() =>
-      this.isAdmin = this.userLoggedService.isAdmin());
   }
 
   setExercise(formIndicator: FormIndicator) {

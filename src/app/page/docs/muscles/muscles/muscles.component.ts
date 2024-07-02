@@ -18,7 +18,6 @@ import {MuscleService} from "../../../../services/muscle/muscle.service";
 import {Muscle} from "../../../../interface/dto/muscle";
 import {SearchBarComponent} from "../../../../components/search-bar/search-bar.component";
 import {Exercise} from "../../../../interface/dto/exercise";
-import {UserLoggedService} from "../../../../services/userLogged/user-logged.service";
 
 @Component({
   selector: 'app-muscles',
@@ -40,7 +39,6 @@ import {UserLoggedService} from "../../../../services/userLogged/user-logged.ser
   templateUrl: './muscles.component.html',
 })
 export class MusclesComponent implements OnInit {
-  isAdmin: boolean = false;
   loading: boolean = true;
   muscles: Muscle[] = [];
   displayedMuscles: Muscle[] = [];
@@ -52,7 +50,6 @@ export class MusclesComponent implements OnInit {
   @ViewChild("modalTemplate") modalTemplate!: TemplateRef<any>;
 
   private muscleService: MuscleService = inject(MuscleService);
-  private userLoggedService: UserLoggedService = inject(UserLoggedService);
 
   ngOnInit(): void {
     this.muscleService.muscles.subscribe((muscles: Muscle[]) => {
@@ -60,7 +57,6 @@ export class MusclesComponent implements OnInit {
       this.displayedMuscles = muscles
     });
     this.muscleService.isLoading.subscribe((isLoading: boolean) => this.loading = isLoading);
-    this.userLoggedService.currentUser.subscribe(() => this.isAdmin = this.userLoggedService.isAdmin());
   }
 
   setMuscle(formIndicator: FormIndicator) {

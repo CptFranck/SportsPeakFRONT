@@ -1,4 +1,5 @@
 <app-modal-button (onCLickModalButton)="onClick($event)"
+                  *ngIf="isAdmin"
                   [modalId]="exerciseModalId"
 >
   Add new

@@ -8,7 +8,6 @@ import {AlertDisplayComponent} from "../../../../components/alert-display/alert-
 import {LoadingComponent} from "../../../../components/loading/loading.component";
 import {ExerciseTypeArrayComponent} from "../exercise-types-array/exercise-type-array.component";
 import {ExerciseTypeModalComponent} from "../exercise-type-modal/exercise-type-modal.component";
-import {UserLoggedService} from "../../../../services/userLogged/user-logged.service";
 import {SearchBarComponent} from "../../../../components/search-bar/search-bar.component";
 import {Exercise} from "../../../../interface/dto/exercise";
 
@@ -19,7 +18,6 @@ import {Exercise} from "../../../../interface/dto/exercise";
   templateUrl: './exercise-types.component.html',
 })
 export class ExerciseTypesComponent implements OnInit {
-  isAdmin: boolean = false;
   loading: boolean = true;
   exerciseTypes: ExerciseType[] = [];
   displayedExerciseTypes: ExerciseType[] = [];
@@ -30,7 +28,6 @@ export class ExerciseTypesComponent implements OnInit {
 
   @ViewChild("modalTemplate") modalTemplate!: TemplateRef<any>
 
-  private userLoggedService: UserLoggedService = inject(UserLoggedService);
   private exerciseTypeService: ExerciseTypeService = inject(ExerciseTypeService);
 
   ngOnInit(): void {
@@ -39,7 +36,6 @@ export class ExerciseTypesComponent implements OnInit {
       this.displayedExerciseTypes = exerciseType;
     });
     this.exerciseTypeService.isLoading.subscribe((loading: boolean) => this.loading = loading)
-    this.userLoggedService.currentUser.subscribe(() => this.isAdmin = this.userLoggedService.isAdmin());
   }
 
   setExerciseType(formIndicator: FormIndicator) {
