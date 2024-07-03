@@ -4,6 +4,9 @@ import {
   NavBarExploreMenuComponent
 } from "../nav-bar-main-menu-components/nav-bar-explore-menu/nav-bar-explore-menu.component";
 import {NavBarDocMenuComponent} from "../nav-bar-main-menu-components/nav-bar-doc-menu/nav-bar-doc-menu.component";
+import {
+  NavBarMyFitnessPlanMenuComponent
+} from "../nav-bar-main-menu-components/nav-bar-doc-my-fitness-plan/nav-bar-my-fitness-plan-menu.component";
 
 @Component({
   selector: 'app-nav-bar-main-menu',
@@ -12,7 +15,8 @@ import {NavBarDocMenuComponent} from "../nav-bar-main-menu-components/nav-bar-do
     RouterLink,
     RouterLinkActive,
     NavBarExploreMenuComponent,
-    NavBarDocMenuComponent
+    NavBarDocMenuComponent,
+    NavBarMyFitnessPlanMenuComponent
   ],
   templateUrl: './nav-bar-main-menu.component.html',
 })
