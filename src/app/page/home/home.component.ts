@@ -15,4 +15,5 @@ import {HorizontalCardComponent} from "../../components/card/horizontal-card/hor
 })
 export class HomeComponent {
 
+  protected readonly RouterLink = RouterLink;
 }

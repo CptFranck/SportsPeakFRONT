@@ -14,4 +14,6 @@ import {RouterLink} from "@angular/router";
 export class HorizontalCardComponent {
   @Input() title: string = "Card title";
   @Input() srcImage: string = "...";
+  @Input() imgHeight: string = "250";
+  @Input() imgWidth: string = "250";
 }

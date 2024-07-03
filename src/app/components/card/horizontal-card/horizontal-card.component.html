@@ -1,10 +1,12 @@
 <div class="card m-2">
   <div class="row">
     <div class="col-md-4">
-      <img [ngSrc]="srcImage" alt="..."
+      <img [height]="imgHeight"
+           [ngSrc]="srcImage"
+           [width]="imgWidth"
+           alt="..."
            class="img-fluid rounded-start h-100 w-100"
-           height="288"
-           width="288">
+           priority>
     </div>
     <div class="col-md-8">
       <div class="card-body">
