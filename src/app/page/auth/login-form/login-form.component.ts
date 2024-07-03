@@ -21,7 +21,7 @@ export class LoginFormComponent implements OnInit {
   private authService: AuthService = inject(AuthService);
 
   ngOnInit() {
-    this.initializeExerciseTypeForm()
+    this.initializeExerciseTypeForm();
   }
 
   initializeExerciseTypeForm() {
