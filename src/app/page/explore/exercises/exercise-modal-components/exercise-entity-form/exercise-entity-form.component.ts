@@ -14,6 +14,7 @@ import {MuscleSelectorComponent} from "../../../../../components/selectors/muscl
 import {
   ExerciseTypeSelectorComponent
 } from "../../../../../components/selectors/exercise-type-selector/exercise-type-selector.component";
+import {UserLoggedService} from "../../../../../services/userLogged/user-logged.service";
 
 @Component({
   selector: 'app-exercise-entity-form',
@@ -30,16 +31,17 @@ import {
   templateUrl: './exercise-entity-form.component.html',
 })
 export class ExerciseEntityFormComponent implements OnInit, AfterViewInit {
+  isAdmin: boolean = false;
   exercise: Exercise | undefined;
   exerciseForm: FormGroup | null = null;
   submitInvalidForm: boolean = false;
   eventsSubscription!: Subscription;
 
-  @Input() isAdmin: boolean = false;
   @Input() btnCloseRef!: HTMLButtonElement;
   @Input() submitEvents!: Observable<void> | undefined;
 
   private exerciseService: ExerciseService = inject(ExerciseService);
+  private userLoggedService: UserLoggedService = inject(UserLoggedService);
 
   @Input() set exerciseInput(value: Exercise | undefined) {
     this.exercise = value;
@@ -47,6 +49,7 @@ export class ExerciseEntityFormComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {
+    this.userLoggedService.currentUser.subscribe(() => this.isAdmin = this.userLoggedService.isAdmin());
     this.initializeMuscleForm();
   }
 

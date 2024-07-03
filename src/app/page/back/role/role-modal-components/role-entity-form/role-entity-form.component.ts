@@ -14,6 +14,7 @@ import {
   PrivilegeSelectorComponent
 } from "../../../../../components/selectors/privilege-selector/privilege-selector.component";
 import {UserSelectorComponent} from "../../../../../components/selectors/user-selector/user-selector.component";
+import {UserLoggedService} from "../../../../../services/userLogged/user-logged.service";
 
 @Component({
   selector: 'app-role-entity-form',
@@ -32,15 +33,16 @@ import {UserSelectorComponent} from "../../../../../components/selectors/user-se
 export class RoleEntityFormComponent implements OnInit, AfterViewInit {
 
   role: Role | undefined;
+  isAdmin: boolean = false;
   roleForm: FormGroup | null = null;
   submitInvalidForm: boolean = false;
   eventsSubscription!: Subscription;
 
-  @Input() isAdmin: boolean = false;
   @Input() btnCloseRef!: HTMLButtonElement;
   @Input() submitEvents!: Observable<void> | undefined;
 
   private roleService: RoleService = inject(RoleService);
+  private userLoggedService: UserLoggedService = inject(UserLoggedService);
 
   @Input() set roleInput(value: Role | undefined) {
     this.role = value;
@@ -48,7 +50,8 @@ export class RoleEntityFormComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {
-    this.initializeMuscleForm()
+    this.userLoggedService.currentUser.subscribe(() => this.isAdmin = this.userLoggedService.isAdmin());
+    this.initializeMuscleForm();
   }
 
   ngAfterViewInit() {

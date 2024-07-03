@@ -9,6 +9,7 @@ import {Exercise} from "../../../../../interface/dto/exercise";
 import {
   ExerciseSelectorComponent
 } from "../../../../../components/selectors/exercise-selector/exercise-selector.component";
+import {UserLoggedService} from "../../../../../services/userLogged/user-logged.service";
 
 @Component({
   selector: 'app-exercise-type-entity-form',
@@ -27,11 +28,12 @@ export class ExerciseTypeEntityFormComponent implements OnInit, AfterViewInit {
   submitInvalidForm: boolean = false;
   eventsSubscription!: Subscription;
 
-  @Input() isAdmin: boolean = false;
+  isAdmin: boolean = false;
   @Input() btnCloseRef!: HTMLButtonElement;
   @Input() submitEvents!: Observable<void> | undefined;
 
   private exerciseTypeService: ExerciseTypeService = inject(ExerciseTypeService);
+  private userLoggedService: UserLoggedService = inject(UserLoggedService);
 
   @Input() set exerciseTypeInput(value: ExerciseType | undefined) {
     this.exerciseType = value;
@@ -39,6 +41,7 @@ export class ExerciseTypeEntityFormComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {
+    this.userLoggedService.currentUser.subscribe(() => this.isAdmin = this.userLoggedService.isAdmin());
     this.initializeExerciseTypeForm();
   }
 

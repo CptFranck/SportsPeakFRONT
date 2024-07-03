@@ -28,7 +28,6 @@ export class UserEmailFormComponent implements OnInit, AfterViewInit {
   submitInvalidForm: boolean = false;
   eventsSubscription!: Subscription;
 
-  @Input() isAdmin: boolean = false;
   @Input() btnCloseRef!: HTMLButtonElement;
   @Input() submitEvents!: Observable<void> | undefined;
 

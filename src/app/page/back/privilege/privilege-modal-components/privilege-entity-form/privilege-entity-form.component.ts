@@ -7,6 +7,7 @@ import {Privilege} from "../../../../../interface/dto/privilege";
 import {PrivilegeService} from "../../../../../services/privilege/privilege.service";
 import {Role} from "../../../../../interface/dto/role";
 import {RoleSelectorComponent} from "../../../../../components/selectors/role-selector/role-selector.component";
+import {UserLoggedService} from "../../../../../services/userLogged/user-logged.service";
 
 @Component({
   selector: 'app-privilege-entity-form',
@@ -26,11 +27,12 @@ export class PrivilegeEntityFormComponent implements OnInit, AfterViewInit {
   submitInvalidForm: boolean = false;
   eventsSubscription!: Subscription;
 
-  @Input() isAdmin: boolean = false;
+  isAdmin: boolean = false;
   @Input() btnCloseRef!: HTMLButtonElement;
   @Input() submitEvents!: Observable<void> | undefined;
 
   private privilegeService: PrivilegeService = inject(PrivilegeService);
+  private userLoggedService: UserLoggedService = inject(UserLoggedService);
 
   @Input() set privilegeInput(value: Privilege | undefined) {
     this.privilege = value;
@@ -38,7 +40,8 @@ export class PrivilegeEntityFormComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {
-    this.initializeMuscleForm()
+    this.userLoggedService.currentUser.subscribe(() => this.isAdmin = this.userLoggedService.isAdmin());
+    this.initializeMuscleForm();
   }
 
   ngAfterViewInit() {

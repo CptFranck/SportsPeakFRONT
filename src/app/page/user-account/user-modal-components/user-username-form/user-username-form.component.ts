@@ -22,7 +22,6 @@ export class UserUsernameFormComponent implements OnInit, AfterViewInit {
   submitInvalidForm: boolean = false;
   eventsSubscription!: Subscription;
 
-  @Input() isAdmin: boolean = false;
   @Input() btnCloseRef!: HTMLButtonElement;
   @Input() submitEvents!: Observable<void> | undefined;
 
@@ -34,7 +33,7 @@ export class UserUsernameFormComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {
-    this.initializeMuscleForm()
+    this.initializeMuscleForm();
   }
 
   ngAfterViewInit() {

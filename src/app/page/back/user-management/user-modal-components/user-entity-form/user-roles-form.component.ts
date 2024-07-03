@@ -7,6 +7,7 @@ import {User} from "../../../../../interface/dto/user";
 import {UserService} from "../../../../../services/user/user.service";
 import {Role} from "../../../../../interface/dto/role";
 import {RoleSelectorComponent} from "../../../../../components/selectors/role-selector/role-selector.component";
+import {UserLoggedService} from "../../../../../services/userLogged/user-logged.service";
 
 @Component({
   selector: 'app-user-roles-form',
@@ -25,11 +26,12 @@ export class UserRolesFormComponent implements OnInit, AfterViewInit {
   submitInvalidForm: boolean = false;
   eventsSubscription!: Subscription;
 
-  @Input() isAdmin: boolean = false;
+  isAdmin: boolean = false;
   @Input() btnCloseRef!: HTMLButtonElement;
   @Input() submitEvents!: Observable<void> | undefined;
 
   private userService: UserService = inject(UserService);
+  private userLoggedService: UserLoggedService = inject(UserLoggedService);
 
   @Input() set userInput(value: User | undefined) {
     this.user = value;
@@ -37,7 +39,8 @@ export class UserRolesFormComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {
-    this.initializeMuscleForm()
+    this.userLoggedService.currentUser.subscribe(() => this.isAdmin = this.userLoggedService.isAdmin());
+    this.initializeMuscleForm();
   }
 
   ngAfterViewInit() {

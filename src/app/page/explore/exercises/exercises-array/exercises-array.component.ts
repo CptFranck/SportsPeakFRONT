@@ -18,7 +18,6 @@ import {UserLoggedService} from "../../../../services/userLogged/user-logged.ser
 })
 export class ExercisesArrayComponent implements OnChanges {
   isAdmin: boolean = false;
-  test: boolean = false;
   showDetails: { [id: string]: boolean } = {};
 
   @Input() exercises!: Exercise[];
