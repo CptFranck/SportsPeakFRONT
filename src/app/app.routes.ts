@@ -4,11 +4,14 @@ import {AuthGuard} from "./guards/auth/auth.guard";
 import {UserComponent} from "./page/user-account/user/user.component";
 import {BackGuard} from "./guards/back/back.guard";
 import {HomeComponent} from "./page/home/home.component";
+import {MyFitnessPlanComponent} from "./page/my-fitness-plan/my-fitness-plan/my-fitness-plan.component";
+import {CommunityComponent} from "./page/community/community/community.component";
 
 export const routes: Routes = [
   {path: '', redirectTo: '/home', pathMatch: 'full'},
   {path: 'home', component: HomeComponent},
   {path: 'auth', component: AuthComponent},
+  {path: 'my-fitness-plan', component: MyFitnessPlanComponent},
   {
     path: 'explore',
     pathMatch: 'prefix',
@@ -19,6 +22,7 @@ export const routes: Routes = [
     pathMatch: 'prefix',
     loadChildren: () => import('./page/docs/docs.routes').then(value => value.DOCS_ROUTES),
   },
+  {path: 'community', component: CommunityComponent},
   {
     path: 'user',
     component: UserComponent,
