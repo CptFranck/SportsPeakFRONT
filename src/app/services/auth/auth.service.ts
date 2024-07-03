@@ -17,6 +17,7 @@ export class AuthService {
 
   isAuthenticated: BehaviorSubject<boolean> = new BehaviorSubject(false);
 
+  private redirectUrl: string = "/";
   private router: Router = inject(Router);
   private apollo: Apollo = inject(Apollo);
   private alertService: AlertService = inject(AlertService);
@@ -78,12 +79,15 @@ export class AuthService {
     let authToken: AuthToken = this.createAuthToken(auth);
     this.tokenService.setCurrentToken(authToken);
     if (redirect) {
-      this.router.navigateByUrl('/')
+      this.router.navigateByUrl(this.redirectUrl)
     }
   }
 
+  setRedirectUrl(redirectUrl: string) {
+    this.redirectUrl = redirectUrl;
+  }
+
   private removeDataAuth(redirect: boolean = false) {
-    console.log("authService")
     this.userLoggedService.removeCurrentUser();
     this.tokenService.removeCurrentToken();
     if (redirect) {
