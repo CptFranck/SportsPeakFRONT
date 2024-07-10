@@ -1,4 +1,5 @@
 import {Role} from "./role";
+import {ProgExercise} from "./prog-exercise";
 
 export interface User {
   id: string,
@@ -6,5 +7,7 @@ export interface User {
   firstName: string,
   lastName: string,
   username: string,
-  roles: Role[];
+  roles: Role[],
+  subscribedProgExercises: ProgExercise[]
+  progExercisesCreated: ProgExercise[]
 }
