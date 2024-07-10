@@ -1,5 +1,5 @@
 import {inject, Injectable} from '@angular/core';
-import {LocalStorageService} from "../localStorage/local-storage.service";
+import {LocalStorageService} from "../local-storage/local-storage.service";
 import {User} from "../../interface/dto/user";
 import {BehaviorSubject} from "rxjs";
 import {Role} from "../../interface/dto/role";
