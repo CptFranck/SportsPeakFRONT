@@ -14,7 +14,7 @@ import {MuscleSelectorComponent} from "../../../../../components/selectors/muscl
 import {
   ExerciseTypeSelectorComponent
 } from "../../../../../components/selectors/exercise-type-selector/exercise-type-selector.component";
-import {UserLoggedService} from "../../../../../services/userLogged/user-logged.service";
+import {UserLoggedService} from "../../../../../services/user-logged/user-logged.service";
 
 @Component({
   selector: 'app-exercise-entity-form',
