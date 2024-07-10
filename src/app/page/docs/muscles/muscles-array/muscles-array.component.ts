@@ -5,7 +5,7 @@ import {ModalButtonComponent} from "../../../../components/modal/modal-button/mo
 import {ModalComponent} from "../../../../components/modal/modal/modal.component";
 import {FormIndicator} from "../../../../interface/utils/form-indicator";
 import {ActionType} from "../../../../enum/action-type";
-import {UserLoggedService} from "../../../../services/userLogged/user-logged.service";
+import {UserLoggedService} from "../../../../services/user-logged/user-logged.service";
 
 @Component({
   selector: 'app-muscles-array',

@@ -9,7 +9,7 @@ import {MuscleEntityFormComponent} from "../muscle-modal-components/muscle-entit
 import {NgIf} from "@angular/common";
 import {muscleDeleteFormComponent} from "../muscle-modal-components/muscle-delete-form/muscle-delete-form.component";
 import {Muscle} from "../../../../interface/dto/muscle";
-import {UserLoggedService} from "../../../../services/userLogged/user-logged.service";
+import {UserLoggedService} from "../../../../services/user-logged/user-logged.service";
 
 @Component({
   selector: 'app-muscle-modal',

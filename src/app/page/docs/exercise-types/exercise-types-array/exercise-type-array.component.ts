@@ -4,7 +4,7 @@ import {ActionType} from "../../../../enum/action-type";
 import {ExerciseType} from "../../../../interface/dto/exerciseType";
 import {NgForOf, NgIf} from "@angular/common";
 import {ModalButtonComponent} from "../../../../components/modal/modal-button/modal-button.component";
-import {UserLoggedService} from "../../../../services/userLogged/user-logged.service";
+import {UserLoggedService} from "../../../../services/user-logged/user-logged.service";
 
 @Component({
   selector: 'app-exercise-type-array',

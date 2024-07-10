@@ -14,7 +14,7 @@ import {
   MOD_USER_ROLES,
   MOD_USER_USERNAME
 } from "../../graphql/operations/user.operations";
-import {UserLoggedService} from "../userLogged/user-logged.service";
+import {UserLoggedService} from "../user-logged/user-logged.service";
 import {AuthService} from "../auth/auth.service";
 import {Auth} from "../../interface/dto/auth";
 

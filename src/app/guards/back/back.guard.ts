@@ -1,6 +1,6 @@
 import {CanActivateFn, Router} from '@angular/router';
 import {inject} from "@angular/core";
-import {UserLoggedService} from "../../services/userLogged/user-logged.service";
+import {UserLoggedService} from "../../services/user-logged/user-logged.service";
 
 export const BackGuard: CanActivateFn = () => {
   const router: Router = inject(Router);

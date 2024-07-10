@@ -10,7 +10,7 @@ import {Exercise} from "../../../../../interface/dto/exercise";
 import {
   ExerciseSelectorComponent
 } from "../../../../../components/selectors/exercise-selector/exercise-selector.component";
-import {UserLoggedService} from "../../../../../services/userLogged/user-logged.service";
+import {UserLoggedService} from "../../../../../services/user-logged/user-logged.service";
 
 @Component({
   selector: 'app-muscle-entity-form',

@@ -6,7 +6,7 @@ import {BehaviorSubject} from "rxjs";
 import {AlertService} from "../alert/alert.service";
 import {Router} from "@angular/router";
 import {Auth} from "../../interface/dto/auth";
-import {UserLoggedService} from "../userLogged/user-logged.service";
+import {UserLoggedService} from "../user-logged/user-logged.service";
 import {TokenService} from "../token/token.service";
 import {AuthToken} from "../../interface/dto/token";
 

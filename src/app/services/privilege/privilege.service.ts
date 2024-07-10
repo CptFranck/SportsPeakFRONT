@@ -11,7 +11,7 @@ import {
   GET_PRIVILEGES,
   MOD_PRIVILEGE
 } from "../../graphql/operations/privilege.operations";
-import {UserLoggedService} from "../userLogged/user-logged.service";
+import {UserLoggedService} from "../user-logged/user-logged.service";
 
 @Injectable({
   providedIn: 'root'

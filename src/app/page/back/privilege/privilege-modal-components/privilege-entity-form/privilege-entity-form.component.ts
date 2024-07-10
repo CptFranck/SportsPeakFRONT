@@ -7,7 +7,7 @@ import {Privilege} from "../../../../../interface/dto/privilege";
 import {PrivilegeService} from "../../../../../services/privilege/privilege.service";
 import {Role} from "../../../../../interface/dto/role";
 import {RoleSelectorComponent} from "../../../../../components/selectors/role-selector/role-selector.component";
-import {UserLoggedService} from "../../../../../services/userLogged/user-logged.service";
+import {UserLoggedService} from "../../../../../services/user-logged/user-logged.service";
 
 @Component({
   selector: 'app-privilege-entity-form',

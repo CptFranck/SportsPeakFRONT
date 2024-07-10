@@ -7,7 +7,7 @@ import {ApolloQueryResult} from "@apollo/client";
 import {FormGroup} from "@angular/forms";
 import {Role} from "../../interface/dto/role";
 import {ADD_ROLE, GET_ROLES, MOD_ROLE} from "../../graphql/operations/role.operations";
-import {UserLoggedService} from "../userLogged/user-logged.service";
+import {UserLoggedService} from "../user-logged/user-logged.service";
 
 @Injectable({
   providedIn: 'root'

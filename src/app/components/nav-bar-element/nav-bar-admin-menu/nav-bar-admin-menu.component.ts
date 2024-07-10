@@ -1,5 +1,5 @@
 import {Component, inject, OnInit} from '@angular/core';
-import {UserLoggedService} from "../../../services/userLogged/user-logged.service";
+import {UserLoggedService} from "../../../services/user-logged/user-logged.service";
 import {RouterLink, RouterLinkActive} from "@angular/router";
 import {NgForOf, NgIf} from "@angular/common";
 

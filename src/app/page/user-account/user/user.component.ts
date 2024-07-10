@@ -1,5 +1,5 @@
 import {Component, inject, TemplateRef} from '@angular/core';
-import {UserLoggedService} from "../../../services/userLogged/user-logged.service";
+import {UserLoggedService} from "../../../services/user-logged/user-logged.service";
 import {User} from "../../../interface/dto/user";
 import {ActionType} from "../../../enum/action-type";
 import {NgIf} from "@angular/common";

@@ -22,7 +22,7 @@ import {
 import {
   ExerciseTypeDeleteFormComponent
 } from "../exercise-type-modal-components/exercise-type-delete-form/exercise-type-delete-form.component";
-import {UserLoggedService} from "../../../../services/userLogged/user-logged.service";
+import {UserLoggedService} from "../../../../services/user-logged/user-logged.service";
 
 @Component({
   selector: 'app-exercise-type-modal',
