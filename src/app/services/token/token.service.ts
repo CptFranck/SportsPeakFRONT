@@ -1,6 +1,6 @@
 import {inject, Injectable} from '@angular/core';
 import {BehaviorSubject} from "rxjs";
-import {LocalStorageService} from "../localStorage/local-storage.service";
+import {LocalStorageService} from "../local-storage/local-storage.service";
 import {AuthToken} from "../../interface/dto/token";
 
 @Injectable({
