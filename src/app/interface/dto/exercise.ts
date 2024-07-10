@@ -1,5 +1,6 @@
 import {Muscle} from "./muscle";
 import {ExerciseType} from "./exerciseType";
+import {ProgExercise} from "./prog-exercise";
 
 export interface Exercise {
   id: string
@@ -8,4 +9,5 @@ export interface Exercise {
   description: string
   muscles: Muscle[]
   exerciseTypes: ExerciseType[]
+  progExercises: ProgExercise[]
 }
