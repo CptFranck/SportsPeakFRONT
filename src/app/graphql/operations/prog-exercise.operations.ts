@@ -11,6 +11,10 @@ export const GET_PROG_EXERCISES = gql`
         name
         description
         goal
+        muscles {
+          id
+          name
+        }
       }
       targetSets {
         id
@@ -54,6 +58,10 @@ export const ADD_PROG_EXERCISE = gql`
         name
         description
         goal
+        muscles {
+          id
+          name
+        }
       }
       targetSets {
         id
@@ -97,6 +105,10 @@ export const MOD_PROG_EXERCISE = gql`
         name
         description
         goal
+        muscles {
+          id
+          name
+        }
       }
       targetSets {
         id
@@ -140,6 +152,10 @@ export const MOD_PROG_EXERCISE_TRUST_LABEL = gql`
         name
         description
         goal
+        muscles {
+          id
+          name
+        }
       }
       targetSets {
         id
