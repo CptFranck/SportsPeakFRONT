@@ -4,7 +4,7 @@ import {FormIndicator} from "../../../../interface/utils/form-indicator";
 import {ActionType} from "../../../../enum/action-type";
 import {Exercise} from "../../../../interface/dto/exercise";
 import {ModalButtonComponent} from "../../../../components/modal/modal-button/modal-button.component";
-import {UserLoggedService} from "../../../../services/userLogged/user-logged.service";
+import {UserLoggedService} from "../../../../services/user-logged/user-logged.service";
 
 @Component({
   selector: 'app-exercises-array',
