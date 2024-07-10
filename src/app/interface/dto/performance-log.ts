@@ -1,11 +1,12 @@
 import {TargetSet} from "./target-set";
+import {WeightUnit} from "../enum/weightUnit";
 
 export interface PerformanceLog {
   id: number
   setIndex: number
   repetitionNumber: number
   weight: number
-  weightUnit: string
+  weightUnit: WeightUnit
   logDate: Date
   targetSet: TargetSet
 }
