@@ -1,11 +1,11 @@
 import {Routes} from "@angular/router";
-import {ExercisesComponent} from "./exercises/exercises/exercises.component";
+import {ProgExercisesComponent} from "./prog-exercises/prog-exercises/prog-exercises.component";
 
 export const EXPLORE_ROUTES: Routes = [
   {
     path: '',
     children: [
-      {path: 'exercises', component: ExercisesComponent},
+      {path: 'prog-exercises', component: ProgExercisesComponent},
     ],
   }
 ]
