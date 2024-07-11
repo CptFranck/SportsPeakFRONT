@@ -12,7 +12,7 @@ import {
   muscleDeleteFormComponent
 } from "../../muscles/muscle-modal-components/muscle-delete-form/muscle-delete-form.component";
 import {ActionType} from "../../../../enum/action-type";
-import {ExerciseType} from "../../../../interface/dto/exerciseType";
+import {ExerciseType} from "../../../../interface/dto/exercise-type";
 import {
   ExerciseTypeDetailsDisplayComponent
 } from "../exercise-type-modal-components/exercise-type-details-display/exercise-type-details-display.component";

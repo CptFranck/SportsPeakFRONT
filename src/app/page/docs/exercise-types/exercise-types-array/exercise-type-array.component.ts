@@ -1,10 +1,11 @@
 import {Component, EventEmitter, inject, Input, OnInit, Output} from '@angular/core';
 import {FormIndicator} from "../../../../interface/utils/form-indicator";
 import {ActionType} from "../../../../enum/action-type";
-import {ExerciseType} from "../../../../interface/dto/exerciseType";
+import {ExerciseType} from "../../../../interface/dto/exercise-type";
 import {NgForOf, NgIf} from "@angular/common";
 import {ModalButtonComponent} from "../../../../components/modal/modal-button/modal-button.component";
 import {UserLoggedService} from "../../../../services/user-logged/user-logged.service";
+import {Dictionary} from "../../../../interface/dto/dictionary";
 
 @Component({
   selector: 'app-exercise-type-array',
@@ -18,7 +19,7 @@ import {UserLoggedService} from "../../../../services/user-logged/user-logged.se
 })
 export class ExerciseTypeArrayComponent implements OnInit {
   isAdmin: boolean = false;
-  showDetails: { [id: string]: boolean } = {};
+  showDetails: Dictionary<boolean> = {};
 
   @Input() exerciseTypes!: ExerciseType[];
   @Input() modalId!: string;

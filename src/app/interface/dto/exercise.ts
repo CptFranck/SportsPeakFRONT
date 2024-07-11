@@ -1,5 +1,5 @@
 import {Muscle} from "./muscle";
-import {ExerciseType} from "./exerciseType";
+import {ExerciseType} from "./exercise-type";
 import {ProgExercise} from "./prog-exercise";
 
 export interface Exercise {

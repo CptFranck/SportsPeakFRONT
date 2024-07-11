@@ -5,6 +5,7 @@ import {ActionType} from "../../../../enum/action-type";
 import {Exercise} from "../../../../interface/dto/exercise";
 import {ModalButtonComponent} from "../../../../components/modal/modal-button/modal-button.component";
 import {UserLoggedService} from "../../../../services/user-logged/user-logged.service";
+import {Dictionary} from "../../../../interface/dto/dictionary";
 
 @Component({
   selector: 'app-exercises-array',
@@ -18,7 +19,7 @@ import {UserLoggedService} from "../../../../services/user-logged/user-logged.se
 })
 export class ExercisesArrayComponent implements OnChanges {
   isAdmin: boolean = false;
-  showDetails: { [id: string]: boolean } = {};
+  showDetails: Dictionary<boolean> = {};
 
   @Input() exercises!: Exercise[];
   @Input() modalId!: string;

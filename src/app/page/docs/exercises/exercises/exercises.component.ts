@@ -11,7 +11,7 @@ import {MusclesArrayComponent} from "../../muscles/muscles-array/muscles-array.c
 import {ExerciseModalComponent} from "../exercise-modal/exercise-modal.component";
 import {SearchBarComponent} from "../../../../components/search-bar/search-bar.component";
 import {Muscle} from "../../../../interface/dto/muscle";
-import {ExerciseType} from "../../../../interface/dto/exerciseType";
+import {ExerciseType} from "../../../../interface/dto/exercise-type";
 
 @Component({
   selector: 'app-exercises',

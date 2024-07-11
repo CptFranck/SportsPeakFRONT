@@ -1,6 +1,6 @@
 import {AfterViewInit, Component, inject, Input} from '@angular/core';
 import {Observable, Subscription} from "rxjs";
-import {ExerciseType} from "../../../../../interface/dto/exerciseType";
+import {ExerciseType} from "../../../../../interface/dto/exercise-type";
 import {ExerciseTypeService} from "../../../../../services/exercise-type/exercise-type.service";
 
 @Component({

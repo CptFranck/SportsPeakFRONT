@@ -6,7 +6,7 @@ import {ExerciseService} from "../../../../../services/exercise/exercise.service
 import {InputControlComponent} from "../../../../../components/input-control/input-control.component";
 import {NgIf} from "@angular/common";
 import {Muscle} from "../../../../../interface/dto/muscle";
-import {ExerciseType} from "../../../../../interface/dto/exerciseType";
+import {ExerciseType} from "../../../../../interface/dto/exercise-type";
 import {
   ExerciseSelectorComponent
 } from "../../../../../components/selectors/exercise-selector/exercise-selector.component";

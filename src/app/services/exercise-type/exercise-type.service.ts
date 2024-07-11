@@ -9,7 +9,7 @@ import {
 } from "../../graphql/operations/exercise-type.operation";
 import {BehaviorSubject} from "rxjs";
 import {AlertService} from "../alert/alert.service";
-import {ExerciseType} from "../../interface/dto/exerciseType";
+import {ExerciseType} from "../../interface/dto/exercise-type";
 import {ApolloQueryResult} from "@apollo/client";
 
 @Injectable({

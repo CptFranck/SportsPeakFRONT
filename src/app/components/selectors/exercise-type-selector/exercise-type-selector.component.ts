@@ -2,7 +2,7 @@ import {Component, forwardRef, inject, Input, OnInit} from '@angular/core';
 import {ControlValueAccessor, NG_VALUE_ACCESSOR} from "@angular/forms";
 import {Option} from "../../../interface/multi-select/option";
 import {ExerciseTypeService} from "../../../services/exercise-type/exercise-type.service";
-import {ExerciseType} from "../../../interface/dto/exerciseType";
+import {ExerciseType} from "../../../interface/dto/exercise-type";
 import {MultiSelectComponent} from "../../multi-select/multi-select.component";
 
 @Component({

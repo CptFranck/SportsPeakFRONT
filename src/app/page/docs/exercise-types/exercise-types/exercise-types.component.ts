@@ -1,6 +1,6 @@
 import {Component, inject, OnInit, TemplateRef, ViewChild} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {ExerciseType} from "../../../../interface/dto/exerciseType";
+import {ExerciseType} from "../../../../interface/dto/exercise-type";
 import {ActionType} from "../../../../enum/action-type";
 import {ExerciseTypeService} from "../../../../services/exercise-type/exercise-type.service";
 import {FormIndicator} from "../../../../interface/utils/form-indicator";

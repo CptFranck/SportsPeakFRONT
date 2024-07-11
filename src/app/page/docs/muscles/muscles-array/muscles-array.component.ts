@@ -6,6 +6,7 @@ import {ModalComponent} from "../../../../components/modal/modal/modal.component
 import {FormIndicator} from "../../../../interface/utils/form-indicator";
 import {ActionType} from "../../../../enum/action-type";
 import {UserLoggedService} from "../../../../services/user-logged/user-logged.service";
+import {Dictionary} from "../../../../interface/dto/dictionary";
 
 @Component({
   selector: 'app-muscles-array',
@@ -20,7 +21,7 @@ import {UserLoggedService} from "../../../../services/user-logged/user-logged.se
 })
 export class MusclesArrayComponent implements OnChanges {
   isAdmin: boolean = false;
-  showDetails: { [id: string]: boolean } = {};
+  showDetails: Dictionary<boolean> = {};
 
   @Input() muscles!: Muscle[];
   @Input() modalId!: string;
