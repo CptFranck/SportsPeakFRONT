@@ -9,9 +9,12 @@ import {
   ADD_PROG_EXERCISE,
   DEL_PROG_EXERCISE,
   GET_PROG_EXERCISES,
+  GET_USER_PROG_EXERCISES,
   MOD_PROG_EXERCISE,
   MOD_PROG_EXERCISE_TRUST_LABEL
 } from "../../graphql/operations/prog-exercise.operations";
+import {User} from "../../interface/dto/user";
+import {UserLoggedService} from "../user-logged/user-logged.service";
 
 @Injectable({
   providedIn: 'root'
@@ -19,13 +22,19 @@ import {
 export class ProgExerciseService {
 
   progExercises: BehaviorSubject<ProgExercise[]> = new BehaviorSubject<ProgExercise[]>([]);
+  userProgExercises: BehaviorSubject<ProgExercise[]> = new BehaviorSubject<ProgExercise[]>([]);
   isLoading: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   private apollo: Apollo = inject(Apollo);
   private alertService: AlertService = inject(AlertService);
+  private userLoggedService: UserLoggedService = inject(UserLoggedService);
 
   constructor() {
     this.getProgExercises();
+    this.userLoggedService.currentUser.subscribe((user: User | undefined) => {
+      if (user)
+        this.getUserProgExercises(user)
+    })
   }
 
   getProgExercises() {
@@ -36,6 +45,22 @@ export class ProgExerciseService {
         this.alertService.graphQLErrorAlertHandler(result.errors);
       }
       this.progExercises.next(result.data.getProgExercises);
+      this.isLoading.next(result.loading);
+    });
+  }
+
+
+  getUserProgExercises(user: User) {
+    return this.apollo.watchQuery({
+      query: GET_USER_PROG_EXERCISES,
+      variables: {
+        userId: user.id
+      }
+    }).valueChanges.subscribe((result: ApolloQueryResult<any>): void => {
+      if (result.errors) {
+        this.alertService.graphQLErrorAlertHandler(result.errors);
+      }
+      this.userProgExercises.next(result.data.getUserProgExercises);
       this.isLoading.next(result.loading);
     });
   }
