@@ -26,11 +26,14 @@ import {UserLoggedService} from "../../../../services/user-logged/user-logged.se
 })
 export class MuscleModalComponent implements OnInit {
   isAdmin: boolean = false;
+
   @Input() modalTitle!: string;
   @Input() muscleModalId!: string;
   @Input() muscle: Muscle | undefined;
   @Input() action!: ActionType;
+
   @ViewChild("modalTemplate") modalTemplate!: TemplateRef<any>;
+
   protected readonly ActionType = ActionType;
   private userLoggedService: UserLoggedService = inject(UserLoggedService);
 
