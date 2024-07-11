@@ -6,7 +6,7 @@ import {FormIndicator} from "../../../../interface/utils/form-indicator";
 import {User} from "../../../../interface/dto/user";
 import {Muscle} from "../../../../interface/dto/muscle";
 import {ActionType} from "../../../../enum/action-type";
-import {Dictionary} from "../../../../interface/dto/dictionary";
+import {Dictionary} from "../../../../interface/utils/dictionary";
 
 @Component({
   selector: 'app-roles-array',

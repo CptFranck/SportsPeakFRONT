@@ -5,7 +5,7 @@ import {ActionType} from "../../../../enum/action-type";
 import {Exercise} from "../../../../interface/dto/exercise";
 import {ModalButtonComponent} from "../../../../components/modal/modal-button/modal-button.component";
 import {UserLoggedService} from "../../../../services/user-logged/user-logged.service";
-import {Dictionary} from "../../../../interface/dto/dictionary";
+import {Dictionary} from "../../../../interface/utils/dictionary";
 
 @Component({
   selector: 'app-exercises-array',

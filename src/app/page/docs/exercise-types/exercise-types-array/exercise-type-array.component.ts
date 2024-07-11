@@ -5,7 +5,7 @@ import {ExerciseType} from "../../../../interface/dto/exercise-type";
 import {NgForOf, NgIf} from "@angular/common";
 import {ModalButtonComponent} from "../../../../components/modal/modal-button/modal-button.component";
 import {UserLoggedService} from "../../../../services/user-logged/user-logged.service";
-import {Dictionary} from "../../../../interface/dto/dictionary";
+import {Dictionary} from "../../../../interface/utils/dictionary";
 
 @Component({
   selector: 'app-exercise-type-array',
