@@ -2,7 +2,9 @@ import {TargetSet} from "../interface/dto/target-set";
 import {ProgExercise} from "../interface/dto/prog-exercise";
 
 export function getTargetSetsInformation(progExercise: ProgExercise) {
-  const lastTargetSet: TargetSet[] = getLastTargetSets(progExercise);
+  let lastTargetSet: TargetSet[] = getLastTargetSets(progExercise);
+  lastTargetSet = sortLastTargetSetsByWeight(lastTargetSet)
+  
   return lastTargetSet.map((targetSet: TargetSet) => {
     let set: string = targetSet.setNumber + " set of " + targetSet.repetitionNumber + " reps with ";
     if (targetSet.weight > 0) {
@@ -15,8 +17,7 @@ export function getTargetSetsInformation(progExercise: ProgExercise) {
 }
 
 export function getProgExerciseTime(progExercise: ProgExercise) {
-  const lastTargetSet: TargetSet[] = getLastTargetSets(progExercise);
-
+  let lastTargetSet: TargetSet[] = getLastTargetSets(progExercise);
 
   let totalSeconds: number = 0;
   let totalMinutes: number = 0;
@@ -41,7 +42,7 @@ function getLastTargetSets(progExercise: ProgExercise): TargetSet[] {
   return progExercise.targetSets.filter((targetSet: TargetSet) => targetSet.targetSetUpdate === null)
 }
 
-function sortLastTargetSets(targetSets: TargetSet[]): TargetSet[] {
+function sortLastTargetSetsByWeight(targetSets: TargetSet[]): TargetSet[] {
   return targetSets.sort((a: TargetSet, b: TargetSet) => {
     if (a.weight > b.weight) return 1;
     if (a.weight < b.weight) return -1;
