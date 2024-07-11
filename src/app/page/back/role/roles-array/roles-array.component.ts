@@ -6,6 +6,7 @@ import {FormIndicator} from "../../../../interface/utils/form-indicator";
 import {User} from "../../../../interface/dto/user";
 import {Muscle} from "../../../../interface/dto/muscle";
 import {ActionType} from "../../../../enum/action-type";
+import {Dictionary} from "../../../../interface/dto/dictionary";
 
 @Component({
   selector: 'app-roles-array',
@@ -24,7 +25,7 @@ export class RolesArrayComponent implements OnChanges {
 
   @Output() actionRole: EventEmitter<FormIndicator> = new EventEmitter<FormIndicator>();
 
-  roleUsers: { [id: string]: string[] } = {};
+  roleUsers: Dictionary<string[]> = {};
 
   ngOnChanges(): void {
     this.roles.forEach((role: Role) => {

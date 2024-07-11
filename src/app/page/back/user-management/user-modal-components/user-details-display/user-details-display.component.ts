@@ -3,6 +3,7 @@ import {NgForOf, NgIf} from "@angular/common";
 import {User} from "../../../../../interface/dto/user";
 import {Role} from "../../../../../interface/dto/role";
 import {Privilege} from "../../../../../interface/dto/privilege";
+import {Dictionary} from "../../../../../interface/dto/dictionary";
 
 @Component({
   selector: 'app-user-details-display',
@@ -15,7 +16,7 @@ import {Privilege} from "../../../../../interface/dto/privilege";
 })
 export class UserDetailsDisplayComponent implements OnChanges {
   user: User | undefined;
-  rolePrivileges: { [id: string]: string } = {};
+  rolePrivileges: Dictionary<string> = {};
   @Input() action!: string;
 
 
