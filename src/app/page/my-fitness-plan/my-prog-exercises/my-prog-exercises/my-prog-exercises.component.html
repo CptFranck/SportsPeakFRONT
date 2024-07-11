@@ -1,0 +1,23 @@
+<div class="container">
+  <app-loading [loading]="loading"/>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col">
+        <h2>My Programed Exercises </h2>
+      </div>
+      <div class="col-2">
+        <app-my-prog-exercise-modal [action]="action"
+                                    [modalTitle]="modalTitle"
+                                    [muscleModalId]="muscleModalId"
+                                    [progExercise]="progExercise"
+        />
+      </div>
+    </div>
+    <div class="row">
+      <app-search-bar (onInput)="searchProgExercise($event)"/>
+    </div>
+    <app-my-prog-exercises-array (actionProgExercises)="setProgExercise($event)"
+                                 [modalId]="muscleModalId"
+                                 [progExercises]="displayedProgExercises"/>
+  </div>
+</div>
