@@ -22,7 +22,6 @@ import {ControlValueAccessor, NG_VALUE_ACCESSOR} from "@angular/forms";
 })
 export class ExerciseSelectComponent implements OnInit, ControlValueAccessor {
 
-  loading: boolean = true;
   exerciseOptions: SelectOption[] = [];
 
   @Input() exerciseId: string | undefined;
