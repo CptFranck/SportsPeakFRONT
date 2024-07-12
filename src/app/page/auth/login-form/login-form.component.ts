@@ -21,10 +21,10 @@ export class LoginFormComponent implements OnInit {
   private authService: AuthService = inject(AuthService);
 
   ngOnInit() {
-    this.initializeExerciseTypeForm();
+    this.initializeLoginForm();
   }
 
-  initializeExerciseTypeForm() {
+  initializeLoginForm() {
     this.loginForm = new FormGroup({
       email: new FormControl(
         // "",
