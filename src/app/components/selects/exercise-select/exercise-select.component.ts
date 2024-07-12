@@ -29,7 +29,7 @@ export class ExerciseSelectComponent implements OnInit, ControlValueAccessor {
 
   private exerciseService: ExerciseService = inject(ExerciseService)
 
-  onChange: (value: string) => void = () => {
+  onChange: (value: string | undefined) => void = () => {
   };
 
   onTouched: ($event: boolean) => void = () => {
@@ -46,15 +46,20 @@ export class ExerciseSelectComponent implements OnInit, ControlValueAccessor {
     })
   }
 
-  writeValue(exerciseId: string): void {
+  writeValue(exerciseId: string | undefined): void {
     this.exerciseId = exerciseId;
   }
 
-  registerOnChange(fn: (value: string) => void): void {
+  registerOnChange(fn: (value: string | undefined) => void): void {
     this.onChange = fn;
   }
 
   registerOnTouched(fn: () => void): void {
     this.onTouched = fn;
+  }
+
+  setExerciseId(exerciseId: string | undefined) {
+    this.exerciseId = exerciseId;
+    this.onChange(exerciseId);
   }
 }

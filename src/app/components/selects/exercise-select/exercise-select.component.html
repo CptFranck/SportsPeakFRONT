@@ -1,1 +1,5 @@
-<app-select [options]="exerciseOptions" [value]="exerciseId"/>
+<app-select (onChange)="setExerciseId($event)"
+            (onTouched)="onTouched($event)"
+            [options]="exerciseOptions"
+            [value]="exerciseId"
+/>
