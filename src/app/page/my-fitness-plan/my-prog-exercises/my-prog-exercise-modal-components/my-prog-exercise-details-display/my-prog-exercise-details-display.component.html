@@ -1,0 +1,57 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-auto">
+      <label class="form-label fw-bold">Name :</label>
+      <p>{{ progExercise?.name }}</p>
+    </div>
+    <div class="col-auto">
+      <label class="form-label fw-bold">Exercise :</label>
+      <p>{{ progExercise?.exercise?.name }}</p>
+    </div>
+  </div>
+  <div class="mb-3">
+    <label class="form-label fw-bold">Note :</label>
+    <p>{{ progExercise?.note }}</p>
+  </div>
+  <div class="mb-3">
+    <label class="form-label fw-bold">Set(s) :</label>
+    <p *ngIf="progExercise?.targetSets?.length === 0">No set(s) in this exercise for the moment</p>
+    <ol *ngIf="progExercise?.targetSets?.length !== 0"
+        class="list-group list-group-numbered"
+    >
+      <li *ngFor="let set of progExercise?.targetSets"
+          class="list-group-item d-flex justify-content-between align-items-start"
+      >
+        <div class="ms-2 me-auto">
+          <h5 class="fw-bold">{{ set?.setNumber }} set(s) of {{ set?.repetitionNumber }} reps </h5>
+          <div class="row">
+            <div class="col-auto">
+              <p>
+                <label class="form-label fw-bold">Weight : </label>
+                {{ " " + set?.weight }} {{ set.weightUnit }}
+              </p>
+            </div>
+            <div class="col-auto">
+              <p>
+                <label class="form-label fw-bold">Effort Time :</label>
+                {{ " " + getStringTime(set.physicalExertionUnitTime.seconds, set.physicalExertionUnitTime.minutes, set.physicalExertionUnitTime.hours) }}
+              </p>
+            </div>
+            <div class="col-auto">
+              <p>
+                <label class="form-label fw-bold">Rest Time :</label>
+                {{ " " + getStringTime(set.restTime.seconds, set.restTime.minutes, set.restTime.hours) }}
+              </p>
+            </div>
+            <div class="col-auto">
+              <p>
+                <label class="form-label fw-bold">Set(s) Time :</label>
+                {{ " " + getTargetSetTime(set) }}
+              </p>
+            </div>
+          </div>
+        </div>
+      </li>
+    </ol>
+  </div>
+</div>
