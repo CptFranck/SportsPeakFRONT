@@ -11,6 +11,7 @@ import {ExerciseSelectComponent} from "../../../../../components/selects/exercis
 import {
   VisibilitySelectComponent
 } from "../../../../../components/selects/visibility-select/visibility-select.component";
+import {ProgExerciseService} from "../../../../../services/prog-exercise/prog-exercise.service";
 
 @Component({
   selector: 'app-my-prog-exercise-entity-form',
@@ -35,6 +36,7 @@ export class MyProgExerciseEntityFormComponent implements OnInit, AfterViewInit 
 
   private user: User | undefined;
   private userLoggedService: UserLoggedService = inject(UserLoggedService);
+  private progExerciseService: ProgExerciseService = inject(ProgExerciseService);
 
   @Input() set muscleInput(value: ProgExercise | undefined) {
     this.progExercise = value;
@@ -78,21 +80,22 @@ export class MyProgExerciseEntityFormComponent implements OnInit, AfterViewInit 
       creatorId: new FormControl(creatorId),
     });
 
-    if (this.progExercise)
+    if (this.progExercise) {
       this.progExerciseForm.addControl("id", new FormControl(this.progExercise.id));
+      this.progExerciseForm.removeControl("creatorId");
+    }
   }
 
   onSubmit() {
     if (!this.progExerciseForm) return;
     if (this.progExerciseForm.valid) {
-      console.log(this.progExerciseForm.value)
-      // this.submitInvalidForm = false;
-      // if (!this.progExerciseForm.value.id) {
-      //   this.progExerciseService.addProgExercise(this.progExerciseForm);
-      // } else {
-      //   this.progExerciseService.modifyProgExercise(this.progExerciseForm);
-      // }
-      // this.btnCloseRef.click();
+      this.submitInvalidForm = false;
+      if (!this.progExerciseForm.value.id) {
+        this.progExerciseService.addProgExercise(this.progExerciseForm);
+      } else {
+        this.progExerciseService.modifyProgExercise(this.progExerciseForm);
+      }
+      this.btnCloseRef.click();
     } else {
       this.submitInvalidForm = true;
     }
