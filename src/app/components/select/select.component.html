@@ -1,4 +1,10 @@
-<select [value]="value" aria-label="Default select example" class="form-select">
+<select (change)="onSelect($event)"
+        (click)="onClick()"
+        [value]="value"
+        class="form-select">
+  <option [value]="undefined" selected>
+    ...
+  </option>
   <option *ngFor="let option of options"
           [value]="option.value"
   >
