@@ -7,6 +7,9 @@ import {ActionType} from "../../../../enum/action-type";
 import {
   MyProgExerciseDeleteFormComponent
 } from "../my-prog-exercise-modal-components/my-prog-exercise-delete-form/my-prog-exercise-delete-form.component";
+import {
+  MyProgExerciseDetailsDisplayComponent
+} from "../my-prog-exercise-modal-components/my-prog-exercise-details-display/my-prog-exercise-details-display.component";
 
 @Component({
   selector: 'app-my-prog-exercise-modal',
@@ -15,7 +18,8 @@ import {
     ModalButtonComponent,
     ModalComponent,
     NgIf,
-    MyProgExerciseDeleteFormComponent
+    MyProgExerciseDeleteFormComponent,
+    MyProgExerciseDetailsDisplayComponent
   ],
   templateUrl: './my-prog-exercise-modal.component.html',
 })
@@ -32,6 +36,6 @@ export class MyProgExerciseModalComponent {
   onClick(value: undefined) {
     this.progExercise = value;
     this.action = ActionType.create;
-    this.modalTitle = "Add new muscle";
+    this.modalTitle = "Add new programed exercise";
   }
 }

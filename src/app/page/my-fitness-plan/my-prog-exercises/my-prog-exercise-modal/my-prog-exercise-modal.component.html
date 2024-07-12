@@ -16,8 +16,8 @@
   <!--                          [muscleInput]="progExercise"-->
   <!--                          [submitEvents]="submitEvents"-->
   <!--  />-->
-  <!--  <app-muscle-details-display *ngIf="action === ActionType.read"-->
-  <!--                              [muscleInput]="progExercise"/>-->
+  <app-my-prog-exercise-details-display *ngIf="action === ActionType.read"
+                                        [progExerciseInput]="progExercise"/>
   <app-my-prog-exercise-delete-form *ngIf="action === ActionType.delete"
                                     [btnCloseRef]="btnClose"
                                     [progExercise]="progExercise"
