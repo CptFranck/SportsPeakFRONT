@@ -69,7 +69,7 @@ export class ProgExerciseService {
     return this.apollo.mutate({
       mutation: ADD_PROG_EXERCISE,
       variables: {
-        inputNewMuscle: progExercisesForm.value,
+        inputNewProgExercise: progExercisesForm.value,
       },
     }).subscribe(
       (result: MutationResult): void => {
@@ -86,7 +86,7 @@ export class ProgExerciseService {
     return this.apollo.mutate({
       mutation: MOD_PROG_EXERCISE,
       variables: {
-        inputMuscle: progExercisesForm.value,
+        inputProgExercise: progExercisesForm.value,
       },
     }).subscribe((result: MutationResult): void => {
       if (result.errors) {
