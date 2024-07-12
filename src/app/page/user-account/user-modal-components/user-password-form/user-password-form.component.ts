@@ -30,11 +30,11 @@ export class UserPasswordFormComponent implements OnInit, AfterViewInit {
 
   @Input() set userInput(value: User | undefined) {
     this.user = value;
-    this.initializeMuscleForm();
+    this.initializeUserPasswordForm();
   }
 
   ngOnInit() {
-    this.initializeMuscleForm()
+    this.initializeUserPasswordForm()
   }
 
   ngAfterViewInit() {
@@ -42,7 +42,7 @@ export class UserPasswordFormComponent implements OnInit, AfterViewInit {
       this.eventsSubscription = this.submitEvents.subscribe(() => this.onSubmit());
   }
 
-  initializeMuscleForm() {
+  initializeUserPasswordForm() {
     this.userForm = new FormGroup({
         oldPassword: new FormControl(
           "",

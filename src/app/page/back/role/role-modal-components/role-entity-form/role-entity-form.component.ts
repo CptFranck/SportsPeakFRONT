@@ -46,12 +46,12 @@ export class RoleEntityFormComponent implements OnInit, AfterViewInit {
 
   @Input() set roleInput(value: Role | undefined) {
     this.role = value;
-    this.initializeMuscleForm();
+    this.initializeRoleForm();
   }
 
   ngOnInit() {
     this.userLoggedService.currentUser.subscribe(() => this.isAdmin = this.userLoggedService.isAdmin());
-    this.initializeMuscleForm();
+    this.initializeRoleForm();
   }
 
   ngAfterViewInit() {
@@ -59,7 +59,7 @@ export class RoleEntityFormComponent implements OnInit, AfterViewInit {
       this.eventsSubscription = this.submitEvents.subscribe(() => this.onSubmit());
   }
 
-  initializeMuscleForm() {
+  initializeRoleForm() {
     const exerciseIdsValidator =
       this.isAdmin ? null : Validators.required;
     const roleName: string = this.role ? this.role.name : "";

@@ -35,12 +35,12 @@ export class UserRolesFormComponent implements OnInit, AfterViewInit {
 
   @Input() set userInput(value: User | undefined) {
     this.user = value;
-    this.initializeMuscleForm();
+    this.initializeUserRoleForm();
   }
 
   ngOnInit() {
     this.userLoggedService.currentUser.subscribe(() => this.isAdmin = this.userLoggedService.isAdmin());
-    this.initializeMuscleForm();
+    this.initializeUserRoleForm();
   }
 
   ngAfterViewInit() {
@@ -48,7 +48,7 @@ export class UserRolesFormComponent implements OnInit, AfterViewInit {
       this.eventsSubscription = this.submitEvents.subscribe(() => this.onSubmit());
   }
 
-  initializeMuscleForm() {
+  initializeUserRoleForm() {
     const roleIdsValidator =
       this.isAdmin ? null : Validators.required;
     const userRoleIds: string[] = this.user?.lastName ?

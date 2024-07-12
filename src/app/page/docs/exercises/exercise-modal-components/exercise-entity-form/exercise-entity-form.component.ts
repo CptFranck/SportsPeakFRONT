@@ -45,12 +45,12 @@ export class ExerciseEntityFormComponent implements OnInit, AfterViewInit {
 
   @Input() set exerciseInput(value: Exercise | undefined) {
     this.exercise = value;
-    this.initializeMuscleForm();
+    this.initializeExerciseForm();
   }
 
   ngOnInit() {
     this.userLoggedService.currentUser.subscribe(() => this.isAdmin = this.userLoggedService.isAdmin());
-    this.initializeMuscleForm();
+    this.initializeExerciseForm();
   }
 
   ngAfterViewInit() {
@@ -58,7 +58,7 @@ export class ExerciseEntityFormComponent implements OnInit, AfterViewInit {
       this.eventsSubscription = this.submitEvents.subscribe(() => this.onSubmit());
   }
 
-  initializeMuscleForm() {
+  initializeExerciseForm() {
     const exerciseIdsValidator =
       this.isAdmin ? null : Validators.required;
     const exerciseName: string = this.exercise ? this.exercise.name : "";

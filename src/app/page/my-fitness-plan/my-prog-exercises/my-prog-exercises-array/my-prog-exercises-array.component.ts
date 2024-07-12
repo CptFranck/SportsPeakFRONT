@@ -8,7 +8,7 @@ import {ActionType} from "../../../../enum/action-type";
 import {ModalButtonComponent} from "../../../../components/modal/modal-button/modal-button.component";
 import {NgForOf, NgIf} from "@angular/common";
 import {TargetSetRowDetail} from "../../../../interface/utils/target-set-row-detail";
-import {getProgExerciseTime, getTargetSetsInformation} from "../../../../utils/functions";
+import {getProgExerciseTime, getTargetSetsInformation} from "../../../../utils/prog-exercise-functions";
 
 @Component({
   selector: 'app-my-prog-exercises-array',

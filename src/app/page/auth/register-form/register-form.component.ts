@@ -29,10 +29,10 @@ export class RegisterFormComponent implements OnInit {
   private authService: AuthService = inject(AuthService);
 
   ngOnInit() {
-    this.initializeExerciseTypeForm();
+    this.initializeRegisterForm();
   }
 
-  initializeExerciseTypeForm() {
+  initializeRegisterForm() {
     this.registerFormGroup = new FormGroup({
         firstName: new FormControl(
           // "",

@@ -36,12 +36,12 @@ export class PrivilegeEntityFormComponent implements OnInit, AfterViewInit {
 
   @Input() set privilegeInput(value: Privilege | undefined) {
     this.privilege = value;
-    this.initializeMuscleForm();
+    this.initializePrivilegeForm();
   }
 
   ngOnInit() {
     this.userLoggedService.currentUser.subscribe(() => this.isAdmin = this.userLoggedService.isAdmin());
-    this.initializeMuscleForm();
+    this.initializePrivilegeForm();
   }
 
   ngAfterViewInit() {
@@ -49,7 +49,7 @@ export class PrivilegeEntityFormComponent implements OnInit, AfterViewInit {
       this.eventsSubscription = this.submitEvents.subscribe(() => this.onSubmit());
   }
 
-  initializeMuscleForm() {
+  initializePrivilegeForm() {
     const exerciseIdsValidator =
       this.isAdmin ? null : Validators.required;
     const privilegeName: string = this.privilege ? this.privilege.name : "";

@@ -29,11 +29,11 @@ export class UserUsernameFormComponent implements OnInit, AfterViewInit {
 
   @Input() set userInput(value: User | undefined) {
     this.user = value;
-    this.initializeMuscleForm();
+    this.initializeUserUsernameForm();
   }
 
   ngOnInit() {
-    this.initializeMuscleForm();
+    this.initializeUserUsernameForm();
   }
 
   ngAfterViewInit() {
@@ -41,7 +41,7 @@ export class UserUsernameFormComponent implements OnInit, AfterViewInit {
       this.eventsSubscription = this.submitEvents.subscribe(() => this.onSubmit());
   }
 
-  initializeMuscleForm() {
+  initializeUserUsernameForm() {
     this.userForm = new FormGroup({
       newUsername: new FormControl("",
         [Validators.required,
