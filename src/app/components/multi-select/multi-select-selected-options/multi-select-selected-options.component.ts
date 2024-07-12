@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {NgForOf, NgIf} from "@angular/common";
-import {MultiSelectOptionSelected} from "../../../interface/multi-select/multiSelectOptionSelected";
+import {MultiSelectOptionSelected} from "../../../interface/components/multi-select/multiSelectOptionSelected";
 
 @Component({
   selector: 'app-multi-select-selected-options',

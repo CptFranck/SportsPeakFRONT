@@ -13,8 +13,8 @@ import {
 } from '@angular/core';
 import {NgForOf, NgIf} from "@angular/common";
 import {FormsModule} from "@angular/forms";
-import {MultiSelectOption} from "../../interface/multi-select/multiSelectOption";
-import {MultiSelectOptionSelected} from "../../interface/multi-select/multiSelectOptionSelected";
+import {MultiSelectOption} from "../../interface/components/multi-select/multiSelectOption";
+import {MultiSelectOptionSelected} from "../../interface/components/multi-select/multiSelectOptionSelected";
 import {LoadingComponent} from "../loading/loading.component";
 import {
   MultiSelectSelectedOptionsComponent
