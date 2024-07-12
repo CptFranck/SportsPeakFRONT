@@ -11,13 +11,13 @@
   </div>
   <div class="mb-3">
     <label class="form-label">Exercise(s) :</label>
-    <app-exercise-selector [exerciseIds]='progExerciseForm.controls["exerciseId"].value' formControlName="exerciseIds"/>
+    <app-exercise-select [exerciseId]='progExerciseForm.controls["exerciseId"].value' formControlName="exerciseId"/>
     <app-input-control
       [formGroup]="progExerciseForm"
       [submitInvalid]="submitInvalidForm"
       errorMessage="Please select exercises that use this muscle"
-      formGroupFieldName="exerciseIds"
-      rules="min : 1"
+      formGroupFieldName="exerciseId"
+      rules=""
     />
   </div>
   <div class="mb-3">
@@ -30,16 +30,14 @@
       rules="min : 3; max : 2000"
     />
   </div>
-
   <div class="mb-3">
     <label class="form-label">Visibility :</label>
-    <textarea aria-label="textarea" class="form-control" formControlName="visibility"></textarea>
+    <app-visibility-select [visibility]='progExerciseForm.controls["visibility"].value' formControlName="visibility"/>
     <app-input-control
       [formGroup]="progExerciseForm"
       [submitInvalid]="submitInvalidForm"
       formGroupFieldName="visibility"
     />
   </div>
-
 </form>
 

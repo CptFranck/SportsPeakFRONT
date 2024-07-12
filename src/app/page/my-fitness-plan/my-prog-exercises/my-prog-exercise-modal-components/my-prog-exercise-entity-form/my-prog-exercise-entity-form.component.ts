@@ -3,11 +3,14 @@ import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/
 import {Observable, Subscription} from "rxjs";
 import {UserLoggedService} from "../../../../../services/user-logged/user-logged.service";
 import {ProgExercise} from "../../../../../interface/dto/prog-exercise";
-import {ProgExerciseService} from "../../../../../services/prog-exercise/prog-exercise.service";
 import {User} from "../../../../../interface/dto/user";
 import {Visibility} from "../../../../../interface/enum/visibility";
 import {InputControlComponent} from "../../../../../components/input-control/input-control.component";
 import {NgIf} from "@angular/common";
+import {ExerciseSelectComponent} from "../../../../../components/selects/exercise-select/exercise-select.component";
+import {
+  VisibilitySelectComponent
+} from "../../../../../components/selects/visibility-select/visibility-select.component";
 
 @Component({
   selector: 'app-my-prog-exercise-entity-form',
@@ -15,7 +18,9 @@ import {NgIf} from "@angular/common";
   imports: [
     InputControlComponent,
     NgIf,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ExerciseSelectComponent,
+    VisibilitySelectComponent
   ],
   templateUrl: './my-prog-exercise-entity-form.component.html',
 })
@@ -30,7 +35,6 @@ export class MyProgExerciseEntityFormComponent implements OnInit, AfterViewInit 
 
   private user: User | undefined;
   private userLoggedService: UserLoggedService = inject(UserLoggedService);
-  private progExerciseService: ProgExerciseService = inject(ProgExerciseService);
 
   @Input() set muscleInput(value: ProgExercise | undefined) {
     this.progExercise = value;
@@ -52,7 +56,7 @@ export class MyProgExerciseEntityFormComponent implements OnInit, AfterViewInit 
     const progExerciseName: string = this.progExercise ? this.progExercise.name : "";
     const progExerciseNote: string = this.progExercise ? this.progExercise.note : "";
     const progExerciseVisibility: string = this.progExercise ? this.progExercise.visibility : Visibility.PRIVATE;
-    const progExerciseExerciseId: string = this.progExercise ? this.progExercise.exercise.id : "";
+    const progExerciseExerciseId: string | null = this.progExercise ? this.progExercise.exercise.id : null;
 
     this.progExerciseForm = new FormGroup({
       name: new FormControl(
@@ -73,18 +77,22 @@ export class MyProgExerciseEntityFormComponent implements OnInit, AfterViewInit 
         [Validators.required]),
       creatorId: new FormControl(creatorId),
     });
+
+    if (this.progExercise)
+      this.progExerciseForm.addControl("id", new FormControl(this.progExercise.id));
   }
 
   onSubmit() {
     if (!this.progExerciseForm) return;
     if (this.progExerciseForm.valid) {
-      this.submitInvalidForm = false;
-      if (!this.progExerciseForm.value.id) {
-        this.progExerciseService.addProgExercise(this.progExerciseForm);
-      } else {
-        this.progExerciseService.modifyProgExercise(this.progExerciseForm);
-      }
-      this.btnCloseRef.click();
+      console.log(this.progExerciseForm.value)
+      // this.submitInvalidForm = false;
+      // if (!this.progExerciseForm.value.id) {
+      //   this.progExerciseService.addProgExercise(this.progExerciseForm);
+      // } else {
+      //   this.progExerciseService.modifyProgExercise(this.progExerciseForm);
+      // }
+      // this.btnCloseRef.click();
     } else {
       this.submitInvalidForm = true;
     }
