@@ -70,7 +70,7 @@ export class MultiSelectComponent implements OnInit, OnChanges, AfterViewInit {
 
   ngAfterViewInit() {
     this.setSelectedOptionActive();
-    document.addEventListener("click", (event) => {
+    document.addEventListener("click", (event: MouseEvent) => {
       if (!(event.target instanceof HTMLElement)) return
       if (
         !event.target.closest(".custom-select")
@@ -83,14 +83,14 @@ export class MultiSelectComponent implements OnInit, OnChanges, AfterViewInit {
   }
 
   resetSelectedOption(): void {
-    this.options.forEach((option) => option.nativeElement.classList.remove("active"));
+    this.options.forEach((option: ElementRef) => option.nativeElement.classList.remove("active"));
   }
 
   setSelectedOptionActive(): void {
-    let allTagsUsed = true;
-    this.options.forEach((option) => {
+    let allTagsUsed: boolean = true;
+    this.options.forEach((option: ElementRef) => {
       if (!option.nativeElement.classList.contains("all-tags")) {
-        let isSelected = this.selectedOptions.find(id =>
+        let isSelected: string | undefined = this.selectedOptions.find((id: number) =>
           id.toString() === option.nativeElement.getAttribute("data-value"))?.toString();
         if (isSelected)
           option.nativeElement.classList.toggle("active");
@@ -104,8 +104,8 @@ export class MultiSelectComponent implements OnInit, OnChanges, AfterViewInit {
   }
 
   optionSelectedToDisplayed(): MultiSelectOptionSelected[] {
-    return this.selectedOptions.map(id => {
-      let option = this.optionList.find(opt => opt.id.toString() === id.toString())
+    return this.selectedOptions.map((id: number) => {
+      let option: MultiSelectOption | undefined = this.optionList.find(opt => opt.id.toString() === id.toString())
       return {
         id: id.toString(),
         title: option ? option.title : ""
@@ -117,7 +117,7 @@ export class MultiSelectComponent implements OnInit, OnChanges, AfterViewInit {
     if (this.limitOfDisplayedSelectedOptions === 0) {
       this.displayedSelectedOptions = this.optionSelectedToDisplayed();
     } else {
-      let length = this.selectedOptions.length;
+      let length: number = this.selectedOptions.length;
       this.displayedSelectedOptions = this.optionSelectedToDisplayed().slice(0, this.limitOfDisplayedSelectedOptions);
       if (length > this.limitOfDisplayedSelectedOptions)
         this.displayedSelectedOptions.push({
@@ -127,9 +127,9 @@ export class MultiSelectComponent implements OnInit, OnChanges, AfterViewInit {
     }
 
     if (this.addDescriptionToTag)
-      this.displayedSelectedOptions.forEach(option => {
-          let opt = this.optionList
-            .find(opt => option.id === opt.id);
+      this.displayedSelectedOptions.forEach((option: MultiSelectOptionSelected) => {
+          let opt: MultiSelectOption | undefined = this.optionList
+            .find((opt: MultiSelectOption) => option.id === opt.id);
           if (opt && opt.description)
             option.title += " : " + opt.description;
         }
@@ -137,10 +137,10 @@ export class MultiSelectComponent implements OnInit, OnChanges, AfterViewInit {
   }
 
   updateSelectedOptions() {
-    let newSelectedOptions = Array.from(this.options)
-      .filter((option) => option.nativeElement.classList.contains("active"))
-      .filter((option) => !option.nativeElement.classList.contains("all-tags"))
-      .map((option) => {
+    let newSelectedOptions: any[] = Array.from(this.options)
+      .filter((option: ElementRef) => option.nativeElement.classList.contains("active"))
+      .filter((option: ElementRef) => !option.nativeElement.classList.contains("all-tags"))
+      .map((option: ElementRef) => {
         return option.nativeElement.getAttribute("data-value");
       });
     this.selectedOptions = newSelectedOptions
@@ -150,7 +150,7 @@ export class MultiSelectComponent implements OnInit, OnChanges, AfterViewInit {
   }
 
   onCLickSelect($event: MouseEvent) {
-    const selectBox = $event.target
+    const selectBox: EventTarget | null = $event.target
     if (!(selectBox instanceof Element)) return;
     if (!selectBox.closest(".tag")) {
       this.selectBox.nativeElement.parentNode.classList.toggle("open")
@@ -160,7 +160,7 @@ export class MultiSelectComponent implements OnInit, OnChanges, AfterViewInit {
 
   onInputSearch() {
     const searchTerm = this.searchInput.nativeElement.value.toLowerCase();
-    this.options.forEach((option) => {
+    this.options.forEach((option: ElementRef) => {
       if (option.nativeElement.textContent) {
         const optionText = option.nativeElement.textContent.trim().toLocaleString().toLowerCase();
         const shouldShow = optionText.includes(searchTerm);
@@ -168,8 +168,8 @@ export class MultiSelectComponent implements OnInit, OnChanges, AfterViewInit {
       }
     });
 
-    const anyOptionsMatch = Array.from(this.options).some(
-      (option) =>
+    const anyOptionsMatch: boolean = Array.from(this.options).some(
+      (option: ElementRef) =>
         (option.nativeElement.style.display === "block")
     );
     this.noResultMessage.nativeElement.style.display =
@@ -183,7 +183,7 @@ export class MultiSelectComponent implements OnInit, OnChanges, AfterViewInit {
 
   onClickClear() {
     this.searchInput.nativeElement.value = "";
-    this.options.forEach((option) => {
+    this.options.forEach((option: ElementRef) => {
       option.nativeElement.style.display = "block";
     });
     this.noResultMessage.nativeElement.style.display = "none";
@@ -191,7 +191,7 @@ export class MultiSelectComponent implements OnInit, OnChanges, AfterViewInit {
 
   onClickAllOption() {
     const isActive = this.allTagsOption.nativeElement.classList.contains("active");
-    this.options.forEach((option) => {
+    this.options.forEach((option: ElementRef) => {
       if (option !== this.allTagsOption.nativeElement)
         option.nativeElement.classList.toggle("active", isActive);
     });
@@ -199,7 +199,7 @@ export class MultiSelectComponent implements OnInit, OnChanges, AfterViewInit {
   }
 
   onClickOption(mouseEvent: MouseEvent) {
-    const option = mouseEvent.currentTarget
+    const option: EventTarget | null = mouseEvent.currentTarget
     if (!(option instanceof HTMLElement)) return;
     option.classList.toggle("active");
     if (option.classList.contains("all-tags"))
@@ -208,19 +208,19 @@ export class MultiSelectComponent implements OnInit, OnChanges, AfterViewInit {
   }
 
   onCLickRemoveTag(mouseEvent: MouseEvent) {
-    const target = mouseEvent.currentTarget
+    const target: EventTarget | null = mouseEvent.currentTarget
     if (!(target instanceof HTMLElement)) return;
-    const removeTag = target.closest(".remove-tag");
+    const removeTag: Element | null = target.closest(".remove-tag");
     if (removeTag === null) return;
-    const customSelect = removeTag.closest(".custom-select");
-    const valueToRemove = removeTag.getAttribute("data-value");
+    const customSelect: Element | null = removeTag.closest(".custom-select");
+    const valueToRemove: string | null = removeTag.getAttribute("data-value");
     if (customSelect === null || valueToRemove === null) return;
-    const optionToRemove = customSelect.querySelector(
+    const optionToRemove: Element | null = customSelect.querySelector(
       ".option[data-value='" + valueToRemove + "']"
     );
     if (optionToRemove === null) return;
     optionToRemove.classList.remove("active");
-    const otherSelectedOptions =
+    const otherSelectedOptions: NodeList =
       customSelect.querySelectorAll(".option.active:not(.all-tags)");
     if (otherSelectedOptions.length === 0)
       this.allTagsOption.nativeElement.classList.remove("active");
