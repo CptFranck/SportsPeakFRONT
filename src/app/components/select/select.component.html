@@ -2,7 +2,7 @@
         (click)="onClick()"
         [value]="value"
         class="form-select">
-  <option [value]="undefined" selected>
+  <option *ngIf="defaultOption" [value]="undefined" selected>
     ...
   </option>
   <option *ngFor="let option of options"
