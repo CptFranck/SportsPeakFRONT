@@ -1,8 +1,9 @@
-import {Component, inject, Input, OnInit} from '@angular/core';
+import {Component, forwardRef, inject, Input, OnInit} from '@angular/core';
 import {ExerciseService} from "../../../services/exercise/exercise.service";
 import {Exercise} from "../../../interface/dto/exercise";
 import {SelectOption} from "../../../interface/components/select/selectOption";
 import {SelectComponent} from "../../select/select.component";
+import {ControlValueAccessor, NG_VALUE_ACCESSOR} from "@angular/forms";
 
 @Component({
   selector: 'app-exercise-select',
@@ -10,14 +11,29 @@ import {SelectComponent} from "../../select/select.component";
   imports: [
     SelectComponent
   ],
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => ExerciseSelectComponent),
+      multi: true,
+    }
+  ],
   templateUrl: './exercise-select.component.html',
 })
-export class ExerciseSelectComponent implements OnInit {
+export class ExerciseSelectComponent implements OnInit, ControlValueAccessor {
 
-  @Input() value: string | undefined;
+  loading: boolean = true;
   exerciseOptions: SelectOption[] = [];
 
+  @Input() exerciseId: string | undefined;
+
   private exerciseService: ExerciseService = inject(ExerciseService)
+
+  onChange: (value: string) => void = () => {
+  };
+
+  onTouched: ($event: boolean) => void = () => {
+  };
 
   ngOnInit(): void {
     this.exerciseService.exercises.subscribe((exercises: Exercise[]) => {
@@ -28,5 +44,17 @@ export class ExerciseSelectComponent implements OnInit {
         };
       });
     })
+  }
+
+  writeValue(exerciseId: string): void {
+    this.exerciseId = exerciseId;
+  }
+
+  registerOnChange(fn: (value: string) => void): void {
+    this.onChange = fn;
+  }
+
+  registerOnTouched(fn: () => void): void {
+    this.onTouched = fn;
   }
 }
