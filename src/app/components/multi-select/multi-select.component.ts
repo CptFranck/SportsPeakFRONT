@@ -14,7 +14,7 @@ import {
 import {NgForOf, NgIf} from "@angular/common";
 import {FormsModule} from "@angular/forms";
 import {MultiSelectOption} from "../../interface/multi-select/multiSelectOption";
-import {OptionSelected} from "../../interface/multi-select/optionSelected";
+import {MultiSelectOptionSelected} from "../../interface/multi-select/multiSelectOptionSelected";
 import {LoadingComponent} from "../loading/loading.component";
 import {
   MultiSelectSelectedOptionsComponent
@@ -34,7 +34,7 @@ import {
   styleUrl: './multi-select.component.css'
 })
 export class MultiSelectComponent implements OnInit, OnChanges, AfterViewInit {
-  displayedSelectedOptions: OptionSelected[] = [];
+  displayedSelectedOptions: MultiSelectOptionSelected[] = [];
   @Input() selectedOptions: number[] = [1, 2, 3, 4];
   @Input() optionList: MultiSelectOption[] = [
     {id: "1", title: "un", value: "un", description: "ceci est un chiffre, 123456789"},
@@ -103,7 +103,7 @@ export class MultiSelectComponent implements OnInit, OnChanges, AfterViewInit {
     }
   }
 
-  optionSelectedToDisplayed(): OptionSelected[] {
+  optionSelectedToDisplayed(): MultiSelectOptionSelected[] {
     return this.selectedOptions.map(id => {
       let option = this.optionList.find(opt => opt.id.toString() === id.toString())
       return {

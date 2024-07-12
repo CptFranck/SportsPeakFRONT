@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {NgForOf, NgIf} from "@angular/common";
-import {OptionSelected} from "../../../interface/multi-select/optionSelected";
+import {MultiSelectOptionSelected} from "../../../interface/multi-select/multiSelectOptionSelected";
 
 @Component({
   selector: 'app-multi-select-selected-options',
@@ -14,7 +14,7 @@ import {OptionSelected} from "../../../interface/multi-select/optionSelected";
 })
 export class MultiSelectSelectedOptionsComponent {
   @Input() selectedOptions!: number[]
-  @Input() displayedSelectedOptions!: OptionSelected[];
+  @Input() displayedSelectedOptions!: MultiSelectOptionSelected[];
 
   @Output() onRemoveTag: EventEmitter<any> = new EventEmitter();
 
