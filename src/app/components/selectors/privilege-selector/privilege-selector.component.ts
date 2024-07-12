@@ -1,6 +1,6 @@
 import {Component, forwardRef, inject, Input, OnInit} from '@angular/core';
 import {ControlValueAccessor, NG_VALUE_ACCESSOR} from "@angular/forms";
-import {Option} from "../../../interface/multi-select/option";
+import {MultiSelectOption} from "../../../interface/multi-select/multiSelectOption";
 import {Privilege} from "../../../interface/dto/privilege";
 import {PrivilegeService} from "../../../services/privilege/privilege.service";
 import {MultiSelectComponent} from "../../multi-select/multi-select.component";
@@ -22,7 +22,7 @@ import {MultiSelectComponent} from "../../multi-select/multi-select.component";
 })
 export class PrivilegeSelectorComponent implements OnInit, ControlValueAccessor {
   loading: boolean = true;
-  privilegeOptions: Option[] = [];
+  privilegeOptions: MultiSelectOption[] = [];
 
   @Input() privilegeIds: number[] = [];
 
@@ -36,7 +36,7 @@ export class PrivilegeSelectorComponent implements OnInit, ControlValueAccessor 
 
   ngOnInit(): void {
     this.privilegeService.privileges.subscribe((privileges: Privilege[]) => {
-      let options: Option[] = []
+      let options: MultiSelectOption[] = []
       privileges.forEach((privilege: Privilege) => {
         options.push({
           id: privilege.id,

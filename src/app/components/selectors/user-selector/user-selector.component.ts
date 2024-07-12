@@ -1,6 +1,6 @@
 import {Component, forwardRef, inject, Input, OnInit} from '@angular/core';
 import {ControlValueAccessor, NG_VALUE_ACCESSOR} from "@angular/forms";
-import {Option} from "../../../interface/multi-select/option";
+import {MultiSelectOption} from "../../../interface/multi-select/multiSelectOption";
 import {UserService} from "../../../services/user/user.service";
 import {User} from "../../../interface/dto/user";
 import {MultiSelectComponent} from "../../multi-select/multi-select.component";
@@ -22,7 +22,7 @@ import {MultiSelectComponent} from "../../multi-select/multi-select.component";
 })
 export class UserSelectorComponent implements OnInit, ControlValueAccessor {
   loading: boolean = true;
-  userOptions: Option[] = [];
+  userOptions: MultiSelectOption[] = [];
 
   @Input() userIds: number[] = [];
 
@@ -36,7 +36,7 @@ export class UserSelectorComponent implements OnInit, ControlValueAccessor {
 
   ngOnInit(): void {
     this.userService.users.subscribe((users: User[]) => {
-      let options: Option[] = []
+      let options: MultiSelectOption[] = []
       users.forEach((user: User) => {
         options.push({
           id: user.id,

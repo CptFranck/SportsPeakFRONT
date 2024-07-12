@@ -1,5 +1,5 @@
 import {Component, forwardRef, inject, Input, OnInit} from '@angular/core';
-import {Option} from "../../../interface/multi-select/option";
+import {MultiSelectOption} from "../../../interface/multi-select/multiSelectOption";
 import {MuscleService} from "../../../services/muscle/muscle.service";
 import {Muscle} from "../../../interface/dto/muscle";
 import {ControlValueAccessor, NG_VALUE_ACCESSOR} from "@angular/forms";
@@ -22,7 +22,7 @@ import {MultiSelectComponent} from "../../multi-select/multi-select.component";
 })
 export class MuscleSelectorComponent implements OnInit, ControlValueAccessor {
   loading: boolean = true;
-  muscleOptions: Option[] = [];
+  muscleOptions: MultiSelectOption[] = [];
 
   @Input() muscleIds: number[] = [];
 
@@ -36,7 +36,7 @@ export class MuscleSelectorComponent implements OnInit, ControlValueAccessor {
 
   ngOnInit(): void {
     this.muscleService.muscles.subscribe((muscles: Muscle[]) => {
-      let options: Option[] = []
+      let options: MultiSelectOption[] = []
       muscles.forEach((muscle: Muscle) => {
         options.push({
           id: muscle.id,

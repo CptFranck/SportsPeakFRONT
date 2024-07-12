@@ -1,5 +1,5 @@
 import {Component, forwardRef, inject, Input, OnInit} from '@angular/core';
-import {Option} from "../../../interface/multi-select/option";
+import {MultiSelectOption} from "../../../interface/multi-select/multiSelectOption";
 import {ControlValueAccessor, NG_VALUE_ACCESSOR} from "@angular/forms";
 import {RoleService} from "../../../services/role/role.service";
 import {Role} from "../../../interface/dto/role";
@@ -23,7 +23,7 @@ import {MultiSelectComponent} from "../../multi-select/multi-select.component";
 })
 export class RoleSelectorComponent implements OnInit, ControlValueAccessor {
   loading: boolean = true;
-  roleOptions: Option[] = [];
+  roleOptions: MultiSelectOption[] = [];
 
   @Input() roleIds: number[] = [];
 
@@ -37,7 +37,7 @@ export class RoleSelectorComponent implements OnInit, ControlValueAccessor {
 
   ngOnInit(): void {
     this.roleService.roles.subscribe((roles: Role[]) => {
-      let options: Option[] = []
+      let options: MultiSelectOption[] = []
       roles.forEach((role: Role) => {
         options.push({
           id: role.id,

@@ -13,7 +13,7 @@ import {
 } from '@angular/core';
 import {NgForOf, NgIf} from "@angular/common";
 import {FormsModule} from "@angular/forms";
-import {Option} from "../../interface/multi-select/option";
+import {MultiSelectOption} from "../../interface/multi-select/multiSelectOption";
 import {OptionSelected} from "../../interface/multi-select/optionSelected";
 import {LoadingComponent} from "../loading/loading.component";
 import {
@@ -36,7 +36,7 @@ import {
 export class MultiSelectComponent implements OnInit, OnChanges, AfterViewInit {
   displayedSelectedOptions: OptionSelected[] = [];
   @Input() selectedOptions: number[] = [1, 2, 3, 4];
-  @Input() optionList: Option[] = [
+  @Input() optionList: MultiSelectOption[] = [
     {id: "1", title: "un", value: "un", description: "ceci est un chiffre, 123456789"},
     {id: "2", title: "deux", value: "deux", description: "ceci est un chiffre"},
     {id: "3", title: "trois", value: "trois", description: "ceci est un chiffre"},

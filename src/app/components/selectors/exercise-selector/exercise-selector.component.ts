@@ -1,6 +1,6 @@
 import {Component, forwardRef, inject, Input, OnInit} from '@angular/core';
 import {Exercise} from "../../../interface/dto/exercise";
-import {Option} from "../../../interface/multi-select/option";
+import {MultiSelectOption} from "../../../interface/multi-select/multiSelectOption";
 import {ControlValueAccessor, NG_VALUE_ACCESSOR} from "@angular/forms";
 import {ExerciseService} from "../../../services/exercise/exercise.service";
 import {MultiSelectComponent} from "../../multi-select/multi-select.component";
@@ -22,7 +22,7 @@ import {MultiSelectComponent} from "../../multi-select/multi-select.component";
 })
 export class ExerciseSelectorComponent implements OnInit, ControlValueAccessor {
   loading: boolean = true;
-  exerciseOptions: Option[] = [];
+  exerciseOptions: MultiSelectOption[] = [];
 
   @Input() exerciseIds: number[] = [];
 
@@ -36,7 +36,7 @@ export class ExerciseSelectorComponent implements OnInit, ControlValueAccessor {
 
   ngOnInit(): void {
     this.exerciseService.exercises.subscribe((exercises: Exercise[]) => {
-      let options: Option[] = []
+      let options: MultiSelectOption[] = []
       exercises.forEach((exercise: Exercise) => {
         options.push({
           id: exercise.id,
