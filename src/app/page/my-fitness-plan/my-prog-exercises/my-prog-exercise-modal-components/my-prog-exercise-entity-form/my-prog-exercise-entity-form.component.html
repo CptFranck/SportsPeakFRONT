@@ -1,0 +1,45 @@
+<form *ngIf="progExerciseForm" [formGroup]="progExerciseForm" class="container-fluid">
+  <div class="mb-3">
+    <label class="form-label">Name :</label>
+    <input class="form-control" formControlName="name" type="text">
+    <app-input-control
+      [formGroup]="progExerciseForm"
+      [submitInvalid]="submitInvalidForm"
+      formGroupFieldName="name"
+      rules="min : 3; max : 50"
+    />
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Exercise(s) :</label>
+    <app-exercise-selector [exerciseIds]='progExerciseForm.controls["exerciseId"].value' formControlName="exerciseIds"/>
+    <app-input-control
+      [formGroup]="progExerciseForm"
+      [submitInvalid]="submitInvalidForm"
+      errorMessage="Please select exercises that use this muscle"
+      formGroupFieldName="exerciseIds"
+      rules="min : 1"
+    />
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Note :</label>
+    <textarea aria-label="textarea" class="form-control" formControlName="note"></textarea>
+    <app-input-control
+      [formGroup]="progExerciseForm"
+      [submitInvalid]="submitInvalidForm"
+      formGroupFieldName="note"
+      rules="min : 3; max : 2000"
+    />
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label">Visibility :</label>
+    <textarea aria-label="textarea" class="form-control" formControlName="visibility"></textarea>
+    <app-input-control
+      [formGroup]="progExerciseForm"
+      [submitInvalid]="submitInvalidForm"
+      formGroupFieldName="visibility"
+    />
+  </div>
+
+</form>
+
