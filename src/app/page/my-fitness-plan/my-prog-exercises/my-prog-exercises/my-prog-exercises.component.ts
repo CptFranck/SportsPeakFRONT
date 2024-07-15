@@ -14,6 +14,9 @@ import {SearchBarComponent} from "../../../../components/search-bar/search-bar.c
 import {Muscle} from "../../../../interface/dto/muscle";
 import {MyProgExercisesArrayComponent} from "../my-prog-exercises-array/my-prog-exercises-array.component";
 import {MyProgExerciseModalComponent} from "../my-prog-exercise-modal/my-prog-exercise-modal.component";
+import {HomeCardComponent} from "../../../../components/card/home-card/home-card.component";
+import {NgForOf} from "@angular/common";
+import {ProgExerciseCardComponent} from "../../../../components/card/prog-exercise-card/prog-exercise-card.component";
 
 @Component({
   selector: 'app-my-prog-exercises',
@@ -24,7 +27,10 @@ import {MyProgExerciseModalComponent} from "../my-prog-exercise-modal/my-prog-ex
     ProgExercisesArrayComponent,
     SearchBarComponent,
     MyProgExercisesArrayComponent,
-    MyProgExerciseModalComponent
+    MyProgExerciseModalComponent,
+    HomeCardComponent,
+    NgForOf,
+    ProgExerciseCardComponent
   ],
   templateUrl: './my-prog-exercises.component.html',
 })
@@ -35,7 +41,7 @@ export class MyProgExercisesComponent implements OnInit {
   progExercise: ProgExercise | undefined;
   action: ActionType = ActionType.create;
   modalTitle: string = "";
-  muscleModalId: string = "progExerciseModal";
+  progExerciseModalId: string = "progExerciseModal";
 
   @ViewChild("modalTemplate") modalTemplate!: TemplateRef<any>;
 

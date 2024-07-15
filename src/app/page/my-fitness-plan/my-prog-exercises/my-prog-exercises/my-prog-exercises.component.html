@@ -8,7 +8,7 @@
       <div class="col-2">
         <app-my-prog-exercise-modal [action]="action"
                                     [modalTitle]="modalTitle"
-                                    [muscleModalId]="muscleModalId"
+                                    [muscleModalId]="progExerciseModalId"
                                     [progExercise]="progExercise"
         />
       </div>
@@ -16,8 +16,12 @@
     <div class="row">
       <app-search-bar (onInput)="searchProgExercise($event)"/>
     </div>
-    <app-my-prog-exercises-array (actionProgExercises)="setProgExercise($event)"
-                                 [modalId]="muscleModalId"
-                                 [progExercises]="displayedProgExercises"/>
+    <div class="row p-2">
+      <app-prog-exercise-card (actionProgExercises)="setProgExercise($event)"
+                              *ngFor="let progExercise of displayedProgExercises"
+                              [modalId]="progExerciseModalId"
+                              [progExercise]="progExercise"
+      />
+    </div>
   </div>
 </div>
