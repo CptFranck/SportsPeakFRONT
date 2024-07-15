@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 
 @Component({
   selector: 'app-modal-button',
@@ -6,10 +6,13 @@ import {Component, EventEmitter, Input, Output} from '@angular/core';
   imports: [],
   templateUrl: './modal-button.component.html',
 })
-export class ModalButtonComponent {
+export class ModalButtonComponent implements OnInit {
+  AllWidthStyle: string = "";
+
   @Input() modalId!: string;
   @Input() modalValue?: any | undefined;
   @Input() btnClass?: string = "btn-success"
+  @Input() allWidth?: boolean = false;
 
   @Output() onCLickModalButton: EventEmitter<any> = new EventEmitter();
 
@@ -17,5 +20,10 @@ export class ModalButtonComponent {
     if (this.onCLickModalButton) {
       this.onCLickModalButton.emit(this.modalValue)
     }
+  }
+
+  ngOnInit(): void {
+    if (this.allWidth)
+      this.AllWidthStyle = "width:100%"
   }
 }
