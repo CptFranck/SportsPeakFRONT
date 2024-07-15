@@ -1,1 +1,22 @@
-
+<div class="container">
+  <app-loading [loading]="loading"/>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col">
+        <h2> {{ progExercise?.name }} </h2>
+      </div>
+      <div class="col-2">
+        <app-my-prog-exercise-details-modal [action]="action"
+                                            [modalTitle]="modalTitle"
+                                            [muscleModalId]="progExerciseModalId"
+                                            [progExercise]="progExercise"
+        />
+      </div>
+    </div>
+    <app-prog-exercise-card-details (actionProgExercises)="setProgExercise($event)"
+                                    *ngIf="progExercise"
+                                    [modalId]="progExerciseModalId"
+                                    [progExercise]="progExercise"
+    />
+  </div>
+</div>
