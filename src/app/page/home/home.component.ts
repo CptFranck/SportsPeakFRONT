@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 import {RouterLink} from "@angular/router";
 import {NgOptimizedImage} from "@angular/common";
-import {HorizontalCardComponent} from "../../components/card/horizontal-card/horizontal-card.component";
+import {HomeCardComponent} from "../../components/card/home-card/home-card.component";
 
 @Component({
   selector: 'app-home',
@@ -9,7 +9,7 @@ import {HorizontalCardComponent} from "../../components/card/horizontal-card/hor
   imports: [
     RouterLink,
     NgOptimizedImage,
-    HorizontalCardComponent
+    HomeCardComponent
   ],
   templateUrl: './home.component.html',
 })

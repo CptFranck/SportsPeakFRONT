@@ -1,5 +1,5 @@
 import {Component, Input} from '@angular/core';
-import {NgOptimizedImage} from "@angular/common";
+import {NgIf, NgOptimizedImage} from "@angular/common";
 import {RouterLink} from "@angular/router";
 
 @Component({
@@ -7,11 +7,12 @@ import {RouterLink} from "@angular/router";
   standalone: true,
   imports: [
     NgOptimizedImage,
-    RouterLink
+    RouterLink,
+    NgIf
   ],
-  templateUrl: './horizontal-card.component.html',
+  templateUrl: './home-card.component.html',
 })
-export class HorizontalCardComponent {
+export class HomeCardComponent {
   @Input() title: string = "Card title";
   @Input() srcImage: string = "...";
   @Input() imgHeight: string = "250";
