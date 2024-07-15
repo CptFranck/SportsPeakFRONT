@@ -49,7 +49,6 @@ export class ProgExerciseService {
     });
   }
 
-
   getUserProgExercises(user: User) {
     return this.apollo.watchQuery({
       query: GET_USER_PROG_EXERCISES,
