@@ -32,7 +32,6 @@ export class ProgExerciseCardDetailsComponent implements OnInit {
   }
 
   showProgExercisePerformance(progExercise: ProgExercise): void {
-
   }
 
   modifyProgExercise(progExercise: ProgExercise) {
