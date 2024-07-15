@@ -1,28 +1,97 @@
 <div class="card mt-2">
   <div class="card-body">
-    <h5 class="card-title">{{ progExercise.name }}</h5>
     <div class="row">
       <div class="col">
-        {{ progExercise.note }}
-      </div>
-      <div class="col-auto">
-        {{ progExercise.exercise.name }}
-      </div>
-      <div class="col-auto">
-        {{ progExercise.trustLabel }}
-      </div>
-      <div class="col-auto">
-        {{ progExercise.visibility }}
-      </div>
-      <div class="col-auto">
+        <h5 class="card-title">{{ progExercise.name }}</h5>
         <div class="row">
-          <a class="btn btn-primary" href="#">Button</a>
+          <div class="col">
+            <div class="row">
+              <div class="col">
+                <label class="fw-bold"> Exercise : </label>
+                {{ progExercise.exercise.name }}
+              </div>
+            </div>
+            <div class="row pt-2">
+              <div class="col">
+                {{ progExercise.exercise.description }}
+              </div>
+            </div>
+          </div>
+          <div class="col-auto">
+            <div class="row">
+              <label class="fw-bold"> Set(s) : </label>
+            </div>
+            <div class="row">
+              <p *ngIf="targetSets.length === 0 "> No sets added</p>
+              <ul>
+                <li *ngFor="let set of targetSets">{{ set }}</li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-auto">
+            <label class="fw-bold"> Trust Label : </label>
+            {{ progExercise.trustLabel }}
+          </div>
+          <div class="col-auto">
+            <label class="fw-bold"> Visibility : </label>
+            {{ progExercise.visibility }}
+          </div>
+          <div class="col-auto">
+            <label class="fw-bold"> Time : </label>
+            {{ exerciseTime }}
+          </div>
         </div>
-        <div class="row">
-          <a class="btn btn-primary" href="#">Button</a>
+        <div class="row pt-1">
+          <div class="col">
+            <label class="fw-bold"> Note : </label>
+            {{ progExercise.note }}
+          </div>
         </div>
-        <div class="row">
-          <a class="btn btn-primary" href="#">Button</a>
+      </div>
+      <div class="col-auto align-content-center">
+        <div class="row text-center">
+          <app-modal-button
+            (onCLickModalButton)="showMuscleDetails($event)"
+            [modalId]="modalId"
+            [modalValue]="progExercise"
+            btnClass="btn-secondary"
+          >
+            Details
+            <i class="fa-solid fa-eye"></i>
+          </app-modal-button>
+        </div>
+        <div class="row pt-1  text-center">
+          <app-modal-button
+            (onCLickModalButton)="showMuscleDetails($event)"
+            [modalId]="modalId"
+            [modalValue]="progExercise"
+            btnClass="btn-secondary"
+          >
+            Performance
+            <i class="fa-solid fa-chart-line"></i>
+          </app-modal-button>
+        </div>
+        <div class="row pt-1 text-center">
+          <app-modal-button
+            (onCLickModalButton)="modifyMuscle($event)"
+            [modalId]="modalId"
+            [modalValue]="progExercise"
+            btnClass="btn-secondary"
+          >
+            Modify
+            <i class="fa-solid fa-pen-to-square"></i>
+          </app-modal-button>
+        </div>
+        <div class="row pt-1 text-center">
+          <app-modal-button
+            (onCLickModalButton)="delProgExercise($event)"
+            [modalId]="modalId"
+            [modalValue]="progExercise"
+            btnClass="btn-danger"
+          >
+            Delete
+            <i class="fa-solid fa-trash"></i>
+          </app-modal-button>
         </div>
       </div>
     </div>
