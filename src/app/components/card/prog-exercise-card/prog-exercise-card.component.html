@@ -59,19 +59,19 @@
       <div class="col-auto align-content-center">
         <div class="row text-center">
           <app-modal-button
-            (onCLickModalButton)="showMuscleDetails($event)"
+            (onCLickModalButton)="showProgExercisePreview($event)"
             [allWidth]="true"
             [modalId]="modalId"
             [modalValue]="progExercise"
             btnClass="btn-secondary"
           >
-            Details
+            Preview
             <i class="fa-solid fa-eye"></i>
           </app-modal-button>
         </div>
         <div class="row pt-1 text-center">
           <app-modal-button
-            (onCLickModalButton)="showMuscleDetails($event)"
+            (onCLickModalButton)="showProgExercisePerformance($event)"
             [allWidth]="true"
             [modalId]="modalId"
             [modalValue]="progExercise"
@@ -85,25 +85,14 @@
           <div class="text-center">
             <button
               class="btn btn-secondary"
+              routerLink="/my-fitness-plan/my-programed-exercise/{{progExercise.id}}"
               style="width: 100%"
               type="button"
             >
-              Modify
+              Manage
               <i class="fa-solid fa-pen-to-square"></i>
             </button>
           </div>
-        </div>
-        <div class="row pt-1 text-center">
-          <app-modal-button
-            (onCLickModalButton)="delProgExercise($event)"
-            [allWidth]="true"
-            [modalId]="modalId"
-            [modalValue]="progExercise"
-            btnClass="btn-danger"
-          >
-            Delete
-            <i class="fa-solid fa-trash"></i>
-          </app-modal-button>
         </div>
       </div>
     </div>

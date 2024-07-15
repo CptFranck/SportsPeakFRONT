@@ -5,6 +5,7 @@ import {ModalButtonComponent} from "../../modal/modal-button/modal-button.compon
 import {ActionType} from "../../../enum/action-type";
 import {FormIndicator} from "../../../interface/utils/form-indicator";
 import {getProgExerciseTime, getTargetSetsInformation} from "../../../utils/prog-exercise-functions";
+import {RouterLink} from "@angular/router";
 
 @Component({
   selector: 'app-prog-exercise-card',
@@ -12,7 +13,8 @@ import {getProgExerciseTime, getTargetSetsInformation} from "../../../utils/prog
   imports: [
     NgForOf,
     ModalButtonComponent,
-    NgIf
+    NgIf,
+    RouterLink
   ],
   templateUrl: './prog-exercise-card.component.html',
 })
@@ -29,23 +31,16 @@ export class ProgExerciseCardComponent implements OnInit {
     this.targetSets = getTargetSetsInformation(this.progExercise);
   }
 
-  showMuscleDetails(progExercise: ProgExercise): void {
+  showProgExercisePreview(progExercise: ProgExercise): void {
     this.actionProgExercises.emit({
       actionType: ActionType.read,
       object: progExercise
     });
   }
 
-  modifyMuscle(progExercise: ProgExercise) {
+  showProgExercisePerformance(progExercise: ProgExercise): void {
     this.actionProgExercises.emit({
-      actionType: ActionType.update,
-      object: progExercise
-    });
-  }
-
-  delProgExercise(progExercise: ProgExercise) {
-    this.actionProgExercises.emit({
-      actionType: ActionType.delete,
+      actionType: ActionType.read,
       object: progExercise
     });
   }
