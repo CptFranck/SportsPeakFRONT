@@ -1,4 +1,4 @@
-<div class="card mt-2">
+<div class="card mt-2 shadow">
   <div class="card-body">
     <div class="row">
       <div class="col">
@@ -29,16 +29,24 @@
             </div>
           </div>
           <div class="col-auto">
-            <label class="fw-bold"> Trust Label : </label>
-            {{ progExercise.trustLabel }}
-          </div>
-          <div class="col-auto">
-            <label class="fw-bold"> Visibility : </label>
-            {{ progExercise.visibility }}
-          </div>
-          <div class="col-auto">
-            <label class="fw-bold"> Time : </label>
-            {{ exerciseTime }}
+            <div class="row">
+              <div class="col">
+                <label class="fw-bold"> Trust Label : </label>
+                {{ progExercise.trustLabel }}
+              </div>
+            </div>
+            <div class="row">
+              <div class="col pt-2">
+                <label class="fw-bold"> Visibility : </label>
+                {{ progExercise.visibility }}
+              </div>
+            </div>
+            <div class="row">
+              <div class="col pt-2">
+                <label class="fw-bold"> Time : </label>
+                {{ exerciseTime }}
+              </div>
+            </div>
           </div>
         </div>
         <div class="row pt-1">
@@ -52,6 +60,7 @@
         <div class="row text-center">
           <app-modal-button
             (onCLickModalButton)="showMuscleDetails($event)"
+            [allWidth]="true"
             [modalId]="modalId"
             [modalValue]="progExercise"
             btnClass="btn-secondary"
@@ -60,9 +69,10 @@
             <i class="fa-solid fa-eye"></i>
           </app-modal-button>
         </div>
-        <div class="row pt-1  text-center">
+        <div class="row pt-1 text-center">
           <app-modal-button
             (onCLickModalButton)="showMuscleDetails($event)"
+            [allWidth]="true"
             [modalId]="modalId"
             [modalValue]="progExercise"
             btnClass="btn-secondary"
@@ -71,20 +81,22 @@
             <i class="fa-solid fa-chart-line"></i>
           </app-modal-button>
         </div>
-        <div class="row pt-1 text-center">
-          <app-modal-button
-            (onCLickModalButton)="modifyMuscle($event)"
-            [modalId]="modalId"
-            [modalValue]="progExercise"
-            btnClass="btn-secondary"
-          >
-            Modify
-            <i class="fa-solid fa-pen-to-square"></i>
-          </app-modal-button>
+        <div class="row pt-1 ">
+          <div class="text-center">
+            <button
+              class="btn btn-secondary"
+              style="width: 100%"
+              type="button"
+            >
+              Modify
+              <i class="fa-solid fa-pen-to-square"></i>
+            </button>
+          </div>
         </div>
         <div class="row pt-1 text-center">
           <app-modal-button
             (onCLickModalButton)="delProgExercise($event)"
+            [allWidth]="true"
             [modalId]="modalId"
             [modalValue]="progExercise"
             btnClass="btn-danger"
