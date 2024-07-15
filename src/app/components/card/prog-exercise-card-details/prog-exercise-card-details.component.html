@@ -1,0 +1,99 @@
+<div class="card mt-2 shadow">
+  <div class="card-body">
+    <div class="row">
+      <div class="col">
+        <h5 class="card-title">{{ progExercise.name }}</h5>
+        <div class="row">
+          <div class="col">
+            <div class="row">
+              <div class="col">
+                <label class="fw-bold"> Exercise : </label>
+                {{ progExercise.exercise.name }}
+              </div>
+            </div>
+            <div class="row pt-2">
+              <div class="col">
+                {{ progExercise.exercise.description }}
+              </div>
+            </div>
+          </div>
+          <div class="col-auto">
+            <div class="row">
+              <label class="fw-bold"> Set(s) : </label>
+            </div>
+            <div class="row">
+              <p *ngIf="targetSets.length === 0 "> No sets added</p>
+              <ul>
+                <li *ngFor="let set of targetSets">{{ set }}</li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-auto">
+            <div class="row">
+              <div class="col">
+                <label class="fw-bold"> Trust Label : </label>
+                {{ progExercise.trustLabel }}
+              </div>
+            </div>
+            <div class="row">
+              <div class="col pt-2">
+                <label class="fw-bold"> Visibility : </label>
+                {{ progExercise.visibility }}
+              </div>
+            </div>
+            <div class="row">
+              <div class="col pt-2">
+                <label class="fw-bold"> Time : </label>
+                {{ exerciseTime }}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row pt-1">
+          <div class="col">
+            <label class="fw-bold"> Note : </label>
+            {{ progExercise.note }}
+          </div>
+        </div>
+      </div>
+      <div class="col-auto align-content-center">
+        <div class="row pt-1 text-center">
+          <app-modal-button
+            (onCLickModalButton)="showProgExercisePerformance($event)"
+            [allWidth]="true"
+            [modalId]="modalId"
+            [modalValue]="progExercise"
+            btnClass="btn-secondary"
+          >
+            Performance
+            <i class="fa-solid fa-chart-line"></i>
+          </app-modal-button>
+        </div>
+        <div class="row pt-1 ">
+          <app-modal-button
+            (onCLickModalButton)="modifyProgExercise($event)"
+            [allWidth]="true"
+            [modalId]="modalId"
+            [modalValue]="progExercise"
+            btnClass="btn-secondary"
+          >
+            Modify
+            <i class="fa-solid fa-pen-to-square"></i>
+          </app-modal-button>
+        </div>
+        <div class="row pt-1 text-center">
+          <app-modal-button
+            (onCLickModalButton)="delProgExercise($event)"
+            [allWidth]="true"
+            [modalId]="modalId"
+            [modalValue]="progExercise"
+            btnClass="btn-danger"
+          >
+            Delete
+            <i class="fa-solid fa-trash"></i>
+          </app-modal-button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
