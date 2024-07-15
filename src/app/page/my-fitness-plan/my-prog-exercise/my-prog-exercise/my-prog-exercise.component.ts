@@ -39,7 +39,7 @@ export class MyProgExerciseComponent implements OnInit {
   progExercise: ProgExercise | undefined;
   action: ActionType = ActionType.update;
   modalTitle: string = "";
-  progExerciseModalId: string = "progExerciseModal";
+  progExerciseDetailsModalId: string = "progExerciseDetailsModal";
 
   private activatedRoute: ActivatedRoute = inject(ActivatedRoute);
   private proExerciseService: ProgExerciseService = inject(ProgExerciseService);

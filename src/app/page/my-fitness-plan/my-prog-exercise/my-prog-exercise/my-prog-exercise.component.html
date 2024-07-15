@@ -8,14 +8,14 @@
       <div class="col-2">
         <app-my-prog-exercise-details-modal [action]="action"
                                             [modalTitle]="modalTitle"
-                                            [muscleModalId]="progExerciseModalId"
+                                            [muscleModalId]="progExerciseDetailsModalId"
                                             [progExercise]="progExercise"
         />
       </div>
     </div>
     <app-prog-exercise-card-details (actionProgExercises)="setProgExercise($event)"
                                     *ngIf="progExercise"
-                                    [modalId]="progExerciseModalId"
+                                    [modalId]="progExerciseDetailsModalId"
                                     [progExercise]="progExercise"
     />
   </div>
