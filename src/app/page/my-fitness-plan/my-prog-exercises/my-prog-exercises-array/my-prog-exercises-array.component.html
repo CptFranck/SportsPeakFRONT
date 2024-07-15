@@ -65,7 +65,7 @@
     <td>
       <div class="col p-1 text-center">
         <button
-          (click)="expendProgExerciseDetails(progExercise.id)"
+          (click)="expendProgExerciseDetails(progExercise.id.toString())"
           [attr.aria-expanded]="expendProgExerciseDetails"
           [attr.data-bs-target]="'#' + progExercise.id "
           class="btn btn-secondary"

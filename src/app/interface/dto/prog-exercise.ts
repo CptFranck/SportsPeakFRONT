@@ -5,7 +5,7 @@ import {Visibility} from "../enum/visibility";
 import {TrustLabel} from "../enum/trustLabel";
 
 export interface ProgExercise {
-  id: string
+  id: number
   name: string
   note: string
   visibility: Visibility
