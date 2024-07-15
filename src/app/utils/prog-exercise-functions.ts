@@ -7,11 +7,9 @@ export function getTargetSetsInformation(progExercise: ProgExercise) {
   lastTargetSet = sortLastTargetSetsByWeight(lastTargetSet)
 
   return lastTargetSet.map((targetSet: TargetSet) => {
-    let set: string = targetSet.setNumber + " set of " + targetSet.repetitionNumber + " reps with ";
+    let set: string = targetSet.setNumber + " set of " + targetSet.repetitionNumber + " reps";
     if (targetSet.weight > 0) {
-      set += targetSet.weight + " " + targetSet.weightUnit;
-    } else {
-      set += "no weight";
+      set += " with " + targetSet.weight + " " + targetSet.weightUnit;
     }
     return set;
   });
