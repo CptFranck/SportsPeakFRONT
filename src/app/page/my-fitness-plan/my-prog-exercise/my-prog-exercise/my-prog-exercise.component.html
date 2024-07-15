@@ -18,5 +18,10 @@
                                     [modalId]="progExerciseDetailsModalId"
                                     [progExercise]="progExercise"
     />
+    <app-target-set-card (actionProgExercises)="setProgExercise($event)"
+                         *ngFor="let targetSet of progExercise?.targetSets"
+                         [modalId]="progExerciseDetailsModalId"
+                         [targetSet]="targetSet"
+    />
   </div>
 </div>

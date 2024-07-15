@@ -17,6 +17,7 @@ import {
   MyProgExerciseModalComponent
 } from "../../my-prog-exercises/my-prog-exercise-modal/my-prog-exercise-modal.component";
 import {MyProgExerciseDetailsModalComponent} from "../my-prog-exercise-modal/my-prog-exercise-details-modal.component";
+import {TargetSetCardComponent} from "../../../../components/card/target-set-card/target-set-card.component";
 
 @Component({
   selector: 'app-my-prog-exercise',
@@ -29,7 +30,8 @@ import {MyProgExerciseDetailsModalComponent} from "../my-prog-exercise-modal/my-
     ProgExerciseCardDetailsComponent,
     ProgExerciseModalComponent,
     MyProgExerciseModalComponent,
-    MyProgExerciseDetailsModalComponent
+    MyProgExerciseDetailsModalComponent,
+    TargetSetCardComponent
   ],
   templateUrl: './my-prog-exercise.component.html',
 })
