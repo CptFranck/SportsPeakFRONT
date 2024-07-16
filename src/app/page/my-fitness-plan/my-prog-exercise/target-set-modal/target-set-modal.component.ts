@@ -13,6 +13,9 @@ import {
 import {NgIf} from "@angular/common";
 import {TargetSet} from "../../../../interface/dto/target-set";
 import {ModalButtonComponent} from "../../../../components/modal/modal-button/modal-button.component";
+import {
+  TargetSetDeleteFormComponent
+} from "../target-set-modal-components/target-set-delete-form/target-set-delete-form.component";
 
 @Component({
   selector: 'app-target-set-modal',
@@ -23,7 +26,8 @@ import {ModalButtonComponent} from "../../../../components/modal/modal-button/mo
     MyProgExerciseEntityFormComponent,
     MyProgExercisePerformanceComponent,
     NgIf,
-    ModalButtonComponent
+    ModalButtonComponent,
+    TargetSetDeleteFormComponent
   ],
   templateUrl: './target-set-modal.component.html',
 })
