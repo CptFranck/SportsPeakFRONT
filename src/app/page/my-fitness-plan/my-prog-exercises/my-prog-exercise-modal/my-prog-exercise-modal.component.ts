@@ -12,7 +12,10 @@ import {
 } from "../my-prog-exercise-modal-components/my-prog-exercise-details-display/my-prog-exercise-details-display.component";
 import {
   MyProgExerciseEntityFormComponent
-} from "../my-prog-exercise-modal-components/my-prog-exercise-entity-form/my-prog-exercise-entity-form.component";
+} from "../my-prog-exercise-modal-components/my-prog-exercise-forms/my-prog-exercise-entity-form/my-prog-exercise-entity-form.component";
+import {
+  MyProgExerciseSettingsComponent
+} from "../my-prog-exercise-modal-components/my-prog-exercise-settings/my-prog-exercise-settings.component";
 
 @Component({
   selector: 'app-my-prog-exercise-modal',
@@ -23,7 +26,8 @@ import {
     NgIf,
     MyProgExerciseDeleteFormComponent,
     MyProgExerciseDetailsDisplayComponent,
-    MyProgExerciseEntityFormComponent
+    MyProgExerciseEntityFormComponent,
+    MyProgExerciseSettingsComponent
   ],
   templateUrl: './my-prog-exercise-modal.component.html',
 })

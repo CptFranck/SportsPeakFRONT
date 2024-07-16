@@ -13,9 +13,13 @@
 <ng-template #modalTemplate let-btnClose="btnClose" let-submitEvents="submitEvents">
   <app-my-prog-exercise-entity-form *ngIf="action === ActionType.create || action === ActionType.update"
                                     [btnCloseRef]="btnClose"
-                                    [muscleInput]="progExercise"
+                                    [progExerciseInput]="progExercise"
                                     [submitEvents]="submitEvents"
   />
+  <!--  <app-my-prog-exercise-settings *ngIf="action === ActionType.create || action === ActionType.update"-->
+  <!--                                 [btnCloseRef]="btnClose"-->
+  <!--                                 [progExercise]="progExercise"-->
+  <!--                                 [submitEvents]="submitEvents"/>-->
   <app-my-prog-exercise-details-display *ngIf="action === ActionType.read"
                                         [progExerciseInput]="progExercise"/>
   <app-my-prog-exercise-delete-form *ngIf="action === ActionType.delete"
