@@ -33,8 +33,9 @@ export class ExercisesArrayComponent implements OnChanges {
     this.userLoggedService.currentUser.subscribe(() => this.isAdmin = this.userLoggedService.isAdmin());
   }
 
-  expendExerciseDetails(id: string): void {
-    this.showDetails[id] = !this.showDetails[id];
+  expendExerciseDetails(id: number): void {
+    let IdKey: string = id.toString()
+    this.showDetails[IdKey] = !this.showDetails[IdKey];
   }
 
   showExerciseDetails(exercise: Exercise): void {

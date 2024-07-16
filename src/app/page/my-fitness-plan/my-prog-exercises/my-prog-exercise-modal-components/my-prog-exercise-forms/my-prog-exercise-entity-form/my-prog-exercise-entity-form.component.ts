@@ -58,7 +58,7 @@ export class MyProgExerciseEntityFormComponent implements OnInit, AfterViewInit 
     const progExerciseName: string = this.progExercise ? this.progExercise.name : "";
     const progExerciseNote: string = this.progExercise ? this.progExercise.note : "";
     const progExerciseVisibility: string = this.progExercise ? this.progExercise.visibility : Visibility.PRIVATE;
-    const progExerciseExerciseId: string | null = this.progExercise ? this.progExercise.exercise.id : null;
+    const progExerciseExerciseId: number | null = this.progExercise ? this.progExercise.exercise.id : null;
 
     this.progExerciseForm = new FormGroup({
       name: new FormControl(

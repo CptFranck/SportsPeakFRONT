@@ -55,7 +55,7 @@ export class ExerciseTypeEntityFormComponent implements OnInit, AfterViewInit {
       this.isAdmin ? null : Validators.required;
     const exerciseTypeName: string = this.exerciseType ? this.exerciseType.name : "";
     const exerciseTypeGoal: string = this.exerciseType ? this.exerciseType.goal : "";
-    const muscleExerciseIds: string[] = this.exerciseType?.exercises ?
+    const muscleExerciseIds: number[] = this.exerciseType?.exercises ?
       this.exerciseType.exercises?.map((ex: Exercise) => ex.id) : [];
 
     this.exerciseTypeForm = new FormGroup({
