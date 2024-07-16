@@ -39,7 +39,7 @@ export class MuscleSelectorComponent implements OnInit, ControlValueAccessor {
       let options: MultiSelectOption[] = []
       muscles.forEach((muscle: Muscle) => {
         options.push({
-          id: muscle.id,
+          id: muscle.id.toString(),
           title: muscle.name,
           value: muscle,
           description: muscle.description

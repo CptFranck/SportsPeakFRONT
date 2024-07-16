@@ -1,7 +1,7 @@
 import {Exercise} from "./exercise";
 
 export interface Muscle {
-  id: string
+  id: number
   name: string
   description: string
   function: string

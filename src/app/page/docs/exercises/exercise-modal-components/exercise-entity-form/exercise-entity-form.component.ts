@@ -64,7 +64,7 @@ export class ExerciseEntityFormComponent implements OnInit, AfterViewInit {
     const exerciseName: string = this.exercise ? this.exercise.name : "";
     const exerciseDescription: string = this.exercise ? this.exercise.description : "";
     const exerciseGoal: string = this.exercise ? this.exercise.goal : "";
-    const exerciseMuscleIds: string[] = this.exercise?.muscles ?
+    const exerciseMuscleIds: number[] = this.exercise?.muscles ?
       this.exercise.muscles?.map((muscle: Muscle) => muscle.id) : [];
     const exerciseExerciseTypeIds: number [] = this.exercise ?
       this.exercise.exerciseTypes?.map((exerciseType: ExerciseType) => exerciseType.id) : [];

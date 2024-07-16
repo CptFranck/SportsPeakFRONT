@@ -35,8 +35,9 @@ export class MusclesArrayComponent implements OnChanges {
     this.userLoggedService.currentUser.subscribe(() => this.isAdmin = this.userLoggedService.isAdmin());
   }
 
-  expendMuscleDetails(id: string): void {
-    this.showDetails[id] = !this.showDetails[id];
+  expendMuscleDetails(id: number): void {
+    let idKey: string = id.toString()
+    this.showDetails[idKey] = !this.showDetails[idKey];
   }
 
   showMuscleDetails(muscle: Muscle): void {
