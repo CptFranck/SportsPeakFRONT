@@ -24,11 +24,11 @@ export class ExerciseSelectComponent implements OnInit, ControlValueAccessor {
 
   exerciseOptions: SelectOption[] = [];
 
-  @Input() exerciseId: string | undefined;
+  @Input() exerciseId: number | undefined;
 
   private exerciseService: ExerciseService = inject(ExerciseService)
 
-  onChange: (value: string | undefined) => void = () => {
+  onChange: (value: number | undefined) => void = () => {
   };
 
   onTouched: ($event: boolean) => void = () => {
@@ -39,17 +39,17 @@ export class ExerciseSelectComponent implements OnInit, ControlValueAccessor {
       this.exerciseOptions = exercises.map((exercise: Exercise) => {
         return {
           title: exercise.name,
-          value: exercise.id,
+          value: exercise.id.toString(),
         };
       });
     })
   }
 
-  writeValue(exerciseId: string | undefined): void {
+  writeValue(exerciseId: number | undefined): void {
     this.exerciseId = exerciseId;
   }
 
-  registerOnChange(fn: (value: string | undefined) => void): void {
+  registerOnChange(fn: (value: number | undefined) => void): void {
     this.onChange = fn;
   }
 
@@ -58,7 +58,10 @@ export class ExerciseSelectComponent implements OnInit, ControlValueAccessor {
   }
 
   setExerciseId(exerciseId: string | undefined) {
-    this.exerciseId = exerciseId;
-    this.onChange(exerciseId);
+    if (exerciseId) {
+      let exId: number = parseInt(exerciseId)
+      this.exerciseId = exId;
+      this.onChange(exId);
+    }
   }
 }

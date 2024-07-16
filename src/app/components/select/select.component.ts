@@ -1,23 +1,25 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {SelectOption} from "../../interface/components/select/selectOption";
 import {NgForOf, NgIf} from "@angular/common";
+import {FormsModule} from "@angular/forms";
 
 @Component({
   selector: 'app-select',
   standalone: true,
   imports: [
     NgForOf,
-    NgIf
+    NgIf,
+    FormsModule
   ],
   templateUrl: './select.component.html',
 })
 export class SelectComponent {
   @Input() value: string | undefined;
   @Input() options!: SelectOption[];
+  @Input() defaultOption: boolean = false;
 
   @Output() onTouched: EventEmitter<boolean> = new EventEmitter<boolean>();
   @Output() onChange: EventEmitter<string | undefined> = new EventEmitter<string | undefined>();
-  @Input() defaultOption: boolean = false;
 
   onSelect(event: Event) {
     if (event.target instanceof HTMLSelectElement) {
