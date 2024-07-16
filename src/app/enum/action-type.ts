@@ -2,5 +2,6 @@ export enum ActionType {
   create = "Create",
   read = "Read",
   update = "Update",
-  delete = "Delete"
+  delete = "Delete",
+  checkPerformance = "CheckPerformance"
 }
