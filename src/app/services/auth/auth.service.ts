@@ -79,7 +79,7 @@ export class AuthService {
     let authToken: AuthToken = this.createAuthToken(auth);
     this.tokenService.setCurrentToken(authToken);
     if (redirect) {
-      this.router.navigateByUrl(this.redirectUrl)
+      this.router.navigateByUrl(this.redirectUrl).then(() => this.setRedirectUrl('/'));
     }
   }
 

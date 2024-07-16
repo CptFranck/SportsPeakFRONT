@@ -8,9 +8,9 @@ export const AuthGuard: CanActivateFn = (route: ActivatedRouteSnapshot, state: R
   const authService: AuthService = inject(AuthService);
 
   if (!authService.isAuthenticated.value) {
+    authService.setRedirectUrl(url.substring(1));
     router.navigate(['auth']);
     return false;
   }
-  authService.setRedirectUrl(url);
   return true;
 };
