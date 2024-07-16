@@ -65,7 +65,7 @@ export class RoleEntityFormComponent implements OnInit, AfterViewInit {
     const roleName: string = this.role ? this.role.name : "";
     const roleUserIds: string[] = this.role?.users ?
       this.role.users?.map((user: User) => user.id) : [];
-    const rolePrivilegeIds: string[] = this.role?.privileges ?
+    const rolePrivilegeIds: number[] = this.role?.privileges ?
       this.role.privileges?.map((privilege: Privilege) => privilege.id) : [];
 
     this.roleForm = new FormGroup({

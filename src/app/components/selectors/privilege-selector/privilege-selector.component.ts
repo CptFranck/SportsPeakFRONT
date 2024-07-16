@@ -39,7 +39,7 @@ export class PrivilegeSelectorComponent implements OnInit, ControlValueAccessor 
       let options: MultiSelectOption[] = []
       privileges.forEach((privilege: Privilege) => {
         options.push({
-          id: privilege.id,
+          id: privilege.id.toString(),
           title: privilege.name,
           value: privilege,
         });
