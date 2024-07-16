@@ -2,51 +2,80 @@
   <div class="card-body">
     <div class="row">
       <div class="col">
-        <!--        <h5 class="card-title">{{ targetSet.name }}</h5>-->
         <div class="row">
           <div class="col">
             <div class="row">
+              <div class="col-auto">
+                <label class="fw-bold"> Set : </label>
+                {{ targetSet.setNumber }}
+              </div>
+              <div class="col-auto">
+                <label class="fw-bold"> Reps : </label>
+                {{ targetSet.repetitionNumber }}
+              </div>
               <div class="col">
                 <label class="fw-bold"> Weight : </label>
                 {{ targetSet.weight + " " + targetSet.weightUnit }}
               </div>
             </div>
-            <!--            <div class="row pt-2">-->
-            <!--              <div class="col">-->
-            <!--                {{ targetSet.exercise.description }}-->
-            <!--              </div>-->
-            <!--            </div>-->
+            <div class="row pt-4">
+              <app-modal-button
+                (onCLickModalButton)="modifyProgExercise($event)"
+                [modalId]="modalId"
+                [modalValue]="targetSet"
+                btnClass="btn-secondary"
+              >
+                Check performances
+                <i class="fa-solid fa-eye"></i>
+              </app-modal-button>
+            </div>
           </div>
-          <!--          <div class="col-auto">-->
-          <!--            <div class="row">-->
-          <!--              <div class="col">-->
-          <!--                <label class="fw-bold"> Trust Label : </label>-->
-          <!--                {{ targetSet.trustLabel }}-->
-          <!--              </div>-->
-          <!--            </div>-->
-          <!--            <div class="row">-->
-          <!--              <div class="col pt-2">-->
-          <!--                <label class="fw-bold"> Visibility : </label>-->
-          <!--                {{ targetSet.visibility }}-->
-          <!--              </div>-->
-          <!--            </div>-->
-          <!--            <div class="row">-->
-          <!--              <div class="col pt-2">-->
-          <!--                <label class="fw-bold"> Time : </label>-->
-          <!--                {{ targetSetTime }}-->
-          <!--              </div>-->
-          <!--            </div>-->
-          <!--          </div>-->
+          <div class="col">
+            <div class="col">
+              <div class="col-auto">
+                <div class="row">
+                  <div class="col-auto">
+                    <div class="row">
+                      <label class="fw-bold"> One Rep Time : </label>
+                    </div>
+                    <div class="row pt-2">
+                      <label class="fw-bold"> Rest Time : </label>
+                    </div>
+                    <div class="row pt-2">
+                      <label class="fw-bold"> Total Time : </label>
+                    </div>
+                  </div>
+                  <div class="col-auto">
+                    <div class="row">
+                      {{ targetSetRepetition }}
+                    </div>
+                    <div class="row pt-2">
+                      {{ targetSetRestTime }}
+                    </div>
+                    <div class="row pt-2">
+                      {{ targetSetTime }}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-        <!--        <div class="row pt-1">-->
-        <!--          <div class="col">-->
-        <!--            <label class="fw-bold"> Note : </label>-->
-        <!--            {{ targetSet.note }}-->
-        <!--          </div>-->
-        <!--        </div>-->
       </div>
       <div class="col-auto align-content-center">
-        <div class="row pt-1 text-center">
+        <div class="row">
+          <app-modal-button
+            (onCLickModalButton)="modifyProgExercise($event)"
+            [allWidth]="true"
+            [modalId]="modalId"
+            [modalValue]="targetSet"
+            btnClass="btn-secondary"
+          >
+            Adjust set's objective
+            <i class="fa-solid fa-sliders"></i>
+          </app-modal-button>
+        </div>
+        <div class="row pt-1">
           <app-modal-button
             (onCLickModalButton)="showProgExercisePerformance($event)"
             [allWidth]="true"
@@ -54,11 +83,13 @@
             [modalValue]="targetSet"
             btnClass="btn-secondary"
           >
-            Performance
+            Add new performance
             <i class="fa-solid fa-chart-line"></i>
           </app-modal-button>
         </div>
-        <div class="row pt-1 ">
+      </div>
+      <div class="col-auto align-content-center">
+        <div class="row">
           <app-modal-button
             (onCLickModalButton)="modifyProgExercise($event)"
             [allWidth]="true"
