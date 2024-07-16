@@ -3,5 +3,7 @@ export enum ActionType {
   read = "Read",
   update = "Update",
   delete = "Delete",
+  addEvolution = "AddEvolution",
+  addPerformance = "AddPerformance",
   checkPerformance = "CheckPerformance"
 }
