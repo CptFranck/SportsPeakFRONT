@@ -11,14 +11,11 @@ import {
   MyProgExerciseDetailsDisplayComponent
 } from "../../my-prog-exercises/my-prog-exercise-modal-components/my-prog-exercise-details-display/my-prog-exercise-details-display.component";
 import {
-  MyProgExerciseSettingsComponent
-} from "../../my-prog-exercises/my-prog-exercise-modal-components/my-prog-exercise-settings/my-prog-exercise-settings.component";
-import {
   MyProgExerciseEntityFormComponent
-} from "../../my-prog-exercises/my-prog-exercise-modal-components/my-prog-exercise-forms/my-prog-exercise-entity-form/my-prog-exercise-entity-form.component";
+} from "../../my-prog-exercises/my-prog-exercise-modal-components/my-prog-exercise-entity-form/my-prog-exercise-entity-form.component";
 import {
   MyProgExercisePerformanceComponent
-} from "../my-prog-exercise-modal-components/my-prog-exercise-performance/my-prog-exercise-performance.component";
+} from "../../my-prog-exercises/my-prog-exercise-modal-components/my-prog-exercise-performance/my-prog-exercise-performance.component";
 
 @Component({
   selector: 'app-my-prog-exercise-details-modal',
@@ -29,10 +26,8 @@ import {
     NgIf,
     MyProgExerciseDeleteFormComponent,
     MyProgExerciseDetailsDisplayComponent,
-    MyProgExerciseSettingsComponent,
     MyProgExerciseDeleteFormComponent,
     MyProgExerciseDetailsDisplayComponent,
-    MyProgExerciseSettingsComponent,
     MyProgExerciseEntityFormComponent,
     MyProgExercisePerformanceComponent
   ],

@@ -12,7 +12,6 @@ import {
 } from "../../../explore/prog-exercises/prog-exercise-array/prog-exercises-array.component";
 import {SearchBarComponent} from "../../../../components/search-bar/search-bar.component";
 import {Muscle} from "../../../../interface/dto/muscle";
-import {MyProgExercisesArrayComponent} from "../my-prog-exercises-array/my-prog-exercises-array.component";
 import {MyProgExerciseModalComponent} from "../my-prog-exercise-modal/my-prog-exercise-modal.component";
 import {HomeCardComponent} from "../../../../components/card/home-card/home-card.component";
 import {NgForOf, NgIf} from "@angular/common";
@@ -28,7 +27,6 @@ import {RouterLink} from "@angular/router";
     ProgExerciseModalComponent,
     ProgExercisesArrayComponent,
     SearchBarComponent,
-    MyProgExercisesArrayComponent,
     MyProgExerciseModalComponent,
     HomeCardComponent,
     NgForOf,
