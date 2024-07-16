@@ -12,10 +12,7 @@ import {
 } from "../my-prog-exercise-modal-components/my-prog-exercise-details-display/my-prog-exercise-details-display.component";
 import {
   MyProgExerciseEntityFormComponent
-} from "../my-prog-exercise-modal-components/my-prog-exercise-forms/my-prog-exercise-entity-form/my-prog-exercise-entity-form.component";
-import {
-  MyProgExerciseSettingsComponent
-} from "../my-prog-exercise-modal-components/my-prog-exercise-settings/my-prog-exercise-settings.component";
+} from "../my-prog-exercise-modal-components/my-prog-exercise-entity-form/my-prog-exercise-entity-form.component";
 
 @Component({
   selector: 'app-my-prog-exercise-modal',
@@ -27,7 +24,6 @@ import {
     MyProgExerciseDeleteFormComponent,
     MyProgExerciseDetailsDisplayComponent,
     MyProgExerciseEntityFormComponent,
-    MyProgExerciseSettingsComponent
   ],
   templateUrl: './my-prog-exercise-modal.component.html',
 })
@@ -37,7 +33,7 @@ export class MyProgExerciseModalComponent {
   @Input() progExercise: ProgExercise | undefined;
   @Input() action!: ActionType;
 
-  @ViewChild("modalTemplate") modalTemplate!: TemplateRef<any>;
+  @ViewChild("progExerciseModalTemplate") modalTemplate!: TemplateRef<any>;
 
   protected readonly ActionType = ActionType;
 
