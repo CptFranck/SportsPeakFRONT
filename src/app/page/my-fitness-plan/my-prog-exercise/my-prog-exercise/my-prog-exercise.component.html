@@ -34,7 +34,7 @@
     <div class="row">
       <app-target-set-card (actionProgExercises)="setTargetSet($event)"
                            *ngFor="let targetSet of progExercise?.targetSets"
-                           [modalId]="progExerciseModalId"
+                           [modalId]="targetSetModalId"
                            [targetSet]="targetSet"
       />
     </div>
