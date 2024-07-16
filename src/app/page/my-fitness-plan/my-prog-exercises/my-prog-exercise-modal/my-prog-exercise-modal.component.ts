@@ -13,6 +13,9 @@ import {
 import {
   MyProgExerciseEntityFormComponent
 } from "../my-prog-exercise-modal-components/my-prog-exercise-entity-form/my-prog-exercise-entity-form.component";
+import {
+  MyProgExercisePerformanceComponent
+} from "../my-prog-exercise-modal-components/my-prog-exercise-performance/my-prog-exercise-performance.component";
 
 @Component({
   selector: 'app-my-prog-exercise-modal',
@@ -24,6 +27,7 @@ import {
     MyProgExerciseDeleteFormComponent,
     MyProgExerciseDetailsDisplayComponent,
     MyProgExerciseEntityFormComponent,
+    MyProgExercisePerformanceComponent,
   ],
   templateUrl: './my-prog-exercise-modal.component.html',
 })
