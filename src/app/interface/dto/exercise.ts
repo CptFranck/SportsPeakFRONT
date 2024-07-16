@@ -3,7 +3,7 @@ import {ExerciseType} from "./exercise-type";
 import {ProgExercise} from "./prog-exercise";
 
 export interface Exercise {
-  id: string
+  id: number
   name: string
   goal: string
   description: string
