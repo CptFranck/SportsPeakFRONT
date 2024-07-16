@@ -39,7 +39,7 @@ export class UserSelectorComponent implements OnInit, ControlValueAccessor {
       let options: MultiSelectOption[] = []
       users.forEach((user: User) => {
         options.push({
-          id: user.id,
+          id: user.id.toString(),
           title: user.username,
           value: user,
           description: "First Name : " + user.firstName + " Last Name : " + user.lastName,

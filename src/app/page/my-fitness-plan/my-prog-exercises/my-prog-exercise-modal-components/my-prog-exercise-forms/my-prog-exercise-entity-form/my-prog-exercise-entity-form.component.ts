@@ -54,7 +54,7 @@ export class MyProgExerciseEntityFormComponent implements OnInit, AfterViewInit 
   }
 
   initializeProgExerciseForm() {
-    const creatorId: string | null = this.user ? this.user.id : null;
+    const creatorId: number | null = this.user ? this.user.id : null;
     const progExerciseName: string = this.progExercise ? this.progExercise.name : "";
     const progExerciseNote: string = this.progExercise ? this.progExercise.note : "";
     const progExerciseVisibility: string = this.progExercise ? this.progExercise.visibility : Visibility.PRIVATE;

@@ -63,7 +63,7 @@ export class RoleEntityFormComponent implements OnInit, AfterViewInit {
     const exerciseIdsValidator =
       this.isAdmin ? null : Validators.required;
     const roleName: string = this.role ? this.role.name : "";
-    const roleUserIds: string[] = this.role?.users ?
+    const roleUserIds: number[] = this.role?.users ?
       this.role.users?.map((user: User) => user.id) : [];
     const rolePrivilegeIds: number[] = this.role?.privileges ?
       this.role.privileges?.map((privilege: Privilege) => privilege.id) : [];

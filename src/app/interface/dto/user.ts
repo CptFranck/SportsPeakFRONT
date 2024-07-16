@@ -2,7 +2,7 @@ import {Role} from "./role";
 import {ProgExercise} from "./prog-exercise";
 
 export interface User {
-  id: string,
+  id: number,
   email: string,
   firstName: string,
   lastName: string,
