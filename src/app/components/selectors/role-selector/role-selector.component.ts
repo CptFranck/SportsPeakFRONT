@@ -40,7 +40,7 @@ export class RoleSelectorComponent implements OnInit, ControlValueAccessor {
       let options: MultiSelectOption[] = []
       roles.forEach((role: Role) => {
         options.push({
-          id: role.id,
+          id: role.id.toString(),
           title: role.name,
           value: role,
           description: "Privilege(s) included : " + role.privileges.map((privilege: Privilege) => privilege.name).join(", ")

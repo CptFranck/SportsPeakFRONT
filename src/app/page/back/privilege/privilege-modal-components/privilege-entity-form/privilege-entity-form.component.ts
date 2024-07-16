@@ -53,7 +53,7 @@ export class PrivilegeEntityFormComponent implements OnInit, AfterViewInit {
     const exerciseIdsValidator =
       this.isAdmin ? null : Validators.required;
     const privilegeName: string = this.privilege ? this.privilege.name : "";
-    const privilegeRoleIds: string[] = this.privilege?.roles ?
+    const privilegeRoleIds: number[] = this.privilege?.roles ?
       this.privilege.roles?.map((role: Role) => role.id) : [];
 
     this.privilegeForm = new FormGroup({

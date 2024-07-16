@@ -51,7 +51,7 @@ export class UserRolesFormComponent implements OnInit, AfterViewInit {
   initializeUserRoleForm() {
     const roleIdsValidator =
       this.isAdmin ? null : Validators.required;
-    const userRoleIds: string[] = this.user?.lastName ?
+    const userRoleIds: number[] = this.user?.lastName ?
       this.user.roles?.map((role: Role) => role.id) : [];
 
     this.userForm = new FormGroup({
