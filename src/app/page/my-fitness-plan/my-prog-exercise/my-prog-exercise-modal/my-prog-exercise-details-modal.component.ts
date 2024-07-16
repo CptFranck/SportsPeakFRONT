@@ -40,7 +40,7 @@ import {
 })
 export class MyProgExerciseDetailsModalComponent {
   @Input() modalTitle!: string;
-  @Input() muscleModalId!: string;
+  @Input() progExerciseModalId!: string;
   @Input() progExercise: ProgExercise | undefined;
   @Input() action!: ActionType;
 
