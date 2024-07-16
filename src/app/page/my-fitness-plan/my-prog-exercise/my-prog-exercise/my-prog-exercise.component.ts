@@ -18,6 +18,8 @@ import {
 } from "../../my-prog-exercises/my-prog-exercise-modal/my-prog-exercise-modal.component";
 import {MyProgExerciseDetailsModalComponent} from "../my-prog-exercise-modal/my-prog-exercise-details-modal.component";
 import {TargetSetCardComponent} from "../../../../components/card/target-set-card/target-set-card.component";
+import {TargetSetModalComponent} from "../target-set-modal/target-set-modal.component";
+import {TargetSet} from "../../../../interface/dto/target-set";
 
 @Component({
   selector: 'app-my-prog-exercise',
@@ -31,17 +33,22 @@ import {TargetSetCardComponent} from "../../../../components/card/target-set-car
     ProgExerciseModalComponent,
     MyProgExerciseModalComponent,
     MyProgExerciseDetailsModalComponent,
-    TargetSetCardComponent
+    TargetSetCardComponent,
+    TargetSetModalComponent
   ],
   templateUrl: './my-prog-exercise.component.html',
 })
 export class MyProgExerciseComponent implements OnInit {
   id: string | undefined;
   loading: boolean = true;
+  targetSet: TargetSet | undefined;
   progExercise: ProgExercise | undefined;
-  action: ActionType = ActionType.update;
-  modalTitle: string = "";
-  progExerciseDetailsModalId: string = "progExerciseDetailsModal";
+  targetSetAction: ActionType = ActionType.update;
+  progExerciseAction: ActionType = ActionType.update;
+  targetSetModalId: string = "targetSetModalId";
+  progExerciseModalId: string = "progExerciseModal";
+  targetSetModalTitle: string = "";
+  progExerciseModalTitle: string = "";
 
   private activatedRoute: ActivatedRoute = inject(ActivatedRoute);
   private proExerciseService: ProgExerciseService = inject(ProgExerciseService);
@@ -60,7 +67,13 @@ export class MyProgExerciseComponent implements OnInit {
 
   setProgExercise(formIndicator: FormIndicator) {
     this.progExercise = formIndicator.object;
-    this.action = formIndicator.actionType;
-    this.modalTitle = formIndicator.object.name;
+    this.progExerciseAction = formIndicator.actionType;
+    this.progExerciseModalTitle = formIndicator.object.name;
+  }
+
+  setTargetSet(formIndicator: FormIndicator) {
+    this.targetSet = formIndicator.object;
+    this.targetSetAction = formIndicator.actionType;
+    this.targetSetModalTitle = formIndicator.object.name;
   }
 }

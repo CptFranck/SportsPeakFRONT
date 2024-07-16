@@ -6,9 +6,9 @@
         <h2> {{ progExercise?.name }} </h2>
       </div>
       <div class="col-2">
-        <app-my-prog-exercise-details-modal [action]="action"
-                                            [modalTitle]="modalTitle"
-                                            [progExerciseModalId]="progExerciseDetailsModalId"
+        <app-my-prog-exercise-details-modal [action]="progExerciseAction"
+                                            [modalTitle]="progExerciseModalTitle"
+                                            [progExerciseModalId]="progExerciseModalId"
                                             [progExercise]="progExercise"
         />
       </div>
@@ -16,22 +16,25 @@
     <div class="row">
       <app-prog-exercise-card-details (actionProgExercises)="setProgExercise($event)"
                                       *ngIf="progExercise"
-                                      [modalId]="progExerciseDetailsModalId"
+                                      [modalId]="progExerciseModalId"
                                       [progExercise]="progExercise"
       />
     </div>
-    <div class="row">
-      <div class="col pt-4">
+    <div class="row pt-4 pb-1">
+      <div class="col">
         <h4> Exercise Set(s) </h4>
       </div>
       <div class="col-2">
-
+        <app-target-set-modal [action]="targetSetAction"
+                              [modalTitle]="targetSetModalTitle"
+                              [targetSetModalId]="targetSetModalId"
+                              [targetSet]="targetSet"/>
       </div>
     </div>
     <div class="row">
-      <app-target-set-card (actionProgExercises)="setProgExercise($event)"
+      <app-target-set-card (actionProgExercises)="setTargetSet($event)"
                            *ngFor="let targetSet of progExercise?.targetSets"
-                           [modalId]="progExerciseDetailsModalId"
+                           [modalId]="progExerciseModalId"
                            [targetSet]="targetSet"
       />
     </div>
