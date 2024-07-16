@@ -32,6 +32,10 @@ export class ProgExerciseCardDetailsComponent implements OnInit {
   }
 
   showProgExercisePerformance(progExercise: ProgExercise): void {
+    this.actionProgExercises.emit({
+      actionType: ActionType.read,
+      object: progExercise
+    });
   }
 
   modifyProgExercise(progExercise: ProgExercise) {
