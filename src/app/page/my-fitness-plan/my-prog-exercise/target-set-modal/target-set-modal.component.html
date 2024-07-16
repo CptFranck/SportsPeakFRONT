@@ -1,0 +1,24 @@
+<app-modal-button (onCLickModalButton)="onClick($event)"
+                  [modalId]="targetSetModalId"
+>
+  Add new
+  <i class="fa-regular fa-square-plus"></i>
+</app-modal-button>
+<app-modal [actionType]="action"
+           [contentTemplate]="targetSetModalTemplate"
+           [modalId]="targetSetModalId"
+           [title]="modalTitle"
+>
+</app-modal>
+<ng-template #targetSetModalTemplate let-btnClose="btnClose" let-submitEvents="submitEvents">
+  <!--  <app-my-prog-exercise-entity-form *ngIf="action === ActionType.create || action === ActionType.update"-->
+  <!--                                    [btnCloseRef]="btnClose"-->
+  <!--                                    [progExerciseInput]="targetSet"-->
+  <!--                                    [submitEvents]="submitEvents"-->
+  <!--  />-->
+  <!--  <app-my-prog-exercise-performance *ngIf="action === ActionType.read"/>-->
+  <!--  <app-my-prog-exercise-delete-form *ngIf="action === ActionType.delete"-->
+  <!--                                    [btnCloseRef]="btnClose"-->
+  <!--                                    [progExercise]="targetSet"-->
+  <!--                                    [submitEvents]="submitEvents"/>-->
+</ng-template>
