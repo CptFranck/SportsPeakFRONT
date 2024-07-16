@@ -6,13 +6,15 @@ export function getTargetSetsInformation(progExercise: ProgExercise) {
   let lastTargetSet: TargetSet[] = getLastTargetSets(progExercise);
   lastTargetSet = sortLastTargetSetsByWeight(lastTargetSet)
 
-  return lastTargetSet.map((targetSet: TargetSet) => {
-    let set: string = targetSet.setNumber + " set of " + targetSet.repetitionNumber + " reps";
-    if (targetSet.weight > 0) {
-      set += " with " + targetSet.weight + " " + targetSet.weightUnit;
-    }
-    return set;
-  });
+  return lastTargetSet.map((targetSet: TargetSet) => getTargetSetInformation(targetSet));
+}
+
+export function getTargetSetInformation(targetSet: TargetSet) {
+  let set: string = targetSet.setNumber + " set of " + targetSet.repetitionNumber + " reps";
+  if (targetSet.weight > 0) {
+    set += " with " + targetSet.weight + " " + targetSet.weightUnit;
+  }
+  return set;
 }
 
 export function getProgExerciseTime(progExercise: ProgExercise) {
