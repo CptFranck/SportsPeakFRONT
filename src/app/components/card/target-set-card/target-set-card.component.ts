@@ -1,6 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {ModalButtonComponent} from "../../modal/modal-button/modal-button.component";
-import {ProgExercise} from "../../../interface/dto/prog-exercise";
 import {FormIndicator} from "../../../interface/utils/form-indicator";
 import {ActionType} from "../../../enum/action-type";
 import {TargetSet} from "../../../interface/dto/target-set";
@@ -39,20 +38,38 @@ export class TargetSetCardComponent implements OnInit {
     )
   }
 
-  showProgExercisePerformance(progExercise: ProgExercise): void {
-  }
-
-  modifyProgExercise(progExercise: ProgExercise) {
+  checkTargetSetPerformance(targetSet: TargetSet): void {
     this.actionProgExercises.emit({
-      actionType: ActionType.update,
-      object: progExercise
+      actionType: ActionType.checkPerformance,
+      object: targetSet
     });
   }
 
-  delProgExercise(progExercise: ProgExercise) {
+  adjustTargetSet(targetSet: TargetSet): void {
+    this.actionProgExercises.emit({
+      actionType: ActionType.addEvolution,
+      object: targetSet
+    });
+  }
+
+  addNewPerformance(targetSet: TargetSet) {
+    this.actionProgExercises.emit({
+      actionType: ActionType.addPerformance,
+      object: targetSet
+    });
+  }
+
+  modifyTargetSet(targetSet: TargetSet) {
+    this.actionProgExercises.emit({
+      actionType: ActionType.update,
+      object: targetSet
+    });
+  }
+
+  delTargetSet(targetSet: TargetSet) {
     this.actionProgExercises.emit({
       actionType: ActionType.delete,
-      object: progExercise
+      object: targetSet
     });
   }
 }

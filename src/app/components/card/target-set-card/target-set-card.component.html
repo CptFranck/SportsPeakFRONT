@@ -20,7 +20,7 @@
             </div>
             <div class="row pt-4">
               <app-modal-button
-                (onCLickModalButton)="modifyProgExercise($event)"
+                (onCLickModalButton)="checkTargetSetPerformance($event)"
                 [modalId]="modalId"
                 [modalValue]="targetSet"
                 btnClass="btn-secondary"
@@ -65,7 +65,7 @@
       <div class="col-auto align-content-center">
         <div class="row">
           <app-modal-button
-            (onCLickModalButton)="modifyProgExercise($event)"
+            (onCLickModalButton)="adjustTargetSet($event)"
             [allWidth]="true"
             [modalId]="modalId"
             [modalValue]="targetSet"
@@ -77,7 +77,7 @@
         </div>
         <div class="row pt-1">
           <app-modal-button
-            (onCLickModalButton)="showProgExercisePerformance($event)"
+            (onCLickModalButton)="addNewPerformance($event)"
             [allWidth]="true"
             [modalId]="modalId"
             [modalValue]="targetSet"
@@ -91,7 +91,7 @@
       <div class="col-auto align-content-center">
         <div class="row">
           <app-modal-button
-            (onCLickModalButton)="modifyProgExercise($event)"
+            (onCLickModalButton)="modifyTargetSet($event)"
             [allWidth]="true"
             [modalId]="modalId"
             [modalValue]="targetSet"
@@ -103,7 +103,7 @@
         </div>
         <div class="row pt-1 text-center">
           <app-modal-button
-            (onCLickModalButton)="delProgExercise($event)"
+            (onCLickModalButton)="delTargetSet($event)"
             [allWidth]="true"
             [modalId]="modalId"
             [modalValue]="targetSet"
