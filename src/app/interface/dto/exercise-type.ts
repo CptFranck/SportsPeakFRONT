@@ -1,7 +1,7 @@
 import {Exercise} from "./exercise";
 
 export interface ExerciseType {
-  id: string
+  id: number
   name: string
   goal: string
   exercises: Exercise[]

@@ -33,8 +33,9 @@ export class ExerciseTypeArrayComponent implements OnInit {
     this.userLoggedService.currentUser.subscribe(() => this.isAdmin = this.userLoggedService.isAdmin());
   }
 
-  expendExerciseTypeDetails(id: string): void {
-    this.showDetails[id] = !this.showDetails[id];
+  expendExerciseTypeDetails(id: number): void {
+    let idKey: string = id.toString();
+    this.showDetails[idKey] = !this.showDetails[idKey];
   }
 
   showExerciseTypeDetails(exerciseType: ExerciseType): void {

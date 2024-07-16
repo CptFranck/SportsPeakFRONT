@@ -39,7 +39,7 @@ export class ExerciseTypeSelectorComponent implements OnInit, ControlValueAccess
       let options: MultiSelectOption[] = []
       exerciseTypes.forEach((exerciseType: ExerciseType) => {
         options.push({
-          id: exerciseType.id,
+          id: exerciseType.id.toString(),
           title: exerciseType.name,
           value: exerciseType,
           description: exerciseType.goal
