@@ -13,15 +13,31 @@
         />
       </div>
     </div>
-    <app-prog-exercise-card-details (actionProgExercises)="setProgExercise($event)"
-                                    *ngIf="progExercise"
-                                    [modalId]="progExerciseDetailsModalId"
-                                    [progExercise]="progExercise"
-    />
-    <app-target-set-card (actionProgExercises)="setProgExercise($event)"
-                         *ngFor="let targetSet of progExercise?.targetSets"
-                         [modalId]="progExerciseDetailsModalId"
-                         [targetSet]="targetSet"
-    />
+    <div class="row">
+      <app-prog-exercise-card-details (actionProgExercises)="setProgExercise($event)"
+                                      *ngIf="progExercise"
+                                      [modalId]="progExerciseDetailsModalId"
+                                      [progExercise]="progExercise"
+      />
+    </div>
+    <div class="row ">
+      <div class="col pt-4">
+        <h4> Exercise Set(s) </h4>
+      </div>
+      <div class="col-2">
+        <app-my-prog-exercise-details-modal [action]="action"
+                                            [modalTitle]="modalTitle"
+                                            [muscleModalId]="progExerciseDetailsModalId"
+                                            [progExercise]="progExercise"
+        />
+      </div>
+    </div>
+    <div class="row">
+      <app-target-set-card (actionProgExercises)="setProgExercise($event)"
+                           *ngFor="let targetSet of progExercise?.targetSets"
+                           [modalId]="progExerciseDetailsModalId"
+                           [targetSet]="targetSet"
+      />
+    </div>
   </div>
 </div>
