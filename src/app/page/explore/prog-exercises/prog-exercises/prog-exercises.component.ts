@@ -68,7 +68,7 @@ export class ProgExercisesComponent implements OnInit {
 
       progExercise.exercise.muscles.forEach((muscle: Muscle) =>
         includeMuscleExerciseName = muscle.name.toLowerCase().includes(localInput))
-      
+
       return progExercise.name.toLowerCase().includes(localInput) ||
         progExercise.note.toLowerCase().includes(localInput) ||
         progExercise.creator.username.toLowerCase().includes(localInput) ||
