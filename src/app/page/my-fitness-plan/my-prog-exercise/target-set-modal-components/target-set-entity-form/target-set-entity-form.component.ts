@@ -13,6 +13,7 @@ import {Duration} from "../../../../../interface/dto/duration";
 import {TargetSetService} from "../../../../../services/target-set/target-set.service";
 import {ActionType} from "../../../../../enum/action-type";
 import {ProgExercise} from "../../../../../interface/dto/prog-exercise";
+import {WeightSelectComponent} from "../../../../../components/selects/weight-select/weight-select.component";
 
 @Component({
   selector: 'app-target-set-entity-form',
@@ -23,7 +24,8 @@ import {ProgExercise} from "../../../../../interface/dto/prog-exercise";
     InputControlComponent,
     NgIf,
     ReactiveFormsModule,
-    VisibilitySelectComponent
+    VisibilitySelectComponent,
+    WeightSelectComponent
   ],
   templateUrl: './target-set-entity-form.component.html',
 })
@@ -57,10 +59,10 @@ export class TargetSetEntityFormComponent implements OnInit, AfterViewInit {
   initializeTargetSetForm() {
     const defaultDuration: Duration =
       {seconds: 0, minutes: 0, hours: 0};
-    const targetSetIndex: number = this.targetSet ? this.targetSet.index : 0;
-    const targetSetSetNumber: number = this.targetSet ? this.targetSet.setNumber : 0;
-    const targetSetRepetitionNumber: number = this.targetSet ? this.targetSet.repetitionNumber : 0;
-    const targetSetWeight: number = this.targetSet ? this.targetSet.repetitionNumber : 0;
+    const targetSetIndex: number = this.targetSet ? this.targetSet.index : 1;
+    const targetSetSetNumber: number = this.targetSet ? this.targetSet.setNumber : 1;
+    const targetSetRepetitionNumber: number = this.targetSet ? this.targetSet.repetitionNumber : 1;
+    const targetSetWeight: number = this.targetSet ? this.targetSet.repetitionNumber : 1;
     const targetSetWeightUnit: string = this.targetSet ? this.targetSet.weightUnit : WeightUnit.KILOGRAMME;
     const targetSetPhysicalExertionUnitTime: Duration = this.targetSet ? this.targetSet.physicalExertionUnitTime : defaultDuration;
     const targetSetRestTime: Duration = this.targetSet ? this.targetSet.restTime : defaultDuration;
@@ -75,22 +77,27 @@ export class TargetSetEntityFormComponent implements OnInit, AfterViewInit {
         targetSetIndex,
         [Validators.required,
           Validators.min(1),
-          Validators.max(50)]),
+          Validators.max(50),
+          Validators.pattern("^[0-9]*$")]),
       setNumber: new FormControl(
         targetSetSetNumber,
         [Validators.required,
-          Validators.min(1),
-          Validators.max(1000)]),
+          Validators.min(0),
+          Validators.max(1000),
+          Validators.pattern("^[0-9]*$")]
+      ),
       repetitionNumber: new FormControl(
         targetSetRepetitionNumber,
         [Validators.required,
           Validators.min(1),
-          Validators.max(1000)]),
+          Validators.max(1000),
+          Validators.pattern("^[0-9]*$")]),
       weight: new FormControl(
         targetSetWeight,
         [Validators.required,
           Validators.min(0),
-          Validators.max(1000)]),
+          Validators.max(1000),
+          Validators.pattern("^[0-9]+(.[0-9]{1,2})?$")]),
       weightUnit: new FormControl(
         targetSetWeightUnit,
         [Validators.required]
@@ -110,7 +117,9 @@ export class TargetSetEntityFormComponent implements OnInit, AfterViewInit {
 
     if (this.targetSet) {
       this.targetSetForm.addControl("id", new FormControl(this.targetSet.id));
+      this.targetSetForm.removeControl("creationDate");
       this.targetSetForm.removeControl("progExerciseId");
+      this.targetSetForm.removeControl("targetSetUpdateId");
     }
   }
 
