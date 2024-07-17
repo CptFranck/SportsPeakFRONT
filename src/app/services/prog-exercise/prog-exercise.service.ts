@@ -8,6 +8,7 @@ import {ProgExercise} from "../../interface/dto/prog-exercise";
 import {
   ADD_PROG_EXERCISE,
   DEL_PROG_EXERCISE,
+  GET_PROG_EXERCISE_BY_ID,
   GET_PROG_EXERCISES,
   GET_USER_PROG_EXERCISES,
   MOD_PROG_EXERCISE,
@@ -21,6 +22,7 @@ import {UserLoggedService} from "../user-logged/user-logged.service";
 })
 export class ProgExerciseService {
 
+  progExercise: BehaviorSubject<ProgExercise | undefined> = new BehaviorSubject<ProgExercise | undefined>(undefined);
   progExercises: BehaviorSubject<ProgExercise[]> = new BehaviorSubject<ProgExercise[]>([]);
   userProgExercises: BehaviorSubject<ProgExercise[]> = new BehaviorSubject<ProgExercise[]>([]);
   isLoading: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
@@ -45,6 +47,21 @@ export class ProgExerciseService {
         this.alertService.graphQLErrorAlertHandler(result.errors);
       }
       this.progExercises.next(result.data.getProgExercises);
+      this.isLoading.next(result.loading);
+    });
+  }
+
+  getProgExerciseById(progExerciseId: number) {
+    return this.apollo.watchQuery({
+      query: GET_PROG_EXERCISE_BY_ID,
+      variables: {
+        id: progExerciseId
+      }
+    }).valueChanges.subscribe((result: ApolloQueryResult<any>): void => {
+      if (result.errors) {
+        this.alertService.graphQLErrorAlertHandler(result.errors);
+      }
+      this.progExercise.next(result.data.getProgExerciseById);
       this.isLoading.next(result.loading);
     });
   }
