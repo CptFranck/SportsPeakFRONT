@@ -39,7 +39,6 @@ import {TargetSet} from "../../../../interface/dto/target-set";
   templateUrl: './my-prog-exercise.component.html',
 })
 export class MyProgExerciseComponent implements OnInit {
-  id: string | undefined;
   loading: boolean = true;
   targetSet: TargetSet | undefined;
   progExercise: ProgExercise | undefined;
@@ -55,12 +54,12 @@ export class MyProgExerciseComponent implements OnInit {
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe((params: Params) => {
-      this.id = params['id'];
+      this.proExerciseService.getProgExerciseById(params['id']);
     });
-    this.proExerciseService.userProgExercises.subscribe((progExercises: ProgExercise[]) => {
-      this.progExercise = progExercises.find((progExercise: ProgExercise) => {
-        return progExercise.id.toString() === this.id
-      });
+    this.proExerciseService.progExercise.subscribe((progExercise: ProgExercise | undefined) => {
+      if (progExercise) {
+        this.progExercise = progExercise;
+      }
     });
     this.proExerciseService.isLoading.subscribe((isLoading: boolean) => this.loading = isLoading);
   }
