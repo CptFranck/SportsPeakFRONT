@@ -4,6 +4,7 @@ import {PerformanceLog} from "./performance-log";
 
 export interface TargetSet {
   id: number
+  index: number
   setNumber: number
   repetitionNumber: number
   weight: number
