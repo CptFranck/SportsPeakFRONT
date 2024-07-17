@@ -20,7 +20,7 @@ export class TargetSetService {
     return this.apollo.mutate({
       mutation: ADD_TARGET_SET,
       variables: {
-        inputNewProgExercise: targetSetForm.value,
+        inputNewTargetSet: targetSetForm.value,
       },
     }).subscribe(
       (result: MutationResult): void => {
@@ -37,7 +37,7 @@ export class TargetSetService {
     return this.apollo.mutate({
       mutation: MOD_TARGET_SET,
       variables: {
-        inputProgExercise: targetSetForm.value,
+        inputTargetSet: targetSetForm.value,
       },
     }).subscribe((result: MutationResult): void => {
       if (result.errors) {
@@ -53,7 +53,7 @@ export class TargetSetService {
     return this.apollo.mutate({
       mutation: DEL_TARGET_SET,
       variables: {
-        muscleId: targetSet.id,
+        targetSetId: targetSet.id,
       },
     }).subscribe((result: MutationResult): void => {
       if (result.errors) {
