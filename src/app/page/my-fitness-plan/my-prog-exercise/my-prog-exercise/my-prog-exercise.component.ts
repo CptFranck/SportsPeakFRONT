@@ -73,6 +73,6 @@ export class MyProgExerciseComponent implements OnInit {
   setTargetSet(formIndicator: FormIndicator) {
     this.targetSet = formIndicator.object;
     this.targetSetAction = formIndicator.actionType;
-    this.targetSetModalTitle = "Set id " + formIndicator.object.id;
+    this.targetSetModalTitle = "Set N° " + formIndicator.object.id;
   }
 }
