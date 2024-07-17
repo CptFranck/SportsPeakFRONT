@@ -14,9 +14,10 @@ export class InputControlComponent implements OnInit {
   @Input() formGroup!: FormGroup;
   @Input() formGroupFieldName!: string;
   @Input() displayedFieldName: string | undefined;
-  @Input() rules: string | undefined;
+  @Input() rules: string = "";
   @Input() errorMessage: string = "";
   @Input() submitInvalid!: boolean;
+  @Input() ifInvalid: boolean = false;
 
   ngOnInit() {
     if (this.rules !== undefined)
@@ -24,7 +25,7 @@ export class InputControlComponent implements OnInit {
     else
       this.rules = "";
 
-    let fieldName: string = "";
+    let fieldName: string;
     if (this.displayedFieldName !== undefined)
       fieldName = this.displayedFieldName;
     else

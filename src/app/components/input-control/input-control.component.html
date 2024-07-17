@@ -4,7 +4,7 @@
   Looks good !
 </div>
 <div *ngIf="formGroup.controls[formGroupFieldName].invalid &&
-            (formGroup.controls[formGroupFieldName].touched || submitInvalid)"
+            (formGroup.controls[formGroupFieldName].touched || submitInvalid || ifInvalid)"
      class="text-danger"
 >
   {{ errorMessage }}
