@@ -3,12 +3,7 @@ import {BehaviorSubject} from "rxjs";
 import {Apollo, MutationResult} from "apollo-angular";
 import {AlertService} from "../alert/alert.service";
 import {FormGroup} from "@angular/forms";
-import {
-  ADD_TARGET_SET,
-  ADD_TARGET_SET_EVOLUTION,
-  DEL_TARGET_SET,
-  MOD_TARGET_SET
-} from "../../graphql/operations/target-set.operations";
+import {ADD_TARGET_SET, DEL_TARGET_SET, MOD_TARGET_SET} from "../../graphql/operations/target-set.operations";
 import {TargetSet} from "../../interface/dto/target-set";
 
 @Injectable({
@@ -32,26 +27,10 @@ export class TargetSetService {
         if (result.errors) {
           this.alertService.graphQLErrorAlertHandler(result.errors);
         } else {
-          let message: string = "Set " + result.data.addTargetSet.id + " been successfully created.";
+          let message: string = "Set " + result.data.addTargetSet.index + " been successfully created.";
           this.alertService.addSuccessAlert(message);
         }
       });
-  }
-
-  addTargetSetEvolution(progExercisesForm: FormGroup) {
-    return this.apollo.mutate({
-      mutation: ADD_TARGET_SET_EVOLUTION,
-      variables: {
-        inputProgExerciseTrustLabel: progExercisesForm.value,
-      },
-    }).subscribe((result: MutationResult): void => {
-      if (result.errors) {
-        this.alertService.graphQLErrorAlertHandler(result.errors);
-      } else {
-        let message: string = "Set " + result.data.addTargetSetEvolution.id + " been successfully updated.";
-        this.alertService.addSuccessAlert(message);
-      }
-    });
   }
 
   modifyTargetSet(targetSetForm: FormGroup) {
@@ -64,7 +43,7 @@ export class TargetSetService {
       if (result.errors) {
         this.alertService.graphQLErrorAlertHandler(result.errors);
       } else {
-        let message: string = "Set " + result.data.modifyTargetSet.id + " been successfully updated.";
+        let message: string = "Set " + result.data.modifyTargetSet.index + " been successfully updated.";
         this.alertService.addSuccessAlert(message);
       }
     });
@@ -80,7 +59,7 @@ export class TargetSetService {
       if (result.errors) {
         this.alertService.graphQLErrorAlertHandler(result.errors);
       } else {
-        let message: string = "Set " + targetSet.id + " has been successfully deleted.";
+        let message: string = "Set " + targetSet.index + " has been successfully deleted.";
         this.alertService.addSuccessAlert(message);
       }
     });
