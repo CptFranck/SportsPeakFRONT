@@ -47,6 +47,61 @@ export const GET_PROG_EXERCISES = gql`
   }
 `;
 
+export const GET_PROG_EXERCISE_BY_ID = gql`
+  query ($id : Int!){
+    getProgExerciseById(id: $id) {
+      id
+      name
+      note
+      exercise {
+        id
+        name
+        description
+        goal
+      }
+      targetSets {
+        id
+        index
+        setNumber
+        repetitionNumber
+        weight
+        weightUnit
+        physicalExertionUnitTime{
+          hours
+          minutes
+          seconds
+        }
+        restTime{
+          hours
+          minutes
+          seconds
+        }
+        creationDate
+        targetSetUpdate {
+          id
+        }
+        performanceLogs {
+          id
+          setIndex
+          repetitionNumber
+          weight
+          weightUnit
+          logDate
+        }
+      }
+      creator {
+        id
+        email
+        firstName
+        lastName
+        username
+      }
+      visibility
+      trustLabel
+    }
+  }
+`;
+
 export const GET_USER_PROG_EXERCISES = gql`
   query ($userId : Int!){
     getUserProgExercises(userId: $userId) {
