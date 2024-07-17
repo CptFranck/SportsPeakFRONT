@@ -5,6 +5,7 @@
         <div class="row">
           <div class="col">
             <div class="row">
+              <h5 class="fw-bold"> {{ "Set N°" + targetSet.index }}</h5>
               <div class="col-auto">
                 <label class="fw-bold"> Set : </label>
                 {{ targetSet.setNumber }}
@@ -18,7 +19,7 @@
                 {{ targetSet.weight + " " + targetSet.weightUnit }}
               </div>
             </div>
-            <div class="row pt-4">
+            <div class="row pt-3">
               <app-modal-button
                 (onCLickModalButton)="checkTargetSetPerformance($event)"
                 [modalId]="modalId"
