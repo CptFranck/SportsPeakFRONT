@@ -16,6 +16,10 @@ import {ModalButtonComponent} from "../../../../components/modal/modal-button/mo
 import {
   TargetSetDeleteFormComponent
 } from "../target-set-modal-components/target-set-delete-form/target-set-delete-form.component";
+import {
+  TargetSetEntityFormComponent
+} from "../target-set-modal-components/target-set-entity-form/target-set-entity-form.component";
+import {ProgExercise} from "../../../../interface/dto/prog-exercise";
 
 @Component({
   selector: 'app-target-set-modal',
@@ -27,7 +31,8 @@ import {
     MyProgExercisePerformanceComponent,
     NgIf,
     ModalButtonComponent,
-    TargetSetDeleteFormComponent
+    TargetSetDeleteFormComponent,
+    TargetSetEntityFormComponent
   ],
   templateUrl: './target-set-modal.component.html',
 })
@@ -35,6 +40,7 @@ export class TargetSetModalComponent {
   @Input() modalTitle!: string;
   @Input() targetSetModalId!: string;
   @Input() targetSet: TargetSet | undefined;
+  @Input() progExercise: ProgExercise | undefined;
   @Input() action!: ActionType;
 
   @ViewChild("targetSetModalTemplate") modalTemplate!: TemplateRef<any>;
