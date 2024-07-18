@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {FormGroup, ReactiveFormsModule} from "@angular/forms";
 import {InputControlComponent} from "../../input-control/input-control.component";
 import {NgIf} from "@angular/common";
@@ -13,13 +13,14 @@ import {NgIf} from "@angular/common";
   ],
   templateUrl: './duration-input.component.html',
 })
-export class DurationInputComponent implements OnInit {
+export class DurationInputComponent {
   durationForm!: FormGroup;
+  rootFormGroup!: FormGroup;
 
   @Input() fieldName!: string;
-  @Input() rootFormGroup!: FormGroup;
 
-  ngOnInit(): void {
+  @Input() set rootFormGroupInput(value: FormGroup) {
+    this.rootFormGroup = value;
     this.durationForm = this.rootFormGroup.get(this.fieldName) as FormGroup;
   }
 }
