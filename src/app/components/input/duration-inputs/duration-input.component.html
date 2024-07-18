@@ -1,0 +1,37 @@
+<form *ngIf="durationForm" [formGroup]="durationForm" class="container-fluid">
+  <div class="col">
+    <div class="row">
+      <div class="input-group mb-2">
+        <input (input)="setHours($event)" [value]="duration.hours" class="form-control" type="text">
+        <div class="input-group-text">H</div>
+        <input (input)="setMinutes($event)" [value]="duration.minutes" class="form-control" type="text">
+        <div class="input-group-text">Min</div>
+        <input (input)="setSeconds($event)" [value]="duration.seconds" class="form-control" type="text">
+        <div class="input-group-text">s</div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <app-input-control
+          [formGroup]="durationForm"
+          [submitInvalid]="submitInvalidForm"
+          formGroupFieldName="physicalExertionUnitTime"
+        />
+      </div>
+      <div class="col">
+        <app-input-control
+          [formGroup]="durationForm"
+          [submitInvalid]="submitInvalidForm"
+          formGroupFieldName="physicalExertionUnitTime"
+        />
+      </div>
+      <div class="col">
+        <app-input-control
+          [formGroup]="durationForm"
+          [submitInvalid]="submitInvalidForm"
+          formGroupFieldName="physicalExertionUnitTime"
+        />
+      </div>
+    </div>
+  </div>
+</form>
