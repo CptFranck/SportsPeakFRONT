@@ -48,7 +48,7 @@
     <input class="form-control" formControlName="password" type="password">
     <app-input-control
       [formGroup]="registerFormGroup"
-      [ifInvalid]=true
+      [ifInvalid]="true"
       [submitInvalid]="submitInvalidForm"
       formGroupFieldName="password"
       rules="min : 10 ; max : 50 ; at least must contain 1 or more lowercase, uppercase and numeric characters"
