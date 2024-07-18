@@ -2,11 +2,13 @@
   <div class="col">
     <div class="row">
       <div class="input-group mb-2">
-        <input (input)="setHours($event)" [value]="duration.hours" class="form-control" type="text">
+        <input class="form-control" formControlName="hours" type="text">
+
         <div class="input-group-text">H</div>
-        <input (input)="setMinutes($event)" [value]="duration.minutes" class="form-control" type="text">
+        <input class="form-control" formControlName="minutes" type="text">
+
         <div class="input-group-text">Min</div>
-        <input (input)="setSeconds($event)" [value]="duration.seconds" class="form-control" type="text">
+        <input class="form-control" formControlName="seconds" type="text">
         <div class="input-group-text">s</div>
       </div>
     </div>
@@ -14,22 +16,31 @@
       <div class="col">
         <app-input-control
           [formGroup]="durationForm"
-          [submitInvalid]="submitInvalidForm"
-          formGroupFieldName="physicalExertionUnitTime"
+          [ifInvalid]="true"
+          [onlyErrorMessage]="true"
+          errorMessage="Please write a correct number of hours"
+          formGroupFieldName="hours"
+          rules="only integer number ; min : 0 ; max : 23"
         />
       </div>
       <div class="col">
         <app-input-control
           [formGroup]="durationForm"
-          [submitInvalid]="submitInvalidForm"
-          formGroupFieldName="physicalExertionUnitTime"
+          [ifInvalid]="true"
+          [onlyErrorMessage]="true"
+          errorMessage="Please write a correct number of minutes"
+          formGroupFieldName="minutes"
+          rules="only integer number ; min : 0 ; max : 59"
         />
       </div>
       <div class="col">
         <app-input-control
           [formGroup]="durationForm"
-          [submitInvalid]="submitInvalidForm"
-          formGroupFieldName="physicalExertionUnitTime"
+          [ifInvalid]="true"
+          [onlyErrorMessage]="true"
+          errorMessage="Please write a correct number of seconds"
+          formGroupFieldName="seconds"
+          rules="only integer number ; min : 0 ; max : 59"
         />
       </div>
     </div>
