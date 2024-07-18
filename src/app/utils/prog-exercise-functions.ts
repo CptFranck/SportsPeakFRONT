@@ -40,11 +40,11 @@ export function getTargetSetTime(targetSet: TargetSet): string {
 
 export function getTimeAmount(targetSet: TargetSet): Dictionary<number> {
   const timeAmount: Dictionary<number> = {}
-  const totalSets: number = targetSet.setNumber;
+  const totalRest: number = targetSet.setNumber - 1;
   const totalReps: number = targetSet.repetitionNumber * targetSet.setNumber;
-  timeAmount["seconds"] = targetSet.physicalExertionUnitTime.seconds * totalReps + targetSet.restTime.seconds * totalSets;
-  timeAmount["minutes"] = targetSet.physicalExertionUnitTime.minutes * totalReps + targetSet.restTime.minutes * totalSets;
-  timeAmount["hours"] = targetSet.physicalExertionUnitTime.hours * totalReps + targetSet.restTime.hours * totalSets;
+  timeAmount["seconds"] = targetSet.physicalExertionUnitTime.seconds * totalReps + targetSet.restTime.seconds * totalRest;
+  timeAmount["minutes"] = targetSet.physicalExertionUnitTime.minutes * totalReps + targetSet.restTime.minutes * totalRest;
+  timeAmount["hours"] = targetSet.physicalExertionUnitTime.hours * totalReps + targetSet.restTime.hours * totalRest;
   return timeAmount;
 }
 
