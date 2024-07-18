@@ -1,6 +1,6 @@
 import {FormGroup} from "@angular/forms";
 
-export function debugFormGroup(formGroup: FormGroup) {
+export function debugFormGroupInvalidField(formGroup: FormGroup) {
   if (formGroup.invalid) {
     const invalid = [];
     const controls = formGroup.controls;
