@@ -13,11 +13,13 @@ import {FormGroup} from "@angular/forms";
 export class InputControlComponent implements OnInit {
   @Input() formGroup!: FormGroup;
   @Input() formGroupFieldName!: string;
-  @Input() displayedFieldName: string | undefined;
+  @Input() ifInvalid: boolean = false;
+  @Input() submitInvalid: boolean = false;
+  @Input() onlyErrorMessage: boolean = false;
+  @Input() onlyValidMessage: boolean = false;
   @Input() rules: string | undefined;
   @Input() errorMessage: string | undefined;
-  @Input() submitInvalid!: boolean;
-  @Input() ifInvalid: boolean = false;
+  @Input() displayedFieldName: string | undefined;
 
   ngOnInit() {
     let fieldName: string;
