@@ -4,7 +4,7 @@
     <input class="form-control" formControlName="index" type="text">
     <app-input-control
       [formGroup]="targetSetForm"
-      [ifInvalid]=true
+      [ifInvalid]="true"
       [submitInvalid]="submitInvalidForm"
       errorMessage="Please write the number corresponding to the index"
       formGroupFieldName="index"
@@ -16,11 +16,11 @@
     <input class="form-control" formControlName="setNumber" type="text">
     <app-input-control
       [formGroup]="targetSetForm"
-      [ifInvalid]=true
+      [ifInvalid]="true"
       [submitInvalid]="submitInvalidForm"
       errorMessage="Please write the number of sets you wish to make"
       formGroupFieldName="setNumber"
-      rules="only integer number ; min : 1; max : 1000"
+      rules="only integer number ; min : 1 ; max : 1000"
     />
   </div>
   <div class="mb-3">
@@ -31,7 +31,7 @@
       [submitInvalid]="submitInvalidForm"
       errorMessage="Please write the number of sets you wish to make"
       formGroupFieldName="repetitionNumber"
-      rules="only integer number ; min : 1; max : 1000"
+      rules="only integer number ; min : 1 ; max : 1000"
     />
   </div>
   <div class="mb-3">
@@ -41,11 +41,11 @@
         <input class="form-control" formControlName="weight" type="text">
         <app-input-control
           [formGroup]="targetSetForm"
-          [ifInvalid]=true
+          [ifInvalid]="true"
           [submitInvalid]="submitInvalidForm"
           errorMessage="Please write the weight of sets you wish to use"
           formGroupFieldName="weight"
-          rules="only number, two digits after the decimal point are accepted; min : 0; max : 1000"
+          rules="only number, two digits after the decimal point are accepted ; min : 0 ; max : 1000"
         />
       </div>
       <div class="col">
@@ -53,11 +53,11 @@
         <app-weight-select [weightUnit]='targetSetForm.controls["weightUnit"].value' formControlName="weightUnit"/>
         <app-input-control
           [formGroup]="targetSetForm"
-          [ifInvalid]=true
+          [ifInvalid]="true"
           [submitInvalid]="submitInvalidForm"
           errorMessage="Please write the weight of sets you wish to use"
           formGroupFieldName="weightUnit"
-          rules="only number, two digits after the decimal point are accepted; min : 0; max : 1000"
+          rules="only number, two digits after the decimal point are accepted ; min : 0 ; max : 1000"
         />
       </div>
     </div>
@@ -67,39 +67,25 @@
       <div class="col">
         <div class="row">
           <label class="form-label">One Rep Time :</label>
-          <div class="col">
-            <div class="input-group mb-2">
-              <input class="form-control" type="text">
-              <div class="input-group-text">H</div>
-              <input class="form-control" type="text">
-              <div class="input-group-text">Min</div>
-              <input class="form-control" type="text">
-              <div class="input-group-text">s</div>
-            </div>
-          </div>
+          <app-duration-input [rootFormGroupInput]="targetSetForm" fieldName="physicalExertionUnitTime"/>
           <app-input-control
             [formGroup]="targetSetForm"
+            [onlyValidMessage]="true"
             [submitInvalid]="submitInvalidForm"
-            formGroupFieldName="restTime"
+            displayedFieldName="one rep time"
+            formGroupFieldName="physicalExertionUnitTime"
           />
         </div>
       </div>
       <div class="col">
         <div class="row">
           <label class="form-label">Rest Time :</label>
-          <div class="col">
-            <div class="input-group mb-2">
-              <input class="form-control" type="text">
-              <div class="input-group-text">H</div>
-              <input class="form-control" type="text">
-              <div class="input-group-text">Min</div>
-              <input class="form-control" type="text">
-              <div class="input-group-text">s</div>
-            </div>
-          </div>
+          <app-duration-input [rootFormGroupInput]="targetSetForm" fieldName="restTime"/>
           <app-input-control
             [formGroup]="targetSetForm"
+            [onlyValidMessage]="true"
             [submitInvalid]="submitInvalidForm"
+            displayedFieldName="rest time"
             formGroupFieldName="restTime"
           />
         </div>
