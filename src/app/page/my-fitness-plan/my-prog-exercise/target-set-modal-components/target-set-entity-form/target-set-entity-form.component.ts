@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, Input, OnInit} from '@angular/core';
+import {AfterViewInit, Component, inject, Input, OnInit} from '@angular/core';
 import {ExerciseSelectComponent} from "../../../../../components/selects/exercise-select/exercise-select.component";
 import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
 import {InputControlComponent} from "../../../../../components/input-control/input-control.component";
@@ -15,7 +15,7 @@ import {ProgExercise} from "../../../../../interface/dto/prog-exercise";
 import {WeightSelectComponent} from "../../../../../components/selects/weight-select/weight-select.component";
 import {DurationInputComponent} from "../../../../../components/input/duration-inputs/duration-input.component";
 import {createDurationForm} from "../../../../../utils/duration-functions";
-import {debugFormGroupInvalidField} from "../../../../../utils/debug-functions";
+import {TargetSetService} from "../../../../../services/target-set/target-set.service";
 
 @Component({
   selector: 'app-target-set-entity-form',
@@ -43,7 +43,7 @@ export class TargetSetEntityFormComponent implements OnInit, AfterViewInit {
   @Input() btnCloseRef!: HTMLButtonElement;
   @Input() submitEvents!: Observable<void> | undefined;
 
-  // private targetSetService: TargetSetService = inject(TargetSetService);
+  private targetSetService: TargetSetService = inject(TargetSetService);
 
   @Input() set progExerciseInput(value: ProgExercise | undefined) {
     this.progExercise = value;
@@ -70,7 +70,7 @@ export class TargetSetEntityFormComponent implements OnInit, AfterViewInit {
     const targetSetIndex: number = this.targetSet ? this.targetSet.index : 1;
     const targetSetSetNumber: number = this.targetSet ? this.targetSet.setNumber : 1;
     const targetSetRepetitionNumber: number = this.targetSet ? this.targetSet.repetitionNumber : 1;
-    const targetSetWeight: number = this.targetSet ? this.targetSet.weight : 1;
+    const targetSetWeight: number = this.targetSet ? this.targetSet.weight : 0;
     const targetSetWeightUnit: string = this.targetSet ? this.targetSet.weightUnit : WeightUnit.KILOGRAMME;
     const targetSetPhysicalExertionUnitTime: Duration = this.targetSet ? this.targetSet.physicalExertionUnitTime : defaultDuration;
     const targetSetRestTime: Duration = this.targetSet ? this.targetSet.restTime : defaultDuration;
@@ -128,20 +128,16 @@ export class TargetSetEntityFormComponent implements OnInit, AfterViewInit {
 
   onSubmit() {
     if (!this.targetSetForm) return;
-    debugFormGroupInvalidField(this.targetSetForm)
-    console.log("physicalExertionUnitTime", this.targetSetForm.value.physicalExertionUnitTime)
-    console.log("restTime", this.targetSetForm.controls["restTime"].value)
-
-    // if (this.targetSetForm.valid) {
-    //   this.submitInvalidForm = false;
-    //   if (!this.targetSetForm.value.id) {
-    //     this.targetSetService.addTargetSet(this.targetSetForm);
-    //   } else {
-    //     this.targetSetService.modifyTargetSet(this.targetSetForm);
-    //   }
-    //   this.btnCloseRef.click();
-    // } else {
-    //   this.submitInvalidForm = true;
-    // }
+    if (this.targetSetForm.valid) {
+      this.submitInvalidForm = false;
+      if (!this.targetSetForm.value.id) {
+        this.targetSetService.addTargetSet(this.targetSetForm);
+      } else {
+        this.targetSetService.modifyTargetSet(this.targetSetForm);
+      }
+      this.btnCloseRef.click();
+    } else {
+      this.submitInvalidForm = true;
+    }
   }
 }
