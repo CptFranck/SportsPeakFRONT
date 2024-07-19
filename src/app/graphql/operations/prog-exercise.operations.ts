@@ -18,6 +18,7 @@ export const GET_PROG_EXERCISES = gql`
       }
       targetSets {
         id
+        index
         setNumber
         repetitionNumber
         weight
@@ -120,6 +121,7 @@ export const GET_USER_PROG_EXERCISES = gql`
       }
       targetSets {
         id
+        index
         setNumber
         repetitionNumber
         weight
@@ -169,6 +171,7 @@ export const ADD_PROG_EXERCISE = gql`
       }
       targetSets {
         id
+        index
         setNumber
         repetitionNumber
         weight
@@ -216,6 +219,7 @@ export const MOD_PROG_EXERCISE = gql`
       }
       targetSets {
         id
+        index
         setNumber
         repetitionNumber
         weight
@@ -263,6 +267,7 @@ export const MOD_PROG_EXERCISE_TRUST_LABEL = gql`
       }
       targetSets {
         id
+        index
         setNumber
         repetitionNumber
         weight
