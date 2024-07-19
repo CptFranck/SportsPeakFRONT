@@ -40,7 +40,7 @@ export function getTargetSetTime(targetSet: TargetSet): string {
 
 export function getTimeAmount(targetSet: TargetSet): Dictionary<number> {
   const timeAmount: Dictionary<number> = {}
-  const totalRest: number = targetSet.setNumber - 1;
+  const totalRest: number = targetSet.setNumber;
   const totalReps: number = targetSet.repetitionNumber * targetSet.setNumber;
   timeAmount["seconds"] = targetSet.physicalExertionUnitTime.seconds * totalReps + targetSet.restTime.seconds * totalRest;
   timeAmount["minutes"] = targetSet.physicalExertionUnitTime.minutes * totalReps + targetSet.restTime.minutes * totalRest;
