@@ -20,11 +20,12 @@ export class TargetSetCardComponent implements OnInit {
   targetSetRepetition: string = "";
   @Input() modalId!: string;
   @Input() targetSet!: TargetSet;
+  @Input() isLastTargetSet: boolean = false;
 
   @Output() actionProgExercises: EventEmitter<FormIndicator> = new EventEmitter<FormIndicator>();
 
   ngOnInit() {
-    this.targetSetTime = getTargetSetTime(this.targetSet);
+    this.targetSetTime = getTargetSetTime(this.targetSet, this.isLastTargetSet);
     this.targetSets = getTargetSetInformation(this.targetSet);
     this.targetSetRestTime = getStringTime(
       this.targetSet.restTime.seconds,
