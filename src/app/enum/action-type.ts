@@ -4,6 +4,7 @@ export enum ActionType {
   update = "Update",
   delete = "Delete",
   addEvolution = "AddEvolution",
+  checkEvolution = "CheckEvolution",
   addPerformance = "AddPerformance",
   checkPerformance = "CheckPerformance"
 }
