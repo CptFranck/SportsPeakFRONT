@@ -72,12 +72,12 @@ export class TargetSetEntityFormComponent implements OnInit, AfterViewInit {
     const targetSetRepetitionNumber: number = this.targetSet ? this.targetSet.repetitionNumber : 1;
     const targetSetWeight: number = this.targetSet ? this.targetSet.weight : 0;
     const targetSetWeightUnit: string = this.targetSet ? this.targetSet.weightUnit : WeightUnit.KILOGRAMME;
+
     const targetSetPhysicalExertionUnitTime: Duration = this.targetSet ? this.targetSet.physicalExertionUnitTime : defaultDuration;
     const targetSetRestTime: Duration = this.targetSet ? this.targetSet.restTime : defaultDuration;
-    const targetSetDate: Date = this.targetSet ? new Date(this.targetSet.creationDate) : new Date();
-    const targetSetUpdateId: number | null = this.targetSet ?
-      (this.actionType === ActionType.addEvolution ?
-        this.targetSet.id : this.targetSet.targetSetUpdate ? this.targetSet.targetSetUpdate.id : null) : null;
+
+    const targetSetDate: Date | null = this.targetSet ? null : new Date();
+    const targetSetUpdateId: number | null = this.targetSet && this.actionType === ActionType.addEvolution ? this.targetSet.id : null;
     const targetSetProgExerciseId: number | null = this.progExercise ? this.progExercise.id : null;
 
     this.targetSetForm = new FormGroup(
@@ -113,8 +113,8 @@ export class TargetSetEntityFormComponent implements OnInit, AfterViewInit {
         ),
         physicalExertionUnitTime: createDurationForm(targetSetPhysicalExertionUnitTime),
         restTime: createDurationForm(targetSetRestTime),
-        creationDate: new FormControl(targetSetDate, [Validators.required]),
-        progExerciseId: new FormControl(targetSetProgExerciseId, [Validators.required]),
+        creationDate: new FormControl(targetSetDate),
+        progExerciseId: new FormControl(targetSetProgExerciseId),
         targetSetUpdateId: new FormControl(targetSetUpdateId),
       });
 
