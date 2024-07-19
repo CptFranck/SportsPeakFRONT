@@ -3,9 +3,9 @@
     <div class="row">
       <div class="col">
         <div class="row">
-          <div class="col">
-            <div class="row">
-              <h5 class="fw-bold"> {{ "Set N°" + targetSet.index }}</h5>
+          <div class="col-auto">
+            <h5 class="fw-bold"> {{ "Set N°" + targetSet.index }}</h5>
+            <div class="row px-1">
               <div class="col-auto">
                 <label class="fw-bold"> Set : </label>
                 {{ targetSet.setNumber }}
@@ -20,18 +20,31 @@
               </div>
             </div>
             <div class="row pt-3">
-              <app-modal-button
-                (onCLickModalButton)="checkTargetSetPerformance($event)"
-                [modalId]="modalId"
-                [modalValue]="targetSet"
-                btnClass="btn-secondary"
-              >
-                Check performances
-                <i class="fa-solid fa-eye"></i>
-              </app-modal-button>
+              <div class="col">
+                <app-modal-button
+                  (onCLickModalButton)="addNewPerformance($event)"
+                  [modalId]="modalId"
+                  [modalValue]="targetSet"
+                  btnClass="btn-secondary"
+                  class="pe-1"
+                >
+                  Add new performance
+                  <i class="fa-regular fa-square-plus"></i>
+                </app-modal-button>
+                <app-modal-button
+                  (onCLickModalButton)="checkTargetSetPerformance($event)"
+                  [modalId]="modalId"
+                  [modalValue]="targetSet"
+                  btnClass="btn-secondary"
+                  class="ps-1"
+                >
+                  Check performances
+                  <i class="fa-solid fa-chart-line"></i>
+                </app-modal-button>
+              </div>
             </div>
           </div>
-          <div class="col">
+          <div class="col align-content-center">
             <div class="col">
               <div class="col-auto">
                 <div class="row">
@@ -78,13 +91,13 @@
         </div>
         <div class="row pt-1">
           <app-modal-button
-            (onCLickModalButton)="addNewPerformance($event)"
+            (onCLickModalButton)="checkAllTargetSetUpdate($event)"
             [allWidth]="true"
             [modalId]="modalId"
             [modalValue]="targetSet"
             btnClass="btn-secondary"
           >
-            Add new performance
+            Check all set's objectives
             <i class="fa-solid fa-chart-line"></i>
           </app-modal-button>
         </div>
@@ -102,7 +115,7 @@
             <i class="fa-solid fa-pen-to-square"></i>
           </app-modal-button>
         </div>
-        <div class="row pt-1 text-center">
+        <div class="row pt-1">
           <app-modal-button
             (onCLickModalButton)="delTargetSet($event)"
             [allWidth]="true"

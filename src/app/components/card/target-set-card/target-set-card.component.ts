@@ -39,6 +39,13 @@ export class TargetSetCardComponent implements OnInit {
     )
   }
 
+  addNewPerformance(targetSet: TargetSet) {
+    this.actionProgExercises.emit({
+      actionType: ActionType.addPerformance,
+      object: targetSet
+    });
+  }
+
   checkTargetSetPerformance(targetSet: TargetSet): void {
     this.actionProgExercises.emit({
       actionType: ActionType.checkPerformance,
@@ -53,9 +60,9 @@ export class TargetSetCardComponent implements OnInit {
     });
   }
 
-  addNewPerformance(targetSet: TargetSet) {
+  checkAllTargetSetUpdate(targetSet: TargetSet) {
     this.actionProgExercises.emit({
-      actionType: ActionType.addPerformance,
+      actionType: ActionType.checkEvolution,
       object: targetSet
     });
   }
