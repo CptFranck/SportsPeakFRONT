@@ -20,6 +20,8 @@ import {MyProgExerciseDetailsModalComponent} from "../my-prog-exercise-modal/my-
 import {TargetSetCardComponent} from "../../../../components/card/target-set-card/target-set-card.component";
 import {TargetSetModalComponent} from "../target-set-modal/target-set-modal.component";
 import {TargetSet} from "../../../../interface/dto/target-set";
+import {getUpToDateTargetSets, sortLastTargetSetsByIndex} from "../../../../utils/prog-exercise-functions";
+import {Dictionary} from "../../../../interface/utils/dictionary";
 
 @Component({
   selector: 'app-my-prog-exercise',
@@ -40,6 +42,8 @@ import {TargetSet} from "../../../../interface/dto/target-set";
 })
 export class MyProgExerciseComponent implements OnInit {
   loading: boolean = true;
+  targetSets: TargetSet[] = [];
+  isLastTargetSet: Dictionary<boolean> = {};
   targetSet: TargetSet | undefined;
   progExercise: ProgExercise | undefined;
   targetSetAction: ActionType = ActionType.update;
@@ -59,6 +63,10 @@ export class MyProgExerciseComponent implements OnInit {
     this.proExerciseService.progExercise.subscribe((progExercise: ProgExercise | undefined) => {
       if (progExercise) {
         this.progExercise = progExercise;
+        this.targetSets = getUpToDateTargetSets(progExercise).sort(sortLastTargetSetsByIndex);
+        this.targetSets.forEach((targetSet: TargetSet, key: number, array: TargetSet[]) => {
+          this.isLastTargetSet[targetSet.id] = (array.length - 1) === key;
+        })
       }
     });
     this.proExerciseService.isLoading.subscribe((isLoading: boolean) => this.loading = isLoading);
