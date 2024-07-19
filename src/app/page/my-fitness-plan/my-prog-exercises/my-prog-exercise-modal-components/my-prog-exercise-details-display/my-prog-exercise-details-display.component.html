@@ -1,12 +1,41 @@
 <div class="container-fluid">
   <div class="row">
-    <div class="col-auto">
+    <div class="col">
       <label class="form-label fw-bold">Name :</label>
       <p>{{ progExercise?.name }}</p>
     </div>
-    <div class="col-auto">
-      <label class="form-label fw-bold">Exercise :</label>
-      <p>{{ progExercise?.exercise?.name }}</p>
+    <div class="col">
+      <div class="row">
+        <div class="col">
+          <label class="fw-bold"> Trust Label : </label>
+          {{ progExercise?.trustLabel }}
+        </div>
+      </div>
+      <div class="row">
+        <div class="col pt-2">
+          <label class="fw-bold"> Visibility : </label>
+          {{ progExercise?.visibility }}
+        </div>
+      </div>
+      <div class="row">
+        <div class="col pt-2">
+          <label class="fw-bold"> Time : </label>
+          {{ exerciseTime }}
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="mb-3">
+    <div class="row">
+      <div class="col">
+        <label class="fw-bold"> Exercise : </label>
+        {{ progExercise?.exercise?.name }}
+      </div>
+    </div>
+    <div class="row pt-2">
+      <div class="col">
+        {{ progExercise?.exercise?.description }}
+      </div>
     </div>
   </div>
   <div class="mb-3">
@@ -15,38 +44,44 @@
   </div>
   <div class="mb-3">
     <label class="form-label fw-bold">Set(s) :</label>
-    <p *ngIf="progExercise?.targetSets?.length === 0">No set(s) in this exercise for the moment</p>
-    <ol *ngIf="progExercise?.targetSets?.length !== 0"
+    <p *ngIf="displayedTargetSets?.length === 0">No set(s) in this exercise for the moment</p>
+    <ol *ngIf="displayedTargetSets?.length !== 0"
         class="list-group list-group-numbered"
     >
-      <li *ngFor="let set of progExercise?.targetSets"
+      <li *ngFor="let targetSet of displayedTargetSets"
           class="list-group-item d-flex justify-content-between align-items-start"
       >
         <div class="ms-2 me-auto">
-          <h5 class="fw-bold">{{ set?.setNumber }} set(s) of {{ set?.repetitionNumber }} reps </h5>
+          <h5 class="fw-bold"> N° {{ " " + targetSet.index }} </h5>
           <div class="row">
             <div class="col-auto">
               <p>
+                <label class="form-label fw-bold">Ex : </label>
+                {{ targetSetsInformation[targetSet.id].setRep }}
+              </p>
+            </div>
+            <div class="col-auto">
+              <p>
                 <label class="form-label fw-bold">Weight : </label>
-                {{ " " + set?.weight }} {{ set.weightUnit }}
+                {{ targetSetsInformation[targetSet.id].weight }}
               </p>
             </div>
             <div class="col-auto">
               <p>
                 <label class="form-label fw-bold">Effort Time :</label>
-                {{ " " + getStringTime(set.physicalExertionUnitTime.seconds, set.physicalExertionUnitTime.minutes, set.physicalExertionUnitTime.hours) }}
+                {{ targetSetsInformation[targetSet.id].effortTime }}
               </p>
             </div>
             <div class="col-auto">
               <p>
                 <label class="form-label fw-bold">Rest Time :</label>
-                {{ " " + getStringTime(set.restTime.seconds, set.restTime.minutes, set.restTime.hours) }}
+                {{ targetSetsInformation[targetSet.id].restTime }}
               </p>
             </div>
             <div class="col-auto">
               <p>
                 <label class="form-label fw-bold">Set(s) Time :</label>
-                {{ " " + getTargetSetTime(set) }}
+                {{ targetSetsInformation[targetSet.id].setTime }}
               </p>
             </div>
           </div>

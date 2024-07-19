@@ -1,7 +1,16 @@
 import {Component, Input} from '@angular/core';
 import {NgForOf, NgIf} from "@angular/common";
 import {ProgExercise} from "../../../../../interface/dto/prog-exercise";
-import {getStringTime, getTargetSetTime} from "../../../../../utils/prog-exercise-functions";
+import {
+  getProgExerciseTime,
+  getStringTime,
+  getTargetSetTime,
+  getUpToDateTargetSets,
+  sortLastTargetSetsByIndex
+} from "../../../../../utils/prog-exercise-functions";
+import {TargetSet} from "../../../../../interface/dto/target-set";
+import {Dictionary} from "../../../../../interface/utils/dictionary";
+import {TargetSetInformation} from "../../../../../interface/utils/target-set-row-detail";
 
 @Component({
   selector: 'app-my-prog-exercise-details-display',
@@ -14,12 +23,29 @@ import {getStringTime, getTargetSetTime} from "../../../../../utils/prog-exercis
 })
 export class MyProgExerciseDetailsDisplayComponent {
   progExercise: ProgExercise | undefined;
+  exerciseTime: string = "";
+  displayedTargetSets: TargetSet[] = [];
+  targetSetsInformation: Dictionary<TargetSetInformation> = {}
 
   @Input() action!: string;
-  protected readonly getStringTime = getStringTime;
-  protected readonly getTargetSetTime = getTargetSetTime;
 
   @Input() set progExerciseInput(value: ProgExercise | undefined) {
+
     this.progExercise = value;
+    if (value) {
+      this.exerciseTime = getProgExerciseTime(value);
+      this.displayedTargetSets = getUpToDateTargetSets(value).sort(sortLastTargetSetsByIndex);
+      this.displayedTargetSets.forEach((targetSet: TargetSet, key: number, array: TargetSet[]) => {
+        this.targetSetsInformation[targetSet.id] = {
+          setRep: targetSet?.setNumber + " set(s) of " + targetSet?.repetitionNumber + " reps",
+          weight: " " + targetSet.weight + " " + targetSet.weightUnit,
+          effortTime: getStringTime(targetSet.physicalExertionUnitTime.seconds,
+            targetSet.physicalExertionUnitTime.minutes,
+            targetSet.physicalExertionUnitTime.hours),
+          restTime: getStringTime(targetSet.restTime.seconds, targetSet.restTime.minutes, targetSet.restTime.hours),
+          setTime: getTargetSetTime(targetSet, (array.length - 1 === key)),
+        }
+      })
+    }
   }
 }
