@@ -1,5 +1,7 @@
-export interface TargetSetRowDetail {
-  show: boolean,
-  sets: string[],
-  time: string,
+export interface TargetSetInformation {
+  setRep: string,
+  weight: string,
+  effortTime: string,
+  restTime: string,
+  setTime: string,
 }
