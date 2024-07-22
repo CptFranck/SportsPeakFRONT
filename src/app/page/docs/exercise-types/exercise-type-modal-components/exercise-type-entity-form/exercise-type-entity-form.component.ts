@@ -1,6 +1,6 @@
-import {AfterViewInit, Component, inject, Input, OnInit} from '@angular/core';
+import {Component, inject, Input, OnDestroy, OnInit} from '@angular/core';
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
-import {Observable} from "rxjs";
+import {Subject, takeUntil} from "rxjs";
 import {InputControlComponent} from "../../../../../components/input-control/input-control.component";
 import {ExerciseType} from "../../../../../interface/dto/exercise-type";
 import {NgIf} from "@angular/common";
@@ -23,17 +23,18 @@ import {ActionType} from "../../../../../enum/action-type";
   ],
   templateUrl: './exercise-type-entity-form.component.html',
 })
-export class ExerciseTypeEntityFormComponent implements OnInit, AfterViewInit {
+export class ExerciseTypeEntityFormComponent implements OnInit, OnDestroy {
   exerciseType: ExerciseType | undefined;
   exerciseTypeForm: FormGroup | null = null;
   submitInvalidForm: boolean = false;
   isAdmin: boolean = false;
 
   @Input() btnCloseRef!: HTMLButtonElement;
-  @Input() submitEventActionType!: Observable<ActionType> | undefined;
+  @Input() submitEventActionType$!: Subject<ActionType> | undefined;
 
-  private exerciseTypeService: ExerciseTypeService = inject(ExerciseTypeService);
+  private unsubscribe$: Subject<void> = new Subject<void>();
   private userLoggedService: UserLoggedService = inject(UserLoggedService);
+  private exerciseTypeService: ExerciseTypeService = inject(ExerciseTypeService);
 
   @Input() set exerciseTypeInput(value: ExerciseType | undefined) {
     this.exerciseType = value;
@@ -41,16 +42,23 @@ export class ExerciseTypeEntityFormComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {
-    this.userLoggedService.currentUser.subscribe(() => this.isAdmin = this.userLoggedService.isAdmin());
     this.initializeExerciseTypeForm();
+    this.userLoggedService.currentUser
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe(() =>
+        this.isAdmin = this.userLoggedService.isAdmin());
+    if (this.submitEventActionType$)
+      this.submitEventActionType$
+        .pipe(takeUntil(this.unsubscribe$))
+        .subscribe((actionType: ActionType) => {
+          if (actionType === ActionType.create || actionType === ActionType.update)
+            this.onSubmit();
+        });
   }
 
-  ngAfterViewInit() {
-    if (this.submitEventActionType)
-      this.submitEventActionType.subscribe((actionType: ActionType) => {
-        if (actionType === ActionType.create || actionType === ActionType.update)
-          this.onSubmit();
-      });
+  ngOnDestroy() {
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
   }
 
   initializeExerciseTypeForm() {
