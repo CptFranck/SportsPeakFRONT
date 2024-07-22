@@ -18,6 +18,7 @@ import {MuscleService} from "../../../../services/muscle/muscle.service";
 import {Muscle} from "../../../../interface/dto/muscle";
 import {SearchBarComponent} from "../../../../components/search-bar/search-bar.component";
 import {Exercise} from "../../../../interface/dto/exercise";
+import {Subject, takeUntil} from "rxjs";
 
 @Component({
   selector: 'app-muscles',
@@ -49,20 +50,29 @@ export class MusclesComponent implements OnInit {
 
   @ViewChild("modalTemplate") modalTemplate!: TemplateRef<any>;
 
+  private unsubscribe$: Subject<void> = new Subject<void>();
   private muscleService: MuscleService = inject(MuscleService);
 
   ngOnInit(): void {
-    this.muscleService.muscles.subscribe((muscles: Muscle[]) => {
-      this.muscles = muscles
-      this.displayedMuscles = muscles
-    });
-    this.muscleService.isLoading.subscribe((isLoading: boolean) => this.loading = isLoading);
+    this.muscleService.muscles
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe((muscles: Muscle[]) => {
+        this.muscles = muscles
+        this.displayedMuscles = muscles
+      });
+    this.muscleService.isLoading
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe((isLoading: boolean) =>
+        this.loading = isLoading);
   }
 
   setMuscle(formIndicator: FormIndicator) {
     this.muscle = formIndicator.object;
     this.action = formIndicator.actionType;
-    this.modalTitle = formIndicator.object.name;
+    if (formIndicator.object === undefined)
+      this.modalTitle = "Add new muscle";
+    else
+      this.modalTitle = formIndicator.object.name;
   }
 
   searchMuscle(input: string) {
