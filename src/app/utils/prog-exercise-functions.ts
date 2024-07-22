@@ -1,6 +1,8 @@
 import {TargetSet} from "../interface/dto/target-set";
 import {ProgExercise} from "../interface/dto/prog-exercise";
-import {Dictionary} from "../interface/utils/dictionary";
+import {Duration} from "../interface/dto/duration";
+
+////////////////////////////////// CARD INFORMATION //////////////////////////////////////////
 
 export function getTargetSetsInformation(progExercise: ProgExercise) {
   let lastTargetSet: TargetSet[] = getUpToDateTargetSets(progExercise);
@@ -11,39 +13,42 @@ export function getTargetSetsInformation(progExercise: ProgExercise) {
 
 export function getTargetSetInformation(targetSet: TargetSet) {
   let set: string = targetSet.setNumber + " set of " + targetSet.repetitionNumber + " reps";
-  if (targetSet.weight > 0) {
+  if (targetSet.weight > 0)
     set += " with " + targetSet.weight + " " + targetSet.weightUnit;
-  }
   return set;
 }
+
+////////////////////////////////// TIME FUNCTIONS //////////////////////////////////////////
 
 export function getProgExerciseTime(progExercise: ProgExercise) {
   let lastTargetSet: TargetSet[] = getUpToDateTargetSets(progExercise);
   lastTargetSet = lastTargetSet.sort(sortLastTargetSetsByIndex);
 
-  let totalSeconds: number = 0;
-  let totalMinutes: number = 0;
-  let totalHours: number = 0;
+  const totalTimeAmount: Duration = {seconds: 0, minutes: 0, hours: 0};
 
   lastTargetSet.forEach((targetSet: TargetSet, key: number, array: TargetSet[]) => {
     let isLastTargetSet: boolean = false
     if (array.length - 1 === key)
       isLastTargetSet = true;
-    const timeAmount: Dictionary<number> = getTimeAmount(targetSet, isLastTargetSet);
-    totalSeconds += timeAmount["seconds"];
-    totalMinutes += timeAmount["minutes"];
-    totalHours += timeAmount["hours"];
+    let timeAmount: Duration = getTargetSetTime(targetSet, isLastTargetSet);
+    addDuration(totalTimeAmount, timeAmount);
   })
-  return getStringTime(totalSeconds, totalMinutes, totalHours);
+  return getStringTime(totalTimeAmount["seconds"], totalTimeAmount["minutes"], totalTimeAmount["hours"]);
 }
 
-export function getTargetSetTime(targetSet: TargetSet, isLastTargetSet: boolean = false): string {
-  const timeAmount: Dictionary<number> = getTimeAmount(targetSet, isLastTargetSet);
+export function addDuration(durationA: Duration, durationB: Duration) {
+  durationA["seconds"] += durationB["seconds"];
+  durationA["minutes"] += durationB["minutes"];
+  durationA["hours"] += durationB["hours"];
+}
+
+export function getTargetSetTimeToString(targetSet: TargetSet, isLastTargetSet: boolean = false): string {
+  const timeAmount: Duration = getTargetSetTime(targetSet, isLastTargetSet);
   return getStringTime(timeAmount["seconds"], timeAmount["minutes"], timeAmount["hours"]);
 }
 
-export function getTimeAmount(targetSet: TargetSet, isLastTargetSet: boolean = false): Dictionary<number> {
-  const timeAmount: Dictionary<number> = {}
+export function getTargetSetTime(targetSet: TargetSet, isLastTargetSet: boolean = false): Duration {
+  const timeAmount: Duration = {seconds: 0, minutes: 0, hours: 0};
   let totalRest: number = targetSet.setNumber;
   if (isLastTargetSet)
     totalRest -= 1;
@@ -62,6 +67,8 @@ export function getStringTime(seconds: number, minutes: number, hours: number): 
   const totalHours: number = (hours + additionalHours) % 60
   return totalHours + "h" + minutesLeft + "m" + secondsLeft + "s";
 }
+
+////////////////////////////////////// SORT FUNCTIONS ////////////////////////////////////////
 
 export function getUpToDateTargetSets(progExercise: ProgExercise): TargetSet[] {
   return progExercise.targetSets.filter((targetSet: TargetSet) => targetSet.targetSetUpdate === null)

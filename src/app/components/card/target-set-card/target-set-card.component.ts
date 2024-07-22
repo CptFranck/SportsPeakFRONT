@@ -3,7 +3,7 @@ import {ModalButtonComponent} from "../../modal/modal-button/modal-button.compon
 import {FormIndicator} from "../../../interface/utils/form-indicator";
 import {ActionType} from "../../../enum/action-type";
 import {TargetSet} from "../../../interface/dto/target-set";
-import {getStringTime, getTargetSetInformation, getTargetSetTime} from "../../../utils/prog-exercise-functions";
+import {getStringTime, getTargetSetInformation, getTargetSetTimeToString} from "../../../utils/prog-exercise-functions";
 
 @Component({
   selector: 'app-target-set-card',
@@ -18,6 +18,7 @@ export class TargetSetCardComponent implements OnInit {
   targetSetTime: string = "";
   targetSetRestTime: string = "";
   targetSetRepetition: string = "";
+
   @Input() modalId!: string;
   @Input() targetSet!: TargetSet;
   @Input() isLastTargetSet: boolean = false;
@@ -25,7 +26,7 @@ export class TargetSetCardComponent implements OnInit {
   @Output() actionProgExercises: EventEmitter<FormIndicator> = new EventEmitter<FormIndicator>();
 
   ngOnInit() {
-    this.targetSetTime = getTargetSetTime(this.targetSet, this.isLastTargetSet);
+    this.targetSetTime = getTargetSetTimeToString(this.targetSet, this.isLastTargetSet);
     this.targetSets = getTargetSetInformation(this.targetSet);
     this.targetSetRestTime = getStringTime(
       this.targetSet.restTime.seconds,

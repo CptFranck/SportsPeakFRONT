@@ -4,7 +4,7 @@ import {ProgExercise} from "../../../../../interface/dto/prog-exercise";
 import {
   getProgExerciseTime,
   getStringTime,
-  getTargetSetTime,
+  getTargetSetTimeToString,
   getUpToDateTargetSets,
   sortLastTargetSetsByIndex
 } from "../../../../../utils/prog-exercise-functions";
@@ -43,7 +43,7 @@ export class MyProgExerciseDetailsDisplayComponent {
             targetSet.physicalExertionUnitTime.minutes,
             targetSet.physicalExertionUnitTime.hours),
           restTime: getStringTime(targetSet.restTime.seconds, targetSet.restTime.minutes, targetSet.restTime.hours),
-          setTime: getTargetSetTime(targetSet, (array.length - 1 === key)),
+          setTime: getTargetSetTimeToString(targetSet, (array.length - 1 === key)),
         }
       })
     }
