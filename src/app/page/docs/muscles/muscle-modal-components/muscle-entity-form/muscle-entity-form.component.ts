@@ -1,16 +1,17 @@
-import {AfterViewInit, Component, inject, Input, OnInit} from '@angular/core';
+import {Component, inject, Input, OnDestroy, OnInit} from '@angular/core';
 import {MultiSelectComponent} from "../../../../../components/multi-select/multi-select.component";
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {NgIf, NgTemplateOutlet} from "@angular/common";
 import {InputControlComponent} from "../../../../../components/input-control/input-control.component";
 import {Muscle} from "../../../../../interface/dto/muscle";
-import {Observable, Subscription} from "rxjs";
+import {Subject, takeUntil} from "rxjs";
 import {MuscleService} from "../../../../../services/muscle/muscle.service";
 import {Exercise} from "../../../../../interface/dto/exercise";
 import {
   ExerciseSelectorComponent
 } from "../../../../../components/selectors/exercise-selector/exercise-selector.component";
 import {UserLoggedService} from "../../../../../services/user-logged/user-logged.service";
+import {ActionType} from "../../../../../enum/action-type";
 
 @Component({
   selector: 'app-muscle-entity-form',
@@ -25,17 +26,17 @@ import {UserLoggedService} from "../../../../../services/user-logged/user-logged
   ],
   templateUrl: './muscle-entity-form.component.html',
 })
-export class MuscleEntityFormComponent implements OnInit, AfterViewInit {
+export class MuscleEntityFormComponent implements OnInit, OnDestroy {
 
+  isAdmin: boolean = false;
   muscle: Muscle | undefined;
   muscleForm: FormGroup | null = null;
   submitInvalidForm: boolean = false;
-  eventsSubscription!: Subscription;
 
-  isAdmin: boolean = false;
   @Input() btnCloseRef!: HTMLButtonElement;
-  @Input() submitEvents!: Observable<void> | undefined;
+  @Input() submitEventActionType$!: Subject<ActionType> | undefined;
 
+  private unsubscribe$: Subject<void> = new Subject<void>();
   private muscleService: MuscleService = inject(MuscleService);
   private userLoggedService: UserLoggedService = inject(UserLoggedService);
 
@@ -45,13 +46,24 @@ export class MuscleEntityFormComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {
-    this.userLoggedService.currentUser.subscribe(() => this.isAdmin = this.userLoggedService.isAdmin());
     this.initializeMuscleForm();
+    this.userLoggedService.currentUser
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe(() =>
+        this.isAdmin = this.userLoggedService.isAdmin());
+    if (this.submitEventActionType$)
+      this.submitEventActionType$
+        .pipe(takeUntil(this.unsubscribe$))
+        .subscribe((actionType: ActionType) => {
+          if (actionType === ActionType.create || actionType === ActionType.update) {
+            this.onSubmit();
+          }
+        });
   }
 
-  ngAfterViewInit() {
-    if (this.submitEvents)
-      this.eventsSubscription = this.submitEvents.subscribe(() => this.onSubmit());
+  ngOnDestroy() {
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
   }
 
   initializeMuscleForm() {
