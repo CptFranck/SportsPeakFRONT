@@ -1,4 +1,4 @@
-import {Component, inject, OnInit, TemplateRef, ViewChild} from '@angular/core';
+import {Component, inject, OnDestroy, OnInit, TemplateRef, ViewChild} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {ExerciseType} from "../../../../interface/dto/exercise-type";
 import {ActionType} from "../../../../enum/action-type";
@@ -10,14 +10,22 @@ import {ExerciseTypeArrayComponent} from "../exercise-types-array/exercise-type-
 import {ExerciseTypeModalComponent} from "../exercise-type-modal/exercise-type-modal.component";
 import {SearchBarComponent} from "../../../../components/search-bar/search-bar.component";
 import {Exercise} from "../../../../interface/dto/exercise";
+import {Subject, takeUntil} from "rxjs";
 
 @Component({
   selector: 'app-exercise-types',
   standalone: true,
-  imports: [CommonModule, AlertDisplayComponent, LoadingComponent, ExerciseTypeArrayComponent, ExerciseTypeModalComponent, SearchBarComponent],
+  imports: [
+    CommonModule,
+    AlertDisplayComponent,
+    LoadingComponent,
+    ExerciseTypeArrayComponent,
+    ExerciseTypeModalComponent,
+    SearchBarComponent
+  ],
   templateUrl: './exercise-types.component.html',
 })
-export class ExerciseTypesComponent implements OnInit {
+export class ExerciseTypesComponent implements OnInit, OnDestroy {
   loading: boolean = true;
   exerciseTypes: ExerciseType[] = [];
   displayedExerciseTypes: ExerciseType[] = [];
@@ -28,20 +36,34 @@ export class ExerciseTypesComponent implements OnInit {
 
   @ViewChild("modalTemplate") modalTemplate!: TemplateRef<any>
 
+  private unsubscribe$: Subject<void> = new Subject<void>();
   private exerciseTypeService: ExerciseTypeService = inject(ExerciseTypeService);
 
   ngOnInit(): void {
-    this.exerciseTypeService.exerciseTypes.subscribe((exerciseType: ExerciseType[]) => {
-      this.exerciseTypes = exerciseType;
-      this.displayedExerciseTypes = exerciseType;
-    });
-    this.exerciseTypeService.isLoading.subscribe((loading: boolean) => this.loading = loading)
+    this.exerciseTypeService.exerciseTypes
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe((exerciseType: ExerciseType[]) => {
+        this.exerciseTypes = exerciseType;
+        this.displayedExerciseTypes = exerciseType;
+      });
+    this.exerciseTypeService.isLoading
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe((loading: boolean) =>
+        this.loading = loading)
+  }
+
+  ngOnDestroy() {
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
   }
 
   setExerciseType(formIndicator: FormIndicator) {
     this.exerciseType = formIndicator.object;
     this.action = formIndicator.actionType;
-    this.modalTitle = formIndicator.object.name;
+    if (formIndicator.object === undefined)
+      this.modalTitle = "Add new exerciseType"
+    else
+      this.modalTitle = formIndicator.object.name;
   }
 
   searchExerciseType(input: string) {
