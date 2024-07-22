@@ -1,6 +1,6 @@
-import {AfterViewInit, Component, inject, Input, OnInit} from '@angular/core';
+import {Component, inject, Input, OnDestroy, OnInit} from '@angular/core';
 import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
-import {Observable, Subscription} from "rxjs";
+import {Subject, takeUntil} from "rxjs";
 import {Exercise} from "../../../../../interface/dto/exercise";
 import {ExerciseService} from "../../../../../services/exercise/exercise.service";
 import {InputControlComponent} from "../../../../../components/input-control/input-control.component";
@@ -15,6 +15,7 @@ import {
   ExerciseTypeSelectorComponent
 } from "../../../../../components/selectors/exercise-type-selector/exercise-type-selector.component";
 import {UserLoggedService} from "../../../../../services/user-logged/user-logged.service";
+import {ActionType} from "../../../../../enum/action-type";
 
 @Component({
   selector: 'app-exercise-entity-form',
@@ -30,16 +31,16 @@ import {UserLoggedService} from "../../../../../services/user-logged/user-logged
   ],
   templateUrl: './exercise-entity-form.component.html',
 })
-export class ExerciseEntityFormComponent implements OnInit, AfterViewInit {
+export class ExerciseEntityFormComponent implements OnInit, OnDestroy {
   isAdmin: boolean = false;
   exercise: Exercise | undefined;
   exerciseForm: FormGroup | null = null;
   submitInvalidForm: boolean = false;
-  eventsSubscription!: Subscription;
 
   @Input() btnCloseRef!: HTMLButtonElement;
-  @Input() submitEvents!: Observable<void> | undefined;
+  @Input() submitEventActionType$!: Subject<ActionType> | undefined;
 
+  private unsubscribe$: Subject<void> = new Subject<void>();
   private exerciseService: ExerciseService = inject(ExerciseService);
   private userLoggedService: UserLoggedService = inject(UserLoggedService);
 
@@ -49,13 +50,23 @@ export class ExerciseEntityFormComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {
-    this.userLoggedService.currentUser.subscribe(() => this.isAdmin = this.userLoggedService.isAdmin());
+    this.userLoggedService.currentUser
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe(() =>
+        this.isAdmin = this.userLoggedService.isAdmin());
+    if (this.submitEventActionType$)
+      this.submitEventActionType$
+        .pipe(takeUntil(this.unsubscribe$))
+        .subscribe((actionType: ActionType) => {
+          if (actionType === ActionType.create || actionType === ActionType.update)
+            this.onSubmit();
+        });
     this.initializeExerciseForm();
   }
 
-  ngAfterViewInit() {
-    if (this.submitEvents)
-      this.eventsSubscription = this.submitEvents.subscribe(() => this.onSubmit());
+  ngOnDestroy() {
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
   }
 
   initializeExerciseForm() {
