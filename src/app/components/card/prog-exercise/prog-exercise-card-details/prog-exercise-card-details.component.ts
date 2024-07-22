@@ -1,9 +1,9 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {ProgExercise} from "../../../interface/dto/prog-exercise";
-import {FormIndicator} from "../../../interface/utils/form-indicator";
-import {getProgExerciseTime, getTargetSetsInformation} from "../../../utils/prog-exercise-functions";
-import {ActionType} from "../../../enum/action-type";
-import {ModalButtonComponent} from "../../modal/modal-button/modal-button.component";
+import {ProgExercise} from "../../../../interface/dto/prog-exercise";
+import {FormIndicator} from "../../../../interface/utils/form-indicator";
+import {getProgExerciseTime, getTargetSetsInformation} from "../../../../utils/prog-exercise-functions";
+import {ActionType} from "../../../../enum/action-type";
+import {ModalButtonComponent} from "../../../modal/modal-button/modal-button.component";
 import {NgForOf, NgIf} from "@angular/common";
 import {RouterLink} from "@angular/router";
 
