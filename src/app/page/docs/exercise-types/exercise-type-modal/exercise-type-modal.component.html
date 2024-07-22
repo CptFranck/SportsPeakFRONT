@@ -15,7 +15,7 @@
   <app-exercise-type-entity-form *ngIf="action === ActionType.create || action === ActionType.update"
                                  [btnCloseRef]="btnClose"
                                  [exerciseTypeInput]="exerciseType"
-                                 [submitEvents]="submitEventActionType"
+                                 [submitEventActionType]="submitEventActionType"
   />
   <app-exercise-type-details-display *ngIf="action === ActionType.read"
                                      [exerciseTypeInput]="exerciseType"/>

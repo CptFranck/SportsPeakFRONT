@@ -30,7 +30,7 @@ export class ExerciseTypeEntityFormComponent implements OnInit, AfterViewInit {
   isAdmin: boolean = false;
 
   @Input() btnCloseRef!: HTMLButtonElement;
-  @Input() submitEvents!: Observable<ActionType> | undefined;
+  @Input() submitEventActionType!: Observable<ActionType> | undefined;
 
   private exerciseTypeService: ExerciseTypeService = inject(ExerciseTypeService);
   private userLoggedService: UserLoggedService = inject(UserLoggedService);
@@ -46,10 +46,10 @@ export class ExerciseTypeEntityFormComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    if (this.submitEvents)
-      this.submitEvents.subscribe((actionType: ActionType) => {
+    if (this.submitEventActionType)
+      this.submitEventActionType.subscribe((actionType: ActionType) => {
         if (actionType === ActionType.create || actionType === ActionType.update)
-          this.onSubmit()
+          this.onSubmit();
       });
   }
 
