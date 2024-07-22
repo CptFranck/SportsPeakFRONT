@@ -1,5 +1,5 @@
-import {AfterViewInit, Component, inject, Input} from '@angular/core';
-import {Observable} from "rxjs";
+import {Component, inject, Input, OnDestroy, OnInit} from '@angular/core';
+import {Observable, Subject, takeUntil} from "rxjs";
 import {ExerciseType} from "../../../../../interface/dto/exercise-type";
 import {ExerciseTypeService} from "../../../../../services/exercise-type/exercise-type.service";
 import {ActionType} from "../../../../../enum/action-type";
@@ -10,20 +10,28 @@ import {ActionType} from "../../../../../enum/action-type";
   imports: [],
   templateUrl: './exercise-type-delete-form.component.html',
 })
-export class ExerciseTypeDeleteFormComponent implements AfterViewInit {
+export class ExerciseTypeDeleteFormComponent implements OnInit, OnDestroy {
 
   @Input() exerciseType!: ExerciseType | undefined;
   @Input() btnCloseRef!: HTMLButtonElement;
-  @Input() submitEventActionType!: Observable<ActionType> | undefined;
+  @Input() submitEventActionType$!: Observable<ActionType> | undefined;
 
+  private unsubscribe$: Subject<void> = new Subject<void>();
   private exerciseTypeService: ExerciseTypeService = inject(ExerciseTypeService);
 
-  ngAfterViewInit() {
-    if (this.submitEventActionType)
-      this.submitEventActionType.subscribe((actionType: ActionType) => {
-        if (actionType === ActionType.delete)
-          this.onSubmit();
-      });
+  ngOnInit() {
+    if (this.submitEventActionType$)
+      this.submitEventActionType$
+        .pipe(takeUntil(this.unsubscribe$))
+        .subscribe((actionType: ActionType) => {
+          if (actionType === ActionType.delete)
+            this.onSubmit();
+        });
+  }
+
+  ngOnDestroy() {
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
   }
 
   onSubmit() {
