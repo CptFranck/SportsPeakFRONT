@@ -46,7 +46,6 @@ export class MuscleEntityFormComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.initializeMuscleForm();
     this.userLoggedService.currentUser
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe(() =>
@@ -59,6 +58,7 @@ export class MuscleEntityFormComponent implements OnInit, OnDestroy {
             this.onSubmit();
           }
         });
+    this.initializeMuscleForm();
   }
 
   ngOnDestroy() {

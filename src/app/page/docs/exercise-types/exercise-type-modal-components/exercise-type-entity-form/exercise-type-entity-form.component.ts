@@ -42,7 +42,6 @@ export class ExerciseTypeEntityFormComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.initializeExerciseTypeForm();
     this.userLoggedService.currentUser
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe(() =>
@@ -54,6 +53,7 @@ export class ExerciseTypeEntityFormComponent implements OnInit, OnDestroy {
           if (actionType === ActionType.create || actionType === ActionType.update)
             this.onSubmit();
         });
+    this.initializeExerciseTypeForm();
   }
 
   ngOnDestroy() {
