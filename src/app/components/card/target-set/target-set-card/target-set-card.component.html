@@ -45,31 +45,27 @@
             </div>
           </div>
           <div class="col align-content-center">
-            <div class="col">
+            <div class="row">
               <div class="col-auto">
                 <div class="row">
-                  <div class="col-auto">
-                    <div class="row">
-                      <label class="fw-bold"> One Rep Time : </label>
-                    </div>
-                    <div class="row pt-2">
-                      <label class="fw-bold"> Rest Time : </label>
-                    </div>
-                    <div class="row pt-2">
-                      <label class="fw-bold"> Total Time : </label>
-                    </div>
-                  </div>
-                  <div class="col-auto">
-                    <div class="row">
-                      {{ targetSetRepetition }}
-                    </div>
-                    <div class="row pt-2">
-                      {{ targetSetRestTime }}
-                    </div>
-                    <div class="row pt-2">
-                      {{ targetSetTime }}
-                    </div>
-                  </div>
+                  <label class="fw-bold"> One Rep Time : </label>
+                </div>
+                <div class="row pt-2">
+                  <label class="fw-bold"> Rest Time : </label>
+                </div>
+                <div class="row pt-2">
+                  <label class="fw-bold"> Total Time : </label>
+                </div>
+              </div>
+              <div class="col-auto">
+                <div class="row">
+                  {{ targetSetRepetition }}
+                </div>
+                <div class="row pt-2">
+                  {{ targetSetRestTime }}
+                </div>
+                <div class="row pt-2">
+                  {{ targetSetTime }}
                 </div>
               </div>
             </div>
@@ -97,7 +93,7 @@
             [modalValue]="targetSet"
             btnClass="btn-secondary"
           >
-            Check all set's objectives
+            Check set's objectives evolution
             <i class="fa-solid fa-chart-line"></i>
           </app-modal-button>
         </div>
