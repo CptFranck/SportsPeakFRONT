@@ -1,7 +1,8 @@
 import {AfterViewInit, Component, inject, Input} from '@angular/core';
-import {Observable, Subscription} from "rxjs";
+import {Observable} from "rxjs";
 import {ExerciseType} from "../../../../../interface/dto/exercise-type";
 import {ExerciseTypeService} from "../../../../../services/exercise-type/exercise-type.service";
+import {ActionType} from "../../../../../enum/action-type";
 
 @Component({
   selector: 'app-exercise-type-delete-form',
@@ -10,17 +11,19 @@ import {ExerciseTypeService} from "../../../../../services/exercise-type/exercis
   templateUrl: './exercise-type-delete-form.component.html',
 })
 export class ExerciseTypeDeleteFormComponent implements AfterViewInit {
-  eventsSubscription!: Subscription;
 
   @Input() exerciseType!: ExerciseType | undefined;
   @Input() btnCloseRef!: HTMLButtonElement;
-  @Input() submitEvents!: Observable<void> | undefined;
+  @Input() submitEventActionType!: Observable<ActionType> | undefined;
 
   private exerciseTypeService: ExerciseTypeService = inject(ExerciseTypeService);
 
   ngAfterViewInit() {
-    if (this.submitEvents)
-      this.eventsSubscription = this.submitEvents.subscribe(() => this.onSubmit());
+    if (this.submitEventActionType)
+      this.submitEventActionType.subscribe((actionType: ActionType) => {
+        if (actionType === ActionType.delete)
+          this.onSubmit();
+      });
   }
 
   onSubmit() {

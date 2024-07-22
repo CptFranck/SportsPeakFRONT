@@ -1,6 +1,6 @@
 import {AfterViewInit, Component, inject, Input, OnInit} from '@angular/core';
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
-import {Observable, Subscription} from "rxjs";
+import {Observable} from "rxjs";
 import {InputControlComponent} from "../../../../../components/input-control/input-control.component";
 import {ExerciseType} from "../../../../../interface/dto/exercise-type";
 import {NgIf} from "@angular/common";
@@ -10,6 +10,7 @@ import {
   ExerciseSelectorComponent
 } from "../../../../../components/selectors/exercise-selector/exercise-selector.component";
 import {UserLoggedService} from "../../../../../services/user-logged/user-logged.service";
+import {ActionType} from "../../../../../enum/action-type";
 
 @Component({
   selector: 'app-exercise-type-entity-form',
@@ -26,11 +27,10 @@ export class ExerciseTypeEntityFormComponent implements OnInit, AfterViewInit {
   exerciseType: ExerciseType | undefined;
   exerciseTypeForm: FormGroup | null = null;
   submitInvalidForm: boolean = false;
-  eventsSubscription!: Subscription;
-
   isAdmin: boolean = false;
+
   @Input() btnCloseRef!: HTMLButtonElement;
-  @Input() submitEvents!: Observable<void> | undefined;
+  @Input() submitEvents!: Observable<ActionType> | undefined;
 
   private exerciseTypeService: ExerciseTypeService = inject(ExerciseTypeService);
   private userLoggedService: UserLoggedService = inject(UserLoggedService);
@@ -47,7 +47,10 @@ export class ExerciseTypeEntityFormComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit() {
     if (this.submitEvents)
-      this.eventsSubscription = this.submitEvents.subscribe(() => this.onSubmit());
+      this.submitEvents.subscribe((actionType: ActionType) => {
+        if (actionType === ActionType.create || actionType === ActionType.update)
+          this.onSubmit()
+      });
   }
 
   initializeExerciseTypeForm() {
