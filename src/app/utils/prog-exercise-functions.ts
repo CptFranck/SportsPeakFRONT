@@ -78,6 +78,23 @@ export function formatTimeDuration(duration: Duration): Duration {
 
 ////////////////////////////////////// SORT FUNCTIONS ////////////////////////////////////////
 
+export function getTargetSetLogs(targetSetUpToDate: TargetSet, progExercise: ProgExercise): TargetSet[] {
+  const targetSetLogs: TargetSet[] = [];
+  targetSetLogs.push(targetSetUpToDate)
+  getTargetUpdate(targetSetUpToDate, progExercise, targetSetLogs)
+  return targetSetLogs;
+}
+
+function getTargetUpdate(targetSetUpToDate: TargetSet, progExercise: ProgExercise, targetSetLogs: TargetSet[]) {
+  progExercise.targetSets.find((targetSet: TargetSet) => {
+    if (targetSet.targetSetUpdate !== null)
+      if (targetSet.targetSetUpdate.id === targetSetUpToDate.id) {
+        targetSetLogs.push(targetSet);
+        getTargetUpdate(targetSet, progExercise, targetSetLogs);
+      }
+  })
+}
+
 export function getUpToDateTargetSets(progExercise: ProgExercise): TargetSet[] {
   return progExercise.targetSets.filter((targetSet: TargetSet) => targetSet.targetSetUpdate === null)
 }
