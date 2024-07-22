@@ -10,16 +10,16 @@
            [title]="modalTitle"
 >
 </app-modal>
-<ng-template #modalTemplate let-btnClose="btnClose" let-submitEvents="submitEvents">
+<ng-template #modalTemplate let-btnClose="btnClose" let-submitEventActionType="submitEventActionType">
   <app-privilege-entity-form *ngIf="action === ActionType.create || action === ActionType.update"
                              [btnCloseRef]="btnClose"
                              [privilegeInput]="privilege"
-                             [submitEvents]="submitEvents"
+                             [submitEvents]="submitEventActionType"
   />
   <app-privilege-details-display *ngIf="action === ActionType.read"
                                  [privilegeInput]="privilege"/>
   <app-privilege-delete-forms *ngIf="action === ActionType.delete"
                               [btnCloseRef]="btnClose"
                               [privilege]="privilege"
-                              [submitEvents]="submitEvents"/>
+                              [submitEvents]="submitEventActionType"/>
 </ng-template>

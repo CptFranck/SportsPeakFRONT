@@ -4,10 +4,10 @@
            [title]="modalTitle"
 >
 </app-modal>
-<ng-template #modalTemplate let-btnClose="btnClose" let-submitEvents="submitEvents">
+<ng-template #modalTemplate let-btnClose="btnClose" let-submitEventActionType="submitEventActionType">
   <app-user-roles-form *ngIf="action === ActionType.create || action === ActionType.update"
                        [btnCloseRef]="btnClose"
-                       [submitEvents]="submitEvents"
+                       [submitEvents]="submitEventActionType"
                        [userInput]="user"
   />
   <app-user-details-display *ngIf="action === ActionType.read"

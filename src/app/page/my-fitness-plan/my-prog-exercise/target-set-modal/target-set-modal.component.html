@@ -10,18 +10,23 @@
            [title]="modalTitle"
 >
 </app-modal>
-<ng-template #targetSetModalTemplate let-btnClose="btnClose" let-submitEvents="submitEvents">
+<ng-template #targetSetModalTemplate let-btnClose="btnClose" let-submitEventActionType="submitEventActionType">
   <app-target-set-entity-form
     *ngIf="action === ActionType.create || action === ActionType.update || action === ActionType.addEvolution"
     [actionType]="action"
     [btnCloseRef]="btnClose"
     [progExerciseInput]="progExercise"
-    [submitEvents]="submitEvents"
+    [submitEvents]="submitEventActionType"
     [targetSetInput]="targetSet"
+  />
+  <app-target-set-logs *ngIf="action === ActionType.checkEvolution"
+                       [btnCloseRef]="btnClose"
+                       [progExerciseInput]="progExercise"
+                       [targetSetInput]="targetSet"
   />
   <!--  <app-my-prog-exercise-performance *ngIf="action === ActionType.read"/>-->
   <app-target-set-delete-form *ngIf="action === ActionType.delete"
                               [btnCloseRef]="btnClose"
-                              [submitEvents]="submitEvents"
+                              [submitEvents]="submitEventActionType"
                               [targetSet]="targetSet"/>
 </ng-template>

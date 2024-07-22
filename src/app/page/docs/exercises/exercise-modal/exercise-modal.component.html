@@ -11,16 +11,16 @@
            [title]="modalTitle"
 >
 </app-modal>
-<ng-template #modalTemplate let-btnClose="btnClose" let-submitEvents="submitEvents">
+<ng-template #modalTemplate let-btnClose="btnClose" let-submitEventActionType="submitEventActionType">
   <app-exercise-entity-form *ngIf="action === ActionType.create || action === ActionType.update"
                             [btnCloseRef]="btnClose"
                             [exerciseInput]="exercise"
-                            [submitEvents]="submitEvents"
+                            [submitEvents]="submitEventActionType"
   />
   <app-exercise-details-display *ngIf="action === ActionType.read"
                                 [exerciseInput]="exercise"/>
   <app-exercise-delete-form *ngIf="action === ActionType.delete"
                             [btnCloseRef]="btnClose"
                             [exercise]="exercise"
-                            [submitEvents]="submitEvents"/>
+                            [submitEvents]="submitEventActionType"/>
 </ng-template>

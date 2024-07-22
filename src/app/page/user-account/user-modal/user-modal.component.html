@@ -4,32 +4,32 @@
            [title]="modalTitle"
 >
 </app-modal>
-<ng-template #modalTemplate let-btnClose="btnClose" let-submitEvents="submitEvents">
+<ng-template #modalTemplate let-btnClose="btnClose" let-submitEventActionType="submitEventActionType">
   <app-user-username-form *ngIf="action === ActionType.update &&
                           modification === ModificationField.username" [btnCloseRef]="btnClose"
-                          [submitEvents]="submitEvents"
+                          [submitEvents]="submitEventActionType"
                           [userInput]="user"
   />
   <app-user-email-form *ngIf="action === ActionType.update &&
                        modification === ModificationField.email"
                        [btnCloseRef]="btnClose"
-                       [submitEvents]="submitEvents"
+                       [submitEvents]="submitEventActionType"
                        [userInput]="user"
   />
   <app-user-name-form *ngIf="action === ActionType.update &&
                       modification === ModificationField.name"
                       [btnCloseRef]="btnClose"
-                      [submitEvents]="submitEvents"
+                      [submitEvents]="submitEventActionType"
                       [userInput]="user"
   />
   <app-user-password-form *ngIf="action === ActionType.update &&
                           modification === ModificationField.password"
                           [btnCloseRef]="btnClose"
-                          [submitEvents]="submitEvents"
+                          [submitEvents]="submitEventActionType"
                           [userInput]="user"
   />
   <app-user-delete-form *ngIf="action === ActionType.delete"
                         [btnCloseRef]="btnClose"
-                        [submitEvents]="submitEvents"
+                        [submitEvents]="submitEventActionType"
                         [user]="user"/>
 </ng-template>
