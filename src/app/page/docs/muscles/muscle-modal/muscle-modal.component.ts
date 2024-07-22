@@ -1,4 +1,4 @@
-import {Component, inject, Input, OnInit, TemplateRef, ViewChild} from '@angular/core';
+import {Component, EventEmitter, inject, Input, OnDestroy, OnInit, Output, TemplateRef, ViewChild} from '@angular/core';
 import {ActionType} from "../../../../enum/action-type";
 import {ModalButtonComponent} from "../../../../components/modal/modal-button/modal-button.component";
 import {ModalComponent} from "../../../../components/modal/modal/modal.component";
@@ -10,6 +10,8 @@ import {NgIf} from "@angular/common";
 import {muscleDeleteFormComponent} from "../muscle-modal-components/muscle-delete-form/muscle-delete-form.component";
 import {Muscle} from "../../../../interface/dto/muscle";
 import {UserLoggedService} from "../../../../services/user-logged/user-logged.service";
+import {FormIndicator} from "../../../../interface/utils/form-indicator";
+import {Subject, takeUntil} from "rxjs";
 
 @Component({
   selector: 'app-muscle-modal',
@@ -24,7 +26,7 @@ import {UserLoggedService} from "../../../../services/user-logged/user-logged.se
   ],
   templateUrl: './muscle-modal.component.html',
 })
-export class MuscleModalComponent implements OnInit {
+export class MuscleModalComponent implements OnInit, OnDestroy {
   isAdmin: boolean = false;
 
   @Input() modalTitle!: string;
@@ -32,18 +34,30 @@ export class MuscleModalComponent implements OnInit {
   @Input() muscle: Muscle | undefined;
   @Input() action!: ActionType;
 
+  @Output() actionMuscle: EventEmitter<FormIndicator> = new EventEmitter();
+
   @ViewChild("modalTemplate") modalTemplate!: TemplateRef<any>;
 
   protected readonly ActionType = ActionType;
+  private unsubscribe$: Subject<void> = new Subject<void>();
   private userLoggedService: UserLoggedService = inject(UserLoggedService);
 
-  onClick(value: undefined) {
-    this.muscle = value;
-    this.action = ActionType.create;
-    this.modalTitle = "Add new muscle";
+  ngOnInit(): void {
+    this.userLoggedService.currentUser
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe(() =>
+        this.isAdmin = this.userLoggedService.isAdmin());
   }
 
-  ngOnInit(): void {
-    this.userLoggedService.currentUser.subscribe(() => this.isAdmin = this.userLoggedService.isAdmin());
+  ngOnDestroy() {
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
+  }
+
+  onClick() {
+    this.actionMuscle.emit({
+      actionType: ActionType.create,
+      object: undefined,
+    });
   }
 }
