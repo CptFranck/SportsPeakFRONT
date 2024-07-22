@@ -22,7 +22,8 @@ export class ModalComponent {
   @ViewChild("btnClose") btnClose: ElementRef | undefined;
 
   readonly ActionType = ActionType;
-  submitEvents: Subject<void> = new Subject<void>();
+
+  submitEventActionType: Subject<ActionType> = new Subject<ActionType>();
   closeButtonTitle: string = "Close";
   validateButtonClass: string = "btn-success";
   validationButtonTitle: string = "Ok";
@@ -51,8 +52,17 @@ export class ModalComponent {
         this.validateButtonClass = "btn-success";
         this.closeButtonTitle = "Cancel";
         return
+      case ActionType.addPerformance:
+        this.validationButtonTitle = "Update";
+        this.validateButtonClass = "btn-success";
+        this.closeButtonTitle = "Cancel";
+        return
+      case ActionType.addEvolution:
+        this.validationButtonTitle = "Update";
+        this.validateButtonClass = "btn-success";
+        this.closeButtonTitle = "Cancel";
+        return
       case ActionType.delete:
-        console.log("del")
         this.validationButtonTitle = "Delete";
         this.validateButtonClass = "btn-danger";
         this.closeButtonTitle = "Cancel";
@@ -64,8 +74,9 @@ export class ModalComponent {
   }
 
   onSubmit() {
-    this.submitEvents.next();
-    if (this.btnClose && this.action === undefined)
+    if (this.action)
+      this.submitEventActionType.next(this.action);
+    if (this.btnClose)
       this.btnClose.nativeElement.click();
   }
 }
