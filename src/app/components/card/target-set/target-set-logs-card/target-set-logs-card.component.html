@@ -1,0 +1,96 @@
+<div class="card mt-2 shadow">
+  <div class="card-body">
+    <div class="row">
+      <div class="col">
+        <div class="row">
+          <div class="col-auto">
+            <h5 class="fw-bold">
+              {{ "Set N°" + targetSet.index + " from " + targetSetCreationDate.toLocaleDateString() }}
+            </h5>
+            <div class="row px-1">
+              <div class="col-auto">
+                <label class="fw-bold"> Set : </label>
+                {{ targetSet.setNumber }}
+              </div>
+              <div class="col-auto">
+                <label class="fw-bold"> Reps : </label>
+                {{ targetSet.repetitionNumber }}
+              </div>
+              <div class="col">
+                <label class="fw-bold"> Weight : </label>
+                {{ targetSet.weight + " " + targetSet.weightUnit }}
+              </div>
+              <div class="col-auto">
+                <label class="fw-bold"> Created : </label>
+                {{ targetSetCreationDate.toLocaleDateString() }}
+              </div>
+            </div>
+            <div class="row pt-3">
+              <div class="col">
+                <app-modal-button
+                  [modalId]="modalId"
+                  [modalValue]="targetSet"
+                  btnClass="btn-secondary"
+                  class="ps-1"
+                >
+                  Check performances
+                  <i class="fa-solid fa-chart-line"></i>
+                </app-modal-button>
+              </div>
+            </div>
+          </div>
+          <div class="col align-content-center">
+            <div class="row">
+              <div class="col-auto">
+                <div class="row">
+                  <label class="fw-bold"> One Rep Time : </label>
+                </div>
+                <div class="row pt-2">
+                  <label class="fw-bold"> Rest Time : </label>
+                </div>
+                <div class="row pt-2">
+                  <label class="fw-bold"> Total Time : </label>
+                </div>
+              </div>
+              <div class="col-auto">
+                <div class="row">
+                  {{ targetSetRepetition }}
+                </div>
+                <div class="row pt-2">
+                  {{ targetSetRestTime }}
+                </div>
+                <div class="row pt-2">
+                  {{ targetSetTime }}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-auto align-content-center">
+        <div class="row">
+          <app-modal-button
+            [allWidth]="true"
+            [modalId]="modalId"
+            [modalValue]="targetSet"
+            btnClass="btn-secondary"
+          >
+            Modify
+            <i class="fa-solid fa-pen-to-square"></i>
+          </app-modal-button>
+        </div>
+        <div class="row pt-1">
+          <app-modal-button
+            [allWidth]="true"
+            [modalId]="modalId"
+            [modalValue]="targetSet"
+            btnClass="btn-danger"
+          >
+            Delete
+            <i class="fa-solid fa-trash"></i>
+          </app-modal-button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
