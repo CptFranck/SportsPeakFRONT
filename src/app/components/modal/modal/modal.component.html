@@ -24,7 +24,7 @@
           {{ closeButtonTitle }}
         </button>
         <button (click)="onSubmit()"
-                *ngIf="action !== ActionType.read"
+                *ngIf="submitButton"
                 [class]="'btn ' + validateButtonClass"
                 type="button"
         >

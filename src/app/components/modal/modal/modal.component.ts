@@ -26,9 +26,15 @@ export class ModalComponent {
   closeButtonTitle: string = "Close";
   validateButtonClass: string = "btn-success";
   validationButtonTitle: string = "Ok";
+  submitButton: boolean = false;
 
   @Input() set actionType(action: ActionType | undefined) {
-    this.action = action;
+    this.submitButton =
+      action === ActionType.create ||
+      action === ActionType.update ||
+      action === ActionType.addEvolution ||
+      action === ActionType.addPerformance;
+
     switch (this.action) {
       case ActionType.read:
         this.closeButtonTitle = "Close";
@@ -49,6 +55,7 @@ export class ModalComponent {
         this.closeButtonTitle = "Cancel";
         return
       default:
+        this.closeButtonTitle = "Close";
         return
     }
   }
