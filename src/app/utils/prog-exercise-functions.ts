@@ -30,24 +30,24 @@ export function getProgExerciseTime(progExercise: ProgExercise) {
     let isLastTargetSet: boolean = false
     if (array.length - 1 === key)
       isLastTargetSet = true;
-    let timeAmount: Duration = getTargetSetTime(targetSet, isLastTargetSet);
-    addDuration(totalTimeAmount, timeAmount);
+    let timeAmount: Duration = getTargetSetTimeAmount(targetSet, isLastTargetSet);
+    addDurationAmount(totalTimeAmount, timeAmount);
   })
-  return getStringTime(totalTimeAmount["seconds"], totalTimeAmount["minutes"], totalTimeAmount["hours"]);
+  return getStringTime(totalTimeAmount);
 }
 
-export function addDuration(durationA: Duration, durationB: Duration) {
+export function addDurationAmount(durationA: Duration, durationB: Duration) {
   durationA["seconds"] += durationB["seconds"];
   durationA["minutes"] += durationB["minutes"];
   durationA["hours"] += durationB["hours"];
 }
 
 export function getTargetSetTimeToString(targetSet: TargetSet, isLastTargetSet: boolean = false): string {
-  const timeAmount: Duration = getTargetSetTime(targetSet, isLastTargetSet);
-  return getStringTime(timeAmount["seconds"], timeAmount["minutes"], timeAmount["hours"]);
+  const timeAmount: Duration = getTargetSetTimeAmount(targetSet, isLastTargetSet);
+  return getStringTime(timeAmount);
 }
 
-export function getTargetSetTime(targetSet: TargetSet, isLastTargetSet: boolean = false): Duration {
+export function getTargetSetTimeAmount(targetSet: TargetSet, isLastTargetSet: boolean = false): Duration {
   const timeAmount: Duration = {seconds: 0, minutes: 0, hours: 0};
   let totalRest: number = targetSet.setNumber;
   if (isLastTargetSet)
@@ -59,13 +59,21 @@ export function getTargetSetTime(targetSet: TargetSet, isLastTargetSet: boolean 
   return timeAmount;
 }
 
-export function getStringTime(seconds: number, minutes: number, hours: number): string {
-  const secondsLeft: number = seconds % 60;
-  const additionalMinutes: number = (seconds - secondsLeft) / 60
-  const minutesLeft: number = (minutes + additionalMinutes) % 60;
-  const additionalHours: number = (minutes + additionalMinutes - minutesLeft) / 60;
-  const totalHours: number = (hours + additionalHours) % 60
-  return totalHours + "h" + minutesLeft + "m" + secondsLeft + "s";
+export function getStringTime(duration: Duration): string {
+  const formatedDuration: Duration = formatTimeDuration(duration);
+  return formatedDuration["hours"] + "h" + formatedDuration["minutes"] + "m" + formatedDuration["seconds"] + "s";
+}
+
+export function formatTimeDuration(duration: Duration): Duration {
+  const formatDuration: Duration = {seconds: 0, minutes: 0, hours: 0};
+  formatDuration["seconds"] = duration["seconds"] % 60;
+  const additionalMinutes: number = (duration["seconds"] - formatDuration["seconds"]) / 60
+
+  formatDuration["minutes"] = (duration["minutes"] + additionalMinutes) % 60;
+  const additionalHours: number = (duration["minutes"] + additionalMinutes - formatDuration["minutes"]) / 60;
+
+  formatDuration["hours"] = (duration["hours"] + additionalHours) % 60
+  return formatDuration;
 }
 
 ////////////////////////////////////// SORT FUNCTIONS ////////////////////////////////////////

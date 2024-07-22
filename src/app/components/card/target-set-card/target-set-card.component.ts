@@ -28,16 +28,8 @@ export class TargetSetCardComponent implements OnInit {
   ngOnInit() {
     this.targetSetTime = getTargetSetTimeToString(this.targetSet, this.isLastTargetSet);
     this.targetSets = getTargetSetInformation(this.targetSet);
-    this.targetSetRestTime = getStringTime(
-      this.targetSet.restTime.seconds,
-      this.targetSet.restTime.minutes,
-      this.targetSet.restTime.hours
-    )
-    this.targetSetRepetition = getStringTime(
-      this.targetSet.physicalExertionUnitTime.seconds,
-      this.targetSet.physicalExertionUnitTime.minutes,
-      this.targetSet.physicalExertionUnitTime.hours
-    )
+    this.targetSetRestTime = getStringTime(this.targetSet.restTime)
+    this.targetSetRepetition = getStringTime(this.targetSet.physicalExertionUnitTime)
   }
 
   addNewPerformance(targetSet: TargetSet) {

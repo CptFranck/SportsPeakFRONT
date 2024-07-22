@@ -39,10 +39,8 @@ export class MyProgExerciseDetailsDisplayComponent {
         this.targetSetsInformation[targetSet.id] = {
           setRep: targetSet?.setNumber + " set(s) of " + targetSet?.repetitionNumber + " reps",
           weight: " " + targetSet.weight + " " + targetSet.weightUnit,
-          effortTime: getStringTime(targetSet.physicalExertionUnitTime.seconds,
-            targetSet.physicalExertionUnitTime.minutes,
-            targetSet.physicalExertionUnitTime.hours),
-          restTime: getStringTime(targetSet.restTime.seconds, targetSet.restTime.minutes, targetSet.restTime.hours),
+          effortTime: getStringTime(targetSet.physicalExertionUnitTime),
+          restTime: getStringTime(targetSet.restTime),
           setTime: getTargetSetTimeToString(targetSet, (array.length - 1 === key)),
         }
       })
