@@ -1,4 +1,4 @@
-<app-modal-button (onCLickModalButton)="onClick($event)"
+<app-modal-button (onCLickModalButton)="onClick()"
                   *ngIf="isAdmin"
                   [modalId]="exerciseTypeModalId"
 >
@@ -11,16 +11,16 @@
            [title]="modalTitle"
 >
 </app-modal>
-<ng-template #modalTemplate let-btnClose="btnClose" let-submitEventActionType="submitEventActionType">
+<ng-template #modalTemplate let-btnClose="btnClose" let-submitEventActionType$="submitEventActionType$">
   <app-exercise-type-entity-form *ngIf="action === ActionType.create || action === ActionType.update"
                                  [btnCloseRef]="btnClose"
                                  [exerciseTypeInput]="exerciseType"
-                                 [submitEventActionType]="submitEventActionType"
+                                 [submitEventActionType$]="submitEventActionType$"
   />
   <app-exercise-type-details-display *ngIf="action === ActionType.read"
                                      [exerciseTypeInput]="exerciseType"/>
   <app-exercise-type-delete-form *ngIf="action === ActionType.delete"
                                  [btnCloseRef]="btnClose"
                                  [exerciseType]="exerciseType"
-                                 [submitEventActionType]="submitEventActionType"/>
+                                 [submitEventActionType$]="submitEventActionType$"/>
 </ng-template>

@@ -1,4 +1,4 @@
-import {Component, inject, Input, OnInit, TemplateRef, ViewChild} from '@angular/core';
+import {Component, EventEmitter, inject, Input, OnDestroy, OnInit, Output, TemplateRef, ViewChild} from '@angular/core';
 import {ModalButtonComponent} from "../../../../components/modal/modal-button/modal-button.component";
 import {ModalComponent} from "../../../../components/modal/modal/modal.component";
 import {
@@ -23,6 +23,8 @@ import {
   ExerciseTypeDeleteFormComponent
 } from "../exercise-type-modal-components/exercise-type-delete-form/exercise-type-delete-form.component";
 import {UserLoggedService} from "../../../../services/user-logged/user-logged.service";
+import {FormIndicator} from "../../../../interface/utils/form-indicator";
+import {Subject, takeUntil} from "rxjs";
 
 @Component({
   selector: 'app-exercise-type-modal',
@@ -40,24 +42,39 @@ import {UserLoggedService} from "../../../../services/user-logged/user-logged.se
   ],
   templateUrl: './exercise-type-modal.component.html',
 })
-export class ExerciseTypeModalComponent implements OnInit {
+export class ExerciseTypeModalComponent implements OnInit, OnDestroy {
   isAdmin: boolean = false;
+
   @Input() modalTitle!: string;
   @Input() exerciseTypeModalId!: string;
   @Input() exerciseType: ExerciseType | undefined;
   @Input() action!: ActionType;
+
+  @Output() exerciseTypeAction: EventEmitter<FormIndicator> = new EventEmitter<FormIndicator>();
+
   @ViewChild("modalTemplate") modalTemplate!: TemplateRef<any>
+
   protected readonly ActionType = ActionType;
+
+  private unsubscribe$: Subject<void> = new Subject<void>();
   private userLoggedService: UserLoggedService = inject(UserLoggedService);
 
-
   ngOnInit(): void {
-    this.userLoggedService.currentUser.subscribe(() => this.isAdmin = this.userLoggedService.isAdmin());
+    this.userLoggedService.currentUser
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe(() =>
+        this.isAdmin = this.userLoggedService.isAdmin());
   }
 
-  onClick(value: undefined) {
-    this.exerciseType = value
-    this.action = ActionType.create
-    this.modalTitle = "Add new exerciseType";
+  ngOnDestroy() {
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
+  }
+
+  onClick() {
+    this.exerciseTypeAction.emit({
+      object: undefined,
+      actionType: ActionType.create
+    })
   }
 }
