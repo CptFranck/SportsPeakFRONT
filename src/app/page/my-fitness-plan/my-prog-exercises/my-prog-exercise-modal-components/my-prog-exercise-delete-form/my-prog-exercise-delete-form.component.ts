@@ -1,7 +1,8 @@
-import {AfterViewInit, Component, inject, Input} from '@angular/core';
-import {Observable, Subscription} from "rxjs";
+import {Component, inject, Input, OnDestroy, OnInit} from '@angular/core';
+import {Observable, Subject, takeUntil} from "rxjs";
 import {ProgExerciseService} from "../../../../../services/prog-exercise/prog-exercise.service";
 import {ProgExercise} from "../../../../../interface/dto/prog-exercise";
+import {ActionType} from "../../../../../enum/action-type";
 
 @Component({
   selector: 'app-my-prog-exercise-delete-form',
@@ -9,18 +10,28 @@ import {ProgExercise} from "../../../../../interface/dto/prog-exercise";
   imports: [],
   templateUrl: './my-prog-exercise-delete-form.component.html',
 })
-export class MyProgExerciseDeleteFormComponent implements AfterViewInit {
-  eventsSubscription!: Subscription;
+export class MyProgExerciseDeleteFormComponent implements OnInit, OnDestroy {
 
   @Input() progExercise!: ProgExercise | undefined;
   @Input() btnCloseRef!: HTMLButtonElement;
-  @Input() submitEvents!: Observable<void> | undefined;
+  @Input() submitEventActionType$!: Observable<ActionType> | undefined;
 
+  private unsubscribe$: Subject<void> = new Subject<void>();
   private progExerciseService: ProgExerciseService = inject(ProgExerciseService);
 
-  ngAfterViewInit() {
-    if (this.submitEvents)
-      this.eventsSubscription = this.submitEvents.subscribe(() => this.onSubmit());
+  ngOnInit() {
+    if (this.submitEventActionType$)
+      this.submitEventActionType$
+        .pipe(takeUntil(this.unsubscribe$))
+        .subscribe((actionType: ActionType) => {
+          if (actionType === ActionType.delete)
+            this.onSubmit()
+        });
+  }
+
+  ngOnDestroy() {
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
   }
 
   onSubmit() {
