@@ -32,9 +32,11 @@ export class ModalComponent {
     this.submitButton =
       action === ActionType.create ||
       action === ActionType.update ||
+      action === ActionType.delete ||
       action === ActionType.addEvolution ||
       action === ActionType.addPerformance;
 
+    this.action = action
     switch (this.action) {
       case ActionType.read:
         this.closeButtonTitle = "Close";
@@ -50,6 +52,7 @@ export class ModalComponent {
         this.closeButtonTitle = "Cancel";
         return
       case ActionType.delete:
+        console.log("del")
         this.validationButtonTitle = "Delete";
         this.validateButtonClass = "btn-danger";
         this.closeButtonTitle = "Cancel";
