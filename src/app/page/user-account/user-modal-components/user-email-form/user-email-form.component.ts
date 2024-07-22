@@ -35,11 +35,11 @@ export class UserEmailFormComponent implements OnInit, AfterViewInit {
 
   @Input() set userInput(value: User | undefined) {
     this.user = value;
-    this.initializeMuscleForm();
+    this.initializeUserEmailForm();
   }
 
   ngOnInit() {
-    this.initializeMuscleForm()
+    this.initializeUserEmailForm()
   }
 
   ngAfterViewInit() {
@@ -47,7 +47,7 @@ export class UserEmailFormComponent implements OnInit, AfterViewInit {
       this.eventsSubscription = this.submitEvents.subscribe(() => this.onSubmit());
   }
 
-  initializeMuscleForm() {
+  initializeUserEmailForm() {
     this.userForm = new FormGroup({
       newEmail: new FormControl("",
         [Validators.required,
