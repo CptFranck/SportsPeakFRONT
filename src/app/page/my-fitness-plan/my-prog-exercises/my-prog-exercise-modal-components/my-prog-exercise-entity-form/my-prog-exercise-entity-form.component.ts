@@ -1,6 +1,6 @@
-import {AfterViewInit, Component, inject, Input, OnInit} from '@angular/core';
+import {Component, inject, Input, OnDestroy, OnInit} from '@angular/core';
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
-import {Observable, Subscription} from "rxjs";
+import {Observable, Subject, takeUntil} from "rxjs";
 import {UserLoggedService} from "../../../../../services/user-logged/user-logged.service";
 import {ProgExercise} from "../../../../../interface/dto/prog-exercise";
 import {User} from "../../../../../interface/dto/user";
@@ -12,6 +12,7 @@ import {
   VisibilitySelectComponent
 } from "../../../../../components/selects/visibility-select/visibility-select.component";
 import {ProgExerciseService} from "../../../../../services/prog-exercise/prog-exercise.service";
+import {ActionType} from "../../../../../enum/action-type";
 
 @Component({
   selector: 'app-my-prog-exercise-entity-form',
@@ -25,16 +26,16 @@ import {ProgExerciseService} from "../../../../../services/prog-exercise/prog-ex
   ],
   templateUrl: './my-prog-exercise-entity-form.component.html',
 })
-export class MyProgExerciseEntityFormComponent implements OnInit, AfterViewInit {
+export class MyProgExerciseEntityFormComponent implements OnInit, OnDestroy {
   progExercise: ProgExercise | undefined;
   progExerciseForm: FormGroup | null = null;
   submitInvalidForm: boolean = false;
-  eventsSubscription!: Subscription;
 
   @Input() btnCloseRef!: HTMLButtonElement;
-  @Input() submitEvents!: Observable<void> | undefined;
+  @Input() submitEventActionType$!: Observable<ActionType> | undefined;
 
   private user: User | undefined;
+  private unsubscribe$: Subject<void> = new Subject<void>();
   private userLoggedService: UserLoggedService = inject(UserLoggedService);
   private progExerciseService: ProgExerciseService = inject(ProgExerciseService);
 
@@ -44,13 +45,23 @@ export class MyProgExerciseEntityFormComponent implements OnInit, AfterViewInit 
   }
 
   ngOnInit() {
-    this.userLoggedService.currentUser.subscribe((user: User | undefined) => this.user = user);
     this.initializeProgExerciseForm();
+    this.userLoggedService.currentUser
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe((user: User | undefined) =>
+        this.user = user);
+    if (this.submitEventActionType$)
+      this.submitEventActionType$
+        .pipe(takeUntil(this.unsubscribe$))
+        .subscribe((actionType: ActionType) => {
+          if (actionType === ActionType.create || actionType === ActionType.update)
+            this.onSubmit()
+        });
   }
 
-  ngAfterViewInit() {
-    if (this.submitEvents)
-      this.eventsSubscription = this.submitEvents.subscribe(() => this.onSubmit());
+  ngOnDestroy() {
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
   }
 
   initializeProgExerciseForm() {
