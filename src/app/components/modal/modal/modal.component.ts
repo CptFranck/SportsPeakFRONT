@@ -14,6 +14,12 @@ import {ActionType} from "../../../enum/action-type";
 })
 export class ModalComponent {
   action!: ActionType | undefined;
+  submitButton: boolean = false;
+  closeButtonTitle: string = "Close";
+  validateButtonClass: string = "btn-success";
+  validationButtonTitle: string = "Ok";
+  submitEventActionType$: Subject<ActionType> = new Subject<ActionType>();
+
   @Input() modalId!: string;
   @Input() title!: string;
   @Input() staticBackdrop: boolean = false;
@@ -22,12 +28,6 @@ export class ModalComponent {
   @ViewChild("btnClose") btnClose: ElementRef | undefined;
 
   readonly ActionType = ActionType;
-
-  submitEventActionType: Subject<ActionType> = new Subject<ActionType>();
-  closeButtonTitle: string = "Close";
-  validateButtonClass: string = "btn-success";
-  validationButtonTitle: string = "Ok";
-  submitButton: boolean = false;
 
   @Input() set actionType(action: ActionType | undefined) {
     this.submitButton =
@@ -75,8 +75,9 @@ export class ModalComponent {
 
   onSubmit() {
     if (this.action)
-      this.submitEventActionType.next(this.action);
+      this.submitEventActionType$.next(this.action);
     if (this.btnClose)
       this.btnClose.nativeElement.click();
   }
+
 }
