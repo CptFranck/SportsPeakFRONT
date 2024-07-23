@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, inject, Input, OnDestroy} from '@angular/core';
+import {Component, inject, Input, OnDestroy, OnInit} from '@angular/core';
 import {NgForOf} from "@angular/common";
 import {Muscle} from "../../../../../interface/dto/muscle";
 import {Observable, Subject, takeUntil} from "rxjs";
@@ -13,7 +13,7 @@ import {ActionType} from "../../../../../enum/action-type";
   ],
   templateUrl: './muscle-delete-form.component.html',
 })
-export class muscleDeleteFormComponent implements AfterViewInit, OnDestroy {
+export class muscleDeleteFormComponent implements OnInit, OnDestroy {
 
   @Input() muscle!: Muscle | undefined;
   @Input() btnCloseRef!: HTMLButtonElement;
@@ -22,7 +22,7 @@ export class muscleDeleteFormComponent implements AfterViewInit, OnDestroy {
   private unsubscribe$: Subject<void> = new Subject<void>();
   private muscleService: MuscleService = inject(MuscleService);
 
-  ngAfterViewInit() {
+  ngOnInit() {
     if (this.submitEventActionType$)
       this.submitEventActionType$
         .pipe(takeUntil(this.unsubscribe$))
