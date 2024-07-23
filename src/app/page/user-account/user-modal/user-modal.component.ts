@@ -33,6 +33,6 @@ export class UserModalComponent {
 
   @ViewChild("modalTemplate") modalTemplate!: TemplateRef<any>;
 
-  protected readonly ModificationField = ModificationField;
   protected readonly ActionType = ActionType;
+  protected readonly ModificationField = ModificationField;
 }

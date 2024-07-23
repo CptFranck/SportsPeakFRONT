@@ -4,32 +4,33 @@
            [title]="modalTitle"
 >
 </app-modal>
-<ng-template #modalTemplate let-btnClose="btnClose" let-submitEventActionType="submitEventActionType">
-  <app-user-username-form *ngIf="action === ActionType.update &&
-                          modification === ModificationField.username" [btnCloseRef]="btnClose"
-                          [submitEvents]="submitEventActionType"
+<ng-template #modalTemplate let-btnClose="btnClose" let-submitEventActionType$="submitEventActionType$">
+  <app-user-username-form *ngIf="action === ActionType.update && modification === ModificationField.username"
+                          [btnCloseRef]="btnClose"
+                          [modification]="modification"
+                          [submitEventActionType$]="submitEventActionType$"
                           [userInput]="user"
   />
-  <app-user-email-form *ngIf="action === ActionType.update &&
-                       modification === ModificationField.email"
+  <app-user-email-form *ngIf="action === ActionType.update && modification === ModificationField.email"
                        [btnCloseRef]="btnClose"
-                       [submitEvents]="submitEventActionType"
+                       [modification]="modification"
+                       [submitEventActionType$]="submitEventActionType$"
                        [userInput]="user"
   />
-  <app-user-name-form *ngIf="action === ActionType.update &&
-                      modification === ModificationField.name"
+  <app-user-name-form *ngIf="action === ActionType.update && modification === ModificationField.name"
                       [btnCloseRef]="btnClose"
-                      [submitEvents]="submitEventActionType"
+                      [modification]="modification"
+                      [submitEventActionType$]="submitEventActionType$"
                       [userInput]="user"
   />
-  <app-user-password-form *ngIf="action === ActionType.update &&
-                          modification === ModificationField.password"
+  <app-user-password-form *ngIf="action === ActionType.update && modification === ModificationField.password"
                           [btnCloseRef]="btnClose"
-                          [submitEvents]="submitEventActionType"
+                          [modification]="modification"
+                          [submitEventActionType$]="submitEventActionType$"
                           [userInput]="user"
   />
   <app-user-delete-form *ngIf="action === ActionType.delete"
                         [btnCloseRef]="btnClose"
-                        [submitEvents]="submitEventActionType"
+                        [submitEventActionType$]="submitEventActionType$"
                         [user]="user"/>
 </ng-template>
