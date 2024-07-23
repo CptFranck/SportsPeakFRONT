@@ -1,7 +1,8 @@
-import {AfterViewInit, Component, inject, Input} from '@angular/core';
-import {Observable, Subscription} from "rxjs";
+import {Component, inject, Input, OnDestroy, OnInit} from '@angular/core';
+import {Observable, Subject, takeUntil} from "rxjs";
 import {TargetSet} from "../../../../../interface/dto/target-set";
 import {TargetSetService} from "../../../../../services/target-set/target-set.service";
+import {ActionType} from "../../../../../enum/action-type";
 
 @Component({
   selector: 'app-target-set-delete-form',
@@ -9,23 +10,33 @@ import {TargetSetService} from "../../../../../services/target-set/target-set.se
   imports: [],
   templateUrl: './target-set-delete-form.component.html',
 })
-export class TargetSetDeleteFormComponent implements AfterViewInit {
-  eventsSubscription!: Subscription;
+export class TargetSetDeleteFormComponent implements OnInit, OnDestroy {
 
   @Input() targetSet!: TargetSet | undefined;
   @Input() btnCloseRef!: HTMLButtonElement;
-  @Input() submitEvents!: Observable<void> | undefined;
+  @Input() submitEventActionType$!: Observable<ActionType> | undefined;
 
+  private unsubscribe$: Subject<void> = new Subject<void>();
   private targetSetService: TargetSetService = inject(TargetSetService);
 
-  ngAfterViewInit() {
-    if (this.submitEvents)
-      this.eventsSubscription = this.submitEvents.subscribe(() => this.onSubmit());
+  ngOnInit() {
+    if (this.submitEventActionType$)
+      this.submitEventActionType$
+        .pipe(takeUntil(this.unsubscribe$))
+        .subscribe((actionType: ActionType) => {
+          if (actionType === ActionType.delete)
+            this.onSubmit();
+        });
+  }
+
+  ngOnDestroy() {
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
   }
 
   onSubmit() {
     if (!this.targetSet) return;
-    this.targetSetService.deleteTargetSet(this.targetSet);
+    // this.targetSetService.deleteTargetSet(this.targetSet);
     this.btnCloseRef.click();
   }
 }
