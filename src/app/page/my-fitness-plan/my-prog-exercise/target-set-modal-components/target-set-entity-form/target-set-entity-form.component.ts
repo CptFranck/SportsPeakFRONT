@@ -61,10 +61,10 @@ export class TargetSetEntityFormComponent implements OnInit, OnDestroy {
       this.submitEventActionType$
         .pipe(takeUntil(this.unsubscribe$))
         .subscribe((actionType: ActionType) => {
-          if (actionType === ActionType.create ||
-            actionType === ActionType.update ||
-            actionType === ActionType.addEvolution)
-            this.onSubmit();
+          if (actionType === ActionType.create || actionType === ActionType.addEvolution)
+            this.onCreateOrEvolutionSubmit();
+          else if (actionType === ActionType.update)
+            this.onUpdateSubmit();
         });
   }
 
@@ -76,18 +76,21 @@ export class TargetSetEntityFormComponent implements OnInit, OnDestroy {
   initializeTargetSetForm() {
     const defaultDuration: Duration = {seconds: 0, minutes: 0, hours: 0};
 
-    const targetSetIndex: number = this.targetSet ? this.targetSet.index : 1;
+    const targetSetIndex: number = this.targetSet ? this.targetSet.index :
+      (this.progExercise ? this.progExercise.targetSets.length + 1 : 1);
     const targetSetSetNumber: number = this.targetSet ? this.targetSet.setNumber : 1;
     const targetSetRepetitionNumber: number = this.targetSet ? this.targetSet.repetitionNumber : 1;
     const targetSetWeight: number = this.targetSet ? this.targetSet.weight : 0;
     const targetSetWeightUnit: string = this.targetSet ? this.targetSet.weightUnit : WeightUnit.KILOGRAMME;
 
-    const targetSetPhysicalExertionUnitTime: Duration = this.targetSet ? this.targetSet.physicalExertionUnitTime : defaultDuration;
+    const targetSetPhysicalExertionUnitTime: Duration = this.targetSet ?
+      this.targetSet.physicalExertionUnitTime : defaultDuration;
     const targetSetRestTime: Duration = this.targetSet ? this.targetSet.restTime : defaultDuration;
 
-    const targetSetDate: Date | null = this.targetSet ? null : new Date();
-    const targetSetUpdateId: number | null = this.targetSet && this.actionType === ActionType.addEvolution ? this.targetSet.id : null;
-    const targetSetProgExerciseId: number | null = this.progExercise ? this.progExercise.id : null;
+    const targetSetDate: Date = new Date();
+    const targetSetUpdateId: number | null = this.targetSet && this.actionType === ActionType.addEvolution ?
+      this.targetSet.id : null;
+    const targetSetProgExerciseId: number | undefined = this.progExercise?.id;
 
     this.targetSetForm = new FormGroup(
       {
@@ -126,26 +129,30 @@ export class TargetSetEntityFormComponent implements OnInit, OnDestroy {
         progExerciseId: new FormControl(targetSetProgExerciseId),
         targetSetUpdateId: new FormControl(targetSetUpdateId),
       });
-
-    if (this.targetSet) {
-      this.targetSetForm.addControl("id", new FormControl(this.targetSet.id));
-      this.targetSetForm.removeControl("creationDate");
-      this.targetSetForm.removeControl("progExerciseId");
-      this.targetSetForm.removeControl("targetSetUpdateId");
-    }
   }
 
-  onSubmit() {
+  onCreateOrEvolutionSubmit() {
     if (!this.targetSetForm) return;
     if (this.targetSetForm.valid) {
       this.submitInvalidForm = false;
-      if (!this.targetSetForm.value.id) {
-        console.log("add")
-        // this.targetSetService.addTargetSet(this.targetSetForm);
-      } else {
-        console.log("mod")
-        // this.targetSetService.modifyTargetSet(this.targetSetForm);
+      this.targetSetService.addTargetSet(this.targetSetForm);
+      this.btnCloseRef.click();
+    } else {
+      this.submitInvalidForm = true;
+    }
+  }
+
+  onUpdateSubmit() {
+    if (!this.targetSetForm) return;
+    if (this.targetSetForm.valid) {
+      if (this.targetSet) {
+        this.targetSetForm.addControl("id", new FormControl(this.targetSet.id));
+        this.targetSetForm.removeControl("creationDate");
+        this.targetSetForm.removeControl("progExerciseId");
+        this.targetSetForm.removeControl("targetSetUpdateId");
       }
+      this.submitInvalidForm = false;
+      this.targetSetService.modifyTargetSet(this.targetSetForm);
       this.btnCloseRef.click();
     } else {
       this.submitInvalidForm = true;
