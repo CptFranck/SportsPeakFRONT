@@ -1,10 +1,12 @@
-import {AfterViewInit, Component, inject, Input, OnInit} from '@angular/core';
+import {Component, inject, Input, OnDestroy, OnInit} from '@angular/core';
 import {User} from "../../../../interface/dto/user";
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
-import {Observable, Subscription} from "rxjs";
+import {Observable, Subject, takeUntil} from "rxjs";
 import {UserService} from "../../../../services/user/user.service";
 import {InputControlComponent} from "../../../../components/input-control/input-control.component";
 import {NgIf} from "@angular/common";
+import {ActionType} from "../../../../enum/action-type";
+import {ModificationField} from "../../../../enum/modification-field";
 
 @Component({
   selector: 'app-user-username-form',
@@ -16,15 +18,16 @@ import {NgIf} from "@angular/common";
   ],
   templateUrl: './user-username-form.component.html',
 })
-export class UserUsernameFormComponent implements OnInit, AfterViewInit {
+export class UserUsernameFormComponent implements OnInit, OnDestroy {
   user: User | undefined;
   userForm: FormGroup | null = null;
   submitInvalidForm: boolean = false;
-  eventsSubscription!: Subscription;
 
   @Input() btnCloseRef!: HTMLButtonElement;
-  @Input() submitEvents!: Observable<void> | undefined;
+  @Input() modification!: ModificationField;
+  @Input() submitEventActionType$!: Observable<ActionType> | undefined;
 
+  private unsubscribe$: Subject<void> = new Subject<void>();
   private userService: UserService = inject(UserService);
 
   @Input() set userInput(value: User | undefined) {
@@ -33,12 +36,19 @@ export class UserUsernameFormComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {
+    if (this.submitEventActionType$)
+      this.submitEventActionType$
+        .pipe(takeUntil(this.unsubscribe$))
+        .subscribe((actionType: ActionType) => {
+          if (actionType === ActionType.update && this.modification === ModificationField.username)
+            this.onSubmit()
+        });
     this.initializeUserUsernameForm();
   }
 
-  ngAfterViewInit() {
-    if (this.submitEvents)
-      this.eventsSubscription = this.submitEvents.subscribe(() => this.onSubmit());
+  ngOnDestroy() {
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
   }
 
   initializeUserUsernameForm() {
