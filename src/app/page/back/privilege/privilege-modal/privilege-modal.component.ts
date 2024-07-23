@@ -1,4 +1,4 @@
-import {Component, Input, TemplateRef, ViewChild} from '@angular/core';
+import {Component, EventEmitter, Input, Output, TemplateRef, ViewChild} from '@angular/core';
 import {ModalButtonComponent} from "../../../../components/modal/modal-button/modal-button.component";
 import {ModalComponent} from "../../../../components/modal/modal/modal.component";
 import {
@@ -12,8 +12,8 @@ import {
   muscleDeleteFormComponent
 } from "../../../docs/muscles/muscle-modal-components/muscle-delete-form/muscle-delete-form.component";
 import {
-  PrivilegeDeleteFormsComponent
-} from "../privilege-modal-components/privilege-delete-forms/privilege-delete-forms.component";
+  PrivilegeDeleteFormComponent
+} from "../privilege-modal-components/privilege-delete-form/privilege-delete-form.component";
 import {
   PrivilegeDetailDisplayComponent
 } from "../privilege-modal-components/privilege-detail-display/privilege-detail-display.component";
@@ -22,6 +22,7 @@ import {
 } from "../privilege-modal-components/privilege-entity-form/privilege-entity-form.component";
 import {Privilege} from "../../../../interface/dto/privilege";
 import {ActionType} from "../../../../enum/action-type";
+import {FormIndicator} from "../../../../interface/utils/form-indicator";
 
 @Component({
   selector: 'app-privilege-modal',
@@ -33,25 +34,29 @@ import {ActionType} from "../../../../enum/action-type";
     MuscleEntityFormComponent,
     NgIf,
     muscleDeleteFormComponent,
-    PrivilegeDeleteFormsComponent,
+    PrivilegeDeleteFormComponent,
     PrivilegeDetailDisplayComponent,
     PrivilegeEntityFormComponent
   ],
   templateUrl: './privilege-modal.component.html',
 })
 export class PrivilegeModalComponent {
+
   @Input() modalTitle!: string;
   @Input() privilegeModalId!: string;
   @Input() privilege: Privilege | undefined;
   @Input() action!: ActionType;
 
+  @Output() privilegeAction: EventEmitter<FormIndicator> = new EventEmitter();
+
   @ViewChild("modalTemplate") modalTemplate!: TemplateRef<any>;
 
   protected readonly ActionType = ActionType;
 
-  onClick(value: undefined) {
-    this.privilege = value;
-    this.action = ActionType.create;
-    this.modalTitle = "Add new muscle";
+  onClick() {
+    this.privilegeAction.emit({
+      object: undefined,
+      actionType: ActionType.create
+    })
   }
 }
