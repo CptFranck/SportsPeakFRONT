@@ -1,11 +1,13 @@
-import {AfterViewInit, Component, inject, Input, OnInit} from '@angular/core';
+import {Component, inject, Input, OnDestroy, OnInit} from '@angular/core';
 import {User} from "../../../../interface/dto/user";
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
-import {Observable, Subscription} from "rxjs";
+import {Observable, Subject, takeUntil} from "rxjs";
 import {UserService} from "../../../../services/user/user.service";
 import {InputControlComponent} from "../../../../components/input-control/input-control.component";
 import {NgIf} from "@angular/common";
 import {confirmValidator} from "../../../../validators/confirmValidator";
+import {ModificationField} from "../../../../enum/modification-field";
+import {ActionType} from "../../../../enum/action-type";
 
 @Component({
   selector: 'app-user-password-form',
@@ -17,15 +19,16 @@ import {confirmValidator} from "../../../../validators/confirmValidator";
   ],
   templateUrl: './user-password-form.component.html',
 })
-export class UserPasswordFormComponent implements OnInit, AfterViewInit {
+export class UserPasswordFormComponent implements OnInit, OnDestroy {
   user: User | undefined;
   userForm: FormGroup | null = null;
   submitInvalidForm: boolean = false;
-  eventsSubscription!: Subscription;
 
   @Input() btnCloseRef!: HTMLButtonElement;
-  @Input() submitEvents!: Observable<void> | undefined;
+  @Input() submitEventActionType$!: Observable<ActionType> | undefined;
+  @Input() modification!: ModificationField;
 
+  private unsubscribe$: Subject<void> = new Subject<void>();
   private userService: UserService = inject(UserService);
 
   @Input() set userInput(value: User | undefined) {
@@ -35,11 +38,18 @@ export class UserPasswordFormComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
     this.initializeUserPasswordForm()
+    if (this.submitEventActionType$)
+      this.submitEventActionType$
+        .pipe(takeUntil(this.unsubscribe$))
+        .subscribe((actionType: ActionType) => {
+          if (actionType === ActionType.update && this.modification === ModificationField.password)
+            this.onSubmit()
+        });
   }
 
-  ngAfterViewInit() {
-    if (this.submitEvents)
-      this.eventsSubscription = this.submitEvents.subscribe(() => this.onSubmit());
+  ngOnDestroy() {
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
   }
 
   initializeUserPasswordForm() {
