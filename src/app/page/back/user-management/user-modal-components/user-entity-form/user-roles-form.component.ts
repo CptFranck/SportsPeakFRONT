@@ -1,6 +1,6 @@
-import {AfterViewInit, Component, inject, Input, OnInit} from '@angular/core';
+import {Component, inject, Input, OnDestroy, OnInit} from '@angular/core';
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
-import {Observable, Subscription} from "rxjs";
+import {Observable, Subject, takeUntil} from "rxjs";
 import {NgIf} from "@angular/common";
 import {InputControlComponent} from "../../../../../components/input-control/input-control.component";
 import {User} from "../../../../../interface/dto/user";
@@ -8,6 +8,7 @@ import {UserService} from "../../../../../services/user/user.service";
 import {Role} from "../../../../../interface/dto/role";
 import {RoleSelectorComponent} from "../../../../../components/selectors/role-selector/role-selector.component";
 import {UserLoggedService} from "../../../../../services/user-logged/user-logged.service";
+import {ActionType} from "../../../../../enum/action-type";
 
 @Component({
   selector: 'app-user-roles-form',
@@ -20,16 +21,16 @@ import {UserLoggedService} from "../../../../../services/user-logged/user-logged
   ],
   templateUrl: './user-roles-form.component.html',
 })
-export class UserRolesFormComponent implements OnInit, AfterViewInit {
+export class UserRolesFormComponent implements OnInit, OnDestroy {
   user: User | undefined;
+  isAdmin: boolean = false;
   userForm: FormGroup | null = null;
   submitInvalidForm: boolean = false;
-  eventsSubscription!: Subscription;
 
-  isAdmin: boolean = false;
   @Input() btnCloseRef!: HTMLButtonElement;
-  @Input() submitEvents!: Observable<void> | undefined;
+  @Input() submitEvents!: Observable<ActionType> | undefined;
 
+  private unsubscribe$: Subject<void> = new Subject<void>();
   private userService: UserService = inject(UserService);
   private userLoggedService: UserLoggedService = inject(UserLoggedService);
 
@@ -39,13 +40,24 @@ export class UserRolesFormComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {
-    this.userLoggedService.currentUser.subscribe(() => this.isAdmin = this.userLoggedService.isAdmin());
+    this.userLoggedService.currentUser
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe(() =>
+        this.isAdmin = this.userLoggedService.isAdmin());
+    if (this.submitEvents)
+      this.submitEvents
+        .pipe(takeUntil(this.unsubscribe$))
+        .subscribe((actionType: ActionType) => {
+          console.log(actionType)
+          if (actionType === ActionType.update)
+            this.onSubmit()
+        });
     this.initializeUserRoleForm();
   }
 
-  ngAfterViewInit() {
-    if (this.submitEvents)
-      this.eventsSubscription = this.submitEvents.subscribe(() => this.onSubmit());
+  ngOnDestroy() {
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
   }
 
   initializeUserRoleForm() {
