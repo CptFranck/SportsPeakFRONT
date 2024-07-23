@@ -1,4 +1,4 @@
-import {Component, inject, OnInit, TemplateRef, ViewChild} from '@angular/core';
+import {Component, inject, OnDestroy, OnInit, TemplateRef, ViewChild} from '@angular/core';
 import {UsersManagementArrayComponent} from "../users-management-array/users-management-array.component";
 import {UsersManagementModalComponent} from "../user-management-modal/users-management-modal.component";
 import {LoadingComponent} from "../../../../components/loading/loading.component";
@@ -8,6 +8,7 @@ import {User} from "../../../../interface/dto/user";
 import {ActionType} from "../../../../enum/action-type";
 import {UserService} from "../../../../services/user/user.service";
 import {FormIndicator} from "../../../../interface/utils/form-indicator";
+import {Subject, takeUntil} from "rxjs";
 
 @Component({
   selector: 'app-users',
@@ -21,7 +22,7 @@ import {FormIndicator} from "../../../../interface/utils/form-indicator";
   ],
   templateUrl: './users-management.component.html',
 })
-export class UsersManagementComponent implements OnInit {
+export class UsersManagementComponent implements OnInit, OnDestroy {
   loading: boolean = true;
   users: User[] = [];
   user: User | undefined;
@@ -30,11 +31,21 @@ export class UsersManagementComponent implements OnInit {
   muscleModalId: string = "userModal";
   @ViewChild("modalTemplate") modalTemplate!: TemplateRef<any>;
 
+  private unsubscribe$: Subject<void> = new Subject<void>();
   private userService: UserService = inject(UserService);
 
   ngOnInit(): void {
-    this.userService.users.subscribe((users: User[]) => this.users = users);
-    this.userService.isLoading.subscribe((isLoading: boolean) => this.loading = isLoading);
+    this.userService.users
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe((users: User[]) => this.users = users);
+    this.userService.isLoading
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe((isLoading: boolean) => this.loading = isLoading);
+  }
+
+  ngOnDestroy() {
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
   }
 
   setUser(formIndicator: FormIndicator) {
