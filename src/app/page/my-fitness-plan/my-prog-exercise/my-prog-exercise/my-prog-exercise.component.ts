@@ -1,4 +1,4 @@
-import {Component, inject, OnInit} from '@angular/core';
+import {Component, inject, OnDestroy, OnInit} from '@angular/core';
 import {ProgExercise} from "../../../../interface/dto/prog-exercise";
 import {ProgExerciseService} from "../../../../services/prog-exercise/prog-exercise.service";
 import {ActivatedRoute, Params} from "@angular/router";
@@ -24,6 +24,7 @@ import {TargetSetModalComponent} from "../target-set-modal/target-set-modal.comp
 import {TargetSet} from "../../../../interface/dto/target-set";
 import {getUpToDateTargetSets, sortLastTargetSetsByIndex} from "../../../../utils/prog-exercise-functions";
 import {Dictionary} from "../../../../interface/utils/dictionary";
+import {Subject, takeUntil} from "rxjs";
 
 @Component({
   selector: 'app-my-prog-exercise',
@@ -42,7 +43,7 @@ import {Dictionary} from "../../../../interface/utils/dictionary";
   ],
   templateUrl: './my-prog-exercise.component.html',
 })
-export class MyProgExerciseComponent implements OnInit {
+export class MyProgExerciseComponent implements OnInit, OnDestroy {
   loading: boolean = true;
   targetSets: TargetSet[] = [];
   isLastTargetSet: Dictionary<boolean> = {};
@@ -55,23 +56,36 @@ export class MyProgExerciseComponent implements OnInit {
   targetSetModalTitle: string = "";
   progExerciseModalTitle: string = "";
 
+  private unsubscribe$: Subject<void> = new Subject<void>();
   private activatedRoute: ActivatedRoute = inject(ActivatedRoute);
   private proExerciseService: ProgExerciseService = inject(ProgExerciseService);
 
   ngOnInit(): void {
-    this.activatedRoute.params.subscribe((params: Params) => {
-      this.proExerciseService.getProgExerciseById(params['id']);
-    });
-    this.proExerciseService.progExercise.subscribe((progExercise: ProgExercise | undefined) => {
-      if (progExercise) {
-        this.progExercise = progExercise;
-        this.targetSets = getUpToDateTargetSets(progExercise).sort(sortLastTargetSetsByIndex);
-        this.targetSets.forEach((targetSet: TargetSet, key: number, array: TargetSet[]) => {
-          this.isLastTargetSet[targetSet.id] = (array.length - 1) === key;
-        })
-      }
-    });
-    this.proExerciseService.isLoading.subscribe((isLoading: boolean) => this.loading = isLoading);
+    this.activatedRoute.params
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe((params: Params) => {
+        this.proExerciseService.getProgExerciseById(params['id']);
+      });
+    this.proExerciseService.progExercise
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe((progExercise: ProgExercise | undefined) => {
+        if (progExercise) {
+          this.progExercise = progExercise;
+          this.targetSets = getUpToDateTargetSets(progExercise).sort(sortLastTargetSetsByIndex);
+          this.targetSets.forEach((targetSet: TargetSet, key: number, array: TargetSet[]) => {
+            this.isLastTargetSet[targetSet.id] = (array.length - 1) === key;
+          })
+        }
+      });
+    this.proExerciseService.isLoading
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe((isLoading: boolean) =>
+        this.loading = isLoading);
+  }
+
+  ngOnDestroy() {
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
   }
 
   setProgExercise(formIndicator: FormIndicator) {
@@ -83,6 +97,9 @@ export class MyProgExerciseComponent implements OnInit {
   setTargetSet(formIndicator: FormIndicator) {
     this.targetSet = formIndicator.object;
     this.targetSetAction = formIndicator.actionType;
-    this.targetSetModalTitle = "Set N° " + formIndicator.object.index;
+    if (formIndicator.object === undefined)
+      this.targetSetModalTitle = "Add new set";
+    else
+      this.targetSetModalTitle = "Set N° " + formIndicator.object.index;
   }
 }
