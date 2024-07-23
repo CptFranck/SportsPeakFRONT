@@ -1,4 +1,4 @@
-import {Component, inject, OnInit, TemplateRef, ViewChild} from '@angular/core';
+import {Component, inject, OnDestroy, OnInit, TemplateRef, ViewChild} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {ModalComponent} from "../../../../components/modal/modal/modal.component";
 import {MusclesArrayComponent} from "../muscles-array/muscles-array.component";
@@ -39,7 +39,7 @@ import {Subject, takeUntil} from "rxjs";
   ],
   templateUrl: './muscles.component.html',
 })
-export class MusclesComponent implements OnInit {
+export class MusclesComponent implements OnInit, OnDestroy {
   loading: boolean = true;
   muscles: Muscle[] = [];
   displayedMuscles: Muscle[] = [];
@@ -64,6 +64,11 @@ export class MusclesComponent implements OnInit {
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe((isLoading: boolean) =>
         this.loading = isLoading);
+  }
+
+  ngOnDestroy() {
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
   }
 
   setMuscle(formIndicator: FormIndicator) {
