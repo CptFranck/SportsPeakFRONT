@@ -36,8 +36,7 @@ export class RoleDeleteFormComponent implements OnInit, OnDestroy {
 
   onSubmit() {
     if (!this.role) return;
-    console.log("del")
-    // this.roleService.deleteRole(this.role);
+    this.roleService.deleteRole(this.role);
     this.btnCloseRef.click();
   }
 }
