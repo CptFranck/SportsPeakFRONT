@@ -1,6 +1,6 @@
-import {AfterViewInit, Component, inject, Input, OnInit} from '@angular/core';
+import {Component, inject, Input, OnDestroy, OnInit} from '@angular/core';
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
-import {Observable, Subscription} from "rxjs";
+import {Observable, Subject, takeUntil} from "rxjs";
 import {NgIf} from "@angular/common";
 import {InputControlComponent} from "../../../../../components/input-control/input-control.component";
 import {Privilege} from "../../../../../interface/dto/privilege";
@@ -8,6 +8,7 @@ import {PrivilegeService} from "../../../../../services/privilege/privilege.serv
 import {Role} from "../../../../../interface/dto/role";
 import {RoleSelectorComponent} from "../../../../../components/selectors/role-selector/role-selector.component";
 import {UserLoggedService} from "../../../../../services/user-logged/user-logged.service";
+import {ActionType} from "../../../../../enum/action-type";
 
 @Component({
   selector: 'app-privilege-entity-form',
@@ -20,17 +21,17 @@ import {UserLoggedService} from "../../../../../services/user-logged/user-logged
   ],
   templateUrl: './privilege-entity-form.component.html',
 })
-export class PrivilegeEntityFormComponent implements OnInit, AfterViewInit {
+export class PrivilegeEntityFormComponent implements OnInit, OnDestroy {
 
   privilege: Privilege | undefined;
   privilegeForm: FormGroup | null = null;
   submitInvalidForm: boolean = false;
-  eventsSubscription!: Subscription;
-
   isAdmin: boolean = false;
-  @Input() btnCloseRef!: HTMLButtonElement;
-  @Input() submitEvents!: Observable<void> | undefined;
 
+  @Input() btnCloseRef!: HTMLButtonElement;
+  @Input() submitEventActionType$!: Observable<ActionType> | undefined;
+
+  private unsubscribe$: Subject<void> = new Subject<void>();
   private privilegeService: PrivilegeService = inject(PrivilegeService);
   private userLoggedService: UserLoggedService = inject(UserLoggedService);
 
@@ -40,13 +41,23 @@ export class PrivilegeEntityFormComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {
-    this.userLoggedService.currentUser.subscribe(() => this.isAdmin = this.userLoggedService.isAdmin());
+    this.userLoggedService.currentUser
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe(() => this.isAdmin =
+        this.userLoggedService.isAdmin());
+    if (this.submitEventActionType$)
+      this.submitEventActionType$
+        .pipe(takeUntil(this.unsubscribe$))
+        .subscribe((actionType: ActionType) => {
+          if (actionType === ActionType.create || actionType === ActionType.update)
+            this.onSubmit()
+        });
     this.initializePrivilegeForm();
   }
 
-  ngAfterViewInit() {
-    if (this.submitEvents)
-      this.eventsSubscription = this.submitEvents.subscribe(() => this.onSubmit());
+  ngOnDestroy() {
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
   }
 
   initializePrivilegeForm() {
