@@ -18,7 +18,7 @@
                                  [submitEventActionType$]="submitEventActionType$"
   />
   <app-exercise-type-details-display *ngIf="action === ActionType.read"
-                                     [exerciseTypeInput]="exerciseType"/>
+                                     [exerciseType]="exerciseType"/>
   <app-exercise-type-delete-form *ngIf="action === ActionType.delete"
                                  [btnCloseRef]="btnClose"
                                  [exerciseType]="exerciseType"

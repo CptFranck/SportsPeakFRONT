@@ -12,11 +12,6 @@ import {Privilege} from "../../../../../interface/dto/privilege";
   templateUrl: './privilege-detail-display.component.html',
 })
 export class PrivilegeDetailDisplayComponent {
-  privilege: Privilege | undefined;
-
+  @Input() privilege: Privilege | undefined;
   @Input() action!: string;
-
-  @Input() set privilegeInput(value: Privilege | undefined) {
-    this.privilege = value;
-  }
 }

@@ -20,11 +20,6 @@ import {
   templateUrl: './muscle-details-display.component.html',
 })
 export class MuscleDetailsDisplayComponent {
-  muscle: Muscle | undefined;
-
+  @Input() muscle: Muscle | undefined;
   @Input() action!: string;
-
-  @Input() set muscleInput(value: Muscle | undefined) {
-    this.muscle = value;
-  }
 }

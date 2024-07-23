@@ -12,10 +12,6 @@ import {Exercise} from "../../../../../interface/dto/exercise";
   templateUrl: './exercise-details-display.component.html',
 })
 export class ExerciseDetailsDisplayComponent {
-  exercise: Exercise | undefined;
+  @Input() exercise: Exercise | undefined;
   @Input() action!: string;
-
-  @Input() set exerciseInput(value: Exercise | undefined) {
-    this.exercise = value;
-  }
 }

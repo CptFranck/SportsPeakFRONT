@@ -12,10 +12,6 @@ import {ExerciseType} from "../../../../../interface/dto/exercise-type";
   templateUrl: './exercise-type-details-display.component.html',
 })
 export class ExerciseTypeDetailsDisplayComponent {
-  exerciseType: ExerciseType | undefined;
+  @Input() exerciseType: ExerciseType | undefined;
   @Input() action!: string;
-
-  @Input() set exerciseTypeInput(value: ExerciseType | undefined) {
-    this.exerciseType = value;
-  }
 }
