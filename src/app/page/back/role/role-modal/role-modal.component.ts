@@ -1,4 +1,4 @@
-import {Component, Input, TemplateRef, ViewChild} from '@angular/core';
+import {Component, EventEmitter, Input, Output, TemplateRef, ViewChild} from '@angular/core';
 import {RoleDeleteFormComponent} from "../role-modal-components/role-delete-form/role-delete-form.component";
 import {
   RoleDetailsDisplayComponent
@@ -18,6 +18,7 @@ import {
 } from "../../../docs/muscles/muscle-modal-components/muscle-delete-form/muscle-delete-form.component";
 import {Role} from "../../../../interface/dto/role";
 import {ActionType} from "../../../../enum/action-type";
+import {FormIndicator} from "../../../../interface/utils/form-indicator";
 
 @Component({
   selector: 'app-role-modal',
@@ -41,13 +42,16 @@ export class RoleModalComponent {
   @Input() role: Role | undefined;
   @Input() action!: ActionType;
 
+  @Output() roleAction: EventEmitter<FormIndicator> = new EventEmitter<FormIndicator>();
+
   @ViewChild("modalTemplate") modalTemplate!: TemplateRef<any>;
 
   protected readonly ActionType = ActionType;
 
-  onClick(value: undefined) {
-    this.role = value;
-    this.action = ActionType.create;
-    this.modalTitle = "Add new role";
+  onClick() {
+    this.roleAction.emit({
+      object: undefined,
+      actionType: ActionType.create
+    })
   }
 }
