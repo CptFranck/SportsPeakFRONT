@@ -1,4 +1,4 @@
-import {Component, Input, TemplateRef, ViewChild} from '@angular/core';
+import {Component, EventEmitter, Input, Output, TemplateRef, ViewChild} from '@angular/core';
 import {ActionType} from "../../../../enum/action-type";
 import {ModalComponent} from "../../../../components/modal/modal/modal.component";
 import {
@@ -20,6 +20,8 @@ import {
   TargetSetEntityFormComponent
 } from "../target-set-modal-components/target-set-entity-form/target-set-entity-form.component";
 import {ProgExercise} from "../../../../interface/dto/prog-exercise";
+import {TargetSetLogsComponent} from "../target-set-modal-components/target-set-logs/target-set-logs.component";
+import {FormIndicator} from "../../../../interface/utils/form-indicator";
 
 @Component({
   selector: 'app-target-set-modal',
@@ -32,7 +34,8 @@ import {ProgExercise} from "../../../../interface/dto/prog-exercise";
     NgIf,
     ModalButtonComponent,
     TargetSetDeleteFormComponent,
-    TargetSetEntityFormComponent
+    TargetSetEntityFormComponent,
+    TargetSetLogsComponent
   ],
   templateUrl: './target-set-modal.component.html',
 })
@@ -43,13 +46,16 @@ export class TargetSetModalComponent {
   @Input() progExercise: ProgExercise | undefined;
   @Input() action!: ActionType;
 
+  @Output() targetSetAction: EventEmitter<FormIndicator> = new EventEmitter();
+
   @ViewChild("targetSetModalTemplate") modalTemplate!: TemplateRef<any>;
 
   protected readonly ActionType = ActionType;
 
-  onClick(value: undefined) {
-    this.targetSet = value;
-    this.action = ActionType.create;
-    this.modalTitle = "Add new set";
+  onClick() {
+    this.targetSetAction.emit({
+      object: undefined,
+      actionType: ActionType.create
+    })
   }
 }
