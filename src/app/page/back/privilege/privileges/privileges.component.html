@@ -6,7 +6,8 @@
         <h2>Privileges saved in database</h2>
       </div>
       <div class="col-2">
-        <app-privilege-modal [action]="action"
+        <app-privilege-modal (privilegeAction)="setPrivilege($event)"
+                             [action]="action"
                              [modalTitle]="modalTitle"
                              [privilegeModalId]="privilegeModalId"
                              [privilege]="privilege"

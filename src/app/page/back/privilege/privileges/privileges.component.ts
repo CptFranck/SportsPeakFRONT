@@ -1,4 +1,4 @@
-import {Component, inject, OnInit, TemplateRef, ViewChild} from '@angular/core';
+import {Component, inject, OnDestroy, OnInit, TemplateRef, ViewChild} from '@angular/core';
 import {PrivilegesArrayComponent} from "../privileges-array/privileges-array.component";
 import {PrivilegeModalComponent} from "../privilege-modal/privilege-modal.component";
 import {LoadingComponent} from "../../../../components/loading/loading.component";
@@ -8,6 +8,7 @@ import {Privilege} from "../../../../interface/dto/privilege";
 import {ActionType} from "../../../../enum/action-type";
 import {PrivilegeService} from "../../../../services/privilege/privilege.service";
 import {FormIndicator} from "../../../../interface/utils/form-indicator";
+import {Subject, takeUntil} from "rxjs";
 
 @Component({
   selector: 'app-privileges',
@@ -21,25 +22,41 @@ import {FormIndicator} from "../../../../interface/utils/form-indicator";
   ],
   templateUrl: './privileges.component.html',
 })
-export class PrivilegesComponent implements OnInit {
+export class PrivilegesComponent implements OnInit, OnDestroy {
   loading: boolean = true;
   privileges: Privilege[] = [];
   privilege: Privilege | undefined;
   action: ActionType = ActionType.create;
   modalTitle: string = "";
   privilegeModalId: string = "privilegeModal";
+
   @ViewChild("modalTemplate") modalTemplate!: TemplateRef<any>;
 
+  private unsubscribe$: Subject<void> = new Subject<void>();
   private privilegeService: PrivilegeService = inject(PrivilegeService);
 
   ngOnInit(): void {
-    this.privilegeService.privileges.subscribe((privileges: Privilege[]) => this.privileges = privileges);
-    this.privilegeService.isLoading.subscribe((isLoading: boolean) => this.loading = isLoading);
+    this.privilegeService.privileges
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe((privileges: Privilege[]) =>
+        this.privileges = privileges);
+    this.privilegeService.isLoading
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe((isLoading: boolean) =>
+        this.loading = isLoading);
+  }
+
+  ngOnDestroy() {
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
   }
 
   setPrivilege(formIndicator: FormIndicator) {
     this.privilege = formIndicator.object;
     this.action = formIndicator.actionType;
-    this.modalTitle = formIndicator.object.name;
+    if (formIndicator.object === undefined)
+      this.modalTitle = "Add new muscle";
+    else
+      this.modalTitle = formIndicator.object.name;
   }
 }
