@@ -6,7 +6,7 @@
         <h2>Roles saved in database</h2>
       </div>
       <div class="col-2">
-        <app-role-modal [action]="action"
+        <app-role-modal (roleAction)="setRole($event)" [action]="action"
                         [modalTitle]="modalTitle"
                         [roleModalId]="muscleModalId"
                         [role]="role"
