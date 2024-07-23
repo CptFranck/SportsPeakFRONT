@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, inject, Input, OnInit} from '@angular/core';
+import {Component, inject, Input, OnDestroy, OnInit} from '@angular/core';
 import {ExerciseSelectComponent} from "../../../../../components/selects/exercise-select/exercise-select.component";
 import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
 import {InputControlComponent} from "../../../../../components/input-control/input-control.component";
@@ -6,7 +6,7 @@ import {NgIf} from "@angular/common";
 import {
   VisibilitySelectComponent
 } from "../../../../../components/selects/visibility-select/visibility-select.component";
-import {Observable, Subscription} from "rxjs";
+import {Observable, Subject, takeUntil} from "rxjs";
 import {TargetSet} from "../../../../../interface/dto/target-set";
 import {WeightUnit} from "../../../../../interface/enum/weightUnit";
 import {Duration} from "../../../../../interface/dto/duration";
@@ -32,17 +32,17 @@ import {TargetSetService} from "../../../../../services/target-set/target-set.se
   ],
   templateUrl: './target-set-entity-form.component.html',
 })
-export class TargetSetEntityFormComponent implements OnInit, AfterViewInit {
+export class TargetSetEntityFormComponent implements OnInit, OnDestroy {
   targetSet: TargetSet | undefined;
   progExercise: ProgExercise | undefined;
   targetSetForm: FormGroup | null = null;
   submitInvalidForm: boolean = false;
-  eventsSubscription!: Subscription;
 
   @Input() actionType!: ActionType;
   @Input() btnCloseRef!: HTMLButtonElement;
-  @Input() submitEvents!: Observable<void> | undefined;
+  @Input() submitEventActionType$!: Observable<ActionType> | undefined;
 
+  private unsubscribe$: Subject<void> = new Subject<void>();
   private targetSetService: TargetSetService = inject(TargetSetService);
 
   @Input() set progExerciseInput(value: ProgExercise | undefined) {
@@ -57,11 +57,20 @@ export class TargetSetEntityFormComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
     this.initializeTargetSetForm();
+    if (this.submitEventActionType$)
+      this.submitEventActionType$
+        .pipe(takeUntil(this.unsubscribe$))
+        .subscribe((actionType: ActionType) => {
+          if (actionType === ActionType.create ||
+            actionType === ActionType.update ||
+            actionType === ActionType.addEvolution)
+            this.onSubmit();
+        });
   }
 
-  ngAfterViewInit() {
-    if (this.submitEvents)
-      this.eventsSubscription = this.submitEvents.subscribe(() => this.onSubmit());
+  ngOnDestroy() {
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
   }
 
   initializeTargetSetForm() {
@@ -131,9 +140,11 @@ export class TargetSetEntityFormComponent implements OnInit, AfterViewInit {
     if (this.targetSetForm.valid) {
       this.submitInvalidForm = false;
       if (!this.targetSetForm.value.id) {
-        this.targetSetService.addTargetSet(this.targetSetForm);
+        console.log("add")
+        // this.targetSetService.addTargetSet(this.targetSetForm);
       } else {
-        this.targetSetService.modifyTargetSet(this.targetSetForm);
+        console.log("mod")
+        // this.targetSetService.modifyTargetSet(this.targetSetForm);
       }
       this.btnCloseRef.click();
     } else {
