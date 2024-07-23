@@ -1,4 +1,4 @@
-import {Component, inject, TemplateRef} from '@angular/core';
+import {Component, inject, OnDestroy, OnInit, TemplateRef} from '@angular/core';
 import {UserLoggedService} from "../../../services/user-logged/user-logged.service";
 import {User} from "../../../interface/dto/user";
 import {ActionType} from "../../../enum/action-type";
@@ -18,6 +18,7 @@ import {
 } from "../../back/user-management/user-modal-components/user-entity-form/user-roles-form.component";
 import {UserModalComponent} from "../user-modal/user-modal.component";
 import {FormIndicator} from "../../../interface/utils/form-indicator";
+import {Subject, takeUntil} from "rxjs";
 
 @Component({
   selector: 'app-user',
@@ -34,7 +35,7 @@ import {FormIndicator} from "../../../interface/utils/form-indicator";
   ],
   templateUrl: './user.component.html',
 })
-export class UserComponent {
+export class UserComponent implements OnInit, OnDestroy {
 
   user: User | undefined = undefined;
   action: ActionType = ActionType.update;
@@ -44,12 +45,21 @@ export class UserComponent {
   modalTitle: string = "Update User";
 
   protected readonly ActionType = ActionType;
+
+  private unsubscribe$: Subject<void> = new Subject<void>();
   private userLoggedService: UserLoggedService = inject(UserLoggedService);
 
-  constructor() {
-    this.userLoggedService.currentUser.subscribe((user: User | undefined) => {
-      this.user = user;
-    })
+  ngOnInit() {
+    this.userLoggedService.currentUser
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe((user: User | undefined) => {
+        this.user = user;
+      })
+  }
+
+  ngOnDestroy() {
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
   }
 
   setUser(formIndicator: FormIndicator) {
