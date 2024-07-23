@@ -15,14 +15,10 @@ import {Dictionary} from "../../../../../interface/utils/dictionary";
   templateUrl: './user-details-display.component.html',
 })
 export class UserDetailsDisplayComponent implements OnChanges {
-  user: User | undefined;
   rolePrivileges: Dictionary<string> = {};
+
+  @Input() user: User | undefined;
   @Input() action!: string;
-
-
-  @Input() set userInput(value: User | undefined) {
-    this.user = value;
-  }
 
   ngOnChanges(): void {
     if (this.user) {
