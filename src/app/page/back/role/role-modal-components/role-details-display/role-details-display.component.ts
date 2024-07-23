@@ -12,11 +12,6 @@ import {Role} from "../../../../../interface/dto/role";
   templateUrl: './role-details-display.component.html',
 })
 export class RoleDetailsDisplayComponent {
-  role: Role | undefined;
-
+  @Input() role: Role | undefined;
   @Input() action!: string;
-
-  @Input() set roleInput(value: Role | undefined) {
-    this.role = value;
-  }
 }
