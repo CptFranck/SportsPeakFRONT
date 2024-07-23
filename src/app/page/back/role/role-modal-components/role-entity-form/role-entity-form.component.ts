@@ -100,11 +100,9 @@ export class RoleEntityFormComponent implements OnInit, OnDestroy {
     if (this.roleForm.valid) {
       this.submitInvalidForm = false;
       if (!this.roleForm.value.id) {
-        console.log("add")
-        // this.roleService.addRole(this.roleForm);
+        this.roleService.addRole(this.roleForm);
       } else {
-        console.log("mod")
-        // this.roleService.modifyRole(this.roleForm);
+        this.roleService.modifyRole(this.roleForm);
       }
       this.btnCloseRef.click();
     } else {
