@@ -36,7 +36,7 @@ export class TargetSetDeleteFormComponent implements OnInit, OnDestroy {
 
   onSubmit() {
     if (!this.targetSet) return;
-    // this.targetSetService.deleteTargetSet(this.targetSet);
+    this.targetSetService.deleteTargetSet(this.targetSet);
     this.btnCloseRef.click();
   }
 }
