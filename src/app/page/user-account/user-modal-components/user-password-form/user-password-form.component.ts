@@ -43,7 +43,7 @@ export class UserPasswordFormComponent implements OnInit, OnDestroy {
         .pipe(takeUntil(this.unsubscribe$))
         .subscribe((actionType: ActionType) => {
           if (actionType === ActionType.update && this.modification === ModificationField.password)
-            this.onSubmit()
+            this.onSubmit();
         });
   }
 

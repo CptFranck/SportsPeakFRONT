@@ -25,7 +25,7 @@ export class RoleDeleteFormComponent implements OnInit, OnDestroy {
         .pipe(takeUntil(this.unsubscribe$))
         .subscribe((actionType: ActionType) => {
           if (actionType === ActionType.delete)
-            this.onSubmit()
+            this.onSubmit();
         });
   }
 

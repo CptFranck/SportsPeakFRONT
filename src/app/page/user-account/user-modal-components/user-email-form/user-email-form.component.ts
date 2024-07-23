@@ -48,7 +48,7 @@ export class UserEmailFormComponent implements OnInit, OnDestroy {
         .pipe(takeUntil(this.unsubscribe$))
         .subscribe((actionType: ActionType) => {
           if (actionType === ActionType.update && this.modification === ModificationField.email)
-            this.onSubmit()
+            this.onSubmit();
         });
   }
 

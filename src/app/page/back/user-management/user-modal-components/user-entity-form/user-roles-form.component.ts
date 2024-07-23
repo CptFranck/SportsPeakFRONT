@@ -50,7 +50,7 @@ export class UserRolesFormComponent implements OnInit, OnDestroy {
         .subscribe((actionType: ActionType) => {
           console.log(actionType)
           if (actionType === ActionType.update)
-            this.onSubmit()
+            this.onSubmit();
         });
     this.initializeUserRoleForm();
   }

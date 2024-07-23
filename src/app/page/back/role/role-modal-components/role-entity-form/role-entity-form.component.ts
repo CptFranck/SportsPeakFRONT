@@ -59,7 +59,7 @@ export class RoleEntityFormComponent implements OnInit, OnDestroy {
         .pipe(takeUntil(this.unsubscribe$))
         .subscribe((actionType: ActionType) => {
           if (actionType === ActionType.create || actionType === ActionType.update)
-            this.onSubmit()
+            this.onSubmit();
         });
     this.initializeRoleForm();
   }
