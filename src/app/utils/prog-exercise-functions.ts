@@ -118,7 +118,6 @@ function getTargetSetUpdate(targetSetUpToDate: TargetSet, progExercise: ProgExer
 }
 
 export function getUpToDateTargetSets(progExercise: ProgExercise): TargetSet[] {
-  progExercise.targetSets.forEach(value => console.log(value.targetSetUpdate))
   return progExercise.targetSets.filter((targetSet: TargetSet) => targetSet.targetSetUpdate === null)
 }
 

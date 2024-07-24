@@ -9,6 +9,5 @@ export function debugFormGroupInvalidField(formGroup: FormGroup) {
         invalid.push(name);
       }
     }
-    console.log(invalid);
   }
 }

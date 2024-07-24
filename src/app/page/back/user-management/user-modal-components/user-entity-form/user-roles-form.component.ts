@@ -48,7 +48,6 @@ export class UserRolesFormComponent implements OnInit, OnDestroy {
       this.submitEvents
         .pipe(takeUntil(this.unsubscribe$))
         .subscribe((actionType: ActionType) => {
-          console.log(actionType)
           if (actionType === ActionType.update)
             this.onSubmit();
         });

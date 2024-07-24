@@ -52,7 +52,6 @@ export class ProgExercisesArrayComponent implements OnChanges {
         );
       }
       this.progExerciseDetails[progExercise.id] = detail;
-      console.log(this.progExerciseDetails)
     });
   }
 
