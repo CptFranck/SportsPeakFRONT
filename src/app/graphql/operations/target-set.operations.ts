@@ -19,6 +19,8 @@ export const GET_TARGET_SET_BY_PROG_EXERCISE_ID = gql`
         minutes
         seconds
       }
+      creationDate
+      state
       targetSetUpdate {
         id
       }
@@ -68,6 +70,8 @@ export const ADD_TARGET_SET = gql`
         minutes
         seconds
       }
+      creationDate
+      state
       targetSetUpdate {
         id
       }
@@ -117,6 +121,8 @@ export const MOD_TARGET_SET = gql`
         minutes
         seconds
       }
+      creationDate
+      state
       targetSetUpdate {
         id
       }

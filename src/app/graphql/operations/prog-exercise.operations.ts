@@ -34,6 +34,7 @@ export const GET_PROG_EXERCISES = gql`
           seconds
         }
         creationDate
+        state
         targetSetUpdate {
           id
         }
@@ -78,6 +79,7 @@ export const GET_PROG_EXERCISE_BY_ID = gql`
           seconds
         }
         creationDate
+        state
         targetSetUpdate {
           id
         }
@@ -137,6 +139,7 @@ export const GET_USER_PROG_EXERCISES = gql`
           seconds
         }
         creationDate
+        state
         targetSetUpdate {
           id
         }
@@ -187,6 +190,7 @@ export const ADD_PROG_EXERCISE = gql`
           seconds
         }
         creationDate
+        state
         targetSetUpdate {
           id
         }
@@ -235,6 +239,7 @@ export const MOD_PROG_EXERCISE = gql`
           seconds
         }
         creationDate
+        state
         targetSetUpdate {
           id
         }
@@ -283,6 +288,7 @@ export const MOD_PROG_EXERCISE_TRUST_LABEL = gql`
           seconds
         }
         creationDate
+        state
         targetSetUpdate {
           id
         }
