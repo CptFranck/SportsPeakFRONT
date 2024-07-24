@@ -9,8 +9,8 @@ import {
   PrivilegeSelectorComponent
 } from "../../../../components/selectors/privilege-selector/privilege-selector.component";
 import {UserSelectorComponent} from "../../../../components/selectors/user-selector/user-selector.component";
-import {ModificationField} from "../../../../enum/modification-field";
-import {ActionType} from "../../../../enum/action-type";
+import {ModificationField} from "../../../../interface/enum/modification-field";
+import {ActionType} from "../../../../interface/enum/action-type";
 
 @Component({
   selector: 'app-user-email-form',

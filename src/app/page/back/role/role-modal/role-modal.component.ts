@@ -17,7 +17,7 @@ import {
   muscleDeleteFormComponent
 } from "../../../docs/muscles/muscle-modal-components/muscle-delete-form/muscle-delete-form.component";
 import {Role} from "../../../../interface/dto/role";
-import {ActionType} from "../../../../enum/action-type";
+import {ActionType} from "../../../../interface/enum/action-type";
 import {FormIndicator} from "../../../../interface/utils/form-indicator";
 
 @Component({

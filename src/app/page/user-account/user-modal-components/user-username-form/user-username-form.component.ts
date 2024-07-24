@@ -5,8 +5,8 @@ import {Observable, Subject, takeUntil} from "rxjs";
 import {UserService} from "../../../../services/user/user.service";
 import {InputControlComponent} from "../../../../components/input-control/input-control.component";
 import {NgIf} from "@angular/common";
-import {ActionType} from "../../../../enum/action-type";
-import {ModificationField} from "../../../../enum/modification-field";
+import {ActionType} from "../../../../interface/enum/action-type";
+import {ModificationField} from "../../../../interface/enum/modification-field";
 
 @Component({
   selector: 'app-user-username-form',

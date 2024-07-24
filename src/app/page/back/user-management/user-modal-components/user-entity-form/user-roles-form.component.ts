@@ -8,7 +8,7 @@ import {UserService} from "../../../../../services/user/user.service";
 import {Role} from "../../../../../interface/dto/role";
 import {RoleSelectorComponent} from "../../../../../components/selectors/role-selector/role-selector.component";
 import {UserLoggedService} from "../../../../../services/user-logged/user-logged.service";
-import {ActionType} from "../../../../../enum/action-type";
+import {ActionType} from "../../../../../interface/enum/action-type";
 
 @Component({
   selector: 'app-user-roles-form',

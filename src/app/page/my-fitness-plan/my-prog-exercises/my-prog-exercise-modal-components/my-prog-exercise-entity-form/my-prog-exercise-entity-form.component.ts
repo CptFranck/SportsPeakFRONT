@@ -12,7 +12,7 @@ import {
   VisibilitySelectComponent
 } from "../../../../../components/selects/visibility-select/visibility-select.component";
 import {ProgExerciseService} from "../../../../../services/prog-exercise/prog-exercise.service";
-import {ActionType} from "../../../../../enum/action-type";
+import {ActionType} from "../../../../../interface/enum/action-type";
 
 @Component({
   selector: 'app-my-prog-exercise-entity-form',

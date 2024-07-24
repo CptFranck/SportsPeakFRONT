@@ -2,8 +2,8 @@ import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {ModalButtonComponent} from "../../../../components/modal/modal-button/modal-button.component";
 import {User} from "../../../../interface/dto/user";
 import {FormIndicator} from "../../../../interface/utils/form-indicator";
-import {ActionType} from "../../../../enum/action-type";
-import {ModificationField} from "../../../../enum/modification-field";
+import {ActionType} from "../../../../interface/enum/action-type";
+import {ModificationField} from "../../../../interface/enum/modification-field";
 
 @Component({
   selector: 'app-user-security',

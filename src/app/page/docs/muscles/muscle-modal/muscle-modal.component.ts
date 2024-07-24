@@ -1,5 +1,5 @@
 import {Component, EventEmitter, inject, Input, OnDestroy, OnInit, Output, TemplateRef, ViewChild} from '@angular/core';
-import {ActionType} from "../../../../enum/action-type";
+import {ActionType} from "../../../../interface/enum/action-type";
 import {ModalButtonComponent} from "../../../../components/modal/modal-button/modal-button.component";
 import {ModalComponent} from "../../../../components/modal/modal/modal.component";
 import {

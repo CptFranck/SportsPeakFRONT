@@ -21,7 +21,7 @@ import {
   PrivilegeEntityFormComponent
 } from "../privilege-modal-components/privilege-entity-form/privilege-entity-form.component";
 import {Privilege} from "../../../../interface/dto/privilege";
-import {ActionType} from "../../../../enum/action-type";
+import {ActionType} from "../../../../interface/enum/action-type";
 import {FormIndicator} from "../../../../interface/utils/form-indicator";
 
 @Component({

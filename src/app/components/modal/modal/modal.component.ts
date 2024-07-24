@@ -1,7 +1,7 @@
 import {Component, ElementRef, Input, TemplateRef, ViewChild} from '@angular/core';
 import {NgIf, NgTemplateOutlet} from "@angular/common";
 import {Subject} from "rxjs";
-import {ActionType} from "../../../enum/action-type";
+import {ActionType} from "../../../interface/enum/action-type";
 
 @Component({
   selector: 'app-modal',

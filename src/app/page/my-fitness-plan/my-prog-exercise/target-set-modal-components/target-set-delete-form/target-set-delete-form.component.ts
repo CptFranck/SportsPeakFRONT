@@ -2,7 +2,7 @@ import {Component, inject, Input, OnDestroy, OnInit} from '@angular/core';
 import {Observable, Subject, takeUntil} from "rxjs";
 import {TargetSet} from "../../../../../interface/dto/target-set";
 import {TargetSetService} from "../../../../../services/target-set/target-set.service";
-import {ActionType} from "../../../../../enum/action-type";
+import {ActionType} from "../../../../../interface/enum/action-type";
 
 @Component({
   selector: 'app-target-set-delete-form',

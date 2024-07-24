@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {ModalButtonComponent} from "../../../modal/modal-button/modal-button.component";
 import {FormIndicator} from "../../../../interface/utils/form-indicator";
-import {ActionType} from "../../../../enum/action-type";
+import {ActionType} from "../../../../interface/enum/action-type";
 import {TargetSet} from "../../../../interface/dto/target-set";
 import {
   getStringTime,

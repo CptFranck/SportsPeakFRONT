@@ -5,8 +5,8 @@ import {User} from "../../../../interface/dto/user";
 import {Observable, Subject, takeUntil} from "rxjs";
 import {UserService} from "../../../../services/user/user.service";
 import {NgIf} from "@angular/common";
-import {ModificationField} from "../../../../enum/modification-field";
-import {ActionType} from "../../../../enum/action-type";
+import {ModificationField} from "../../../../interface/enum/modification-field";
+import {ActionType} from "../../../../interface/enum/action-type";
 
 @Component({
   selector: 'app-user-name-form',

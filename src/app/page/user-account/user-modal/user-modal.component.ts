@@ -1,10 +1,10 @@
 import {Component, Input, TemplateRef, ViewChild} from '@angular/core';
 import {User} from "../../../interface/dto/user";
-import {ActionType} from "../../../enum/action-type";
+import {ActionType} from "../../../interface/enum/action-type";
 import {ModalComponent} from "../../../components/modal/modal/modal.component";
 import {UserEmailFormComponent} from "../user-modal-components/user-email-form/user-email-form.component";
 import {NgIf} from "@angular/common";
-import {ModificationField} from "../../../enum/modification-field";
+import {ModificationField} from "../../../interface/enum/modification-field";
 import {UserUsernameFormComponent} from "../user-modal-components/user-username-form/user-username-form.component";
 import {UserNameFormComponent} from "../user-modal-components/user-name-form/user-name-form.component";
 import {UserPasswordFormComponent} from "../user-modal-components/user-password-form/user-password-form.component";

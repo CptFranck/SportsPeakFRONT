@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, Output, TemplateRef, ViewChild} from '@angular/core';
-import {ActionType} from "../../../../enum/action-type";
+import {ActionType} from "../../../../interface/enum/action-type";
 import {ModalComponent} from "../../../../components/modal/modal/modal.component";
 import {
   MyProgExerciseDeleteFormComponent

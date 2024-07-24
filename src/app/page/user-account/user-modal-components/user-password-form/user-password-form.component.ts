@@ -6,8 +6,8 @@ import {UserService} from "../../../../services/user/user.service";
 import {InputControlComponent} from "../../../../components/input-control/input-control.component";
 import {NgIf} from "@angular/common";
 import {confirmValidator} from "../../../../validators/confirmValidator";
-import {ModificationField} from "../../../../enum/modification-field";
-import {ActionType} from "../../../../enum/action-type";
+import {ModificationField} from "../../../../interface/enum/modification-field";
+import {ActionType} from "../../../../interface/enum/action-type";
 
 @Component({
   selector: 'app-user-password-form',

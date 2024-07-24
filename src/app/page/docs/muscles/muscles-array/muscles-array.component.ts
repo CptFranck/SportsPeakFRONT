@@ -4,7 +4,7 @@ import {Muscle} from "../../../../interface/dto/muscle";
 import {ModalButtonComponent} from "../../../../components/modal/modal-button/modal-button.component";
 import {ModalComponent} from "../../../../components/modal/modal/modal.component";
 import {FormIndicator} from "../../../../interface/utils/form-indicator";
-import {ActionType} from "../../../../enum/action-type";
+import {ActionType} from "../../../../interface/enum/action-type";
 import {UserLoggedService} from "../../../../services/user-logged/user-logged.service";
 import {Dictionary} from "../../../../interface/utils/dictionary";
 

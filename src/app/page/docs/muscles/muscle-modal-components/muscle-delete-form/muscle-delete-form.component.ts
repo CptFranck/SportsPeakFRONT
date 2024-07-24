@@ -3,7 +3,7 @@ import {NgForOf} from "@angular/common";
 import {Muscle} from "../../../../../interface/dto/muscle";
 import {Observable, Subject, takeUntil} from "rxjs";
 import {MuscleService} from "../../../../../services/muscle/muscle.service";
-import {ActionType} from "../../../../../enum/action-type";
+import {ActionType} from "../../../../../interface/enum/action-type";
 
 @Component({
   selector: 'app-muscle-delete-form',

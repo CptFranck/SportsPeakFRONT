@@ -1,6 +1,6 @@
 import {Component, inject, OnInit, TemplateRef, ViewChild} from '@angular/core';
 import {ProgExercise} from "../../../../interface/dto/prog-exercise";
-import {ActionType} from "../../../../enum/action-type";
+import {ActionType} from "../../../../interface/enum/action-type";
 import {ProgExerciseService} from "../../../../services/prog-exercise/prog-exercise.service";
 import {FormIndicator} from "../../../../interface/utils/form-indicator";
 import {LoadingComponent} from "../../../../components/loading/loading.component";

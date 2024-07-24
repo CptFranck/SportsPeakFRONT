@@ -1,7 +1,7 @@
 import {Component, EventEmitter, inject, Input, OnChanges, Output} from '@angular/core';
 import {FormIndicator} from "../../../../interface/utils/form-indicator";
 import {UserLoggedService} from "../../../../services/user-logged/user-logged.service";
-import {ActionType} from "../../../../enum/action-type";
+import {ActionType} from "../../../../interface/enum/action-type";
 import {ModalButtonComponent} from "../../../../components/modal/modal-button/modal-button.component";
 import {NgForOf, NgIf} from "@angular/common";
 import {ProgExercise} from "../../../../interface/dto/prog-exercise";

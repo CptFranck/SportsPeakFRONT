@@ -15,7 +15,7 @@ import {
 } from "../../../../../components/selectors/privilege-selector/privilege-selector.component";
 import {UserSelectorComponent} from "../../../../../components/selectors/user-selector/user-selector.component";
 import {UserLoggedService} from "../../../../../services/user-logged/user-logged.service";
-import {ActionType} from "../../../../../enum/action-type";
+import {ActionType} from "../../../../../interface/enum/action-type";
 
 @Component({
   selector: 'app-role-entity-form',

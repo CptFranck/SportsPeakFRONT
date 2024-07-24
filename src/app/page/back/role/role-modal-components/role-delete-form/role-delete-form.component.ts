@@ -2,7 +2,7 @@ import {Component, inject, Input, OnDestroy, OnInit} from '@angular/core';
 import {Observable, Subject, takeUntil} from "rxjs";
 import {Role} from "../../../../../interface/dto/role";
 import {RoleService} from "../../../../../services/role/role.service";
-import {ActionType} from "../../../../../enum/action-type";
+import {ActionType} from "../../../../../interface/enum/action-type";
 
 @Component({
   selector: 'app-role-delete-form',

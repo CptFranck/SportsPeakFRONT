@@ -15,7 +15,7 @@ import {
   ExerciseTypeSelectorComponent
 } from "../../../../../components/selectors/exercise-type-selector/exercise-type-selector.component";
 import {UserLoggedService} from "../../../../../services/user-logged/user-logged.service";
-import {ActionType} from "../../../../../enum/action-type";
+import {ActionType} from "../../../../../interface/enum/action-type";
 
 @Component({
   selector: 'app-exercise-entity-form',

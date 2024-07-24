@@ -19,7 +19,7 @@ import {
   UserDeleteFormComponent
 } from "../../../user-account/user-modal-components/user-delete-form/user-delete-form.component";
 import {User} from "../../../../interface/dto/user";
-import {ActionType} from "../../../../enum/action-type";
+import {ActionType} from "../../../../interface/enum/action-type";
 
 @Component({
   selector: 'app-user-modal',

@@ -11,7 +11,7 @@ import {NgIf} from "@angular/common";
 import {
   muscleDeleteFormComponent
 } from "../../muscles/muscle-modal-components/muscle-delete-form/muscle-delete-form.component";
-import {ActionType} from "../../../../enum/action-type";
+import {ActionType} from "../../../../interface/enum/action-type";
 import {Exercise} from "../../../../interface/dto/exercise";
 import {
   ExerciseEntityFormComponent

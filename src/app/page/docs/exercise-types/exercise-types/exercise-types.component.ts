@@ -1,7 +1,7 @@
 import {Component, inject, OnDestroy, OnInit, TemplateRef, ViewChild} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {ExerciseType} from "../../../../interface/dto/exercise-type";
-import {ActionType} from "../../../../enum/action-type";
+import {ActionType} from "../../../../interface/enum/action-type";
 import {ExerciseTypeService} from "../../../../services/exercise-type/exercise-type.service";
 import {FormIndicator} from "../../../../interface/utils/form-indicator";
 import {AlertDisplayComponent} from "../../../../components/alert-display/alert-display.component";

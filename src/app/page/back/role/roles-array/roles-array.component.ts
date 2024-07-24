@@ -5,7 +5,7 @@ import {Role} from "../../../../interface/dto/role";
 import {FormIndicator} from "../../../../interface/utils/form-indicator";
 import {User} from "../../../../interface/dto/user";
 import {Muscle} from "../../../../interface/dto/muscle";
-import {ActionType} from "../../../../enum/action-type";
+import {ActionType} from "../../../../interface/enum/action-type";
 import {Dictionary} from "../../../../interface/utils/dictionary";
 
 @Component({

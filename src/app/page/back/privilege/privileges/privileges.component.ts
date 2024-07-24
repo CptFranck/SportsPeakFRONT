@@ -5,7 +5,7 @@ import {LoadingComponent} from "../../../../components/loading/loading.component
 import {MuscleModalComponent} from "../../../docs/muscles/muscle-modal/muscle-modal.component";
 import {MusclesArrayComponent} from "../../../docs/muscles/muscles-array/muscles-array.component";
 import {Privilege} from "../../../../interface/dto/privilege";
-import {ActionType} from "../../../../enum/action-type";
+import {ActionType} from "../../../../interface/enum/action-type";
 import {PrivilegeService} from "../../../../services/privilege/privilege.service";
 import {FormIndicator} from "../../../../interface/utils/form-indicator";
 import {Subject, takeUntil} from "rxjs";

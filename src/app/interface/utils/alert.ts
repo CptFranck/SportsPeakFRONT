@@ -1,5 +1,5 @@
-import {AlertType} from "../../enum/alert-type";
-import {AlertErrorType} from "../../enum/alert-error-type";
+import {AlertType} from "../enum/alert-type";
+import {AlertErrorType} from "../enum/alert-error-type";
 import {SourceLocation} from "graphql/language/location";
 
 export interface Alert {

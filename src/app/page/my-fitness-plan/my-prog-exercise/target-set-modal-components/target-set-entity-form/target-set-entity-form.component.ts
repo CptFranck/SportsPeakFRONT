@@ -10,7 +10,7 @@ import {Observable, Subject, takeUntil} from "rxjs";
 import {TargetSet} from "../../../../../interface/dto/target-set";
 import {WeightUnit} from "../../../../../interface/enum/weightUnit";
 import {Duration} from "../../../../../interface/dto/duration";
-import {ActionType} from "../../../../../enum/action-type";
+import {ActionType} from "../../../../../interface/enum/action-type";
 import {ProgExercise} from "../../../../../interface/dto/prog-exercise";
 import {WeightSelectComponent} from "../../../../../components/selects/weight-select/weight-select.component";
 import {DurationInputComponent} from "../../../../../components/input/duration-inputs/duration-input.component";

@@ -3,7 +3,7 @@ import {ModalButtonComponent} from "../../../../components/modal/modal-button/mo
 import {ModalComponent} from "../../../../components/modal/modal/modal.component";
 import {NgIf} from "@angular/common";
 import {ProgExercise} from "../../../../interface/dto/prog-exercise";
-import {ActionType} from "../../../../enum/action-type";
+import {ActionType} from "../../../../interface/enum/action-type";
 import {
   MyProgExerciseDeleteFormComponent
 } from "../../my-prog-exercises/my-prog-exercise-modal-components/my-prog-exercise-delete-form/my-prog-exercise-delete-form.component";

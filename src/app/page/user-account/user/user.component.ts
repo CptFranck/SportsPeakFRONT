@@ -1,9 +1,9 @@
 import {Component, inject, OnDestroy, OnInit, TemplateRef} from '@angular/core';
 import {UserLoggedService} from "../../../services/user-logged/user-logged.service";
 import {User} from "../../../interface/dto/user";
-import {ActionType} from "../../../enum/action-type";
+import {ActionType} from "../../../interface/enum/action-type";
 import {NgIf} from "@angular/common";
-import {ModificationField} from "../../../enum/modification-field";
+import {ModificationField} from "../../../interface/enum/modification-field";
 import {UserSecurityComponent} from "../user-information/user-security/user-security.component";
 import {
   UserDetailsDisplayComponent

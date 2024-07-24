@@ -1,6 +1,6 @@
 import {Component, inject, OnInit, TemplateRef, ViewChild} from '@angular/core';
 import {FormIndicator} from "../../../../interface/utils/form-indicator";
-import {ActionType} from "../../../../enum/action-type";
+import {ActionType} from "../../../../interface/enum/action-type";
 import {ProgExercise} from "../../../../interface/dto/prog-exercise";
 import {LoadingComponent} from "../../../../components/loading/loading.component";
 import {MuscleModalComponent} from "../../../docs/muscles/muscle-modal/muscle-modal.component";

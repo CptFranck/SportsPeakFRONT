@@ -7,7 +7,7 @@ import {
   ProgExerciseCardComponent
 } from "../../../../components/card/prog-exercise/prog-exercise-card/prog-exercise-card.component";
 import {FormIndicator} from "../../../../interface/utils/form-indicator";
-import {ActionType} from "../../../../enum/action-type";
+import {ActionType} from "../../../../interface/enum/action-type";
 import {LoadingComponent} from "../../../../components/loading/loading.component";
 import {
   ProgExerciseCardDetailsComponent

@@ -11,7 +11,7 @@ import {
 } from "../muscle-modal-components/muscle-details-display/muscle-details-display.component";
 import {muscleDeleteFormComponent} from "../muscle-modal-components/muscle-delete-form/muscle-delete-form.component";
 import {FormIndicator} from "../../../../interface/utils/form-indicator";
-import {ActionType} from "../../../../enum/action-type";
+import {ActionType} from "../../../../interface/enum/action-type";
 import {MuscleModalComponent} from "../muscle-modal/muscle-modal.component";
 import {AlertDisplayComponent} from "../../../../components/alert-display/alert-display.component";
 import {MuscleService} from "../../../../services/muscle/muscle.service";
