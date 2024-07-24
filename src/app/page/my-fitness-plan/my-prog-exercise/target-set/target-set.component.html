@@ -1,0 +1,48 @@
+<div class="small-middle-container">
+  <ul class="nav nav-tabs">
+    <li class="nav-item">
+      <button [attr.data-bs-target]="'#' + targetSetUsed" aria-selected="true"
+              class="nav-link link-secondary active"
+              data-bs-toggle="tab" id="home-tab"
+              type="button"
+      >
+        Currently used
+      </button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button [attr.data-bs-target]="'#' + targetSetUnused" aria-selected="false"
+              class="nav-link link-secondary"
+              data-bs-toggle="tab"
+              type="button"
+      >
+        Unused
+      </button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button [attr.data-bs-target]="'#' + targetSetHidden" aria-selected="false"
+              class="nav-link link-secondary"
+              data-bs-toggle="tab"
+              type="button"
+      >
+        Hidden
+      </button>
+    </li>
+  </ul>
+  <div class="border-right-0 tab-content rounded-bottom ">
+    <div [id]="targetSetUsed" class="tab-pane fade show active">
+      <p *ngIf=" progExerciseTargetSets.targetSetUsed.length === 0 ">No target set used</p>
+      <app-target-set-card (actionProgExercises)="setTargetSet($event)"
+                           *ngFor="let targetSet of progExerciseTargetSets.targetSetUsed"
+                           [isLastTargetSet]="isLastTargetSetUsed[targetSet.id]"
+                           [modalId]="targetSetModalId"
+                           [targetSet]="targetSet"
+      />
+    </div>
+    <div [id]="targetSetUnused" class="tab-pane fade">
+      <p *ngIf=" progExerciseTargetSets.targetSetUnused.length === 0 ">No set are unused</p>
+    </div>
+    <div [id]="targetSetHidden" class="tab-pane fade">
+      <p *ngIf=" progExerciseTargetSets.targetSetHidden.length === 0 ">No set are hidden</p>
+    </div>
+  </div>
+</div>
