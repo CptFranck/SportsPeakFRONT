@@ -1,6 +1,8 @@
 import {TargetSet} from "../interface/dto/target-set";
 import {ProgExercise} from "../interface/dto/prog-exercise";
 import {Duration} from "../interface/dto/duration";
+import {TargetSetState} from "../interface/enum/targetSetState";
+import {ProgExerciseTargetSets} from "../interface/utils/progExerciseTargetSets";
 
 ////////////////////////////////// CARD INFORMATION //////////////////////////////////////////
 
@@ -78,6 +80,26 @@ export function formatTimeDuration(duration: Duration): Duration {
 
 ////////////////////////////////////// SORT FUNCTIONS ////////////////////////////////////////
 
+export function getProgExerciseTargetSet(targetSets: TargetSet[]): ProgExerciseTargetSets {
+  const targetSetUsed: TargetSet[] = [];
+  const targetSetUnused: TargetSet[] = [];
+  const targetSetHidden: TargetSet[] = [];
+
+  targetSets.forEach((targetSet: TargetSet) => {
+    if (targetSet.state === TargetSetState.USED)
+      targetSetUsed.push(targetSet);
+    else if (targetSet.state === TargetSetState.UNUSED)
+      targetSetUnused.push(targetSet);
+    else if (targetSet.state === TargetSetState.HIDDEN)
+      targetSetHidden.push(targetSet);
+  })
+  return {
+    targetSetUsed: targetSetUsed,
+    targetSetUnused: targetSetUnused,
+    targetSetHidden: targetSetHidden
+  }
+}
+
 export function getTargetSetLogs(targetSetUpToDate: TargetSet, progExercise: ProgExercise): TargetSet[] {
   const targetSetLogs: TargetSet[] = [];
   targetSetLogs.push(targetSetUpToDate)
@@ -96,6 +118,7 @@ function getTargetSetUpdate(targetSetUpToDate: TargetSet, progExercise: ProgExer
 }
 
 export function getUpToDateTargetSets(progExercise: ProgExercise): TargetSet[] {
+  progExercise.targetSets.forEach(value => console.log(value.targetSetUpdate))
   return progExercise.targetSets.filter((targetSet: TargetSet) => targetSet.targetSetUpdate === null)
 }
 
