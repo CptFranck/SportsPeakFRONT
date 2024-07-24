@@ -22,9 +22,14 @@ import {MyProgExerciseDetailsModalComponent} from "../my-prog-exercise-modal/my-
 import {TargetSetCardComponent} from "../../../../components/card/target-set/target-set-card/target-set-card.component";
 import {TargetSetModalComponent} from "../target-set-modal/target-set-modal.component";
 import {TargetSet} from "../../../../interface/dto/target-set";
-import {getUpToDateTargetSets, sortLastTargetSetsByIndex} from "../../../../utils/prog-exercise-functions";
-import {Dictionary} from "../../../../interface/utils/dictionary";
+import {
+  getProgExerciseTargetSet,
+  getUpToDateTargetSets,
+  sortLastTargetSetsByIndex
+} from "../../../../utils/prog-exercise-functions";
 import {Subject, takeUntil} from "rxjs";
+import {ProgExerciseTargetSets} from "../../../../interface/utils/progExerciseTargetSets";
+import {TargetSetComponent} from "../target-set/target-set.component";
 
 @Component({
   selector: 'app-my-prog-exercise',
@@ -39,14 +44,16 @@ import {Subject, takeUntil} from "rxjs";
     MyProgExerciseModalComponent,
     MyProgExerciseDetailsModalComponent,
     TargetSetCardComponent,
-    TargetSetModalComponent
+    TargetSetModalComponent,
+    TargetSetComponent
   ],
   templateUrl: './my-prog-exercise.component.html',
 })
 export class MyProgExerciseComponent implements OnInit, OnDestroy {
   loading: boolean = true;
-  targetSets: TargetSet[] = [];
-  isLastTargetSet: Dictionary<boolean> = {};
+  progExerciseTargetSets: ProgExerciseTargetSets =
+    {targetSetUsed: [], targetSetUnused: [], targetSetHidden: []};
+
   targetSet: TargetSet | undefined;
   progExercise: ProgExercise | undefined;
   targetSetAction: ActionType = ActionType.update;
@@ -55,7 +62,7 @@ export class MyProgExerciseComponent implements OnInit, OnDestroy {
   progExerciseModalId: string = "progExerciseModal";
   targetSetModalTitle: string = "";
   progExerciseModalTitle: string = "";
-
+  
   private unsubscribe$: Subject<void> = new Subject<void>();
   private activatedRoute: ActivatedRoute = inject(ActivatedRoute);
   private proExerciseService: ProgExerciseService = inject(ProgExerciseService);
@@ -71,10 +78,8 @@ export class MyProgExerciseComponent implements OnInit, OnDestroy {
       .subscribe((progExercise: ProgExercise | undefined) => {
         if (progExercise) {
           this.progExercise = progExercise;
-          this.targetSets = getUpToDateTargetSets(progExercise).sort(sortLastTargetSetsByIndex);
-          this.targetSets.forEach((targetSet: TargetSet, key: number, array: TargetSet[]) => {
-            this.isLastTargetSet[targetSet.id] = (array.length - 1) === key;
-          })
+          let targetSets: TargetSet[] = getUpToDateTargetSets(progExercise).sort(sortLastTargetSetsByIndex);
+          this.progExerciseTargetSets = getProgExerciseTargetSet(targetSets)
         }
       });
     this.proExerciseService.isLoading
