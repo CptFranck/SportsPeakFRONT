@@ -4,21 +4,24 @@
       <div class="col-auto">
         <h5 class="fw-bold"> {{ "Set N°" + targetSet.index }}</h5>
         <div class="row">
-          <div class="col-auto">
-            <label class="fw-bold"> Set : </label>
+          <div class="col-auto d-flex align-items-center">
+            <label class="fw-bold me-1"> Set : </label>
             {{ targetSet.setNumber }}
           </div>
-          <div class="col-auto">
-            <label class="fw-bold"> Reps : </label>
+          <div class="col-auto d-flex align-items-center">
+            <label class="fw-bold me-1"> Reps : </label>
             {{ targetSet.repetitionNumber }}
           </div>
-          <div class="col">
-            <label class="fw-bold"> Weight : </label>
+          <div class="col-auto d-flex align-items-center">
+            <label class="fw-bold me-1"> Weight : </label>
             {{ targetSet.weight + " " + targetSet.weightUnit }}
           </div>
+          <div class="col-auto">
+            <app-target-set-state-form [targetSet]="targetSet"/>
+          </div>
         </div>
-        <div class="row">
-          <div class="col-auto p-1">
+        <div class="row text-center pt-2">
+          <div class="col p-1">
             <app-modal-button
               (onCLickModalButton)="addNewPerformance($event)"
               [modalId]="modalId"
@@ -29,7 +32,7 @@
               <i class="fa-regular fa-square-plus"></i>
             </app-modal-button>
           </div>
-          <div class="col-auto p-1">
+          <div class="col p-1">
             <app-modal-button
               (onCLickModalButton)="checkTargetSetPerformance($event)"
               [modalId]="modalId"
@@ -44,29 +47,26 @@
       </div>
       <div class="col align-content-center">
         <div class="row">
-          <div class="col-auto align-content-center">
-            <div class="col">
+          <div class="col-auto mx-auto">
+            <div class="col-auto p-2">
               <label class="fw-bold"> One Rep Time : </label>
               {{ targetSetRepetition }}
             </div>
-            <div class="col pt-2">
+            <div class="col-auto p-2">
               <label class="fw-bold"> Rest Time : </label>
               {{ targetSetRestTime }}
             </div>
-            <div class="col pt-2">
+            <div class="col-auto p-2">
               <label class="fw-bold"> Total Time : </label>
               {{ targetSetTime }}
             </div>
-          </div>
-          <div class="col align-content-center">
-            <app-target-set-state-form [targetSet]="targetSet"/>
           </div>
         </div>
       </div>
       <div class="col-auto align-content-center">
         <div class="row">
-          <div class="col-auto align-content-center">
-            <div class="p-1">
+          <div class="col-auto align-content-center text-center">
+            <div class="row p-1">
               <app-modal-button
                 (onCLickModalButton)="adjustTargetSet($event)"
                 [allWidth]="true"
@@ -74,11 +74,11 @@
                 [modalValue]="targetSet"
                 btnClass="btn-secondary"
               >
-                Adjust set's objective
+                Adjust objective
                 <i class="fa-solid fa-sliders"></i>
               </app-modal-button>
             </div>
-            <div class="p-1">
+            <div class="row p-1">
               <app-modal-button
                 (onCLickModalButton)="checkAllTargetSetUpdate($event)"
                 [allWidth]="true"
@@ -86,16 +86,15 @@
                 [modalValue]="targetSet"
                 btnClass="btn-secondary"
               >
-                Check set's objectives evolution
+                Check objectives evolution
                 <i class="fa-solid fa-chart-line"></i>
               </app-modal-button>
             </div>
           </div>
-          <div class="col-auto align-content-center">
-            <div class="p-1">
+          <div class="col text-center align-content-center">
+            <div class="row p-1">
               <app-modal-button
                 (onCLickModalButton)="modifyTargetSet($event)"
-                [allWidth]="true"
                 [modalId]="modalId"
                 [modalValue]="targetSet"
                 btnClass="btn-secondary"
@@ -104,10 +103,9 @@
                 <i class="fa-solid fa-pen-to-square"></i>
               </app-modal-button>
             </div>
-            <div class="p-1">
+            <div class="row p-1">
               <app-modal-button
                 (onCLickModalButton)="delTargetSet($event)"
-                [allWidth]="true"
                 [modalId]="modalId"
                 [modalValue]="targetSet"
                 btnClass="btn-danger"
