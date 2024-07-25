@@ -1,5 +1,6 @@
-<app-target-set-card-logs *ngFor="let set of targetSetLogs"
+<app-target-set-card-logs (actionProgExercises)="actionProgExerciseEvent($event)"
+                          *ngFor="let set of targetSetLogs"
+                          [modalId]="modalId"
                           [targetSet]="set"
-                          modalId="_________________"
 
 />
