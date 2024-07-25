@@ -1,10 +1,8 @@
 <div>
   <div *ngIf="!modify" class="d-flex align-items-center">
-    <div class="">
-      <label class="fw-bold me-1"> State : </label>
-      {{ targetSet.state }}
-    </div>
-    <button (click)="openForm()" class="d-flex btn btn-outline-secondary p-2 mx-auto">
+    <label class="fw-bold me-1"> State : </label>
+    {{ targetSet.state }}
+    <button (click)="openForm()" class="d-flex btn btn-outline-secondary p-2 ms-2">
       <i class="fa-solid fa-pen-to-square"></i>
     </button>
   </div>
