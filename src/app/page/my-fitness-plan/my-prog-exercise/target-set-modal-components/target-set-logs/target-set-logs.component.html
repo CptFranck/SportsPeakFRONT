@@ -1,2 +1,5 @@
-<p>{{ targetSetLogs.length }}</p>
-<p *ngFor="let targetSet of targetSetLogs">{{ targetSet.id }} </p>
+<app-target-set-card-logs *ngFor="let set of targetSetLogs"
+                          [targetSet]="set"
+                          modalId="_________________"
+
+/>

@@ -3,12 +3,16 @@ import {ProgExercise} from "../../../../../interface/dto/prog-exercise";
 import {TargetSet} from "../../../../../interface/dto/target-set";
 import {getTargetSetLogs} from "../../../../../utils/prog-exercise-functions";
 import {NgForOf} from "@angular/common";
+import {
+  TargetSetLogsCardComponent
+} from "../../../../../components/card/target-set/target-set-logs-card/target-set-logs-card.component";
 
 @Component({
   selector: 'app-target-set-logs',
   standalone: true,
   imports: [
-    NgForOf
+    NgForOf,
+    TargetSetLogsCardComponent
   ],
   templateUrl: './target-set-logs.component.html',
 })
@@ -21,12 +25,16 @@ export class TargetSetLogsComponent {
 
   @Input() set targetSetInput(value: TargetSet | undefined) {
     this.targetSet = value;
-    if (this.targetSet && this.progExercise) {
-      this.targetSetLogs = getTargetSetLogs(this.targetSet, this.progExercise);
-    }
+    this.initializeTargetSetLogs();
   }
 
   @Input() set progExerciseInput(value: ProgExercise | undefined) {
     this.progExercise = value;
+    this.initializeTargetSetLogs();
+  }
+
+  initializeTargetSetLogs() {
+    if (this.targetSet && this.progExercise)
+      this.targetSetLogs = getTargetSetLogs(this.targetSet, this.progExercise);
   }
 }
