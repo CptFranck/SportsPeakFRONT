@@ -40,9 +40,21 @@
     </div>
     <div [id]="targetSetUnused" class="tab-pane fade">
       <p *ngIf=" progExerciseTargetSets.targetSetUnused.length === 0 ">No set are unused</p>
+      <app-target-set-card (actionProgExercises)="setTargetSet($event)"
+                           *ngFor="let targetSet of progExerciseTargetSets.targetSetUnused"
+                           [isLastTargetSet]="isLastTargetSetUsed[targetSet.id]"
+                           [modalId]="targetSetModalId"
+                           [targetSet]="targetSet"
+      />
     </div>
     <div [id]="targetSetHidden" class="tab-pane fade">
       <p *ngIf=" progExerciseTargetSets.targetSetHidden.length === 0 ">No set are hidden</p>
+      <app-target-set-card (actionProgExercises)="setTargetSet($event)"
+                           *ngFor="let targetSet of progExerciseTargetSets.targetSetHidden"
+                           [isLastTargetSet]="isLastTargetSetUsed[targetSet.id]"
+                           [modalId]="targetSetModalId"
+                           [targetSet]="targetSet"
+      />
     </div>
   </div>
 </div>
