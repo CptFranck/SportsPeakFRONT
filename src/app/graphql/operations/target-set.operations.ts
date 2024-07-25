@@ -155,49 +155,34 @@ export const MOD_TARGET_SET = gql`
 
 export const MOD_TARGET_SET_STATE = gql`
   mutation ($inputTargetSetState: InputTargetSetState!){
-    modifyTargetSetState(inputTargetSetState: $inputTargetSetState)
-    id
-    index
-    setNumber
-    repetitionNumber
-    weight
-    weightUnit
-    physicalExertionUnitTime{
-      hours
-      minutes
-      seconds
-    }
-    restTime{
-      hours
-      minutes
-      seconds
-    }
-    creationDate
-    state
-    targetSetUpdate {
+    modifyTargetSetState(inputTargetSetState: $inputTargetSetState) {
       id
-    }
-    performanceLogs {
-      id
-      setIndex
+      setNumber
       repetitionNumber
       weight
       weightUnit
-      logDate
-    }
-    progExercise {
-      id
-      name
-      note
-      exercise {
-        id
-        name
+      physicalExertionUnitTime{
+        hours
+        minutes
+        seconds
       }
-      trustLabel
-      visibility
-      creator {
+      restTime{
+        hours
+        minutes
+        seconds
+      }
+      creationDate
+      state
+      targetSetUpdate {
         id
-        username
+      }
+      performanceLogs {
+        id
+        setIndex
+        repetitionNumber
+        weight
+        weightUnit
+        logDate
       }
     }
   }
