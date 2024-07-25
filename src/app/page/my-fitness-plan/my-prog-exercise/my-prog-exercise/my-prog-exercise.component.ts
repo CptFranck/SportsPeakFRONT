@@ -62,7 +62,7 @@ export class MyProgExerciseComponent implements OnInit, OnDestroy {
   progExerciseModalId: string = "progExerciseModal";
   targetSetModalTitle: string = "";
   progExerciseModalTitle: string = "";
-  
+
   private unsubscribe$: Subject<void> = new Subject<void>();
   private activatedRoute: ActivatedRoute = inject(ActivatedRoute);
   private proExerciseService: ProgExerciseService = inject(ProgExerciseService);
@@ -79,7 +79,7 @@ export class MyProgExerciseComponent implements OnInit, OnDestroy {
         if (progExercise) {
           this.progExercise = progExercise;
           let targetSets: TargetSet[] = getUpToDateTargetSets(progExercise).sort(sortLastTargetSetsByIndex);
-          this.progExerciseTargetSets = getProgExerciseTargetSet(targetSets)
+          this.progExerciseTargetSets = getProgExerciseTargetSet(targetSets);
         }
       });
     this.proExerciseService.isLoading
