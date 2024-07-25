@@ -22,13 +22,7 @@ import {MyProgExerciseDetailsModalComponent} from "../my-prog-exercise-modal/my-
 import {TargetSetCardComponent} from "../../../../components/card/target-set/target-set-card/target-set-card.component";
 import {TargetSetModalComponent} from "../target-set-modal/target-set-modal.component";
 import {TargetSet} from "../../../../interface/dto/target-set";
-import {
-  getProgExerciseTargetSet,
-  getUpToDateTargetSets,
-  sortLastTargetSetsByIndex
-} from "../../../../utils/prog-exercise-functions";
 import {Subject, takeUntil} from "rxjs";
-import {ProgExerciseTargetSets} from "../../../../interface/utils/progExerciseTargetSets";
 import {TargetSetComponent} from "../target-set/target-set.component";
 
 @Component({
@@ -51,9 +45,6 @@ import {TargetSetComponent} from "../target-set/target-set.component";
 })
 export class MyProgExerciseComponent implements OnInit, OnDestroy {
   loading: boolean = true;
-  progExerciseTargetSets: ProgExerciseTargetSets =
-    {targetSetUsed: [], targetSetUnused: [], targetSetHidden: []};
-
   targetSet: TargetSet | undefined;
   progExercise: ProgExercise | undefined;
   targetSetAction: ActionType = ActionType.update;
@@ -78,8 +69,6 @@ export class MyProgExerciseComponent implements OnInit, OnDestroy {
       .subscribe((progExercise: ProgExercise | undefined) => {
         if (progExercise) {
           this.progExercise = progExercise;
-          let targetSets: TargetSet[] = getUpToDateTargetSets(progExercise).sort(sortLastTargetSetsByIndex);
-          this.progExerciseTargetSets = getProgExerciseTargetSet(targetSets);
         }
       });
     this.proExerciseService.isLoading
