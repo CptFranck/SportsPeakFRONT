@@ -11,13 +11,15 @@ import {
 import {
   TargetSetStateFormComponent
 } from "../../../../page/my-fitness-plan/my-prog-exercise/target-set-modal-components/target-set-state-form/target-set-state-form.component";
+import {CollapseButtonComponent} from "../../../collapse-buton/collapse-button.component";
 
 @Component({
   selector: 'app-target-set-card',
   standalone: true,
   imports: [
     ModalButtonComponent,
-    TargetSetStateFormComponent
+    TargetSetStateFormComponent,
+    CollapseButtonComponent
   ],
   templateUrl: './target-set-card.component.html',
 })
@@ -30,6 +32,7 @@ export class TargetSetCardComponent implements OnInit {
   @Input() modalId!: string;
   @Input() targetSet!: TargetSet;
   @Input() isLastTargetSet: boolean = false;
+  @Input() collapseId!: string;
 
   @Output() actionProgExercises: EventEmitter<FormIndicator> = new EventEmitter<FormIndicator>();
 
@@ -57,13 +60,6 @@ export class TargetSetCardComponent implements OnInit {
   adjustTargetSet(targetSet: TargetSet): void {
     this.actionProgExercises.emit({
       actionType: ActionType.addEvolution,
-      object: targetSet
-    });
-  }
-
-  checkAllTargetSetUpdate(targetSet: TargetSet) {
-    this.actionProgExercises.emit({
-      actionType: ActionType.checkEvolution,
       object: targetSet
     });
   }
