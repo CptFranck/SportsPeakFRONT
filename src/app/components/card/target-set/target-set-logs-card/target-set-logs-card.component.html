@@ -62,6 +62,7 @@
       <div class="col text-center align-content-center">
         <div class="row p-1">
           <app-modal-button
+            (onCLickModalButton)="modifyTargetSet($event)"
             [modalId]="modalId"
             [modalValue]="targetSet"
             btnClass="btn-secondary"
@@ -72,6 +73,7 @@
         </div>
         <div class="row p-1">
           <app-modal-button
+            (onCLickModalButton)="delTargetSet($event)"
             [modalId]="modalId"
             [modalValue]="targetSet"
             btnClass="btn-danger"

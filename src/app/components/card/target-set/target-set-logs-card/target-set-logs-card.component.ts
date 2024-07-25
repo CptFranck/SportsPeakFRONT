@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {ModalButtonComponent} from "../../../modal/modal-button/modal-button.component";
 import {TargetSet} from "../../../../interface/dto/target-set";
 import {
@@ -9,6 +9,8 @@ import {
 import {
   TargetSetStateFormComponent
 } from "../../../../page/my-fitness-plan/my-prog-exercise/target-set-modal-components/target-set-state-form/target-set-state-form.component";
+import {ActionType} from "../../../../interface/enum/action-type";
+import {FormIndicator} from "../../../../interface/utils/form-indicator";
 
 @Component({
   selector: 'app-target-set-card-logs',
@@ -30,6 +32,8 @@ export class TargetSetLogsCardComponent implements OnInit {
   @Input() targetSet!: TargetSet;
   @Input() isLastTargetSet: boolean = false;
 
+  @Output() actionProgExercises: EventEmitter<FormIndicator> = new EventEmitter<FormIndicator>();
+  
   ngOnInit() {
     this.targetSetTime = getTargetSetTimeToString(this.targetSet, this.isLastTargetSet);
     this.targetSets = getTargetSetInformation(this.targetSet);
@@ -38,4 +42,17 @@ export class TargetSetLogsCardComponent implements OnInit {
     this.targetSetCreationDate = new Date(this.targetSet.creationDate);
   }
 
+  modifyTargetSet(targetSet: TargetSet) {
+    this.actionProgExercises.emit({
+      actionType: ActionType.update,
+      object: targetSet
+    });
+  }
+
+  delTargetSet(targetSet: TargetSet) {
+    this.actionProgExercises.emit({
+      actionType: ActionType.delete,
+      object: targetSet
+    });
+  }
 }
