@@ -52,10 +52,10 @@ export class TargetSetSateSelectComponent implements ControlValueAccessor {
     this.onTouched = fn;
   }
 
-  setVisibilityId(visibility: string | undefined): void {
-    if (visibility) {
-      this.targetSetState = visibility;
-      this.onChange(visibility)
+  setTargetSetId(targetSetState: string | undefined): void {
+    if (targetSetState) {
+      this.targetSetState = targetSetState;
+      this.onChange(targetSetState)
     }
   }
 }
