@@ -3,7 +3,12 @@ import {BehaviorSubject} from "rxjs";
 import {Apollo, MutationResult} from "apollo-angular";
 import {AlertService} from "../alert/alert.service";
 import {FormGroup} from "@angular/forms";
-import {ADD_TARGET_SET, DEL_TARGET_SET, MOD_TARGET_SET} from "../../graphql/operations/target-set.operations";
+import {
+  ADD_TARGET_SET,
+  DEL_TARGET_SET,
+  MOD_TARGET_SET,
+  MOD_TARGET_SET_STATE
+} from "../../graphql/operations/target-set.operations";
 import {TargetSet} from "../../interface/dto/target-set";
 
 @Injectable({
@@ -44,6 +49,22 @@ export class TargetSetService {
         this.alertService.graphQLErrorAlertHandler(result.errors);
       } else {
         let message: string = "Set " + result.data.modifyTargetSet.index + " been successfully updated.";
+        this.alertService.addSuccessAlert(message);
+      }
+    });
+  }
+
+  modifyTargetSetState(targetSetStateForm: FormGroup) {
+    return this.apollo.mutate({
+      mutation: MOD_TARGET_SET_STATE,
+      variables: {
+        inputTargetSetState: targetSetStateForm.value,
+      },
+    }).subscribe((result: MutationResult): void => {
+      if (result.errors) {
+        this.alertService.graphQLErrorAlertHandler(result.errors);
+      } else {
+        let message: string = "Set state been successfully updated.";
         this.alertService.addSuccessAlert(message);
       }
     });
