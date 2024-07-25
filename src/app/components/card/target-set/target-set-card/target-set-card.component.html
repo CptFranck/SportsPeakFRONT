@@ -44,84 +44,81 @@
               </div>
             </div>
           </div>
+          <div class="col-auto align-content-center">
+            <div class="col">
+              <label class="fw-bold"> One Rep Time : </label>
+              {{ targetSetRepetition }}
+            </div>
+            <div class="col pt-2">
+              <label class="fw-bold"> Rest Time : </label>
+              {{ targetSetRestTime }}
+            </div>
+            <div class="col pt-2">
+              <label class="fw-bold"> Total Time : </label>
+              {{ targetSetTime }}
+            </div>
+          </div>
           <div class="col align-content-center">
-            <div class="row">
-              <div class="col-auto">
-                <div class="row">
-                  <label class="fw-bold"> One Rep Time : </label>
-                </div>
-                <div class="row pt-2">
-                  <label class="fw-bold"> Rest Time : </label>
-                </div>
-                <div class="row pt-2">
-                  <label class="fw-bold"> Total Time : </label>
-                </div>
-              </div>
-              <div class="col-auto">
-                <div class="row">
-                  {{ targetSetRepetition }}
-                </div>
-                <div class="row pt-2">
-                  {{ targetSetRestTime }}
-                </div>
-                <div class="row pt-2">
-                  {{ targetSetTime }}
-                </div>
-              </div>
+            <div class="col">
+              <app-target-set-state-form [targetSet]="targetSet"/>
             </div>
           </div>
         </div>
       </div>
       <div class="col-auto align-content-center">
         <div class="row">
-          <app-modal-button
-            (onCLickModalButton)="adjustTargetSet($event)"
-            [allWidth]="true"
-            [modalId]="modalId"
-            [modalValue]="targetSet"
-            btnClass="btn-secondary"
-          >
-            Adjust set's objective
-            <i class="fa-solid fa-sliders"></i>
-          </app-modal-button>
-        </div>
-        <div class="row pt-1">
-          <app-modal-button
-            (onCLickModalButton)="checkAllTargetSetUpdate($event)"
-            [allWidth]="true"
-            [modalId]="modalId"
-            [modalValue]="targetSet"
-            btnClass="btn-secondary"
-          >
-            Check set's objectives evolution
-            <i class="fa-solid fa-chart-line"></i>
-          </app-modal-button>
-        </div>
-      </div>
-      <div class="col-auto align-content-center">
-        <div class="row">
-          <app-modal-button
-            (onCLickModalButton)="modifyTargetSet($event)"
-            [allWidth]="true"
-            [modalId]="modalId"
-            [modalValue]="targetSet"
-            btnClass="btn-secondary"
-          >
-            Modify
-            <i class="fa-solid fa-pen-to-square"></i>
-          </app-modal-button>
-        </div>
-        <div class="row pt-1">
-          <app-modal-button
-            (onCLickModalButton)="delTargetSet($event)"
-            [allWidth]="true"
-            [modalId]="modalId"
-            [modalValue]="targetSet"
-            btnClass="btn-danger"
-          >
-            Delete
-            <i class="fa-solid fa-trash"></i>
-          </app-modal-button>
+          <div class="col-auto align-content-center">
+            <div class="row">
+              <app-modal-button
+                (onCLickModalButton)="adjustTargetSet($event)"
+                [allWidth]="true"
+                [modalId]="modalId"
+                [modalValue]="targetSet"
+                btnClass="btn-secondary"
+              >
+                Adjust set's objective
+                <i class="fa-solid fa-sliders"></i>
+              </app-modal-button>
+            </div>
+            <div class="row pt-1">
+              <app-modal-button
+                (onCLickModalButton)="checkAllTargetSetUpdate($event)"
+                [allWidth]="true"
+                [modalId]="modalId"
+                [modalValue]="targetSet"
+                btnClass="btn-secondary"
+              >
+                Check set's objectives evolution
+                <i class="fa-solid fa-chart-line"></i>
+              </app-modal-button>
+            </div>
+          </div>
+          <div class="col-auto align-content-center">
+            <div class="row">
+              <app-modal-button
+                (onCLickModalButton)="modifyTargetSet($event)"
+                [allWidth]="true"
+                [modalId]="modalId"
+                [modalValue]="targetSet"
+                btnClass="btn-secondary"
+              >
+                Modify
+                <i class="fa-solid fa-pen-to-square"></i>
+              </app-modal-button>
+            </div>
+            <div class="row pt-1">
+              <app-modal-button
+                (onCLickModalButton)="delTargetSet($event)"
+                [allWidth]="true"
+                [modalId]="modalId"
+                [modalValue]="targetSet"
+                btnClass="btn-danger"
+              >
+                Delete
+                <i class="fa-solid fa-trash"></i>
+              </app-modal-button>
+            </div>
+          </div>
         </div>
       </div>
     </div>

@@ -8,12 +8,16 @@ import {
   getTargetSetInformation,
   getTargetSetTimeToString
 } from "../../../../utils/prog-exercise-functions";
+import {
+  TargetSetStateFormComponent
+} from "../../../../page/my-fitness-plan/my-prog-exercise/target-set-modal-components/target-set-state-form/target-set-state-form.component";
 
 @Component({
   selector: 'app-target-set-card',
   standalone: true,
   imports: [
-    ModalButtonComponent
+    ModalButtonComponent,
+    TargetSetStateFormComponent
   ],
   templateUrl: './target-set-card.component.html',
 })
