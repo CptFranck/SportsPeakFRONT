@@ -1,0 +1,9 @@
+<button
+  (click)="onClick()"
+  [attr.data-bs-target]="'#' + collapseId"
+  class="btn btn-secondary"
+  data-bs-toggle="collapse"
+  type="button"
+>
+  <ng-content/>
+</button>
