@@ -153,6 +153,56 @@ export const MOD_TARGET_SET = gql`
   }
 `;
 
+export const MOD_TARGET_SET_STATE = gql`
+  mutation ($inputTargetSetState: InputTargetSetState!){
+    modifyTargetSetState(inputTargetSetState: $inputTargetSetState)
+    id
+    index
+    setNumber
+    repetitionNumber
+    weight
+    weightUnit
+    physicalExertionUnitTime{
+      hours
+      minutes
+      seconds
+    }
+    restTime{
+      hours
+      minutes
+      seconds
+    }
+    creationDate
+    state
+    targetSetUpdate {
+      id
+    }
+    performanceLogs {
+      id
+      setIndex
+      repetitionNumber
+      weight
+      weightUnit
+      logDate
+    }
+    progExercise {
+      id
+      name
+      note
+      exercise {
+        id
+        name
+      }
+      trustLabel
+      visibility
+      creator {
+        id
+        username
+      }
+    }
+  }
+`;
+
 export const DEL_TARGET_SET = gql`
   mutation ($targetSetId : Int!){
     deleteTargetSet(targetSetId: $targetSetId)
