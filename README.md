@@ -9,13 +9,13 @@ different programs, sessions and exercises, but also an educational vision throu
 on the exercises, their purpose, the muscles requested, and their associated information.
 
 Here is some screenshot from this project:
-"home" page:
+home page:
 ![homePage](https://github.com/CptFranck/SportsPeakFRONT/blob/master/screenshots/homePage.png?raw=true)
-"register" page:
+register page:
 ![registerForm](https://github.com/CptFranck/SportsPeakFRONT/blob/master/screenshots/registerForm.png?raw=true)
-"muscles documentation" page, with the details view:
+muscles documentation page, with the details view:
 ![docMusclePage](https://github.com/CptFranck/SportsPeakFRONT/blob/master/screenshots/docMusclePage.png?raw=true)
-"exercise documentation" page, with the details view, logged as an admin:
+exercises documentation page, with the details view, logged as an admin:
 ![docExercisePageAdminView](https://github.com/CptFranck/SportsPeakFRONT/blob/master/screenshots/docExercisePageAdminView.png?raw=true)
 "my programed exercises" page with the user's programed exercises he subscribed or create:
 ![myFitnessPlanMyProgExercisesPageUserLoggedView](https://github.com/CptFranck/SportsPeakFRONT/blob/master/screenshots/myFitnessPlanMyProgExercisesPageUserLoggedView.png?raw=true)
