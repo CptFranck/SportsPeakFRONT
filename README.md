@@ -2,6 +2,19 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.1.0.
 
+Sport’s Peak is an Angular & JAVA Spring Boot application that aims to create custom exercises, sessions,
+and sports programs, incorporating a performance log.
+This project incorporates a community vision through the possibility for different users to share their
+different programs, sessions and exercises, but also an educational vision through direct access to information
+on the exercises, their purpose, the muscles requested, and their associated information.
+
+![homePage](https://github.com/CptFranck/SportsPeakFRONT/blob/master/screenshots/homePage.png?raw=true)
+![docMusclePage](https://github.com/CptFranck/SportsPeakFRONT/blob/master/screenshots/docMusclePage.png?raw=true)
+![registerForm](https://github.com/CptFranck/SportsPeakFRONT/blob/master/screenshots/registerForm.png?raw=true)
+![docExercisePageAdminView](https://github.com/CptFranck/SportsPeakFRONT/blob/master/screenshots/docExercisePageAdminView.png?raw=true)
+![myFitnessPlanMyProgExercisePageDetailsView](https://github.com/CptFranck/SportsPeakFRONT/blob/master/screenshots/myFitnessPlanMyProgExercisePageDetailsView.png?raw=true)
+![myFitnessPlanMyProgExercisesPageUserLoggedView](https://github.com/CptFranck/SportsPeakFRONT/blob/master/screenshots/myFitnessPlanMyProgExercisesPageUserLoggedView.png?raw=true)
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
