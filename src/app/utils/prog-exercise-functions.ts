@@ -102,7 +102,6 @@ export function getProgExerciseTargetSet(targetSets: TargetSet[]): ProgExerciseT
 
 export function getTargetSetLogs(targetSetUpToDate: TargetSet, progExercise: ProgExercise): TargetSet[] {
   const targetSetLogs: TargetSet[] = [];
-  targetSetLogs.push(targetSetUpToDate)
   getTargetSetUpdate(targetSetUpToDate, progExercise, targetSetLogs)
   return targetSetLogs;
 }
