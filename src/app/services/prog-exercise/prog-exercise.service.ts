@@ -114,6 +114,7 @@ export class ProgExerciseService {
     });
   }
 
+  // UNUSED FOR NOW
   modifyProgExerciseTrustLabel(progExercisesForm: FormGroup) {
     return this.apollo.mutate({
       mutation: MOD_PROG_EXERCISE_TRUST_LABEL,
