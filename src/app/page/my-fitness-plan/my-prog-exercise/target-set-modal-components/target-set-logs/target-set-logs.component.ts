@@ -2,7 +2,7 @@ import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {ProgExercise} from "../../../../../interface/dto/prog-exercise";
 import {TargetSet} from "../../../../../interface/dto/target-set";
 import {getTargetSetLogs} from "../../../../../utils/prog-exercise-functions";
-import {NgForOf} from "@angular/common";
+import {NgForOf, NgIf} from "@angular/common";
 import {
   TargetSetLogsCardComponent
 } from "../../../../../components/card/target-set/target-set-logs-card/target-set-logs-card.component";
@@ -13,7 +13,8 @@ import {FormIndicator} from "../../../../../interface/utils/form-indicator";
   standalone: true,
   imports: [
     NgForOf,
-    TargetSetLogsCardComponent
+    TargetSetLogsCardComponent,
+    NgIf
   ],
   templateUrl: './target-set-logs.component.html',
 })
