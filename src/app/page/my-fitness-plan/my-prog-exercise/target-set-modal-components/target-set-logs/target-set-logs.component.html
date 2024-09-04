@@ -1,6 +1,19 @@
-<app-target-set-logs-card (actionProgExercises)="actionProgExerciseEvent($event)"
-                          *ngFor="let set of targetSetLogs"
-                          [modalId]="modalId"
-                          [targetSet]="set"
+<div>
+  <app-target-set-logs-card (actionProgExercises)="actionProgExerciseEvent($event)"
+                            *ngFor="let set of targetSetLogs"
+                            [modalId]="modalId"
+                            [targetSet]="set"
 
-/>
+  />
+  <div *ngIf="targetSetLogs.length === 0">
+    <div class="col-auto card m-3 shadow">
+      <div class="card-body ">
+        <div class="row">
+          <div class="col-auto">
+            No old set save
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
