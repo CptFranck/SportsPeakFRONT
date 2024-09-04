@@ -13,7 +13,7 @@ import {ActionType} from "../../../../interface/enum/action-type";
 import {FormIndicator} from "../../../../interface/utils/form-indicator";
 
 @Component({
-  selector: 'app-target-set-card-logs',
+  selector: 'app-target-set-logs-card',
   standalone: true,
   imports: [
     ModalButtonComponent,
@@ -33,7 +33,7 @@ export class TargetSetLogsCardComponent implements OnInit {
   @Input() isLastTargetSet: boolean = false;
 
   @Output() actionProgExercises: EventEmitter<FormIndicator> = new EventEmitter<FormIndicator>();
-  
+
   ngOnInit() {
     this.targetSetTime = getTargetSetTimeToString(this.targetSet, this.isLastTargetSet);
     this.targetSets = getTargetSetInformation(this.targetSet);
