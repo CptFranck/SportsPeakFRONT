@@ -27,9 +27,9 @@ import {
     NgIf,
     TargetSetLogsComponent
   ],
-  templateUrl: './target-set.component.html',
+  templateUrl: './target-sets.component.html',
 })
-export class TargetSetComponent {
+export class TargetSetsComponent {
   progExercise: ProgExercise | undefined;
   isLastTargetSetUsed: Dictionary<boolean> = {};
   targetSetUsedId: string = "TargetSetUsedId";

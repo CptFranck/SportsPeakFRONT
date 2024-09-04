@@ -23,7 +23,7 @@ import {TargetSetCardComponent} from "../../../../components/card/target-set/tar
 import {TargetSetModalComponent} from "../target-set-modal/target-set-modal.component";
 import {TargetSet} from "../../../../interface/dto/target-set";
 import {Subject, takeUntil} from "rxjs";
-import {TargetSetComponent} from "../target-set/target-set.component";
+import {TargetSetsComponent} from "../target-sets/target-sets.component";
 
 @Component({
   selector: 'app-my-prog-exercise',
@@ -39,7 +39,7 @@ import {TargetSetComponent} from "../target-set/target-set.component";
     MyProgExerciseDetailsModalComponent,
     TargetSetCardComponent,
     TargetSetModalComponent,
-    TargetSetComponent
+    TargetSetsComponent
   ],
   templateUrl: './my-prog-exercise.component.html',
 })

@@ -39,12 +39,10 @@
                              [targetSet]="targetSet"
         />
         <div [id]="targetSet.id + 'collapse'" class="collapse pt-2">
-          <div class="card card-body">
-            <app-target-set-logs (actionProgExercises)="setTargetSet($event)"
-                                 [modalId]="targetSetModalId"
-                                 [progExerciseInput]="progExercise"
-                                 [targetSetInput]="targetSet"/>
-          </div>
+          <app-target-set-logs (actionProgExercises)="setTargetSet($event)"
+                               [modalId]="targetSetModalId"
+                               [progExerciseInput]="progExercise"
+                               [targetSetInput]="targetSet"/>
         </div>
       </div>
     </div>
