@@ -50,14 +50,14 @@ export class MyProgExercisesComponent implements OnInit {
 
   @ViewChild("modalTemplate") modalTemplate!: TemplateRef<any>;
 
-  private proExerciseService: ProgExerciseService = inject(ProgExerciseService);
+  private progExerciseService: ProgExerciseService = inject(ProgExerciseService);
 
   ngOnInit(): void {
-    this.proExerciseService.userProgExercises.subscribe((progExercises: ProgExercise[]) => {
+    this.progExerciseService.userProgExercises.subscribe((progExercises: ProgExercise[]) => {
       this.progExercises = progExercises;
       this.displayedProgExercises = progExercises;
     });
-    this.proExerciseService.isLoading.subscribe((isLoading: boolean) => this.loading = isLoading);
+    this.progExerciseService.isLoading.subscribe((isLoading: boolean) => this.loading = isLoading);
   }
 
   setProgExercise(formIndicator: FormIndicator) {
