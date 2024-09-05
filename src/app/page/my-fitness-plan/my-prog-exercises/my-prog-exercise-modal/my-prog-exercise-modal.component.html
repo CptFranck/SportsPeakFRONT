@@ -11,6 +11,10 @@
 >
 </app-modal>
 <ng-template #progExerciseModalTemplate let-btnClose="btnClose" let-submitEventActionType$="submitEventActionType$">
+  <app-my-prog-exercise-entity-form *ngIf="action === ActionType.create"
+                                    [btnCloseRef]="btnClose"
+                                    [progExerciseInput]="progExercise"
+                                    [submitEventActionType$]="submitEventActionType$"/>
   <app-my-prog-exercise-details-display *ngIf="action === ActionType.read"
                                         [progExerciseInput]="progExercise"/>
   <app-my-prog-exercise-performance *ngIf="action === ActionType.checkPerformance"/>
