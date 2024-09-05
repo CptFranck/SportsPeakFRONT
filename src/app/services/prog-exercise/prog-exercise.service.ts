@@ -34,8 +34,9 @@ export class ProgExerciseService {
   constructor() {
     this.getProgExercises();
     this.userLoggedService.currentUser.subscribe((user: User | undefined) => {
-      if (user)
+      if (user) {
         this.getUserProgExercises(user)
+      }
     })
   }
 
@@ -82,20 +83,30 @@ export class ProgExerciseService {
   }
 
   addProgExercise(progExercisesForm: FormGroup) {
-    return this.apollo.mutate({
-      mutation: ADD_PROG_EXERCISE,
-      variables: {
-        inputNewProgExercise: progExercisesForm.value,
-      },
-    }).subscribe(
-      (result: MutationResult): void => {
-        if (result.errors) {
-          this.alertService.graphQLErrorAlertHandler(result.errors);
-        } else {
-          let message: string = "Programed exercise " + result.data.addProgExercise.name + " been successfully created.";
-          this.alertService.addSuccessAlert(message);
-        }
-      });
+    const user = this.userLoggedService.currentUser.value
+    if (user)
+      return this.apollo.mutate({
+        mutation: ADD_PROG_EXERCISE,
+        variables: {
+          inputNewProgExercise: progExercisesForm.value,
+        },
+        refetchQueries: [{
+          query: GET_USER_PROG_EXERCISES,
+          variables: {
+            userId: user.id
+          }
+        }]
+      }).subscribe(
+        (result: MutationResult): void => {
+          if (result.errors) {
+            this.alertService.graphQLErrorAlertHandler(result.errors);
+          } else {
+            let message: string = "Programed exercise " + result.data.addProgExercise.name + " been successfully created.";
+            this.alertService.addSuccessAlert(message);
+          }
+        });
+    else
+      return this.alertService.addErrorAlert("User not logged in.");
   }
 
   modifyProgExercise(progExercisesForm: FormGroup) {
@@ -135,10 +146,11 @@ export class ProgExerciseService {
     return this.apollo.mutate({
       mutation: DEL_PROG_EXERCISE,
       variables: {
-        muscleId: progExercise.id,
+        progExerciseId: progExercise.id,
       },
     }).subscribe((result: MutationResult): void => {
       if (result.errors) {
+        console.log(result.errors)
         this.alertService.graphQLErrorAlertHandler(result.errors);
       } else {
         let message: string = "Programed exercise " + progExercise.name + " has been successfully deleted.";
