@@ -16,6 +16,7 @@ import {
 } from "../../graphql/operations/prog-exercise.operations";
 import {User} from "../../interface/dto/user";
 import {UserLoggedService} from "../user-logged/user-logged.service";
+import {Router} from "@angular/router";
 
 @Injectable({
   providedIn: 'root'
@@ -27,6 +28,7 @@ export class ProgExerciseService {
   userProgExercises: BehaviorSubject<ProgExercise[]> = new BehaviorSubject<ProgExercise[]>([]);
   isLoading: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
+  private router: Router = inject(Router);
   private apollo: Apollo = inject(Apollo);
   private alertService: AlertService = inject(AlertService);
   private userLoggedService: UserLoggedService = inject(UserLoggedService);
@@ -83,7 +85,7 @@ export class ProgExerciseService {
   }
 
   addProgExercise(progExercisesForm: FormGroup) {
-    const user = this.userLoggedService.currentUser.value
+    const user: User | undefined = this.userLoggedService.currentUser.value
     if (user)
       return this.apollo.mutate({
         mutation: ADD_PROG_EXERCISE,
@@ -110,19 +112,29 @@ export class ProgExerciseService {
   }
 
   modifyProgExercise(progExercisesForm: FormGroup) {
-    return this.apollo.mutate({
-      mutation: MOD_PROG_EXERCISE,
-      variables: {
-        inputProgExercise: progExercisesForm.value,
-      },
-    }).subscribe((result: MutationResult): void => {
-      if (result.errors) {
-        this.alertService.graphQLErrorAlertHandler(result.errors);
-      } else {
-        let message: string = "Programed exercise " + result.data.modifyProgExercise.name + " been successfully updated.";
-        this.alertService.addSuccessAlert(message);
-      }
-    });
+    const user: User | undefined = this.userLoggedService.currentUser.value
+    if (user)
+      this.apollo.mutate({
+        mutation: MOD_PROG_EXERCISE,
+        variables: {
+          inputProgExercise: progExercisesForm.value,
+        },
+        refetchQueries: [{
+          query: GET_USER_PROG_EXERCISES,
+          variables: {
+            userId: user.id
+          }
+        }]
+      }).subscribe((result: MutationResult): void => {
+        if (result.errors) {
+          this.alertService.graphQLErrorAlertHandler(result.errors);
+        } else {
+          let message: string = "Programed exercise " + result.data.modifyProgExercise.name + " been successfully updated.";
+          this.alertService.addSuccessAlert(message);
+        }
+      });
+    else
+      return this.alertService.addErrorAlert("User not logged in.");
   }
 
   // UNUSED FOR NOW
@@ -143,19 +155,31 @@ export class ProgExerciseService {
   }
 
   deleteProgExercises(progExercise: ProgExercise) {
-    return this.apollo.mutate({
-      mutation: DEL_PROG_EXERCISE,
-      variables: {
-        progExerciseId: progExercise.id,
-      },
-    }).subscribe((result: MutationResult): void => {
-      if (result.errors) {
-        console.log(result.errors)
-        this.alertService.graphQLErrorAlertHandler(result.errors);
-      } else {
-        let message: string = "Programed exercise " + progExercise.name + " has been successfully deleted.";
-        this.alertService.addSuccessAlert(message);
-      }
-    });
+    const user: User | undefined = this.userLoggedService.currentUser.value
+    if (user) {
+      this.apollo.mutate({
+        mutation: DEL_PROG_EXERCISE,
+        variables: {
+          progExerciseId: progExercise.id,
+        },
+        refetchQueries: [{
+          query: GET_USER_PROG_EXERCISES,
+          variables: {
+            userId: user.id
+          }
+        }]
+      }).subscribe((result: MutationResult): void => {
+        if (result.errors) {
+          console.log(result.errors)
+          this.alertService.graphQLErrorAlertHandler(result.errors);
+        } else {
+          let message: string = "Programed exercise " + progExercise.name + " has been successfully deleted.";
+          this.alertService.addSuccessAlert(message);
+        }
+      });
+      this.router.navigateByUrl('/my-fitness-plan/my-programed-exercises')
+    } else {
+      return this.alertService.addErrorAlert("User not logged in.");
+    }
   }
 }
