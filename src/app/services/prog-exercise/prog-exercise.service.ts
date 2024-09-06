@@ -139,19 +139,29 @@ export class ProgExerciseService {
 
   // UNUSED FOR NOW
   modifyProgExerciseTrustLabel(progExercisesForm: FormGroup) {
-    return this.apollo.mutate({
-      mutation: MOD_PROG_EXERCISE_TRUST_LABEL,
-      variables: {
-        inputProgExerciseTrustLabel: progExercisesForm.value,
-      },
-    }).subscribe((result: MutationResult): void => {
-      if (result.errors) {
-        this.alertService.graphQLErrorAlertHandler(result.errors);
-      } else {
-        let message: string = "Programed exercise " + result.data.modifyProgExerciseTrustLabel.name + " been successfully updated.";
-        this.alertService.addSuccessAlert(message);
-      }
-    });
+    const user: User | undefined = this.userLoggedService.currentUser.value
+    if (user)
+      return this.apollo.mutate({
+        mutation: MOD_PROG_EXERCISE_TRUST_LABEL,
+        variables: {
+          inputProgExerciseTrustLabel: progExercisesForm.value,
+        },
+        refetchQueries: [{
+          query: GET_USER_PROG_EXERCISES,
+          variables: {
+            userId: user.id
+          }
+        }]
+      }).subscribe((result: MutationResult): void => {
+        if (result.errors) {
+          this.alertService.graphQLErrorAlertHandler(result.errors);
+        } else {
+          let message: string = "Programed exercise " + result.data.modifyProgExerciseTrustLabel.name + " been successfully updated.";
+          this.alertService.addSuccessAlert(message);
+        }
+      });
+    else
+      return this.alertService.addErrorAlert("User not logged in.");
   }
 
   deleteProgExercises(progExercise: ProgExercise) {
