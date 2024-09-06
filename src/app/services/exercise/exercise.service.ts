@@ -40,6 +40,9 @@ export class ExerciseService {
       variables: {
         inputNewExercise: exerciseForm.value,
       },
+      refetchQueries: [{
+        query: GET_EXERCISES,
+      }]
     }).subscribe((result: MutationResult) => {
       if (result.errors) {
         this.alertService.graphQLErrorAlertHandler(result.errors);
@@ -56,6 +59,9 @@ export class ExerciseService {
       variables: {
         inputExercise: exerciseForm.value,
       },
+      refetchQueries: [{
+        query: GET_EXERCISES,
+      }]
     }).subscribe((result: MutationResult) => {
       if (result.errors) {
         this.alertService.graphQLErrorAlertHandler(result.errors);
@@ -72,6 +78,9 @@ export class ExerciseService {
       variables: {
         exerciseId: exercise.id,
       },
+      refetchQueries: [{
+        query: GET_EXERCISES,
+      }]
     }).subscribe((result: MutationResult) => {
       if (result.errors) {
         this.alertService.graphQLErrorAlertHandler(result.errors);
