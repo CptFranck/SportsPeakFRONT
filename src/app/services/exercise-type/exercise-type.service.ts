@@ -46,6 +46,9 @@ export class ExerciseTypeService {
       variables: {
         inputNewExerciseType: muscleForm.value,
       },
+      refetchQueries: [{
+        query: GET_EXERCISE_TYPES,
+      }]
     }).subscribe((result: MutationResult) => {
       if (result.errors) {
         this.alertService.graphQLErrorAlertHandler(result.errors);
@@ -62,6 +65,9 @@ export class ExerciseTypeService {
       variables: {
         inputExerciseType: muscleForm.value,
       },
+      refetchQueries: [{
+        query: GET_EXERCISE_TYPES,
+      }]
     }).subscribe((result: MutationResult) => {
       if (result.errors) {
         this.alertService.graphQLErrorAlertHandler(result.errors);
@@ -78,6 +84,9 @@ export class ExerciseTypeService {
       variables: {
         exerciseTypeId: exerciseType.id,
       },
+      refetchQueries: [{
+        query: GET_EXERCISE_TYPES,
+      }]
     }).subscribe((result: MutationResult) => {
       if (result.errors) {
         this.alertService.graphQLErrorAlertHandler(result.errors);
