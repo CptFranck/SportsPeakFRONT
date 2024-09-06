@@ -15,7 +15,7 @@ export class TooltipComponent {
     "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit...";
 
   showTooltip() {
-    console.log("test")
-    this.tooltipHidden = !this.tooltipHidden;
+    if (this.used)
+      this.tooltipHidden = !this.tooltipHidden;
   }
 }

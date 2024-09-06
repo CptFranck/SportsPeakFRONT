@@ -1,7 +1,7 @@
 <div (mouseout)="showTooltip()" (mouseover)="showTooltip()" class="text-center">
   <ng-content/>
   <div class="myTooltip">
-    <div [hidden]="tooltipHidden || used" class="tooltipText">
+    <div [hidden]="tooltipHidden" class="tooltipText">
       {{ tooltipText }}
     </div>
   </div>
