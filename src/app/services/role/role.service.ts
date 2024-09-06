@@ -47,6 +47,9 @@ export class RoleService {
       variables: {
         inputNewRole: roleForm.value,
       },
+      refetchQueries: [{
+        query: GET_ROLES,
+      }]
     }).subscribe((result: MutationResult) => {
       if (result.errors) {
         this.alertService.graphQLErrorAlertHandler(result.errors);
@@ -63,6 +66,9 @@ export class RoleService {
       variables: {
         inputRole: roleForm.value,
       },
+      refetchQueries: [{
+        query: GET_ROLES,
+      }]
     }).subscribe((result: MutationResult) => {
       if (result.errors) {
         this.alertService.graphQLErrorAlertHandler(result.errors);
@@ -79,6 +85,9 @@ export class RoleService {
       variables: {
         roleId: role.id,
       },
+      refetchQueries: [{
+        query: GET_ROLES,
+      }]
     }).subscribe((result: MutationResult) => {
       if (result.errors) {
         this.alertService.graphQLErrorAlertHandler(result.errors);
