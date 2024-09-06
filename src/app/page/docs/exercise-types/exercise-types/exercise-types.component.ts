@@ -33,6 +33,7 @@ export class ExerciseTypesComponent implements OnInit, OnDestroy {
   action: ActionType = ActionType.create;
   modalTitle: string = "";
   exerciseTypeModalId: string = "exercisesTypeModal";
+  searchInput: string = "";
 
   @ViewChild("modalTemplate") modalTemplate!: TemplateRef<any>
 
@@ -44,7 +45,7 @@ export class ExerciseTypesComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe((exerciseType: ExerciseType[]) => {
         this.exerciseTypes = exerciseType;
-        this.displayedExerciseTypes = exerciseType;
+        this.updateDisplayedExerciseTypes();
       });
     this.exerciseTypeService.isLoading
       .pipe(takeUntil(this.unsubscribe$))
@@ -67,12 +68,17 @@ export class ExerciseTypesComponent implements OnInit, OnDestroy {
   }
 
   searchExerciseType(input: string) {
-    if (input === "") {
-      this.displayedExerciseTypes = this.exerciseTypes
+    this.searchInput = input;
+    this.updateDisplayedExerciseTypes();
+  }
+
+  updateDisplayedExerciseTypes() {
+    if (this.searchInput === "") {
+      this.displayedExerciseTypes = this.exerciseTypes;
       return;
     }
 
-    let localInput: string = input.toLowerCase();
+    let localInput: string = this.searchInput.toLowerCase();
     let includeExerciseTypeExerciseName: boolean = false;
 
     this.displayedExerciseTypes = this.exerciseTypes.filter((exerciseType: ExerciseType) => {
