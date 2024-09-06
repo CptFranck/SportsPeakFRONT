@@ -57,6 +57,9 @@ export class UserService {
       variables: {
         inputUserIdentity: userForm.value,
       },
+      refetchQueries: [{
+        query: GET_USERS,
+      }]
     }).subscribe((result: MutationResult): void => {
       if (result.errors) {
         this.alertService.graphQLErrorAlertHandler(result.errors);
@@ -74,6 +77,9 @@ export class UserService {
       variables: {
         inputUserRoles: userForm.value,
       },
+      refetchQueries: [{
+        query: GET_USERS,
+      }]
     }).subscribe((result: MutationResult): void => {
       if (result.errors) {
         this.alertService.graphQLErrorAlertHandler(result.errors);
