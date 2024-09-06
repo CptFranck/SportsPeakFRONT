@@ -40,6 +40,9 @@ export class MuscleService {
       variables: {
         inputNewMuscle: muscleForm.value,
       },
+      refetchQueries: [{
+        query: GET_MUSCLES,
+      }]
     }).subscribe(
       (result: MutationResult): void => {
         if (result.errors) {
@@ -57,6 +60,9 @@ export class MuscleService {
       variables: {
         inputMuscle: muscleForm.value,
       },
+      refetchQueries: [{
+        query: GET_MUSCLES,
+      }]
     }).subscribe((result: MutationResult): void => {
       if (result.errors) {
         this.alertService.graphQLErrorAlertHandler(result.errors);
@@ -73,6 +79,9 @@ export class MuscleService {
       variables: {
         muscleId: muscle.id,
       },
+      refetchQueries: [{
+        query: GET_MUSCLES,
+      }]
     }).subscribe((result: MutationResult): void => {
       if (result.errors) {
         this.alertService.graphQLErrorAlertHandler(result.errors);
