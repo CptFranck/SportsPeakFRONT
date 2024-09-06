@@ -93,9 +93,12 @@
       <div class="col p-1 text-center">
         <app-modal-button
           (onCLickModalButton)="delMuscle($event)"
+          [disabled]="muscle.exercises.length !== 0"
           [modalId]="modalId"
           [modalValue]="muscle"
+          [useTooltip]="muscle.exercises.length !== 0"
           btnClass="btn-danger"
+          tooltipText="this muscle is still used in some exercise"
         >
           <i class="fa-solid fa-trash"></i>
         </app-modal-button>
