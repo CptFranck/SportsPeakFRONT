@@ -9,6 +9,7 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 export class ModalButtonComponent implements OnInit {
   AllWidthStyle: string = "";
 
+  @Input() disabled: boolean = false;
   @Input() modalId!: string;
   @Input() modalValue?: any | undefined;
   @Input() btnClass?: string = "btn-success"
