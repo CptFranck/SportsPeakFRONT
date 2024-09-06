@@ -36,6 +36,7 @@ export class ExercisesComponent implements OnInit, OnDestroy {
   action: ActionType = ActionType.create;
   modalTitle: string = "";
   exerciseModalId: string = "exerciseModal"
+  searchInput: string = "";
 
   @ViewChild("modalTemplate") modalTemplate!: TemplateRef<any>
 
@@ -47,7 +48,7 @@ export class ExercisesComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe((exercises: Exercise[]) => {
         this.exercises = exercises;
-        this.displayedExercises = exercises;
+        this.updateDisplayedExercise();
       });
     this.exerciseService.isLoading
       .pipe(takeUntil(this.unsubscribe$))
@@ -69,12 +70,16 @@ export class ExercisesComponent implements OnInit, OnDestroy {
   }
 
   searchExercise(input: string) {
-    if (input === "") {
+    this.searchInput = input;
+    this.updateDisplayedExercise();
+  }
+
+  updateDisplayedExercise() {
+    if (this.searchInput === "") {
       this.displayedExercises = this.exercises
       return;
     }
-
-    let localInput: string = input.toLowerCase();
+    let localInput: string = this.searchInput.toLowerCase();
     let includeExerciseMuscleName: boolean = false;
     let includeExerciseExerciseTypeName: boolean = false;
 
