@@ -51,6 +51,9 @@ export class PrivilegeService {
       variables: {
         inputNewPrivilege: privilegeForm.value,
       },
+      refetchQueries: [{
+        query: GET_PRIVILEGES,
+      }]
     }).subscribe((result: MutationResult) => {
       if (result.errors) {
         this.alertService.graphQLErrorAlertHandler(result.errors);
@@ -67,6 +70,9 @@ export class PrivilegeService {
       variables: {
         inputPrivilege: privilegeForm.value,
       },
+      refetchQueries: [{
+        query: GET_PRIVILEGES,
+      }]
     }).subscribe((result: MutationResult) => {
       if (result.errors) {
         this.alertService.graphQLErrorAlertHandler(result.errors);
@@ -83,6 +89,9 @@ export class PrivilegeService {
       variables: {
         privilegeId: privilegeForm.id,
       },
+      refetchQueries: [{
+        query: GET_PRIVILEGES,
+      }]
     }).subscribe((result: MutationResult) => {
       if (result.errors) {
         this.alertService.graphQLErrorAlertHandler(result.errors);
