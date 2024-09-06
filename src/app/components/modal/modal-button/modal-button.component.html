@@ -1,11 +1,14 @@
-<button
-  (click)="onClick()"
-  [attr.data-bs-target]="'#' + modalId"
-  [class]="'btn ' + btnClass"
-  [disabled]="disabled"
-  [style]="AllWidthStyle"
-  data-bs-toggle="modal"
-  type="button"
->
-  <ng-content/>
-</button>
+<app-tooltip [tooltipText]="tooltipText" [used]="useTooltip">
+  <button
+    (click)="onClick()"
+    [attr.data-bs-target]="'#' + modalId"
+    [class]="'btn ' + btnClass"
+    [disabled]="disabled"
+    [style]="AllWidthStyle"
+    data-bs-toggle="modal"
+    type="button"
+  >
+    <ng-content/>
+  </button>
+</app-tooltip>
+
