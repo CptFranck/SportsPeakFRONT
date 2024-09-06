@@ -1,0 +1,16 @@
+<div>
+  <div *ngIf="!modify" class="d-flex align-items-center">
+    <label class="fw-bold me-1"> TrustLabel : </label>
+    {{ progExercise.trustLabel }}
+    <button (click)="openForm()" class="d-flex btn btn-outline-secondary p-2 ms-2">
+      <i class="fa-solid fa-pen-to-square"></i>
+    </button>
+  </div>
+  <form *ngIf="progExerciseTrustLabel && modify" [formGroup]="progExerciseTrustLabel" class="d-flex align-items-center">
+    <app-target-set-state-select [targetSetState]='progExerciseTrustLabel.controls["state"].value'
+                                 class="mx-auto" formControlName="state"/>
+    <button (click)="submit()" class="btn btn-outline-secondary mx-auto">
+      <i class="fa-solid fa-check"></i>
+    </button>
+  </form>
+</div>
