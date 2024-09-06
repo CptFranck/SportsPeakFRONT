@@ -1,0 +1,8 @@
+<div (mouseout)="showTooltip()" (mouseover)="showTooltip()">
+  <ng-content/>
+  <div class="myTooltip">
+    <div [hidden]="tooltipHidden && used" class="tooltipText">
+      {{ tooltipText }}
+    </div>
+  </div>
+</div>

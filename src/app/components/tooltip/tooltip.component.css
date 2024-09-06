@@ -1,0 +1,23 @@
+.myTooltip {
+  position: relative;
+}
+
+.tooltipText {
+  background-color: rgb(0, 0, 0);
+  color: rgb(255, 255, 255);
+  text-align: center;
+  padding: 5px 10px;
+  border-radius: 6px;
+
+  /* Position the tooltip text - see examples below! */
+  position: absolute;
+  z-index: 1;
+  left: 50%;
+  transform: translate(-50%);
+  top: calc(100% + 50%);
+
+  height: 100px;
+  width: 200px;
+  overflow: scroll;
+  text-overflow: ellipsis;
+}
