@@ -17,6 +17,7 @@ import {RouterLink, RouterLinkActive} from "@angular/router";
 })
 export class NavBarUserMenuComponent implements OnInit {
   user: User | undefined = undefined;
+  isAdmin: boolean | undefined;
   navbarDropdownId: string = "NavBarUserMenu"
 
   private userService: UserLoggedService = inject(UserLoggedService);
@@ -24,6 +25,7 @@ export class NavBarUserMenuComponent implements OnInit {
   ngOnInit() {
     this.userService.currentUser.subscribe((user: User | undefined) => {
       this.user = user;
+      this.isAdmin = this.userService.isAdmin();
     })
   }
 }

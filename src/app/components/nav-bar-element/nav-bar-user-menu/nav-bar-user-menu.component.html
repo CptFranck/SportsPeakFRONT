@@ -7,25 +7,28 @@
     </a>
     <ul [attr.aria-labelledby]="navbarDropdownId" class="dropdown-menu">
       <li>
-        <a class="dropdown-item" routerLink="/user" routerLinkActive="active">User Profile</a>
+        <a class="nav-link" routerLink="/user" routerLinkActive="active">User Profile</a>
       </li>
       <li>
-        <a class="dropdown-item" routerLink="/user" routerLinkActive="active">Account settings</a>
+        <a class="nav-link" routerLink="/user" routerLinkActive="active">Account settings</a>
       </li>
       <li>
         <hr class="dropdown-divider">
       </li>
       <li>
-        <div class="dropdown-item ">
-          <p class="m-0"> Account : {{ user.firstName }} {{ user.lastName }} </p>
+        <div class="nav-link disabled">
+          <p class="m-0"> Account : </p>
+          <p class="m-0">{{ user.firstName }} {{ user.lastName }} </p>
         </div>
       </li>
-      <li *ngIf="user?.roles">
-        <hr class="dropdown-divider">
-        <p class="dropdown-item m-0 disabled"> Role : </p>
-      </li>
-      <li *ngFor="let role of user?.roles">
-        <p class="dropdown-item m-0 disabled"> {{ role.name }}</p>
+      <li *ngIf="user?.roles && isAdmin">
+        <div class="nav-link disabled">
+          <p class="m-0 "> Role : </p>
+          <p *ngFor="let role of user?.roles"
+             class="m-0">
+            {{ role.name }}
+          </p>
+        </div>
       </li>
     </ul>
   </li>
