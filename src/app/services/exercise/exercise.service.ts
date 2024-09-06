@@ -47,7 +47,7 @@ export class ExerciseService {
       if (result.errors) {
         this.alertService.graphQLErrorAlertHandler(result.errors);
       } else {
-        let message: string = "Exercise " + result.data.modifyExercise.name + " been successfully created."
+        let message: string = "Exercise " + result.data.addExercise.name + " been successfully created."
         this.alertService.addSuccessAlert(message);
       }
     });
