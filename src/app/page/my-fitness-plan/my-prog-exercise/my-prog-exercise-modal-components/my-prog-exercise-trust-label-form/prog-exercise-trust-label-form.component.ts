@@ -6,6 +6,9 @@ import {
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {ProgExercise} from "../../../../../interface/dto/prog-exercise";
 import {ProgExerciseService} from "../../../../../services/prog-exercise/prog-exercise.service";
+import {
+  TrustLabelSelectComponent
+} from "../../../../../components/selects/prog-exercise-trust-label-select/trust-label-select.component";
 
 @Component({
   selector: 'app-prog-exercise-trust-label-form',
@@ -13,7 +16,8 @@ import {ProgExerciseService} from "../../../../../services/prog-exercise/prog-ex
   imports: [
     NgIf,
     TargetSetSateSelectComponent,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    TrustLabelSelectComponent
   ],
   templateUrl: './prog-exercise-trust-label-form.component.html',
 })

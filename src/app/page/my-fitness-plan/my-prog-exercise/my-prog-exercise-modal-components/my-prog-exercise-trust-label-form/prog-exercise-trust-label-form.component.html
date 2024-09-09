@@ -7,8 +7,8 @@
     </button>
   </div>
   <form *ngIf="progExerciseTrustLabel && modify" [formGroup]="progExerciseTrustLabel" class="d-flex align-items-center">
-    <app-target-set-state-select [targetSetState]='progExerciseTrustLabel.controls["state"].value'
-                                 class="mx-auto" formControlName="state"/>
+    <app-prog-exercise-trust-label-select [trustLabel]='progExerciseTrustLabel.controls["trustLabel"].value'
+                                          class="mx-auto" formControlName="trustLabel"/>
     <button (click)="submit()" class="btn btn-outline-secondary mx-auto">
       <i class="fa-solid fa-check"></i>
     </button>
