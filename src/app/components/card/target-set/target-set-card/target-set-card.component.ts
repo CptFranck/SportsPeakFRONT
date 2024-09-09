@@ -8,10 +8,10 @@ import {
   getTargetSetInformation,
   getTargetSetTimeToString
 } from "../../../../utils/prog-exercise-functions";
+import {CollapseButtonComponent} from "../../../collapse-buton/collapse-button.component";
 import {
   TargetSetStateFormComponent
-} from "../../../../page/my-fitness-plan/my-prog-exercise/target-set-modal-components/target-set-state-form/target-set-state-form.component";
-import {CollapseButtonComponent} from "../../../collapse-buton/collapse-button.component";
+} from "../../../../page/my-fitness-plan/my-prog-exercise/my-prog-exercise-target-sets/target-set-modal-components/target-set-state-form/target-set-state-form.component";
 
 @Component({
   selector: 'app-target-set-card',

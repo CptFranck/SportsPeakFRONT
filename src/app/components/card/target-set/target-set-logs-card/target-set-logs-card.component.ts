@@ -6,11 +6,11 @@ import {
   getTargetSetInformation,
   getTargetSetTimeToString
 } from "../../../../utils/prog-exercise-functions";
-import {
-  TargetSetStateFormComponent
-} from "../../../../page/my-fitness-plan/my-prog-exercise/target-set-modal-components/target-set-state-form/target-set-state-form.component";
 import {ActionType} from "../../../../interface/enum/action-type";
 import {FormIndicator} from "../../../../interface/utils/form-indicator";
+import {
+  TargetSetStateFormComponent
+} from "../../../../page/my-fitness-plan/my-prog-exercise/my-prog-exercise-target-sets/target-set-modal-components/target-set-state-form/target-set-state-form.component";
 
 @Component({
   selector: 'app-target-set-logs-card',

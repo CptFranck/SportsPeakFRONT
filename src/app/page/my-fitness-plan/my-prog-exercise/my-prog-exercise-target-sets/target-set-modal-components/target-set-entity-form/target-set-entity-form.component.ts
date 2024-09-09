@@ -1,21 +1,21 @@
 import {Component, inject, Input, OnDestroy, OnInit} from '@angular/core';
-import {ExerciseSelectComponent} from "../../../../../components/selects/exercise-select/exercise-select.component";
 import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
-import {InputControlComponent} from "../../../../../components/input-control/input-control.component";
 import {NgIf} from "@angular/common";
+import {Observable, Subject, takeUntil} from "rxjs";
+import {ExerciseSelectComponent} from "../../../../../../components/selects/exercise-select/exercise-select.component";
+import {InputControlComponent} from "../../../../../../components/input-control/input-control.component";
 import {
   VisibilitySelectComponent
-} from "../../../../../components/selects/visibility-select/visibility-select.component";
-import {Observable, Subject, takeUntil} from "rxjs";
-import {TargetSet} from "../../../../../interface/dto/target-set";
-import {WeightUnit} from "../../../../../interface/enum/weightUnit";
-import {Duration} from "../../../../../interface/dto/duration";
-import {ActionType} from "../../../../../interface/enum/action-type";
-import {ProgExercise} from "../../../../../interface/dto/prog-exercise";
-import {WeightSelectComponent} from "../../../../../components/selects/weight-select/weight-select.component";
-import {DurationInputComponent} from "../../../../../components/input/duration-inputs/duration-input.component";
-import {createDurationForm} from "../../../../../utils/duration-functions";
-import {TargetSetService} from "../../../../../services/target-set/target-set.service";
+} from "../../../../../../components/selects/visibility-select/visibility-select.component";
+import {WeightSelectComponent} from "../../../../../../components/selects/weight-select/weight-select.component";
+import {DurationInputComponent} from "../../../../../../components/input/duration-inputs/duration-input.component";
+import {TargetSet} from "../../../../../../interface/dto/target-set";
+import {ProgExercise} from "../../../../../../interface/dto/prog-exercise";
+import {ActionType} from "../../../../../../interface/enum/action-type";
+import {TargetSetService} from "../../../../../../services/target-set/target-set.service";
+import {Duration} from "../../../../../../interface/dto/duration";
+import {WeightUnit} from "../../../../../../interface/enum/weightUnit";
+import {createDurationForm} from "../../../../../../utils/duration-functions";
 
 @Component({
   selector: 'app-target-set-entity-form',

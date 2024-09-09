@@ -20,10 +20,10 @@ import {
 } from "../../my-prog-exercises/my-prog-exercise-modal/my-prog-exercise-modal.component";
 import {MyProgExerciseDetailsModalComponent} from "../my-prog-exercise-modal/my-prog-exercise-details-modal.component";
 import {TargetSetCardComponent} from "../../../../components/card/target-set/target-set-card/target-set-card.component";
-import {TargetSetModalComponent} from "../target-set-modal/target-set-modal.component";
+import {TargetSetModalComponent} from "../my-prog-exercise-target-sets/target-set-modal/target-set-modal.component";
 import {TargetSet} from "../../../../interface/dto/target-set";
 import {Subject, takeUntil} from "rxjs";
-import {TargetSetsComponent} from "../target-sets/target-sets.component";
+import {TargetSetsComponent} from "../my-prog-exercise-target-sets/target-sets/target-sets.component";
 
 @Component({
   selector: 'app-my-prog-exercise',
