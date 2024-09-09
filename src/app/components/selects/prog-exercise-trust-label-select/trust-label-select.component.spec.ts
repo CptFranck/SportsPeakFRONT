@@ -1,18 +1,18 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import {ProgExerciseTrustLabelSelectComponent} from './prog-exercise-trust-label-select.component';
+import {TrustLabelSelectComponent} from './trust-label-select.component';
 
 describe('VisibilitySelectComponent', () => {
-  let component: ProgExerciseTrustLabelSelectComponent;
-  let fixture: ComponentFixture<ProgExerciseTrustLabelSelectComponent>;
+  let component: TrustLabelSelectComponent;
+  let fixture: ComponentFixture<TrustLabelSelectComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ProgExerciseTrustLabelSelectComponent]
+      imports: [TrustLabelSelectComponent]
     })
       .compileComponents();
 
-    fixture = TestBed.createComponent(ProgExerciseTrustLabelSelectComponent);
+    fixture = TestBed.createComponent(TrustLabelSelectComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

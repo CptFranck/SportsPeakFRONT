@@ -13,13 +13,13 @@ import {TrustLabel} from "../../../interface/enum/trustLabel";
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => ProgExerciseTrustLabelSelectComponent),
+      useExisting: forwardRef(() => TrustLabelSelectComponent),
       multi: true,
     }
   ],
-  templateUrl: './prog-exercise-trust-label-select.component.html',
+  templateUrl: './trust-label-select.component.html',
 })
-export class ProgExerciseTrustLabelSelectComponent implements ControlValueAccessor {
+export class TrustLabelSelectComponent implements ControlValueAccessor {
 
   targetSetStateOptions: SelectOption[] = [{
     title: TrustLabel.UNVERIFIED,
