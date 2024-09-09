@@ -18,7 +18,9 @@ import {
 import {
   MyProgExerciseModalComponent
 } from "../../my-prog-exercises/my-prog-exercise-modal/my-prog-exercise-modal.component";
-import {MyProgExerciseDetailsModalComponent} from "../my-prog-exercise-modal/my-prog-exercise-details-modal.component";
+import {
+  MyProgExerciseDetailsModalComponent
+} from "../my-prog-exercise-details-modal/my-prog-exercise-details-modal.component";
 import {TargetSetCardComponent} from "../../../../components/card/target-set/target-set-card/target-set-card.component";
 import {TargetSetModalComponent} from "../my-prog-exercise-target-sets/target-set-modal/target-set-modal.component";
 import {TargetSet} from "../../../../interface/dto/target-set";
