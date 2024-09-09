@@ -9,6 +9,7 @@ import {ProgExerciseService} from "../../../../../services/prog-exercise/prog-ex
 import {
   TrustLabelSelectComponent
 } from "../../../../../components/selects/prog-exercise-trust-label-select/trust-label-select.component";
+import {UserLoggedService} from "../../../../../services/user-logged/user-logged.service";
 
 @Component({
   selector: 'app-prog-exercise-trust-label-form',
@@ -23,14 +24,19 @@ import {
 })
 export class ProgExerciseTrustLabelFormComponent implements OnInit {
   modify: boolean = false;
+  isStaff: boolean = false;
   progExerciseTrustLabel: FormGroup | null = null;
 
   @Input() progExercise!: ProgExercise;
 
+  private userLoggedService: UserLoggedService = inject(UserLoggedService);
   private progExerciseService: ProgExerciseService = inject(ProgExerciseService);
 
   ngOnInit() {
     this.initializeProgExerciseForm();
+    this.userLoggedService.currentUser.subscribe(() => {
+      this.isStaff = this.userLoggedService.isStaff();
+    })
   }
 
   initializeProgExerciseForm() {
