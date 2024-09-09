@@ -18,8 +18,4 @@
   <app-my-prog-exercise-details-display *ngIf="action === ActionType.read"
                                         [progExerciseInput]="progExercise"/>
   <app-my-prog-exercise-performance *ngIf="action === ActionType.checkPerformance"/>
-  <app-my-prog-exercise-delete-form *ngIf="action === ActionType.delete"
-                                    [btnCloseRef]="btnClose"
-                                    [progExercise]="progExercise"
-                                    [submitEventActionType$]="submitEventActionType$"/>
 </ng-template>
