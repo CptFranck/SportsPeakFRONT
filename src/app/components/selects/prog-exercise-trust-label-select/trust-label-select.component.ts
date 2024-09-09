@@ -21,7 +21,7 @@ import {TrustLabel} from "../../../interface/enum/trustLabel";
 })
 export class TrustLabelSelectComponent implements ControlValueAccessor {
 
-  targetSetStateOptions: SelectOption[] = [{
+  trustLabelOptions: SelectOption[] = [{
     title: TrustLabel.UNVERIFIED,
     value: TrustLabel.UNVERIFIED,
   }, {
@@ -32,7 +32,7 @@ export class TrustLabelSelectComponent implements ControlValueAccessor {
     value: TrustLabel.EXPERT_APPROVED,
   }];
 
-  @Input() targetSetState!: string;
+  @Input() trustLabel!: string;
 
   onChange: (value: string) => void = () => {
   };
@@ -41,7 +41,7 @@ export class TrustLabelSelectComponent implements ControlValueAccessor {
   };
 
   writeValue(targetSetState: string): void {
-    this.targetSetState = targetSetState;
+    this.trustLabel = targetSetState;
   }
 
   registerOnChange(fn: (value: string) => void): void {
@@ -54,7 +54,7 @@ export class TrustLabelSelectComponent implements ControlValueAccessor {
 
   setTargetSetId(targetSetState: string | undefined): void {
     if (targetSetState) {
-      this.targetSetState = targetSetState;
+      this.trustLabel = targetSetState;
       this.onChange(targetSetState)
     }
   }
