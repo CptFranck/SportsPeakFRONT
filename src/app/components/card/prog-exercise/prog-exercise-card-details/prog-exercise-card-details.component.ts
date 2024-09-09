@@ -6,6 +6,9 @@ import {ActionType} from "../../../../interface/enum/action-type";
 import {ModalButtonComponent} from "../../../modal/modal-button/modal-button.component";
 import {NgForOf, NgIf} from "@angular/common";
 import {RouterLink} from "@angular/router";
+import {
+  ProgExerciseTrustLabelFormComponent
+} from "../../../../page/my-fitness-plan/my-prog-exercise/my-prog-exercise-modal-components/my-prog-exercise-trust-label-form/prog-exercise-trust-label-form.component";
 
 @Component({
   selector: 'app-prog-exercise-card-details',
@@ -14,7 +17,8 @@ import {RouterLink} from "@angular/router";
     ModalButtonComponent,
     NgForOf,
     NgIf,
-    RouterLink
+    RouterLink,
+    ProgExerciseTrustLabelFormComponent
   ],
   templateUrl: './prog-exercise-card-details.component.html',
 })
