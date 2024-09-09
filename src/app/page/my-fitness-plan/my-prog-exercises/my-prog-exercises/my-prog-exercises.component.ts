@@ -47,6 +47,7 @@ export class MyProgExercisesComponent implements OnInit {
   action: ActionType = ActionType.create;
   modalTitle: string = "";
   progExerciseModalId: string = "progExerciseModal";
+  searchInput: string = "";
 
   @ViewChild("modalTemplate") modalTemplate!: TemplateRef<any>;
 
@@ -55,7 +56,7 @@ export class MyProgExercisesComponent implements OnInit {
   ngOnInit(): void {
     this.progExerciseService.userProgExercises.subscribe((progExercises: ProgExercise[]) => {
       this.progExercises = progExercises;
-      this.displayedProgExercises = progExercises;
+      this.updateDisplayedProgExercise();
     });
     this.progExerciseService.isLoading.subscribe((isLoading: boolean) => this.loading = isLoading);
   }
@@ -67,12 +68,17 @@ export class MyProgExercisesComponent implements OnInit {
   }
 
   searchProgExercise(input: string) {
-    if (input === "") {
-      this.displayedProgExercises = this.progExercises
+    this.searchInput = input;
+    this.updateDisplayedProgExercise();
+  }
+
+  updateDisplayedProgExercise() {
+    if (this.searchInput === "") {
+      this.displayedProgExercises = this.progExercises;
       return;
     }
 
-    let localInput: string = input.toLowerCase();
+    let localInput: string = this.searchInput.toLowerCase();
     let includeMuscleExerciseName: boolean = false;
 
     this.displayedProgExercises = this.progExercises.filter((progExercise: ProgExercise) => {
