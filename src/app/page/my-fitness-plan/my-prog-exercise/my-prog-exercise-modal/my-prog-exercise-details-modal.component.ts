@@ -6,7 +6,7 @@ import {ProgExercise} from "../../../../interface/dto/prog-exercise";
 import {ActionType} from "../../../../interface/enum/action-type";
 import {
   MyProgExerciseDeleteFormComponent
-} from "../../my-prog-exercises/my-prog-exercise-modal-components/my-prog-exercise-delete-form/my-prog-exercise-delete-form.component";
+} from "../my-prog-exercise-modal-components/my-prog-exercise-delete-form/my-prog-exercise-delete-form.component";
 import {
   MyProgExerciseDetailsDisplayComponent
 } from "../../my-prog-exercises/my-prog-exercise-modal-components/my-prog-exercise-details-display/my-prog-exercise-details-display.component";

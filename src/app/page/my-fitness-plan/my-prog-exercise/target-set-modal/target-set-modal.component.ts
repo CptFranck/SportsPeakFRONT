@@ -3,7 +3,7 @@ import {ActionType} from "../../../../interface/enum/action-type";
 import {ModalComponent} from "../../../../components/modal/modal/modal.component";
 import {
   MyProgExerciseDeleteFormComponent
-} from "../../my-prog-exercises/my-prog-exercise-modal-components/my-prog-exercise-delete-form/my-prog-exercise-delete-form.component";
+} from "../my-prog-exercise-modal-components/my-prog-exercise-delete-form/my-prog-exercise-delete-form.component";
 import {
   MyProgExerciseEntityFormComponent
 } from "../../my-prog-exercises/my-prog-exercise-modal-components/my-prog-exercise-entity-form/my-prog-exercise-entity-form.component";
