@@ -137,7 +137,6 @@ export class ProgExerciseService {
       return this.alertService.addErrorAlert("User not logged in.");
   }
 
-  // UNUSED FOR NOW
   modifyProgExerciseTrustLabel(progExercisesForm: FormGroup) {
     const user: User | undefined = this.userLoggedService.currentUser.value
     if (user)
