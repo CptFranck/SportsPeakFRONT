@@ -1,4 +1,4 @@
-import {Component, inject, OnInit, TemplateRef, ViewChild} from '@angular/core';
+import {Component, inject, OnDestroy, OnInit, TemplateRef, ViewChild} from '@angular/core';
 import {FormIndicator} from "../../../../interface/utils/form-indicator";
 import {ActionType} from "../../../../interface/enum/action-type";
 import {ProgExercise} from "../../../../interface/dto/prog-exercise";
@@ -11,6 +11,7 @@ import {Visibility} from "../../../../interface/enum/visibility";
 import {ProgExercisesArrayComponent} from "../prog-exercise-array/prog-exercises-array.component";
 import {ProgExerciseModalComponent} from "../prog-exercise-modal/prog-exercise-modal.component";
 import {Muscle} from "../../../../interface/dto/muscle";
+import {Subject, takeUntil} from "rxjs";
 
 @Component({
   selector: 'app-prog-exercises',
@@ -25,7 +26,7 @@ import {Muscle} from "../../../../interface/dto/muscle";
   ],
   templateUrl: './prog-exercises.component.html',
 })
-export class ProgExercisesComponent implements OnInit {
+export class ProgExercisesComponent implements OnInit, OnDestroy {
   loading: boolean = true;
   progExercises: ProgExercise[] = [];
   displayedProgExercises: ProgExercise[] = [];
@@ -36,16 +37,26 @@ export class ProgExercisesComponent implements OnInit {
 
   @ViewChild("modalTemplate") modalTemplate!: TemplateRef<any>;
 
+  private unsubscribe$: Subject<void> = new Subject<void>();
   private proExerciseService: ProgExerciseService = inject(ProgExerciseService);
 
   ngOnInit(): void {
-    this.proExerciseService.progExercises.subscribe((progExercises: ProgExercise[]) => {
-      let publicProgExercise: ProgExercise[] = progExercises.filter((progExercise: ProgExercise) =>
-        progExercise.visibility === Visibility.PUBLIC)
-      this.progExercises = publicProgExercise;
-      this.displayedProgExercises = publicProgExercise;
-    });
-    this.proExerciseService.isLoading.subscribe((isLoading: boolean) => this.loading = isLoading);
+    this.proExerciseService.progExercises
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe((progExercises: ProgExercise[]) => {
+        let publicProgExercise: ProgExercise[] = progExercises.filter((progExercise: ProgExercise) =>
+          progExercise.visibility === Visibility.PUBLIC)
+        this.progExercises = publicProgExercise;
+        this.displayedProgExercises = publicProgExercise;
+      });
+    this.proExerciseService.isLoading
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe((isLoading: boolean) => this.loading = isLoading);
+  }
+
+  ngOnDestroy() {
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
   }
 
   setProgExercise(formIndicator: FormIndicator) {
