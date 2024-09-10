@@ -1,9 +1,10 @@
-import {Component, forwardRef, inject, Input, OnInit} from '@angular/core';
+import {Component, forwardRef, inject, Input, OnDestroy, OnInit} from '@angular/core';
 import {ControlValueAccessor, NG_VALUE_ACCESSOR} from "@angular/forms";
 import {MultiSelectOption} from "../../../interface/components/multi-select/multiSelectOption";
 import {ExerciseTypeService} from "../../../services/exercise-type/exercise-type.service";
 import {ExerciseType} from "../../../interface/dto/exercise-type";
 import {MultiSelectComponent} from "../../multi-select/multi-select.component";
+import {Subject, takeUntil} from "rxjs";
 
 @Component({
   selector: 'app-exercise-type-selector',
@@ -20,12 +21,13 @@ import {MultiSelectComponent} from "../../multi-select/multi-select.component";
   ],
   templateUrl: './exercise-type-selector.component.html',
 })
-export class ExerciseTypeSelectorComponent implements OnInit, ControlValueAccessor {
+export class ExerciseTypeSelectorComponent implements OnInit, OnDestroy, ControlValueAccessor {
   loading: boolean = true;
   exerciseTypes: MultiSelectOption[] = [];
 
   @Input() exerciseTypeIds: number[] = [];
 
+  private unsubscribe$: Subject<void> = new Subject<void>();
   private exerciseTypeService: ExerciseTypeService = inject(ExerciseTypeService);
 
   onChange: (value: number[]) => void = () => {
@@ -35,19 +37,26 @@ export class ExerciseTypeSelectorComponent implements OnInit, ControlValueAccess
   };
 
   ngOnInit(): void {
-    this.exerciseTypeService.exerciseTypes.subscribe((exerciseTypes: ExerciseType[]): void => {
-      let options: MultiSelectOption[] = []
-      exerciseTypes.forEach((exerciseType: ExerciseType) => {
-        options.push({
-          id: exerciseType.id.toString(),
-          title: exerciseType.name,
-          value: exerciseType,
-          description: exerciseType.goal
+    this.exerciseTypeService.exerciseTypes
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe((exerciseTypes: ExerciseType[]): void => {
+        let options: MultiSelectOption[] = []
+        exerciseTypes.forEach((exerciseType: ExerciseType) => {
+          options.push({
+            id: exerciseType.id.toString(),
+            title: exerciseType.name,
+            value: exerciseType,
+            description: exerciseType.goal
+          });
         });
+        this.exerciseTypes = [...options];
       });
-      this.exerciseTypes = [...options];
-    });
     this.exerciseTypeService.isLoading.subscribe((loading: boolean) => this.loading = loading);
+  }
+
+  ngOnDestroy() {
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
   }
 
   writeValue(exerciseTypeIds: number[]): void {
