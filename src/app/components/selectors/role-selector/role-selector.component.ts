@@ -1,10 +1,11 @@
-import {Component, forwardRef, inject, Input, OnInit} from '@angular/core';
+import {Component, forwardRef, inject, Input, OnDestroy, OnInit} from '@angular/core';
 import {MultiSelectOption} from "../../../interface/components/multi-select/multiSelectOption";
 import {ControlValueAccessor, NG_VALUE_ACCESSOR} from "@angular/forms";
 import {RoleService} from "../../../services/role/role.service";
 import {Role} from "../../../interface/dto/role";
 import {Privilege} from "../../../interface/dto/privilege";
 import {MultiSelectComponent} from "../../multi-select/multi-select.component";
+import {Subject, takeUntil} from "rxjs";
 
 @Component({
   selector: 'app-roles-selector',
@@ -21,12 +22,13 @@ import {MultiSelectComponent} from "../../multi-select/multi-select.component";
   ],
   templateUrl: './role-selector.component.html',
 })
-export class RoleSelectorComponent implements OnInit, ControlValueAccessor {
+export class RoleSelectorComponent implements OnInit, OnDestroy, ControlValueAccessor {
   loading: boolean = true;
   roleOptions: MultiSelectOption[] = [];
 
   @Input() roleIds: number[] = [];
 
+  private unsubscribe$: Subject<void> = new Subject<void>();
   private roleService: RoleService = inject(RoleService);
 
   onChange: (value: number[]) => void = () => {
@@ -36,19 +38,26 @@ export class RoleSelectorComponent implements OnInit, ControlValueAccessor {
   };
 
   ngOnInit(): void {
-    this.roleService.roles.subscribe((roles: Role[]) => {
-      let options: MultiSelectOption[] = []
-      roles.forEach((role: Role) => {
-        options.push({
-          id: role.id.toString(),
-          title: role.name,
-          value: role,
-          description: "Privilege(s) included : " + role.privileges.map((privilege: Privilege) => privilege.name).join(", ")
+    this.roleService.roles
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe((roles: Role[]) => {
+        let options: MultiSelectOption[] = []
+        roles.forEach((role: Role) => {
+          options.push({
+            id: role.id.toString(),
+            title: role.name,
+            value: role,
+            description: "Privilege(s) included : " + role.privileges.map((privilege: Privilege) => privilege.name).join(", ")
+          });
         });
+        this.roleOptions = [...options];
       });
-      this.roleOptions = [...options];
-    });
     this.roleService.isLoading.subscribe((loading: boolean) => this.loading = loading);
+  }
+
+  ngOnDestroy() {
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
   }
 
   writeValue(roleIds: number[]): void {
