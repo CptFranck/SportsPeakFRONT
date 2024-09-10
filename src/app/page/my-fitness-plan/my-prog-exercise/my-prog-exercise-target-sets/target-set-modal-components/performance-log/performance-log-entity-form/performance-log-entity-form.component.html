@@ -1,0 +1,56 @@
+<form *ngIf="performanceLogForm" [formGroup]="performanceLogForm" class="container-fluid">
+  <div class="mb-3">
+    <label class="form-label">Set index :</label>
+    <app-performance-log-index-select [targetSetNumber]="targetSet?.setNumber"/>
+    <app-input-control
+      [formGroup]="performanceLogForm"
+      [ifInvalid]="true"
+      [submitInvalid]="submitInvalidForm"
+      errorMessage="Please write the number corresponding to the index"
+      formGroupFieldName="setIndex"
+      rules="only integer number ; min : 1; max : 50"
+    />
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Number of Repetition(s) :</label>
+    <input class="form-control" formControlName="repetitionNumber" type="text">
+    <app-input-control
+      [formGroup]="performanceLogForm"
+      [submitInvalid]="submitInvalidForm"
+      errorMessage="Please write the number of sets you wish to make"
+      formGroupFieldName="repetitionNumber"
+      rules="only integer number ; min : 1 ; max : 1000"
+    />
+  </div>
+  <div class="mb-3">
+    <div class="row">
+      <div class="col">
+        <label class="form-label">Weight :</label>
+        <input class="form-control" formControlName="weight" type="text">
+        <app-input-control
+          [formGroup]="performanceLogForm"
+          [ifInvalid]="true"
+          [submitInvalid]="submitInvalidForm"
+          errorMessage="Please write the weight of sets you wish to use"
+          formGroupFieldName="weight"
+          rules="only number, two digits after the decimal point are accepted ; min : 0 ; max : 1000"
+        />
+      </div>
+      <div class="col">
+        <label class="form-label">Weight Unit:</label>
+        <app-weight-select [weightUnit]='performanceLogForm.controls["weightUnit"].value' formControlName="weightUnit"/>
+        <app-input-control
+          [formGroup]="performanceLogForm"
+          [ifInvalid]="true"
+          [submitInvalid]="submitInvalidForm"
+          errorMessage="Please write the weight of sets you wish to use"
+          formGroupFieldName="weightUnit"
+          rules="only number, two digits after the decimal point are accepted ; min : 0 ; max : 1000"
+        />
+      </div>
+    </div>
+  </div>
+  <div class="mb-3">
+  </div>
+</form>
+
