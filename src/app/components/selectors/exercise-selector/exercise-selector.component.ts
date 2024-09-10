@@ -1,9 +1,10 @@
-import {Component, forwardRef, inject, Input, OnInit} from '@angular/core';
+import {Component, forwardRef, inject, Input, OnDestroy, OnInit} from '@angular/core';
 import {Exercise} from "../../../interface/dto/exercise";
 import {MultiSelectOption} from "../../../interface/components/multi-select/multiSelectOption";
 import {ControlValueAccessor, NG_VALUE_ACCESSOR} from "@angular/forms";
 import {ExerciseService} from "../../../services/exercise/exercise.service";
 import {MultiSelectComponent} from "../../multi-select/multi-select.component";
+import {Subject, takeUntil} from "rxjs";
 
 @Component({
   selector: 'app-exercise-selector',
@@ -20,12 +21,13 @@ import {MultiSelectComponent} from "../../multi-select/multi-select.component";
   ],
   templateUrl: './exercise-selector.component.html',
 })
-export class ExerciseSelectorComponent implements OnInit, ControlValueAccessor {
+export class ExerciseSelectorComponent implements OnInit, OnDestroy, ControlValueAccessor {
   loading: boolean = true;
   exerciseOptions: MultiSelectOption[] = [];
 
   @Input() exerciseIds: number[] = [];
 
+  private unsubscribe$: Subject<void> = new Subject<void>();
   private exerciseService: ExerciseService = inject(ExerciseService);
 
   onChange: (value: number[]) => void = () => {
@@ -35,19 +37,26 @@ export class ExerciseSelectorComponent implements OnInit, ControlValueAccessor {
   };
 
   ngOnInit(): void {
-    this.exerciseService.exercises.subscribe((exercises: Exercise[]) => {
-      let options: MultiSelectOption[] = []
-      exercises.forEach((exercise: Exercise) => {
-        options.push({
-          id: exercise.id.toString(),
-          title: exercise.name,
-          value: exercise,
-          description: exercise.description
+    this.exerciseService.exercises
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe((exercises: Exercise[]) => {
+        let options: MultiSelectOption[] = []
+        exercises.forEach((exercise: Exercise) => {
+          options.push({
+            id: exercise.id.toString(),
+            title: exercise.name,
+            value: exercise,
+            description: exercise.description
+          });
         });
+        this.exerciseOptions = [...options];
       });
-      this.exerciseOptions = [...options];
-    });
     this.exerciseService.isLoading.subscribe((loading: boolean) => this.loading = loading);
+  }
+
+  ngOnDestroy() {
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
   }
 
   writeValue(exerciseIds: number[]): void {
