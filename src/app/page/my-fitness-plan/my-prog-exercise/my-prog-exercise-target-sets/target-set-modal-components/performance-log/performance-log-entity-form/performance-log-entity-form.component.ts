@@ -20,7 +20,7 @@ import {
     InputControlComponent,
     NgIf,
     WeightSelectComponent,
-    PerformanceLogIndexSelectComponent
+    PerformanceLogIndexSelectComponent,
   ],
   templateUrl: './performance-log-entity-form.component.html',
 })
@@ -73,6 +73,7 @@ export class PerformanceLogEntityFormComponent implements OnInit, OnDestroy {
     const performanceLogWeight: number | undefined = this.targetSet?.weight;
     const performanceLogWeightUnit: string = this.targetSet ? this.targetSet.weightUnit : WeightUnit.KILOGRAMME;
     const logDate: Date = new Date();
+
     const targetSetId: number | undefined = this.targetSet?.id;
 
     this.performanceLogForm = new FormGroup(
@@ -99,7 +100,9 @@ export class PerformanceLogEntityFormComponent implements OnInit, OnDestroy {
           performanceLogWeightUnit,
           [Validators.required]
         ),
-        logDate: new FormControl(logDate),
+        logDate: new FormControl(
+          logDate.toISOString().substring(0, 10),
+          [Validators.required]),
         targetSetId: new FormControl(targetSetId),
       });
   }

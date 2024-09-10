@@ -27,7 +27,6 @@ export class PerformanceLogIndexSelectComponent implements ControlValueAccessor 
   @Input() index!: number | undefined;
 
   @Input() set targetSetNumber(value: number | undefined) {
-    console.log(value)
     this.initialize(value);
   }
 
@@ -51,7 +50,6 @@ export class PerformanceLogIndexSelectComponent implements ControlValueAccessor 
         value: (this.indexOptions.length + 1).toString()
       });
     }
-    console.log(this.indexOptions)
   }
 
   writeValue(index: number | undefined): void {

@@ -1,15 +1,32 @@
 <form *ngIf="performanceLogForm" [formGroup]="performanceLogForm" class="container-fluid">
   <div class="mb-3">
-    <label class="form-label">Set index :</label>
-    <app-performance-log-index-select [targetSetNumber]="targetSet?.setNumber"/>
-    <app-input-control
-      [formGroup]="performanceLogForm"
-      [ifInvalid]="true"
-      [submitInvalid]="submitInvalidForm"
-      errorMessage="Please write the number corresponding to the index"
-      formGroupFieldName="setIndex"
-      rules="only integer number ; min : 1; max : 50"
-    />
+    <div class="row">
+      <div class="col">
+        <label class="form-label">Set index :</label>
+        <app-performance-log-index-select [index]='performanceLogForm.controls["setIndex"].value'
+                                          [targetSetNumber]="targetSet?.setNumber"/>
+        <app-input-control
+          [formGroup]="performanceLogForm"
+          [ifInvalid]="true"
+          [submitInvalid]="submitInvalidForm"
+          errorMessage="Please write the number corresponding to the index"
+          formGroupFieldName="setIndex"
+          rules="only integer number ; min : 1; max : 50"
+        />
+      </div>
+      <div class="col">
+        <label class="form-label">Date :</label>
+        <input class="form-control" formControlName="logDate" type="date"/>
+        <app-input-control
+          [formGroup]="performanceLogForm"
+          [ifInvalid]="true"
+          [submitInvalid]="submitInvalidForm"
+          errorMessage="Please select a correct date"
+          formGroupFieldName="logDate"
+          rules="must be a date"
+        />
+      </div>
+    </div>
   </div>
   <div class="mb-3">
     <label class="form-label">Number of Repetition(s) :</label>
