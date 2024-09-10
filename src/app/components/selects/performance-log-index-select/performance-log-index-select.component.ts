@@ -1,5 +1,5 @@
 import {Component, forwardRef, Input} from '@angular/core';
-import {NgForOf} from "@angular/common";
+import {NgForOf, NgIf} from "@angular/common";
 import {SelectOption} from "../../../interface/components/select/selectOption";
 import {NG_VALUE_ACCESSOR} from "@angular/forms";
 
@@ -7,7 +7,8 @@ import {NG_VALUE_ACCESSOR} from "@angular/forms";
   selector: 'app-performance-log-index-select',
   standalone: true,
   imports: [
-    NgForOf
+    NgForOf,
+    NgIf
   ],
   providers: [
     {
