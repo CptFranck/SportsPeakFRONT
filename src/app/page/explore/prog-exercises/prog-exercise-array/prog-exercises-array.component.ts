@@ -1,4 +1,4 @@
-import {Component, EventEmitter, inject, Input, OnChanges, Output} from '@angular/core';
+import {Component, EventEmitter, inject, Input, OnChanges, OnDestroy, Output} from '@angular/core';
 import {FormIndicator} from "../../../../interface/utils/form-indicator";
 import {UserLoggedService} from "../../../../services/user-logged/user-logged.service";
 import {ActionType} from "../../../../interface/enum/action-type";
@@ -8,6 +8,7 @@ import {ProgExercise} from "../../../../interface/dto/prog-exercise";
 import {User} from "../../../../interface/dto/user";
 import {ProgExerciseRowDetail} from "../../../../interface/utils/prog-exercise-row-detail";
 import {Dictionary} from "../../../../interface/utils/dictionary";
+import {Subject} from "rxjs";
 
 @Component({
   selector: 'app-prog-exercises-array',
@@ -19,7 +20,7 @@ import {Dictionary} from "../../../../interface/utils/dictionary";
   ],
   templateUrl: './prog-exercises-array.component.html',
 })
-export class ProgExercisesArrayComponent implements OnChanges {
+export class ProgExercisesArrayComponent implements OnChanges, OnDestroy {
   isAdmin: boolean = false;
   userLogged: User | undefined;
   progExerciseDetails: Dictionary<ProgExerciseRowDetail> = {};
@@ -30,6 +31,7 @@ export class ProgExercisesArrayComponent implements OnChanges {
 
   @Output() actionMuscle: EventEmitter<FormIndicator> = new EventEmitter<FormIndicator>();
 
+  private unsubscribe$: Subject<void> = new Subject<void>();
   private userLoggedService: UserLoggedService = inject(UserLoggedService);
 
   ngOnChanges(): void {
@@ -53,6 +55,11 @@ export class ProgExercisesArrayComponent implements OnChanges {
       }
       this.progExerciseDetails[progExercise.id] = detail;
     });
+  }
+
+  ngOnDestroy() {
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
   }
 
   expendProgExerciseDetails(id: string): void {
