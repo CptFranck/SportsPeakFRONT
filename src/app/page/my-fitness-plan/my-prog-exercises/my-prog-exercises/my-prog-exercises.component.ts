@@ -1,4 +1,4 @@
-import {Component, inject, OnInit, TemplateRef, ViewChild} from '@angular/core';
+import {Component, inject, OnDestroy, OnInit, TemplateRef, ViewChild} from '@angular/core';
 import {ProgExercise} from "../../../../interface/dto/prog-exercise";
 import {ActionType} from "../../../../interface/enum/action-type";
 import {ProgExerciseService} from "../../../../services/prog-exercise/prog-exercise.service";
@@ -20,6 +20,7 @@ import {
 } from "../../../../components/card/prog-exercise/prog-exercise-card/prog-exercise-card.component";
 import {ModalButtonComponent} from "../../../../components/modal/modal-button/modal-button.component";
 import {RouterLink} from "@angular/router";
+import {Subject, takeUntil} from "rxjs";
 
 @Component({
   selector: 'app-my-prog-exercises',
@@ -39,7 +40,7 @@ import {RouterLink} from "@angular/router";
   ],
   templateUrl: './my-prog-exercises.component.html',
 })
-export class MyProgExercisesComponent implements OnInit {
+export class MyProgExercisesComponent implements OnInit, OnDestroy {
   loading: boolean = true;
   progExercises: ProgExercise[] = [];
   displayedProgExercises: ProgExercise[] = [];
@@ -51,14 +52,24 @@ export class MyProgExercisesComponent implements OnInit {
 
   @ViewChild("modalTemplate") modalTemplate!: TemplateRef<any>;
 
+  private unsubscribe$: Subject<void> = new Subject<void>();
   private progExerciseService: ProgExerciseService = inject(ProgExerciseService);
 
   ngOnInit(): void {
-    this.progExerciseService.userProgExercises.subscribe((progExercises: ProgExercise[]) => {
-      this.progExercises = progExercises;
-      this.updateDisplayedProgExercise();
-    });
-    this.progExerciseService.isLoading.subscribe((isLoading: boolean) => this.loading = isLoading);
+    this.progExerciseService.userProgExercises
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe((progExercises: ProgExercise[]) => {
+        this.progExercises = progExercises;
+        this.updateDisplayedProgExercise();
+      });
+    this.progExerciseService.isLoading
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe((isLoading: boolean) => this.loading = isLoading);
+  }
+
+  ngOnDestroy() {
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
   }
 
   setProgExercise(formIndicator: FormIndicator) {
