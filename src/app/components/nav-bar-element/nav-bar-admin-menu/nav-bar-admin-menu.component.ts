@@ -1,7 +1,8 @@
-import {Component, inject, OnInit} from '@angular/core';
+import {Component, inject, OnDestroy, OnInit} from '@angular/core';
 import {UserLoggedService} from "../../../services/user-logged/user-logged.service";
 import {RouterLink, RouterLinkActive} from "@angular/router";
 import {NgForOf, NgIf} from "@angular/common";
+import {Subject, takeUntil} from "rxjs";
 
 @Component({
   selector: 'app-nav-bar-admin-menu',
@@ -14,14 +15,23 @@ import {NgForOf, NgIf} from "@angular/common";
   ],
   templateUrl: './nav-bar-admin-menu.component.html',
 })
-export class NavBarAdminMenuComponent implements OnInit {
+export class NavBarAdminMenuComponent implements OnInit, OnDestroy {
   isAdmin: boolean = false;
-  navbarDropdownId: string = "NavBarAdminMenu"
+  navbarDropdownId: string = "NavBarAdminMenu";
+
+  private unsubscribe$: Subject<void> = new Subject<void>();
   private userLoggedService: UserLoggedService = inject(UserLoggedService);
 
   ngOnInit() {
-    this.userLoggedService.currentUser.subscribe(() => {
-      this.isAdmin = this.userLoggedService.isAdmin();
-    })
+    this.userLoggedService.currentUser
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe(() => {
+        this.isAdmin = this.userLoggedService.isAdmin();
+      })
+  }
+
+  ngOnDestroy() {
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
   }
 }
