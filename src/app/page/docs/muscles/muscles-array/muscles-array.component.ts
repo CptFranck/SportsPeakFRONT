@@ -1,4 +1,4 @@
-import {Component, EventEmitter, inject, Input, OnChanges, Output} from '@angular/core';
+import {Component, EventEmitter, inject, Input, OnChanges, OnDestroy, Output} from '@angular/core';
 import {NgForOf, NgIf} from "@angular/common";
 import {Muscle} from "../../../../interface/dto/muscle";
 import {ModalButtonComponent} from "../../../../components/modal/modal-button/modal-button.component";
@@ -7,6 +7,7 @@ import {FormIndicator} from "../../../../interface/utils/form-indicator";
 import {ActionType} from "../../../../interface/enum/action-type";
 import {UserLoggedService} from "../../../../services/user-logged/user-logged.service";
 import {Dictionary} from "../../../../interface/utils/dictionary";
+import {Subject, takeUntil} from "rxjs";
 
 @Component({
   selector: 'app-muscles-array',
@@ -19,7 +20,7 @@ import {Dictionary} from "../../../../interface/utils/dictionary";
   ],
   templateUrl: './muscles-array.component.html',
 })
-export class MusclesArrayComponent implements OnChanges {
+export class MusclesArrayComponent implements OnChanges, OnDestroy {
   isAdmin: boolean = false;
   showDetails: Dictionary<boolean> = {};
 
@@ -28,11 +29,19 @@ export class MusclesArrayComponent implements OnChanges {
 
   @Output() actionMuscle: EventEmitter<FormIndicator> = new EventEmitter<FormIndicator>();
 
+  private unsubscribe$: Subject<void> = new Subject<void>();
   private userLoggedService: UserLoggedService = inject(UserLoggedService);
 
   ngOnChanges(): void {
     this.muscles.forEach((muscle: Muscle) => this.showDetails[muscle.id] = false);
-    this.userLoggedService.currentUser.subscribe(() => this.isAdmin = this.userLoggedService.isAdmin());
+    this.userLoggedService.currentUser
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe(() => this.isAdmin = this.userLoggedService.isAdmin());
+  }
+
+  ngOnDestroy() {
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
   }
 
   expendMuscleDetails(id: number): void {
