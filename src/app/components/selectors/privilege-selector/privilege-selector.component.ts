@@ -1,9 +1,10 @@
-import {Component, forwardRef, inject, Input, OnInit} from '@angular/core';
+import {Component, forwardRef, inject, Input, OnDestroy, OnInit} from '@angular/core';
 import {ControlValueAccessor, NG_VALUE_ACCESSOR} from "@angular/forms";
 import {MultiSelectOption} from "../../../interface/components/multi-select/multiSelectOption";
 import {Privilege} from "../../../interface/dto/privilege";
 import {PrivilegeService} from "../../../services/privilege/privilege.service";
 import {MultiSelectComponent} from "../../multi-select/multi-select.component";
+import {Subject, takeUntil} from "rxjs";
 
 @Component({
   selector: 'app-privilege-selector',
@@ -20,12 +21,13 @@ import {MultiSelectComponent} from "../../multi-select/multi-select.component";
   ],
   templateUrl: './privilege-selector.component.html',
 })
-export class PrivilegeSelectorComponent implements OnInit, ControlValueAccessor {
+export class PrivilegeSelectorComponent implements OnInit, OnDestroy, ControlValueAccessor {
   loading: boolean = true;
   privilegeOptions: MultiSelectOption[] = [];
 
   @Input() privilegeIds: number[] = [];
 
+  private unsubscribe$: Subject<void> = new Subject<void>();
   private privilegeService: PrivilegeService = inject(PrivilegeService);
 
   onChange: (value: number[]) => void = () => {
@@ -35,18 +37,25 @@ export class PrivilegeSelectorComponent implements OnInit, ControlValueAccessor 
   };
 
   ngOnInit(): void {
-    this.privilegeService.privileges.subscribe((privileges: Privilege[]) => {
-      let options: MultiSelectOption[] = []
-      privileges.forEach((privilege: Privilege) => {
-        options.push({
-          id: privilege.id.toString(),
-          title: privilege.name,
-          value: privilege,
+    this.privilegeService.privileges
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe((privileges: Privilege[]) => {
+        let options: MultiSelectOption[] = []
+        privileges.forEach((privilege: Privilege) => {
+          options.push({
+            id: privilege.id.toString(),
+            title: privilege.name,
+            value: privilege,
+          });
         });
+        this.privilegeOptions = [...options];
       });
-      this.privilegeOptions = [...options];
-    });
     this.privilegeService.isLoading.subscribe((loading: boolean) => this.loading = loading);
+  }
+
+  ngOnDestroy() {
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
   }
 
   writeValue(roleIds: number[]): void {
