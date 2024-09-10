@@ -53,12 +53,12 @@ export class ModalComponent {
         this.closeButtonTitle = "Cancel";
         return
       case ActionType.addPerformance:
-        this.validationButtonTitle = "Update";
+        this.validationButtonTitle = "Add Performance";
         this.validateButtonClass = "btn-success";
         this.closeButtonTitle = "Cancel";
         return
       case ActionType.addEvolution:
-        this.validationButtonTitle = "Update";
+        this.validationButtonTitle = "Update objective";
         this.validateButtonClass = "btn-success";
         this.closeButtonTitle = "Cancel";
         return
