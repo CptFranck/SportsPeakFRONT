@@ -1,14 +1,16 @@
 import {Component, forwardRef, Input} from '@angular/core';
 import {NgForOf, NgIf} from "@angular/common";
 import {SelectOption} from "../../../interface/components/select/selectOption";
-import {NG_VALUE_ACCESSOR} from "@angular/forms";
+import {ControlValueAccessor, NG_VALUE_ACCESSOR} from "@angular/forms";
+import {SelectComponent} from "../../select/select.component";
 
 @Component({
   selector: 'app-performance-log-index-select',
   standalone: true,
   imports: [
     NgForOf,
-    NgIf
+    NgIf,
+    SelectComponent
   ],
   providers: [
     {
@@ -19,10 +21,13 @@ import {NG_VALUE_ACCESSOR} from "@angular/forms";
   ],
   templateUrl: './performance-log-index-select.component.html',
 })
-export class PerformanceLogIndexSelectComponent {
-  selectOptions: SelectOption[] = [];
+export class PerformanceLogIndexSelectComponent implements ControlValueAccessor {
+  indexOptions: SelectOption[] = [];
+
+  @Input() index!: number | undefined;
 
   @Input() set targetSetNumber(value: number | undefined) {
+    console.log(value)
     this.initialize(value);
   }
 
@@ -33,17 +38,24 @@ export class PerformanceLogIndexSelectComponent {
   };
 
   initialize(targetSetNumber: number | undefined): void {
-    if (targetSetNumber)
+    this.indexOptions = []
+    if (targetSetNumber) {
       for (let index: number = 1; index <= targetSetNumber; index++) {
-        this.selectOptions.push({
+        this.indexOptions.push({
           title: index.toString(),
           value: index.toString(),
         });
       }
+      this.indexOptions.push({
+        title: (this.indexOptions.length + 1).toString() + " (additional rep)",
+        value: (this.indexOptions.length + 1).toString()
+      });
+    }
+    console.log(this.indexOptions)
   }
 
-  writeValue(exerciseId: number | undefined): void {
-    this.targetSetNumber = exerciseId;
+  writeValue(index: number | undefined): void {
+    this.index = index;
   }
 
   registerOnChange(fn: (value: number | undefined) => void): void {
@@ -54,11 +66,11 @@ export class PerformanceLogIndexSelectComponent {
     this.onTouched = fn;
   }
 
-  setExerciseId(exerciseId: string | undefined) {
-    if (exerciseId) {
-      let exId: number = parseInt(exerciseId)
-      this.targetSetNumber = exId;
-      this.onChange(exId);
+  setIndex(stringIndex: string | undefined) {
+    if (stringIndex) {
+      let index: number = parseInt(stringIndex)
+      this.index = index;
+      this.onChange(index);
     }
   }
 }

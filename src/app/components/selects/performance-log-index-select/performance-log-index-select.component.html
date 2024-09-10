@@ -1,4 +1,5 @@
-<select class="form-select">
-  <option *ngFor="let option of selectOptions" [value]="option.value">{{ option.title }}</option>
-  <option *ngIf="selectOptions.length > 0" [value]="selectOptions.length + 1">bonus set</option>
-</select>
+<app-select (onChange)="setIndex($event)"
+            (onTouched)="onTouched($event)"
+            [options]="indexOptions"
+            [value]="index?.toString()"
+/>
