@@ -15,6 +15,8 @@ import {FormsModule} from "@angular/forms";
 })
 export class SelectComponent {
   @Input() value: string | undefined;
+  @Input() defaultValue: string | undefined;
+  @Input() defaultTitle: string = "...";
   @Input() options!: SelectOption[];
   @Input() defaultOption: boolean = false;
 
