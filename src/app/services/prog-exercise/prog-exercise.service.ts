@@ -179,7 +179,6 @@ export class ProgExerciseService {
         }]
       }).subscribe((result: MutationResult): void => {
         if (result.errors) {
-          console.log(result.errors)
           this.alertService.graphQLErrorAlertHandler(result.errors);
         } else {
           let message: string = "Programed exercise " + progExercise.name + " has been successfully deleted.";
