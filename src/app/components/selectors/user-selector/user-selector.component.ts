@@ -51,7 +51,9 @@ export class UserSelectorComponent implements OnInit, OnDestroy, ControlValueAcc
         });
         this.userOptions = [...options];
       });
-    this.userService.isLoading.subscribe((loading: boolean) => this.loading = loading);
+    this.userService.isLoading
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe((loading: boolean) => this.loading = loading);
   }
 
   ngOnDestroy() {
