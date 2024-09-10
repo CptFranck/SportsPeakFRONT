@@ -52,7 +52,9 @@ export class RoleSelectorComponent implements OnInit, OnDestroy, ControlValueAcc
         });
         this.roleOptions = [...options];
       });
-    this.roleService.isLoading.subscribe((loading: boolean) => this.loading = loading);
+    this.roleService.isLoading
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe((loading: boolean) => this.loading = loading);
   }
 
   ngOnDestroy() {

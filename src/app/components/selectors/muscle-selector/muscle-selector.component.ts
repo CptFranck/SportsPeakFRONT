@@ -51,7 +51,9 @@ export class MuscleSelectorComponent implements OnInit, OnDestroy, ControlValueA
         });
         this.muscleOptions = [...options];
       });
-    this.muscleService.isLoading.subscribe((loading: boolean) => this.loading = loading);
+    this.muscleService.isLoading
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe((loading: boolean) => this.loading = loading);
   }
 
   ngOnDestroy() {

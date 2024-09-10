@@ -50,7 +50,9 @@ export class PrivilegeSelectorComponent implements OnInit, OnDestroy, ControlVal
         });
         this.privilegeOptions = [...options];
       });
-    this.privilegeService.isLoading.subscribe((loading: boolean) => this.loading = loading);
+    this.privilegeService.isLoading
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe((loading: boolean) => this.loading = loading);
   }
 
   ngOnDestroy() {

@@ -51,7 +51,9 @@ export class ExerciseSelectorComponent implements OnInit, OnDestroy, ControlValu
         });
         this.exerciseOptions = [...options];
       });
-    this.exerciseService.isLoading.subscribe((loading: boolean) => this.loading = loading);
+    this.exerciseService.isLoading
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe((loading: boolean) => this.loading = loading);
   }
 
   ngOnDestroy() {
