@@ -47,14 +47,16 @@ import {TargetSetsComponent} from "../my-prog-exercise-target-sets/target-sets/t
 })
 export class MyProgExerciseComponent implements OnInit, OnDestroy {
   loading: boolean = true;
-  targetSet: TargetSet | undefined;
+
   progExercise: ProgExercise | undefined;
-  targetSetAction: ActionType = ActionType.update;
   progExerciseAction: ActionType = ActionType.update;
-  targetSetModalId: string = "targetSetModalId";
   progExerciseModalId: string = "progExerciseModal";
-  targetSetModalTitle: string = "";
   progExerciseModalTitle: string = "";
+
+  targetSet: TargetSet | undefined;
+  targetSetAction: ActionType = ActionType.update;
+  targetSetModalId: string = "targetSetModalId";
+  targetSetModalTitle: string = "";
 
   private unsubscribe$: Subject<void> = new Subject<void>();
   private activatedRoute: ActivatedRoute = inject(ActivatedRoute);
