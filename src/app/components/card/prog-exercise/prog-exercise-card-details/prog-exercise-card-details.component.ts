@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {ProgExercise} from "../../../../interface/dto/prog-exercise";
 import {FormIndicator} from "../../../../interface/utils/form-indicator";
-import {getProgExerciseTime, getTargetSetsInformation} from "../../../../utils/prog-exercise-functions";
+import {getProgExerciseTime} from "../../../../utils/prog-exercise-functions";
 import {ActionType} from "../../../../interface/enum/action-type";
 import {ModalButtonComponent} from "../../../modal/modal-button/modal-button.component";
 import {NgForOf, NgIf} from "@angular/common";
@@ -9,6 +9,7 @@ import {RouterLink} from "@angular/router";
 import {
   ProgExerciseTrustLabelFormComponent
 } from "../../../../page/my-fitness-plan/my-prog-exercise/my-prog-exercise-modal-components/my-prog-exercise-trust-label-form/prog-exercise-trust-label-form.component";
+import {getTargetSetsInformation} from "../../../../utils/target-set-functions";
 
 @Component({
   selector: 'app-prog-exercise-card-details',

@@ -4,8 +4,9 @@ import {ProgExercise} from "../../../../interface/dto/prog-exercise";
 import {ModalButtonComponent} from "../../../modal/modal-button/modal-button.component";
 import {ActionType} from "../../../../interface/enum/action-type";
 import {FormIndicator} from "../../../../interface/utils/form-indicator";
-import {getProgExerciseTime, getTargetSetsInformation} from "../../../../utils/prog-exercise-functions";
+import {getProgExerciseTime} from "../../../../utils/prog-exercise-functions";
 import {RouterLink} from "@angular/router";
+import {getTargetSetsInformation} from "../../../../utils/target-set-functions";
 
 @Component({
   selector: 'app-prog-exercise-card',

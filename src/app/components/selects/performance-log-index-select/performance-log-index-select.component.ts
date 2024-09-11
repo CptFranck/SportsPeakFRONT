@@ -4,9 +4,9 @@ import {SelectOption} from "../../../interface/components/select/selectOption";
 import {ControlValueAccessor, NG_VALUE_ACCESSOR} from "@angular/forms";
 import {SelectComponent} from "../../select/select.component";
 import {TargetSet} from "../../../interface/dto/target-set";
-import {sortPerformanceLogsByLogDate} from "../../../utils/target-set-functions";
 import {Dictionary} from "../../../interface/utils/dictionary";
 import {PerformanceLog} from "../../../interface/dto/performance-log";
+import {sortPerformanceLogsByLogDate} from "../../../utils/performance-log-functions";
 
 @Component({
   selector: 'app-performance-log-index-select',

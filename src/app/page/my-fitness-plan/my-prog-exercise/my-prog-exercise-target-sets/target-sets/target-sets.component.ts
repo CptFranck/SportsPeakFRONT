@@ -12,11 +12,8 @@ import {TargetSet} from "../../../../../interface/dto/target-set";
 import {ActionType} from "../../../../../interface/enum/action-type";
 import {TargetSetLogsComponent} from "../target-set-logs/target-set-logs.component";
 import {ProgExercise} from "../../../../../interface/dto/prog-exercise";
-import {
-  getProgExerciseTargetSet,
-  getUpToDateTargetSets,
-  sortLastTargetSetsByIndex
-} from "../../../../../utils/prog-exercise-functions";
+import {getProgExerciseTargetSet,} from "../../../../../utils/prog-exercise-functions";
+import {getUpToDateTargetSets, sortLastTargetSetsByIndex} from "../../../../../utils/target-set-functions";
 
 @Component({
   selector: 'app-target-sets',

@@ -1,16 +1,13 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {ModalButtonComponent} from "../../../modal/modal-button/modal-button.component";
 import {TargetSet} from "../../../../interface/dto/target-set";
-import {
-  getStringTime,
-  getTargetSetInformation,
-  getTargetSetTimeToString
-} from "../../../../utils/prog-exercise-functions";
 import {ActionType} from "../../../../interface/enum/action-type";
 import {FormIndicator} from "../../../../interface/utils/form-indicator";
 import {
   TargetSetStateFormComponent
 } from "../../../../page/my-fitness-plan/my-prog-exercise/my-prog-exercise-target-sets/target-set-modal-components/target-set-state-form/target-set-state-form.component";
+import {getTargetSetInformation, getTargetSetTimeToString} from "../../../../utils/target-set-functions";
+import {getStringTime} from "../../../../utils/duration-functions";
 
 @Component({
   selector: 'app-target-set-logs-card',

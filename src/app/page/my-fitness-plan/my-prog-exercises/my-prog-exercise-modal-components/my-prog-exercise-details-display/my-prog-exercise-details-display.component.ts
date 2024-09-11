@@ -1,16 +1,17 @@
 import {Component, Input} from '@angular/core';
 import {NgForOf, NgIf} from "@angular/common";
 import {ProgExercise} from "../../../../../interface/dto/prog-exercise";
-import {
-  getProgExerciseTime,
-  getStringTime,
-  getTargetSetTimeToString,
-  getUpToDateTargetSets,
-  sortLastTargetSetsByIndex
-} from "../../../../../utils/prog-exercise-functions";
+
 import {TargetSet} from "../../../../../interface/dto/target-set";
 import {Dictionary} from "../../../../../interface/utils/dictionary";
 import {TargetSetInformation} from "../../../../../interface/utils/target-set-row-detail";
+import {getProgExerciseTime} from "../../../../../utils/prog-exercise-functions";
+import {
+  getTargetSetTimeToString,
+  getUpToDateTargetSets,
+  sortLastTargetSetsByIndex
+} from "../../../../../utils/target-set-functions";
+import {getStringTime} from "../../../../../utils/duration-functions";
 
 @Component({
   selector: 'app-my-prog-exercise-details-display',

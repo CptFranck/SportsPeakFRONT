@@ -13,7 +13,7 @@ import {
 } from "../../../../../../../components/selects/performance-log-index-select/performance-log-index-select.component";
 import {PerformanceLogService} from "../../../../../../../services/performance-log/performance-log.service";
 import {Dictionary} from "../../../../../../../interface/utils/dictionary";
-import {sortPerformanceLogsByLogDate} from "../../../../../../../utils/target-set-functions";
+import {sortPerformanceLogsByLogDate} from "../../../../../../../utils/performance-log-functions";
 
 @Component({
   selector: 'app-performance-log-entity-form',
