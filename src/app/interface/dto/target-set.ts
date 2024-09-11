@@ -12,7 +12,7 @@ export interface TargetSet {
   weightUnit: string
   physicalExertionUnitTime: Duration
   restTime: Duration
-  creationDate: Date
+  creationDate: string
   state: TargetSetState
   progExercise: ProgExercise
   targetSetUpdate: TargetSet
