@@ -29,12 +29,12 @@ export class PerformanceLogService {
     })
   }
 
-  addPerformanceLog(progExercisesForm: FormGroup) {
+  addPerformanceLog(performanceLogForm: FormGroup) {
     if (this.progExercise)
       this.apollo.mutate({
         mutation: ADD_PERFORMANCE_LOG,
         variables: {
-          inputNewPerformanceLog: progExercisesForm.value,
+          inputNewPerformanceLog: performanceLogForm.value,
         },
         refetchQueries: [{
           query: GET_PROG_EXERCISE_BY_ID,
@@ -47,7 +47,7 @@ export class PerformanceLogService {
           if (result.errors) {
             this.alertService.graphQLErrorAlertHandler(result.errors);
           } else {
-            let message: string = "Performance log " + result.data.addPerformanceLog.id + " been successfully created.";
+            let message: string = "This performance log " + result.data.addPerformanceLog.id + "has been successfully created.";
             this.alertService.addSuccessAlert(message);
           }
         });
@@ -55,12 +55,12 @@ export class PerformanceLogService {
       this.alertService.addErrorAlert("Programed exercise is undefined !");
   }
 
-  modifyPerformanceLog(progExercisesForm: FormGroup) {
+  modifyPerformanceLog(performanceLogForm: FormGroup) {
     if (this.progExercise)
       this.apollo.mutate({
         mutation: MOD_PERFORMANCE_LOG,
         variables: {
-          inputPerformanceLog: progExercisesForm.value,
+          inputPerformanceLog: performanceLogForm.value,
         },
         refetchQueries: [{
           query: GET_PROG_EXERCISE_BY_ID,
@@ -72,7 +72,7 @@ export class PerformanceLogService {
         if (result.errors) {
           this.alertService.graphQLErrorAlertHandler(result.errors);
         } else {
-          let message: string = "Performance log " + result.data.modifyPerformanceLog.id + " been successfully updated.";
+          let message: string = "This performance log " + result.data.modifyPerformanceLog.id + "has been successfully updated.";
           this.alertService.addSuccessAlert(message);
         }
       });
@@ -97,7 +97,7 @@ export class PerformanceLogService {
         if (result.errors) {
           this.alertService.graphQLErrorAlertHandler(result.errors);
         } else {
-          let message: string = "Performance log " + performanceLog.id + " has been successfully deleted.";
+          let message: string = "This  performance log " + performanceLog.id + "has been successfully deleted.";
           this.alertService.addSuccessAlert(message);
         }
       });
