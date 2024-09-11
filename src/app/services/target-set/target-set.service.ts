@@ -1,5 +1,4 @@
 import {inject, Injectable} from '@angular/core';
-import {BehaviorSubject} from "rxjs";
 import {Apollo, MutationResult} from "apollo-angular";
 import {AlertService} from "../alert/alert.service";
 import {FormGroup} from "@angular/forms";
@@ -15,8 +14,6 @@ import {TargetSet} from "../../interface/dto/target-set";
   providedIn: 'root'
 })
 export class TargetSetService {
-
-  isLoading: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   private apollo: Apollo = inject(Apollo);
   private alertService: AlertService = inject(AlertService);
