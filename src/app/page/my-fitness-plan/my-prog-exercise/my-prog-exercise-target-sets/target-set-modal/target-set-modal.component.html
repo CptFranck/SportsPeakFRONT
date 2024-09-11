@@ -20,12 +20,15 @@
                               [submitEventActionType$]="submitEventActionType$"
                               [targetSetInput]="targetSet"
   />
+  <app-performance-log-entity-form *ngIf="action=== ActionType.addPerformance"
+                                   [btnCloseRef]="btnClose"
+                                   [submitEventActionType$]="submitEventActionType$"
+                                   [targetSetInput]="targetSet"/>
   <app-target-set-logs *ngIf="action === ActionType.checkEvolution"
                        [btnCloseRef]="btnClose"
                        [progExerciseInput]="progExercise"
                        [targetSetInput]="targetSet"
   />
-  <!--  <app-my-prog-exercise-performance *ngIf="action === ActionType.read"/>-->
   <app-target-set-delete-form *ngIf="action === ActionType.delete"
                               [btnCloseRef]="btnClose"
                               [submitEventActionType$]="submitEventActionType$"
