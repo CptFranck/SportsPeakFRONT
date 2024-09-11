@@ -3,6 +3,10 @@ import {NgForOf, NgIf} from "@angular/common";
 import {SelectOption} from "../../../interface/components/select/selectOption";
 import {ControlValueAccessor, NG_VALUE_ACCESSOR} from "@angular/forms";
 import {SelectComponent} from "../../select/select.component";
+import {TargetSet} from "../../../interface/dto/target-set";
+import {sortPerformanceLogsByLogDate} from "../../../utils/target-set-functions";
+import {Dictionary} from "../../../interface/utils/dictionary";
+import {PerformanceLog} from "../../../interface/dto/performance-log";
 
 @Component({
   selector: 'app-performance-log-index-select',
@@ -24,35 +28,43 @@ import {SelectComponent} from "../../select/select.component";
 export class PerformanceLogIndexSelectComponent implements ControlValueAccessor {
   indexOptions: SelectOption[] = [];
 
-  @Input() index!: number | undefined;
+  @Input() index!: number;
+  @Input() logDate!: string;
 
-  @Input() set targetSetNumber(value: number | undefined) {
-    this.initialize(value);
+  @Input() set targetSet(targetSet: TargetSet | undefined) {
+    this.indexOptions = []
+
+    if (targetSet) {
+      const sortedPerformanceLogs: Dictionary<PerformanceLog[]> = sortPerformanceLogsByLogDate(targetSet);
+      const performanceLogThisDate: PerformanceLog[] = sortedPerformanceLogs[this.logDate];
+      let totalSets: number = targetSet.setNumber;
+      if (performanceLogThisDate) {
+        if (performanceLogThisDate.length > totalSets) {
+          totalSets = performanceLogThisDate.length + 1;
+        }
+      }
+
+      for (let index: number = 1; index <= totalSets; index++) {
+        let option: SelectOption = {
+          title: index.toString(),
+          value: index.toString(),
+        }
+        if (index > targetSet.setNumber) {
+          option.value += 1;
+          option.title += " (additional rep)";
+        }
+        this.indexOptions.push(option);
+      }
+    }
   }
 
-  onChange: (value: number | undefined) => void = () => {
+  onChange: (value: number) => void = () => {
   };
 
   onTouched: ($event: boolean) => void = () => {
   };
 
-  initialize(targetSetNumber: number | undefined): void {
-    this.indexOptions = []
-    if (targetSetNumber) {
-      for (let index: number = 1; index <= targetSetNumber; index++) {
-        this.indexOptions.push({
-          title: index.toString(),
-          value: index.toString(),
-        });
-      }
-      this.indexOptions.push({
-        title: (this.indexOptions.length + 1).toString() + " (additional rep)",
-        value: (this.indexOptions.length + 1).toString()
-      });
-    }
-  }
-
-  writeValue(index: number | undefined): void {
+  writeValue(index: number): void {
     this.index = index;
   }
 
