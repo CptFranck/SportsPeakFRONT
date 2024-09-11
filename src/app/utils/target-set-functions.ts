@@ -6,7 +6,10 @@ export function sortPerformanceLogsByLogDate(targetSet: TargetSet | undefined) {
   let sortedPerformanceLogs: Dictionary<PerformanceLog[]> = {};
   if (targetSet)
     targetSet.performanceLogs.forEach((performanceLog: PerformanceLog) => {
-      const date: string = new Date(performanceLog.logDate).toISOString().substring(0, 10);
+      const date: string = performanceLog.logDate.split('T')[0];
+      if (sortedPerformanceLogs[date] === undefined) {
+        sortedPerformanceLogs[date] = [];
+      }
       sortedPerformanceLogs[date].push(performanceLog);
     })
   return sortedPerformanceLogs;
