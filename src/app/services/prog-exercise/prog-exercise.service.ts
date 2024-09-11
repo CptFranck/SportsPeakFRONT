@@ -28,6 +28,7 @@ export class ProgExerciseService {
   userProgExercises: BehaviorSubject<ProgExercise[]> = new BehaviorSubject<ProgExercise[]>([]);
   isLoading: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
+  private user: User | undefined;
   private router: Router = inject(Router);
   private apollo: Apollo = inject(Apollo);
   private alertService: AlertService = inject(AlertService);
@@ -37,13 +38,14 @@ export class ProgExerciseService {
     this.getProgExercises();
     this.userLoggedService.currentUser.subscribe((user: User | undefined) => {
       if (user) {
+        this.user = user;
         this.getUserProgExercises(user)
       }
     })
   }
 
   getProgExercises() {
-    return this.apollo.watchQuery({
+    this.apollo.watchQuery({
       query: GET_PROG_EXERCISES,
     }).valueChanges.subscribe((result: ApolloQueryResult<any>): void => {
       if (result.errors) {
@@ -55,7 +57,7 @@ export class ProgExerciseService {
   }
 
   getProgExerciseById(progExerciseId: number) {
-    return this.apollo.watchQuery({
+    this.apollo.watchQuery({
       query: GET_PROG_EXERCISE_BY_ID,
       variables: {
         id: progExerciseId
@@ -70,7 +72,7 @@ export class ProgExerciseService {
   }
 
   getUserProgExercises(user: User) {
-    return this.apollo.watchQuery({
+    this.apollo.watchQuery({
       query: GET_USER_PROG_EXERCISES,
       variables: {
         userId: user.id
@@ -85,9 +87,8 @@ export class ProgExerciseService {
   }
 
   addProgExercise(progExercisesForm: FormGroup) {
-    const user: User | undefined = this.userLoggedService.currentUser.value
-    if (user)
-      return this.apollo.mutate({
+    if (this.user)
+      this.apollo.mutate({
         mutation: ADD_PROG_EXERCISE,
         variables: {
           inputNewProgExercise: progExercisesForm.value,
@@ -95,7 +96,7 @@ export class ProgExerciseService {
         refetchQueries: [{
           query: GET_USER_PROG_EXERCISES,
           variables: {
-            userId: user.id
+            userId: this.user.id
           }
         }]
       }).subscribe(
@@ -108,12 +109,11 @@ export class ProgExerciseService {
           }
         });
     else
-      return this.alertService.addErrorAlert("User not logged in.");
+      this.alertService.addErrorAlert("User not logged in.");
   }
 
   modifyProgExercise(progExercisesForm: FormGroup) {
-    const user: User | undefined = this.userLoggedService.currentUser.value
-    if (user)
+    if (this.user)
       this.apollo.mutate({
         mutation: MOD_PROG_EXERCISE,
         variables: {
@@ -122,7 +122,7 @@ export class ProgExerciseService {
         refetchQueries: [{
           query: GET_USER_PROG_EXERCISES,
           variables: {
-            userId: user.id
+            userId: this.user.id
           }
         }]
       }).subscribe((result: MutationResult): void => {
@@ -134,13 +134,12 @@ export class ProgExerciseService {
         }
       });
     else
-      return this.alertService.addErrorAlert("User not logged in.");
+      this.alertService.addErrorAlert("User not logged in.");
   }
 
   modifyProgExerciseTrustLabel(progExercisesForm: FormGroup) {
-    const user: User | undefined = this.userLoggedService.currentUser.value
-    if (user)
-      return this.apollo.mutate({
+    if (this.user)
+      this.apollo.mutate({
         mutation: MOD_PROG_EXERCISE_TRUST_LABEL,
         variables: {
           inputProgExerciseTrustLabel: progExercisesForm.value,
@@ -148,7 +147,7 @@ export class ProgExerciseService {
         refetchQueries: [{
           query: GET_USER_PROG_EXERCISES,
           variables: {
-            userId: user.id
+            userId: this.user.id
           }
         }]
       }).subscribe((result: MutationResult): void => {
@@ -160,12 +159,11 @@ export class ProgExerciseService {
         }
       });
     else
-      return this.alertService.addErrorAlert("User not logged in.");
+      this.alertService.addErrorAlert("User not logged in.");
   }
 
   deleteProgExercises(progExercise: ProgExercise) {
-    const user: User | undefined = this.userLoggedService.currentUser.value
-    if (user) {
+    if (this.user) {
       this.apollo.mutate({
         mutation: DEL_PROG_EXERCISE,
         variables: {
@@ -174,7 +172,7 @@ export class ProgExerciseService {
         refetchQueries: [{
           query: GET_USER_PROG_EXERCISES,
           variables: {
-            userId: user.id
+            userId: this.user.id
           }
         }]
       }).subscribe((result: MutationResult): void => {
@@ -187,7 +185,7 @@ export class ProgExerciseService {
       });
       this.router.navigateByUrl('/my-fitness-plan/my-programed-exercises')
     } else {
-      return this.alertService.addErrorAlert("User not logged in.");
+      this.alertService.addErrorAlert("User not logged in.");
     }
   }
 }
