@@ -7,6 +7,6 @@ export interface PerformanceLog {
   repetitionNumber: number
   weight: number
   weightUnit: WeightUnit
-  logDate: Date
+  logDate: string
   targetSet: TargetSet
 }
