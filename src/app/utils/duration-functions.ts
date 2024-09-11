@@ -23,3 +23,28 @@ export function createDurationForm(duration: Duration) {
         Validators.pattern("^[0-9]*$")]),
   })
 }
+
+export function addDurationAmount(durationA: Duration, durationB: Duration) {
+  durationA["seconds"] += durationB["seconds"];
+  durationA["minutes"] += durationB["minutes"];
+  durationA["hours"] += durationB["hours"];
+}
+
+////////////////////////////////////// GENERIC TIME FUNCTIONS /////////////////////////////////////////
+
+export function getStringTime(duration: Duration): string {
+  const formatedDuration: Duration = formatTimeDuration(duration);
+  return formatedDuration["hours"] + "h" + formatedDuration["minutes"] + "m" + formatedDuration["seconds"] + "s";
+}
+
+export function formatTimeDuration(duration: Duration): Duration {
+  const formatDuration: Duration = {seconds: 0, minutes: 0, hours: 0};
+  formatDuration["seconds"] = duration["seconds"] % 60;
+  const additionalMinutes: number = (duration["seconds"] - formatDuration["seconds"]) / 60
+
+  formatDuration["minutes"] = (duration["minutes"] + additionalMinutes) % 60;
+  const additionalHours: number = (duration["minutes"] + additionalMinutes - formatDuration["minutes"]) / 60;
+
+  formatDuration["hours"] = (duration["hours"] + additionalHours) % 60
+  return formatDuration;
+}
