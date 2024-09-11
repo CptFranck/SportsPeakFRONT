@@ -1,4 +1,4 @@
-import {Component, Input, OnDestroy, OnInit} from '@angular/core';
+import {Component, inject, Input, OnDestroy, OnInit} from '@angular/core';
 import {TargetSet} from "../../../../../../../interface/dto/target-set";
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {PerformanceLog} from "../../../../../../../interface/dto/performance-log";
@@ -11,6 +11,9 @@ import {WeightSelectComponent} from "../../../../../../../components/selects/wei
 import {
   PerformanceLogIndexSelectComponent
 } from "../../../../../../../components/selects/performance-log-index-select/performance-log-index-select.component";
+import {PerformanceLogService} from "../../../../../../../services/performance-log/performance-log.service";
+import {Dictionary} from "../../../../../../../interface/utils/dictionary";
+import {sortPerformanceLogsByLogDate} from "../../../../../../../utils/target-set-functions";
 
 @Component({
   selector: 'app-performance-log-entity-form',
@@ -36,8 +39,7 @@ export class PerformanceLogEntityFormComponent implements OnInit, OnDestroy {
   @Input() submitEventActionType$!: Observable<ActionType> | undefined;
 
   private unsubscribe$: Subject<void> = new Subject<void>();
-
-  // private performanceLogService: PerformanceLogService = inject(PerformanceLogService);
+  private performanceLogService: PerformanceLogService = inject(PerformanceLogService);
 
   @Input() set performanceLogInput(value: PerformanceLog | undefined) {
     this.performanceLog = value;
@@ -68,12 +70,20 @@ export class PerformanceLogEntityFormComponent implements OnInit, OnDestroy {
   }
 
   initializeTargetSetForm() {
-    const performanceLogSetIndex: number = 1;
-    const performanceLogRepetitionNumber: number | undefined = this.targetSet?.repetitionNumber;
+    const logDate: string = new Date().toISOString().substring(0, 10);
+    const sortedPerformanceLogs: Dictionary<PerformanceLog[]> = sortPerformanceLogsByLogDate(this.targetSet);
+    const performanceLogOfThisDay: PerformanceLog[] | undefined = sortedPerformanceLogs[logDate];
+    let performanceLogSetIndex: number = 1;
+    if (performanceLogOfThisDay) {
+      if (performanceLogOfThisDay.length > 0) {
+        performanceLogSetIndex = performanceLogOfThisDay.length + 1;
+      }
+    }
+
+    const performanceLogRepetitionNumber: number = this.targetSet?.repetitionNumber ?
+      this.targetSet?.repetitionNumber : 1;
     const performanceLogWeight: number | undefined = this.targetSet?.weight;
     const performanceLogWeightUnit: string = this.targetSet ? this.targetSet.weightUnit : WeightUnit.KILOGRAMME;
-    const logDate: Date = new Date();
-
     const targetSetId: number | undefined = this.targetSet?.id;
 
     this.performanceLogForm = new FormGroup(
@@ -101,7 +111,7 @@ export class PerformanceLogEntityFormComponent implements OnInit, OnDestroy {
           [Validators.required]
         ),
         logDate: new FormControl(
-          logDate.toISOString().substring(0, 10),
+          logDate,
           [Validators.required]),
         targetSetId: new FormControl(targetSetId),
       });
@@ -111,7 +121,8 @@ export class PerformanceLogEntityFormComponent implements OnInit, OnDestroy {
     if (!this.performanceLogForm) return;
     if (this.performanceLogForm.valid) {
       this.submitInvalidForm = false;
-      // this.performanceLogService.addTargetSet(this.targetSetForm);
+      this.performanceLogForm.controls["logDate"].setValue(new Date(this.performanceLogForm.controls["logDate"].value))
+      this.performanceLogService.addPerformanceLog(this.performanceLogForm);
       this.btnCloseRef.click();
     } else {
       this.submitInvalidForm = true;
