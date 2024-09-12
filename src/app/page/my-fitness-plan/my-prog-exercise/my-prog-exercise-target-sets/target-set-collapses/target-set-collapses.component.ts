@@ -32,6 +32,7 @@ export class TargetSetCollapsesComponent {
 
   @Output() actionCollapseType: EventEmitter<ActionType> = new EventEmitter<ActionType>();
   @Output() actionTargetSets: EventEmitter<FormIndicator> = new EventEmitter<FormIndicator>();
+  @Output() actionPerformanceLogs: EventEmitter<FormIndicator> = new EventEmitter<FormIndicator>();
 
   setTargetSet(event: FormIndicator) {
     this.actionTargetSets.emit(event)
@@ -39,5 +40,9 @@ export class TargetSetCollapsesComponent {
 
   setCollapseType($event: ActionType) {
     this.collapseActionType = $event
+  }
+
+  setPerformanceLog(event: FormIndicator) {
+    this.actionPerformanceLogs.emit(event)
   }
 }

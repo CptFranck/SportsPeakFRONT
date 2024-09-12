@@ -7,7 +7,9 @@
                      [targetSet]="targetSet"
 />
 <app-collapse-block [collapseId]="targetSet.id + 'collapsePerformanceLog'" classArgs="pt-2">
-  <app-performance-logs [progExercise]="progExercise"
+  <app-performance-logs (actionPerformanceLog)="setPerformanceLog($event)"
+                        [modalId]="targetSetModalId"
+                        [progExercise]="progExercise"
                         [targetSet]="targetSet"/>
 </app-collapse-block>
 <app-collapse-block [collapseId]="targetSet.id + 'collapseTargetSet'" classArgs="pt-2">
