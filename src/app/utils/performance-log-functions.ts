@@ -15,5 +15,18 @@ export function sortPerformanceLogsByLogDate(targetSet: TargetSet | undefined) {
       }
       sortedPerformanceLogs[date].push(performanceLog);
     })
-  return sortedPerformanceLogs;
+  return sortPerformanceLogsBySet(sortedPerformanceLogs);
+}
+
+export function sortPerformanceLogsBySet(performanceLogs: Dictionary<PerformanceLog[]>) {
+  Object.keys(performanceLogs).forEach((date: string) => {
+    performanceLogs[date].sort(sortPerformanceLogsSetIndex);
+  })
+  return performanceLogs;
+}
+
+export function sortPerformanceLogsSetIndex(a: PerformanceLog, b: PerformanceLog) {
+  if (a.setIndex > b.setIndex) return 1;
+  if (a.setIndex < b.setIndex) return -1;
+  return 0;
 }
