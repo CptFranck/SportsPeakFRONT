@@ -26,6 +26,7 @@ import {TargetSetModalComponent} from "../my-prog-exercise-target-sets/target-se
 import {TargetSet} from "../../../../interface/dto/target-set";
 import {Subject, takeUntil} from "rxjs";
 import {TargetSetsComponent} from "../my-prog-exercise-target-sets/target-sets/target-sets.component";
+import {PerformanceLog} from "../../../../interface/dto/performance-log";
 
 @Component({
   selector: 'app-my-prog-exercise',
@@ -57,6 +58,8 @@ export class MyProgExerciseComponent implements OnInit, OnDestroy {
   targetSetAction: ActionType = ActionType.update;
   targetSetModalId: string = "targetSetModalId";
   targetSetModalTitle: string = "";
+
+  performanceLog: PerformanceLog | undefined;
 
   private unsubscribe$: Subject<void> = new Subject<void>();
   private activatedRoute: ActivatedRoute = inject(ActivatedRoute);
@@ -96,8 +99,19 @@ export class MyProgExerciseComponent implements OnInit, OnDestroy {
     this.targetSet = formIndicator.object;
     this.targetSetAction = formIndicator.actionType;
     if (formIndicator.object === undefined)
-      this.targetSetModalTitle = "Add new set";
+      this.targetSetModalTitle = "Add new step (set of set(s))";
+    else if (formIndicator?.complement === true)
+      this.targetSetModalTitle = "Add new performance log";
+    else if (formIndicator.actionType === ActionType.addEvolution)
+      this.targetSetModalTitle = "Add an evolution of N°" + formIndicator.object.index;
     else
       this.targetSetModalTitle = "Set N° " + formIndicator.object.index;
+  }
+
+  setPerformanceLog(formIndicator: FormIndicator) {
+    this.performanceLog = formIndicator.object;
+    this.targetSetAction = formIndicator.actionType;
+    this.targetSetModalTitle = "Performance log of set N° " + formIndicator.object.setIndex +
+      " the " + formIndicator.object.logDate.substring(0, 10);
   }
 }

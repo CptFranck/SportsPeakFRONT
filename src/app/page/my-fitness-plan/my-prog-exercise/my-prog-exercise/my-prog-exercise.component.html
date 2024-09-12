@@ -28,13 +28,15 @@
         <app-target-set-modal (targetSetAction)="setTargetSet($event)"
                               [action]="targetSetAction"
                               [modalTitle]="targetSetModalTitle"
+                              [performanceLog]="performanceLog"
                               [progExercise]="progExercise"
                               [targetSetModalId]="targetSetModalId"
                               [targetSet]="targetSet"/>
       </div>
     </div>
     <div class="row">
-      <app-target-sets (actionTargetSets)="setTargetSet($event)"
+      <app-target-sets (actionPerformanceLogs)="setPerformanceLog($event)"
+                       (actionTargetSets)="setTargetSet($event)"
                        [progExerciseInput]="progExercise"
                        [targetSetModalId]="targetSetModalId"/>
     </div>
