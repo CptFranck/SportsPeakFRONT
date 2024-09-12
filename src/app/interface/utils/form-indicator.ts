@@ -5,4 +5,5 @@ export interface FormIndicator {
   actionType: ActionType,
   modificationField?: ModificationField,
   object: any
+  complement?: boolean
 }
