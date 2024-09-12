@@ -1,7 +1,9 @@
 <div *ngIf="performanceLogs">
   <div *ngFor="let perfLogs of performanceLogs | keyvalue">
     <div *ngFor="let perfLog of perfLogs.value">
-      <app-performance-logs-card [performanceLog]="perfLog"/>
+      <app-performance-logs-card (actionPerformanceLog)="setPerformanceLog($event)"
+                                 [modalId]="modalId"
+                                 [performanceLog]="perfLog"/>
     </div>
   </div>
   <div *ngIf="Object.keys(performanceLogs).length === 0">

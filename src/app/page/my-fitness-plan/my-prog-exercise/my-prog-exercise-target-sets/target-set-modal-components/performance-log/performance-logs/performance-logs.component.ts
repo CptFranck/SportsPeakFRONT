@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {TargetSet} from "../../../../../../../interface/dto/target-set";
 import {ProgExercise} from "../../../../../../../interface/dto/prog-exercise";
 import {getTargetSetLogs} from "../../../../../../../utils/target-set-functions";
@@ -12,6 +12,7 @@ import {
 import {
   PerformanceLogsCardComponent
 } from "../../../../../../../components/card/performance-log/performance-logs-card/performance-logs-card.component";
+import {FormIndicator} from "../../../../../../../interface/utils/form-indicator";
 
 @Component({
   selector: 'app-performance-logs',
@@ -26,13 +27,16 @@ import {
   templateUrl: './performance-logs.component.html',
 })
 export class PerformanceLogsComponent implements OnInit {
-  
-  @Input() progExercise: ProgExercise | undefined;
-  @Input() targetSet: TargetSet | undefined;
 
   targetSetLogs: TargetSet[] = [];
   performanceLogs: Dictionary<PerformanceLog[]> | undefined;
   oldPerformanceLogs: Dictionary<PerformanceLog[]> = {};
+
+  @Input() modalId!: string;
+  @Input() targetSet: TargetSet | undefined;
+  @Input() progExercise: ProgExercise | undefined;
+
+  @Output() actionPerformanceLog: EventEmitter<FormIndicator> = new EventEmitter<FormIndicator>();
 
   protected readonly Object: ObjectConstructor = Object;
 
@@ -41,5 +45,9 @@ export class PerformanceLogsComponent implements OnInit {
       this.performanceLogs = sortPerformanceLogsByLogDate(this.targetSet);
       this.targetSetLogs = getTargetSetLogs(this.targetSet, this.progExercise);
     }
+  }
+
+  setPerformanceLog($event: FormIndicator) {
+    this.actionPerformanceLog.emit($event)
   }
 }
