@@ -29,8 +29,8 @@ import {sortPerformanceLogsByLogDate} from "../../../../../../../utils/performan
 })
 export class PerformanceLogEntityFormComponent implements OnInit, OnDestroy {
 
-  performanceLog: PerformanceLog | undefined;
   targetSet: TargetSet | undefined;
+  performanceLog: PerformanceLog | undefined;
   performanceLogForm: FormGroup | null = null;
   submitInvalidForm: boolean = false;
 
