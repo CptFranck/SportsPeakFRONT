@@ -39,7 +39,7 @@ export class TargetSetsComponent {
   @Input() progExerciseTargetSets: ProgExerciseTargetSets =
     {targetSetUsed: [], targetSetUnused: [], targetSetHidden: []};
 
-  @Output() actionProgExercises: EventEmitter<FormIndicator> = new EventEmitter<FormIndicator>();
+  @Output() actionTargetSets: EventEmitter<FormIndicator> = new EventEmitter<FormIndicator>();
 
   protected readonly ActionType = ActionType;
 
@@ -59,6 +59,6 @@ export class TargetSetsComponent {
   }
 
   setTargetSet(event: FormIndicator) {
-    this.actionProgExercises.emit(event)
+    this.actionTargetSets.emit(event)
   }
 }
