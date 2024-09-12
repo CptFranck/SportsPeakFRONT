@@ -48,7 +48,8 @@ export class TargetSetCardComponent implements OnInit {
   addNewPerformance(targetSet: TargetSet) {
     this.actionTargetSets.emit({
       actionType: ActionType.addPerformance,
-      object: targetSet
+      object: targetSet,
+      complement: true
     });
   }
 
