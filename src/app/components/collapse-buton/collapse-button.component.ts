@@ -10,7 +10,7 @@ export class CollapseButtonComponent {
   @Input() collapseId!: string;
   @Input() value!: any;
 
-  @Output() onClickEvent: EventEmitter<string> = new EventEmitter();
+  @Output() onClickEvent: EventEmitter<any> = new EventEmitter();
 
   onClick() {
     this.onClickEvent.emit(this.value);
