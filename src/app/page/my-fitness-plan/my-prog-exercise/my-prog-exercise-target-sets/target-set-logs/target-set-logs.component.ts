@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {ProgExercise} from "../../../../../interface/dto/prog-exercise";
 import {TargetSet} from "../../../../../interface/dto/target-set";
 import {NgForOf, NgIf} from "@angular/common";
@@ -18,27 +18,17 @@ import {getTargetSetLogs} from "../../../../../utils/target-set-functions";
   ],
   templateUrl: './target-set-logs.component.html',
 })
-export class TargetSetLogsComponent {
-  progExercise: ProgExercise | undefined;
-  targetSet: TargetSet | undefined;
+export class TargetSetLogsComponent implements OnInit {
+
   targetSetLogs: TargetSet[] = [];
 
-  @Input() btnCloseRef!: HTMLButtonElement;
   @Input() modalId!: string;
+  @Input() targetSet: TargetSet | undefined;
+  @Input() progExercise: ProgExercise | undefined;
 
   @Output() actionTargetSets: EventEmitter<FormIndicator> = new EventEmitter<FormIndicator>();
 
-  @Input() set targetSetInput(value: TargetSet | undefined) {
-    this.targetSet = value;
-    this.initializeTargetSetLogs();
-  }
-
-  @Input() set progExerciseInput(value: ProgExercise | undefined) {
-    this.progExercise = value;
-    this.initializeTargetSetLogs();
-  }
-
-  initializeTargetSetLogs() {
+  ngOnInit() {
     if (this.targetSet && this.progExercise)
       this.targetSetLogs = getTargetSetLogs(this.targetSet, this.progExercise);
   }
