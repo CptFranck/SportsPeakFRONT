@@ -1,5 +1,21 @@
 <div class="col-auto card m-3 shadow">
   <div class="card-body ">
-    {{ performanceLog | json }}
+    <div class="row">
+      <div class="col-auto">
+        <h5 class="fw-bold">
+          {{ "Performance from " + performanceLogDate.toLocaleDateString() }}
+        </h5>
+        <div class="row">
+          <div class="col-auto">
+            <label class="fw-bold"> Reps : </label>
+            {{ performanceLog.repetitionNumber }}
+          </div>
+          <div class="col-auto">
+            <label class="fw-bold"> Weight : </label>
+            {{ performanceLog.weight + " " + performanceLog.weightUnit }}
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>

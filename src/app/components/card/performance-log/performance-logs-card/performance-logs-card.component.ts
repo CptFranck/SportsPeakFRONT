@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {ModalButtonComponent} from "../../../modal/modal-button/modal-button.component";
 import {PerformanceLog} from "../../../../interface/dto/performance-log";
 import {JsonPipe} from "@angular/common";
@@ -12,6 +12,13 @@ import {JsonPipe} from "@angular/common";
   ],
   templateUrl: './performance-logs-card.component.html',
 })
-export class PerformanceLogsCardComponent {
-  @Input() performanceLog: PerformanceLog | undefined;
+export class PerformanceLogsCardComponent implements OnInit {
+
+  performanceLogDate!: Date;
+
+  @Input() performanceLog!: PerformanceLog;
+
+  ngOnInit() {
+    this.performanceLogDate = new Date(this.performanceLog?.logDate);
+  }
 }
