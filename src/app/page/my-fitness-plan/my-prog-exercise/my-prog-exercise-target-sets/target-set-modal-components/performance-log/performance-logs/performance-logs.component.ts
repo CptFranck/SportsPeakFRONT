@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {TargetSet} from "../../../../../../../interface/dto/target-set";
 import {ProgExercise} from "../../../../../../../interface/dto/prog-exercise";
 import {getTargetSetLogs} from "../../../../../../../utils/target-set-functions";
@@ -25,26 +25,18 @@ import {
   ],
   templateUrl: './performance-logs.component.html',
 })
-export class PerformanceLogsComponent {
-  progExercise: ProgExercise | undefined;
-  targetSet: TargetSet | undefined;
+export class PerformanceLogsComponent implements OnInit {
+  
+  @Input() progExercise: ProgExercise | undefined;
+  @Input() targetSet: TargetSet | undefined;
+
   targetSetLogs: TargetSet[] = [];
   performanceLogs: Dictionary<PerformanceLog[]> | undefined;
   oldPerformanceLogs: Dictionary<PerformanceLog[]> = {};
 
   protected readonly Object: ObjectConstructor = Object;
 
-  @Input() set progExerciseInput(value: ProgExercise | undefined) {
-    this.progExercise = value;
-    this.initializeTargetSetLogs();
-  }
-
-  @Input() set targetSetInput(value: TargetSet | undefined) {
-    this.targetSet = value;
-    this.initializeTargetSetLogs();
-  }
-
-  initializeTargetSetLogs() {
+  ngOnInit() {
     if (this.targetSet && this.progExercise) {
       this.performanceLogs = sortPerformanceLogsByLogDate(this.targetSet);
       this.targetSetLogs = getTargetSetLogs(this.targetSet, this.progExercise);
