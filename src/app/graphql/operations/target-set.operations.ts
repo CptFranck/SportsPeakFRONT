@@ -134,21 +134,6 @@ export const MOD_TARGET_SET = gql`
         weightUnit
         logDate
       }
-      progExercise {
-        id
-        name
-        note
-        exercise {
-          id
-          name
-        }
-        trustLabel
-        visibility
-        creator {
-          id
-          username
-        }
-      }
     }
   }
 `;
