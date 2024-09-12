@@ -29,9 +29,14 @@ export class TargetSetCardComponent implements OnInit {
   @Input() modalId!: string;
   @Input() targetSet!: TargetSet;
   @Input() isLastTargetSet: boolean = false;
-  @Input() collapseId!: string;
+  @Input() collapseTargetSetId!: string;
+  @Input() collapsePerformanceLogId!: string;
+  @Input() collapseActionType!: ActionType;
 
-  @Output() actionProgExercises: EventEmitter<FormIndicator> = new EventEmitter<FormIndicator>();
+  @Output() actionTargetSets: EventEmitter<FormIndicator> = new EventEmitter<FormIndicator>();
+  @Output() actionCollapseType: EventEmitter<ActionType> = new EventEmitter<ActionType>();
+
+  protected readonly ActionType = ActionType;
 
   ngOnInit() {
     this.targetSetTime = getTargetSetTimeToString(this.targetSet, this.isLastTargetSet);
@@ -41,37 +46,34 @@ export class TargetSetCardComponent implements OnInit {
   }
 
   addNewPerformance(targetSet: TargetSet) {
-    this.actionProgExercises.emit({
+    this.actionTargetSets.emit({
       actionType: ActionType.addPerformance,
       object: targetSet
     });
   }
 
-  checkTargetSetPerformance(targetSet: TargetSet): void {
-    this.actionProgExercises.emit({
-      actionType: ActionType.checkPerformance,
-      object: targetSet
-    });
-  }
-
   adjustTargetSet(targetSet: TargetSet): void {
-    this.actionProgExercises.emit({
+    this.actionTargetSets.emit({
       actionType: ActionType.addEvolution,
       object: targetSet
     });
   }
 
   modifyTargetSet(targetSet: TargetSet) {
-    this.actionProgExercises.emit({
+    this.actionTargetSets.emit({
       actionType: ActionType.update,
       object: targetSet
     });
   }
 
   delTargetSet(targetSet: TargetSet) {
-    this.actionProgExercises.emit({
+    this.actionTargetSets.emit({
       actionType: ActionType.delete,
       object: targetSet
     });
+  }
+
+  setCollapseActionType($event: ActionType) {
+    this.actionCollapseType.emit($event)
   }
 }
