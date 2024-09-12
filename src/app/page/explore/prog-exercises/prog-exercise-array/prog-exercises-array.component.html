@@ -82,10 +82,7 @@
       <div class="col p-1 text-center">
         <button
           (click)="expendProgExerciseDetails(progExercise.id.toString())"
-          [attr.aria-expanded]="expendProgExerciseDetails"
-          [attr.data-bs-target]="'#' + progExercise.id "
-          [class]="'btn ' + subscribeClassButton"
-          data-bs-toggle="collapse" type="button"
+          [class]="'btn ' + subscribeClassButton" type="button"
         >
           <i class="fa-regular fa-square-plus"></i>
           <i class="fa-solid fa-minus"></i>

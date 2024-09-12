@@ -47,10 +47,8 @@
       <div class="col p-1 text-center">
         <button
           (click)="expendExerciseTypeDetails(exerciseType.id)"
-          [attr.aria-expanded]="expendExerciseTypeDetails"
-          [attr.data-bs-target]="'#' + exerciseType.id "
           class="btn btn-secondary"
-          data-bs-toggle="collapse" type="button"
+          type="button"
         >
           <i class="fa-solid fa-angle-down"></i>
         </button>
