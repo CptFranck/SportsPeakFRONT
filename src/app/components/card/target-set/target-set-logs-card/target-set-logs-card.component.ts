@@ -29,7 +29,7 @@ export class TargetSetLogsCardComponent implements OnInit {
   @Input() targetSet!: TargetSet;
   @Input() isLastTargetSet: boolean = false;
 
-  @Output() actionProgExercises: EventEmitter<FormIndicator> = new EventEmitter<FormIndicator>();
+  @Output() actionTargetSets: EventEmitter<FormIndicator> = new EventEmitter<FormIndicator>();
 
   ngOnInit() {
     this.targetSetTime = getTargetSetTimeToString(this.targetSet, this.isLastTargetSet);
@@ -40,14 +40,14 @@ export class TargetSetLogsCardComponent implements OnInit {
   }
 
   modifyTargetSet(targetSet: TargetSet) {
-    this.actionProgExercises.emit({
+    this.actionTargetSets.emit({
       actionType: ActionType.update,
       object: targetSet
     });
   }
 
   delTargetSet(targetSet: TargetSet) {
-    this.actionProgExercises.emit({
+    this.actionTargetSets.emit({
       actionType: ActionType.delete,
       object: targetSet
     });

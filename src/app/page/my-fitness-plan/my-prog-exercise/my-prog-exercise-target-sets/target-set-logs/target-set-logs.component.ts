@@ -26,7 +26,7 @@ export class TargetSetLogsComponent {
   @Input() btnCloseRef!: HTMLButtonElement;
   @Input() modalId!: string;
 
-  @Output() actionProgExercises: EventEmitter<FormIndicator> = new EventEmitter<FormIndicator>();
+  @Output() actionTargetSets: EventEmitter<FormIndicator> = new EventEmitter<FormIndicator>();
 
   @Input() set targetSetInput(value: TargetSet | undefined) {
     this.targetSet = value;
@@ -43,7 +43,7 @@ export class TargetSetLogsComponent {
       this.targetSetLogs = getTargetSetLogs(this.targetSet, this.progExercise);
   }
 
-  actionProgExerciseEvent(formIndicator: FormIndicator) {
-    this.actionProgExercises.emit(formIndicator)
+  actionTargetSetEvent(formIndicator: FormIndicator) {
+    this.actionTargetSets.emit(formIndicator)
   }
 }
