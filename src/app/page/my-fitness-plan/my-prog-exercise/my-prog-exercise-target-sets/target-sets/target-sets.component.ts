@@ -18,6 +18,7 @@ import {CollapseBlockComponent} from "../../../../../components/collapse-block/c
 import {
   PerformanceLogsComponent
 } from "../target-set-modal-components/performance-log/performance-logs/performance-logs.component";
+import {TargetSetCollapsesComponent} from "../target-set-collapses/target-set-collapses.component";
 
 @Component({
   selector: 'app-target-sets',
@@ -30,7 +31,8 @@ import {
     NgIf,
     TargetSetLogsComponent,
     CollapseBlockComponent,
-    PerformanceLogsComponent
+    PerformanceLogsComponent,
+    TargetSetCollapsesComponent
   ],
   templateUrl: './target-sets.component.html',
 })
