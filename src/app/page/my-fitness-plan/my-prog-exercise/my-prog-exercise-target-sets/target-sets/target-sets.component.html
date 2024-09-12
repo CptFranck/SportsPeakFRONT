@@ -32,56 +32,73 @@
     <div [id]="targetSetUsedId" class="tab-pane fade show active">
       <p *ngIf=" progExerciseTargetSets.targetSetUsed.length === 0 ">No target set used</p>
       <div *ngFor="let targetSet of progExerciseTargetSets.targetSetUsed">
-        <app-target-set-card (actionProgExercises)="setTargetSet($event)"
-                             [collapseId]="targetSet.id + 'collapse'"
+        <app-target-set-card (actionCollapseType)="setCollapseType($event)"
+                             (actionTargetSets)="setTargetSet($event)"
+                             [collapseActionType]="collapseActionType"
+                             [collapsePerformanceLogId]="targetSet.id + 'collapsePerformanceLog'"
+                             [collapseTargetSetId]="targetSet.id + 'collapseTargetSet'"
                              [isLastTargetSet]="isLastTargetSetUsed[targetSet.id]"
                              [modalId]="targetSetModalId"
                              [targetSet]="targetSet"
         />
-        <div [id]="targetSet.id + 'collapse'" class="collapse pt-2">
-          <app-target-set-logs (actionProgExercises)="setTargetSet($event)"
+        <app-collapse-block [collapseId]="targetSet.id + 'collapsePerformanceLog'" classArgs="pt-2">
+          <app-performance-logs [progExerciseInput]="progExercise"
+                                [targetSetInput]="targetSet"/>
+        </app-collapse-block>
+        <app-collapse-block [collapseId]="targetSet.id + 'collapseTargetSet'" classArgs="pt-2">
+          <app-target-set-logs (actionTargetSets)="setTargetSet($event)"
                                [modalId]="targetSetModalId"
                                [progExerciseInput]="progExercise"
                                [targetSetInput]="targetSet"/>
-        </div>
+        </app-collapse-block>
       </div>
     </div>
     <div [id]="targetSetUnusedId" class="tab-pane fade">
       <p *ngIf=" progExerciseTargetSets.targetSetUnused.length === 0 ">No set are unused</p>
       <div *ngFor="let targetSet of progExerciseTargetSets.targetSetUnused">
-        <app-target-set-card (actionProgExercises)="setTargetSet($event)"
-                             [collapseId]="targetSet.id + 'collapse'"
+        <app-target-set-card (actionCollapseType)="setCollapseType($event)"
+                             (actionTargetSets)="setTargetSet($event)"
+                             [collapseActionType]="collapseActionType"
+                             [collapsePerformanceLogId]="targetSet.id + 'collapsePerformanceLog'"
+                             [collapseTargetSetId]="targetSet.id + 'collapseTargetSet'"
                              [isLastTargetSet]="isLastTargetSetUsed[targetSet.id]"
                              [modalId]="targetSetModalId"
                              [targetSet]="targetSet"
         />
-        <div [id]="targetSet.id + 'collapse'" class="collapse pt-2">
-          <div class="card card-body">
-            <app-target-set-logs (actionProgExercises)="setTargetSet($event)"
-                                 [modalId]="targetSetModalId"
-                                 [progExerciseInput]="progExercise"
-                                 [targetSetInput]="targetSet"/>
-          </div>
-        </div>
+        <app-collapse-block [collapseId]="targetSet.id + 'collapsePerformanceLog'" classArgs="pt-2">
+          <app-performance-logs [progExerciseInput]="progExercise"
+                                [targetSetInput]="targetSet"/>
+        </app-collapse-block>
+        <app-collapse-block [collapseId]="targetSet.id + 'collapseTargetSet'" classArgs="pt-2">
+          <app-target-set-logs (actionTargetSets)="setTargetSet($event)"
+                               [modalId]="targetSetModalId"
+                               [progExerciseInput]="progExercise"
+                               [targetSetInput]="targetSet"/>
+        </app-collapse-block>
       </div>
     </div>
     <div [id]="targetSetHiddenId" class="tab-pane fade">
       <p *ngIf=" progExerciseTargetSets.targetSetHidden.length === 0 ">No set are hidden</p>
       <div *ngFor="let targetSet of progExerciseTargetSets.targetSetHidden">
-        <app-target-set-card (actionProgExercises)="setTargetSet($event)"
-                             [collapseId]="targetSet.id + 'collapse'"
+        <app-target-set-card (actionCollapseType)="setCollapseType($event)"
+                             (actionTargetSets)="setTargetSet($event)"
+                             [collapseActionType]="collapseActionType"
+                             [collapsePerformanceLogId]="targetSet.id + 'collapsePerformanceLog'"
+                             [collapseTargetSetId]="targetSet.id + 'collapseTargetSet'"
                              [isLastTargetSet]="isLastTargetSetUsed[targetSet.id]"
                              [modalId]="targetSetModalId"
                              [targetSet]="targetSet"
         />
-        <div [id]="targetSet.id + 'collapse'" class="collapse pt-2">
-          <div class="card card-body">
-            <app-target-set-logs (actionProgExercises)="setTargetSet($event)"
-                                 [modalId]="targetSetModalId"
-                                 [progExerciseInput]="progExercise"
-                                 [targetSetInput]="targetSet"/>
-          </div>
-        </div>
+        <app-collapse-block [collapseId]="targetSet.id + 'collapsePerformanceLog'" classArgs="pt-2">
+          <app-performance-logs [progExerciseInput]="progExercise"
+                                [targetSetInput]="targetSet"/>
+        </app-collapse-block>
+        <app-collapse-block [collapseId]="targetSet.id + 'collapseTargetSet'" classArgs="pt-2">
+          <app-target-set-logs (actionTargetSets)="setTargetSet($event)"
+                               [modalId]="targetSetModalId"
+                               [progExerciseInput]="progExercise"
+                               [targetSetInput]="targetSet"/>
+        </app-collapse-block>
       </div>
     </div>
   </div>
