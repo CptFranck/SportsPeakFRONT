@@ -49,6 +49,7 @@ export class TargetSetsComponent {
     {targetSetUsed: [], targetSetUnused: [], targetSetHidden: []};
 
   @Output() actionTargetSets: EventEmitter<FormIndicator> = new EventEmitter<FormIndicator>();
+  @Output() actionPerformanceLogs: EventEmitter<FormIndicator> = new EventEmitter<FormIndicator>();
 
   protected readonly ActionType = ActionType;
 
@@ -73,5 +74,9 @@ export class TargetSetsComponent {
 
   setCollapseType($event: ActionType) {
     this.collapseActionType = $event
+  }
+
+  setPerformanceLogs($event: FormIndicator) {
+    this.actionPerformanceLogs.emit($event)
   }
 }
