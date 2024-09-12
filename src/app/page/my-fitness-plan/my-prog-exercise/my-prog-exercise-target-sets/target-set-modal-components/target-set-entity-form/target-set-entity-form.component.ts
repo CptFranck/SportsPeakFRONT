@@ -16,6 +16,7 @@ import {TargetSetService} from "../../../../../../services/target-set/target-set
 import {Duration} from "../../../../../../interface/dto/duration";
 import {WeightUnit} from "../../../../../../interface/enum/weightUnit";
 import {createDurationForm} from "../../../../../../utils/duration-functions";
+import {getUpToDateTargetSets} from "../../../../../../utils/target-set-functions";
 
 @Component({
   selector: 'app-target-set-entity-form',
@@ -75,9 +76,8 @@ export class TargetSetEntityFormComponent implements OnInit, OnDestroy {
 
   initializeTargetSetForm() {
     const defaultDuration: Duration = {seconds: 0, minutes: 0, hours: 0};
-
     const targetSetIndex: number = this.targetSet ? this.targetSet.index :
-      (this.progExercise ? this.progExercise.targetSets.length + 1 : 1);
+      (this.progExercise ? getUpToDateTargetSets(this.progExercise).length + 1 : 1);
     const targetSetSetNumber: number = this.targetSet ? this.targetSet.setNumber : 1;
     const targetSetRepetitionNumber: number = this.targetSet ? this.targetSet.repetitionNumber : 1;
     const targetSetWeight: number = this.targetSet ? this.targetSet.weight : 0;
@@ -144,6 +144,7 @@ export class TargetSetEntityFormComponent implements OnInit, OnDestroy {
 
   onUpdateSubmit() {
     if (!this.targetSetForm) return;
+    console.log(this.targetSetForm.value)
     if (this.targetSetForm.valid) {
       if (this.targetSet) {
         this.targetSetForm.addControl("id", new FormControl(this.targetSet.id));
