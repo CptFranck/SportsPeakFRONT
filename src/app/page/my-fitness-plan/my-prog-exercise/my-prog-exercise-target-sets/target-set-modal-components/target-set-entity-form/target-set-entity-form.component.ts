@@ -144,7 +144,6 @@ export class TargetSetEntityFormComponent implements OnInit, OnDestroy {
 
   onUpdateSubmit() {
     if (!this.targetSetForm) return;
-    console.log(this.targetSetForm.value)
     if (this.targetSetForm.valid) {
       if (this.targetSet) {
         this.targetSetForm.addControl("id", new FormControl(this.targetSet.id));
