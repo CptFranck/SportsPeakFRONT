@@ -2,6 +2,7 @@ import {TargetSet} from "../interface/dto/target-set";
 import {Dictionary} from "../interface/utils/dictionary";
 import {PerformanceLog} from "../interface/dto/performance-log";
 import {stringToDateString} from "./time-functions";
+import {PerformanceLogDictionary} from "../interface/utils/performance-log-dictionary";
 
 
 ////////////////////////////////////// SORT FUNCTIONS ////////////////////////////////////////
@@ -38,9 +39,9 @@ export function filterPerformanceLogByDate(targetSet: TargetSet | undefined, log
   return performanceLogThisDate;
 }
 
-export function sortPerformanceLogsByLogDate(a: [string, PerformanceLog[]], b: [string, PerformanceLog[]]) {
-  const dateA: Date = new Date(a[0])
-  const dateB: Date = new Date(b[0])
+export function sortPerformanceLogsByLogDate(a: PerformanceLogDictionary, b: PerformanceLogDictionary) {
+  const dateA: Date = new Date(a.keyDate)
+  const dateB: Date = new Date(a.keyDate)
   if (dateA < dateB) return 1;
   if (dateA > dateB) return -1;
   return 0;
