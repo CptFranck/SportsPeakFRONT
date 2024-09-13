@@ -4,9 +4,8 @@ import {SelectOption} from "../../../interface/components/select/selectOption";
 import {ControlValueAccessor, NG_VALUE_ACCESSOR} from "@angular/forms";
 import {SelectComponent} from "../../select/select.component";
 import {TargetSet} from "../../../interface/dto/target-set";
-import {Dictionary} from "../../../interface/utils/dictionary";
 import {PerformanceLog} from "../../../interface/dto/performance-log";
-import {sortPerformanceLogsByLogDate} from "../../../utils/performance-log-functions";
+import {filterPerformanceLogByDate} from "../../../utils/performance-log-functions";
 
 @Component({
   selector: 'app-performance-log-index-select',
@@ -33,16 +32,11 @@ export class PerformanceLogIndexSelectComponent implements ControlValueAccessor 
 
   @Input() set targetSet(targetSet: TargetSet | undefined) {
     this.indexOptions = []
-
     if (targetSet) {
-      const sortedPerformanceLogs: Dictionary<PerformanceLog[]> = sortPerformanceLogsByLogDate(targetSet);
-      const performanceLogThisDate: PerformanceLog[] = sortedPerformanceLogs[this.logDate];
+      const performanceLogThisDate: PerformanceLog[] = filterPerformanceLogByDate(targetSet, this.logDate);
       let totalSets: number = targetSet.setNumber;
-      if (performanceLogThisDate) {
-        if (performanceLogThisDate.length > totalSets) {
-          totalSets = performanceLogThisDate.length + 1;
-        }
-      }
+      if (performanceLogThisDate?.length >= totalSets)
+        totalSets = performanceLogThisDate.length + 1;
 
       for (let index: number = 1; index <= totalSets; index++) {
         let option: SelectOption = {
@@ -50,7 +44,6 @@ export class PerformanceLogIndexSelectComponent implements ControlValueAccessor 
           value: index.toString(),
         }
         if (index > targetSet.setNumber) {
-          option.value += 1;
           option.title += " (additional rep)";
         }
         this.indexOptions.push(option);
