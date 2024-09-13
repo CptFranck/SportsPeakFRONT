@@ -5,7 +5,8 @@
         <label class="form-label">Set index :</label>
         <app-performance-log-index-select [index]='performanceLogForm.controls["setIndex"].value'
                                           [logDate]='performanceLogForm.controls["logDate"].value'
-                                          [targetSet]="targetSet"/>
+                                          [targetSet]="selectTargetSet"
+                                          formControlName="setIndex"/>
         <app-input-control
           [formGroup]="performanceLogForm"
           [ifInvalid]="true"
