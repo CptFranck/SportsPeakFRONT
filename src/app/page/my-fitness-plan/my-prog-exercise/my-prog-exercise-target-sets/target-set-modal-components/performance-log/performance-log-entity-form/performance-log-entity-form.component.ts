@@ -57,10 +57,8 @@ export class PerformanceLogEntityFormComponent implements OnInit, OnDestroy {
       this.submitEventActionType$
         .pipe(takeUntil(this.unsubscribe$))
         .subscribe((actionType: ActionType) => {
-          if (actionType === ActionType.addPerformance)
-            this.onCreateOrEvolutionSubmit();
-          // else if (actionType === ActionType.update)
-          //   this.onUpdateSubmit();
+          if (actionType === ActionType.addPerformance || actionType === ActionType.updatePerformance)
+            this.submit();
         });
   }
 
@@ -115,34 +113,23 @@ export class PerformanceLogEntityFormComponent implements OnInit, OnDestroy {
           [Validators.required]),
         targetSetId: new FormControl(targetSetId),
       });
+    if (this.performanceLog)
+      this.performanceLogForm.addControl("id", new FormControl(this.performanceLog.id));
   }
 
-  onCreateOrEvolutionSubmit() {
+  submit() {
     if (!this.performanceLogForm) return;
     if (this.performanceLogForm.valid) {
       this.submitInvalidForm = false;
       this.performanceLogForm.controls["logDate"].setValue(new Date(this.performanceLogForm.controls["logDate"].value))
-      this.performanceLogService.addPerformanceLog(this.performanceLogForm);
+      if (!this.performanceLogForm.value.id) {
+        this.performanceLogService.addPerformanceLog(this.performanceLogForm);
+      } else {
+        this.performanceLogService.modifyPerformanceLog(this.performanceLogForm);
+      }
       this.btnCloseRef.click();
     } else {
       this.submitInvalidForm = true;
     }
   }
-
-  // onUpdateSubmit() {
-  //   if (!this.targetSetForm) return;
-  //   if (this.targetSetForm.valid) {
-  //     if (this.targetSet) {
-  //       this.targetSetForm.addControl("id", new FormControl(this.targetSet.id));
-  //       this.targetSetForm.removeControl("creationDate");
-  //       this.targetSetForm.removeControl("progExerciseId");
-  //       this.targetSetForm.removeControl("targetSetUpdateId");
-  //     }
-  //     this.submitInvalidForm = false;
-  //     this.performanceLogService.modifyTargetSet(this.targetSetForm);
-  //     this.btnCloseRef.click();
-  //   } else {
-  //     this.submitInvalidForm = true;
-  //   }
-  // }
 }
