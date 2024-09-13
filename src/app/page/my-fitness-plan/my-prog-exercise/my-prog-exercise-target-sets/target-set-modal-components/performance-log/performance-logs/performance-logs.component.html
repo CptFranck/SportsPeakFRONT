@@ -1,12 +1,12 @@
-<div *ngIf="performanceLogs">
-  <div *ngFor="let perfLogs of performanceLogs | keyvalue">
-    <div *ngFor="let perfLog of perfLogs.value">
+<div *ngIf="performanceLogsSortByDate">
+  <div *ngFor="let perfLogsOfDate of performanceLogsSortByDate">
+    <div *ngFor="let perfLog of perfLogsOfDate.value">
       <app-performance-logs-card (actionPerformanceLog)="setPerformanceLog($event)"
                                  [modalId]="modalId"
                                  [performanceLog]="perfLog"/>
     </div>
   </div>
-  <div *ngIf="Object.keys(performanceLogs).length === 0">
+  <div *ngIf="Object.keys(performanceLogsSortByDate).length === 0">
     <div class="col-auto card m-3 shadow">
       <div class="card-body ">
         <div class="row">
