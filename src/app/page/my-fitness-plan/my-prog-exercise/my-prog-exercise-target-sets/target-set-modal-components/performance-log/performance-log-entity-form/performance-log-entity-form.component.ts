@@ -13,7 +13,8 @@ import {
 } from "../../../../../../../components/selects/performance-log-index-select/performance-log-index-select.component";
 import {PerformanceLogService} from "../../../../../../../services/performance-log/performance-log.service";
 import {Dictionary} from "../../../../../../../interface/utils/dictionary";
-import {sortPerformanceLogsByLogDate} from "../../../../../../../utils/performance-log-functions";
+import {sortPerformanceLogsByDictionary} from "../../../../../../../utils/performance-log-functions";
+import {stringToDateString} from "../../../../../../../utils/time-functions";
 
 @Component({
   selector: 'app-performance-log-entity-form',
@@ -70,7 +71,6 @@ export class PerformanceLogEntityFormComponent implements OnInit, OnDestroy {
   }
 
   initializeTargetSetForm() {
-
     let logDate: string = new Date().toISOString().substring(0, 10);
     let performanceLogSetIndex: number = 1;
     let performanceLogRepetitionNumber: number = 1;
@@ -84,7 +84,7 @@ export class PerformanceLogEntityFormComponent implements OnInit, OnDestroy {
       performanceLogWeight = this.targetSet.weight;
       targetSetId = this.targetSet.id;
       performanceLogWeightUnit = this.targetSet.weightUnit;
-      const sortedPerformanceLogs: Dictionary<PerformanceLog[]> = sortPerformanceLogsByLogDate(this.targetSet);
+      const sortedPerformanceLogs: Dictionary<PerformanceLog[]> = sortPerformanceLogsByDictionary(this.targetSet);
       const performanceLogOfThisDay: PerformanceLog[] | undefined = sortedPerformanceLogs[logDate];
 
       if (performanceLogOfThisDay) {
@@ -95,15 +95,13 @@ export class PerformanceLogEntityFormComponent implements OnInit, OnDestroy {
     }
     if (this.performanceLog) {
       this.selectTargetSet = this.performanceLog.targetSet
-      logDate = new Date(this.performanceLog.logDate).toISOString().substring(0, 10);
+      logDate = stringToDateString(this.performanceLog.logDate);
       performanceLogSetIndex = this.performanceLog.setIndex;
       performanceLogRepetitionNumber = this.performanceLog.repetitionNumber;
       performanceLogWeight = this.performanceLog.weight;
       targetSetId = this.performanceLog.targetSet.id;
       performanceLogWeightUnit = this.performanceLog.weightUnit;
     }
-
-    console.log(performanceLogSetIndex)
 
     this.performanceLogForm = new FormGroup(
       {
