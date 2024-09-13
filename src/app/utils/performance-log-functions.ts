@@ -2,22 +2,26 @@ import {TargetSet} from "../interface/dto/target-set";
 import {Dictionary} from "../interface/utils/dictionary";
 import {PerformanceLog} from "../interface/dto/performance-log";
 import {stringToDateString} from "./time-functions";
-import {PerformanceLogDictionary} from "../interface/utils/performance-log-dictionary";
+import {DictionaryArray} from "../interface/utils/dictionary-array";
 
 
 ////////////////////////////////////// SORT FUNCTIONS ////////////////////////////////////////
 
-export function sortPerformanceLogsByDictionary(targetSet: TargetSet | undefined) {
+export function convertDictionaryToArray(performanceLogs: Dictionary<any[]>) {
+  return Object.entries(performanceLogs).map((value: [string, any[]]): DictionaryArray<any> => {
+    return {key: value[0], value: value[1]}
+  })
+}
+
+export function sortPerformanceLogsByDictionary(targetSet: TargetSet) {
   let sortedPerformanceLogs: Dictionary<PerformanceLog[]> = {};
-  if (targetSet) {
-    targetSet.performanceLogs.forEach((performanceLog: PerformanceLog) => {
-      const date: string = stringToDateString(performanceLog.logDate);
-      if (sortedPerformanceLogs[date] === undefined) {
-        sortedPerformanceLogs[date] = [];
-      }
-      sortedPerformanceLogs[date].push(performanceLog);
-    })
-  }
+  targetSet.performanceLogs.forEach((performanceLog: PerformanceLog) => {
+    const date: string = stringToDateString(performanceLog.logDate);
+    if (sortedPerformanceLogs[date] === undefined) {
+      sortedPerformanceLogs[date] = [];
+    }
+    sortedPerformanceLogs[date].push(performanceLog);
+  })
   return sortPerformanceLogsBySet(sortedPerformanceLogs);
 }
 
@@ -39,9 +43,9 @@ export function filterPerformanceLogByDate(targetSet: TargetSet | undefined, log
   return performanceLogThisDate;
 }
 
-export function sortPerformanceLogsByLogDate(a: PerformanceLogDictionary, b: PerformanceLogDictionary) {
-  const dateA: Date = new Date(a.keyDate)
-  const dateB: Date = new Date(a.keyDate)
+export function sortPerformanceLogsByLogDate(a: DictionaryArray<PerformanceLog[]>, b: DictionaryArray<PerformanceLog[]>) {
+  const dateA: Date = new Date(a.key)
+  const dateB: Date = new Date(a.key)
   if (dateA < dateB) return 1;
   if (dateA > dateB) return -1;
   return 0;
