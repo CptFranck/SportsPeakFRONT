@@ -92,6 +92,18 @@ export const GET_PROG_EXERCISE_BY_ID = gql`
           logDate
           targetSet {
             id
+            setNumber
+            performanceLogs {
+              id
+              setIndex
+              repetitionNumber
+              weight
+              weightUnit
+              logDate
+              targetSet {
+                id
+              }
+            }
           }
         }
       }
