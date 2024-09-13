@@ -47,7 +47,7 @@ export class PerformanceLogService {
           if (result.errors) {
             this.alertService.graphQLErrorAlertHandler(result.errors);
           } else {
-            let message: string = "This performance log " + result.data.addPerformanceLog.id + "has been successfully created.";
+            let message: string = "This performance log " + result.data.addPerformanceLog.id + " has been successfully created.";
             this.alertService.addSuccessAlert(message);
           }
         });
