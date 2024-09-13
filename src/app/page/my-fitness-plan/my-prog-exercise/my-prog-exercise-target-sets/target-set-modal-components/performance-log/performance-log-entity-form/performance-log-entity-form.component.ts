@@ -30,6 +30,7 @@ import {sortPerformanceLogsByLogDate} from "../../../../../../../utils/performan
 export class PerformanceLogEntityFormComponent implements OnInit, OnDestroy {
 
   targetSet: TargetSet | undefined;
+  selectTargetSet: TargetSet | undefined;
   performanceLog: PerformanceLog | undefined;
   performanceLogForm: FormGroup | null = null;
   submitInvalidForm: boolean = false;
@@ -57,8 +58,9 @@ export class PerformanceLogEntityFormComponent implements OnInit, OnDestroy {
       this.submitEventActionType$
         .pipe(takeUntil(this.unsubscribe$))
         .subscribe((actionType: ActionType) => {
-          if (actionType === ActionType.addPerformance || actionType === ActionType.updatePerformance)
+          if (actionType === ActionType.addPerformance || actionType === ActionType.updatePerformance) {
             this.submit();
+          }
         });
   }
 
@@ -68,21 +70,40 @@ export class PerformanceLogEntityFormComponent implements OnInit, OnDestroy {
   }
 
   initializeTargetSetForm() {
-    const logDate: string = new Date().toISOString().substring(0, 10);
-    const sortedPerformanceLogs: Dictionary<PerformanceLog[]> = sortPerformanceLogsByLogDate(this.targetSet);
-    const performanceLogOfThisDay: PerformanceLog[] | undefined = sortedPerformanceLogs[logDate];
+
+    let logDate: string = new Date().toISOString().substring(0, 10);
     let performanceLogSetIndex: number = 1;
-    if (performanceLogOfThisDay) {
-      if (performanceLogOfThisDay.length > 0) {
-        performanceLogSetIndex = performanceLogOfThisDay.length + 1;
+    let performanceLogRepetitionNumber: number = 1;
+    let performanceLogWeight: number = 0;
+    let targetSetId: number | undefined;
+    let performanceLogWeightUnit: string = WeightUnit.KILOGRAMME;
+
+    if (this.targetSet) {
+      this.selectTargetSet = this.targetSet
+      performanceLogRepetitionNumber = this.targetSet.repetitionNumber;
+      performanceLogWeight = this.targetSet.weight;
+      targetSetId = this.targetSet.id;
+      performanceLogWeightUnit = this.targetSet.weightUnit;
+      const sortedPerformanceLogs: Dictionary<PerformanceLog[]> = sortPerformanceLogsByLogDate(this.targetSet);
+      const performanceLogOfThisDay: PerformanceLog[] | undefined = sortedPerformanceLogs[logDate];
+
+      if (performanceLogOfThisDay) {
+        if (performanceLogOfThisDay.length > 0) {
+          performanceLogSetIndex = performanceLogOfThisDay.length + 1;
+        }
       }
     }
+    if (this.performanceLog) {
+      this.selectTargetSet = this.performanceLog.targetSet
+      logDate = new Date(this.performanceLog.logDate).toISOString().substring(0, 10);
+      performanceLogSetIndex = this.performanceLog.setIndex;
+      performanceLogRepetitionNumber = this.performanceLog.repetitionNumber;
+      performanceLogWeight = this.performanceLog.weight;
+      targetSetId = this.performanceLog.targetSet.id;
+      performanceLogWeightUnit = this.performanceLog.weightUnit;
+    }
 
-    const performanceLogRepetitionNumber: number = this.targetSet?.repetitionNumber ?
-      this.targetSet?.repetitionNumber : 1;
-    const performanceLogWeight: number | undefined = this.targetSet?.weight;
-    const performanceLogWeightUnit: string = this.targetSet ? this.targetSet.weightUnit : WeightUnit.KILOGRAMME;
-    const targetSetId: number | undefined = this.targetSet?.id;
+    console.log(performanceLogSetIndex)
 
     this.performanceLogForm = new FormGroup(
       {
