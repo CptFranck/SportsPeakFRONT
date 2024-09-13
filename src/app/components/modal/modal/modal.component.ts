@@ -35,37 +35,35 @@ export class ModalComponent {
       action === ActionType.update ||
       action === ActionType.delete ||
       action === ActionType.addEvolution ||
-      action === ActionType.addPerformance;
+      action === ActionType.addPerformance ||
+      action === ActionType.updatePerformance ||
+      action === ActionType.deletePerformance;
 
     this.action = action
+    this.validateButtonClass = "btn-success";
+    this.closeButtonTitle = "Cancel";
     switch (this.action) {
       case ActionType.read:
         this.closeButtonTitle = "Close";
         return
       case ActionType.create:
         this.validationButtonTitle = "Create";
-        this.validateButtonClass = "btn-success";
-        this.closeButtonTitle = "Cancel";
         return
       case ActionType.update:
         this.validationButtonTitle = "Update";
-        this.validateButtonClass = "btn-success";
-        this.closeButtonTitle = "Cancel";
+        return
+      case ActionType.addEvolution:
+        this.validationButtonTitle = "Add updated objective";
         return
       case ActionType.addPerformance:
         this.validationButtonTitle = "Add Performance";
-        this.validateButtonClass = "btn-success";
-        this.closeButtonTitle = "Cancel";
         return
-      case ActionType.addEvolution:
-        this.validationButtonTitle = "Update objective";
-        this.validateButtonClass = "btn-success";
-        this.closeButtonTitle = "Cancel";
+      case ActionType.updatePerformance:
+        this.validationButtonTitle = "Update Performance";
         return
       case ActionType.delete:
         this.validationButtonTitle = "Delete";
         this.validateButtonClass = "btn-danger";
-        this.closeButtonTitle = "Cancel";
         return
       default:
         this.closeButtonTitle = "Close";
