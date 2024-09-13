@@ -72,7 +72,7 @@ export class PerformanceLogService {
         if (result.errors) {
           this.alertService.graphQLErrorAlertHandler(result.errors);
         } else {
-          let message: string = "This performance log " + result.data.modifyPerformanceLog.id + "has been successfully updated.";
+          let message: string = "This performance log " + result.data.modifyPerformanceLog.id + " has been successfully updated.";
           this.alertService.addSuccessAlert(message);
         }
       });
