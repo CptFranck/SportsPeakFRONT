@@ -97,18 +97,21 @@ export class MyProgExerciseComponent implements OnInit, OnDestroy {
 
   setTargetSet(formIndicator: FormIndicator) {
     this.targetSet = formIndicator.object;
+    this.performanceLog = undefined;
     this.targetSetAction = formIndicator.actionType;
+
     if (formIndicator.object === undefined)
-      this.targetSetModalTitle = "Add new step (set of set(s))";
+      this.targetSetModalTitle = "Add new set's step";
     else if (formIndicator?.complement === true)
       this.targetSetModalTitle = "Add new performance log";
     else if (formIndicator.actionType === ActionType.addEvolution)
-      this.targetSetModalTitle = "Add an evolution of N°" + formIndicator.object.index;
+      this.targetSetModalTitle = "Add evolution to set's step N°" + formIndicator.object.index;
     else
-      this.targetSetModalTitle = "Set N° " + formIndicator.object.index;
+      this.targetSetModalTitle = "Set's step N° " + formIndicator.object.index;
   }
 
   setPerformanceLog(formIndicator: FormIndicator) {
+    this.targetSet = undefined;
     this.performanceLog = formIndicator.object;
     this.targetSetAction = formIndicator.actionType;
     this.targetSetModalTitle = "Performance log of set N° " + formIndicator.object.setIndex +
