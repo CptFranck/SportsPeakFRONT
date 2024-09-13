@@ -23,8 +23,19 @@ export function sortPerformanceLogsByDictionary(targetSet: TargetSet | undefined
 export function sortPerformanceLogsBySet(performanceLogs: Dictionary<PerformanceLog[]>) {
   Object.keys(performanceLogs).forEach((date: string) => {
     performanceLogs[date].sort(sortPerformanceLogsBySetIndex);
-  })
+  });
   return performanceLogs;
+}
+
+export function filterPerformanceLogByDate(targetSet: TargetSet | undefined, logDate: string): PerformanceLog[] {
+  let performanceLogThisDate: PerformanceLog[] = [];
+  if (targetSet?.performanceLogs) {
+    performanceLogThisDate = targetSet.performanceLogs.filter((performanceLog: PerformanceLog) => {
+      const date: string = stringToDateString(performanceLog.logDate);
+      return logDate === date;
+    })
+  }
+  return performanceLogThisDate;
 }
 
 export function sortPerformanceLogsByLogDate(a: [string, PerformanceLog[]], b: [string, PerformanceLog[]]) {
