@@ -12,8 +12,7 @@ import {
   PerformanceLogIndexSelectComponent
 } from "../../../../../../../components/selects/performance-log-index-select/performance-log-index-select.component";
 import {PerformanceLogService} from "../../../../../../../services/performance-log/performance-log.service";
-import {Dictionary} from "../../../../../../../interface/utils/dictionary";
-import {sortPerformanceLogsByDictionary} from "../../../../../../../utils/performance-log-functions";
+import {filterPerformanceLogByDate} from "../../../../../../../utils/performance-log-functions";
 import {stringToDateString} from "../../../../../../../utils/time-functions";
 
 @Component({
@@ -84,14 +83,9 @@ export class PerformanceLogEntityFormComponent implements OnInit, OnDestroy {
       performanceLogWeight = this.targetSet.weight;
       targetSetId = this.targetSet.id;
       performanceLogWeightUnit = this.targetSet.weightUnit;
-      const sortedPerformanceLogs: Dictionary<PerformanceLog[]> = sortPerformanceLogsByDictionary(this.targetSet);
-      const performanceLogOfThisDay: PerformanceLog[] | undefined = sortedPerformanceLogs[logDate];
-
-      if (performanceLogOfThisDay) {
-        if (performanceLogOfThisDay.length > 0) {
-          performanceLogSetIndex = performanceLogOfThisDay.length + 1;
-        }
-      }
+      const performanceLogOfThisDay: PerformanceLog[] = filterPerformanceLogByDate(this.targetSet, logDate);
+      if (performanceLogOfThisDay.length > 0)
+        performanceLogSetIndex = performanceLogOfThisDay.length + 1;
     }
     if (this.performanceLog) {
       this.selectTargetSet = this.performanceLog.targetSet
