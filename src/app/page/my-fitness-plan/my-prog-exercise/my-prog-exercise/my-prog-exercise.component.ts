@@ -105,7 +105,6 @@ export class MyProgExerciseComponent implements OnInit, OnDestroy {
 
   setTargetSet(formIndicator: FormIndicator) {
     this.targetSet = formIndicator.object;
-
     this.targetSetAction = formIndicator.actionType;
 
     if (formIndicator.object === undefined)
