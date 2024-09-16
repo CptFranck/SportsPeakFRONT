@@ -1,23 +1,23 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {TargetSet} from "../../../../../../../interface/dto/target-set";
-import {ProgExercise} from "../../../../../../../interface/dto/prog-exercise";
-import {getTargetSetLogs} from "../../../../../../../utils/target-set-functions";
-import {PerformanceLog} from "../../../../../../../interface/dto/performance-log";
-import {Dictionary} from "../../../../../../../interface/utils/dictionary";
+import {TargetSet} from "../../../../../interface/dto/target-set";
+import {ProgExercise} from "../../../../../interface/dto/prog-exercise";
+import {getTargetSetLogs} from "../../../../../utils/target-set-functions";
+import {PerformanceLog} from "../../../../../interface/dto/performance-log";
+import {Dictionary} from "../../../../../interface/utils/dictionary";
 import {
   convertDictionaryToArray,
   sortPerformanceLogsByDictionary,
   sortPerformanceLogsByLogDate
-} from "../../../../../../../utils/performance-log-functions";
+} from "../../../../../utils/performance-log-functions";
 import {KeyValuePipe, NgForOf, NgIf} from "@angular/common";
 import {
   TargetSetLogsCardComponent
-} from "../../../../../../../components/card/target-set/target-set-logs-card/target-set-logs-card.component";
+} from "../../../../../components/card/target-set/target-set-logs-card/target-set-logs-card.component";
 import {
   PerformanceLogsCardComponent
-} from "../../../../../../../components/card/performance-log/performance-logs-card/performance-logs-card.component";
-import {FormIndicator} from "../../../../../../../interface/utils/form-indicator";
-import {DictionaryArray} from "../../../../../../../interface/utils/dictionary-array";
+} from "../../../../../components/card/performance-log/performance-logs-card/performance-logs-card.component";
+import {FormIndicator} from "../../../../../interface/utils/form-indicator";
+import {DictionaryArray} from "../../../../../interface/utils/dictionary-array";
 
 @Component({
   selector: 'app-performance-logs',
