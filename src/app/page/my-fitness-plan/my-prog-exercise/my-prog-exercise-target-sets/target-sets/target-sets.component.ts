@@ -16,7 +16,7 @@ import {getProgExerciseTargetSet,} from "../../../../../utils/prog-exercise-func
 import {getUpToDateTargetSets, sortLastTargetSetsByIndex} from "../../../../../utils/target-set-functions";
 import {CollapseBlockComponent} from "../../../../../components/collapse-block/collapse-block.component";
 import {PerformanceLogsComponent} from "../performance-logs/performance-logs.component";
-import {TargetSetStepComponent} from "../target-set-collapses/target-set-step.component";
+import {TargetSetStepComponent} from "../target-set-step/target-set-step.component";
 
 @Component({
   selector: 'app-target-sets',
