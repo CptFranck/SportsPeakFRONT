@@ -2,7 +2,9 @@ import {Component, Input, TemplateRef, ViewChild} from '@angular/core';
 import {
   UserDetailsDisplayComponent
 } from "../user-modal-components/user-details-display/user-details-display.component";
-import {UserRolesFormComponent} from "../user-modal-components/user-entity-form/user-roles-form.component";
+import {
+  UserRolesFormComponent
+} from "../../../../components/form/user-management/user-entity-form/user-roles-form.component";
 import {ModalButtonComponent} from "../../../../components/modal/modal-button/modal-button.component";
 import {ModalComponent} from "../../../../components/modal/modal/modal.component";
 import {NgIf} from "@angular/common";

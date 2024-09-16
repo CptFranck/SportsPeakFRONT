@@ -15,7 +15,7 @@ import {
 import {UserDeleteFormComponent} from "../user-modal-components/user-delete-form/user-delete-form.component";
 import {
   UserRolesFormComponent
-} from "../../back/user-management/user-modal-components/user-entity-form/user-roles-form.component";
+} from "../../../components/form/user-management/user-entity-form/user-roles-form.component";
 import {UserModalComponent} from "../user-modal/user-modal.component";
 import {FormIndicator} from "../../../interface/utils/form-indicator";
 import {Subject, takeUntil} from "rxjs";
