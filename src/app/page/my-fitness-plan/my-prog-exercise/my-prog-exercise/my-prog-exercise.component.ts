@@ -117,10 +117,14 @@ export class MyProgExerciseComponent implements OnInit, OnDestroy {
 
   setPerformanceLog(formIndicator: FormIndicator) {
     this.performanceLogAction = formIndicator.actionType;
-    if (formIndicator?.complement === true) {
+    if (formIndicator.actionType === ActionType.create) {
       this.targetSet = formIndicator.object;
       this.performanceLog = undefined;
       this.performanceLogModalTitle = "Add new performance log";
+    } else if (formIndicator.actionType === ActionType.checkPerformance) {
+      this.targetSet = formIndicator.object;
+      this.performanceLog = undefined;
+      this.performanceLogModalTitle = "Check step N° " + this.targetSet?.index + " performances";
     } else {
       this.targetSet = undefined;
       this.performanceLog = formIndicator.object;
