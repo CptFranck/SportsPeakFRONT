@@ -33,12 +33,12 @@ import {DictionaryArray} from "../../../../../interface/utils/dictionary-array";
 })
 export class PerformanceLogsComponent implements OnInit {
 
+  targetSet: TargetSet | undefined;
   targetSetLogs: TargetSet[] = [];
   performanceLogsSortByDate: DictionaryArray<PerformanceLog[]>[] = [];
   oldPerformanceLogsSortByDate: DictionaryArray<PerformanceLog[]>[] = [];
 
   @Input() modalId!: string;
-  @Input() targetSet: TargetSet | undefined;
   @Input() progExercise: ProgExercise | undefined;
 
   @Output() actionPerformanceLog: EventEmitter<FormIndicator> = new EventEmitter<FormIndicator>();
@@ -47,11 +47,6 @@ export class PerformanceLogsComponent implements OnInit {
 
   @Input() set targetSetInput(targetSet: TargetSet | undefined) {
     this.targetSet = targetSet;
-    this.initialize();
-  }
-
-  @Input() set progExerciseInput(progExercise: ProgExercise | undefined) {
-    this.progExercise = progExercise;
     this.initialize();
   }
 
