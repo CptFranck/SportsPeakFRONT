@@ -13,14 +13,7 @@ import {
 import {ProgExercise} from "../../../../../interface/dto/prog-exercise";
 import {TargetSetLogsComponent} from "../target-set-logs/target-set-logs.component";
 import {FormIndicator} from "../../../../../interface/utils/form-indicator";
-import {
-  PerformanceLogEntityFormComponent
-} from "../../../../../components/form/performance-log/performance-log-entity-form/performance-log-entity-form.component";
-import {PerformanceLogsComponent} from "../performance-logs/performance-logs.component";
 import {PerformanceLog} from "../../../../../interface/dto/performance-log";
-import {
-  PerformanceLogDeleteFormComponent
-} from "../../../../../components/form/performance-log/performance-log-delete-form/performance-log-delete-form.component";
 
 @Component({
   selector: 'app-target-set-modal',
@@ -32,9 +25,6 @@ import {
     TargetSetDeleteFormComponent,
     TargetSetEntityFormComponent,
     TargetSetLogsComponent,
-    PerformanceLogEntityFormComponent,
-    PerformanceLogsComponent,
-    PerformanceLogDeleteFormComponent
   ],
   templateUrl: './target-set-modal.component.html',
 })

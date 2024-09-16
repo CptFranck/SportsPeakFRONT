@@ -1,35 +1,23 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {LoginFormComponent} from "../../../../../components/form/auth/login-form/login-form.component";
-import {RegisterFormComponent} from "../../../../../components/form/auth/register-form/register-form.component";
 import {NgForOf, NgIf} from "@angular/common";
-import {
-  TargetSetCardComponent
-} from "../../../../../components/card/target-set/target-set-card/target-set-card.component";
 import {FormIndicator} from "../../../../../interface/utils/form-indicator";
 import {ProgExerciseTargetSets} from "../../../../../interface/utils/progExerciseTargetSets";
 import {Dictionary} from "../../../../../interface/utils/dictionary";
 import {TargetSet} from "../../../../../interface/dto/target-set";
 import {ActionType} from "../../../../../interface/enum/action-type";
-import {TargetSetLogsComponent} from "../target-set-logs/target-set-logs.component";
 import {ProgExercise} from "../../../../../interface/dto/prog-exercise";
 import {getProgExerciseTargetSet,} from "../../../../../utils/prog-exercise-functions";
 import {getUpToDateTargetSets, sortLastTargetSetsByIndex} from "../../../../../utils/target-set-functions";
 import {CollapseBlockComponent} from "../../../../../components/collapse-block/collapse-block.component";
-import {PerformanceLogsComponent} from "../performance-logs/performance-logs.component";
 import {TargetSetStepComponent} from "../target-set-step/target-set-step.component";
 
 @Component({
   selector: 'app-target-sets',
   standalone: true,
   imports: [
-    LoginFormComponent,
-    RegisterFormComponent,
     NgForOf,
-    TargetSetCardComponent,
     NgIf,
-    TargetSetLogsComponent,
     CollapseBlockComponent,
-    PerformanceLogsComponent,
     TargetSetStepComponent
   ],
   templateUrl: './target-sets.component.html',
