@@ -17,6 +17,10 @@
                                    [performanceLogInput]="performanceLog"
                                    [submitEventActionType$]="submitEventActionType$"
                                    [targetSetInput]="targetSet"/>
+  <app-performance-log-delete-form *ngIf="action === ActionType.deletePerformance"
+                                   [btnCloseRef]="btnClose"
+                                   [performanceLogInput]="performanceLog"
+                                   [submitEventActionType$]="submitEventActionType$"/>
   <app-target-set-entity-form *ngIf="action === ActionType.create ||
                                     action === ActionType.update ||
                                     action === ActionType.addEvolution"
