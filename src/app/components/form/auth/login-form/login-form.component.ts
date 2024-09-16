@@ -1,7 +1,7 @@
 import {Component, inject, OnInit} from '@angular/core';
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
-import {AuthService} from "../../../services/auth/auth.service";
-import {InputControlComponent} from "../../../components/input-control/input-control.component";
+import {AuthService} from "../../../../services/auth/auth.service";
+import {InputControlComponent} from "../../../input-control/input-control.component";
 import {NgIf} from "@angular/common";
 
 @Component({

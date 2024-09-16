@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {LoginFormComponent} from "../../../../auth/login-form/login-form.component";
-import {RegisterFormComponent} from "../../../../auth/register-form/register-form.component";
+import {LoginFormComponent} from "../../../../../components/form/auth/login-form/login-form.component";
+import {RegisterFormComponent} from "../../../../../components/form/auth/register-form/register-form.component";
 import {NgForOf, NgIf} from "@angular/common";
 import {
   TargetSetCardComponent
