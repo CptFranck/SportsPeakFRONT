@@ -1,21 +1,19 @@
 import {Component, inject, Input, OnDestroy, OnInit} from '@angular/core';
 import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
 import {Subject, takeUntil} from "rxjs";
-import {Exercise} from "../../../../../interface/dto/exercise";
-import {ExerciseService} from "../../../../../services/exercise/exercise.service";
-import {InputControlComponent} from "../../../../../components/input-control/input-control.component";
+import {Exercise} from "../../../../interface/dto/exercise";
+import {ExerciseService} from "../../../../services/exercise/exercise.service";
+import {InputControlComponent} from "../../../input-control/input-control.component";
 import {NgIf} from "@angular/common";
-import {Muscle} from "../../../../../interface/dto/muscle";
-import {ExerciseType} from "../../../../../interface/dto/exercise-type";
-import {
-  ExerciseSelectorComponent
-} from "../../../../../components/selectors/exercise-selector/exercise-selector.component";
-import {MuscleSelectorComponent} from "../../../../../components/selectors/muscle-selector/muscle-selector.component";
+import {Muscle} from "../../../../interface/dto/muscle";
+import {ExerciseType} from "../../../../interface/dto/exercise-type";
+import {ExerciseSelectorComponent} from "../../../selectors/exercise-selector/exercise-selector.component";
+import {MuscleSelectorComponent} from "../../../selectors/muscle-selector/muscle-selector.component";
 import {
   ExerciseTypeSelectorComponent
-} from "../../../../../components/selectors/exercise-type-selector/exercise-type-selector.component";
-import {UserLoggedService} from "../../../../../services/user-logged/user-logged.service";
-import {ActionType} from "../../../../../interface/enum/action-type";
+} from "../../../selectors/exercise-type-selector/exercise-type-selector.component";
+import {UserLoggedService} from "../../../../services/user-logged/user-logged.service";
+import {ActionType} from "../../../../interface/enum/action-type";
 
 @Component({
   selector: 'app-exercise-entity-form',

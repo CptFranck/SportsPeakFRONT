@@ -15,10 +15,10 @@ import {ActionType} from "../../../../interface/enum/action-type";
 import {Exercise} from "../../../../interface/dto/exercise";
 import {
   ExerciseEntityFormComponent
-} from "../exercise-modal-components/exercise-entity-form/exercise-entity-form.component";
+} from "../../../../components/form/exercise/exercise-entity-form/exercise-entity-form.component";
 import {
   ExerciseDeleteFormComponent
-} from "../exercise-modal-components/exercise-delete-form/exercise-delete-form.component";
+} from "../../../../components/form/exercise/exercise-delete-form/exercise-delete-form.component";
 import {
   ExerciseDetailsDisplayComponent
 } from "../exercise-modal-components/exercise-details-display/exercise-details-display.component";

@@ -1,8 +1,8 @@
 import {Component, inject, Input, OnDestroy, OnInit} from '@angular/core';
 import {Subject, takeUntil} from "rxjs";
-import {Exercise} from "../../../../../interface/dto/exercise";
-import {ExerciseService} from "../../../../../services/exercise/exercise.service";
-import {ActionType} from "../../../../../interface/enum/action-type";
+import {Exercise} from "../../../../interface/dto/exercise";
+import {ExerciseService} from "../../../../services/exercise/exercise.service";
+import {ActionType} from "../../../../interface/enum/action-type";
 
 @Component({
   selector: 'app-exercise-delete-form',
