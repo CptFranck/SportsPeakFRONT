@@ -15,9 +15,7 @@ import {ProgExercise} from "../../../../../interface/dto/prog-exercise";
 import {getProgExerciseTargetSet,} from "../../../../../utils/prog-exercise-functions";
 import {getUpToDateTargetSets, sortLastTargetSetsByIndex} from "../../../../../utils/target-set-functions";
 import {CollapseBlockComponent} from "../../../../../components/collapse-block/collapse-block.component";
-import {
-  PerformanceLogsComponent
-} from "../target-set-modal-components/performance-log/performance-logs/performance-logs.component";
+import {PerformanceLogsComponent} from "../performance-logs/performance-logs.component";
 import {TargetSetCollapsesComponent} from "../target-set-collapses/target-set-collapses.component";
 
 @Component({

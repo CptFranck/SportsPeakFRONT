@@ -3,7 +3,7 @@ import {User} from "../../../../interface/dto/user";
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {Observable, Subject, takeUntil} from "rxjs";
 import {UserService} from "../../../../services/user/user.service";
-import {InputControlComponent} from "../../../../components/input-control/input-control.component";
+import {InputControlComponent} from "../../../input-control/input-control.component";
 import {NgIf} from "@angular/common";
 import {confirmValidator} from "../../../../validators/confirmValidator";
 import {ModificationField} from "../../../../interface/enum/modification-field";
