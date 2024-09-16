@@ -2,16 +2,7 @@ import {Component, inject, Input, OnDestroy, OnInit, TemplateRef, ViewChild} fro
 import {UserLoggedService} from "../../../../services/user-logged/user-logged.service";
 import {ModalButtonComponent} from "../../../../components/modal/modal-button/modal-button.component";
 import {ModalComponent} from "../../../../components/modal/modal/modal.component";
-import {
-  MuscleDetailsDisplayComponent
-} from "../../../docs/muscles/muscle-modal-components/muscle-details-display/muscle-details-display.component";
-import {
-  MuscleEntityFormComponent
-} from "../../../docs/muscles/muscle-modal-components/muscle-entity-form/muscle-entity-form.component";
 import {NgIf} from "@angular/common";
-import {
-  muscleDeleteFormComponent
-} from "../../../docs/muscles/muscle-modal-components/muscle-delete-form/muscle-delete-form.component";
 import {ActionType} from "../../../../interface/enum/action-type";
 import {ProgExercise} from "../../../../interface/dto/prog-exercise";
 import {
@@ -25,10 +16,7 @@ import {Subject, takeUntil} from "rxjs";
   imports: [
     ModalButtonComponent,
     ModalComponent,
-    MuscleDetailsDisplayComponent,
-    MuscleEntityFormComponent,
     NgIf,
-    muscleDeleteFormComponent,
     MyProgExerciseDetailsDisplayComponent
   ],
   templateUrl: './prog-exercise-modal.component.html',

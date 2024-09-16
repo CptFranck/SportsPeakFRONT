@@ -1,16 +1,7 @@
 import {Component, EventEmitter, inject, Input, OnDestroy, OnInit, Output, TemplateRef, ViewChild} from '@angular/core';
 import {ModalButtonComponent} from "../../../../components/modal/modal-button/modal-button.component";
 import {ModalComponent} from "../../../../components/modal/modal/modal.component";
-import {
-  MuscleDetailsDisplayComponent
-} from "../../muscles/muscle-modal-components/muscle-details-display/muscle-details-display.component";
-import {
-  MuscleEntityFormComponent
-} from "../../muscles/muscle-modal-components/muscle-entity-form/muscle-entity-form.component";
 import {NgIf} from "@angular/common";
-import {
-  muscleDeleteFormComponent
-} from "../../muscles/muscle-modal-components/muscle-delete-form/muscle-delete-form.component";
 import {ActionType} from "../../../../interface/enum/action-type";
 import {Exercise} from "../../../../interface/dto/exercise";
 import {
@@ -32,10 +23,7 @@ import {FormIndicator} from "../../../../interface/utils/form-indicator";
   imports: [
     ModalButtonComponent,
     ModalComponent,
-    MuscleDetailsDisplayComponent,
-    MuscleEntityFormComponent,
     NgIf,
-    muscleDeleteFormComponent,
     ExerciseEntityFormComponent,
     ExerciseDeleteFormComponent,
     ExerciseDetailsDisplayComponent
