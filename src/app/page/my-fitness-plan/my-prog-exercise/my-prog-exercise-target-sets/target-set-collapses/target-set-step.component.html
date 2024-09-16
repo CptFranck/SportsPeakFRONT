@@ -1,14 +1,16 @@
 <app-target-set-card (actionCollapseType)="setCollapseType($event)"
+                     (actionPerformanceLogs)="setPerformanceLog($event)"
                      (actionTargetSets)="setTargetSet($event)"
                      [collapsePerformanceLogId]="targetSet.id + 'collapsePerformanceLog'"
                      [collapseTargetSetId]="targetSet.id + 'collapseTargetSet'"
                      [isLastTargetSet]="isLastTargetSet"
-                     [modalId]="targetSetModalId"
+                     [performanceLogModalId]="performanceLogModalId"
+                     [targetSetModalId]="targetSetModalId"
                      [targetSet]="targetSet"
 />
 <app-collapse-block [collapseId]="targetSet.id + 'collapsePerformanceLog'" classArgs="pt-2">
   <app-performance-logs (actionPerformanceLog)="setPerformanceLog($event)"
-                        [modalId]="targetSetModalId"
+                        [modalId]="performanceLogModalId"
                         [progExercise]="progExercise"
                         [targetSet]="targetSet"/>
 </app-collapse-block>

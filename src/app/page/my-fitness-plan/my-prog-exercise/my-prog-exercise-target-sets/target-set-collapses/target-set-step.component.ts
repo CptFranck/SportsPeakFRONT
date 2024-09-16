@@ -11,7 +11,7 @@ import {FormIndicator} from "../../../../../interface/utils/form-indicator";
 import {ProgExercise} from "../../../../../interface/dto/prog-exercise";
 
 @Component({
-  selector: 'app-target-set-collapses',
+  selector: 'app-target-step',
   standalone: true,
   imports: [
     CollapseBlockComponent,
@@ -19,14 +19,15 @@ import {ProgExercise} from "../../../../../interface/dto/prog-exercise";
     TargetSetCardComponent,
     TargetSetLogsComponent
   ],
-  templateUrl: './target-set-collapses.component.html',
+  templateUrl: './target-set-step.component.html',
 })
-export class TargetSetCollapsesComponent {
+export class TargetSetStepComponent {
   @Input() targetSet!: TargetSet;
   @Input() progExercise!: ProgExercise | undefined;
   @Input() isLastTargetSet!: boolean;
   @Input() collapseActionType!: ActionType;
   @Input() targetSetModalId!: string;
+  @Input() performanceLogModalId!: string;
 
   @Output() actionCollapseType: EventEmitter<ActionType> = new EventEmitter<ActionType>();
   @Output() actionTargetSets: EventEmitter<FormIndicator> = new EventEmitter<FormIndicator>();
