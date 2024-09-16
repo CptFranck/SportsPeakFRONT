@@ -1,15 +1,6 @@
 import {Component, EventEmitter, Input, Output, TemplateRef, ViewChild} from '@angular/core';
 import {ActionType} from "../../../../../interface/enum/action-type";
 import {ModalComponent} from "../../../../../components/modal/modal/modal.component";
-import {
-  MyProgExerciseDeleteFormComponent
-} from "../../my-prog-exercise-modal-components/my-prog-exercise-delete-form/my-prog-exercise-delete-form.component";
-import {
-  MyProgExerciseEntityFormComponent
-} from "../../../my-prog-exercises/my-prog-exercise-modal-components/my-prog-exercise-entity-form/my-prog-exercise-entity-form.component";
-import {
-  MyProgExercisePerformanceComponent
-} from "../../../my-prog-exercises/my-prog-exercise-modal-components/my-prog-exercise-performance/my-prog-exercise-performance.component";
 import {NgIf} from "@angular/common";
 import {TargetSet} from "../../../../../interface/dto/target-set";
 import {ModalButtonComponent} from "../../../../../components/modal/modal-button/modal-button.component";
@@ -35,9 +26,6 @@ import {PerformanceLog} from "../../../../../interface/dto/performance-log";
   standalone: true,
   imports: [
     ModalComponent,
-    MyProgExerciseDeleteFormComponent,
-    MyProgExerciseEntityFormComponent,
-    MyProgExercisePerformanceComponent,
     NgIf,
     ModalButtonComponent,
     TargetSetDeleteFormComponent,
