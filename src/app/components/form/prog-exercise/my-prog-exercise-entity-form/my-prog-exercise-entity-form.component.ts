@@ -1,18 +1,16 @@
 import {Component, inject, Input, OnDestroy, OnInit} from '@angular/core';
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {Observable, Subject, takeUntil} from "rxjs";
-import {UserLoggedService} from "../../../../../services/user-logged/user-logged.service";
-import {ProgExercise} from "../../../../../interface/dto/prog-exercise";
-import {User} from "../../../../../interface/dto/user";
-import {Visibility} from "../../../../../interface/enum/visibility";
-import {InputControlComponent} from "../../../../../components/input-control/input-control.component";
+import {UserLoggedService} from "../../../../services/user-logged/user-logged.service";
+import {ProgExercise} from "../../../../interface/dto/prog-exercise";
+import {User} from "../../../../interface/dto/user";
+import {Visibility} from "../../../../interface/enum/visibility";
+import {InputControlComponent} from "../../../input-control/input-control.component";
 import {NgIf} from "@angular/common";
-import {ExerciseSelectComponent} from "../../../../../components/selects/exercise-select/exercise-select.component";
-import {
-  VisibilitySelectComponent
-} from "../../../../../components/selects/visibility-select/visibility-select.component";
-import {ProgExerciseService} from "../../../../../services/prog-exercise/prog-exercise.service";
-import {ActionType} from "../../../../../interface/enum/action-type";
+import {ExerciseSelectComponent} from "../../../selects/exercise-select/exercise-select.component";
+import {VisibilitySelectComponent} from "../../../selects/visibility-select/visibility-select.component";
+import {ProgExerciseService} from "../../../../services/prog-exercise/prog-exercise.service";
+import {ActionType} from "../../../../interface/enum/action-type";
 
 @Component({
   selector: 'app-my-prog-exercise-entity-form',

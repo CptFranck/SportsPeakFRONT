@@ -5,14 +5,11 @@ import {NgIf} from "@angular/common";
 import {ProgExercise} from "../../../../interface/dto/prog-exercise";
 import {ActionType} from "../../../../interface/enum/action-type";
 import {
-  MyProgExerciseDeleteFormComponent
-} from "../../my-prog-exercise/my-prog-exercise-modal-components/my-prog-exercise-delete-form/my-prog-exercise-delete-form.component";
-import {
   MyProgExerciseDetailsDisplayComponent
 } from "../my-prog-exercise-modal-components/my-prog-exercise-details-display/my-prog-exercise-details-display.component";
 import {
   MyProgExerciseEntityFormComponent
-} from "../my-prog-exercise-modal-components/my-prog-exercise-entity-form/my-prog-exercise-entity-form.component";
+} from "../../../../components/form/prog-exercise/my-prog-exercise-entity-form/my-prog-exercise-entity-form.component";
 import {
   MyProgExercisePerformanceComponent
 } from "../my-prog-exercise-modal-components/my-prog-exercise-performance/my-prog-exercise-performance.component";
@@ -24,7 +21,6 @@ import {
     ModalButtonComponent,
     ModalComponent,
     NgIf,
-    MyProgExerciseDeleteFormComponent,
     MyProgExerciseDetailsDisplayComponent,
     MyProgExerciseEntityFormComponent,
     MyProgExercisePerformanceComponent,

@@ -1,15 +1,13 @@
 import {Component, inject, Input, OnDestroy, OnInit} from '@angular/core';
 import {NgIf} from "@angular/common";
-import {
-  TargetSetSateSelectComponent
-} from "../../../../../components/selects/target-set-state-select/target-set-sate-select.component";
+import {TargetSetSateSelectComponent} from "../../../selects/target-set-state-select/target-set-sate-select.component";
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
-import {ProgExercise} from "../../../../../interface/dto/prog-exercise";
-import {ProgExerciseService} from "../../../../../services/prog-exercise/prog-exercise.service";
+import {ProgExercise} from "../../../../interface/dto/prog-exercise";
+import {ProgExerciseService} from "../../../../services/prog-exercise/prog-exercise.service";
 import {
   TrustLabelSelectComponent
-} from "../../../../../components/selects/prog-exercise-trust-label-select/trust-label-select.component";
-import {UserLoggedService} from "../../../../../services/user-logged/user-logged.service";
+} from "../../../selects/prog-exercise-trust-label-select/trust-label-select.component";
+import {UserLoggedService} from "../../../../services/user-logged/user-logged.service";
 import {Subject, takeUntil} from "rxjs";
 
 @Component({

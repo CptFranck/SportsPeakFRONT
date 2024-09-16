@@ -8,7 +8,7 @@ import {NgForOf, NgIf} from "@angular/common";
 import {RouterLink} from "@angular/router";
 import {
   ProgExerciseTrustLabelFormComponent
-} from "../../../../page/my-fitness-plan/my-prog-exercise/my-prog-exercise-modal-components/my-prog-exercise-trust-label-form/prog-exercise-trust-label-form.component";
+} from "../../../form/prog-exercise/prog-exercise-trust-label-form/prog-exercise-trust-label-form.component";
 import {getTargetSetsInformation} from "../../../../utils/target-set-functions";
 
 @Component({
