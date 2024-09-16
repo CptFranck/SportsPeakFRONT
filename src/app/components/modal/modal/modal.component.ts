@@ -34,10 +34,7 @@ export class ModalComponent {
       action === ActionType.create ||
       action === ActionType.update ||
       action === ActionType.delete ||
-      action === ActionType.addEvolution ||
-      action === ActionType.addPerformance ||
-      action === ActionType.updatePerformance ||
-      action === ActionType.deletePerformance;
+      action === ActionType.addEvolution;
 
     this.action = action
     this.validateButtonClass = "btn-success";
@@ -53,13 +50,7 @@ export class ModalComponent {
         this.validationButtonTitle = "Update";
         return
       case ActionType.addEvolution:
-        this.validationButtonTitle = "Add updated objective";
-        return
-      case ActionType.addPerformance:
-        this.validationButtonTitle = "Add Performance";
-        return
-      case ActionType.updatePerformance:
-        this.validationButtonTitle = "Update Performance";
+        this.validationButtonTitle = "Add an updated objective";
         return
       case ActionType.delete:
         this.validationButtonTitle = "Delete";
@@ -77,5 +68,4 @@ export class ModalComponent {
     if (this.btnClose)
       this.btnClose.nativeElement.click();
   }
-
 }

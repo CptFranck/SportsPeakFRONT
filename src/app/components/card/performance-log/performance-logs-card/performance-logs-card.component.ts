@@ -29,14 +29,14 @@ export class PerformanceLogsCardComponent implements OnInit {
 
   modPerformanceLog($event: any) {
     this.actionPerformanceLog.emit({
-      actionType: ActionType.updatePerformance,
+      actionType: ActionType.update,
       object: $event
     });
   }
 
   delPerformanceLog($event: any) {
     this.actionPerformanceLog.emit({
-      actionType: ActionType.deletePerformance,
+      actionType: ActionType.delete,
       object: $event
     });
   }

@@ -58,7 +58,7 @@ export class PerformanceLogEntityFormComponent implements OnInit, OnDestroy {
       this.submitEventActionType$
         .pipe(takeUntil(this.unsubscribe$))
         .subscribe((actionType: ActionType) => {
-          if (actionType === ActionType.addPerformance || actionType === ActionType.updatePerformance) {
+          if (actionType === ActionType.create || actionType === ActionType.update) {
             this.submit();
           }
         });
