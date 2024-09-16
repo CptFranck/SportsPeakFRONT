@@ -2,11 +2,13 @@ import {Component, inject, Input, OnDestroy, OnInit} from '@angular/core';
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {Observable, Subject, takeUntil} from "rxjs";
 import {User} from "../../../../interface/dto/user";
-import {InputControlComponent} from "../../../input-control/input-control.component";
+import {InputControlComponent} from "../../../../components/input-control/input-control.component";
 import {NgIf} from "@angular/common";
 import {UserService} from "../../../../services/user/user.service";
-import {PrivilegeSelectorComponent} from "../../../selectors/privilege-selector/privilege-selector.component";
-import {UserSelectorComponent} from "../../../selectors/user-selector/user-selector.component";
+import {
+  PrivilegeSelectorComponent
+} from "../../../../components/selectors/privilege-selector/privilege-selector.component";
+import {UserSelectorComponent} from "../../../../components/selectors/user-selector/user-selector.component";
 import {ModificationField} from "../../../../interface/enum/modification-field";
 import {ActionType} from "../../../../interface/enum/action-type";
 

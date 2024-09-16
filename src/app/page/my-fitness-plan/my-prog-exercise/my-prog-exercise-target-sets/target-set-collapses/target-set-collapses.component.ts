@@ -1,6 +1,8 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {CollapseBlockComponent} from "../../../../../components/collapse-block/collapse-block.component";
-import {PerformanceLogsComponent} from "../performance-logs/performance-logs.component";
+import {
+  PerformanceLogsComponent
+} from "../target-set-modal-components/performance-log/performance-logs/performance-logs.component";
 import {
   TargetSetCardComponent
 } from "../../../../../components/card/target-set/target-set-card/target-set-card.component";

@@ -1,5 +1,5 @@
 import {Component, inject, Input, OnDestroy, OnInit} from '@angular/core';
-import {InputControlComponent} from "../../../input-control/input-control.component";
+import {InputControlComponent} from "../../../../components/input-control/input-control.component";
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {User} from "../../../../interface/dto/user";
 import {Observable, Subject, takeUntil} from "rxjs";
