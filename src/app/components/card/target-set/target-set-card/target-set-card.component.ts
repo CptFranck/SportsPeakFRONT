@@ -51,7 +51,13 @@ export class TargetSetCardComponent implements OnInit {
     this.actionPerformanceLogs.emit({
       actionType: ActionType.create,
       object: targetSet,
-      complement: true
+    });
+  }
+
+  checkPerformance(targetSet: TargetSet) {
+    this.actionPerformanceLogs.emit({
+      actionType: ActionType.checkPerformance,
+      object: targetSet,
     });
   }
 

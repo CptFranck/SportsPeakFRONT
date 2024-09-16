@@ -33,12 +33,15 @@
             </app-modal-button>
           </div>
           <div class="col p-1">
-            <app-collapse-button (onClickEvent)="setCollapseActionType($event)"
-                                 [collapseId]="collapsePerformanceLogId"
-                                 [value]="ActionType.checkPerformance">
+            <app-modal-button
+              (onCLickModalButton)="checkPerformance($event)"
+              [modalId]="performanceLogModalId"
+              [modalValue]="targetSet"
+              btnClass="btn-secondary"
+            >
               Check performances
               <i class="fa-solid fa-chart-line"></i>
-            </app-collapse-button>
+            </app-modal-button>
           </div>
         </div>
       </div>
