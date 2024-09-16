@@ -4,13 +4,13 @@ import {ModalComponent} from "../../../../components/modal/modal/modal.component
 import {NgIf} from "@angular/common";
 import {
   PrivilegeDeleteFormComponent
-} from "../privilege-modal-components/privilege-delete-form/privilege-delete-form.component";
+} from "../../../../components/form/privilege/privilege-delete-form/privilege-delete-form.component";
 import {
   PrivilegeDetailDisplayComponent
 } from "../privilege-modal-components/privilege-detail-display/privilege-detail-display.component";
 import {
   PrivilegeEntityFormComponent
-} from "../privilege-modal-components/privilege-entity-form/privilege-entity-form.component";
+} from "../../../../components/form/privilege/privilege-entity-form/privilege-entity-form.component";
 import {Privilege} from "../../../../interface/dto/privilege";
 import {ActionType} from "../../../../interface/enum/action-type";
 import {FormIndicator} from "../../../../interface/utils/form-indicator";

@@ -2,13 +2,13 @@ import {Component, inject, Input, OnDestroy, OnInit} from '@angular/core';
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {Observable, Subject, takeUntil} from "rxjs";
 import {NgIf} from "@angular/common";
-import {InputControlComponent} from "../../../../../components/input-control/input-control.component";
-import {Privilege} from "../../../../../interface/dto/privilege";
-import {PrivilegeService} from "../../../../../services/privilege/privilege.service";
-import {Role} from "../../../../../interface/dto/role";
-import {RoleSelectorComponent} from "../../../../../components/selectors/role-selector/role-selector.component";
-import {UserLoggedService} from "../../../../../services/user-logged/user-logged.service";
-import {ActionType} from "../../../../../interface/enum/action-type";
+import {InputControlComponent} from "../../../input-control/input-control.component";
+import {Privilege} from "../../../../interface/dto/privilege";
+import {PrivilegeService} from "../../../../services/privilege/privilege.service";
+import {Role} from "../../../../interface/dto/role";
+import {RoleSelectorComponent} from "../../../selectors/role-selector/role-selector.component";
+import {UserLoggedService} from "../../../../services/user-logged/user-logged.service";
+import {ActionType} from "../../../../interface/enum/action-type";
 
 @Component({
   selector: 'app-privilege-entity-form',
