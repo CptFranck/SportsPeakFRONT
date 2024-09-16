@@ -1,9 +1,9 @@
 import {Component, inject, Input, OnDestroy, OnInit} from '@angular/core';
 import {NgForOf} from "@angular/common";
-import {Muscle} from "../../../../../interface/dto/muscle";
+import {Muscle} from "../../../../interface/dto/muscle";
 import {Observable, Subject, takeUntil} from "rxjs";
-import {MuscleService} from "../../../../../services/muscle/muscle.service";
-import {ActionType} from "../../../../../interface/enum/action-type";
+import {MuscleService} from "../../../../services/muscle/muscle.service";
+import {ActionType} from "../../../../interface/enum/action-type";
 
 @Component({
   selector: 'app-muscle-delete-form',
@@ -13,7 +13,7 @@ import {ActionType} from "../../../../../interface/enum/action-type";
   ],
   templateUrl: './muscle-delete-form.component.html',
 })
-export class muscleDeleteFormComponent implements OnInit, OnDestroy {
+export class MuscleDeleteFormComponent implements OnInit, OnDestroy {
 
   @Input() muscle!: Muscle | undefined;
   @Input() btnCloseRef!: HTMLButtonElement;

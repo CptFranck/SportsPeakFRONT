@@ -5,9 +5,13 @@ import {ModalComponent} from "../../../../components/modal/modal/modal.component
 import {
   MuscleDetailsDisplayComponent
 } from "../muscle-modal-components/muscle-details-display/muscle-details-display.component";
-import {MuscleEntityFormComponent} from "../muscle-modal-components/muscle-entity-form/muscle-entity-form.component";
+import {
+  MuscleEntityFormComponent
+} from "../../../../components/form/muscle/muscle-entity-form/muscle-entity-form.component";
 import {NgIf} from "@angular/common";
-import {muscleDeleteFormComponent} from "../muscle-modal-components/muscle-delete-form/muscle-delete-form.component";
+import {
+  MuscleDeleteFormComponent
+} from "../../../../components/form/muscle/muscle-delete-form/muscle-delete-form.component";
 import {Muscle} from "../../../../interface/dto/muscle";
 import {UserLoggedService} from "../../../../services/user-logged/user-logged.service";
 import {FormIndicator} from "../../../../interface/utils/form-indicator";
@@ -22,7 +26,7 @@ import {Subject, takeUntil} from "rxjs";
     MuscleDetailsDisplayComponent,
     MuscleEntityFormComponent,
     NgIf,
-    muscleDeleteFormComponent
+    MuscleDeleteFormComponent
   ],
   templateUrl: './muscle-modal.component.html',
 })
