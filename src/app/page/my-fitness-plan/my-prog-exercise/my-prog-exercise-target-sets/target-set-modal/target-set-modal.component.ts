@@ -40,8 +40,8 @@ import {
 })
 export class TargetSetModalComponent {
 
-  @Input() modalTitle!: string;
   @Input() targetSetModalId!: string;
+  @Input() targetSetModalTitle!: string;
   @Input() targetSet: TargetSet | undefined;
   @Input() progExercise: ProgExercise | undefined;
   @Input() performanceLog: PerformanceLog | undefined;

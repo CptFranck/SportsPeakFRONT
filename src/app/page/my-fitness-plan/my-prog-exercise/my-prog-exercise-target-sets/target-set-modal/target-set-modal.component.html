@@ -7,20 +7,10 @@
 <app-modal [actionType]="action"
            [contentTemplate]="targetSetModalTemplate"
            [modalId]="targetSetModalId"
-           [title]="modalTitle"
+           [title]="targetSetModalTitle"
 >
 </app-modal>
 <ng-template #targetSetModalTemplate let-btnClose="btnClose" let-submitEventActionType$="submitEventActionType$">
-  <app-performance-log-entity-form *ngIf="action=== ActionType.addPerformance ||
-                                          action === ActionType.updatePerformance"
-                                   [btnCloseRef]="btnClose"
-                                   [performanceLogInput]="performanceLog"
-                                   [submitEventActionType$]="submitEventActionType$"
-                                   [targetSetInput]="targetSet"/>
-  <app-performance-log-delete-form *ngIf="action === ActionType.deletePerformance"
-                                   [btnCloseRef]="btnClose"
-                                   [performanceLogInput]="performanceLog"
-                                   [submitEventActionType$]="submitEventActionType$"/>
   <app-target-set-entity-form *ngIf="action === ActionType.create ||
                                     action === ActionType.update ||
                                     action === ActionType.addEvolution"
