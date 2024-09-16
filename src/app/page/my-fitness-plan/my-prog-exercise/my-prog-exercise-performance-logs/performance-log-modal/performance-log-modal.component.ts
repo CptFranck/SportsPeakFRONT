@@ -10,13 +10,7 @@ import {
 import {
   PerformanceLogEntityFormComponent
 } from "../../../../../components/form/performance-log/performance-log-entity-form/performance-log-entity-form.component";
-import {
-  TargetSetDeleteFormComponent
-} from "../../../../../components/form/target-set/target-set-delete-form/target-set-delete-form.component";
-import {
-  TargetSetEntityFormComponent
-} from "../../../../../components/form/target-set/target-set-entity-form/target-set-entity-form.component";
-import {PerformanceLogsComponent} from "../../my-prog-exercise-target-sets/performance-logs/performance-logs.component";
+import {PerformanceLogsComponent} from "../performance-logs/performance-logs.component";
 import {ProgExercise} from "../../../../../interface/dto/prog-exercise";
 
 @Component({
@@ -27,8 +21,6 @@ import {ProgExercise} from "../../../../../interface/dto/prog-exercise";
     NgIf,
     PerformanceLogDeleteFormComponent,
     PerformanceLogEntityFormComponent,
-    TargetSetDeleteFormComponent,
-    TargetSetEntityFormComponent,
     PerformanceLogsComponent
   ],
   templateUrl: './performance-log-modal.component.html',
