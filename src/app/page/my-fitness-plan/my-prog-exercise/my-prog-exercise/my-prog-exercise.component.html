@@ -27,16 +27,22 @@
       <div class="col-2">
         <app-target-set-modal (targetSetAction)="setTargetSet($event)"
                               [action]="targetSetAction"
-                              [modalTitle]="targetSetModalTitle"
                               [performanceLog]="performanceLog"
                               [progExercise]="progExercise"
                               [targetSetModalId]="targetSetModalId"
+                              [targetSetModalTitle]="targetSetModalTitle"
                               [targetSet]="targetSet"/>
+        <app-performance-log-modal [action]="performanceLogAction"
+                                   [performanceLogModalId]="performanceLogModalId"
+                                   [performanceLogModalTitle]="performanceLogModalTitle"
+                                   [performanceLog]="performanceLog"
+                                   [targetSet]="targetSet"/>
       </div>
     </div>
     <div class="row">
       <app-target-sets (actionPerformanceLogs)="setPerformanceLog($event)"
                        (actionTargetSets)="setTargetSet($event)"
+                       [performanceLogModalId]="performanceLogModalId"
                        [progExerciseInput]="progExercise"
                        [targetSetModalId]="targetSetModalId"/>
     </div>
