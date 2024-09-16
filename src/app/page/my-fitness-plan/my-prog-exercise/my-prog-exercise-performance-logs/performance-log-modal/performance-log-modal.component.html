@@ -1,0 +1,18 @@
+<app-modal [actionType]="action"
+           [contentTemplate]="performanceLogModalTemplate"
+           [modalId]="performanceLogModalId"
+           [title]="performanceLogModalTitle"
+>
+</app-modal>
+<ng-template #performanceLogModalTemplate let-btnClose="btnClose" let-submitEventActionType$="submitEventActionType$">
+  <app-performance-log-entity-form *ngIf="action === ActionType.addPerformance ||
+                                          action === ActionType.updatePerformance"
+                                   [btnCloseRef]="btnClose"
+                                   [performanceLogInput]="performanceLog"
+                                   [submitEventActionType$]="submitEventActionType$"
+                                   [targetSetInput]="targetSet"/>
+  <app-performance-log-delete-form *ngIf="action === ActionType.deletePerformance"
+                                   [btnCloseRef]="btnClose"
+                                   [performanceLogInput]="performanceLog"
+                                   [submitEventActionType$]="submitEventActionType$"/>
+</ng-template>
