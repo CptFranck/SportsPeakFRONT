@@ -24,7 +24,7 @@
           <div class="col p-1">
             <app-modal-button
               (onCLickModalButton)="addNewPerformance($event)"
-              [modalId]="modalId"
+              [modalId]="performanceLogModalId"
               [modalValue]="targetSet"
               btnClass="btn-secondary"
             >
@@ -67,7 +67,7 @@
               <app-modal-button
                 (onCLickModalButton)="adjustTargetSet($event)"
                 [allWidth]="true"
-                [modalId]="modalId"
+                [modalId]="targetSetModalId"
                 [modalValue]="targetSet"
                 btnClass="btn-secondary"
               >
@@ -89,7 +89,7 @@
             <div class="row p-1">
               <app-modal-button
                 (onCLickModalButton)="modifyTargetSet($event)"
-                [modalId]="modalId"
+                [modalId]="targetSetModalId"
                 [modalValue]="targetSet"
                 btnClass="btn-secondary"
               >
@@ -100,7 +100,7 @@
             <div class="row p-1">
               <app-modal-button
                 (onCLickModalButton)="delTargetSet($event)"
-                [modalId]="modalId"
+                [modalId]="targetSetModalId"
                 [modalValue]="targetSet"
                 btnClass="btn-danger"
               >

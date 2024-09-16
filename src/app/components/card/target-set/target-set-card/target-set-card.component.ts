@@ -26,7 +26,8 @@ export class TargetSetCardComponent implements OnInit {
   targetSetRestTime: string = "";
   targetSetRepetition: string = "";
 
-  @Input() modalId!: string;
+  @Input() targetSetModalId!: string;
+  @Input() performanceLogModalId!: string;
   @Input() targetSet!: TargetSet;
   @Input() isLastTargetSet: boolean = false;
   @Input() collapseTargetSetId!: string;
@@ -34,6 +35,7 @@ export class TargetSetCardComponent implements OnInit {
   @Input() collapseActionType!: ActionType;
 
   @Output() actionTargetSets: EventEmitter<FormIndicator> = new EventEmitter<FormIndicator>();
+  @Output() actionPerformanceLogs: EventEmitter<FormIndicator> = new EventEmitter<FormIndicator>();
   @Output() actionCollapseType: EventEmitter<ActionType> = new EventEmitter<ActionType>();
 
   protected readonly ActionType = ActionType;
@@ -46,7 +48,7 @@ export class TargetSetCardComponent implements OnInit {
   }
 
   addNewPerformance(targetSet: TargetSet) {
-    this.actionTargetSets.emit({
+    this.actionPerformanceLogs.emit({
       actionType: ActionType.addPerformance,
       object: targetSet,
       complement: true
