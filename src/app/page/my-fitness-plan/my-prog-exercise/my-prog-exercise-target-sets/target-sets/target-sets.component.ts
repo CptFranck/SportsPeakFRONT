@@ -16,7 +16,7 @@ import {getProgExerciseTargetSet,} from "../../../../../utils/prog-exercise-func
 import {getUpToDateTargetSets, sortLastTargetSetsByIndex} from "../../../../../utils/target-set-functions";
 import {CollapseBlockComponent} from "../../../../../components/collapse-block/collapse-block.component";
 import {PerformanceLogsComponent} from "../performance-logs/performance-logs.component";
-import {TargetSetCollapsesComponent} from "../target-set-collapses/target-set-collapses.component";
+import {TargetSetStepComponent} from "../target-set-collapses/target-set-step.component";
 
 @Component({
   selector: 'app-target-sets',
@@ -30,7 +30,7 @@ import {TargetSetCollapsesComponent} from "../target-set-collapses/target-set-co
     TargetSetLogsComponent,
     CollapseBlockComponent,
     PerformanceLogsComponent,
-    TargetSetCollapsesComponent
+    TargetSetStepComponent
   ],
   templateUrl: './target-sets.component.html',
 })
@@ -43,6 +43,7 @@ export class TargetSetsComponent {
   collapseActionType: ActionType = ActionType.checkPerformance;
 
   @Input() targetSetModalId!: string;
+  @Input() performanceLogModalId!: string;
   @Input() progExerciseTargetSets: ProgExerciseTargetSets =
     {targetSetUsed: [], targetSetUnused: [], targetSetHidden: []};
 
