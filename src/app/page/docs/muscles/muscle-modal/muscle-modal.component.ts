@@ -4,7 +4,7 @@ import {ModalButtonComponent} from "../../../../components/modal/modal-button/mo
 import {ModalComponent} from "../../../../components/modal/modal/modal.component";
 import {
   MuscleDetailsDisplayComponent
-} from "../muscle-modal-components/muscle-details-display/muscle-details-display.component";
+} from "../../../../components/modal-component/muscle/muscle-details-display/muscle-details-display.component";
 import {
   MuscleEntityFormComponent
 } from "../../../../components/form/muscle/muscle-entity-form/muscle-entity-form.component";

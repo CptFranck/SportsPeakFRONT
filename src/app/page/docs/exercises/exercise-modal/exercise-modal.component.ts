@@ -12,7 +12,7 @@ import {
 } from "../../../../components/form/exercise/exercise-delete-form/exercise-delete-form.component";
 import {
   ExerciseDetailsDisplayComponent
-} from "../exercise-modal-components/exercise-details-display/exercise-details-display.component";
+} from "../../../../components/modal-component/exercise/exercise-details-display/exercise-details-display.component";
 import {UserLoggedService} from "../../../../services/user-logged/user-logged.service";
 import {Subject, takeUntil} from "rxjs";
 import {FormIndicator} from "../../../../interface/utils/form-indicator";

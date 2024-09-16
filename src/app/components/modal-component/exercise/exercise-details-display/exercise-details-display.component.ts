@@ -1,6 +1,6 @@
 import {Component, Input} from '@angular/core';
 import {NgForOf, NgIf} from "@angular/common";
-import {Exercise} from "../../../../../interface/dto/exercise";
+import {Exercise} from "../../../../interface/dto/exercise";
 
 @Component({
   selector: 'app-exercise-details-display',

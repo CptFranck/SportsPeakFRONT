@@ -1,7 +1,7 @@
 import {Component, Input, TemplateRef, ViewChild} from '@angular/core';
 import {
   UserDetailsDisplayComponent
-} from "../user-modal-components/user-details-display/user-details-display.component";
+} from "../../../../components/modal-component/user-management/user-details-display/user-details-display.component";
 import {
   UserRolesFormComponent
 } from "../../../../components/form/user-management/user-entity-form/user-roles-form.component";

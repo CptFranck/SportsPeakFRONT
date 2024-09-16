@@ -12,7 +12,7 @@ import {
 } from "../../../../components/form/prog-exercise/my-prog-exercise-entity-form/my-prog-exercise-entity-form.component";
 import {
   MyProgExercisePerformanceComponent
-} from "../../my-prog-exercises/my-prog-exercise-modal-components/my-prog-exercise-performance/my-prog-exercise-performance.component";
+} from "../../../../components/modal-component/prog-exercise/my-prog-exercise-performance/my-prog-exercise-performance.component";
 
 @Component({
   selector: 'app-my-prog-exercise-details-modal',

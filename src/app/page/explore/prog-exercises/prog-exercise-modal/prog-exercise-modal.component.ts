@@ -7,7 +7,7 @@ import {ActionType} from "../../../../interface/enum/action-type";
 import {ProgExercise} from "../../../../interface/dto/prog-exercise";
 import {
   MyProgExerciseDetailsDisplayComponent
-} from "../../../my-fitness-plan/my-prog-exercises/my-prog-exercise-modal-components/my-prog-exercise-details-display/my-prog-exercise-details-display.component";
+} from "../../../../components/modal-component/prog-exercise/my-prog-exercise-details-display/my-prog-exercise-details-display.component";
 import {Subject, takeUntil} from "rxjs";
 
 @Component({

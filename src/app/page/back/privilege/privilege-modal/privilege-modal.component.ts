@@ -7,7 +7,7 @@ import {
 } from "../../../../components/form/privilege/privilege-delete-form/privilege-delete-form.component";
 import {
   PrivilegeDetailDisplayComponent
-} from "../privilege-modal-components/privilege-detail-display/privilege-detail-display.component";
+} from "../../../../components/modal-component/privilege/privilege-detail-display/privilege-detail-display.component";
 import {
   PrivilegeEntityFormComponent
 } from "../../../../components/form/privilege/privilege-entity-form/privilege-entity-form.component";

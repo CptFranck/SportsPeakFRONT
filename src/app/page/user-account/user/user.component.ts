@@ -7,7 +7,7 @@ import {ModificationField} from "../../../interface/enum/modification-field";
 import {UserSecurityComponent} from "../user-information/user-security/user-security.component";
 import {
   UserDetailsDisplayComponent
-} from "../../back/user-management/user-modal-components/user-details-display/user-details-display.component";
+} from "../../../components/modal-component/user-management/user-details-display/user-details-display.component";
 import {ModalComponent} from "../../../components/modal/modal/modal.component";
 import {
   UserInformationDisplayComponent

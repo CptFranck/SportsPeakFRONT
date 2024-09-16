@@ -6,7 +6,7 @@ import {ActionType} from "../../../../interface/enum/action-type";
 import {ExerciseType} from "../../../../interface/dto/exercise-type";
 import {
   ExerciseTypeDetailsDisplayComponent
-} from "../exercise-type-modal-components/exercise-type-details-display/exercise-type-details-display.component";
+} from "../../../../components/modal-component/exercise-type/exercise-type-details-display/exercise-type-details-display.component";
 import {
   ExerciseTypeEntityFormComponent
 } from "../../../../components/form/exercise-type/exercise-type-entity-form/exercise-type-entity-form.component";
