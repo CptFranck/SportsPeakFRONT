@@ -1,19 +1,19 @@
 import {Component, inject, Input, OnDestroy, OnInit} from '@angular/core';
-import {TargetSet} from "../../../../../../../interface/dto/target-set";
+import {TargetSet} from "../../../../interface/dto/target-set";
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
-import {PerformanceLog} from "../../../../../../../interface/dto/performance-log";
+import {PerformanceLog} from "../../../../interface/dto/performance-log";
 import {Observable, Subject, takeUntil} from "rxjs";
-import {ActionType} from "../../../../../../../interface/enum/action-type";
-import {WeightUnit} from "../../../../../../../interface/enum/weightUnit";
-import {InputControlComponent} from "../../../../../../../components/input-control/input-control.component";
+import {ActionType} from "../../../../interface/enum/action-type";
+import {WeightUnit} from "../../../../interface/enum/weightUnit";
+import {InputControlComponent} from "../../../input-control/input-control.component";
 import {NgIf} from "@angular/common";
-import {WeightSelectComponent} from "../../../../../../../components/selects/weight-select/weight-select.component";
+import {WeightSelectComponent} from "../../../selects/weight-select/weight-select.component";
 import {
   PerformanceLogIndexSelectComponent
-} from "../../../../../../../components/selects/performance-log-index-select/performance-log-index-select.component";
-import {PerformanceLogService} from "../../../../../../../services/performance-log/performance-log.service";
-import {filterPerformanceLogByDate} from "../../../../../../../utils/performance-log-functions";
-import {stringToDateString} from "../../../../../../../utils/time-functions";
+} from "../../../selects/performance-log-index-select/performance-log-index-select.component";
+import {PerformanceLogService} from "../../../../services/performance-log/performance-log.service";
+import {filterPerformanceLogByDate} from "../../../../utils/performance-log-functions";
+import {stringToDateString} from "../../../../utils/time-functions";
 
 @Component({
   selector: 'app-performance-log-entity-form',

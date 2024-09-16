@@ -15,7 +15,7 @@ import {TargetSetLogsComponent} from "../target-set-logs/target-set-logs.compone
 import {FormIndicator} from "../../../../../interface/utils/form-indicator";
 import {
   PerformanceLogEntityFormComponent
-} from "../target-set-modal-components/performance-log/performance-log-entity-form/performance-log-entity-form.component";
+} from "../../../../../components/form/performance-log/performance-log-entity-form/performance-log-entity-form.component";
 import {
   PerformanceLogsComponent
 } from "../target-set-modal-components/performance-log/performance-logs/performance-logs.component";
