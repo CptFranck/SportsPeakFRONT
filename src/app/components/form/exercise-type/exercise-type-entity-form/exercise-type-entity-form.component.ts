@@ -1,16 +1,14 @@
 import {Component, inject, Input, OnDestroy, OnInit} from '@angular/core';
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {Subject, takeUntil} from "rxjs";
-import {InputControlComponent} from "../../../../../components/input-control/input-control.component";
-import {ExerciseType} from "../../../../../interface/dto/exercise-type";
+import {InputControlComponent} from "../../../input-control/input-control.component";
+import {ExerciseType} from "../../../../interface/dto/exercise-type";
 import {NgIf} from "@angular/common";
-import {ExerciseTypeService} from "../../../../../services/exercise-type/exercise-type.service";
-import {Exercise} from "../../../../../interface/dto/exercise";
-import {
-  ExerciseSelectorComponent
-} from "../../../../../components/selectors/exercise-selector/exercise-selector.component";
-import {UserLoggedService} from "../../../../../services/user-logged/user-logged.service";
-import {ActionType} from "../../../../../interface/enum/action-type";
+import {ExerciseTypeService} from "../../../../services/exercise-type/exercise-type.service";
+import {Exercise} from "../../../../interface/dto/exercise";
+import {ExerciseSelectorComponent} from "../../../selectors/exercise-selector/exercise-selector.component";
+import {UserLoggedService} from "../../../../services/user-logged/user-logged.service";
+import {ActionType} from "../../../../interface/enum/action-type";
 
 @Component({
   selector: 'app-exercise-type-entity-form',

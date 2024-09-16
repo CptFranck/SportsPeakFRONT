@@ -18,10 +18,10 @@ import {
 } from "../exercise-type-modal-components/exercise-type-details-display/exercise-type-details-display.component";
 import {
   ExerciseTypeEntityFormComponent
-} from "../exercise-type-modal-components/exercise-type-entity-form/exercise-type-entity-form.component";
+} from "../../../../components/form/exercise-type/exercise-type-entity-form/exercise-type-entity-form.component";
 import {
   ExerciseTypeDeleteFormComponent
-} from "../exercise-type-modal-components/exercise-type-delete-form/exercise-type-delete-form.component";
+} from "../../../../components/form/exercise-type/exercise-type-delete-form/exercise-type-delete-form.component";
 import {UserLoggedService} from "../../../../services/user-logged/user-logged.service";
 import {FormIndicator} from "../../../../interface/utils/form-indicator";
 import {Subject, takeUntil} from "rxjs";
