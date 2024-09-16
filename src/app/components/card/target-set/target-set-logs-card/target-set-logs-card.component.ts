@@ -5,7 +5,7 @@ import {ActionType} from "../../../../interface/enum/action-type";
 import {FormIndicator} from "../../../../interface/utils/form-indicator";
 import {
   TargetSetStateFormComponent
-} from "../../../../page/my-fitness-plan/my-prog-exercise/my-prog-exercise-target-sets/target-set-modal-components/target-set-state-form/target-set-state-form.component";
+} from "../../../form/target-set/target-set-state-form/target-set-state-form.component";
 import {getTargetSetInformation, getTargetSetTimeToString} from "../../../../utils/target-set-functions";
 import {getStringTime} from "../../../../utils/duration-functions";
 

@@ -1,11 +1,9 @@
 import {Component, inject, Input, OnInit} from '@angular/core';
 import {NgIf} from "@angular/common";
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
-import {
-  TargetSetSateSelectComponent
-} from "../../../../../../components/selects/target-set-state-select/target-set-sate-select.component";
-import {TargetSet} from "../../../../../../interface/dto/target-set";
-import {TargetSetService} from "../../../../../../services/target-set/target-set.service";
+import {TargetSetSateSelectComponent} from "../../../selects/target-set-state-select/target-set-sate-select.component";
+import {TargetSet} from "../../../../interface/dto/target-set";
+import {TargetSetService} from "../../../../services/target-set/target-set.service";
 
 @Component({
   selector: 'app-target-set-state-form',

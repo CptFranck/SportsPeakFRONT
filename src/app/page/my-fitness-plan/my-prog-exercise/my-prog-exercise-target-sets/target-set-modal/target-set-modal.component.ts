@@ -6,10 +6,10 @@ import {TargetSet} from "../../../../../interface/dto/target-set";
 import {ModalButtonComponent} from "../../../../../components/modal/modal-button/modal-button.component";
 import {
   TargetSetDeleteFormComponent
-} from "../target-set-modal-components/target-set-delete-form/target-set-delete-form.component";
+} from "../../../../../components/form/target-set/target-set-delete-form/target-set-delete-form.component";
 import {
   TargetSetEntityFormComponent
-} from "../target-set-modal-components/target-set-entity-form/target-set-entity-form.component";
+} from "../../../../../components/form/target-set/target-set-entity-form/target-set-entity-form.component";
 import {ProgExercise} from "../../../../../interface/dto/prog-exercise";
 import {TargetSetLogsComponent} from "../target-set-logs/target-set-logs.component";
 import {FormIndicator} from "../../../../../interface/utils/form-indicator";
