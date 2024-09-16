@@ -12,13 +12,13 @@ import {ModalComponent} from "../../../components/modal/modal/modal.component";
 import {
   UserInformationDisplayComponent
 } from "../user-information/user-information-display/user-information-display.component";
-import {UserDeleteFormComponent} from "../user-modal-components/user-delete-form/user-delete-form.component";
 import {
   UserRolesFormComponent
 } from "../../../components/form/user-management/user-entity-form/user-roles-form.component";
 import {UserModalComponent} from "../user-modal/user-modal.component";
 import {FormIndicator} from "../../../interface/utils/form-indicator";
 import {Subject, takeUntil} from "rxjs";
+import {UserDeleteFormComponent} from "../../../components/form/user/user-delete-form/user-delete-form.component";
 
 @Component({
   selector: 'app-user',

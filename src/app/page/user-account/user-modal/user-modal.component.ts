@@ -2,25 +2,25 @@ import {Component, Input, TemplateRef, ViewChild} from '@angular/core';
 import {User} from "../../../interface/dto/user";
 import {ActionType} from "../../../interface/enum/action-type";
 import {ModalComponent} from "../../../components/modal/modal/modal.component";
-import {UserEmailFormComponent} from "../user-modal-components/user-email-form/user-email-form.component";
 import {NgIf} from "@angular/common";
 import {ModificationField} from "../../../interface/enum/modification-field";
-import {UserUsernameFormComponent} from "../user-modal-components/user-username-form/user-username-form.component";
-import {UserNameFormComponent} from "../user-modal-components/user-name-form/user-name-form.component";
-import {UserPasswordFormComponent} from "../user-modal-components/user-password-form/user-password-form.component";
-import {UserDeleteFormComponent} from "../user-modal-components/user-delete-form/user-delete-form.component";
+import {UserEmailFormComponent} from "../../../components/form/user/user-email-form/user-email-form.component";
+import {UserUsernameFormComponent} from "../../../components/form/user/user-username-form/user-username-form.component";
+import {UserNameFormComponent} from "../../../components/form/user/user-name-form/user-name-form.component";
+import {UserPasswordFormComponent} from "../../../components/form/user/user-password-form/user-password-form.component";
+import {UserDeleteFormComponent} from "../../../components/form/user/user-delete-form/user-delete-form.component";
 
 @Component({
   selector: 'app-user-modal',
   standalone: true,
   imports: [
     ModalComponent,
-    UserEmailFormComponent,
     NgIf,
+    UserEmailFormComponent,
     UserUsernameFormComponent,
     UserNameFormComponent,
     UserPasswordFormComponent,
-    UserDeleteFormComponent
+    UserDeleteFormComponent,
   ],
   templateUrl: './user-modal.component.html',
 })

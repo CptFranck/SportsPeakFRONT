@@ -8,9 +8,6 @@ import {
 import {ModalButtonComponent} from "../../../../components/modal/modal-button/modal-button.component";
 import {ModalComponent} from "../../../../components/modal/modal/modal.component";
 import {NgIf} from "@angular/common";
-import {
-  UserDeleteFormComponent
-} from "../../../user-account/user-modal-components/user-delete-form/user-delete-form.component";
 import {User} from "../../../../interface/dto/user";
 import {ActionType} from "../../../../interface/enum/action-type";
 
@@ -21,7 +18,6 @@ import {ActionType} from "../../../../interface/enum/action-type";
     ModalButtonComponent,
     ModalComponent,
     NgIf,
-    UserDeleteFormComponent,
     UserDetailsDisplayComponent,
     UserRolesFormComponent
   ],
