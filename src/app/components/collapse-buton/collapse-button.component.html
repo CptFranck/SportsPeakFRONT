@@ -1,7 +1,7 @@
 <button
   (click)="onClick()"
   [attr.data-bs-target]="'#' + collapseId"
-  class="btn btn-secondary"
+  [class]="'btn ' + btnClass"
   data-bs-toggle="collapse"
   type="button"
 >

@@ -8,6 +8,7 @@ import {Component, EventEmitter, Input, Output} from '@angular/core';
 })
 export class CollapseButtonComponent {
   @Input() collapseId!: string;
+  @Input() btnClass!: string;
   @Input() value!: any;
 
   @Output() onClickEvent: EventEmitter<any> = new EventEmitter();
