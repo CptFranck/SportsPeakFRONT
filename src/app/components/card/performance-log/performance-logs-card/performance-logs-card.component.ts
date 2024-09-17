@@ -4,13 +4,15 @@ import {PerformanceLog} from "../../../../interface/dto/performance-log";
 import {JsonPipe} from "@angular/common";
 import {FormIndicator} from "../../../../interface/utils/form-indicator";
 import {ActionType} from "../../../../interface/enum/action-type";
+import {CollapseButtonComponent} from "../../../collapse-buton/collapse-button.component";
 
 @Component({
   selector: 'app-performance-logs-card',
   standalone: true,
   imports: [
     ModalButtonComponent,
-    JsonPipe
+    JsonPipe,
+    CollapseButtonComponent
   ],
   templateUrl: './performance-logs-card.component.html',
 })
@@ -18,8 +20,8 @@ export class PerformanceLogsCardComponent implements OnInit {
 
   performanceLogDate!: Date;
 
-  @Input() modalId!: string;
   @Input() performanceLog!: PerformanceLog;
+  @Input() formCollapseId!: string;
 
   @Output() actionPerformanceLog: EventEmitter<FormIndicator> = new EventEmitter<FormIndicator>();
 

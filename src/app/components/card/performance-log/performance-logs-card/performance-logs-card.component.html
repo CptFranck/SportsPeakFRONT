@@ -22,26 +22,26 @@
       </div>
       <div class="col text-center align-content-center">
         <div class="row p-1">
-          <app-modal-button
-            (onCLickModalButton)="modPerformanceLog($event)"
-            [modalId]="modalId"
-            [modalValue]="performanceLog"
+          <app-collapse-button
+            (onClickEvent)="modPerformanceLog($event)"
+            [collapseId]="formCollapseId"
+            [value]="performanceLog"
             btnClass="btn-secondary"
           >
             Modify
             <i class="fa-solid fa-pen-to-square"></i>
-          </app-modal-button>
+          </app-collapse-button>
         </div>
         <div class="row p-1">
-          <app-modal-button
-            (onCLickModalButton)="delPerformanceLog($event)"
-            [modalId]="modalId"
-            [modalValue]="performanceLog"
+          <app-collapse-button
+            (onClickEvent)="delPerformanceLog($event)"
+            [collapseId]="formCollapseId"
+            [value]="performanceLog"
             btnClass="btn-danger"
           >
             Delete
             <i class="fa-solid fa-trash"></i>
-          </app-modal-button>
+          </app-collapse-button>
         </div>
     </div>
   </div>
