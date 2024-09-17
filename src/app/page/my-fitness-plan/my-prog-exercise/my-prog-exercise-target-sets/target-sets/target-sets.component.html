@@ -1,34 +1,8 @@
 <div class="small-middle-container">
-  <ul class="nav nav-tabs">
-    <li class="nav-item">
-      <button [attr.data-bs-target]="'#' + targetSetUsedId" aria-selected="true"
-              class="nav-link link-secondary active"
-              data-bs-toggle="tab" id="home-tab"
-              type="button"
-      >
-        Currently used
-      </button>
-    </li>
-    <li class="nav-item" role="presentation">
-      <button [attr.data-bs-target]="'#' + targetSetUnusedId" aria-selected="false"
-              class="nav-link link-secondary"
-              data-bs-toggle="tab"
-              type="button"
-      >
-        Unused
-      </button>
-    </li>
-    <li class="nav-item" role="presentation">
-      <button [attr.data-bs-target]="'#' + targetSetHiddenId" aria-selected="false"
-              class="nav-link link-secondary"
-              data-bs-toggle="tab"
-              type="button"
-      >
-        Hidden
-      </button>
-    </li>
-  </ul>
-  <div class="border-right-0 tab-content rounded-bottom ">
+  <app-tab-header [tabId]="tabId"
+                  [tabOptions]="tabOptions"
+  />
+  <div [id]="tabId" class="tab-content">
     <div [id]="targetSetUsedId" class="tab-pane fade show active">
       <p *ngIf=" progExerciseTargetSets.targetSetUsed.length === 0 ">No target set used</p>
       <div *ngFor="let targetSet of progExerciseTargetSets.targetSetUsed">

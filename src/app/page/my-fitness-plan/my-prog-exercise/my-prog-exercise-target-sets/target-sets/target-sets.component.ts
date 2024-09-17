@@ -11,6 +11,8 @@ import {getUpToDateTargetSets, sortLastTargetSetsByIndex} from "../../../../../u
 import {
   TargetSetCardComponent
 } from "../../../../../components/card/target-set/target-set-card/target-set-card.component";
+import {TabHeaderComponent} from "../../../../../components/tab-header/tab-header.component";
+import {tabOption} from "../../../../../interface/components/tab/tabOption";
 
 @Component({
   selector: 'app-target-sets',
@@ -18,16 +20,23 @@ import {
   imports: [
     NgForOf,
     NgIf,
-    TargetSetCardComponent
+    TargetSetCardComponent,
+    TabHeaderComponent
   ],
   templateUrl: './target-sets.component.html',
 })
 export class TargetSetsComponent {
+  tabId: string = "targetSetTab";
   progExercise: ProgExercise | undefined;
   isLastTargetSetUsed: Dictionary<boolean> = {};
   targetSetUsedId: string = "TargetSetUsedId";
   targetSetUnusedId: string = "TargetSetUnusedId";
   targetSetHiddenId: string = "TargetSetHiddenId";
+  tabOptions: tabOption[] = [
+    {id: this.targetSetUsedId, title: "Currently used", active: "active", disabled: false},
+    {id: this.targetSetUnusedId, title: "Unused", active: "", disabled: false},
+    {id: this.targetSetHiddenId, title: "Hidden", active: "", disabled: false},
+  ];
 
   @Input() targetSetModalId!: string;
   @Input() performanceLogModalId!: string;
