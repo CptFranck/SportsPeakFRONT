@@ -20,13 +20,25 @@ import {getTargetSetLogs} from "../../../../../utils/target-set-functions";
 })
 export class TargetSetLogsComponent implements OnInit {
 
+  targetSet: TargetSet | undefined;
+  progExercise: ProgExercise | undefined;
   targetSetLogs: TargetSet[] = [];
 
   @Input() modalId!: string;
-  @Input() targetSet: TargetSet | undefined;
-  @Input() progExercise: ProgExercise | undefined;
 
   @Output() actionTargetSets: EventEmitter<FormIndicator> = new EventEmitter<FormIndicator>();
+
+  @Input() set targetSetInput(targetSet: TargetSet | undefined) {
+    this.targetSet = targetSet;
+    if (this.targetSet && this.progExercise)
+      this.targetSetLogs = getTargetSetLogs(this.targetSet, this.progExercise);
+  }
+
+  @Input() set progExerciseInput(progExercise: ProgExercise | undefined) {
+    this.progExercise = progExercise;
+    if (this.targetSet && this.progExercise)
+      this.targetSetLogs = getTargetSetLogs(this.targetSet, this.progExercise);
+  }
 
   ngOnInit() {
     if (this.targetSet && this.progExercise)
