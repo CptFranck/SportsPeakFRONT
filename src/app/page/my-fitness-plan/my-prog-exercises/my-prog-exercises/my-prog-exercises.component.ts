@@ -4,22 +4,13 @@ import {ActionType} from "../../../../interface/enum/action-type";
 import {ProgExerciseService} from "../../../../services/prog-exercise/prog-exercise.service";
 import {FormIndicator} from "../../../../interface/utils/form-indicator";
 import {LoadingComponent} from "../../../../components/loading/loading.component";
-import {
-  ProgExerciseModalComponent
-} from "../../../explore/prog-exercises/prog-exercise-modal/prog-exercise-modal.component";
-import {
-  ProgExercisesArrayComponent
-} from "../../../explore/prog-exercises/prog-exercise-array/prog-exercises-array.component";
 import {SearchBarComponent} from "../../../../components/search-bar/search-bar.component";
 import {Muscle} from "../../../../interface/dto/muscle";
 import {MyProgExerciseModalComponent} from "../my-prog-exercise-modal/my-prog-exercise-modal.component";
-import {HomeCardComponent} from "../../../../components/card/home-card/home-card.component";
-import {NgForOf, NgIf} from "@angular/common";
+import {NgForOf} from "@angular/common";
 import {
   ProgExerciseCardComponent
 } from "../../../../components/card/prog-exercise/prog-exercise-card/prog-exercise-card.component";
-import {ModalButtonComponent} from "../../../../components/modal/modal-button/modal-button.component";
-import {RouterLink} from "@angular/router";
 import {Subject, takeUntil} from "rxjs";
 
 @Component({
@@ -27,16 +18,10 @@ import {Subject, takeUntil} from "rxjs";
   standalone: true,
   imports: [
     LoadingComponent,
-    ProgExerciseModalComponent,
-    ProgExercisesArrayComponent,
     SearchBarComponent,
     MyProgExerciseModalComponent,
-    HomeCardComponent,
     NgForOf,
     ProgExerciseCardComponent,
-    ModalButtonComponent,
-    NgIf,
-    RouterLink
   ],
   templateUrl: './my-prog-exercises.component.html',
 })

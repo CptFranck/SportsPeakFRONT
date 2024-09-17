@@ -6,8 +6,6 @@ import {Exercise} from "../../../../interface/dto/exercise";
 import {ExerciseService} from "../../../../services/exercise/exercise.service";
 import {FormIndicator} from "../../../../interface/utils/form-indicator";
 import {LoadingComponent} from "../../../../components/loading/loading.component";
-import {MuscleModalComponent} from "../../muscles/muscle-modal/muscle-modal.component";
-import {MusclesArrayComponent} from "../../muscles/muscles-array/muscles-array.component";
 import {ExerciseModalComponent} from "../exercise-modal/exercise-modal.component";
 import {SearchBarComponent} from "../../../../components/search-bar/search-bar.component";
 import {Muscle} from "../../../../interface/dto/muscle";
@@ -21,8 +19,6 @@ import {Subject, takeUntil} from "rxjs";
     CommonModule,
     ExercisesArrayComponent,
     LoadingComponent,
-    MuscleModalComponent,
-    MusclesArrayComponent,
     ExerciseModalComponent,
     SearchBarComponent
   ],

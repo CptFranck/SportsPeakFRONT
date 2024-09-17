@@ -3,9 +3,6 @@ import {ProgExercise} from "../../../../interface/dto/prog-exercise";
 import {ProgExerciseService} from "../../../../services/prog-exercise/prog-exercise.service";
 import {ActivatedRoute, Params} from "@angular/router";
 import {NgForOf, NgIf} from "@angular/common";
-import {
-  ProgExerciseCardComponent
-} from "../../../../components/card/prog-exercise/prog-exercise-card/prog-exercise-card.component";
 import {FormIndicator} from "../../../../interface/utils/form-indicator";
 import {ActionType} from "../../../../interface/enum/action-type";
 import {LoadingComponent} from "../../../../components/loading/loading.component";
@@ -13,15 +10,11 @@ import {
   ProgExerciseCardDetailsComponent
 } from "../../../../components/card/prog-exercise/prog-exercise-card-details/prog-exercise-card-details.component";
 import {
-  ProgExerciseModalComponent
-} from "../../../explore/prog-exercises/prog-exercise-modal/prog-exercise-modal.component";
-import {
   MyProgExerciseModalComponent
 } from "../../my-prog-exercises/my-prog-exercise-modal/my-prog-exercise-modal.component";
 import {
   MyProgExerciseDetailsModalComponent
 } from "../my-prog-exercise-details-modal/my-prog-exercise-details-modal.component";
-import {TargetSetCardComponent} from "../../../../components/card/target-set/target-set-card/target-set-card.component";
 import {TargetSetModalComponent} from "../my-prog-exercise-target-sets/target-set-modal/target-set-modal.component";
 import {TargetSet} from "../../../../interface/dto/target-set";
 import {Subject, takeUntil} from "rxjs";
@@ -36,14 +29,11 @@ import {
   standalone: true,
   imports: [
     NgForOf,
-    ProgExerciseCardComponent,
     NgIf,
     LoadingComponent,
     ProgExerciseCardDetailsComponent,
-    ProgExerciseModalComponent,
     MyProgExerciseModalComponent,
     MyProgExerciseDetailsModalComponent,
-    TargetSetCardComponent,
     TargetSetModalComponent,
     TargetSetsComponent,
     PerformanceLogModalComponent

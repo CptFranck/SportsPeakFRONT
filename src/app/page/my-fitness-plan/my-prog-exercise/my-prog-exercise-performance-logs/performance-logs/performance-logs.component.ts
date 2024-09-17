@@ -9,10 +9,7 @@ import {
   sortPerformanceLogsByDictionary,
   sortPerformanceLogsByLogDate
 } from "../../../../../utils/performance-log-functions";
-import {KeyValuePipe, NgForOf, NgIf} from "@angular/common";
-import {
-  TargetSetLogsCardComponent
-} from "../../../../../components/card/target-set/target-set-logs-card/target-set-logs-card.component";
+import {NgForOf, NgIf} from "@angular/common";
 import {
   PerformanceLogsCardComponent
 } from "../../../../../components/card/performance-log/performance-logs-card/performance-logs-card.component";
@@ -25,8 +22,6 @@ import {DictionaryArray} from "../../../../../interface/utils/dictionary-array";
   imports: [
     NgIf,
     NgForOf,
-    KeyValuePipe,
-    TargetSetLogsCardComponent,
     PerformanceLogsCardComponent
   ],
   templateUrl: './performance-logs.component.html',

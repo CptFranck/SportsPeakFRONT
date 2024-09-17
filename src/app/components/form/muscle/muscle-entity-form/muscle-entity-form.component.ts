@@ -1,5 +1,4 @@
 import {Component, inject, Input, OnDestroy, OnInit} from '@angular/core';
-import {MultiSelectComponent} from "../../../multi-select/multi-select.component";
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {NgIf, NgTemplateOutlet} from "@angular/common";
 import {InputControlComponent} from "../../../input-control/input-control.component";
@@ -15,7 +14,6 @@ import {ActionType} from "../../../../interface/enum/action-type";
   selector: 'app-muscle-entity-form',
   standalone: true,
   imports: [
-    MultiSelectComponent,
     ExerciseSelectorComponent,
     ReactiveFormsModule,
     NgIf,
