@@ -1,11 +1,11 @@
-<ul [id]="tabId" class="nav nav-tabs">
+<ul [class]="'nav ' + ulClass " [id]="tabId">
   <li *ngFor="let tabOption of tabOptions" class="nav-item">
-    <button [attr.data-bs-target]="'#' + tabOption.id"
-            [class]='"nav-link link-secondary " + tabOption.active'
-            data-bs-toggle="tab"
-            type="button"
+    <a [attr.data-bs-target]="'#' + tabOption.id"
+       [attr.data-bs-toggle]="dataBsToggle"
+       [class]='"nav-link link-secondary " + tabOption.active'
+       type="button"
     >
       {{ tabOption.title }}
-    </button>
+    </a>
   </li>
 </ul>
