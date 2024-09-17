@@ -7,7 +7,8 @@
                       [collapseId]="formCollapseId"
                       [contentTemplate]="performanceCollapseTemplate"
   />
-  <ng-template #performanceCollapseTemplate let-btnClose="btnClose" let-submitEventActionType$="submitEventActionType$">
+  <ng-template #performanceCollapseTemplate let-btnClose="btnClose"
+               let-submitEventActionType$="submitEventActionType$">
     <app-performance-log-entity-form *ngIf="action === ActionType.update"
                                      [btnCloseRef]="btnClose"
                                      [performanceLogInput]="performanceLog"
@@ -17,18 +18,17 @@
                                      [btnCloseRef]="btnClose"
                                      [performanceLogInput]="performanceLog"
                                      [submitEventActionType$]="submitEventActionType$"/>
+
   </ng-template>
-  <div [id]="tabOptions[0].id" class="tab-pane fade show active">
+  <div [id]="tabOptions[0].id" class="tab-pane fade show active p-1">
     <div *ngIf="performanceLogsSortByDate">
       <div *ngFor="let perfLogsOfDate of performanceLogsSortByDate">
         <div *ngFor="let perfLog of perfLogsOfDate.value">
-          <br/>
           <app-performance-logs-card (actionPerformanceLog)="setPerformanceLog($event)"
                                      [formCollapseId]="formCollapseId"
                                      [performanceLog]="perfLog"/>
         </div>
       </div>
-      <br/>
       <div *ngIf="Object.keys(performanceLogsSortByDate).length === 0">
         <div class="col-auto card m-3 shadow">
           <div class="card-body ">

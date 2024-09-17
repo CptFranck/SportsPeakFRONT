@@ -1,19 +1,24 @@
-<div [class]="'collapse ' + classArgs" [id]="collapseId">
-  <ng-container [ngTemplateOutletContext]="{submitEventActionType$: submitEventActionType$, btnClose:btnClose}"
-                [ngTemplateOutlet]=" contentTemplate || defaultModalNgTemplate">
-  </ng-container>
-  <ng-template #defaultModalNgTemplate>
-    <ng-content/>
-  </ng-template>
-  <app-collapse-button #btnClose [collapseId]="collapseId" btnClass="btn-secondary mx-2 float-end">
-    {{ closeButtonTitle }}
-  </app-collapse-button>
-  <button (click)="onSubmit()"
-          *ngIf="submitButton"
-          [class]="'btn mx-2 float-end ' + validateButtonClass"
-          type="button"
-  >
-    {{ validationButtonTitle }}
-  </button>
-  <br>
+<div [class]="'collapse p-4 ' + classArgs" [id]="collapseId">
+  <div class="border border-1 rounded">
+    <div class="p-2">
+      <ng-container [ngTemplateOutletContext]="{submitEventActionType$: submitEventActionType$, btnClose:btnClose}"
+                    [ngTemplateOutlet]=" contentTemplate || defaultModalNgTemplate">
+      </ng-container>
+      <ng-template #defaultModalNgTemplate>
+        <ng-content/>
+      </ng-template>
+      <div class="text-end">
+        <app-collapse-button #btnClose [collapseId]="collapseId" btnClass="btn-secondary mx-2">
+          {{ closeButtonTitle }}
+        </app-collapse-button>
+        <button (click)="onSubmit()"
+                *ngIf="submitButton"
+                [class]="'btn mx-2 ' + validateButtonClass"
+                type="button"
+        >
+          {{ validationButtonTitle }}
+        </button>
+      </div>
+    </div>
+  </div>
 </div>
