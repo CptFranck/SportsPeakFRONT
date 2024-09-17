@@ -1,20 +1,47 @@
-<div *ngIf="performanceLogsSortByDate">
-  <div *ngFor="let perfLogsOfDate of performanceLogsSortByDate">
-    <div *ngFor="let perfLog of perfLogsOfDate.value">
-      <app-performance-logs-card (actionPerformanceLog)="setPerformanceLog($event)"
-                                 [modalId]="modalId"
-                                 [performanceLog]="perfLog"/>
-    </div>
-  </div>
-  <div *ngIf="Object.keys(performanceLogsSortByDate).length === 0">
-    <div class="col-auto card m-3 shadow">
-      <div class="card-body ">
-        <div class="row">
-          <div class="col-auto">
-            No performanceLogs saved
+<app-tab-header [tabId]="tabId"
+                [tabOptions]="tabOptions"
+                type="pill"
+/>
+<div [id]="tabId" class="tab-content border border-top-0 rounded-bottom border-1">
+  <app-collapse-block [actionType]="action"
+                      [collapseId]="formCollapseId"
+                      [contentTemplate]="performanceCollapseTemplate"
+  />
+  <ng-template #performanceCollapseTemplate let-btnClose="btnClose" let-submitEventActionType$="submitEventActionType$">
+    <app-performance-log-entity-form *ngIf="action === ActionType.update"
+                                     [btnCloseRef]="btnClose"
+                                     [performanceLogInput]="performanceLog"
+                                     [submitEventActionType$]="submitEventActionType$"
+                                     [targetSetInput]="targetSet"/>
+    <app-performance-log-delete-form *ngIf="action === ActionType.delete"
+                                     [btnCloseRef]="btnClose"
+                                     [performanceLogInput]="performanceLog"
+                                     [submitEventActionType$]="submitEventActionType$"/>
+  </ng-template>
+  <div [id]="tabOptions[0].id" class="tab-pane fade show active">
+    <div *ngIf="performanceLogsSortByDate">
+      <div *ngFor="let perfLogsOfDate of performanceLogsSortByDate">
+        <div *ngFor="let perfLog of perfLogsOfDate.value">
+          <br/>
+          <app-performance-logs-card (actionPerformanceLog)="setPerformanceLog($event)"
+                                     [formCollapseId]="formCollapseId"
+                                     [performanceLog]="perfLog"/>
+        </div>
+      </div>
+      <br/>
+      <div *ngIf="Object.keys(performanceLogsSortByDate).length === 0">
+        <div class="col-auto card m-3 shadow">
+          <div class="card-body ">
+            <div class="row">
+              <div class="col-auto">
+                No performanceLogs saved
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
+  </div>
+  <div [id]="tabOptions[1].id" class="tab-pane fade">
   </div>
 </div>

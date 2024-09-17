@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, Input, OnInit, TemplateRef, ViewChild} from '@angular/core';
 import {TargetSet} from "../../../../../interface/dto/target-set";
 import {ProgExercise} from "../../../../../interface/dto/prog-exercise";
 import {getTargetSetLogs} from "../../../../../utils/target-set-functions";
@@ -15,6 +15,17 @@ import {
 } from "../../../../../components/card/performance-log/performance-logs-card/performance-logs-card.component";
 import {FormIndicator} from "../../../../../interface/utils/form-indicator";
 import {DictionaryArray} from "../../../../../interface/utils/dictionary-array";
+import {TabHeaderComponent} from "../../../../../components/tab-header/tab-header.component";
+import {tabOption} from "../../../../../interface/components/tab/tabOption";
+import {CollapseBlockComponent} from "../../../../../components/collapse-block/collapse-block.component";
+import {
+  PerformanceLogEntityFormComponent
+} from "../../../../../components/form/performance-log/performance-log-entity-form/performance-log-entity-form.component";
+import {
+  PerformanceLogDeleteFormComponent
+} from "../../../../../components/form/performance-log/performance-log-delete-form/performance-log-delete-form.component";
+import {CollapseButtonComponent} from "../../../../../components/collapse-buton/collapse-button.component";
+import {ActionType} from "../../../../../interface/enum/action-type";
 
 @Component({
   selector: 'app-performance-logs',
@@ -22,22 +33,37 @@ import {DictionaryArray} from "../../../../../interface/utils/dictionary-array";
   imports: [
     NgIf,
     NgForOf,
-    PerformanceLogsCardComponent
+    PerformanceLogsCardComponent,
+    TabHeaderComponent,
+    CollapseBlockComponent,
+    PerformanceLogEntityFormComponent,
+    PerformanceLogDeleteFormComponent,
+    CollapseButtonComponent
   ],
   templateUrl: './performance-logs.component.html',
 })
 export class PerformanceLogsComponent implements OnInit {
 
+  tabId: string = "targetLogsTab";
+  tabOptions: tabOption[] = [
+    {id: "performanceListId", title: "Performance list", active: "active", disabled: false},
+    {id: "performanceGraphId", title: "Performances graph", active: "", disabled: false},
+  ];
+
+  formCollapseId: string = "formCollapseId";
+  action: ActionType = ActionType.read;
+
   targetSet: TargetSet | undefined;
   targetSetLogs: TargetSet[] = [];
+  performanceLog: PerformanceLog | undefined;
   performanceLogsSortByDate: DictionaryArray<PerformanceLog[]>[] = [];
   oldPerformanceLogsSortByDate: DictionaryArray<PerformanceLog[]>[] = [];
 
-  @Input() modalId!: string;
   @Input() progExercise: ProgExercise | undefined;
 
-  @Output() actionPerformanceLog: EventEmitter<FormIndicator> = new EventEmitter<FormIndicator>();
+  @ViewChild("performanceCollapseTemplate") modalTemplate!: TemplateRef<any>;
 
+  protected readonly ActionType = ActionType;
   protected readonly Object: ObjectConstructor = Object;
 
   @Input() set targetSetInput(targetSet: TargetSet | undefined) {
@@ -64,7 +90,8 @@ export class PerformanceLogsComponent implements OnInit {
     return convertDictionaryToArray(performanceLogs).sort(sortPerformanceLogsByLogDate);
   }
 
-  setPerformanceLog($event: FormIndicator) {
-    this.actionPerformanceLog.emit($event)
+  setPerformanceLog(formIndicator: FormIndicator) {
+    this.action = formIndicator.actionType;
+    this.performanceLog = formIndicator.object;
   }
 }
