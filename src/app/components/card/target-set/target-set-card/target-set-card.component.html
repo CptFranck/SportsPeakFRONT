@@ -79,13 +79,16 @@
               </app-modal-button>
             </div>
             <div class="row p-1">
-              <app-collapse-button (onClickEvent)="setCollapseActionType($event)"
-                                   [collapseId]="collapseTargetSetId"
-                                   [value]="ActionType.checkEvolution"
+              <app-modal-button
+                (onCLickModalButton)="checkTargetSet($event)"
+                [allWidth]="true"
+                [modalId]="targetSetModalId"
+                [modalValue]="targetSet"
+                btnClass="btn-secondary"
               >
                 Check objectives evolution
                 <i class="fa-solid fa-chart-line"></i>
-              </app-collapse-button>
+              </app-modal-button>
             </div>
           </div>
           <div class="col text-center align-content-center">

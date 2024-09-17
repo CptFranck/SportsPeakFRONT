@@ -30,13 +30,9 @@ export class TargetSetCardComponent implements OnInit {
   @Input() performanceLogModalId!: string;
   @Input() targetSet!: TargetSet;
   @Input() isLastTargetSet: boolean = false;
-  @Input() collapseTargetSetId!: string;
-  @Input() collapsePerformanceLogId!: string;
-  @Input() collapseActionType!: ActionType;
 
   @Output() actionTargetSets: EventEmitter<FormIndicator> = new EventEmitter<FormIndicator>();
   @Output() actionPerformanceLogs: EventEmitter<FormIndicator> = new EventEmitter<FormIndicator>();
-  @Output() actionCollapseType: EventEmitter<ActionType> = new EventEmitter<ActionType>();
 
   protected readonly ActionType = ActionType;
 
@@ -68,6 +64,13 @@ export class TargetSetCardComponent implements OnInit {
     });
   }
 
+  checkTargetSet(targetSet: TargetSet) {
+    this.actionTargetSets.emit({
+      actionType: ActionType.checkEvolution,
+      object: targetSet
+    });
+  }
+
   modifyTargetSet(targetSet: TargetSet) {
     this.actionTargetSets.emit({
       actionType: ActionType.update,
@@ -80,9 +83,5 @@ export class TargetSetCardComponent implements OnInit {
       actionType: ActionType.delete,
       object: targetSet
     });
-  }
-
-  setCollapseActionType($event: ActionType) {
-    this.actionCollapseType.emit($event)
   }
 }
