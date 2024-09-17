@@ -2,10 +2,11 @@
   <app-tab-header [tabId]="tabId"
                   [tabOptions]="tabOptions"
   />
-  <div [id]="tabId" class="tab-content">
+  <div [id]="tabId" class="tab-content border border-top-0 rounded-bottom border-1">
     <div [id]="targetSetUsedId" class="tab-pane fade show active">
       <p *ngIf=" progExerciseTargetSets.targetSetUsed.length === 0 ">No target set used</p>
       <div *ngFor="let targetSet of progExerciseTargetSets.targetSetUsed">
+        <br/>
         <app-target-set-card (actionPerformanceLogs)="setPerformanceLog($event)"
                              (actionTargetSets)="setTargetSet($event)"
                              [isLastTargetSet]="isLastTargetSetUsed[targetSet.id]"
