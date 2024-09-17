@@ -32,43 +32,37 @@
     <div [id]="targetSetUsedId" class="tab-pane fade show active">
       <p *ngIf=" progExerciseTargetSets.targetSetUsed.length === 0 ">No target set used</p>
       <div *ngFor="let targetSet of progExerciseTargetSets.targetSetUsed">
-        <app-target-step (actionCollapseType)="setCollapseType($event)"
-                         (actionPerformanceLogs)="setPerformanceLogs($event)"
-                         (actionTargetSets)="setTargetSet($event)"
-                         [collapseActionType]="collapseActionType"
-                         [isLastTargetSet]="isLastTargetSetUsed[targetSet.id]"
-                         [performanceLogModalId]="performanceLogModalId"
-                         [progExercise]="progExercise"
-                         [targetSetModalId]="targetSetModalId"
-                         [targetSet]="targetSet"/>
+        <app-target-set-card (actionPerformanceLogs)="setPerformanceLog($event)"
+                             (actionTargetSets)="setTargetSet($event)"
+                             [isLastTargetSet]="isLastTargetSetUsed[targetSet.id]"
+                             [performanceLogModalId]="performanceLogModalId"
+                             [targetSetModalId]="targetSetModalId"
+                             [targetSet]="targetSet"
+        />
       </div>
     </div>
     <div [id]="targetSetUnusedId" class="tab-pane fade">
       <p *ngIf=" progExerciseTargetSets.targetSetUnused.length === 0 ">No set are unused</p>
       <div *ngFor="let targetSet of progExerciseTargetSets.targetSetUnused">
-        <app-target-step (actionCollapseType)="setCollapseType($event)"
-                         (actionPerformanceLogs)="setPerformanceLogs($event)"
-                         (actionTargetSets)="setTargetSet($event)"
-                         [collapseActionType]="collapseActionType"
-                         [isLastTargetSet]="isLastTargetSetUsed[targetSet.id]"
-                         [performanceLogModalId]="performanceLogModalId"
-                         [progExercise]="progExercise"
-                         [targetSetModalId]="targetSetModalId"
-                         [targetSet]="targetSet"/>
+        <app-target-set-card (actionPerformanceLogs)="setPerformanceLog($event)"
+                             (actionTargetSets)="setTargetSet($event)"
+                             [isLastTargetSet]="isLastTargetSetUsed[targetSet.id]"
+                             [performanceLogModalId]="performanceLogModalId"
+                             [targetSetModalId]="targetSetModalId"
+                             [targetSet]="targetSet"
+        />
       </div>
     </div>
     <div [id]="targetSetHiddenId" class="tab-pane fade">
       <p *ngIf=" progExerciseTargetSets.targetSetHidden.length === 0 ">No set are hidden</p>
       <div *ngFor="let targetSet of progExerciseTargetSets.targetSetHidden">
-        <app-target-step (actionCollapseType)="setCollapseType($event)"
-                         (actionPerformanceLogs)="setPerformanceLogs($event)"
-                         (actionTargetSets)="setTargetSet($event)"
-                         [collapseActionType]="collapseActionType"
-                         [isLastTargetSet]="isLastTargetSetUsed[targetSet.id]"
-                         [performanceLogModalId]="performanceLogModalId"
-                         [progExercise]="progExercise"
-                         [targetSetModalId]="targetSetModalId"
-                         [targetSet]="targetSet"/>
+        <app-target-set-card (actionPerformanceLogs)="setPerformanceLog($event)"
+                             (actionTargetSets)="setTargetSet($event)"
+                             [isLastTargetSet]="isLastTargetSetUsed[targetSet.id]"
+                             [performanceLogModalId]="performanceLogModalId"
+                             [targetSetModalId]="targetSetModalId"
+                             [targetSet]="targetSet"
+        />
       </div>
     </div>
   </div>

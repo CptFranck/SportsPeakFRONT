@@ -8,8 +8,9 @@ import {ActionType} from "../../../../../interface/enum/action-type";
 import {ProgExercise} from "../../../../../interface/dto/prog-exercise";
 import {getProgExerciseTargetSet,} from "../../../../../utils/prog-exercise-functions";
 import {getUpToDateTargetSets, sortLastTargetSetsByIndex} from "../../../../../utils/target-set-functions";
-import {CollapseBlockComponent} from "../../../../../components/collapse-block/collapse-block.component";
-import {TargetSetStepComponent} from "../target-set-step/target-set-step.component";
+import {
+  TargetSetCardComponent
+} from "../../../../../components/card/target-set/target-set-card/target-set-card.component";
 
 @Component({
   selector: 'app-target-sets',
@@ -17,8 +18,7 @@ import {TargetSetStepComponent} from "../target-set-step/target-set-step.compone
   imports: [
     NgForOf,
     NgIf,
-    CollapseBlockComponent,
-    TargetSetStepComponent
+    TargetSetCardComponent
   ],
   templateUrl: './target-sets.component.html',
 })
@@ -28,7 +28,6 @@ export class TargetSetsComponent {
   targetSetUsedId: string = "TargetSetUsedId";
   targetSetUnusedId: string = "TargetSetUnusedId";
   targetSetHiddenId: string = "TargetSetHiddenId";
-  collapseActionType: ActionType = ActionType.checkPerformance;
 
   @Input() targetSetModalId!: string;
   @Input() performanceLogModalId!: string;
@@ -59,11 +58,7 @@ export class TargetSetsComponent {
     this.actionTargetSets.emit(event)
   }
 
-  setCollapseType($event: ActionType) {
-    this.collapseActionType = $event
-  }
-
-  setPerformanceLogs($event: FormIndicator) {
+  setPerformanceLog($event: FormIndicator) {
     this.actionPerformanceLogs.emit($event)
   }
 }
