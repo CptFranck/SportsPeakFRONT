@@ -35,7 +35,6 @@ export class PerformanceLogEntityFormComponent implements OnInit, OnDestroy {
   performanceLogForm: FormGroup | null = null;
   submitInvalidForm: boolean = false;
 
-  @Input() actionType!: ActionType;
   @Input() btnCloseRef!: HTMLButtonElement;
   @Input() submitEventActionType$!: Observable<ActionType> | undefined;
 
