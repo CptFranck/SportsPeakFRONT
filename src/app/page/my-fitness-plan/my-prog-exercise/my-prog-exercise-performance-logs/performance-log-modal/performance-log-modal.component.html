@@ -16,7 +16,6 @@
                                    [performanceLogInput]="performanceLog"
                                    [submitEventActionType$]="submitEventActionType$"/>
   <app-performance-logs *ngIf="action === ActionType.checkPerformance"
-                        [modalId]="performanceLogModalId"
                         [progExercise]="progExercise"
                         [targetSetInput]="targetSet"/>
 </ng-template>
