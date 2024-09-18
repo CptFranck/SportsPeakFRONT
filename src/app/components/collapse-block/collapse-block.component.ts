@@ -26,6 +26,7 @@ export class CollapseBlockComponent {
 
   @ViewChild("btnClose") btnClose: ElementRef | undefined;
 
+  @Input() visible: boolean = false;
   @Input() collapseId!: string;
   @Input() classArgs: string = "";
   @Input() contentTemplate: TemplateRef<any> | undefined;
@@ -48,6 +49,18 @@ export class CollapseBlockComponent {
         this.closeButtonTitle = "Close";
         return
     }
+  }
+
+  toggle() {
+    this.visible = !this.visible;
+  }
+
+  show() {
+    this.visible = true;
+  }
+
+  hide() {
+    this.visible = false;
   }
 
   onSubmit() {
