@@ -1,9 +1,9 @@
 <button
   (click)="onClick()"
-  [attr.data-bs-target]="'#' + collapseId"
   [class]="'btn ' + btnClass"
-  data-bs-toggle="collapse"
   type="button"
 >
+  <!--  [attr.data-bs-target]="'#' + collapseId"-->
+  <!--  data-bs-toggle="collapse"-->
   <ng-content/>
 </button>
