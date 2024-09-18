@@ -26,6 +26,9 @@ import {
 } from "../../../../../components/form/performance-log/performance-log-delete-form/performance-log-delete-form.component";
 import {CollapseButtonComponent} from "../../../../../components/collapse-buton/collapse-button.component";
 import {ActionType} from "../../../../../interface/enum/action-type";
+import {
+  PerformanceLogsChartsComponent
+} from "../../../../../components/chart/performance-logs-charts/performance-logs-charts.component";
 
 @Component({
   selector: 'app-performance-logs',
@@ -38,7 +41,8 @@ import {ActionType} from "../../../../../interface/enum/action-type";
     CollapseBlockComponent,
     PerformanceLogEntityFormComponent,
     PerformanceLogDeleteFormComponent,
-    CollapseButtonComponent
+    CollapseButtonComponent,
+    PerformanceLogsChartsComponent
   ],
   templateUrl: './performance-logs.component.html',
 })
