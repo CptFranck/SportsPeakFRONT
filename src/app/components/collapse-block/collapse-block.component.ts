@@ -53,7 +53,5 @@ export class CollapseBlockComponent {
   onSubmit() {
     if (this.action)
       this.submitEventActionType$.next(this.action);
-    if (this.btnClose)
-      this.btnClose.nativeElement.click();
   }
 }
