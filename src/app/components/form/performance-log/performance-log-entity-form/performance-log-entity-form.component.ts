@@ -133,7 +133,6 @@ export class PerformanceLogEntityFormComponent implements OnInit, OnDestroy {
     if (!this.performanceLogForm) return;
     if (this.performanceLogForm.valid) {
       this.submitInvalidForm = false;
-      this.performanceLogForm.controls["logDate"].setValue(new Date(this.performanceLogForm.controls["logDate"].value))
       if (!this.performanceLogForm.value.id) {
         this.performanceLogService.addPerformanceLog(this.performanceLogForm);
       } else {

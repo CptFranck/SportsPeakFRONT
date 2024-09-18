@@ -30,11 +30,13 @@ export class PerformanceLogService {
   }
 
   addPerformanceLog(performanceLogForm: FormGroup) {
+    let inputValue = performanceLogForm.value;
+    inputValue.logDate = new Date(inputValue.logDate)
     if (this.progExercise)
       this.apollo.mutate({
         mutation: ADD_PERFORMANCE_LOG,
         variables: {
-          inputNewPerformanceLog: performanceLogForm.value,
+          inputNewPerformanceLog: inputValue,
         },
         refetchQueries: [{
           query: GET_PROG_EXERCISE_BY_ID,
@@ -56,11 +58,13 @@ export class PerformanceLogService {
   }
 
   modifyPerformanceLog(performanceLogForm: FormGroup) {
+    let inputValue = performanceLogForm.value;
+    inputValue.logDate = new Date(inputValue.logDate)
     if (this.progExercise)
       this.apollo.mutate({
         mutation: MOD_PERFORMANCE_LOG,
         variables: {
-          inputPerformanceLog: performanceLogForm.value,
+          inputPerformanceLog: inputValue,
         },
         refetchQueries: [{
           query: GET_PROG_EXERCISE_BY_ID,
