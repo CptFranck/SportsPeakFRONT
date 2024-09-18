@@ -18,7 +18,7 @@ import {CollapseButtonComponent} from "../../../collapse-buton/collapse-button.c
 })
 export class PerformanceLogsCardComponent implements OnInit {
 
-  performanceLogDate!: Date;
+  performanceLogDate!: string;
 
   @Input() performanceLog!: PerformanceLog;
   @Input() formCollapseId!: string;
@@ -26,7 +26,7 @@ export class PerformanceLogsCardComponent implements OnInit {
   @Output() actionPerformanceLog: EventEmitter<FormIndicator> = new EventEmitter<FormIndicator>();
 
   ngOnInit() {
-    this.performanceLogDate = new Date(this.performanceLog?.logDate);
+    this.performanceLogDate = new Date(this.performanceLog?.logDate).toLocaleDateString();
   }
 
   modPerformanceLog($event: any) {
