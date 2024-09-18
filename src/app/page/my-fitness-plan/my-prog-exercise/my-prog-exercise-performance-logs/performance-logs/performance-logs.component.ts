@@ -61,8 +61,6 @@ export class PerformanceLogsComponent implements OnInit {
   performanceLogsSortByDate: DictionaryArray<PerformanceLog[]>[] = [];
   oldPerformanceLogsSortByDate: DictionaryArray<PerformanceLog[]>[] = [];
 
-
-  @ViewChild(CollapseBlockComponent, {static: true}) collapseBlockRef?: CollapseBlockComponent;
   @ViewChild("performanceCollapseTemplate") modalTemplate!: TemplateRef<any>;
 
   protected readonly ActionType = ActionType;

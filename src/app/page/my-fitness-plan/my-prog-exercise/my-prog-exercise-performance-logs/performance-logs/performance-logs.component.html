@@ -3,7 +3,8 @@
                 type="pill"
 />
 <div [id]="tabId" class="tab-content border border-top-0 rounded-bottom border-1">
-  <app-collapse-block [actionType]="action"
+  <app-collapse-block #collapseBlock
+                      [actionType]="action"
                       [collapseId]="formCollapseId"
                       [contentTemplate]="performanceCollapseTemplate"
   />
@@ -26,7 +27,7 @@
       <div *ngFor="let perfLogsOfDate of performanceLogsSortByDate">
         <div *ngFor="let perfLog of perfLogsOfDate.value">
           <app-performance-logs-card (actionPerformanceLog)="setPerformanceLog($event)"
-                                     [collapseBlockRef]="collapseBlockRef"
+                                     [collapseBlockComponent]="collapseBlock"
                                      [formCollapseId]="formCollapseId"
                                      [performanceLog]="perfLog"/>
         </div>

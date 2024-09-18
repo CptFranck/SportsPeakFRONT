@@ -23,7 +23,7 @@ export class PerformanceLogsCardComponent implements OnInit {
 
   @Input() formCollapseId!: string;
   @Input() performanceLog!: PerformanceLog;
-  @Input() collapseBlockRef?: CollapseBlockComponent;
+  @Input() collapseBlockComponent?: CollapseBlockComponent;
 
   @Output() actionPerformanceLog: EventEmitter<FormIndicator> = new EventEmitter<FormIndicator>();
 
