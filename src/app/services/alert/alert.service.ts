@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {Alert} from "../../interface/utils/alert";
 import {AlertType} from "../../interface/enum/alert-type";
 import {Subject} from "rxjs";
-import {GraphQLError} from "graphql/error";
+import {GraphQLFormattedError} from "graphql/error";
 import {AlertErrorType} from "../../interface/enum/alert-error-type";
 import {NetworkError} from "@apollo/client/errors";
 
@@ -54,8 +54,8 @@ export class AlertService {
 
   ///////////// APOLLO / GRAPHQL /////////////
 
-  graphQLErrorAlertHandler(graphQLErrors: readonly GraphQLError[]): void {
-    graphQLErrors.map((err: GraphQLError) =>
+  graphQLErrorAlertHandler(graphQLErrors: ReadonlyArray<GraphQLFormattedError>): void {
+    graphQLErrors.map((err: GraphQLFormattedError) =>
       this.createGraphQLErrorAlert(err));
   }
 
@@ -86,7 +86,7 @@ export class AlertService {
     return alert;
   }
 
-  private createGraphQLErrorAlert(graphQLError: GraphQLError): void {
+  private createGraphQLErrorAlert(graphQLError: GraphQLFormattedError): void {
     let graphQLAlert: Alert = this.createErrorAlert(graphQLError)
     if (graphQLAlert.errorInformation) {
       graphQLAlert.errorInformation["errorType"] = AlertErrorType.GraphQLError;
@@ -98,11 +98,12 @@ export class AlertService {
     this.alertId += 1;
   }
 
-  private createErrorAlert(error: Error): Alert {
+  private createErrorAlert(error: GraphQLFormattedError): Alert {
     const errorAlert: Alert = this.createAlert("Unsuccessful operation :(", error.message, AlertType.error);
     errorAlert.errorInformation = {
-      errorName: error.name,
-      errorStack: error.stack,
+      errorExtension: error.extensions,
+      errorLocation: error.locations,
+      errorPath: error.path,
     }
     return errorAlert;
   }

@@ -1,17 +1,17 @@
 <div [class]="'alert ' + alert.type + ' alert-dismissible fade show'" role="alert">
   <h5><strong>{{ alert.title }}</strong></h5>
   <div class="row ">
-    <div *ngIf="alert.errorInformation?.errorName" class="col-auto m-0">
-      <strong>ErrorName : </strong> {{ alert.errorInformation?.errorName }}
+    <div *ngIf="alert.errorInformation?.errorPath" class="col-auto m-0">
+      <strong>ErrorPath : </strong> {{ alert.errorInformation?.errorPath }}
     </div>
     <div *ngIf="alert.errorInformation?.errorType" class="col-auto">
       <strong>ErrorType : </strong> {{ alert.errorInformation?.errorType }}
     </div>
     <div *ngIf="alert.errorInformation?.errorPath" class="col-auto">
-      <strong>ErrorPath : </strong>{{ alert.errorInformation?.errorPath }}
+      <strong>ErrorLocation : </strong>{{ alert.errorInformation?.errorLocation }}
     </div>
-    <div *ngIf="alert.errorInformation?.errorStack" class="col-auto">
-      <strong>ErrorStack : </strong> {{ alert.errorInformation?.errorStack }}
+    <div *ngIf="alert.errorInformation?.errorExtension" class="col-auto">
+      <strong>ErrorExtension : </strong> {{ alert.errorInformation?.errorExtension }}
     </div>
   </div>
   <div class="row">
