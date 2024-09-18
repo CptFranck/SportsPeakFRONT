@@ -9,6 +9,7 @@
   />
   <ng-template #performanceCollapseTemplate let-btnClose="btnClose"
                let-submitEventActionType$="submitEventActionType$">
+    <h5 *ngIf="performanceLogDate" class="fw-bold"> {{ "Performance from " + performanceLogDate }} </h5>
     <app-performance-log-entity-form *ngIf="action === ActionType.update"
                                      [btnCloseRef]="btnClose"
                                      [performanceLogInput]="performanceLog"

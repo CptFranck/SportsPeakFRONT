@@ -44,6 +44,7 @@ import {ActionType} from "../../../../../interface/enum/action-type";
 })
 export class PerformanceLogsComponent implements OnInit {
 
+  performanceLogDate: string | undefined;
   tabId: string = "targetLogsTab";
   tabOptions: tabOption[] = [
     {id: "performanceListId", title: "Performance list", active: "active", disabled: false},
@@ -93,5 +94,6 @@ export class PerformanceLogsComponent implements OnInit {
   setPerformanceLog(formIndicator: FormIndicator) {
     this.action = formIndicator.actionType;
     this.performanceLog = formIndicator.object;
+    this.performanceLogDate = new Date(formIndicator.object?.logDate).toLocaleDateString();
   }
 }
