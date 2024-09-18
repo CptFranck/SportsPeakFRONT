@@ -31,6 +31,9 @@ export class CollapseBlockComponent {
   @Input() classArgs: string = "";
   @Input() contentTemplate: TemplateRef<any> | undefined;
 
+  constructor(private elementRef: ElementRef) {
+  }
+
   @Input() set actionType(action: ActionType | undefined) {
     this.submitButton = action === ActionType.update || action === ActionType.delete;
 
@@ -66,5 +69,9 @@ export class CollapseBlockComponent {
   onSubmit() {
     if (this.action)
       this.submitEventActionType$.next(this.action);
+  }
+
+  scroll() {
+    this.elementRef.nativeElement.scrollIntoView();
   }
 }

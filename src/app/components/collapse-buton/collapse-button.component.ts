@@ -16,19 +16,20 @@ export class CollapseButtonComponent {
 
   @Output() onClickEvent: EventEmitter<any> = new EventEmitter();
 
-  @Input() collapseBlockRef?: CollapseBlockComponent;
+  @Input() collapseBlockComponent?: CollapseBlockComponent;
 
   onClick() {
     if (this.value && this.onClickEvent) {
       this.onClickEvent.emit(this.value);
     }
-    if (this.collapseBlockRef) {
+    if (this.collapseBlockComponent) {
+      this.collapseBlockComponent.scroll()
       if (this.onlyOpen)
-        this.collapseBlockRef.show();
+        this.collapseBlockComponent.show();
       else if (this.onlyClose)
-        this.collapseBlockRef.hide()
+        this.collapseBlockComponent.hide()
       else
-        this.collapseBlockRef.toggle()
+        this.collapseBlockComponent.toggle()
     }
   }
 }

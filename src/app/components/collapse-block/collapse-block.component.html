@@ -1,4 +1,4 @@
-<div *ngIf="visible" [id]="collapseId" class="p-4">
+<div [hidden]="!visible" [id]="collapseId" class="p-4 collapseBlock">
   <div class="border border-1 rounded">
     <div class="p-2">
       <ng-container [ngTemplateOutletContext]="{submitEventActionType$: submitEventActionType$, btnClose:btnClose}"
