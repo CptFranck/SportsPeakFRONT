@@ -26,6 +26,7 @@
       <div *ngFor="let perfLogsOfDate of performanceLogsSortByDate">
         <div *ngFor="let perfLog of perfLogsOfDate.value">
           <app-performance-logs-card (actionPerformanceLog)="setPerformanceLog($event)"
+                                     [collapseBlockRef]="collapseBlockRef"
                                      [formCollapseId]="formCollapseId"
                                      [performanceLog]="perfLog"/>
         </div>

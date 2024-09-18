@@ -62,6 +62,7 @@ export class PerformanceLogsComponent implements OnInit {
 
   @Input() progExercise: ProgExercise | undefined;
 
+  @ViewChild(CollapseBlockComponent, {static: true}) collapseBlockRef?: CollapseBlockComponent;
   @ViewChild("performanceCollapseTemplate") modalTemplate!: TemplateRef<any>;
 
   protected readonly ActionType = ActionType;
@@ -92,6 +93,9 @@ export class PerformanceLogsComponent implements OnInit {
   }
 
   setPerformanceLog(formIndicator: FormIndicator) {
+    if (this.action != formIndicator.actionType) {
+
+    }
     this.action = formIndicator.actionType;
     this.performanceLog = formIndicator.object;
     this.performanceLogDate = new Date(formIndicator.object?.logDate).toLocaleDateString();
