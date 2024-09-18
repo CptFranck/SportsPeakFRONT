@@ -24,7 +24,9 @@
         <div class="row p-1">
           <app-collapse-button
             (onClickEvent)="modPerformanceLog($event)"
+            [collapseBlockRef]="collapseBlockRef"
             [collapseId]="formCollapseId"
+            [onlyOpen]="true"
             [value]="performanceLog"
             btnClass="btn-secondary"
           >
@@ -35,7 +37,9 @@
         <div class="row p-1">
           <app-collapse-button
             (onClickEvent)="delPerformanceLog($event)"
+            [collapseBlockRef]="collapseBlockRef"
             [collapseId]="formCollapseId"
+            [onlyOpen]="true"
             [value]="performanceLog"
             btnClass="btn-danger"
           >

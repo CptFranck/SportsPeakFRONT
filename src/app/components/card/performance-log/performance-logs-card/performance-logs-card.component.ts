@@ -5,6 +5,7 @@ import {JsonPipe} from "@angular/common";
 import {FormIndicator} from "../../../../interface/utils/form-indicator";
 import {ActionType} from "../../../../interface/enum/action-type";
 import {CollapseButtonComponent} from "../../../collapse-buton/collapse-button.component";
+import {CollapseBlockComponent} from "../../../collapse-block/collapse-block.component";
 
 @Component({
   selector: 'app-performance-logs-card',
@@ -20,8 +21,9 @@ export class PerformanceLogsCardComponent implements OnInit {
 
   performanceLogDate!: string;
 
-  @Input() performanceLog!: PerformanceLog;
   @Input() formCollapseId!: string;
+  @Input() performanceLog!: PerformanceLog;
+  @Input() collapseBlockRef?: CollapseBlockComponent;
 
   @Output() actionPerformanceLog: EventEmitter<FormIndicator> = new EventEmitter<FormIndicator>();
 
