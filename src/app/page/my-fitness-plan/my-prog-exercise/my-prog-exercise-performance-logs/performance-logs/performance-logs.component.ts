@@ -54,19 +54,24 @@ export class PerformanceLogsComponent implements OnInit {
   formCollapseId: string = "formCollapseId";
   action: ActionType = ActionType.read;
 
+  progExercise: ProgExercise | undefined;
   targetSet: TargetSet | undefined;
   targetSetLogs: TargetSet[] = [];
   performanceLog: PerformanceLog | undefined;
   performanceLogsSortByDate: DictionaryArray<PerformanceLog[]>[] = [];
   oldPerformanceLogsSortByDate: DictionaryArray<PerformanceLog[]>[] = [];
 
-  @Input() progExercise: ProgExercise | undefined;
 
   @ViewChild(CollapseBlockComponent, {static: true}) collapseBlockRef?: CollapseBlockComponent;
   @ViewChild("performanceCollapseTemplate") modalTemplate!: TemplateRef<any>;
 
   protected readonly ActionType = ActionType;
   protected readonly Object: ObjectConstructor = Object;
+
+  @Input() set progExerciseInput(progExercise: ProgExercise | undefined) {
+    this.progExercise = progExercise;
+    this.initialize();
+  }
 
   @Input() set targetSetInput(targetSet: TargetSet | undefined) {
     this.targetSet = targetSet;
@@ -93,9 +98,6 @@ export class PerformanceLogsComponent implements OnInit {
   }
 
   setPerformanceLog(formIndicator: FormIndicator) {
-    if (this.action != formIndicator.actionType) {
-
-    }
     this.action = formIndicator.actionType;
     this.performanceLog = formIndicator.object;
     this.performanceLogDate = new Date(formIndicator.object?.logDate).toLocaleDateString();

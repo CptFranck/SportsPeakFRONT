@@ -74,6 +74,10 @@ export class MyProgExerciseComponent implements OnInit, OnDestroy {
       .subscribe((progExercise: ProgExercise | undefined) => {
         if (progExercise) {
           this.progExercise = progExercise;
+          if (this.targetSet) {
+            this.targetSet =
+              this.progExercise.targetSets.find((targetSet: TargetSet) => this.targetSet?.id === targetSet.id);
+          }
         }
       });
     this.proExerciseService.isLoading
