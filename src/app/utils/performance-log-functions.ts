@@ -46,7 +46,6 @@ export function filterPerformanceLogByDate(targetSet: TargetSet | undefined, log
 export function sortPerformanceLogsByLogDate(a: DictionaryArray<PerformanceLog[]>, b: DictionaryArray<PerformanceLog[]>) {
   const dateA: Date = new Date(a.key)
   const dateB: Date = new Date(b.key)
-  console.log(a.key, b.key)
   if (dateA < dateB) return 1;
   if (dateA > dateB) return -1;
   return 0;
