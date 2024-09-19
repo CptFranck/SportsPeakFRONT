@@ -23,6 +23,7 @@ export class CollapseBlockComponent {
   validateButtonClass: string = "btn-success";
   validationButtonTitle: string = "Ok";
   submitEventActionType$: Subject<ActionType> = new Subject<ActionType>();
+  lastButton: ElementRef | undefined;
 
   @ViewChild("btnClose") btnClose: ElementRef | undefined;
 
@@ -54,12 +55,14 @@ export class CollapseBlockComponent {
     }
   }
 
-  toggle() {
-    this.visible = !this.visible;
-  }
-
-  show() {
-    this.visible = true;
+  toggle(elementRef: ElementRef) {
+    this.elementRef.nativeElement.scrollIntoView();
+    if (!this.visible) {
+      this.visible = !this.visible;
+    } else if (this.visible && elementRef === this.lastButton) {
+      this.visible = !this.visible;
+    }
+    this.lastButton = elementRef;
   }
 
   hide() {
@@ -69,9 +72,5 @@ export class CollapseBlockComponent {
   onSubmit() {
     if (this.action)
       this.submitEventActionType$.next(this.action);
-  }
-
-  scroll() {
-    this.elementRef.nativeElement.scrollIntoView();
   }
 }
