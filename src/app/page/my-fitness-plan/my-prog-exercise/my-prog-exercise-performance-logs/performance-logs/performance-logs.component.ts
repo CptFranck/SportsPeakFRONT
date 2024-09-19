@@ -9,7 +9,7 @@ import {
   sortPerformanceLogsByDictionary,
   sortPerformanceLogsByLogDate
 } from "../../../../../utils/performance-log-functions";
-import {NgForOf, NgIf} from "@angular/common";
+import {DatePipe, JsonPipe, KeyValuePipe, NgForOf, NgIf} from "@angular/common";
 import {
   PerformanceLogsCardComponent
 } from "../../../../../components/card/performance-log/performance-logs-card/performance-logs-card.component";
@@ -29,6 +29,7 @@ import {ActionType} from "../../../../../interface/enum/action-type";
 import {
   PerformanceLogsChartsComponent
 } from "../../../../../components/chart/performance-logs-charts/performance-logs-charts.component";
+import {CollapseGroupItemComponent} from "../../../../../components/collapse-group/collapse-group-item.component";
 
 @Component({
   selector: 'app-performance-logs',
@@ -42,7 +43,11 @@ import {
     PerformanceLogEntityFormComponent,
     PerformanceLogDeleteFormComponent,
     CollapseButtonComponent,
-    PerformanceLogsChartsComponent
+    PerformanceLogsChartsComponent,
+    KeyValuePipe,
+    JsonPipe,
+    DatePipe,
+    CollapseGroupItemComponent
   ],
   templateUrl: './performance-logs.component.html',
 })
@@ -55,8 +60,9 @@ export class PerformanceLogsComponent implements OnInit {
     {id: "performanceGraphId", title: "Performances graph", active: "", disabled: false},
   ];
 
-  formCollapseId: string = "formCollapseId";
   action: ActionType = ActionType.read;
+  formCollapseId: string = "formCollapseId";
+  accordionParentId: string = "accordionParentId";
 
   progExercise: ProgExercise | undefined;
   targetSet: TargetSet | undefined;
@@ -86,6 +92,7 @@ export class PerformanceLogsComponent implements OnInit {
 
   initialize() {
     if (this.targetSet && this.progExercise) {
+      console.log(this.performanceLogsSortByDate);
       this.performanceLogsSortByDate = this.getPerformanceLogSortByLogDate(this.targetSet)
       this.targetSetLogs = getTargetSetLogs(this.targetSet, this.progExercise);
       this.targetSetLogs.forEach((targetSet: TargetSet) => {

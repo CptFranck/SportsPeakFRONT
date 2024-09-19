@@ -22,15 +22,20 @@
                                      [submitEventActionType$]="submitEventActionType$"/>
 
   </ng-template>
-  <div [id]="tabOptions[0].id" class="tab-pane fade show active p-1">
-    <div *ngIf="performanceLogsSortByDate">
-      <div *ngFor="let perfLogsOfDate of performanceLogsSortByDate">
-        <div *ngFor="let perfLog of perfLogsOfDate.value">
+  <div [id]="tabOptions[0].id" class="tab-pane fade show active p-2">
+    <div *ngIf="performanceLogsSortByDate" [id]="accordionParentId" class="accordion m-1">
+      <div *ngFor="let perfLogsOfDate of performanceLogsSortByDate, index as i" class="accordion-item">
+        <app-collapse-group-item [accordionParentId]="accordionParentId"
+                                 [isOpen]="i === 0"
+                                 [itemId]="perfLogsOfDate.key"
+                                 [title]="perfLogsOfDate.key | date"
+        >
           <app-performance-logs-card (actionPerformanceLog)="setPerformanceLog($event)"
+                                     *ngFor="let perfLog of perfLogsOfDate.value"
                                      [collapseBlockComponent]="collapseBlock"
                                      [formCollapseId]="formCollapseId"
                                      [performanceLog]="perfLog"/>
-        </div>
+        </app-collapse-group-item>
       </div>
       <div *ngIf="Object.keys(performanceLogsSortByDate).length === 0">
         <div class="col-auto card m-3 shadow">
