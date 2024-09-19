@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {NgForOf} from "@angular/common";
-import {AccordionItem} from "../../interface/components/collapse-group/collapse-group";
+import {CollapseGroupItem} from "../../interface/components/collapse-group/collapse-group";
 
 @Component({
   selector: 'app-collapse-group-item',
@@ -11,7 +11,7 @@ import {AccordionItem} from "../../interface/components/collapse-group/collapse-
   templateUrl: './collapse-group-item.component.html',
 })
 export class CollapseGroupItemComponent implements OnInit {
-  accordionItem!: AccordionItem;
+  accordionItem!: CollapseGroupItem;
 
   show: string = "";
   collapsed: string = "";
