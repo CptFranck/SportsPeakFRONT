@@ -23,7 +23,7 @@
 
   </ng-template>
   <div [id]="tabOptions[0].id" class="tab-pane fade show active p-2">
-    <div *ngIf="performanceLogsSortByDate" [id]="accordionParentId" class="accordion m-1">
+    <div *ngIf="performanceLogsSortByDate" [id]="accordionParentId" class="accordion">
       <div *ngFor="let perfLogsOfDate of performanceLogsSortByDate, index as i" class="accordion-item">
         <app-collapse-group-item [accordionParentId]="accordionParentId"
                                  [isOpen]="i === 0"
@@ -37,13 +37,13 @@
                                      [performanceLog]="perfLog"/>
         </app-collapse-group-item>
       </div>
-      <div *ngIf="Object.keys(performanceLogsSortByDate).length === 0">
-        <div class="col-auto card m-3 shadow">
-          <div class="card-body ">
-            <div class="row">
-              <div class="col-auto">
-                No performanceLogs saved
-              </div>
+    </div>
+    <div *ngIf="Object.keys(performanceLogsSortByDate).length === 0">
+      <div class="col-auto card m-3 shadow">
+        <div class="card-body ">
+          <div class="row">
+            <div class="col-auto">
+              No performanceLogs saved
             </div>
           </div>
         </div>
