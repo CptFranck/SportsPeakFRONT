@@ -51,6 +51,8 @@
     </div>
   </div>
   <div [id]="tabOptions[1].id" class="tab-pane fade">
-    <app-performance-logs-charts/>
+    <div *ngIf="performanceLogsSortByDate">
+      <app-performance-logs-charts [performanceLogsInput]="performanceLogsSortByDate"/>
+    </div>
   </div>
 </div>

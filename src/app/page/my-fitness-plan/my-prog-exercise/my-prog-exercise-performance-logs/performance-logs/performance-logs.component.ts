@@ -92,7 +92,6 @@ export class PerformanceLogsComponent implements OnInit {
 
   initialize() {
     if (this.targetSet && this.progExercise) {
-      console.log(this.performanceLogsSortByDate);
       this.performanceLogsSortByDate = this.getPerformanceLogSortByLogDate(this.targetSet)
       this.targetSetLogs = getTargetSetLogs(this.targetSet, this.progExercise);
       this.targetSetLogs.forEach((targetSet: TargetSet) => {
