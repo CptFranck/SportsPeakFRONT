@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {ModalButtonComponent} from "../../../modal/modal-button/modal-button.component";
 import {PerformanceLog} from "../../../../interface/dto/performance-log";
 import {JsonPipe} from "@angular/common";
@@ -17,19 +17,13 @@ import {CollapseBlockComponent} from "../../../collapse-block/collapse-block.com
   ],
   templateUrl: './performance-logs-card.component.html',
 })
-export class PerformanceLogsCardComponent implements OnInit {
-
-  performanceLogDate!: string;
+export class PerformanceLogsCardComponent {
 
   @Input() formCollapseId!: string;
   @Input() performanceLog!: PerformanceLog;
   @Input() collapseBlockComponent?: CollapseBlockComponent;
 
   @Output() actionPerformanceLog: EventEmitter<FormIndicator> = new EventEmitter<FormIndicator>();
-
-  ngOnInit() {
-    this.performanceLogDate = new Date(this.performanceLog?.logDate).toLocaleDateString();
-  }
 
   modPerformanceLog($event: any) {
     this.actionPerformanceLog.emit({

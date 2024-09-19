@@ -1,51 +1,48 @@
 <div class="col-auto card m-2 shadow">
-  <div class="card-body ">
-    <div class="row">
+  <div class="card-body py-0">
+    <div class="row align-items-center">
       <div class="col-auto">
-        <h5 class="fw-bold">
-          {{ "Performance from " + performanceLogDate }}
-        </h5>
-        <div class="row">
-          <div class="col-auto d-flex align-items-center">
-            <label class="fw-bold me-1"> Set N°: </label>
-            {{ performanceLog.setIndex }}
-          </div>
-          <div class="col-auto">
-            <label class="fw-bold"> Reps : </label>
-            {{ performanceLog.repetitionNumber }}
-          </div>
-          <div class="col-auto">
-            <label class="fw-bold"> Weight : </label>
-            {{ performanceLog.weight + " " + performanceLog.weightUnit }}
-          </div>
-        </div>
+        <label class="fw-bold me-1"> Set N°: </label>
+        {{ performanceLog.setIndex }}
       </div>
-      <div class="col text-center align-content-center">
-        <div class="row p-1">
-          <app-collapse-button
-            (onClickEvent)="modPerformanceLog($event)"
-            [collapseBlockComponent]="collapseBlockComponent"
-            [collapseId]="formCollapseId"
-            [onlyOpen]="true"
-            [value]="performanceLog"
-            btnClass="btn-secondary"
-          >
-            Modify
-            <i class="fa-solid fa-pen-to-square"></i>
-          </app-collapse-button>
-        </div>
-        <div class="row p-1">
-          <app-collapse-button
-            (onClickEvent)="delPerformanceLog($event)"
-            [collapseBlockComponent]="collapseBlockComponent"
-            [collapseId]="formCollapseId"
-            [onlyOpen]="true"
-            [value]="performanceLog"
-            btnClass="btn-danger"
-          >
-            Delete
-            <i class="fa-solid fa-trash"></i>
-          </app-collapse-button>
+      <div class="col-auto">
+        <label class="fw-bold"> Reps : </label>
+        {{ performanceLog.repetitionNumber }}
+      </div>
+      <div class="col-auto">
+        <label class="fw-bold"> Weight : </label>
+        {{ performanceLog.weight + " " + performanceLog.weightUnit }}
+      </div>
+      <div class="col">
+      </div>
+      <div class="col-auto">
+        <div class="row">
+          <div class="col-auto p-2">
+            <app-collapse-button
+              (onClickEvent)="modPerformanceLog($event)"
+              [collapseBlockComponent]="collapseBlockComponent"
+              [collapseId]="formCollapseId"
+              [onlyOpen]="true"
+              [value]="performanceLog"
+              btnClass="btn-secondary"
+            >
+              Modify
+              <i class="fa-solid fa-pen-to-square"></i>
+            </app-collapse-button>
+          </div>
+          <div class="col-auto p-2">
+            <app-collapse-button
+              (onClickEvent)="delPerformanceLog($event)"
+              [collapseBlockComponent]="collapseBlockComponent"
+              [collapseId]="formCollapseId"
+              [onlyOpen]="true"
+              [value]="performanceLog"
+              btnClass="btn-danger"
+            >
+              Delete
+              <i class="fa-solid fa-trash"></i>
+            </app-collapse-button>
+          </div>
         </div>
       </div>
     </div>
