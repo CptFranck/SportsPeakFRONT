@@ -1,0 +1,17 @@
+<h2 class="accordion-header">
+  <button [attr.data-bs-target]='"#" + accordionItem.id'
+          [class]='"accordion-button " + collapsed'
+          data-bs-toggle="collapse"
+          type="button"
+  >
+    {{ accordionItem.title }}
+  </button>
+</h2>
+<div [attr.data-bs-parent]='"#" + accordionParentId'
+     [class]='"accordion-collapse collapse " + show'
+     [id]="accordionItem.id"
+>
+  <div class="accordion-body">
+    <ng-content/>
+  </div>
+</div>
