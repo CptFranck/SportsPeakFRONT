@@ -10,6 +10,18 @@ import {convertDictionaryToArray} from "./generic-function";
 
 ////////////////////////////////////// SORT FUNCTIONS ////////////////////////////////////////
 
+export function sortPerformanceLogsByDictionaryDate(performanceLogs: PerformanceLog[]) {
+  const dictionary: Dictionary<PerformanceLog[]> = {};
+  performanceLogs.forEach((performanceLog: PerformanceLog) => {
+    const key: string = stringToDateString(performanceLog.logDate);
+    if (dictionary[key] === undefined) {
+      dictionary[key] = [];
+    }
+    dictionary[key].push(performanceLog);
+  })
+  return convertDictionaryToArray(dictionary);
+}
+
 export function sortPerformanceLogsBy(progExercise: ProgExercise, targetSet: TargetSet, logDateTrueSetIndexFalse: boolean) {
   let performanceLogSortedDictionary: Dictionary<PerformanceLog[]> = {};
   const targetSetLogs: TargetSet[] = getTargetSetLogs(targetSet, progExercise, true);
