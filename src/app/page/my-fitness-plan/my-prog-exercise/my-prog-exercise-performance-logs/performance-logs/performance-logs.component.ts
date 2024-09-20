@@ -2,7 +2,7 @@ import {Component, Input, OnInit, TemplateRef, ViewChild} from '@angular/core';
 import {TargetSet} from "../../../../../interface/dto/target-set";
 import {ProgExercise} from "../../../../../interface/dto/prog-exercise";
 import {PerformanceLog} from "../../../../../interface/dto/performance-log";
-import {sortAllPerformanceLogsBySet, sortPerformanceLogsByDate} from "../../../../../utils/performance-log-functions";
+import {sortPerformanceLogsByDate, sortPerformanceLogsBySet} from "../../../../../utils/performance-log-functions";
 import {DatePipe, JsonPipe, KeyValuePipe, NgForOf, NgIf} from "@angular/common";
 import {
   PerformanceLogsCardComponent
@@ -85,10 +85,8 @@ export class PerformanceLogsComponent implements OnInit {
 
   initialize() {
     if (this.targetSet && this.progExercise) {
-      this.performanceLogsSortedBySet = sortAllPerformanceLogsBySet(this.progExercise, this.targetSet);
-      console.log(this.performanceLogsSortedBySet);
+      this.performanceLogsSortedBySet = sortPerformanceLogsBySet(this.progExercise, this.targetSet);
       this.performanceLogsSortByDate = sortPerformanceLogsByDate(this.progExercise, this.targetSet)
-      sortAllPerformanceLogsBySet(this.progExercise, this.targetSet)
     }
   }
 
