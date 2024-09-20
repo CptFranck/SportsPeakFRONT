@@ -7,7 +7,7 @@
     {{ accordionItem.title }}
   </button>
 </h2>
-<div [attr.data-bs-parent]='"#" + accordionParentId'
+<div [attr.data-bs-parent]='parentId'
      [class]='"accordion-collapse collapse " + show'
      [id]="accordionItem.id"
 >

@@ -15,11 +15,16 @@ export class CollapseGroupItemComponent implements OnInit {
 
   show: string = "";
   collapsed: string = "";
+  parentId!: string;
 
   @Input() title: string | null = "";
   @Input() itemId!: string;
   @Input() isOpen: boolean = false;
-  @Input() accordionParentId!: string;
+  @Input() stayOpen: boolean = false;
+
+  @Input() set accordionParentId(accordionParentId: string) {
+    this.parentId = "#" + accordionParentId;
+  }
 
   ngOnInit() {
     this.accordionItem = {
@@ -31,6 +36,9 @@ export class CollapseGroupItemComponent implements OnInit {
       this.show = "show"
     } else {
       this.collapsed = "collapsed"
+    }
+    if (this.stayOpen) {
+      this.parentId = ""
     }
   }
 }
