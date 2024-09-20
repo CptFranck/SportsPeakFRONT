@@ -1,20 +1,14 @@
 import {Component, Input, OnInit, TemplateRef, ViewChild} from '@angular/core';
 import {TargetSet} from "../../../../../interface/dto/target-set";
 import {ProgExercise} from "../../../../../interface/dto/prog-exercise";
-import {getTargetSetLogs} from "../../../../../utils/target-set-functions";
 import {PerformanceLog} from "../../../../../interface/dto/performance-log";
-import {Dictionary} from "../../../../../interface/utils/dictionary";
-import {
-  convertDictionaryToArray,
-  sortPerformanceLogsByDictionary,
-  sortPerformanceLogsByLogDate
-} from "../../../../../utils/performance-log-functions";
+import {sortAllPerformanceLogsBySet, sortPerformanceLogsByDate} from "../../../../../utils/performance-log-functions";
 import {DatePipe, JsonPipe, KeyValuePipe, NgForOf, NgIf} from "@angular/common";
 import {
   PerformanceLogsCardComponent
 } from "../../../../../components/card/performance-log/performance-logs-card/performance-logs-card.component";
 import {FormIndicator} from "../../../../../interface/utils/form-indicator";
-import {DictionaryArray} from "../../../../../interface/utils/dictionary-array";
+import {DictionaryItem} from "../../../../../interface/utils/dictionary-item";
 import {TabHeaderComponent} from "../../../../../components/tab-header/tab-header.component";
 import {tabOption} from "../../../../../interface/components/tab/tabOption";
 import {CollapseBlockComponent} from "../../../../../components/collapse-block/collapse-block.component";
@@ -53,7 +47,6 @@ import {CollapseGroupItemComponent} from "../../../../../components/collapse-gro
 })
 export class PerformanceLogsComponent implements OnInit {
 
-  performanceLogDate: string | undefined;
   tabId: string = "targetLogsTab";
   tabOptions: tabOption[] = [
     {id: "performanceListId", title: "Performance list", active: "active", disabled: false},
@@ -66,10 +59,10 @@ export class PerformanceLogsComponent implements OnInit {
 
   progExercise: ProgExercise | undefined;
   targetSet: TargetSet | undefined;
-  targetSetLogs: TargetSet[] = [];
   performanceLog: PerformanceLog | undefined;
-  performanceLogsSortByDate: DictionaryArray<PerformanceLog[]>[] = [];
-  oldPerformanceLogsSortByDate: DictionaryArray<PerformanceLog[]>[] = [];
+  performanceLogDate: string | undefined;
+  performanceLogsSortByDate: DictionaryItem<PerformanceLog[]>[] = [];
+  performanceLogsSortedBySet: DictionaryItem<PerformanceLog[]>[] = [];
 
   @ViewChild("performanceCollapseTemplate") modalTemplate!: TemplateRef<any>;
 
@@ -92,17 +85,11 @@ export class PerformanceLogsComponent implements OnInit {
 
   initialize() {
     if (this.targetSet && this.progExercise) {
-      this.performanceLogsSortByDate = this.getPerformanceLogSortByLogDate(this.targetSet)
-      this.targetSetLogs = getTargetSetLogs(this.targetSet, this.progExercise);
-      this.targetSetLogs.forEach((targetSet: TargetSet) => {
-        this.oldPerformanceLogsSortByDate = this.getPerformanceLogSortByLogDate(targetSet);
-      });
+      this.performanceLogsSortedBySet = sortAllPerformanceLogsBySet(this.progExercise, this.targetSet);
+      console.log(this.performanceLogsSortedBySet);
+      this.performanceLogsSortByDate = sortPerformanceLogsByDate(this.progExercise, this.targetSet)
+      sortAllPerformanceLogsBySet(this.progExercise, this.targetSet)
     }
-  }
-
-  getPerformanceLogSortByLogDate(targetSet: TargetSet) {
-    let performanceLogs: Dictionary<PerformanceLog[]> = sortPerformanceLogsByDictionary(targetSet);
-    return convertDictionaryToArray(performanceLogs).sort(sortPerformanceLogsByLogDate);
   }
 
   setPerformanceLog(formIndicator: FormIndicator) {
