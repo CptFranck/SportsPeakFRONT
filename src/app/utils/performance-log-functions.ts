@@ -2,18 +2,15 @@ import {TargetSet} from "../interface/dto/target-set";
 import {Dictionary} from "../interface/utils/dictionary";
 import {PerformanceLog} from "../interface/dto/performance-log";
 import {stringToDateString} from "./time-functions";
-import {DictionaryArray} from "../interface/utils/dictionary-array";
+import {DictionaryItem} from "../interface/utils/dictionary-item";
+import {ProgExercise} from "../interface/dto/prog-exercise";
+import {getTargetSetLogs} from "./target-set-functions";
+import {convertDictionaryToArray} from "./generic-function";
 
 
 ////////////////////////////////////// SORT FUNCTIONS ////////////////////////////////////////
 
-export function convertDictionaryToArray(performanceLogs: Dictionary<any[]>) {
-  return Object.entries(performanceLogs).map((value: [string, any[]]): DictionaryArray<any> => {
-    return {key: value[0], value: value[1]}
-  })
-}
-
-export function sortPerformanceLogsByDictionary(targetSet: TargetSet) {
+export function sortPerformanceLogsByDictionaryDate(targetSet: TargetSet) {
   let sortedPerformanceLogs: Dictionary<PerformanceLog[]> = {};
   targetSet.performanceLogs.forEach((performanceLog: PerformanceLog) => {
     const date: string = stringToDateString(performanceLog.logDate);
@@ -23,6 +20,29 @@ export function sortPerformanceLogsByDictionary(targetSet: TargetSet) {
     sortedPerformanceLogs[date].push(performanceLog);
   })
   return sortPerformanceLogsBySet(sortedPerformanceLogs);
+}
+
+export function sortAllPerformanceLogsBySet(progExercise: ProgExercise, targetSet: TargetSet) {
+  const performanceLogSortedBySet: Dictionary<PerformanceLog[]> = {};
+  const targetSetLogs: TargetSet[] = getTargetSetLogs(targetSet, progExercise, true);
+
+  targetSetLogs.forEach((targetSet: TargetSet) => {
+    targetSet.performanceLogs.forEach((performanceLog: PerformanceLog) => {
+      const setIndex: string = performanceLog.setIndex.toString();
+      if (performanceLogSortedBySet[setIndex] === undefined) {
+        performanceLogSortedBySet[setIndex] = [];
+      }
+      performanceLogSortedBySet[setIndex].push(performanceLog);
+    })
+  });
+
+  const performanceLogSortedBySetAndByLogDate: DictionaryItem<PerformanceLog[]>[] =
+    convertDictionaryToArray(performanceLogSortedBySet);
+
+  performanceLogSortedBySetAndByLogDate.forEach((performanceLogSet: DictionaryItem<PerformanceLog[]>) => {
+    performanceLogSet.value = performanceLogSet.value.sort(sortPerformanceLogsByLogDate);
+  })
+  return performanceLogSortedBySetAndByLogDate;
 }
 
 export function sortPerformanceLogsBySet(performanceLogs: Dictionary<PerformanceLog[]>) {
@@ -43,7 +63,7 @@ export function filterPerformanceLogByDate(targetSet: TargetSet | undefined, log
   return performanceLogThisDate;
 }
 
-export function sortPerformanceLogsByLogDate(a: DictionaryArray<PerformanceLog[]>, b: DictionaryArray<PerformanceLog[]>) {
+export function sortDictionaryArrayOfPerformanceLogsByLogDate(a: DictionaryItem<PerformanceLog[]>, b: DictionaryItem<PerformanceLog[]>) {
   const dateA: Date = new Date(a.key)
   const dateB: Date = new Date(b.key)
   if (dateA < dateB) return 1;
@@ -54,5 +74,13 @@ export function sortPerformanceLogsByLogDate(a: DictionaryArray<PerformanceLog[]
 export function sortPerformanceLogsBySetIndex(a: PerformanceLog, b: PerformanceLog) {
   if (a.setIndex > b.setIndex) return 1;
   if (a.setIndex < b.setIndex) return -1;
+  return 0;
+}
+
+export function sortPerformanceLogsByLogDate(a: PerformanceLog, b: PerformanceLog) {
+  const dateA: Date = new Date(a.logDate)
+  const dateB: Date = new Date(b.logDate)
+  if (dateA < dateB) return 1;
+  if (dateA > dateB) return -1;
   return 0;
 }
