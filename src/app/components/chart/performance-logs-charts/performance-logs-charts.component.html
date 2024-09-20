@@ -1,5 +1,6 @@
-<div>
-  <canvas #chart height="400" width="400"></canvas>
+<div class="container p-2">
+  <div *ngFor="let performanceLogSet of performanceLogsInputSortedBySet">
+    <h6 class="fw-bold p-2"> Set N°{{ performanceLogSet.key }}</h6>
+    <app-performance-logs-set-chart [performanceLogSet]="performanceLogSet.value"/>
+  </div>
 </div>
-<p>performance-logs-charts works!</p>
-
