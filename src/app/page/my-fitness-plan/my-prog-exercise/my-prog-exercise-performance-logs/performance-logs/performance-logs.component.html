@@ -22,56 +22,29 @@
                                      [submitEventActionType$]="submitEventActionType$"/>
 
   </ng-template>
+
   <div [id]="tabOptions[0].id" class="tab-pane fade show active p-2">
-
-    <div [id]="accordionParentId" class="accordion">
-      <div *ngFor="let performanceLogsSet of performanceLogsSortedBySet, index as i" class="accordion-item">
-        <app-collapse-group-item [accordionParentId]="accordionParentId"
-                                 [itemId]="performanceLogsSet.key"
-                                 [title]='"Set N°" +performanceLogsSet.key'
-        >
-          <app-performance-logs-card (actionPerformanceLog)="setPerformanceLog($event)"
-                                     *ngFor="let perfLog of performanceLogsSet.value"
-                                     [collapseBlockComponent]="collapseBlock"
-                                     [formCollapseId]="formCollapseId"
-                                     [performanceLog]="perfLog"/>
-        </app-collapse-group-item>
-      </div>
+    <div class="container p-2">
+      <app-check-box (actionPerformanceLog)="onCheckBoxClick()" [checked]="switch"
+                     label="sort by performance by log or set"
+      />
     </div>
+    <app-performance-log-sorted-by-set (actionPerformanceLog)="setPerformanceLog($event)"
+                                       [accordionParentIdSet]="accordionParentIdSet"
+                                       [collapseBlock]="collapseBlock"
+                                       [formCollapseId]="formCollapseId"
+                                       [hidden]="switch"
+                                       [performanceLogsSortedBySet]="performanceLogsSortedBySet"
+    />
+    <app-performance-log-sorted-by-log-date (actionPerformanceLog)="setPerformanceLog($event)"
+                                            [accordionParentIdDate]="accordionParentIdDate"
+                                            [collapseBlock]="collapseBlock"
+                                            [formCollapseId]="formCollapseId"
+                                            [hidden]="!switch"
+                                            [performanceLogsSortByDate]="performanceLogsSortedByLogDate"
 
-    <!--    <div [id]="accordionParentId" class="accordion">-->
-    <!--      <div *ngFor="let perfLogsOfDate of performanceLogsSortByDate, index as i" class="accordion-item">-->
-    <!--        <app-collapse-group-item [accordionParentId]="accordionParentId"-->
-    <!--                                 [isOpen]="i === 0"-->
-    <!--                                 [itemId]="perfLogsOfDate.key"-->
-    <!--                                 [title]="perfLogsOfDate.key | date"-->
-    <!--        >-->
-    <!--          <app-performance-logs-card (actionPerformanceLog)="setPerformanceLog($event)"-->
-    <!--                                     *ngFor="let perfLog of perfLogsOfDate.value"-->
-    <!--                                     [collapseBlockComponent]="collapseBlock"-->
-    <!--                                     [formCollapseId]="formCollapseId"-->
-    <!--                                     [performanceLog]="perfLog"/>-->
-    <!--        </app-collapse-group-item>-->
-    <!--      </div>-->
-    <!--    </div>-->
-
-
-    <!--    <div [id]="accordionParentId" class="accordion">-->
-    <!--      <div *ngFor="let perfLogsOfDate of performanceLogsSortByDate, index as i" class="accordion-item">-->
-    <!--        <app-collapse-group-item [accordionParentId]="accordionParentId"-->
-    <!--                                 [isOpen]="i === 0"-->
-    <!--                                 [itemId]="perfLogsOfDate.key"-->
-    <!--                                 [title]="perfLogsOfDate.key | date"-->
-    <!--        >-->
-    <!--          <app-performance-logs-card (actionPerformanceLog)="setPerformanceLog($event)"-->
-    <!--                                     *ngFor="let perfLog of perfLogsOfDate.value"-->
-    <!--                                     [collapseBlockComponent]="collapseBlock"-->
-    <!--                                     [formCollapseId]="formCollapseId"-->
-    <!--                                     [performanceLog]="perfLog"/>-->
-    <!--        </app-collapse-group-item>-->
-    <!--      </div>-->
-    <!--    </div>-->
-    <div *ngIf="Object.keys(performanceLogsSortByDate).length === 0">
+    />
+    <div *ngIf="Object.keys(performanceLogsSortedByLogDate).length === 0">
       <div class="col-auto card m-3 shadow">
         <div class="card-body ">
           <div class="row">
@@ -84,8 +57,9 @@
     </div>
   </div>
   <div [id]="tabOptions[1].id" class="tab-pane fade">
-    <div *ngIf="performanceLogsSortByDate">
-      <app-performance-logs-charts [performanceLogsInput]="performanceLogsSortByDate"/>
+    <div *ngIf="performanceLogsSortedByLogDate">
+      <app-performance-logs-charts [performanceLogsInputSortedByLogDateInput]="performanceLogsSortedByLogDate"
+                                   [performanceLogsInputSortedBySetInput]="performanceLogsSortedBySet"/>
     </div>
   </div>
 </div>

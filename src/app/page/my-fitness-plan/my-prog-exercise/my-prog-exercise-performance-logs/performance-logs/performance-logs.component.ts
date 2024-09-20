@@ -3,45 +3,43 @@ import {TargetSet} from "../../../../../interface/dto/target-set";
 import {ProgExercise} from "../../../../../interface/dto/prog-exercise";
 import {PerformanceLog} from "../../../../../interface/dto/performance-log";
 import {sortPerformanceLogsByDate, sortPerformanceLogsBySet} from "../../../../../utils/performance-log-functions";
-import {DatePipe, JsonPipe, KeyValuePipe, NgForOf, NgIf} from "@angular/common";
-import {
-  PerformanceLogsCardComponent
-} from "../../../../../components/card/performance-log/performance-logs-card/performance-logs-card.component";
 import {FormIndicator} from "../../../../../interface/utils/form-indicator";
 import {DictionaryItem} from "../../../../../interface/utils/dictionary-item";
-import {TabHeaderComponent} from "../../../../../components/tab-header/tab-header.component";
 import {tabOption} from "../../../../../interface/components/tab/tabOption";
-import {CollapseBlockComponent} from "../../../../../components/collapse-block/collapse-block.component";
+import {ActionType} from "../../../../../interface/enum/action-type";
 import {
   PerformanceLogEntityFormComponent
 } from "../../../../../components/form/performance-log/performance-log-entity-form/performance-log-entity-form.component";
+import {CollapseBlockComponent} from "../../../../../components/collapse-block/collapse-block.component";
 import {
   PerformanceLogDeleteFormComponent
 } from "../../../../../components/form/performance-log/performance-log-delete-form/performance-log-delete-form.component";
-import {CollapseButtonComponent} from "../../../../../components/collapse-buton/collapse-button.component";
-import {ActionType} from "../../../../../interface/enum/action-type";
+import {NgIf} from "@angular/common";
+import {
+  PerformanceLogSortedBySetComponent
+} from "../performance-log-collpase-groups/performance-log-sorted-by-set/performance-log-sorted-by-set.component";
 import {
   PerformanceLogsChartsComponent
 } from "../../../../../components/chart/performance-logs-charts/performance-logs-charts.component";
-import {CollapseGroupItemComponent} from "../../../../../components/collapse-group/collapse-group-item.component";
+import {TabHeaderComponent} from "../../../../../components/tab-header/tab-header.component";
+import {
+  PerformanceLogSortedByLogDateComponent
+} from "../performance-log-collpase-groups/performance-log-sorted-by-log-date/performance-log-sorted-by-log-date.component";
+import {CheckBoxComponent} from "../../../../../components/input/check-box/check-box.component";
 
 @Component({
   selector: 'app-performance-logs',
   standalone: true,
   imports: [
-    NgIf,
-    NgForOf,
-    PerformanceLogsCardComponent,
-    TabHeaderComponent,
-    CollapseBlockComponent,
     PerformanceLogEntityFormComponent,
+    CollapseBlockComponent,
     PerformanceLogDeleteFormComponent,
-    CollapseButtonComponent,
+    NgIf,
+    PerformanceLogSortedBySetComponent,
     PerformanceLogsChartsComponent,
-    KeyValuePipe,
-    JsonPipe,
-    DatePipe,
-    CollapseGroupItemComponent
+    TabHeaderComponent,
+    PerformanceLogSortedByLogDateComponent,
+    CheckBoxComponent
   ],
   templateUrl: './performance-logs.component.html',
 })
@@ -53,16 +51,18 @@ export class PerformanceLogsComponent implements OnInit {
     {id: "performanceGraphId", title: "Performances graph", active: "", disabled: false},
   ];
 
+  switch: boolean = false;
   action: ActionType = ActionType.read;
   formCollapseId: string = "formCollapseId";
-  accordionParentId: string = "accordionParentId";
+  accordionParentIdSet: string = "accordionParentIdSet";
+  accordionParentIdDate: string = "accordionParentIdDate";
 
   progExercise: ProgExercise | undefined;
   targetSet: TargetSet | undefined;
   performanceLog: PerformanceLog | undefined;
   performanceLogDate: string | undefined;
-  performanceLogsSortByDate: DictionaryItem<PerformanceLog[]>[] = [];
   performanceLogsSortedBySet: DictionaryItem<PerformanceLog[]>[] = [];
+  performanceLogsSortedByLogDate: DictionaryItem<PerformanceLog[]>[] = [];
 
   @ViewChild("performanceCollapseTemplate") modalTemplate!: TemplateRef<any>;
 
@@ -86,7 +86,7 @@ export class PerformanceLogsComponent implements OnInit {
   initialize() {
     if (this.targetSet && this.progExercise) {
       this.performanceLogsSortedBySet = sortPerformanceLogsBySet(this.progExercise, this.targetSet);
-      this.performanceLogsSortByDate = sortPerformanceLogsByDate(this.progExercise, this.targetSet)
+      this.performanceLogsSortedByLogDate = sortPerformanceLogsByDate(this.progExercise, this.targetSet)
     }
   }
 
@@ -94,5 +94,9 @@ export class PerformanceLogsComponent implements OnInit {
     this.action = formIndicator.actionType;
     this.performanceLog = formIndicator.object;
     this.performanceLogDate = new Date(formIndicator.object?.logDate).toLocaleDateString();
+  }
+
+  onCheckBoxClick() {
+    this.switch = !this.switch;
   }
 }
