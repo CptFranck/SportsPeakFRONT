@@ -3,6 +3,7 @@
     <app-collapse-group-item [accordionParentId]="accordionParentIdDate"
                              [isOpen]="i === 0"
                              [itemId]="perfLogsOfDate.key"
+                             [stayOpen]="true"
                              [title]="perfLogsOfDate.key | date"
     >
       <app-performance-logs-card (actionPerformanceLog)="setPerformanceLog($event)"

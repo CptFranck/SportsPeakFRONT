@@ -1,7 +1,9 @@
 <div [id]="accordionParentIdSet" class="accordion">
   <div *ngFor="let performanceLogsSet of performanceLogsSortedBySet, index as i" class="accordion-item">
     <app-collapse-group-item [accordionParentId]="accordionParentIdSet"
+                             [isOpen]="i === 0"
                              [itemId]="performanceLogsSet.key"
+                             [stayOpen]="true"
                              [title]='"Set N°" +performanceLogsSet.key'
     >
       <app-performance-logs-card (actionPerformanceLog)="setPerformanceLog($event)"
