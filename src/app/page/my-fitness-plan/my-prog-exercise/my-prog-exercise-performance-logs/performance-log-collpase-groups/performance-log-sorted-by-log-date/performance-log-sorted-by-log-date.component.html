@@ -1,0 +1,15 @@
+<div [id]="accordionParentIdDate" class="accordion">
+  <div *ngFor="let perfLogsOfDate of performanceLogsSortByDate, index as i" class="accordion-item">
+    <app-collapse-group-item [accordionParentId]="accordionParentIdDate"
+                             [isOpen]="i === 0"
+                             [itemId]="perfLogsOfDate.key"
+                             [title]="perfLogsOfDate.key | date"
+    >
+      <app-performance-logs-card (actionPerformanceLog)="setPerformanceLog($event)"
+                                 *ngFor="let perfLog of perfLogsOfDate.value"
+                                 [collapseBlockComponent]="collapseBlock"
+                                 [formCollapseId]="formCollapseId"
+                                 [performanceLog]="perfLog"/>
+    </app-collapse-group-item>
+  </div>
+</div>
