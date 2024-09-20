@@ -30,17 +30,19 @@ export class TargetSetLogsComponent implements OnInit {
 
   @Input() set targetSetInput(targetSet: TargetSet | undefined) {
     this.targetSet = targetSet;
-    if (this.targetSet && this.progExercise)
-      this.targetSetLogs = getTargetSetLogs(this.targetSet, this.progExercise);
+    this.initialize()
   }
 
   @Input() set progExerciseInput(progExercise: ProgExercise | undefined) {
     this.progExercise = progExercise;
-    if (this.targetSet && this.progExercise)
-      this.targetSetLogs = getTargetSetLogs(this.targetSet, this.progExercise);
+    this.initialize()
   }
 
   ngOnInit() {
+    this.initialize()
+  }
+
+  initialize() {
     if (this.targetSet && this.progExercise)
       this.targetSetLogs = getTargetSetLogs(this.targetSet, this.progExercise);
   }
