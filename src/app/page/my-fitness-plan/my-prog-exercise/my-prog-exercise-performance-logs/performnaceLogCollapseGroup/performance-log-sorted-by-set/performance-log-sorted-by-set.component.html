@@ -1,0 +1,14 @@
+<div [id]="accordionParentIdSet" class="accordion">
+  <div *ngFor="let performanceLogsSet of performanceLogsSortedBySet, index as i" class="accordion-item">
+    <app-collapse-group-item [accordionParentId]="accordionParentIdSet"
+                             [itemId]="performanceLogsSet.key"
+                             [title]='"Set N°" +performanceLogsSet.key'
+    >
+      <app-performance-logs-card (actionPerformanceLog)="setPerformanceLog($event)"
+                                 *ngFor="let perfLog of performanceLogsSet.value"
+                                 [collapseBlockComponent]="collapseBlock"
+                                 [formCollapseId]="formCollapseId"
+                                 [performanceLog]="perfLog"/>
+    </app-collapse-group-item>
+  </div>
+</div>
