@@ -2,6 +2,10 @@
   <div class="card-body py-0">
     <div class="row align-items-center">
       <div class="col-auto">
+        <label class="fw-bold me-1"> Performed : </label>
+        {{ performanceLog.logDate | date: 'dd/MM/yyyy' }}
+      </div>
+      <div class="col-auto">
         <label class="fw-bold me-1"> Set N°: </label>
         {{ performanceLog.setIndex }}
       </div>
