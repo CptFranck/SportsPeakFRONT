@@ -41,9 +41,11 @@ export function getTargetSetTimeAmount(targetSet: TargetSet, isLastTargetSet: bo
 
 ////////////////////////////////////// SORT FUNCTIONS ////////////////////////////////////////
 
-export function getTargetSetLogs(targetSetUpToDate: TargetSet, progExercise: ProgExercise): TargetSet[] {
+export function getTargetSetLogs(targetSetUpToDate: TargetSet, progExercise: ProgExercise, includeFirstTargetSet: boolean = false): TargetSet[] {
   const targetSetLogs: TargetSet[] = [];
-  getTargetSetUpdate(targetSetUpToDate, progExercise, targetSetLogs)
+  if (includeFirstTargetSet)
+    targetSetLogs.push(targetSetUpToDate);
+  getTargetSetUpdate(targetSetUpToDate, progExercise, targetSetLogs);
   return targetSetLogs;
 }
 
