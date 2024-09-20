@@ -15,8 +15,3 @@ export function addDateTime(date: Date, hour: number = 0, minute: number = 0, se
   );
   return date;
 }
-
-
-export function randomIntFromInterval(min: number, max: number) {
-  return Math.floor(Math.random() * (max - min + 1) + min);
-}
