@@ -28,9 +28,14 @@ export function sortPerformanceLogsBy(progExercise: ProgExercise, targetSet: Tar
   const performanceLogSortedDictionaryItem: DictionaryItem<PerformanceLog[]>[] =
     convertDictionaryToArray(performanceLogSortedDictionary);
 
+  if (logDateTrueSetIndexFalse) {
+    performanceLogSortedDictionaryItem.sort(sortDictionaryItemArrayByKeyDate)
+  }
+
   performanceLogSortedDictionaryItem.forEach((performanceLogSet: DictionaryItem<PerformanceLog[]>) => {
     performanceLogSet.value = performanceLogSet.value.sort(
-      logDateTrueSetIndexFalse ? sortPerformanceLogsByLogDate : sortPerformanceLogsBySetIndex);
+      logDateTrueSetIndexFalse ? sortPerformanceLogsBySetIndex : sortPerformanceLogsByLogDate);
+    // invert sort type to be date/set or set/date
   })
 
   return performanceLogSortedDictionaryItem;
@@ -53,6 +58,14 @@ export function sortPerformanceLogsBySetIndex(a: PerformanceLog, b: PerformanceL
 export function sortPerformanceLogsByLogDate(a: PerformanceLog, b: PerformanceLog) {
   const dateA: Date = new Date(a.logDate)
   const dateB: Date = new Date(b.logDate)
+  if (dateA < dateB) return 1;
+  if (dateA > dateB) return -1;
+  return 0;
+}
+
+export function sortDictionaryItemArrayByKeyDate(a: DictionaryItem<any>, b: DictionaryItem<any>) {
+  const dateA: Date = new Date(a.key)
+  const dateB: Date = new Date(b.key)
   if (dateA < dateB) return 1;
   if (dateA > dateB) return -1;
   return 0;
