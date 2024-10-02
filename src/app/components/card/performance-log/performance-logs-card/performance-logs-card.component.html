@@ -1,7 +1,7 @@
 <div class="col-auto card m-2 shadow">
   <div class="card-body py-2">
     <div class="container">
-      <div [class]="'row row-cols-5 align-items-center ' + centerContentClass ">
+      <div [class]="'row align-items-center ' + centerContentClass ">
         <div class="col-auto">
           <label class="fw-bold me-1"> Performed : </label>
           {{ performanceLog.logDate | date: 'dd/MM/yyyy' }}
@@ -18,11 +18,9 @@
           <label class="fw-bold"> Weight : </label>
           {{ performanceLog.weight + " " + performanceLog.weightUnit }}
         </div>
-        <div class="col">
-        </div>
-        <div *ngIf="activeButton" class="col-auto">
-          <div class="row">
-            <div class="col-auto p-1">
+        <div *ngIf="activeButton" class="col">
+          <div class="row justify-content-center">
+            <div class="col-auto d-flex justify-content-center px-3 py-1">
               <app-collapse-button
                 (onClickEvent)="modPerformanceLog($event)"
                 [collapseBlockComponent]="collapseBlockComponent"
@@ -35,7 +33,7 @@
                 <i class="fa-solid fa-pen-to-square"></i>
               </app-collapse-button>
             </div>
-            <div class="col-auto p-1">
+            <div class="col-auto d-flex justify-content-center px-3 py-1">
               <app-collapse-button
                 (onClickEvent)="delPerformanceLog($event)"
                 [collapseBlockComponent]="collapseBlockComponent"
