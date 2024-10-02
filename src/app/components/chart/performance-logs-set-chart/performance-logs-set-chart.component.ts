@@ -1,8 +1,8 @@
 import {AfterViewInit, Component, ElementRef, Input, ViewChild} from '@angular/core';
 import {Chart, registerables} from "chart.js";
-import zoomPlugin from "chartjs-plugin-zoom";
-import {PerformanceLog} from "../../../interface/dto/performance-log";
+import zoomPlugin from 'chartjs-plugin-zoom';
 import {addDateTime, stringToDate} from "../../../utils/time-functions";
+import {PerformanceLog} from "../../../interface/dto/performance-log";
 import {DictionaryItem} from "../../../interface/utils/dictionary-item";
 import {sortPerformanceLogsByDictionaryDate} from "../../../utils/performance-log-functions";
 
@@ -11,58 +11,68 @@ import {sortPerformanceLogsByDictionaryDate} from "../../../utils/performance-lo
   standalone: true,
   imports: [],
   templateUrl: './performance-logs-set-chart.component.html',
-  styleUrl: './performance-logs-set-chart.component.css'
 })
 export class PerformanceLogsSetChartComponent implements AfterViewInit {
 
-  chartRep: Chart | undefined;
-  chartWeight: Chart | undefined;
+  refChart: any;
 
-  @Input() performanceLogSet!: PerformanceLog[];
+  reps: number[] = [];
+  dates: Date[] = [];
+  weights: number[] = [];
 
-  @ViewChild('chartRep', {static: false}) chartRepRef!: ElementRef;
-  @ViewChild('chartWeight', {static: false}) chartWeightRef!: ElementRef;
+  data: any;
+  options: any;
+  chart: Chart | undefined;
+
+  performanceLogSet!: PerformanceLog[];
+  @ViewChild('chartRef', {static: false}) chartRef!: ElementRef;
+
+  @Input() set performanceLogSetInput(performanceLogs: PerformanceLog[] | undefined) {
+    if (performanceLogs) {
+      this.performanceLogSet = performanceLogs
+      this.defineData();
+      this.defineOption();
+      this.draw();
+    }
+  }
 
   ngAfterViewInit() {
     Chart.register(...registerables);
     Chart.register(zoomPlugin);
 
-    let chartRepRef = this.chartRepRef.nativeElement.getContext('2d');
+    this.refChart = this.chartRef.nativeElement.getContext('2d');
 
-    let datesBis: Date[] = [];
-    let weights: number[] = [];
-    let reps: number[] = [];
+    this.initChart()
+  }
 
-    const performanceLogsSorted: DictionaryItem<PerformanceLog[]>[] = sortPerformanceLogsByDictionaryDate(this.performanceLogSet)
-    performanceLogsSorted.forEach((performanceLogs: DictionaryItem<PerformanceLog[]>) => {
-      const perfLogsLength: number = performanceLogs.value.length;
-      performanceLogs.value.forEach((performanceLog: PerformanceLog, index: number) => {
-        datesBis.push(addDateTime(stringToDate(performanceLog.logDate), index * 23 / perfLogsLength));
-        weights.push(performanceLog.weight + index);
-        reps.push(performanceLog.repetitionNumber);
-      })
-    })
+  initChart() {
+    this.defineData()
+    this.defineOption()
+    this.draw()
+  }
 
-    const maxRep: number = Math.max(...reps);
-    const minDate: Date = new Date(Math.min(...datesBis.map((d: Date) => d.getTime())));
-    const maxDate: Date = new Date(Math.max(...datesBis.map((d: Date) => d.getTime())));
+  resetZoom() {
+    if (this.chart) {
+      this.chart.resetZoom()
+    }
+  }
 
-    const dataRep: any = {
-      labels: datesBis,
-      datasets: [{
-        type: 'line',
-        label: 'reps',
-        data: reps,
-        borderWidth: 2
-      }, {
-        type: 'line',
-        label: 'weight',
-        data: weights,
-        borderWidth: 2
-      }]
-    };
+  draw() {
+    if (this.refChart)
+      this.chart = new Chart(this.refChart, {
+        data: this.data,
+        options: this.options
+      });
+  }
 
-    const options: any = {
+  defineOption() {
+    const maxRep: number = Math.max(...this.reps);
+    const minDate: Date = new Date(Math.min(...this.dates.map((d: Date) => d.getTime())));
+    const maxDate: Date = new Date(Math.max(...this.dates.map((d: Date) => d.getTime())));
+
+    this.options = {
+      responsive: true,
+      maintainAspectRatio: false,
       scales: {
         x: {
           min: minDate,
@@ -84,13 +94,13 @@ export class PerformanceLogsSetChartComponent implements AfterViewInit {
           max: maxRep + 5,
           title: {
             display: true,
-            text: 'number of repetition'
+            text: 'Number of repetition'
           }
         }
       },
       plugins: {
         title: {
-          text: 'number of repetition per performance of current set',
+          text: 'number of reps and weight per performance of this set',
           display: true
         },
         zoom: {
@@ -111,10 +121,36 @@ export class PerformanceLogsSetChartComponent implements AfterViewInit {
         }
       },
     }
+  }
 
-    this.chartRep = new Chart(chartRepRef, {
-      data: dataRep,
-      options: options
+  private defineData() {
+    this.reps = [];
+    this.dates = [];
+    this.weights = [];
+
+    const performanceLogsSorted: DictionaryItem<PerformanceLog[]>[] = sortPerformanceLogsByDictionaryDate(this.performanceLogSet);
+    performanceLogsSorted.forEach((performanceLogs: DictionaryItem<PerformanceLog[]>) => {
+      const perfLogsLength: number = performanceLogs.value.length;
+      performanceLogs.value.forEach((performanceLog: PerformanceLog, index: number) => {
+        this.dates.push(addDateTime(stringToDate(performanceLog.logDate), index * 23 / perfLogsLength));
+        this.weights.push(performanceLog.weight + index);
+        this.reps.push(performanceLog.repetitionNumber);
+      });
     });
+
+    this.data = {
+      labels: this.dates,
+      datasets: [{
+        type: 'line',
+        label: 'reps',
+        data: this.reps,
+        borderWidth: 2
+      }, {
+        type: 'line',
+        label: 'weight',
+        data: this.weights,
+        borderWidth: 2
+      }]
+    };
   }
 }
