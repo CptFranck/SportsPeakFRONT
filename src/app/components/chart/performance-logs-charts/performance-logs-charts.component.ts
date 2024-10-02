@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 import 'chartjs-adapter-date-fns';
 
 import {DictionaryItem} from "../../../interface/utils/dictionary-item";
@@ -9,6 +9,8 @@ import {CollapseGroupItemComponent} from "../../collapse-group/collapse-group-it
 import {
   PerformanceLogsCardComponent
 } from "../../card/performance-log/performance-logs-card/performance-logs-card.component";
+import {FormIndicator} from "../../../interface/utils/form-indicator";
+import {CollapseBlockComponent} from "../../collapse-block/collapse-block.component";
 
 @Component({
   selector: 'app-performance-logs-charts',
@@ -27,11 +29,19 @@ export class PerformanceLogsChartsComponent {
   performanceLogsInputSortedBySet!: DictionaryItem<PerformanceLog[]>[];
   performanceLogsInputSortedByLogDate!: DictionaryItem<PerformanceLog[]>[];
 
+  @Input() collapseBlock!: CollapseBlockComponent;
+  
+  @Output() actionPerformanceLog: EventEmitter<FormIndicator> = new EventEmitter<FormIndicator>();
+
   @Input() set performanceLogsInputSortedBySetInput(performanceLogs: DictionaryItem<PerformanceLog[]>[]) {
     this.performanceLogsInputSortedBySet = performanceLogs;
   }
 
   @Input() set performanceLogsInputSortedByLogDateInput(performanceLogs: DictionaryItem<PerformanceLog[]>[]) {
     this.performanceLogsInputSortedByLogDate = performanceLogs;
+  }
+
+  setPerformanceLog($event: FormIndicator) {
+    this.actionPerformanceLog.emit($event);
   }
 }
