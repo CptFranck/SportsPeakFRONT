@@ -8,6 +8,7 @@ import {CollapseBlockComponent} from "../../../../../../components/collapse-bloc
 import {DictionaryItem} from "../../../../../../interface/utils/dictionary-item";
 import {PerformanceLog} from "../../../../../../interface/dto/performance-log";
 import {FormIndicator} from "../../../../../../interface/utils/form-indicator";
+import {ifFirstShow, ifNotFirstCollapse} from "../../../../../../utils/accordion-function";
 
 @Component({
   selector: 'app-performance-log-sorted-by-log-date',
@@ -28,16 +29,10 @@ export class PerformanceLogSortedByLogDateComponent {
   @Input() performanceLogsSortByDate!: DictionaryItem<PerformanceLog[]>[];
 
   @Output() actionPerformanceLog: EventEmitter<FormIndicator> = new EventEmitter<FormIndicator>();
+  protected readonly ifFirstShow = ifFirstShow;
+  protected readonly ifNotFirstCollapse = ifNotFirstCollapse;
 
   setPerformanceLog($event: FormIndicator) {
     this.actionPerformanceLog.emit($event);
-  }
-
-  ifNotFirstCollapse(i: number) {
-    return i !== 0 ? "collapsed" : ""
-  }
-
-  ifFirstShow(i: number) {
-    return i === 0 ? "show" : ""
   }
 }
