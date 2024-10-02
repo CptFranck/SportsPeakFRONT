@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {ModalButtonComponent} from "../../../modal/modal-button/modal-button.component";
 import {PerformanceLog} from "../../../../interface/dto/performance-log";
-import {DatePipe, JsonPipe} from "@angular/common";
+import {DatePipe, JsonPipe, NgIf} from "@angular/common";
 import {FormIndicator} from "../../../../interface/utils/form-indicator";
 import {ActionType} from "../../../../interface/enum/action-type";
 import {CollapseButtonComponent} from "../../../collapse-buton/collapse-button.component";
@@ -14,17 +14,26 @@ import {CollapseBlockComponent} from "../../../collapse-block/collapse-block.com
     ModalButtonComponent,
     JsonPipe,
     CollapseButtonComponent,
-    DatePipe
+    DatePipe,
+    NgIf
   ],
   templateUrl: './performance-logs-card.component.html',
 })
 export class PerformanceLogsCardComponent {
 
-  @Input() formCollapseId!: string;
+  centerContentClass: string = "";
+  @Input() activeButton!: boolean;
+  @Input() formCollapseId: string = "";
   @Input() performanceLog!: PerformanceLog;
   @Input() collapseBlockComponent?: CollapseBlockComponent;
-
   @Output() actionPerformanceLog: EventEmitter<FormIndicator> = new EventEmitter<FormIndicator>();
+
+  @Input() set centerContent(bool: boolean) {
+    if (bool)
+      this.centerContentClass = "justify-content-center";
+    else
+      this.centerContentClass = "";
+  }
 
   modPerformanceLog($event: any) {
     this.actionPerformanceLog.emit({
