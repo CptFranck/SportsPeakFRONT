@@ -1,6 +1,5 @@
 <div [id]="accordionParentIdSet" class="accordion">
   <div *ngFor="let performanceLogsSet of performanceLogsSortedBySet, index as i" class="accordion-item">
-
     <h2 class="accordion-header">
       <button [attr.data-bs-target]='"#" + accordionParentIdSet + performanceLogsSet.key'
               [class]='"accordion-button fw-bold " + ifNotFirstCollapse(i)'

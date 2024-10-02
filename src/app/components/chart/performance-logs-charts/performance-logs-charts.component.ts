@@ -11,6 +11,7 @@ import {
 } from "../../card/performance-log/performance-logs-card/performance-logs-card.component";
 import {FormIndicator} from "../../../interface/utils/form-indicator";
 import {CollapseBlockComponent} from "../../collapse-block/collapse-block.component";
+import {ifFirstShow, ifNotFirstCollapse} from "../../../utils/accordion-function";
 
 @Component({
   selector: 'app-performance-logs-charts',
@@ -30,8 +31,10 @@ export class PerformanceLogsChartsComponent {
   performanceLogsInputSortedByLogDate!: DictionaryItem<PerformanceLog[]>[];
 
   @Input() collapseBlock!: CollapseBlockComponent;
-  
+
   @Output() actionPerformanceLog: EventEmitter<FormIndicator> = new EventEmitter<FormIndicator>();
+  protected readonly ifFirstShow = ifFirstShow;
+  protected readonly ifNotFirstCollapse = ifNotFirstCollapse;
 
   @Input() set performanceLogsInputSortedBySetInput(performanceLogs: DictionaryItem<PerformanceLog[]>[]) {
     this.performanceLogsInputSortedBySet = performanceLogs;

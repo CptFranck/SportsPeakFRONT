@@ -22,29 +22,30 @@
                                      [submitEventActionType$]="submitEventActionType$"/>
 
   </ng-template>
-
-  <div [id]="tabOptions[0].id" class="tab-pane fade show active p-2">
-    <div class="container p-2">
-      <app-check-box (actionPerformanceLog)="onCheckBoxClick()"
-                     [checkedInput]="switch"
-                     labelCheck="sort by date"
-                     labelUnchecked="sort by set"
+  <div [id]="tabOptions[0].id" class="tab-pane fade show active">
+    <div class="container p-3">
+      <div class="container p-2">
+        <app-check-box (actionPerformanceLog)="onCheckBoxClick()"
+                       [checkedInput]="switch"
+                       labelCheck="sort by date"
+                       labelUnchecked="sort by set"
+        />
+      </div>
+      <app-performance-log-sorted-by-log-date (actionPerformanceLog)="setPerformanceLog($event)"
+                                              [accordionParentIdDate]="accordionParentIdDate"
+                                              [collapseBlock]="collapseBlock"
+                                              [formCollapseId]="formCollapseId"
+                                              [hidden]="!switch"
+                                              [performanceLogsSortByDate]="performanceLogsSortedByLogDate"
+      />
+      <app-performance-log-sorted-by-set (actionPerformanceLog)="setPerformanceLog($event)"
+                                         [accordionParentIdSet]="accordionParentIdSet"
+                                         [collapseBlock]="collapseBlock"
+                                         [formCollapseId]="formCollapseId"
+                                         [hidden]="switch"
+                                         [performanceLogsSortedBySet]="performanceLogsSortedBySet"
       />
     </div>
-    <app-performance-log-sorted-by-log-date (actionPerformanceLog)="setPerformanceLog($event)"
-                                            [accordionParentIdDate]="accordionParentIdDate"
-                                            [collapseBlock]="collapseBlock"
-                                            [formCollapseId]="formCollapseId"
-                                            [hidden]="!switch"
-                                            [performanceLogsSortByDate]="performanceLogsSortedByLogDate"
-    />
-    <app-performance-log-sorted-by-set (actionPerformanceLog)="setPerformanceLog($event)"
-                                       [accordionParentIdSet]="accordionParentIdSet"
-                                       [collapseBlock]="collapseBlock"
-                                       [formCollapseId]="formCollapseId"
-                                       [hidden]="switch"
-                                       [performanceLogsSortedBySet]="performanceLogsSortedBySet"
-    />
     <div *ngIf="Object.keys(performanceLogsSortedByLogDate).length === 0">
       <div class="col-auto card m-3 shadow">
         <div class="card-body ">
@@ -58,9 +59,22 @@
     </div>
   </div>
   <div [id]="tabOptions[1].id" class="tab-pane fade p-2">
-    <div *ngIf="performanceLogsSortedByLogDate">
-      <app-performance-logs-charts [performanceLogsInputSortedByLogDateInput]="performanceLogsSortedByLogDate"
+    <div *ngIf="performanceLogsSortedByLogDate" class="container p-3">
+      <app-performance-logs-charts (actionPerformanceLog)="setPerformanceLog($event)"
+                                   [collapseBlock]="collapseBlock"
+                                   [performanceLogsInputSortedByLogDateInput]="performanceLogsSortedByLogDate"
                                    [performanceLogsInputSortedBySetInput]="performanceLogsSortedBySet"/>
+    </div>
+    <div *ngIf="Object.keys(performanceLogsSortedByLogDate).length === 0">
+      <div class="col-auto card m-3 shadow">
+        <div class="card-body ">
+          <div class="row">
+            <div class="col-auto">
+              No performanceLogs saved
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
