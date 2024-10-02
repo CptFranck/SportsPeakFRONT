@@ -57,7 +57,7 @@
       </div>
     </div>
   </div>
-  <div [id]="tabOptions[1].id" class="tab-pane fade">
+  <div [id]="tabOptions[1].id" class="tab-pane fade p-2">
     <div *ngIf="performanceLogsSortedByLogDate">
       <app-performance-logs-charts [performanceLogsInputSortedByLogDateInput]="performanceLogsSortedByLogDate"
                                    [performanceLogsInputSortedBySetInput]="performanceLogsSortedBySet"/>
