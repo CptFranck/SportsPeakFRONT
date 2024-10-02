@@ -32,4 +32,12 @@ export class PerformanceLogSortedByLogDateComponent {
   setPerformanceLog($event: FormIndicator) {
     this.actionPerformanceLog.emit($event);
   }
+
+  ifNotFirstCollapse(i: number) {
+    return i !== 0 ? "collapsed" : ""
+  }
+
+  ifFirstShow(i: number) {
+    return i === 0 ? "show" : ""
+  }
 }

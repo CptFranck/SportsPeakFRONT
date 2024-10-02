@@ -1,16 +1,28 @@
 <div [id]="accordionParentIdDate" class="accordion">
   <div *ngFor="let perfLogsOfDate of performanceLogsSortByDate, index as i" class="accordion-item">
-    <app-collapse-group-item [accordionParentId]="accordionParentIdDate"
-                             [isOpen]="i === 0"
-                             [itemId]="perfLogsOfDate.key"
-                             [stayOpen]="true"
-                             [title]="perfLogsOfDate.key | date: 'dd/MM/yyyy'"
+    <h2 class="accordion-header">
+      <button [attr.data-bs-target]='"#" + accordionParentIdDate + perfLogsOfDate.key'
+              [class]='"accordion-button fw-bold " + ifNotFirstCollapse(i)'
+              data-bs-toggle="collapse"
+              type="button"
+      >
+        {{ perfLogsOfDate.key | date: 'dd/MM/yyyy' }}
+      </button>
+    </h2>
+    <div [attr.data-bs-parent]='accordionParentIdDate'
+         [class]='"accordion-collapse collapse " + ifFirstShow(i)'
+         [id]="accordionParentIdDate + perfLogsOfDate.key"
     >
-      <app-performance-logs-card (actionPerformanceLog)="setPerformanceLog($event)"
-                                 *ngFor="let perfLog of perfLogsOfDate.value"
-                                 [collapseBlockComponent]="collapseBlock"
-                                 [formCollapseId]="formCollapseId"
-                                 [performanceLog]="perfLog"/>
-    </app-collapse-group-item>
+      <div class="accordion-body p-0 ">
+        <app-performance-logs-card (actionPerformanceLog)="setPerformanceLog($event)"
+                                   *ngFor="let perfLog of perfLogsOfDate.value"
+                                   [activeButton]="true"
+                                   [collapseBlockComponent]="collapseBlock"
+                                   [formCollapseId]="formCollapseId"
+                                   [performanceLog]="perfLog"/>
+      </div>
+    </div>
   </div>
 </div>
+
+
