@@ -5,7 +5,6 @@ import {DictionaryItem} from "../../../interface/utils/dictionary-item";
 import {PerformanceLog} from "../../../interface/dto/performance-log";
 import {NgForOf} from "@angular/common";
 import {PerformanceLogsSetChartComponent} from "../performance-logs-set-chart/performance-logs-set-chart.component";
-import {CollapseGroupItemComponent} from "../../collapse-group/collapse-group-item.component";
 import {
   PerformanceLogsCardComponent
 } from "../../card/performance-log/performance-logs-card/performance-logs-card.component";
@@ -19,7 +18,6 @@ import {ifFirstShow, ifNotFirstCollapse} from "../../../utils/accordion-function
   imports: [
     NgForOf,
     PerformanceLogsSetChartComponent,
-    CollapseGroupItemComponent,
     PerformanceLogsCardComponent
   ],
   templateUrl: './performance-logs-charts.component.html',

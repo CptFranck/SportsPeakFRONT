@@ -1,6 +1,5 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {DatePipe, NgForOf, NgIf} from "@angular/common";
-import {CollapseGroupItemComponent} from "../../../../../../components/collapse-group/collapse-group-item.component";
 import {
   PerformanceLogsCardComponent
 } from "../../../../../../components/card/performance-log/performance-logs-card/performance-logs-card.component";
@@ -16,7 +15,6 @@ import {ifFirstShow, ifNotFirstCollapse} from "../../../../../../utils/accordion
   imports: [
     NgIf,
     NgForOf,
-    CollapseGroupItemComponent,
     PerformanceLogsCardComponent,
     DatePipe
   ],
