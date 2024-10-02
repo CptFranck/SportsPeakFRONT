@@ -51,7 +51,7 @@ export class PerformanceLogsComponent implements OnInit {
     {id: "performanceGraphId", title: "Performances graph", active: "", disabled: false},
   ];
 
-  switch: boolean = false;
+  switch: boolean = true;
   action: ActionType = ActionType.read;
   formCollapseId: string = "formCollapseId";
   accordionParentIdSet: string = "accordionParentIdSet";

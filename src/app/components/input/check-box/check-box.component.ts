@@ -8,12 +8,26 @@ import {Component, EventEmitter, Input, Output} from '@angular/core';
 })
 export class CheckBoxComponent {
 
-  @Input() label !: string;
-  @Input() checked !: boolean;
+  label!: string;
+  checked !: boolean
+  @Input() labelCheck !: string;
+  @Input() labelUnchecked !: string;
 
   @Output() actionPerformanceLog: EventEmitter<void> = new EventEmitter();
 
+  @Input() set checkedInput(checked: boolean) {
+    this.checked = checked;
+    this.updateLabel();
+  }
+
   onCheckBoxClick() {
-    this.actionPerformanceLog.emit()
+    this.actionPerformanceLog.emit();
+  }
+
+  updateLabel() {
+    if (this.checked)
+      this.label = this.labelCheck;
+    else
+      this.label = this.labelUnchecked;
   }
 }
