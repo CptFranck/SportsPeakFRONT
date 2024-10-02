@@ -1,6 +1,23 @@
-<div class="container p-2">
-  <div *ngFor="let performanceLogSet of performanceLogsInputSortedBySet">
-    <h6 class="fw-bold p-2"> Set N°{{ performanceLogSet.key }}</h6>
-    <app-performance-logs-set-chart [performanceLogSet]="performanceLogSet.value"/>
+<div [id]="accordionParentIdGraph" class="accordion">
+  <div *ngFor="let performanceLogsSet of performanceLogsInputSortedBySet, index as i" class="accordion-item">
+    <app-collapse-group-item [accordionParentId]="accordionParentIdGraph"
+                             [isOpen]="i === 0"
+                             [itemId]="performanceLogsSet.key"
+                             [stayOpen]="true"
+                             [title]='"Set N°" + performanceLogsSet.key'
+    >
+      <div class="row">
+        <div class="col">
+          <app-performance-logs-set-chart [performanceLogSet]="performanceLogsSet.value"/>
+        </div>
+        <div class="col">
+          <!--          <app-performance-logs-card (actionPerformanceLog)="setPerformanceLog($event)"-->
+          <!--                                     *ngFor="let perfLog of performanceLogsSet.value"-->
+          <!--                                     [collapseBlockComponent]="collapseBlock"-->
+          <!--                                     [formCollapseId]="formCollapseId"-->
+          <!--                                     [performanceLog]="perfLog"/>-->
+        </div>
+      </div>
+    </app-collapse-group-item>
   </div>
 </div>
