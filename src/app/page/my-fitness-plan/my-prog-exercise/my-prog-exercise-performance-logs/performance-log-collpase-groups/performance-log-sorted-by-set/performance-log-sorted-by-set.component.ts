@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {NgForOf, NgIf} from "@angular/common";
+import {DatePipe, NgForOf, NgIf} from "@angular/common";
 import {CollapseGroupItemComponent} from "../../../../../../components/collapse-group/collapse-group-item.component";
 import {
   PerformanceLogsCardComponent
@@ -8,6 +8,7 @@ import {DictionaryItem} from "../../../../../../interface/utils/dictionary-item"
 import {PerformanceLog} from "../../../../../../interface/dto/performance-log";
 import {CollapseBlockComponent} from "../../../../../../components/collapse-block/collapse-block.component";
 import {FormIndicator} from "../../../../../../interface/utils/form-indicator";
+import {ifFirstShow, ifNotFirstCollapse} from "../../../../../../utils/accordion-function";
 
 @Component({
   selector: 'app-performance-log-sorted-by-set',
@@ -16,7 +17,8 @@ import {FormIndicator} from "../../../../../../interface/utils/form-indicator";
     NgIf,
     NgForOf,
     CollapseGroupItemComponent,
-    PerformanceLogsCardComponent
+    PerformanceLogsCardComponent,
+    DatePipe
   ],
   templateUrl: './performance-log-sorted-by-set.component.html',
 })
@@ -27,6 +29,8 @@ export class PerformanceLogSortedBySetComponent {
   @Input() performanceLogsSortedBySet!: DictionaryItem<PerformanceLog[]>[];
 
   @Output() actionPerformanceLog: EventEmitter<FormIndicator> = new EventEmitter<FormIndicator>();
+  protected readonly ifFirstShow = ifFirstShow;
+  protected readonly ifNotFirstCollapse = ifNotFirstCollapse;
 
   setPerformanceLog($event: FormIndicator) {
     this.actionPerformanceLog.emit($event);

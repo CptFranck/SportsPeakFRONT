@@ -1,16 +1,26 @@
 <div [id]="accordionParentIdSet" class="accordion">
   <div *ngFor="let performanceLogsSet of performanceLogsSortedBySet, index as i" class="accordion-item">
-    <app-collapse-group-item [accordionParentId]="accordionParentIdSet"
-                             [isOpen]="false"
-                             [itemId]="performanceLogsSet.key"
-                             [stayOpen]="true"
-                             [title]='"Set N°" +performanceLogsSet.key'
+
+    <h2 class="accordion-header">
+      <button [attr.data-bs-target]='"#" + accordionParentIdSet + performanceLogsSet.key'
+              [class]='"accordion-button fw-bold " + ifNotFirstCollapse(i)'
+              data-bs-toggle="collapse"
+              type="button"
+      >
+        {{ "Set N°" + performanceLogsSet.key }}
+      </button>
+    </h2>
+    <div [attr.data-bs-parent]='accordionParentIdSet'
+         [class]='"accordion-collapse collapse " + ifFirstShow(i)'
+         [id]="accordionParentIdSet + performanceLogsSet.key"
     >
-      <app-performance-logs-card (actionPerformanceLog)="setPerformanceLog($event)"
-                                 *ngFor="let perfLog of performanceLogsSet.value"
-                                 [collapseBlockComponent]="collapseBlock"
-                                 [formCollapseId]="formCollapseId"
-                                 [performanceLog]="perfLog"/>
-    </app-collapse-group-item>
+      <div class="accordion-body p-0 ">
+        <app-performance-logs-card (actionPerformanceLog)="setPerformanceLog($event)"
+                                   *ngFor="let perfLog of performanceLogsSet.value"
+                                   [collapseBlockComponent]="collapseBlock"
+                                   [formCollapseId]="formCollapseId"
+                                   [performanceLog]="perfLog"/>
+      </div>
+    </div>
   </div>
 </div>
