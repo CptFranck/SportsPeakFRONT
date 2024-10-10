@@ -38,7 +38,7 @@ export class ProgExerciseCardDetailsComponent implements OnInit {
 
   showProgExercisePerformance(progExercise: ProgExercise): void {
     this.actionProgExercises.emit({
-      actionType: ActionType.read,
+      actionType: ActionType.checkPerformance,
       object: progExercise
     });
   }
