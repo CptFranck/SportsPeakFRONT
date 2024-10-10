@@ -1,1 +1,28 @@
-<p>my-prog-exercise-performance works!</p>
+<div [id]="accordionAllPerformance" class="accordion">
+  <div *ngFor="let targetSetPerformance of targetSetsPerformanceLogsSortedByLogDate, index as i" class="accordion-item">
+    <h2 class="accordion-header">
+      <button [attr.data-bs-target]='"#" + accordionAllPerformance + targetSetPerformance.key'
+              [class]='"accordion-button fw-bold " + ifNotFirstCollapse(i)'
+              data-bs-toggle="collapse"
+              type="button"
+      >
+        Step N° {{ targetSetPerformance.key }}
+      </button>
+    </h2>
+    <div [attr.data-bs-parent]='accordionAllPerformance'
+         [class]='"accordion-collapse collapse " + ifFirstShow(i)'
+         [id]="accordionAllPerformance + targetSetPerformance.key"
+    >
+      <div class="accordion-body p-0 ">
+        <div class="container py-1">
+          <div class="row row-cols-5 align-items-center">
+            <div *ngFor="let test of targetSetPerformance.value" class="col p-2">
+              <p class="fw-bold"> Set N° {{ test.key }} </p>
+              <app-performance-logs-set-chart [performanceLogSetInput]="test.value"/>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
