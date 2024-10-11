@@ -24,11 +24,11 @@ import {ifFirstShow, ifNotFirstCollapse} from "../../../utils/accordion-function
 })
 export class PerformanceLogsChartsComponent {
 
-  accordionParentIdGraph: any;
   performanceLogsInputSortedBySet!: DictionaryItem<PerformanceLog[]>[];
   performanceLogsInputSortedByLogDate!: DictionaryItem<PerformanceLog[]>[];
 
   @Input() collapseBlock!: CollapseBlockComponent;
+  @Input() accordionParentIdGraph!: string;
 
   @Output() actionPerformanceLog: EventEmitter<FormIndicator> = new EventEmitter<FormIndicator>();
   protected readonly ifFirstShow = ifFirstShow;
