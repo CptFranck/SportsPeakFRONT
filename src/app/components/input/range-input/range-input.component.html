@@ -1,3 +1,4 @@
-<label class="form-label" for="customRange3">{{ label }}</label>
-<input (change)="change($event)" [max]="max" [min]="min" [step]="step" [value]="value" class="form-range" id="customRange3"
+<label class="form-label" for="customRange3">{{ label }} : {{ value }}</label>
+<input (input)="change($event)" [max]="max" [min]="min" [step]="step" [value]="value" class="form-range"
+       id="customRange3"
        type="range">

@@ -5,7 +5,6 @@ import {Component, EventEmitter, Input, Output} from '@angular/core';
   standalone: true,
   imports: [],
   templateUrl: './range-input.component.html',
-  styleUrl: './range-input.component.css'
 })
 export class RangeInputComponent {
 
@@ -17,7 +16,10 @@ export class RangeInputComponent {
 
   @Output() onChange: EventEmitter<number> = new EventEmitter();
 
-  change(event: number) {
-    this.onChange.emit(event);
+  change($event: Event) {
+    if ($event.target instanceof HTMLInputElement) {
+      this.value = parseInt($event.target.value);
+      this.onChange.emit(parseInt($event.target.value));
+    }
   }
 }
