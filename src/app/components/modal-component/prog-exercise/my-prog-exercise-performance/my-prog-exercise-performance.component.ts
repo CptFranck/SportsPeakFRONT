@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {ProgExercise} from "../../../../interface/dto/prog-exercise";
 import {ifFirstShow, ifNotFirstCollapse} from "../../../../utils/accordion-function";
 import {DatePipe, NgForOf} from "@angular/common";
@@ -14,6 +14,7 @@ import {DictionaryItem} from "../../../../interface/utils/dictionary-item";
 import {
   PerformanceLogsSetChartComponent
 } from "../../../chart/performance-logs-set-chart/performance-logs-set-chart.component";
+import {RangeInputComponent} from "../../../input/range-input/range-input.component";
 
 @Component({
   selector: 'app-my-prog-exercise-performance',
@@ -22,12 +23,15 @@ import {
     DatePipe,
     NgForOf,
     PerformanceLogsCardComponent,
-    PerformanceLogsSetChartComponent
+    PerformanceLogsSetChartComponent,
+    RangeInputComponent
   ],
   templateUrl: './my-prog-exercise-performance.component.html',
 })
-export class MyProgExercisePerformanceComponent {
+export class MyProgExercisePerformanceComponent implements OnInit {
   progExercise!: ProgExercise;
+  rowColNumber: number = 3;
+  rowColNumberClass: string = "row-cols-";
   accordionAllPerformance: string = "accordionAllPerformance";
   targetSetsPerformanceLogsSortedByLogDate: DictionaryItem<DictionaryItem<PerformanceLog[]>[]>[] = []
 
@@ -46,7 +50,14 @@ export class MyProgExercisePerformanceComponent {
           value: sortPerformanceLogsBySet(this.progExercise, targetSet)
         })
       })
-      console.log(this.targetSetsPerformanceLogsSortedByLogDate)
     }
+  }
+
+  ngOnInit() {
+    this.rowColNumberClass = this.rowColNumberClass + this.rowColNumber.toString();
+  }
+
+  changeRowColNumber($event: number) {
+    this.rowColNumberClass = this.rowColNumberClass.replace(this.rowColNumberClass.slice(-1), $event.toString())
   }
 }
