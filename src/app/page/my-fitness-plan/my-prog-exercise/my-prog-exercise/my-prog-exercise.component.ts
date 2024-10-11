@@ -64,11 +64,6 @@ export class MyProgExerciseComponent implements OnInit, OnDestroy {
   private proExerciseService: ProgExerciseService = inject(ProgExerciseService);
 
   ngOnInit(): void {
-    this.activatedRoute.params
-      .pipe(takeUntil(this.unsubscribe$))
-      .subscribe((params: Params) => {
-        this.proExerciseService.getProgExerciseById(params['id']);
-      });
     this.proExerciseService.progExercise
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe((progExercise: ProgExercise | undefined) => {
@@ -79,6 +74,12 @@ export class MyProgExerciseComponent implements OnInit, OnDestroy {
               this.progExercise.targetSets.find((targetSet: TargetSet) => this.targetSet?.id === targetSet.id);
           }
         }
+      });
+    this.activatedRoute.params
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe((params: Params) => {
+        if (params['id'] !== this.progExercise?.id)
+          this.proExerciseService.getProgExerciseById(params['id']);
       });
     this.proExerciseService.isLoading
       .pipe(takeUntil(this.unsubscribe$))
