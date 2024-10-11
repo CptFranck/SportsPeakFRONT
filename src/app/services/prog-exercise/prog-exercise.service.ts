@@ -26,7 +26,7 @@ export class ProgExerciseService {
   progExercise: BehaviorSubject<ProgExercise | undefined> = new BehaviorSubject<ProgExercise | undefined>(undefined);
   progExercises: BehaviorSubject<ProgExercise[]> = new BehaviorSubject<ProgExercise[]>([]);
   userProgExercises: BehaviorSubject<ProgExercise[]> = new BehaviorSubject<ProgExercise[]>([]);
-  isLoading: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  isLoading: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
 
   private user: User | undefined;
   private router: Router = inject(Router);
@@ -45,6 +45,7 @@ export class ProgExerciseService {
   }
 
   getProgExercises() {
+    this.isLoading.next(true);
     this.apollo.watchQuery({
       query: GET_PROG_EXERCISES,
     }).valueChanges.subscribe((result: ApolloQueryResult<any>): void => {
@@ -57,6 +58,8 @@ export class ProgExerciseService {
   }
 
   getProgExerciseById(progExerciseId: number) {
+    this.progExercise.next(undefined);
+    this.isLoading.next(true);
     this.apollo.watchQuery({
       query: GET_PROG_EXERCISE_BY_ID,
       variables: {
@@ -72,6 +75,7 @@ export class ProgExerciseService {
   }
 
   getUserProgExercises(user: User) {
+    this.isLoading.next(true);
     this.apollo.watchQuery({
       query: GET_USER_PROG_EXERCISES,
       variables: {

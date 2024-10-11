@@ -15,7 +15,7 @@ import {UserLoggedService} from "../user-logged/user-logged.service";
 export class RoleService {
 
   roles: BehaviorSubject<Role[]> = new BehaviorSubject<Role[]>([]);
-  isLoading: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  isLoading: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
 
   private apollo: Apollo = inject(Apollo);
   private alertService: AlertService = inject(AlertService);
@@ -30,6 +30,7 @@ export class RoleService {
   }
 
   getRoles() {
+    this.isLoading.next(true);
     return this.apollo.watchQuery({
       query: GET_ROLES,
     }).valueChanges.subscribe((result: ApolloQueryResult<any>): void => {

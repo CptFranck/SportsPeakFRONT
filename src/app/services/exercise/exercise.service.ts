@@ -13,7 +13,7 @@ import {ApolloQueryResult} from "@apollo/client";
 export class ExerciseService {
 
   exercises: BehaviorSubject<Exercise[]> = new BehaviorSubject<Exercise[]>([]);
-  isLoading: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  isLoading: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
 
   private apollo: Apollo = inject(Apollo);
   private alertService: AlertService = inject(AlertService);
@@ -23,6 +23,7 @@ export class ExerciseService {
   }
 
   getExercises() {
+    this.isLoading.next(true);
     return this.apollo.watchQuery({
       query: GET_EXERCISES,
     }).valueChanges.subscribe((result: ApolloQueryResult<any>): void => {

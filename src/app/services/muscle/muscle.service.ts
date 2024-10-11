@@ -13,7 +13,7 @@ import {ApolloQueryResult} from "@apollo/client";
 export class MuscleService {
 
   muscles: BehaviorSubject<Muscle[]> = new BehaviorSubject<Muscle[]>([]);
-  isLoading: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  isLoading: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
 
   private apollo: Apollo = inject(Apollo);
   private alertService: AlertService = inject(AlertService);
@@ -23,6 +23,7 @@ export class MuscleService {
   }
 
   getMuscles() {
+    this.isLoading.next(true);
     return this.apollo.watchQuery({
       query: GET_MUSCLES,
     }).valueChanges.subscribe((result: ApolloQueryResult<any>): void => {

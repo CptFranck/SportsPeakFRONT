@@ -24,7 +24,7 @@ import {Auth} from "../../interface/dto/auth";
 export class UserService {
 
   users: BehaviorSubject<User[]> = new BehaviorSubject<User[]>([]);
-  isLoading: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  isLoading: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
 
   private apollo: Apollo = inject(Apollo);
   private authService: AuthService = inject(AuthService);
@@ -40,6 +40,7 @@ export class UserService {
   }
 
   getUsers() {
+    this.isLoading.next(true);
     return this.apollo.watchQuery({
       query: GET_USERS,
     }).valueChanges.subscribe((result: ApolloQueryResult<any>): void => {
