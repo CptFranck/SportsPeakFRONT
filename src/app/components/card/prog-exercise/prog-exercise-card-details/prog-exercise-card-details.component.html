@@ -1,7 +1,7 @@
 <div class="card mt-2 shadow">
   <div class="card-body">
     <div class="row">
-      <div class="col">
+      <div class="col-auto">
         <h5 class="card-title">{{ progExercise.name }}</h5>
         <div class="row">
           <div class="col">
@@ -44,8 +44,8 @@
           </div>
         </div>
       </div>
-      <div class="col-auto align-content-center">
-        <div class="row pt-1 text-center">
+      <div class="col align-content-center">
+        <div class="row pt-1">
           <app-modal-button
             (onCLickModalButton)="showProgExercisePerformance($event)"
             [allWidth]="true"
@@ -57,7 +57,7 @@
             <i class="fa-solid fa-chart-line"></i>
           </app-modal-button>
         </div>
-        <div class="row pt-1 ">
+        <div class="pt-1">
           <app-modal-button
             (onCLickModalButton)="modifyProgExercise($event)"
             [allWidth]="true"
@@ -69,7 +69,7 @@
             <i class="fa-solid fa-pen-to-square"></i>
           </app-modal-button>
         </div>
-        <div class="row pt-1 text-center">
+        <div class="pt-1">
           <app-modal-button
             (onCLickModalButton)="delProgExercise($event)"
             [allWidth]="true"
