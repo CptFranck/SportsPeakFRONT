@@ -4,7 +4,7 @@
       <div class="col-auto">
         <h5 class="fw-bold"> {{ "Step N°" + targetSet.index }}</h5>
         <div class="row">
-          <div class="col-auto d-flex align-items-center">
+          <div class="col d-flex align-items-center">
             <label class="fw-bold me-1"> Set : </label>
             {{ targetSet.setNumber }}
           </div>
@@ -21,96 +21,100 @@
           </div>
         </div>
         <div class="row text-center pt-2">
-          <div class="col p-1">
-            <app-modal-button
-              (onCLickModalButton)="addNewPerformance($event)"
-              [modalId]="performanceLogModalId"
-              [modalValue]="targetSet"
-              btnClass="btn-secondary"
-            >
-              New performance
-              <i class="fa-regular fa-square-plus"></i>
-            </app-modal-button>
-          </div>
-          <div class="col p-1">
-            <app-modal-button
-              (onCLickModalButton)="checkPerformance($event)"
-              [modalId]="performanceLogModalId"
-              [modalValue]="targetSet"
-              btnClass="btn-secondary"
-            >
-              Check performances
-              <i class="fa-solid fa-chart-line"></i>
-            </app-modal-button>
-          </div>
-        </div>
-      </div>
-      <div class="col align-content-center">
-        <div class="row">
-          <div class="col align-content-center">
-            <div class="container d-flex">
-              <label class="fw-bold me-1"> One Rep : </label>
-              {{ targetSetRepetition }}
-            </div>
-            <div class="container d-flex">
-              <label class="fw-bold me-1"> Rest : </label>
-              {{ targetSetRestTime }}
-            </div>
-            <div class="container d-flex">
-              <label class="fw-bold me-1"> Total : </label>
-              {{ targetSetTime }}
-            </div>
-          </div>
-          <div class="col text-center align-content-center">
+          <div class="col">
             <div class="p-1">
               <app-modal-button
-                (onCLickModalButton)="adjustTargetSet($event)"
+                (onCLickModalButton)="addNewPerformance($event)"
                 [allWidth]="true"
-                [modalId]="targetSetModalId"
+                [modalId]="performanceLogModalId"
                 [modalValue]="targetSet"
                 btnClass="btn-secondary"
               >
-                Adjust objective
-                <i class="fa-solid fa-sliders"></i>
+                New performance
+                <i class="fa-regular fa-square-plus"></i>
               </app-modal-button>
             </div>
+          </div>
+          <div class="col">
             <div class="p-1">
               <app-modal-button
-                (onCLickModalButton)="checkTargetSet($event)"
+                (onCLickModalButton)="checkPerformance($event)"
                 [allWidth]="true"
-                [modalId]="targetSetModalId"
+                [modalId]="performanceLogModalId"
                 [modalValue]="targetSet"
                 btnClass="btn-secondary"
               >
-                Objectives evolution
+                Check performances
                 <i class="fa-solid fa-chart-line"></i>
               </app-modal-button>
             </div>
           </div>
-          <div class="col text-center align-content-center">
-            <div class="p-1">
-              <app-modal-button
-                (onCLickModalButton)="modifyTargetSet($event)"
-                [modalId]="targetSetModalId"
-                [modalValue]="targetSet"
-                btnClass="btn-secondary"
-              >
-                Modify
-                <i class="fa-solid fa-pen-to-square"></i>
-              </app-modal-button>
-            </div>
-            <div class="p-1">
-              <app-modal-button
-                (onCLickModalButton)="delTargetSet($event)"
-                [modalId]="targetSetModalId"
-                [modalValue]="targetSet"
-                btnClass="btn-danger"
-              >
-                Delete
-                <i class="fa-solid fa-trash"></i>
-              </app-modal-button>
-            </div>
-          </div>
+        </div>
+      </div>
+      <div class="col align-content-center">
+        <div class="container d-flex">
+          <label class="fw-bold me-1"> One Rep : </label>
+          {{ targetSetRepetition }}
+        </div>
+        <div class="container d-flex">
+          <label class="fw-bold me-1"> Rest : </label>
+          {{ targetSetRestTime }}
+        </div>
+        <div class="container d-flex">
+          <label class="fw-bold me-1"> Total : </label>
+          {{ targetSetTime }}
+        </div>
+      </div>
+      <div class="col align-content-center">
+        <div class="p-1">
+          <app-modal-button
+            (onCLickModalButton)="adjustTargetSet($event)"
+            [allWidth]="true"
+            [modalId]="targetSetModalId"
+            [modalValue]="targetSet"
+            btnClass="btn-secondary"
+          >
+            Adjust objective
+            <i class="fa-solid fa-sliders"></i>
+          </app-modal-button>
+        </div>
+        <div class="p-1">
+          <app-modal-button
+            (onCLickModalButton)="checkTargetSet($event)"
+            [allWidth]="true"
+            [modalId]="targetSetModalId"
+            [modalValue]="targetSet"
+            btnClass="btn-secondary"
+          >
+            Objectives evolution
+            <i class="fa-solid fa-chart-line"></i>
+          </app-modal-button>
+        </div>
+      </div>
+      <div class="col align-content-center">
+        <div class="p-1">
+          <app-modal-button
+            (onCLickModalButton)="modifyTargetSet($event)"
+            [allWidth]="true"
+            [modalId]="targetSetModalId"
+            [modalValue]="targetSet"
+            btnClass="btn-secondary"
+          >
+            Modify
+            <i class="fa-solid fa-pen-to-square"></i>
+          </app-modal-button>
+        </div>
+        <div class="p-1">
+          <app-modal-button
+            (onCLickModalButton)="delTargetSet($event)"
+            [allWidth]="true"
+            [modalId]="targetSetModalId"
+            [modalValue]="targetSet"
+            btnClass="btn-danger"
+          >
+            Delete
+            <i class="fa-solid fa-trash"></i>
+          </app-modal-button>
         </div>
       </div>
     </div>
