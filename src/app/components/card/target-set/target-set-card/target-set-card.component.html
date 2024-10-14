@@ -3,7 +3,7 @@
     <div class="row justify-content-center">
       <div class="col-auto">
         <h5 class="fw-bold"> {{ "Step N°" + targetSet.index }}</h5>
-        <div class="row">
+        <div class="row p-2">
           <div class="col d-flex align-items-center">
             <label class="fw-bold me-1"> Set : </label>
             {{ targetSet.setNumber }}
@@ -20,7 +20,7 @@
             <app-target-set-state-form [targetSet]="targetSet"/>
           </div>
         </div>
-        <div class="row pt-2">
+        <div class="row">
           <div class="col align-content-center">
             <div class="p-1">
               <app-modal-button
