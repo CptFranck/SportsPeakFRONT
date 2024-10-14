@@ -94,7 +94,7 @@ export class PerformanceLogService {
         refetchQueries: [{
           query: GET_PROG_EXERCISE_BY_ID,
           variables: {
-            id: performanceLog.id
+            id: this.progExercise.id
           }
         }]
       }).subscribe((result: MutationResult): void => {
