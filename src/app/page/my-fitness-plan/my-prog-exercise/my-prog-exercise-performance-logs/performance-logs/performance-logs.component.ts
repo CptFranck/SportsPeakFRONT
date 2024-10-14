@@ -64,6 +64,8 @@ export class PerformanceLogsComponent implements OnInit {
   performanceLogsSortedBySet: DictionaryItem<PerformanceLog[]>[] = [];
   performanceLogsSortedByLogDate: DictionaryItem<PerformanceLog[]>[] = [];
 
+  @Input() isTargetSetLog: boolean = false;
+
   @ViewChild("performanceCollapseTemplate") modalTemplate!: TemplateRef<any>;
 
   protected readonly ActionType = ActionType;
@@ -85,8 +87,8 @@ export class PerformanceLogsComponent implements OnInit {
 
   initialize() {
     if (this.targetSet && this.progExercise) {
-      this.performanceLogsSortedBySet = sortPerformanceLogsBySet(this.progExercise, this.targetSet);
-      this.performanceLogsSortedByLogDate = sortPerformanceLogsByDate(this.progExercise, this.targetSet)
+      this.performanceLogsSortedBySet = sortPerformanceLogsBySet(this.progExercise, this.targetSet, this.isTargetSetLog);
+      this.performanceLogsSortedByLogDate = sortPerformanceLogsByDate(this.progExercise, this.targetSet, this.isTargetSetLog)
     }
   }
 
