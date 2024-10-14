@@ -5,7 +5,7 @@
 <div [id]="tabId" class="tab-content border border-top-0 rounded-bottom border-1">
   <app-collapse-block #collapseBlock
                       [actionType]="action"
-                      [collapseId]="formCollapseId"
+                      [collapseId]="performanceLogFormCollapseId"
                       [contentTemplate]="performanceCollapseTemplate"
   />
   <ng-template #performanceCollapseTemplate let-btnClose="btnClose"
@@ -34,14 +34,14 @@
       <app-performance-log-sorted-by-log-date (actionPerformanceLog)="setPerformanceLog($event)"
                                               [accordionParentIdDate]="accordionParentIdDate"
                                               [collapseBlock]="collapseBlock"
-                                              [formCollapseId]="formCollapseId"
+                                              [formCollapseId]="performanceLogFormCollapseId"
                                               [hidden]="!switch"
                                               [performanceLogsSortByDate]="performanceLogsSortedByLogDate"
       />
       <app-performance-log-sorted-by-set (actionPerformanceLog)="setPerformanceLog($event)"
                                          [accordionParentIdSet]="accordionParentIdSet"
                                          [collapseBlock]="collapseBlock"
-                                         [formCollapseId]="formCollapseId"
+                                         [formCollapseId]="performanceLogFormCollapseId"
                                          [hidden]="switch"
                                          [performanceLogsSortedBySet]="performanceLogsSortedBySet"
       />

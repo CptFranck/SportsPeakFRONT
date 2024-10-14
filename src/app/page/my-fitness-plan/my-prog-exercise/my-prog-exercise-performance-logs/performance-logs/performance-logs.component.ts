@@ -53,9 +53,9 @@ export class PerformanceLogsComponent implements OnInit {
 
   switch: boolean = true;
   action: ActionType = ActionType.read;
-  formCollapseId: string = "formCollapseId";
   accordionParentIdSet: string = "accordionParentIdSet";
   accordionParentIdDate: string = "accordionParentIdDate";
+  performanceLogFormCollapseId: string = "PerformanceLogFormCollapseId";
 
   progExercise: ProgExercise | undefined;
   targetSet: TargetSet | undefined;
