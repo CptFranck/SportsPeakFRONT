@@ -27,6 +27,7 @@ export class PerformanceLogSortedByLogDateComponent {
   @Input() performanceLogsSortByDate!: DictionaryItem<PerformanceLog[]>[];
 
   @Output() actionPerformanceLog: EventEmitter<FormIndicator> = new EventEmitter<FormIndicator>();
+  
   protected readonly ifFirstShow = ifFirstShow;
   protected readonly ifNotFirstCollapse = ifNotFirstCollapse;
 
