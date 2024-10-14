@@ -34,7 +34,13 @@ export function addDurationAmount(durationA: Duration, durationB: Duration) {
 
 export function getStringTime(duration: Duration): string {
   const formatedDuration: Duration = formatTimeDuration(duration);
-  return formatedDuration["hours"] + "h" + formatedDuration["minutes"] + "m" + formatedDuration["seconds"] + "s";
+  let stringTime: string = "";
+  if (formatedDuration["hours"] >= 1)
+    stringTime += formatedDuration["hours"] + "h";
+  if (formatedDuration["minutes"] >= 1)
+    stringTime += formatedDuration["minutes"] + "m";
+  stringTime += formatedDuration["seconds"] + "s";
+  return stringTime;
 }
 
 export function formatTimeDuration(duration: Duration): Duration {
