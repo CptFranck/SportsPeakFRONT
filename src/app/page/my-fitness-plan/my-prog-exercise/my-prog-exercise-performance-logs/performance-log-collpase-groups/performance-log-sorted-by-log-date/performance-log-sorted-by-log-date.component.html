@@ -17,6 +17,7 @@
         <app-performance-logs-card (actionPerformanceLog)="setPerformanceLog($event)"
                                    *ngFor="let perfLog of perfLogsOfDate.value"
                                    [activeButton]="true"
+                                   [centerContent]="true"
                                    [collapseBlockComponent]="collapseBlock"
                                    [formCollapseId]="formCollapseId"
                                    [performanceLog]="perfLog"/>

@@ -16,6 +16,8 @@
       <div class="accordion-body p-0 ">
         <app-performance-logs-card (actionPerformanceLog)="setPerformanceLog($event)"
                                    *ngFor="let perfLog of performanceLogsSet.value"
+                                   [activeButton]="true"
+                                   [centerContent]="true"
                                    [collapseBlockComponent]="collapseBlock"
                                    [formCollapseId]="formCollapseId"
                                    [performanceLog]="perfLog"/>
