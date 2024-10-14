@@ -15,6 +15,9 @@ import {
 import {
   TargetSetDeleteFormComponent
 } from "../../../../../components/form/target-set/target-set-delete-form/target-set-delete-form.component";
+import {
+  PerformanceLogsComponent
+} from "../../my-prog-exercise-performance-logs/performance-logs/performance-logs.component";
 
 @Component({
   selector: 'app-target-set-logs',
@@ -25,7 +28,8 @@ import {
     NgIf,
     CollapseBlockComponent,
     TargetSetEntityFormComponent,
-    TargetSetDeleteFormComponent
+    TargetSetDeleteFormComponent,
+    PerformanceLogsComponent
   ],
   templateUrl: './target-set-logs.component.html',
 })
@@ -33,7 +37,7 @@ export class TargetSetLogsComponent implements OnInit {
   switch: boolean = true;
   action: ActionType = ActionType.read;
   targetSetLog: TargetSet | undefined;
-  targetSetCreationDate: string | undefined;
+  blocTitle: string | undefined;
   targetSetFormCollapseId: string = "TargetSetFormCollapseId";
 
   targetSet: TargetSet | undefined;
@@ -70,6 +74,10 @@ export class TargetSetLogsComponent implements OnInit {
   setTargetSet(formIndicator: FormIndicator) {
     this.action = formIndicator.actionType;
     this.targetSetLog = formIndicator.object;
-    this.targetSetCreationDate = new Date(formIndicator.object?.creationDate).toLocaleDateString();
+    if (this.action === ActionType.checkPerformance) {
+
+    } else {
+      this.blocTitle = "Set created on " + new Date(formIndicator.object?.creationDate).toLocaleDateString();
+    }
   }
 }
