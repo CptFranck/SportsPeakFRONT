@@ -30,7 +30,6 @@
         <div class="row align-content-center pt-1">
           <app-modal-button
             [allWidth]="true"
-            [modalId]="modalId"
             [modalValue]="targetSet"
             btnClass="btn-secondary"
           >
@@ -56,28 +55,32 @@
       </div>
       <div class="col text-center align-content-center">
         <div class="row py-1">
-          <app-modal-button
-            (onCLickModalButton)="modifyTargetSet($event)"
+          <app-collapse-button
+            (onClickEvent)="modifyTargetSet($event)"
             [allWidth]="true"
-            [modalId]="modalId"
-            [modalValue]="targetSet"
+            [collapseBlockComponent]="collapseBlockComponent"
+            [collapseId]="formCollapseId"
+            [onlyOpen]="true"
+            [value]="targetSet"
             btnClass="btn-secondary"
           >
             Modify
             <i class="fa-solid fa-pen-to-square"></i>
-          </app-modal-button>
+          </app-collapse-button>
         </div>
         <div class="row py-1">
-          <app-modal-button
-            (onCLickModalButton)="delTargetSet($event)"
+          <app-collapse-button
+            (onClickEvent)="delTargetSet($event)"
             [allWidth]="true"
-            [modalId]="modalId"
-            [modalValue]="targetSet"
+            [collapseBlockComponent]="collapseBlockComponent"
+            [collapseId]="formCollapseId"
+            [onlyOpen]="true"
+            [value]="targetSet"
             btnClass="btn-danger"
           >
             Delete
             <i class="fa-solid fa-trash"></i>
-          </app-modal-button>
+          </app-collapse-button>
         </div>
       </div>
     </div>

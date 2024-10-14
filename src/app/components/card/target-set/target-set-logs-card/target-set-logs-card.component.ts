@@ -8,13 +8,16 @@ import {
 } from "../../../form/target-set/target-set-state-form/target-set-state-form.component";
 import {getTargetSetInformation, getTargetSetTimeToString} from "../../../../utils/target-set-functions";
 import {getStringTime} from "../../../../utils/duration-functions";
+import {CollapseBlockComponent} from "../../../collapse-block/collapse-block.component";
+import {CollapseButtonComponent} from "../../../collapse-buton/collapse-button.component";
 
 @Component({
   selector: 'app-target-set-logs-card',
   standalone: true,
   imports: [
     ModalButtonComponent,
-    TargetSetStateFormComponent
+    TargetSetStateFormComponent,
+    CollapseButtonComponent
   ],
   templateUrl: './target-set-logs-card.component.html',
 })
@@ -25,8 +28,9 @@ export class TargetSetLogsCardComponent implements OnInit {
   targetSetRepetition: string = "";
   targetSetCreationDate!: Date;
 
-  @Input() modalId!: string;
   @Input() targetSet!: TargetSet;
+  @Input() collapseBlockComponent!: CollapseBlockComponent;
+  @Input() formCollapseId!: string;
   @Input() isLastTargetSet: boolean = false;
 
   @Output() actionTargetSets: EventEmitter<FormIndicator> = new EventEmitter<FormIndicator>();
