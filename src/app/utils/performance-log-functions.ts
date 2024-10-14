@@ -22,9 +22,27 @@ export function sortPerformanceLogsByDictionaryDate(performanceLogs: Performance
   return convertDictionaryToArray(dictionary);
 }
 
-export function sortPerformanceLogsBy(progExercise: ProgExercise, targetSet: TargetSet, logDateTrueSetIndexFalse: boolean) {
+export function sortPerformanceLogsByDate(progExercise: ProgExercise, targetSet: TargetSet, isTargetSetLog: boolean = false) {
+  return sortPerformanceLogsBy(progExercise, targetSet, true, isTargetSetLog);
+}
+
+export function sortPerformanceLogsBySet(progExercise: ProgExercise, targetSet: TargetSet, isTargetSetLog: boolean = false) {
+  return sortPerformanceLogsBy(progExercise, targetSet, false, isTargetSetLog);
+}
+
+export function sortPerformanceLogsBy(
+  progExercise: ProgExercise,
+  targetSet: TargetSet,
+  logDateTrueSetIndexFalse: boolean,
+  isTargetSetLog: boolean = false
+) {
   let performanceLogSortedDictionary: Dictionary<PerformanceLog[]> = {};
-  const targetSetLogs: TargetSet[] = getTargetSetLogs(targetSet, progExercise, true);
+
+  let targetSetLogs: TargetSet[] = [];
+  if (isTargetSetLog)
+    targetSetLogs.push(targetSet)
+  else
+    targetSetLogs = getTargetSetLogs(targetSet, progExercise, true);
 
   targetSetLogs.forEach((localTargetSet: TargetSet) => {
     localTargetSet.performanceLogs.forEach((performanceLog: PerformanceLog) => {
@@ -51,14 +69,6 @@ export function sortPerformanceLogsBy(progExercise: ProgExercise, targetSet: Tar
   })
 
   return performanceLogSortedDictionaryItem;
-}
-
-export function sortPerformanceLogsByDate(progExercise: ProgExercise, targetSet: TargetSet) {
-  return sortPerformanceLogsBy(progExercise, targetSet, true);
-}
-
-export function sortPerformanceLogsBySet(progExercise: ProgExercise, targetSet: TargetSet) {
-  return sortPerformanceLogsBy(progExercise, targetSet, false);
 }
 
 export function sortPerformanceLogsBySetIndex(a: PerformanceLog, b: PerformanceLog) {
