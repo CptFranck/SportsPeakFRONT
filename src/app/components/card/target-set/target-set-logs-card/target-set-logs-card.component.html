@@ -6,64 +6,59 @@
           {{ "Set from " + targetSetCreationDate.toLocaleDateString() }}
         </h5>
         <div class="row">
-          <div class="col-auto">
-            <label class="fw-bold"> Set : </label>
+          <div class="col-auto d-flex">
+            <label class="fw-bold me-1"> Set : </label>
             {{ targetSet.setNumber }}
           </div>
-          <div class="col-auto">
-            <label class="fw-bold"> Reps : </label>
+          <div class="col-auto d-flex">
+            <label class="fw-bold me-1"> Reps : </label>
             {{ targetSet.repetitionNumber }}
           </div>
-          <div class="col-auto">
-            <label class="fw-bold"> Weight : </label>
+          <div class="col-auto d-flex">
+            <label class="fw-bold me-1"> Weight : </label>
             {{ targetSet.weight + " " + targetSet.weightUnit }}
           </div>
-          <div class="col-auto">
-            <label class="fw-bold"> Created : </label>
+          <div class="col-auto d-flex">
+            <label class="fw-bold me-1"> Created : </label>
             {{ targetSetCreationDate.toLocaleDateString() }}
           </div>
-          <div class="col-auto">
-            <label class="fw-bold"> State : </label>
+          <div class="col-auto d-flex">
+            <label class="fw-bold me-1"> State : </label>
             {{ targetSet.state }}
           </div>
         </div>
-        <div class="row pt-2">
-          <div class="col p-1">
-            <app-modal-button
-              [modalId]="modalId"
-              [modalValue]="targetSet"
-              btnClass="btn-secondary"
-              class="ps-1"
-            >
-              Check performances NOT WORKING
+        <div class="row align-content-center pt-1">
+          <app-modal-button
+            [allWidth]="true"
+            [modalId]="modalId"
+            [modalValue]="targetSet"
+            btnClass="btn-secondary"
+          >
+            Check performances NOT WORKING
 
-              <i class="fa-solid fa-chart-line"></i>
-            </app-modal-button>
-          </div>
+            <i class="fa-solid fa-chart-line"></i>
+          </app-modal-button>
         </div>
       </div>
       <div class="col align-content-center">
         <div class="row">
-          <div class="col-auto mx-auto">
-            <div class="col-auto p-2">
-              <label class="fw-bold"> One Rep Time : </label>
-              {{ targetSetRepetition }}
-            </div>
-            <div class="col-auto p-2">
-              <label class="fw-bold"> Rest Time : </label>
-              {{ targetSetRestTime }}
-            </div>
-            <div class="col-auto p-2">
-              <label class="fw-bold"> Total Time : </label>
-              {{ targetSetTime }}
-            </div>
-          </div>
+          <label class="col fw-bold me-1 "> One Rep : </label>
+          {{ targetSetRepetition }}
+        </div>
+        <div class="row">
+          <label class="col fw-bold me-1"> Rest : </label>
+          {{ targetSetRestTime }}
+        </div>
+        <div class="row">
+          <label class="col fw-bold me-1"> Total : </label>
+          {{ targetSetTime }}
         </div>
       </div>
       <div class="col text-center align-content-center">
-        <div class="row p-1">
+        <div class="row py-1">
           <app-modal-button
             (onCLickModalButton)="modifyTargetSet($event)"
+            [allWidth]="true"
             [modalId]="modalId"
             [modalValue]="targetSet"
             btnClass="btn-secondary"
@@ -72,9 +67,10 @@
             <i class="fa-solid fa-pen-to-square"></i>
           </app-modal-button>
         </div>
-        <div class="row p-1">
+        <div class="row py-1">
           <app-modal-button
             (onCLickModalButton)="delTargetSet($event)"
+            [allWidth]="true"
             [modalId]="modalId"
             [modalValue]="targetSet"
             btnClass="btn-danger"
