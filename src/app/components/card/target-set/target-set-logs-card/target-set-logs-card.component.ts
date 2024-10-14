@@ -43,6 +43,13 @@ export class TargetSetLogsCardComponent implements OnInit {
     this.targetSetCreationDate = new Date(this.targetSet.creationDate);
   }
 
+  checkPerformanceLogs(targetSet: TargetSet) {
+    this.actionTargetSets.emit({
+      actionType: ActionType.checkPerformance,
+      object: targetSet
+    });
+  }
+
   modifyTargetSet(targetSet: TargetSet) {
     this.actionTargetSets.emit({
       actionType: ActionType.update,

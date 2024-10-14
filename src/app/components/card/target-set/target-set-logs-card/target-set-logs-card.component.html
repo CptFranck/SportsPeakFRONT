@@ -28,15 +28,19 @@
           </div>
         </div>
         <div class="row align-content-center pt-1">
-          <app-modal-button
+          <app-collapse-button
+            (onClickEvent)="checkPerformanceLogs($event)"
             [allWidth]="true"
-            [modalValue]="targetSet"
+            [collapseBlockComponent]="collapseBlockComponent"
+            [collapseId]="formCollapseId"
+            [onlyOpen]="true"
+            [value]="targetSet"
             btnClass="btn-secondary"
           >
-            Check performances NOT WORKING
+            Check performances
 
             <i class="fa-solid fa-chart-line"></i>
-          </app-modal-button>
+          </app-collapse-button>
         </div>
       </div>
       <div class="col align-content-center">
