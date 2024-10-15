@@ -1,31 +1,29 @@
 import {Component, Input, OnInit, TemplateRef, ViewChild} from '@angular/core';
-import {TargetSet} from "../../../../../interface/dto/target-set";
-import {ProgExercise} from "../../../../../interface/dto/prog-exercise";
-import {PerformanceLog} from "../../../../../interface/dto/performance-log";
-import {sortPerformanceLogsByDate, sortPerformanceLogsBySet} from "../../../../../utils/performance-log-functions";
-import {FormIndicator} from "../../../../../interface/utils/form-indicator";
-import {DictionaryItem} from "../../../../../interface/utils/dictionary-item";
-import {tabOption} from "../../../../../interface/components/tab/tabOption";
-import {ActionType} from "../../../../../interface/enum/action-type";
+import {TargetSet} from "../../../../interface/dto/target-set";
+import {ProgExercise} from "../../../../interface/dto/prog-exercise";
+import {PerformanceLog} from "../../../../interface/dto/performance-log";
+import {sortPerformanceLogsByDate, sortPerformanceLogsBySet} from "../../../../utils/performance-log-functions";
+import {FormIndicator} from "../../../../interface/utils/form-indicator";
+import {DictionaryItem} from "../../../../interface/utils/dictionary-item";
+import {tabOption} from "../../../../interface/components/tab/tabOption";
+import {ActionType} from "../../../../interface/enum/action-type";
 import {
   PerformanceLogEntityFormComponent
-} from "../../../../../components/form/performance-log/performance-log-entity-form/performance-log-entity-form.component";
-import {CollapseBlockComponent} from "../../../../../components/collapse-block/collapse-block.component";
+} from "../../../form/performance-log/performance-log-entity-form/performance-log-entity-form.component";
+import {CollapseBlockComponent} from "../../../collapse-block/collapse-block.component";
 import {
   PerformanceLogDeleteFormComponent
-} from "../../../../../components/form/performance-log/performance-log-delete-form/performance-log-delete-form.component";
+} from "../../../form/performance-log/performance-log-delete-form/performance-log-delete-form.component";
 import {NgIf} from "@angular/common";
 import {
   PerformanceLogSortedBySetComponent
-} from "../performance-log-collpase-groups/performance-log-sorted-by-set/performance-log-sorted-by-set.component";
-import {
-  PerformanceLogsChartsComponent
-} from "../../../../../components/chart/performance-logs-charts/performance-logs-charts.component";
-import {TabHeaderComponent} from "../../../../../components/tab-header/tab-header.component";
+} from "../performance-log-sorted-by-set/performance-log-sorted-by-set.component";
+import {PerformanceLogsChartsComponent} from "../../../chart/performance-logs-charts/performance-logs-charts.component";
+import {TabHeaderComponent} from "../../../tab-header/tab-header.component";
 import {
   PerformanceLogSortedByLogDateComponent
-} from "../performance-log-collpase-groups/performance-log-sorted-by-log-date/performance-log-sorted-by-log-date.component";
-import {CheckBoxComponent} from "../../../../../components/input/check-box/check-box.component";
+} from "../performance-log-sorted-by-log-date/performance-log-sorted-by-log-date.component";
+import {CheckBoxComponent} from "../../../input/check-box/check-box.component";
 
 @Component({
   selector: 'app-performance-logs',
