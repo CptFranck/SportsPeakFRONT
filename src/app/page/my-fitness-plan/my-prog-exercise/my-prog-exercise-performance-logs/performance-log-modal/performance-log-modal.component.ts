@@ -10,7 +10,9 @@ import {
 import {
   PerformanceLogEntityFormComponent
 } from "../../../../../components/form/performance-log/performance-log-entity-form/performance-log-entity-form.component";
-import {PerformanceLogsComponent} from "../performance-logs/performance-logs.component";
+import {
+  PerformanceLogsComponent
+} from "../../../../../components/modal-component/performance-log/performance-logs/performance-logs.component";
 import {ProgExercise} from "../../../../../interface/dto/prog-exercise";
 
 @Component({

@@ -11,7 +11,9 @@ import {
   TargetSetEntityFormComponent
 } from "../../../../../components/form/target-set/target-set-entity-form/target-set-entity-form.component";
 import {ProgExercise} from "../../../../../interface/dto/prog-exercise";
-import {TargetSetLogsComponent} from "../target-set-logs/target-set-logs.component";
+import {
+  TargetSetLogsComponent
+} from "../../../../../components/modal-component/target-set/target-set-logs/target-set-logs.component";
 import {FormIndicator} from "../../../../../interface/utils/form-indicator";
 import {PerformanceLog} from "../../../../../interface/dto/performance-log";
 
