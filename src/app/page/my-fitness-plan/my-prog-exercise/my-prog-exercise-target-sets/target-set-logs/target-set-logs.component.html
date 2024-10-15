@@ -19,6 +19,7 @@
                                 [targetSetInput]="targetSetLog"/>
     <app-target-set-delete-form *ngIf="action === ActionType.delete"
                                 [btnCloseRef]="btnClose"
+                                [progExercise]="progExercise"
                                 [submitEventActionType$]="submitEventActionType$"
                                 [targetSet]="targetSetLog"/>
 
