@@ -1,23 +1,19 @@
 import {Component, EventEmitter, Input, OnInit, Output, TemplateRef, ViewChild} from '@angular/core';
-import {ProgExercise} from "../../../../../interface/dto/prog-exercise";
-import {TargetSet} from "../../../../../interface/dto/target-set";
+import {ProgExercise} from "../../../../interface/dto/prog-exercise";
+import {TargetSet} from "../../../../interface/dto/target-set";
 import {NgForOf, NgIf} from "@angular/common";
-import {
-  TargetSetLogsCardComponent
-} from "../../../../../components/card/target-set/target-set-logs-card/target-set-logs-card.component";
-import {FormIndicator} from "../../../../../interface/utils/form-indicator";
-import {getTargetSetLogs} from "../../../../../utils/target-set-functions";
-import {ActionType} from "../../../../../interface/enum/action-type";
-import {CollapseBlockComponent} from "../../../../../components/collapse-block/collapse-block.component";
+import {TargetSetLogsCardComponent} from "../../../card/target-set/target-set-logs-card/target-set-logs-card.component";
+import {FormIndicator} from "../../../../interface/utils/form-indicator";
+import {getTargetSetLogs} from "../../../../utils/target-set-functions";
+import {ActionType} from "../../../../interface/enum/action-type";
+import {CollapseBlockComponent} from "../../../collapse-block/collapse-block.component";
 import {
   TargetSetEntityFormComponent
-} from "../../../../../components/form/target-set/target-set-entity-form/target-set-entity-form.component";
+} from "../../../form/target-set/target-set-entity-form/target-set-entity-form.component";
 import {
   TargetSetDeleteFormComponent
-} from "../../../../../components/form/target-set/target-set-delete-form/target-set-delete-form.component";
-import {
-  PerformanceLogsComponent
-} from "../../my-prog-exercise-performance-logs/performance-logs/performance-logs.component";
+} from "../../../form/target-set/target-set-delete-form/target-set-delete-form.component";
+import {PerformanceLogsComponent} from "../../performance-log/performance-logs/performance-logs.component";
 
 @Component({
   selector: 'app-target-set-logs',
