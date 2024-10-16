@@ -44,10 +44,7 @@ import {CheckBoxComponent} from "../../../input/check-box/check-box.component";
 export class PerformanceLogsComponent implements OnInit {
 
   tabId: string = "targetLogsTab";
-  tabOptions: tabOption[] = [
-    {id: "performanceListId", title: "Performance list", active: "active", disabled: false},
-    {id: "performanceGraphId", title: "Performances graph", active: "", disabled: false},
-  ];
+  tabOptions: tabOption[] = [];
 
   switch: boolean = true;
   action: ActionType = ActionType.read;
@@ -85,6 +82,10 @@ export class PerformanceLogsComponent implements OnInit {
 
   initialize() {
     if (this.targetSet && this.progExercise) {
+      this.tabOptions = [
+        {id: "performanceListId" + this.targetSet.id, title: "Performance list", active: "active", disabled: false},
+        {id: "performanceGraphId" + this.targetSet.id, title: "Performances graph", active: "", disabled: false},
+      ]
       this.performanceLogsSortedBySet = sortPerformanceLogsBySet(this.progExercise, this.targetSet, this.isTargetSetLog);
       this.performanceLogsSortedByLogDate = sortPerformanceLogsByDate(this.progExercise, this.targetSet, this.isTargetSetLog)
     }
