@@ -23,7 +23,7 @@
                                 [targetSet]="targetSetLog"/>
 
   </ng-template>
-  <div class="container px-4">
+  <div *ngIf="targetSetLogs.length !== 0" class="container px-4 overflow-auto" style="max-height: calc(100vh - 40vh)">
     <app-target-set-logs-card (actionTargetSets)="setTargetSet($event)"
                               *ngFor="let set of targetSetLogs"
                               [collapseBlockComponent]="collapseBlock"
