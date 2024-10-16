@@ -8,8 +8,7 @@
                       [collapseId]="performanceLogFormCollapseId"
                       [contentTemplate]="performanceCollapseTemplate"
   />
-  <ng-template #performanceCollapseTemplate let-btnClose="btnClose"
-               let-submitEventActionType$="submitEventActionType$">
+  <ng-template #performanceCollapseTemplate let-btnClose="btnClose" let-submitEventActionType$="submitEventActionType$">
     <h5 *ngIf="performanceLogDate" class="fw-bold"> {{ "Performance from " + performanceLogDate }} </h5>
     <app-performance-log-entity-form *ngIf="action === ActionType.update"
                                      [btnCloseRef]="btnClose"
@@ -20,10 +19,9 @@
                                      [btnCloseRef]="btnClose"
                                      [performanceLogInput]="performanceLog"
                                      [submitEventActionType$]="submitEventActionType$"/>
-
   </ng-template>
   <div [id]="tabOptions[0].id" class="tab-pane fade show active">
-    <div class="container p-3">
+    <div class="container overflow-auto p-3" style="height: calc(100vh - 50vh)">
       <div class="container p-2">
         <app-check-box (actionPerformanceLog)="onCheckBoxClick()"
                        [checkedInput]="switch"
@@ -58,8 +56,8 @@
       </div>
     </div>
   </div>
-  <div [id]="tabOptions[1].id" class="tab-pane fade p-2">
-    <div *ngIf="performanceLogsSortedByLogDate" class="container p-3">
+  <div [id]="tabOptions[1].id" class="tab-pane fade">
+    <div *ngIf="performanceLogsSortedByLogDate" class="container overflow-auto p-3" style="height: calc(100vh - 50vh)">
       <app-performance-logs-charts (actionPerformanceLog)="setPerformanceLog($event)"
                                    [collapseBlock]="collapseBlock"
                                    [performanceLogsInputSortedByLogDateInput]="performanceLogsSortedByLogDate"
