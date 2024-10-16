@@ -21,30 +21,40 @@
                                      [submitEventActionType$]="submitEventActionType$"/>
   </ng-template>
   <div [id]="tabOptions[0].id" class="tab-pane fade show active">
-    <div *ngIf="Object.keys(performanceLogsSortedByLogDate).length !== 0" class="container overflow-auto p-3"
-         style="max-height: calc(100vh - 50vh)"
-    >
-      <div class="container p-2">
-        <app-check-box (actionPerformanceLog)="onCheckBoxClick()"
-                       [checkedInput]="switch"
-                       labelCheck="sort by date"
-                       labelUnchecked="sort by set"
+    <div class="container">
+      <div class="container d-flex p-2">
+        <div class="p-2">
+          <app-check-box (actionPerformanceLog)="onCheckBoxClick()"
+                         [checkedInput]="switch"
+                         labelCheck="sort by date"
+                         labelUnchecked="sort by set"
+          />
+        </div>
+        <div class="p-2">
+          <app-check-box (actionPerformanceLog)="onUseRelativeInformationOnlyClick()"
+                         [checkedInput]="useRelativeInformationOnly"
+                         labelCheck="see only performance logs of current version set"
+          />
+        </div>
+      </div>
+      <div *ngIf="Object.keys(performanceLogsSortedByLogDate).length !== 0" class="container overflow-auto p-3"
+           style="max-height: calc(100vh - 50vh)"
+      >
+        <app-performance-log-sorted-by-log-date (actionPerformanceLog)="setPerformanceLog($event)"
+                                                [accordionParentIdDate]="accordionParentIdDate"
+                                                [collapseBlock]="collapseBlock"
+                                                [formCollapseId]="performanceLogFormCollapseId"
+                                                [hidden]="!switch"
+                                                [performanceLogsSortByDate]="performanceLogsSortedByLogDate"
+        />
+        <app-performance-log-sorted-by-set (actionPerformanceLog)="setPerformanceLog($event)"
+                                           [accordionParentIdSet]="accordionParentIdSet"
+                                           [collapseBlock]="collapseBlock"
+                                           [formCollapseId]="performanceLogFormCollapseId"
+                                           [hidden]="switch"
+                                           [performanceLogsSortedBySet]="performanceLogsSortedBySet"
         />
       </div>
-      <app-performance-log-sorted-by-log-date (actionPerformanceLog)="setPerformanceLog($event)"
-                                              [accordionParentIdDate]="accordionParentIdDate"
-                                              [collapseBlock]="collapseBlock"
-                                              [formCollapseId]="performanceLogFormCollapseId"
-                                              [hidden]="!switch"
-                                              [performanceLogsSortByDate]="performanceLogsSortedByLogDate"
-      />
-      <app-performance-log-sorted-by-set (actionPerformanceLog)="setPerformanceLog($event)"
-                                         [accordionParentIdSet]="accordionParentIdSet"
-                                         [collapseBlock]="collapseBlock"
-                                         [formCollapseId]="performanceLogFormCollapseId"
-                                         [hidden]="switch"
-                                         [performanceLogsSortedBySet]="performanceLogsSortedBySet"
-      />
     </div>
     <div *ngIf="Object.keys(performanceLogsSortedByLogDate).length === 0" class="container p-2">
       <div class="col-auto card m-3 shadow">
@@ -59,12 +69,23 @@
     </div>
   </div>
   <div [id]="tabOptions[1].id" class="tab-pane fade">
-    <div *ngIf="Object.keys(performanceLogsSortedByLogDate).length !== 0" class="container overflow-auto p-3"
-         style="max-height: calc(100vh - 50vh)">
-      <app-performance-logs-charts (actionPerformanceLog)="setPerformanceLog($event)"
-                                   [collapseBlock]="collapseBlock"
-                                   [performanceLogsInputSortedByLogDateInput]="performanceLogsSortedByLogDate"
-                                   [performanceLogsInputSortedBySetInput]="performanceLogsSortedBySet"/>
+    <div class="container">
+      <div class="container d-flex p-2">
+        <div class="p-2">
+          <app-check-box (actionPerformanceLog)="onUseRelativeInformationOnlyClick()"
+                         [checkedInput]="switch"
+                         labelCheck="see also old performance logs"
+          />
+        </div>
+      </div>
+      <div *ngIf="Object.keys(performanceLogsSortedByLogDate).length !== 0" class="container overflow-auto p-3"
+           style="max-height: calc(100vh - 50vh)"
+      >
+        <app-performance-logs-charts (actionPerformanceLog)="setPerformanceLog($event)"
+                                     [collapseBlock]="collapseBlock"
+                                     [performanceLogsInputSortedByLogDateInput]="performanceLogsSortedByLogDate"
+                                     [performanceLogsInputSortedBySetInput]="performanceLogsSortedBySet"/>
+      </div>
     </div>
     <div *ngIf="Object.keys(performanceLogsSortedByLogDate).length === 0" class="container p-2">
       <div class="col-auto card m-3 shadow">

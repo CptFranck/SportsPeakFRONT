@@ -48,6 +48,7 @@ export class PerformanceLogsComponent implements OnInit {
 
   switch: boolean = true;
   action: ActionType = ActionType.read;
+
   accordionParentIdSet: string = "accordionParentIdSet";
   accordionParentIdDate: string = "accordionParentIdDate";
   performanceLogFormCollapseId: string = "PerformanceLogFormCollapseId";
@@ -59,7 +60,7 @@ export class PerformanceLogsComponent implements OnInit {
   performanceLogsSortedBySet: DictionaryItem<PerformanceLog[]>[] = [];
   performanceLogsSortedByLogDate: DictionaryItem<PerformanceLog[]>[] = [];
 
-  @Input() isTargetSetLog: boolean = false;
+  @Input() useRelativeInformationOnly: boolean = false;
 
   @ViewChild("performanceCollapseTemplate") modalTemplate!: TemplateRef<any>;
 
@@ -86,8 +87,8 @@ export class PerformanceLogsComponent implements OnInit {
         {id: "performanceListId" + this.targetSet.id, title: "Performance list", active: "active", disabled: false},
         {id: "performanceGraphId" + this.targetSet.id, title: "Performances graph", active: "", disabled: false},
       ]
-      this.performanceLogsSortedBySet = sortPerformanceLogsBySet(this.progExercise, this.targetSet, this.isTargetSetLog);
-      this.performanceLogsSortedByLogDate = sortPerformanceLogsByDate(this.progExercise, this.targetSet, this.isTargetSetLog)
+      this.performanceLogsSortedBySet = sortPerformanceLogsBySet(this.progExercise, this.targetSet, this.useRelativeInformationOnly);
+      this.performanceLogsSortedByLogDate = sortPerformanceLogsByDate(this.progExercise, this.targetSet, this.useRelativeInformationOnly)
     }
   }
 
@@ -95,6 +96,11 @@ export class PerformanceLogsComponent implements OnInit {
     this.action = formIndicator.actionType;
     this.performanceLog = formIndicator.object;
     this.performanceLogDate = new Date(formIndicator.object?.logDate).toLocaleDateString();
+  }
+
+  onUseRelativeInformationOnlyClick() {
+    this.useRelativeInformationOnly = !this.useRelativeInformationOnly;
+    this.initialize()
   }
 
   onCheckBoxClick() {
