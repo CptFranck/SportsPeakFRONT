@@ -46,7 +46,7 @@
                                          [performanceLogsSortedBySet]="performanceLogsSortedBySet"
       />
     </div>
-    <div *ngIf="Object.keys(performanceLogsSortedByLogDate).length === 0">
+    <div *ngIf="Object.keys(performanceLogsSortedByLogDate).length === 0" class="container p-2">
       <div class="col-auto card m-3 shadow">
         <div class="card-body ">
           <div class="row">
@@ -66,7 +66,7 @@
                                    [performanceLogsInputSortedByLogDateInput]="performanceLogsSortedByLogDate"
                                    [performanceLogsInputSortedBySetInput]="performanceLogsSortedBySet"/>
     </div>
-    <div *ngIf="Object.keys(performanceLogsSortedByLogDate).length === 0">
+    <div *ngIf="Object.keys(performanceLogsSortedByLogDate).length === 0" class="container p-2">
       <div class="col-auto card m-3 shadow">
         <div class="card-body ">
           <div class="row">
