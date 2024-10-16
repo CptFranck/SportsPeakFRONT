@@ -1,4 +1,4 @@
-<div [id]="accordionParentIdGraph" class="accordion">
+<div [id]="accordionParentIdGraph" class="accordion p-2">
   <div *ngFor="let performanceLogsSet of performanceLogsInputSortedBySet, index as i" class="accordion-item">
     <h2 class="accordion-header">
       <button [attr.data-bs-target]='"#" + accordionParentIdGraph + performanceLogsSet.key'

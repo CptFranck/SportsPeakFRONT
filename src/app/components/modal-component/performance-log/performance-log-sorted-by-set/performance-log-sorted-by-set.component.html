@@ -1,4 +1,4 @@
-<div [id]="accordionParentIdSet" class="accordion">
+<div [id]="accordionParentIdSet" class="accordion p-2">
   <div *ngFor="let performanceLogsSet of performanceLogsSortedBySet, index as i" class="accordion-item">
     <h2 class="accordion-header">
       <button [attr.data-bs-target]='"#" + accordionParentIdSet + performanceLogsSet.key'
@@ -13,7 +13,7 @@
          [class]='"accordion-collapse collapse " + ifFirstShow(i)'
          [id]="accordionParentIdSet + performanceLogsSet.key"
     >
-      <div class="accordion-body p-0 ">
+      <div class="accordion-body p-0 overflow-auto" style="height: calc(100vh - 70vh)">
         <app-performance-logs-card (actionPerformanceLog)="setPerformanceLog($event)"
                                    *ngFor="let perfLog of performanceLogsSet.value"
                                    [activeButton]="true"
