@@ -4,8 +4,7 @@
                       [collapseId]="targetSetFormCollapseId"
                       [contentTemplate]="performanceCollapseTemplate"
   />
-  <ng-template #performanceCollapseTemplate let-btnClose="btnClose"
-               let-submitEventActionType$="submitEventActionType$">
+  <ng-template #performanceCollapseTemplate let-btnClose="btnClose" let-submitEventActionType$="submitEventActionType$">
     <h5 *ngIf="blocTitle" class="fw-bold"> {{ blocTitle }} </h5>
     <app-performance-logs *ngIf="action === ActionType.checkPerformance"
                           [isTargetSetLog]="true"
@@ -24,13 +23,15 @@
                                 [targetSet]="targetSetLog"/>
 
   </ng-template>
-  <app-target-set-logs-card (actionTargetSets)="setTargetSet($event)"
-                            *ngFor="let set of targetSetLogs"
-                            [collapseBlockComponent]="collapseBlock"
-                            [formCollapseId]="targetSetFormCollapseId"
-                            [targetSet]="set"
+  <div class="container px-4">
+    <app-target-set-logs-card (actionTargetSets)="setTargetSet($event)"
+                              *ngFor="let set of targetSetLogs"
+                              [collapseBlockComponent]="collapseBlock"
+                              [formCollapseId]="targetSetFormCollapseId"
+                              [targetSet]="set"
 
-  />
+    />
+  </div>
   <div *ngIf="targetSetLogs.length === 0">
     <div class="col-auto card m-3 shadow">
       <div class="card-body ">
