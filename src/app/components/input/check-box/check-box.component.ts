@@ -11,7 +11,7 @@ export class CheckBoxComponent {
   label!: string;
   checked !: boolean
   @Input() labelCheck !: string;
-  @Input() labelUnchecked !: string;
+  @Input() labelUnchecked: string | undefined;
 
   @Output() actionPerformanceLog: EventEmitter<void> = new EventEmitter();
 
@@ -27,7 +27,7 @@ export class CheckBoxComponent {
   updateLabel() {
     if (this.checked)
       this.label = this.labelCheck;
-    else
+    else if (this.labelUnchecked)
       this.label = this.labelUnchecked;
   }
 }
