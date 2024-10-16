@@ -22,7 +22,7 @@
   </ng-template>
   <div [id]="tabOptions[0].id" class="tab-pane fade show active">
     <div *ngIf="Object.keys(performanceLogsSortedByLogDate).length !== 0" class="container overflow-auto p-3"
-         style="height: calc(100vh - 50vh)"
+         style="max-height: calc(100vh - 50vh)"
     >
       <div class="container p-2">
         <app-check-box (actionPerformanceLog)="onCheckBoxClick()"
@@ -60,7 +60,7 @@
   </div>
   <div [id]="tabOptions[1].id" class="tab-pane fade">
     <div *ngIf="Object.keys(performanceLogsSortedByLogDate).length !== 0" class="container overflow-auto p-3"
-         style="height: calc(100vh - 50vh)">
+         style="max-height: calc(100vh - 50vh)">
       <app-performance-logs-charts (actionPerformanceLog)="setPerformanceLog($event)"
                                    [collapseBlock]="collapseBlock"
                                    [performanceLogsInputSortedByLogDateInput]="performanceLogsSortedByLogDate"
