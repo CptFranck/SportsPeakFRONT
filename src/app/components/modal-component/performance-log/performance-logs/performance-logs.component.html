@@ -21,7 +21,9 @@
                                      [submitEventActionType$]="submitEventActionType$"/>
   </ng-template>
   <div [id]="tabOptions[0].id" class="tab-pane fade show active">
-    <div class="container overflow-auto p-3" style="height: calc(100vh - 50vh)">
+    <div *ngIf="Object.keys(performanceLogsSortedByLogDate).length !== 0" class="container overflow-auto p-3"
+         style="height: calc(100vh - 50vh)"
+    >
       <div class="container p-2">
         <app-check-box (actionPerformanceLog)="onCheckBoxClick()"
                        [checkedInput]="switch"
@@ -57,7 +59,8 @@
     </div>
   </div>
   <div [id]="tabOptions[1].id" class="tab-pane fade">
-    <div *ngIf="performanceLogsSortedByLogDate" class="container overflow-auto p-3" style="height: calc(100vh - 50vh)">
+    <div *ngIf="Object.keys(performanceLogsSortedByLogDate).length !== 0" class="container overflow-auto p-3"
+         style="height: calc(100vh - 50vh)">
       <app-performance-logs-charts (actionPerformanceLog)="setPerformanceLog($event)"
                                    [collapseBlock]="collapseBlock"
                                    [performanceLogsInputSortedByLogDateInput]="performanceLogsSortedByLogDate"
