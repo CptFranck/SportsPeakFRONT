@@ -7,9 +7,9 @@
   <ng-template #performanceCollapseTemplate let-btnClose="btnClose" let-submitEventActionType$="submitEventActionType$">
     <h5 *ngIf="blocTitle" class="fw-bold"> {{ blocTitle }} </h5>
     <app-performance-logs *ngIf="action === ActionType.checkPerformance"
-                          [isTargetSetLog]="true"
                           [progExerciseInput]="progExercise"
                           [targetSetInput]="targetSetLog"
+                          [useRelativeInformationOnly]="true"
     />
     <app-target-set-entity-form *ngIf="action === ActionType.update"
                                 [btnCloseRef]="btnClose"
