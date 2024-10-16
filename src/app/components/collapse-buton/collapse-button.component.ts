@@ -13,7 +13,6 @@ export class CollapseButtonComponent implements OnInit {
   @Input() value!: any;
   @Input() btnClass!: string;
   @Input() collapseId!: string;
-  @Input() onlyOpen: boolean = false;
   @Input() onlyClose: boolean = false;
   @Input() allWidth: boolean = false;
   @Input() collapseBlockComponent?: CollapseBlockComponent;
