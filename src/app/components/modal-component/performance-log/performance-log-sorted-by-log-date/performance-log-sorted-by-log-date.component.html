@@ -13,7 +13,7 @@
          [class]='"accordion-collapse collapse " + ifFirstShow(i)'
          [id]="accordionParentIdDate + perfLogsOfDate.key"
     >
-      <div class="accordion-body p-0 overflow-auto" style="height: calc(100vh - 70vh)">
+      <div class="accordion-body p-0 overflow-auto" style="max-height: calc(100vh - 70vh)">
         <app-performance-logs-card (actionPerformanceLog)="setPerformanceLog($event)"
                                    *ngFor="let perfLog of perfLogsOfDate.value"
                                    [activeButton]="true"

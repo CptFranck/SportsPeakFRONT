@@ -20,7 +20,7 @@
               <app-performance-logs-set-chart [performanceLogSetInput]="performanceLogsSet.value"/>
             </div>
             <div class="col p-2">
-              <div class="overflow-auto border-1 border" style="height: calc(100vh - 70vh)">
+              <div class="overflow-auto border-1 border" style="max-height: calc(100vh - 70vh)">
                 <app-performance-logs-card (actionPerformanceLog)="setPerformanceLog($event)"
                                            *ngFor="let perfLog of performanceLogsSet.value"
                                            [activeButton]="true"
