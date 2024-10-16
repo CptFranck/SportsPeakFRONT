@@ -22,24 +22,24 @@ export function sortPerformanceLogsByDictionaryDate(performanceLogs: Performance
   return convertDictionaryToArray(dictionary);
 }
 
-export function sortPerformanceLogsByDate(progExercise: ProgExercise, targetSet: TargetSet, isTargetSetLog: boolean = false) {
-  return sortPerformanceLogsBy(progExercise, targetSet, true, isTargetSetLog);
+export function sortPerformanceLogsByDate(progExercise: ProgExercise, targetSet: TargetSet, useRelativeTargetSetInformationOnly: boolean = false) {
+  return sortPerformanceLogsBy(progExercise, targetSet, true, useRelativeTargetSetInformationOnly);
 }
 
-export function sortPerformanceLogsBySet(progExercise: ProgExercise, targetSet: TargetSet, isTargetSetLog: boolean = false) {
-  return sortPerformanceLogsBy(progExercise, targetSet, false, isTargetSetLog);
+export function sortPerformanceLogsBySet(progExercise: ProgExercise, targetSet: TargetSet, useRelativeTargetSetInformationOnly: boolean = false) {
+  return sortPerformanceLogsBy(progExercise, targetSet, false, useRelativeTargetSetInformationOnly);
 }
 
 export function sortPerformanceLogsBy(
   progExercise: ProgExercise,
   targetSet: TargetSet,
   logDateTrueSetIndexFalse: boolean,
-  isTargetSetLog: boolean = false
+  useRelativeTargetSetInformationOnly: boolean = false
 ) {
   let performanceLogSortedDictionary: Dictionary<PerformanceLog[]> = {};
 
   let targetSetLogs: TargetSet[] = [];
-  if (isTargetSetLog)
+  if (useRelativeTargetSetInformationOnly)
     targetSetLogs.push(targetSet)
   else
     targetSetLogs = getTargetSetLogs(targetSet, progExercise, true);
