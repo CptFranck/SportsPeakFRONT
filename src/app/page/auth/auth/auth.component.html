@@ -1,6 +1,6 @@
 <div class="small-middle-container">
   <app-tab-header [tabId]="tabId" [tabOptions]="tabOptions"/>
-  <div class="border-right-0 tab-content rounded-bottom">
+  <div [id]="tabId" class="tab-content border border-top-0 rounded-bottom border-1">
     <div [id]="tabOptions[0].id" class="tab-pane fade show active">
       <app-login-form/>
     </div>
