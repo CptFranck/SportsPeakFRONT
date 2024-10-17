@@ -1,29 +1,10 @@
 <div class="small-middle-container">
-  <ul class="nav nav-tabs">
-    <li class="nav-item">
-      <button [attr.data-bs-target]="'#' + loginTabId" aria-selected="true"
-              class="nav-link link-secondary active"
-              data-bs-toggle="tab"
-              type="button"
-      >
-        Login
-      </button>
-    </li>
-    <li class="nav-item" role="presentation">
-      <button [attr.data-bs-target]="'#' + registerTabId" aria-selected="false"
-              class="nav-link link-secondary"
-              data-bs-toggle="tab"
-              type="button"
-      >
-        Register
-      </button>
-    </li>
-  </ul>
-  <div class="border-right-0 tab-content rounded-bottom ">
-    <div [id]="loginTabId" class="tab-pane fade show active">
+  <app-tab-header [tabId]="tabId" [tabOptions]="tabOptions"/>
+  <div class="border-right-0 tab-content rounded-bottom">
+    <div [id]="tabOptions[0].id" class="tab-pane fade show active">
       <app-login-form/>
     </div>
-    <div [id]="registerTabId" class="tab-pane fade">
+    <div [id]="tabOptions[1].id" class="tab-pane fade">
       <app-register-form/>
     </div>
   </div>
