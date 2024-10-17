@@ -46,9 +46,6 @@ export class PerformanceLogsComponent implements OnInit {
   tabId: string = "targetLogsTab";
   tabOptions: tabOption[] = [];
 
-  switch: boolean = true;
-  action: ActionType = ActionType.read;
-
   accordionParentIdSet: string = "accordionParentIdSet";
   accordionParentIdDate: string = "accordionParentIdDate";
   performanceLogFormCollapseId: string = "PerformanceLogFormCollapseId";
@@ -60,6 +57,8 @@ export class PerformanceLogsComponent implements OnInit {
   performanceLogsSortedBySet: DictionaryItem<PerformanceLog[]>[] = [];
   performanceLogsSortedByLogDate: DictionaryItem<PerformanceLog[]>[] = [];
 
+  switch: boolean = true;
+  action: ActionType = ActionType.read;
   @Input() useRelativeInformationOnly: boolean = false;
 
   @ViewChild("performanceCollapseTemplate") modalTemplate!: TemplateRef<any>;
@@ -106,4 +105,5 @@ export class PerformanceLogsComponent implements OnInit {
   onCheckBoxClick() {
     this.switch = !this.switch;
   }
+
 }
