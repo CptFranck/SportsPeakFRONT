@@ -33,9 +33,9 @@ export class TargetSetsComponent {
   targetSetUnusedId: string = "TargetSetUnusedId";
   targetSetHiddenId: string = "TargetSetHiddenId";
   tabOptions: tabOption[] = [
-    {id: this.targetSetUsedId, title: "Currently used", active: "active", disabled: false},
-    {id: this.targetSetUnusedId, title: "Unused", active: "", disabled: false},
-    {id: this.targetSetHiddenId, title: "Hidden", active: "", disabled: false},
+    {id: this.targetSetUsedId, title: "Currently used", active: "active"},
+    {id: this.targetSetUnusedId, title: "Unused", active: ""},
+    {id: this.targetSetHiddenId, title: "Hidden", active: ""},
   ];
 
   @Input() targetSetModalId!: string;

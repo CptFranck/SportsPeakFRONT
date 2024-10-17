@@ -84,8 +84,8 @@ export class PerformanceLogsComponent implements OnInit {
   initialize() {
     if (this.targetSet && this.progExercise) {
       this.tabOptions = [
-        {id: "performanceListId" + this.targetSet.id, title: "Performance list", active: "active", disabled: false},
-        {id: "performanceGraphId" + this.targetSet.id, title: "Performances graph", active: "", disabled: false},
+        {id: "performanceListId" + this.targetSet.id, title: "Performance list", active: "active"},
+        {id: "performanceGraphId" + this.targetSet.id, title: "Performances graph", active: ""},
       ]
       this.performanceLogsSortedBySet = sortPerformanceLogsBySet(this.progExercise, this.targetSet, this.useRelativeInformationOnly);
       this.performanceLogsSortedByLogDate = sortPerformanceLogsByDate(this.progExercise, this.targetSet, this.useRelativeInformationOnly)
