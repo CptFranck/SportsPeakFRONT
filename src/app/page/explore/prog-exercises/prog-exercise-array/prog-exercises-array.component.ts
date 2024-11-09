@@ -23,6 +23,8 @@ import {Subject} from "rxjs";
 export class ProgExercisesArrayComponent implements OnChanges, OnDestroy {
   isAdmin: boolean = false;
   userLogged: User | undefined;
+  userCreatedProExercise: ProgExercise[] | undefined;
+  userSubscribedProExercise: ProgExercise[] | undefined;
   progExerciseDetails: Dictionary<ProgExerciseRowDetail> = {};
   subscribeClassButton: string = "btn-Success";
 
@@ -45,11 +47,13 @@ export class ProgExercisesArrayComponent implements OnChanges, OnDestroy {
         subscribed: false,
         creator: false
       }
-      if (this.userLogged) {
-        detail.subscribed = this.userLogged.subscribedProgExercises.some(
+      if (this.userCreatedProExercise) {
+        detail.creator = this.userCreatedProExercise.some(
           (progEx: ProgExercise) => progExercise.id === progEx.id
         );
-        detail.creator = this.userLogged.progExercisesCreated.some(
+      }
+      if (this.userSubscribedProExercise) {
+        detail.subscribed = this.userSubscribedProExercise.some(
           (progEx: ProgExercise) => progExercise.id === progEx.id
         );
       }
