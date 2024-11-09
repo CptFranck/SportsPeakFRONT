@@ -30,7 +30,6 @@ import {stringToDateString} from "../../../../utils/time-functions";
 export class PerformanceLogEntityFormComponent implements OnInit, OnDestroy {
 
   targetSet: TargetSet | undefined;
-  selectTargetSet: TargetSet | undefined;
   performanceLog: PerformanceLog | undefined;
   performanceLogForm: FormGroup | null = null;
   submitInvalidForm: boolean = false;
@@ -77,7 +76,6 @@ export class PerformanceLogEntityFormComponent implements OnInit, OnDestroy {
     let performanceLogWeightUnit: string = WeightUnit.KILOGRAMME;
 
     if (this.targetSet) {
-      this.selectTargetSet = this.targetSet
       performanceLogRepetitionNumber = this.targetSet.repetitionNumber;
       performanceLogWeight = this.targetSet.weight;
       targetSetId = this.targetSet.id;
@@ -87,12 +85,10 @@ export class PerformanceLogEntityFormComponent implements OnInit, OnDestroy {
         performanceLogSetIndex = performanceLogOfThisDay.length + 1;
     }
     if (this.performanceLog) {
-      this.selectTargetSet = this.performanceLog.targetSet
       logDate = stringToDateString(this.performanceLog.logDate);
       performanceLogSetIndex = this.performanceLog.setIndex;
       performanceLogRepetitionNumber = this.performanceLog.repetitionNumber;
       performanceLogWeight = this.performanceLog.weight;
-      targetSetId = this.performanceLog.targetSet.id;
       performanceLogWeightUnit = this.performanceLog.weightUnit;
     }
 
