@@ -1,4 +1,3 @@
-import {ProgExercise} from "./prog-exercise";
 import {Duration} from "./duration";
 import {PerformanceLog} from "./performance-log";
 import {TargetSetState} from "../enum/targetSetState";
@@ -14,7 +13,6 @@ export interface TargetSet {
   restTime: Duration
   creationDate: string
   state: TargetSetState
-  progExercise: ProgExercise
   targetSetUpdate: TargetSet
   performanceLogs: PerformanceLog[]
 }
