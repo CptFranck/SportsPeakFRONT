@@ -4,7 +4,6 @@ import {Observable, Subject, takeUntil} from "rxjs";
 import {NgIf} from "@angular/common";
 import {Role} from "../../../../interface/dto/role";
 import {RoleService} from "../../../../services/role/role.service";
-import {User} from "../../../../interface/dto/user";
 import {Privilege} from "../../../../interface/dto/privilege";
 import {ExerciseSelectorComponent} from "../../../selectors/exercise-selector/exercise-selector.component";
 import {InputControlComponent} from "../../../input-control/input-control.component";
@@ -69,8 +68,6 @@ export class RoleEntityFormComponent implements OnInit, OnDestroy {
     const exerciseIdsValidator =
       this.isAdmin ? null : Validators.required;
     const roleName: string = this.role ? this.role.name : "";
-    const roleUserIds: number[] = this.role?.users ?
-      this.role.users?.map((user: User) => user.id) : [];
     const rolePrivilegeIds: number[] = this.role?.privileges ?
       this.role.privileges?.map((privilege: Privilege) => privilege.id) : [];
 
@@ -81,9 +78,6 @@ export class RoleEntityFormComponent implements OnInit, OnDestroy {
           Validators.maxLength(50)]),
       privilegeIds: new FormControl(
         rolePrivilegeIds, exerciseIdsValidator
-      ),
-      userIds: new FormControl(
-        roleUserIds, exerciseIdsValidator
       ),
     });
 

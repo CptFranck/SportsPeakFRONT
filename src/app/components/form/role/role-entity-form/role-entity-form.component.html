@@ -20,16 +20,5 @@
       rules="min : 1"
     />
   </div>
-  <div class="mb-3">
-    <label class="form-label">User(s) :</label>
-    <app-user-selector [userIds]='roleForm.controls["userIds"].value' formControlName="userIds"/>
-    <app-input-control
-      [formGroup]="roleForm"
-      [submitInvalid]="submitInvalidForm"
-      errorMessage="Please select users who must have this role"
-      formGroupFieldName="userIds"
-      rules="min : 1"
-    />
-  </div>
 </form>
 
