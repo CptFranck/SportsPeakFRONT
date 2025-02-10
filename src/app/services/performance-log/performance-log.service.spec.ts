@@ -1,12 +1,19 @@
-import { TestBed } from '@angular/core/testing';
+import {TestBed} from '@angular/core/testing';
 
-import { PerformanceLogService } from './performance-log.service';
+import {PerformanceLogService} from './performance-log.service';
+import {ApolloTestingModule} from "apollo-angular/testing";
+import {HttpClientTestingModule} from "@angular/common/http/testing";
 
-describe('PerformanceLogServiceService', () => {
+describe('PerformanceLogService', () => {
   let service: PerformanceLogService;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
+    TestBed.configureTestingModule({
+      imports: [
+        ApolloTestingModule,
+        HttpClientTestingModule
+      ],
+    });
     service = TestBed.inject(PerformanceLogService);
   });
 
