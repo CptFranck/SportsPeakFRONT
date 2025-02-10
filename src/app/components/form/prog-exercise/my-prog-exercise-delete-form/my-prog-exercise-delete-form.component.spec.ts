@@ -1,17 +1,19 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { MyProgExerciseDeleteFormComponent } from './my-prog-exercise-delete-form.component';
+import {MyProgExerciseDeleteFormComponent} from './my-prog-exercise-delete-form.component';
+import {ProgExerciseService} from "../../../../services/prog-exercise/prog-exercise.service";
 
 describe('MyProgExerciseDeleteFormComponent', () => {
   let component: MyProgExerciseDeleteFormComponent;
   let fixture: ComponentFixture<MyProgExerciseDeleteFormComponent>;
-
+  let mockProgExerciseService: jasmine.SpyObj<ProgExerciseService>;
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      providers: [{provide: ProgExerciseService, useValue: mockProgExerciseService}],
       imports: [MyProgExerciseDeleteFormComponent]
     })
-    .compileComponents();
-    
+      .compileComponents();
+
     fixture = TestBed.createComponent(MyProgExerciseDeleteFormComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
