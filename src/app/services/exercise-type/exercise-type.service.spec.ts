@@ -1,12 +1,19 @@
-import { TestBed } from '@angular/core/testing';
+import {TestBed} from '@angular/core/testing';
 
-import { ExerciseTypeService } from './exercise-type.service';
+import {ExerciseTypeService} from './exercise-type.service';
+import {ApolloTestingModule} from "apollo-angular/testing";
+import {HttpClientTestingModule} from "@angular/common/http/testing";
 
 describe('ExerciseTypeService', () => {
   let service: ExerciseTypeService;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
+    TestBed.configureTestingModule({
+      imports: [
+        ApolloTestingModule,
+        HttpClientTestingModule
+      ],
+    });
     service = TestBed.inject(ExerciseTypeService);
   });
 
