@@ -1,6 +1,7 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { NavBarMainMenuComponent } from './nav-bar-main-menu.component';
+import {NavBarMainMenuComponent} from './nav-bar-main-menu.component';
+import {provideRouter} from "@angular/router";
 
 describe('NavBarMainMenuComponent', () => {
   let component: NavBarMainMenuComponent;
@@ -8,10 +9,11 @@ describe('NavBarMainMenuComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [NavBarMainMenuComponent]
+      imports: [NavBarMainMenuComponent],
+      providers: [provideRouter([])],
     })
-    .compileComponents();
-    
+      .compileComponents();
+
     fixture = TestBed.createComponent(NavBarMainMenuComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
