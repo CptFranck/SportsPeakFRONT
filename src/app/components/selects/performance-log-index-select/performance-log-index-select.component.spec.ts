@@ -2,7 +2,7 @@ import {ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {PerformanceLogIndexSelectComponent} from './performance-log-index-select.component';
 
-describe('SimpleSelectComponent', () => {
+describe('PerformanceLogIndexSelectComponent', () => {
   let component: PerformanceLogIndexSelectComponent;
   let fixture: ComponentFixture<PerformanceLogIndexSelectComponent>;
 
@@ -14,6 +14,8 @@ describe('SimpleSelectComponent', () => {
 
     fixture = TestBed.createComponent(PerformanceLogIndexSelectComponent);
     component = fixture.componentInstance;
+
+    component.index = 0;
     fixture.detectChanges();
   });
 
