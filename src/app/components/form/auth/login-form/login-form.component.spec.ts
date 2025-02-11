@@ -6,7 +6,9 @@ import {AuthService} from "../../../../services/auth/auth.service";
 describe('LoginFormComponent', () => {
   let component: LoginFormComponent;
   let fixture: ComponentFixture<LoginFormComponent>;
+
   let mockAuthService: jasmine.SpyObj<AuthService>;
+
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       providers: [{provide: AuthService, useValue: mockAuthService}],
