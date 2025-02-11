@@ -9,7 +9,7 @@ describe('UserSelectorComponent', () => {
   let component: UserSelectorComponent;
   let fixture: ComponentFixture<UserSelectorComponent>;
   let mockUserService: jasmine.SpyObj<UserService> =
-    jasmine.createSpyObj('UserService', ['muscles', 'isLoading']);
+    jasmine.createSpyObj('UserService', ['users', 'isLoading']);
   mockUserService.users = new BehaviorSubject<User[]>([]);
   mockUserService.isLoading = new BehaviorSubject<boolean>(true);
 

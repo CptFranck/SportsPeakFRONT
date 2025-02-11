@@ -17,7 +17,7 @@ describe('ExerciseTypesComponent', () => {
   mockExerciseService.isLoading = new BehaviorSubject<boolean>(true);
 
   let mockExerciseTypeService: jasmine.SpyObj<ExerciseTypeService> =
-    jasmine.createSpyObj('ExerciseTypeService', ['muscles', 'isLoading']);
+    jasmine.createSpyObj('ExerciseTypeService', ['exerciseTypes', 'isLoading']);
   mockExerciseTypeService.exerciseTypes = new BehaviorSubject<ExerciseType[]>([]);
   mockExerciseTypeService.isLoading = new BehaviorSubject<boolean>(true);
 
