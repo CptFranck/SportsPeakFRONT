@@ -6,6 +6,10 @@ import {TrustLabel} from "../interface/enum/trustLabel";
 import {Role} from "../interface/dto/role";
 import {Muscle} from "../interface/dto/muscle";
 import {ExerciseType} from "../interface/dto/exercise-type";
+import {TargetSet} from "../interface/dto/target-set";
+import {TargetSetState} from "../interface/enum/targetSetState";
+import {WeightUnit} from "../interface/enum/weightUnit";
+import {PerformanceLog} from "../interface/dto/performance-log";
 
 export function generateTestUser(roles: Role[] = []) {
   const mockUser: User = {
@@ -46,5 +50,23 @@ export function generateTestProgExercise(user: User, exercise: Exercise) {
     targetSets: [],
   };
   return mockProgExercise;
+}
+
+export function generateTestTargetSet(performanceLogs: PerformanceLog[] = []) {
+  const mockTargetSet: TargetSet = {
+    id: 0,
+    index: 0,
+    setNumber: 0,
+    repetitionNumber: 0,
+    weight: 0,
+    weightUnit: WeightUnit.KILOGRAMME,
+    physicalExertionUnitTime: {seconds: 0, minutes: 0, hours: 0},
+    restTime: {seconds: 0, minutes: 0, hours: 0},
+    creationDate: new Date().toISOString(),
+    state: TargetSetState.USED,
+    targetSetUpdate: null,
+    performanceLogs: performanceLogs,
+  };
+  return mockTargetSet;
 }
 
