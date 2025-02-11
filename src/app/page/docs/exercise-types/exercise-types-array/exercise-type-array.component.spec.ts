@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { ExerciseTypeArrayComponent } from './exercise-type-array.component';
+import {ExerciseTypeArrayComponent} from './exercise-type-array.component';
 
 describe('ExerciseTypeArrayComponent', () => {
   let component: ExerciseTypeArrayComponent;
@@ -10,10 +10,12 @@ describe('ExerciseTypeArrayComponent', () => {
     await TestBed.configureTestingModule({
       imports: [ExerciseTypeArrayComponent]
     })
-    .compileComponents();
-    
+      .compileComponents();
+
     fixture = TestBed.createComponent(ExerciseTypeArrayComponent);
     component = fixture.componentInstance;
+
+    component.exerciseTypes = [];
     fixture.detectChanges();
   });
 
