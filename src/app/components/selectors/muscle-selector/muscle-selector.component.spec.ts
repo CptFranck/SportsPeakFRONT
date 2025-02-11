@@ -15,7 +15,9 @@ describe('MuscleSelectorComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      providers: [{provide: MuscleService, useValue: mockMuscleService}],
+      providers: [
+        {provide: MuscleService, useValue: mockMuscleService}
+      ],
       imports: [MuscleSelectorComponent]
     })
       .compileComponents();
