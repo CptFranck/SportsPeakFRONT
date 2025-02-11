@@ -1,17 +1,23 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { UserDeleteFormComponent } from './user-delete-form.component';
+import {UserDeleteFormComponent} from './user-delete-form.component';
+import {UserService} from "../../../../services/user/user.service";
 
 describe('UserDeleteFormComponent', () => {
   let component: UserDeleteFormComponent;
   let fixture: ComponentFixture<UserDeleteFormComponent>;
 
+  let mockUserService: jasmine.SpyObj<UserService>;
+
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      providers: [
+        {provide: UserService, useValue: mockUserService},
+      ],
       imports: [UserDeleteFormComponent]
     })
-    .compileComponents();
-    
+      .compileComponents();
+
     fixture = TestBed.createComponent(UserDeleteFormComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
