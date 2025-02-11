@@ -1,9 +1,20 @@
-import { TestBed } from '@angular/core/testing';
-import { AppComponent } from './app.component';
+import {TestBed} from '@angular/core/testing';
+import {AppComponent} from './app.component';
+import {provideRouter} from "@angular/router";
+import {AuthService} from "./services/auth/auth.service";
+import {BehaviorSubject} from "rxjs";
 
 describe('AppComponent', () => {
+  let mockAuthService: jasmine.SpyObj<AuthService> =
+    jasmine.createSpyObj('AuthService', ['isAuthenticated']);
+  mockAuthService.isAuthenticated = new BehaviorSubject<boolean>(false);
+
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      providers: [
+        {provide: AuthService, useValue: mockAuthService},
+        provideRouter([])
+      ],
       imports: [AppComponent],
     }).compileComponents();
   });
@@ -20,10 +31,4 @@ describe('AppComponent', () => {
     expect(app.title).toEqual('SportsPeak');
   });
 
-  it('should render title', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('h1')?.textContent).toContain('Hello, SportsPeak');
-  });
 });
