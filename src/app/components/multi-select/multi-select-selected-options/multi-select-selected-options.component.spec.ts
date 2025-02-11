@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { MultiSelectSelectedOptionsComponent } from './multi-select-selected-options.component';
+import {MultiSelectSelectedOptionsComponent} from './multi-select-selected-options.component';
 
 describe('MultiSelectSelectedOptionsComponent', () => {
   let component: MultiSelectSelectedOptionsComponent;
@@ -10,10 +10,12 @@ describe('MultiSelectSelectedOptionsComponent', () => {
     await TestBed.configureTestingModule({
       imports: [MultiSelectSelectedOptionsComponent]
     })
-    .compileComponents();
-    
+      .compileComponents();
+
     fixture = TestBed.createComponent(MultiSelectSelectedOptionsComponent);
     component = fixture.componentInstance;
+
+    component.selectedOptions = [];
     fixture.detectChanges();
   });
 
