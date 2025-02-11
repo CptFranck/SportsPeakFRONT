@@ -3,7 +3,7 @@ import {ComponentFixture, TestBed} from '@angular/core/testing';
 import {UserUsernameFormComponent} from './user-username-form.component';
 import {UserService} from "../../../../services/user/user.service";
 
-describe('UsernameFormComponent', () => {
+describe('UserUsernameFormComponent', () => {
   let component: UserUsernameFormComponent;
   let fixture: ComponentFixture<UserUsernameFormComponent>;
 
