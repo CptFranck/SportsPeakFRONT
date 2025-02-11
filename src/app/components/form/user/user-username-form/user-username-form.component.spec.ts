@@ -6,11 +6,14 @@ import {UserService} from "../../../../services/user/user.service";
 describe('UsernameFormComponent', () => {
   let component: UserUsernameFormComponent;
   let fixture: ComponentFixture<UserUsernameFormComponent>;
+
   let mockUserService: jasmine.SpyObj<UserService>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      providers: [{provide: UserService, useValue: mockUserService}],
+      providers: [
+        {provide: UserService, useValue: mockUserService}
+      ],
       imports: [UserUsernameFormComponent]
     })
       .compileComponents();
