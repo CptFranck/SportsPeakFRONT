@@ -1,6 +1,7 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { PerformanceLogsCardComponent } from './performance-logs-card.component';
+import {PerformanceLogsCardComponent} from './performance-logs-card.component';
+import {generateTestPerformanceLog} from "../../../../utils/testFunctions";
 
 describe('PerformanceLogsCardComponent', () => {
   let component: PerformanceLogsCardComponent;
@@ -10,10 +11,12 @@ describe('PerformanceLogsCardComponent', () => {
     await TestBed.configureTestingModule({
       imports: [PerformanceLogsCardComponent]
     })
-    .compileComponents();
-    
+      .compileComponents();
+
     fixture = TestBed.createComponent(PerformanceLogsCardComponent);
     component = fixture.componentInstance;
+
+    component.performanceLog = generateTestPerformanceLog();
     fixture.detectChanges();
   });
 

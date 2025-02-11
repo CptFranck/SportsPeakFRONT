@@ -70,3 +70,15 @@ export function generateTestTargetSet(performanceLogs: PerformanceLog[] = []) {
   return mockTargetSet;
 }
 
+export function generateTestPerformanceLog() {
+  const mockPerformanceLog: PerformanceLog = {
+    id: 0,
+    setIndex: 0,
+    repetitionNumber: 0,
+    weight: 0,
+    weightUnit: WeightUnit.KILOGRAMME,
+    logDate: new Date().toISOString(),
+  };
+  return mockPerformanceLog;
+}
+
