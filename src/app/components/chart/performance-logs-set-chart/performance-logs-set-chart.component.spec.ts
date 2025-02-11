@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { PerformanceLogsSetChartComponent } from './performance-logs-set-chart.component';
+import {PerformanceLogsSetChartComponent} from './performance-logs-set-chart.component';
 
 describe('PerformanceLogsSetChartComponent', () => {
   let component: PerformanceLogsSetChartComponent;
@@ -10,10 +10,12 @@ describe('PerformanceLogsSetChartComponent', () => {
     await TestBed.configureTestingModule({
       imports: [PerformanceLogsSetChartComponent]
     })
-    .compileComponents();
-    
+      .compileComponents();
+
     fixture = TestBed.createComponent(PerformanceLogsSetChartComponent);
     component = fixture.componentInstance;
+
+    component.performanceLogSetInput = [];
     fixture.detectChanges();
   });
 
