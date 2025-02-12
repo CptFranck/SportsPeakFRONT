@@ -12,7 +12,6 @@ module.exports = function (config) {
       require('karma-jasmine-html-reporter'),
       require('karma-coverage'),
       require('@angular-devkit/build-angular/plugins/karma'),
-      require('karma-sonarqube-reporter'),
     ],
     client: {
       jasmine: {
@@ -29,11 +28,11 @@ module.exports = function (config) {
       dir: require('path').join(__dirname, './coverage/sports-peak'),
       subdir: '.',
       reporters: [
-        {type: 'html'},
-        {type: 'text-summary'}
+        {type: 'html', subdir: 'html-report'},
+        {type: 'lcov', subdir: 'lcov-report'}
       ]
     },
-    reporters: ['progress', 'kjhtml', 'sonarqube'],
+    reporters: ['progress', 'kjhtml'],
     browsers: ['Chrome', 'Firefox'],
     restartOnFileChange: true,
     sonarqubeReporter: {
