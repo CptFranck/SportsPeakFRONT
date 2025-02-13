@@ -50,7 +50,7 @@ export function getTargetSetLogs(targetSetUpToDate: TargetSet, progExercise: Pro
 }
 
 function getTargetSetUpdate(targetSetUpToDate: TargetSet, progExercise: ProgExercise, targetSetLogs: TargetSet[]) {
-  progExercise.targetSets.find((targetSet: TargetSet) => {
+  progExercise.targetSets.forEach((targetSet: TargetSet) => {
     if (targetSet.targetSetUpdate !== null)
       if (targetSet.targetSetUpdate.id === targetSetUpToDate.id) {
         targetSetLogs.push(targetSet);
