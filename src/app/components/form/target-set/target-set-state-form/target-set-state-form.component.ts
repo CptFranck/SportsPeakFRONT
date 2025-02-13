@@ -21,7 +21,7 @@ export class TargetSetStateFormComponent implements OnInit {
 
   @Input() targetSet!: TargetSet;
 
-  private targetSetService: TargetSetService = inject(TargetSetService);
+  private readonly targetSetService: TargetSetService = inject(TargetSetService);
 
   ngOnInit() {
     this.initializeTargetSetForm();
