@@ -17,8 +17,8 @@ import {Subject, takeUntil} from "rxjs";
 export class AlertDisplayComponent implements OnInit, OnDestroy {
   alerts: Alert[] = [];
 
-  private unsubscribe$: Subject<void> = new Subject<void>();
-  private alertService: AlertService = inject(AlertService);
+  private readonly unsubscribe$: Subject<void> = new Subject<void>();
+  private readonly alertService: AlertService = inject(AlertService);
 
   ngOnInit() {
     this.alertService.getAlertsSubject()
