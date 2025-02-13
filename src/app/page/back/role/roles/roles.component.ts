@@ -32,8 +32,8 @@ export class RolesComponent implements OnInit, OnDestroy {
 
   @ViewChild("modalTemplate") modalTemplate!: TemplateRef<any>;
 
-  private unsubscribe$: Subject<void> = new Subject<void>();
-  private roleService: RoleService = inject(RoleService);
+  private readonly unsubscribe$: Subject<void> = new Subject<void>();
+  private readonly roleService: RoleService = inject(RoleService);
 
   ngOnInit(): void {
     this.roleService.roles

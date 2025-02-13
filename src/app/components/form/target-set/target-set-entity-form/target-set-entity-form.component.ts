@@ -41,8 +41,8 @@ export class TargetSetEntityFormComponent implements OnInit, OnDestroy {
   @Input() btnCloseRef!: HTMLButtonElement;
   @Input() submitEventActionType$!: Observable<ActionType> | undefined;
 
-  private unsubscribe$: Subject<void> = new Subject<void>();
-  private targetSetService: TargetSetService = inject(TargetSetService);
+  private readonly unsubscribe$: Subject<void> = new Subject<void>();
+  private readonly targetSetService: TargetSetService = inject(TargetSetService);
 
   @Input() set progExerciseInput(value: ProgExercise | undefined) {
     this.progExercise = value;

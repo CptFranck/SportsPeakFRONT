@@ -28,9 +28,9 @@ export class ProgExerciseTrustLabelFormComponent implements OnInit, OnDestroy {
 
   @Input() progExercise!: ProgExercise;
 
-  private unsubscribe$: Subject<void> = new Subject<void>();
-  private userLoggedService: UserLoggedService = inject(UserLoggedService);
-  private progExerciseService: ProgExerciseService = inject(ProgExerciseService);
+  private readonly unsubscribe$: Subject<void> = new Subject<void>();
+  private readonly userLoggedService: UserLoggedService = inject(UserLoggedService);
+  private readonly progExerciseService: ProgExerciseService = inject(ProgExerciseService);
 
   ngOnInit() {
     this.initializeProgExerciseForm();

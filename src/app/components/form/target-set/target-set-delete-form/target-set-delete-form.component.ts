@@ -18,8 +18,8 @@ export class TargetSetDeleteFormComponent implements OnInit, OnDestroy {
   @Input() btnCloseRef!: HTMLButtonElement;
   @Input() submitEventActionType$!: Observable<ActionType> | undefined;
 
-  private unsubscribe$: Subject<void> = new Subject<void>();
-  private targetSetService: TargetSetService = inject(TargetSetService);
+  private readonly unsubscribe$: Subject<void> = new Subject<void>();
+  private readonly targetSetService: TargetSetService = inject(TargetSetService);
 
   ngOnInit() {
     console.log(this.targetSet)

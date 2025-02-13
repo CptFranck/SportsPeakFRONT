@@ -30,9 +30,9 @@ export class UserRolesFormComponent implements OnInit, OnDestroy {
   @Input() btnCloseRef!: HTMLButtonElement;
   @Input() submitEvents!: Observable<ActionType> | undefined;
 
-  private unsubscribe$: Subject<void> = new Subject<void>();
-  private userService: UserService = inject(UserService);
-  private userLoggedService: UserLoggedService = inject(UserLoggedService);
+  private readonly unsubscribe$: Subject<void> = new Subject<void>();
+  private readonly userService: UserService = inject(UserService);
+  private readonly userLoggedService: UserLoggedService = inject(UserLoggedService);
 
   @Input() set userInput(value: User | undefined) {
     this.user = value;

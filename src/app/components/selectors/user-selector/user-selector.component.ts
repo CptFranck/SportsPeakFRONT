@@ -27,8 +27,8 @@ export class UserSelectorComponent implements OnInit, OnDestroy, ControlValueAcc
 
   @Input() userIds: number[] = [];
 
-  private unsubscribe$: Subject<void> = new Subject<void>();
-  private userService: UserService = inject(UserService);
+  private readonly unsubscribe$: Subject<void> = new Subject<void>();
+  private readonly userService: UserService = inject(UserService);
 
   onChange: (value: number[]) => void = () => {
   };

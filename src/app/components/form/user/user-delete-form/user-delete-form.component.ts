@@ -15,8 +15,8 @@ export class UserDeleteFormComponent implements OnInit, OnDestroy {
   @Input() btnCloseRef!: HTMLButtonElement;
   @Input() submitEventActionType$!: Observable<ActionType> | undefined;
 
-  private unsubscribe$: Subject<void> = new Subject<void>();
-  private userService: UserService = inject(UserService);
+  private readonly unsubscribe$: Subject<void> = new Subject<void>();
+  private readonly userService: UserService = inject(UserService);
 
   ngOnInit() {
     if (this.submitEventActionType$)

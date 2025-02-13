@@ -27,8 +27,8 @@ export class UserUsernameFormComponent implements OnInit, OnDestroy {
   @Input() modification!: ModificationField;
   @Input() submitEventActionType$!: Observable<ActionType> | undefined;
 
-  private unsubscribe$: Subject<void> = new Subject<void>();
-  private userService: UserService = inject(UserService);
+  private readonly unsubscribe$: Subject<void> = new Subject<void>();
+  private readonly userService: UserService = inject(UserService);
 
   @Input() set userInput(value: User | undefined) {
     this.user = value;

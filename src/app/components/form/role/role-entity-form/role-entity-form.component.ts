@@ -36,9 +36,9 @@ export class RoleEntityFormComponent implements OnInit, OnDestroy {
   @Input() btnCloseRef!: HTMLButtonElement;
   @Input() submitEventActionType$!: Observable<ActionType> | undefined;
 
-  private unsubscribe$: Subject<void> = new Subject<void>();
-  private roleService: RoleService = inject(RoleService);
-  private userLoggedService: UserLoggedService = inject(UserLoggedService);
+  private readonly unsubscribe$: Subject<void> = new Subject<void>();
+  private readonly roleService: RoleService = inject(RoleService);
+  private readonly userLoggedService: UserLoggedService = inject(UserLoggedService);
 
   @Input() set roleInput(value: Role | undefined) {
     this.role = value;

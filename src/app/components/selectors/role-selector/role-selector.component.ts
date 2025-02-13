@@ -28,8 +28,8 @@ export class RoleSelectorComponent implements OnInit, OnDestroy, ControlValueAcc
 
   @Input() roleIds: number[] = [];
 
-  private unsubscribe$: Subject<void> = new Subject<void>();
-  private roleService: RoleService = inject(RoleService);
+  private readonly unsubscribe$: Subject<void> = new Subject<void>();
+  private readonly roleService: RoleService = inject(RoleService);
 
   onChange: (value: number[]) => void = () => {
   };
