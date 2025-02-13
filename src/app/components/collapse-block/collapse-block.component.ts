@@ -32,7 +32,7 @@ export class CollapseBlockComponent {
   @Input() classArgs: string = "";
   @Input() contentTemplate: TemplateRef<any> | undefined;
 
-  constructor(private elementRef: ElementRef) {
+  constructor(private readonly elementRef: ElementRef) {
   }
 
   @Input() set actionType(action: ActionType | undefined) {
@@ -57,9 +57,7 @@ export class CollapseBlockComponent {
 
   toggle(elementRef: ElementRef) {
     this.elementRef.nativeElement.scrollIntoView();
-    if (!this.visible) {
-      this.visible = !this.visible;
-    } else if (this.visible && elementRef === this.lastButton) {
+    if (!this.visible || this.visible && elementRef === this.lastButton) {
       this.visible = !this.visible;
     }
     this.lastButton = elementRef;
