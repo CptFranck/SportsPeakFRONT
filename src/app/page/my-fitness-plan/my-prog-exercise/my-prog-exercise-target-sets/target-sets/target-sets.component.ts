@@ -12,7 +12,7 @@ import {
   TargetSetCardComponent
 } from "../../../../../components/card/target-set/target-set-card/target-set-card.component";
 import {TabHeaderComponent} from "../../../../../components/tab-header/tab-header.component";
-import {tabOption} from "../../../../../interface/components/tab/tabOption";
+import {TabOption} from "../../../../../interface/components/tab/tabOption";
 
 @Component({
   selector: 'app-target-sets',
@@ -32,7 +32,7 @@ export class TargetSetsComponent {
   targetSetUsedId: string = "TargetSetUsedId";
   targetSetUnusedId: string = "TargetSetUnusedId";
   targetSetHiddenId: string = "TargetSetHiddenId";
-  tabOptions: tabOption[] = [
+  tabOptions: TabOption[] = [
     {id: this.targetSetUsedId, title: "Currently used", active: "active"},
     {id: this.targetSetUnusedId, title: "Unused", active: ""},
     {id: this.targetSetHiddenId, title: "Hidden", active: ""},

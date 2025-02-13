@@ -1,6 +1,6 @@
 import {Component, Input} from '@angular/core';
 import {NgForOf} from "@angular/common";
-import {tabOption} from "../../interface/components/tab/tabOption";
+import {TabOption} from "../../interface/components/tab/tabOption";
 
 @Component({
   selector: 'app-tab-header',
@@ -12,5 +12,5 @@ import {tabOption} from "../../interface/components/tab/tabOption";
 })
 export class TabHeaderComponent {
   @Input() tabId!: string;
-  @Input() tabOptions!: tabOption[];
+  @Input() tabOptions!: TabOption[];
 }

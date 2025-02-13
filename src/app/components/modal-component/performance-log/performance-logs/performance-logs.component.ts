@@ -5,7 +5,7 @@ import {PerformanceLog} from "../../../../interface/dto/performance-log";
 import {sortPerformanceLogsByDate, sortPerformanceLogsBySet} from "../../../../utils/performance-log-functions";
 import {FormIndicator} from "../../../../interface/utils/form-indicator";
 import {DictionaryItem} from "../../../../interface/utils/dictionary-item";
-import {tabOption} from "../../../../interface/components/tab/tabOption";
+import {TabOption} from "../../../../interface/components/tab/tabOption";
 import {ActionType} from "../../../../interface/enum/action-type";
 import {
   PerformanceLogEntityFormComponent
@@ -44,7 +44,7 @@ import {CheckBoxComponent} from "../../../input/check-box/check-box.component";
 export class PerformanceLogsComponent implements OnInit {
 
   tabId: string = "targetLogsTab";
-  tabOptions: tabOption[] = [];
+  tabOptions: TabOption[] = [];
 
   accordionParentIdSet: string = "accordionParentIdSet";
   accordionParentIdDate: string = "accordionParentIdDate";
