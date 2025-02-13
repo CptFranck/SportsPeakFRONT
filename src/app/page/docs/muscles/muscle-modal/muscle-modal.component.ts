@@ -43,8 +43,8 @@ export class MuscleModalComponent implements OnInit, OnDestroy {
   @ViewChild("modalTemplate") modalTemplate!: TemplateRef<any>;
 
   protected readonly ActionType = ActionType;
-  private unsubscribe$: Subject<void> = new Subject<void>();
-  private userLoggedService: UserLoggedService = inject(UserLoggedService);
+  private readonly unsubscribe$: Subject<void> = new Subject<void>();
+  private readonly userLoggedService: UserLoggedService = inject(UserLoggedService);
 
   ngOnInit(): void {
     this.userLoggedService.currentUser

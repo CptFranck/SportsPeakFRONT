@@ -33,9 +33,9 @@ export class MyProgExerciseEntityFormComponent implements OnInit, OnDestroy {
   @Input() submitEventActionType$!: Observable<ActionType> | undefined;
 
   private user: User | undefined;
-  private unsubscribe$: Subject<void> = new Subject<void>();
-  private userLoggedService: UserLoggedService = inject(UserLoggedService);
-  private progExerciseService: ProgExerciseService = inject(ProgExerciseService);
+  private readonly unsubscribe$: Subject<void> = new Subject<void>();
+  private readonly userLoggedService: UserLoggedService = inject(UserLoggedService);
+  private readonly progExerciseService: ProgExerciseService = inject(ProgExerciseService);
 
   @Input() set progExerciseInput(value: ProgExercise | undefined) {
     this.progExercise = value;

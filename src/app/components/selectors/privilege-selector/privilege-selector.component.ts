@@ -27,8 +27,8 @@ export class PrivilegeSelectorComponent implements OnInit, OnDestroy, ControlVal
 
   @Input() privilegeIds: number[] = [];
 
-  private unsubscribe$: Subject<void> = new Subject<void>();
-  private privilegeService: PrivilegeService = inject(PrivilegeService);
+  private readonly unsubscribe$: Subject<void> = new Subject<void>();
+  private readonly privilegeService: PrivilegeService = inject(PrivilegeService);
 
   onChange: (value: number[]) => void = () => {
   };

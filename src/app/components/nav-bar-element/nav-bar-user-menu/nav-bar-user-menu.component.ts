@@ -21,8 +21,8 @@ export class NavBarUserMenuComponent implements OnInit, OnDestroy {
   isAdmin: boolean | undefined;
   navbarDropdownId: string = "NavBarUserMenu"
 
-  private unsubscribe$: Subject<void> = new Subject<void>();
-  private userService: UserLoggedService = inject(UserLoggedService);
+  private readonly unsubscribe$: Subject<void> = new Subject<void>();
+  private readonly userService: UserLoggedService = inject(UserLoggedService);
 
   ngOnInit() {
     this.userService.currentUser

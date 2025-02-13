@@ -31,9 +31,9 @@ export class PrivilegeEntityFormComponent implements OnInit, OnDestroy {
   @Input() btnCloseRef!: HTMLButtonElement;
   @Input() submitEventActionType$!: Observable<ActionType> | undefined;
 
-  private unsubscribe$: Subject<void> = new Subject<void>();
-  private privilegeService: PrivilegeService = inject(PrivilegeService);
-  private userLoggedService: UserLoggedService = inject(UserLoggedService);
+  private readonly unsubscribe$: Subject<void> = new Subject<void>();
+  private readonly privilegeService: PrivilegeService = inject(PrivilegeService);
+  private readonly userLoggedService: UserLoggedService = inject(UserLoggedService);
 
   @Input() set privilegeInput(value: Privilege | undefined) {
     this.privilege = value;

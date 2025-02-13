@@ -27,8 +27,8 @@ export class ExerciseTypeSelectorComponent implements OnInit, OnDestroy, Control
 
   @Input() exerciseTypeIds: number[] = [];
 
-  private unsubscribe$: Subject<void> = new Subject<void>();
-  private exerciseTypeService: ExerciseTypeService = inject(ExerciseTypeService);
+  private readonly unsubscribe$: Subject<void> = new Subject<void>();
+  private readonly exerciseTypeService: ExerciseTypeService = inject(ExerciseTypeService);
 
   onChange: (value: number[]) => void = () => {
   };

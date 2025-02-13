@@ -27,8 +27,8 @@ export class MuscleSelectorComponent implements OnInit, OnDestroy, ControlValueA
 
   @Input() muscleIds: number[] = [];
 
-  private unsubscribe$: Subject<void> = new Subject<void>();
-  private muscleService: MuscleService = inject(MuscleService);
+  private readonly unsubscribe$: Subject<void> = new Subject<void>();
+  private readonly muscleService: MuscleService = inject(MuscleService);
 
   onChange: (value: number[]) => void = () => {
   };

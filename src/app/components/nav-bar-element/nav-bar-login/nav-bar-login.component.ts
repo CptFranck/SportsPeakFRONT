@@ -16,8 +16,8 @@ import {Subject, takeUntil} from "rxjs";
 export class NavBarLoginComponent implements OnInit, OnDestroy {
   isLogged: boolean = false;
 
-  private unsubscribe$: Subject<void> = new Subject<void>();
-  private authService: AuthService = inject(AuthService);
+  private readonly unsubscribe$: Subject<void> = new Subject<void>();
+  private readonly authService: AuthService = inject(AuthService);
 
   ngOnInit() {
     this.authService.isAuthenticated

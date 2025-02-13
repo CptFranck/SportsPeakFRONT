@@ -27,8 +27,8 @@ export class ExerciseSelectorComponent implements OnInit, OnDestroy, ControlValu
 
   @Input() exerciseIds: number[] = [];
 
-  private unsubscribe$: Subject<void> = new Subject<void>();
-  private exerciseService: ExerciseService = inject(ExerciseService);
+  private readonly unsubscribe$: Subject<void> = new Subject<void>();
+  private readonly exerciseService: ExerciseService = inject(ExerciseService);
 
   onChange: (value: number[]) => void = () => {
   };

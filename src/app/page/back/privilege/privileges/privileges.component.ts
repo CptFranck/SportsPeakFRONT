@@ -32,8 +32,8 @@ export class PrivilegesComponent implements OnInit, OnDestroy {
 
   @ViewChild("modalTemplate") modalTemplate!: TemplateRef<any>;
 
-  private unsubscribe$: Subject<void> = new Subject<void>();
-  private privilegeService: PrivilegeService = inject(PrivilegeService);
+  private readonly unsubscribe$: Subject<void> = new Subject<void>();
+  private readonly privilegeService: PrivilegeService = inject(PrivilegeService);
 
   ngOnInit(): void {
     this.privilegeService.privileges
