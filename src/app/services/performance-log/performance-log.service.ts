@@ -17,7 +17,7 @@ import {PerformanceLog} from "../../interface/dto/performance-log";
 })
 export class PerformanceLogService {
 
-  private progExercise: ProgExercise | undefined;
+  progExercise: ProgExercise | undefined;
   private readonly apollo: Apollo = inject(Apollo);
   private readonly alertService: AlertService = inject(AlertService);
   private readonly progExerciseService: ProgExerciseService = inject(ProgExerciseService);
