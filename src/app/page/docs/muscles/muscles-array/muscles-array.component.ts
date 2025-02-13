@@ -29,8 +29,8 @@ export class MusclesArrayComponent implements OnChanges, OnDestroy {
 
   @Output() actionMuscle: EventEmitter<FormIndicator> = new EventEmitter<FormIndicator>();
 
-  private unsubscribe$: Subject<void> = new Subject<void>();
-  private userLoggedService: UserLoggedService = inject(UserLoggedService);
+  private readonly unsubscribe$: Subject<void> = new Subject<void>();
+  private readonly userLoggedService: UserLoggedService = inject(UserLoggedService);
 
   ngOnChanges(): void {
     this.muscles.forEach((muscle: Muscle) => this.showDetails[muscle.id] = false);

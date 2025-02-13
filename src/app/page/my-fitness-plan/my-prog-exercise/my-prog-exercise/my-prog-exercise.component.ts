@@ -59,9 +59,9 @@ export class MyProgExerciseComponent implements OnInit, OnDestroy {
   performanceLogModalTitle: string = "";
 
 
-  private unsubscribe$: Subject<void> = new Subject<void>();
-  private activatedRoute: ActivatedRoute = inject(ActivatedRoute);
-  private proExerciseService: ProgExerciseService = inject(ProgExerciseService);
+  private readonly unsubscribe$: Subject<void> = new Subject<void>();
+  private readonly activatedRoute: ActivatedRoute = inject(ActivatedRoute);
+  private readonly proExerciseService: ProgExerciseService = inject(ProgExerciseService);
 
   ngOnInit(): void {
     this.proExerciseService.progExercise

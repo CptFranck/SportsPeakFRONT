@@ -37,8 +37,8 @@ export class ExerciseTypesComponent implements OnInit, OnDestroy {
 
   @ViewChild("modalTemplate") modalTemplate!: TemplateRef<any>
 
-  private unsubscribe$: Subject<void> = new Subject<void>();
-  private exerciseTypeService: ExerciseTypeService = inject(ExerciseTypeService);
+  private readonly unsubscribe$: Subject<void> = new Subject<void>();
+  private readonly exerciseTypeService: ExerciseTypeService = inject(ExerciseTypeService);
 
   ngOnInit(): void {
     this.exerciseTypeService.exerciseTypes

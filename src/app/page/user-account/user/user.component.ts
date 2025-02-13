@@ -46,8 +46,8 @@ export class UserComponent implements OnInit, OnDestroy {
 
   protected readonly ActionType = ActionType;
 
-  private unsubscribe$: Subject<void> = new Subject<void>();
-  private userLoggedService: UserLoggedService = inject(UserLoggedService);
+  private readonly unsubscribe$: Subject<void> = new Subject<void>();
+  private readonly userLoggedService: UserLoggedService = inject(UserLoggedService);
 
   ngOnInit() {
     this.userLoggedService.currentUser
