@@ -1,11 +1,11 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-auto">
-      <p><label class="form-label fw-bold">Name : </label> {{ privilege?.name }}</p>
+      <p><span class="form-label fw-bold">Name : </span> {{ privilege?.name }}</p>
     </div>
   </div>
   <div class="mb-3">
-    <label class="form-label fw-bold">Role(s) :</label>
+    <span class="form-label fw-bold">Role(s) :</span>
     <p *ngIf="privilege?.roles?.length === 0">No roles attributed to this user</p>
     <ol *ngIf="privilege?.roles?.length !== 0"
         class="list-group list-group-numbered"

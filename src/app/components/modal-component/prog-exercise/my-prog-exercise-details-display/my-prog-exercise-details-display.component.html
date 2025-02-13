@@ -1,25 +1,25 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col">
-      <label class="form-label fw-bold">Name :</label>
+      <span class="form-label fw-bold">Name :</span>
       <p>{{ progExercise?.name }}</p>
     </div>
     <div class="col">
       <div class="row">
         <div class="col">
-          <label class="fw-bold"> Trust Label : </label>
+          <span class="fw-bold"> Trust Label : </span>
           {{ progExercise?.trustLabel }}
         </div>
       </div>
       <div class="row">
         <div class="col pt-2">
-          <label class="fw-bold"> Visibility : </label>
+          <span class="fw-bold"> Visibility : </span>
           {{ progExercise?.visibility }}
         </div>
       </div>
       <div class="row">
         <div class="col pt-2">
-          <label class="fw-bold"> Time : </label>
+          <span class="fw-bold"> Time : </span>
           {{ exerciseTime }}
         </div>
       </div>
@@ -28,7 +28,7 @@
   <div class="mb-3">
     <div class="row">
       <div class="col">
-        <label class="fw-bold"> Exercise : </label>
+        <span class="fw-bold"> Exercise : </span>
         {{ progExercise?.exercise?.name }}
       </div>
     </div>
@@ -39,11 +39,11 @@
     </div>
   </div>
   <div class="mb-3">
-    <label class="form-label fw-bold">Note :</label>
+    <span class="form-label fw-bold">Note :</span>
     <p>{{ progExercise?.note }}</p>
   </div>
   <div class="mb-3">
-    <label class="form-label fw-bold">Set(s) :</label>
+    <span class="form-label fw-bold">Set(s) :</span>
     <p *ngIf="displayedTargetSets?.length === 0">No set(s) in this exercise for the moment</p>
     <ol *ngIf="displayedTargetSets?.length !== 0"
         class="list-group list-group-numbered"
@@ -56,31 +56,31 @@
           <div class="row">
             <div class="col-auto">
               <p>
-                <label class="form-label fw-bold">Ex : </label>
+                <span class="form-label fw-bold">Ex : </span>
                 {{ targetSetsInformation[targetSet.id].setRep }}
               </p>
             </div>
             <div class="col-auto">
               <p>
-                <label class="form-label fw-bold">Weight : </label>
+                <span class="form-label fw-bold">Weight : </span>
                 {{ targetSetsInformation[targetSet.id].weight }}
               </p>
             </div>
             <div class="col-auto">
               <p>
-                <label class="form-label fw-bold">Effort Time :</label>
+                <span class="form-label fw-bold">Effort Time :</span>
                 {{ targetSetsInformation[targetSet.id].effortTime }}
               </p>
             </div>
             <div class="col-auto">
               <p>
-                <label class="form-label fw-bold">Rest Time :</label>
+                <span class="form-label fw-bold">Rest Time :</span>
                 {{ targetSetsInformation[targetSet.id].restTime }}
               </p>
             </div>
             <div class="col-auto">
               <p>
-                <label class="form-label fw-bold">Set(s) Time :</label>
+                <span class="form-label fw-bold">Set(s) Time :</span>
                 {{ targetSetsInformation[targetSet.id].setTime }}
               </p>
             </div>
