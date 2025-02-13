@@ -21,19 +21,11 @@ import {CollapseBlockComponent} from "../../../collapse-block/collapse-block.com
 })
 export class PerformanceLogsCardComponent {
 
-  centerContentClass: string = "";
   @Input() activeButton!: boolean;
   @Input() formCollapseId: string = "";
   @Input() performanceLog!: PerformanceLog;
   @Input() collapseBlockComponent?: CollapseBlockComponent;
   @Output() actionPerformanceLog: EventEmitter<FormIndicator> = new EventEmitter<FormIndicator>();
-
-  @Input() set centerContent(bool: boolean) {
-    if (bool)
-      this.centerContentClass = "justify-content-center";
-    else
-      this.centerContentClass = "";
-  }
 
   modPerformanceLog($event: any) {
     this.actionPerformanceLog.emit({
