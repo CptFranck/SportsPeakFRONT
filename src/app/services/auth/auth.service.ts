@@ -18,11 +18,11 @@ export class AuthService {
   isAuthenticated: BehaviorSubject<boolean> = new BehaviorSubject(false);
 
   private redirectUrl: string = "/";
-  private router: Router = inject(Router);
-  private apollo: Apollo = inject(Apollo);
-  private alertService: AlertService = inject(AlertService);
-  private tokenService: TokenService = inject(TokenService);
-  private userLoggedService: UserLoggedService = inject(UserLoggedService);
+  private readonly router: Router = inject(Router);
+  private readonly apollo: Apollo = inject(Apollo);
+  private readonly alertService: AlertService = inject(AlertService);
+  private readonly tokenService: TokenService = inject(TokenService);
+  private readonly userLoggedService: UserLoggedService = inject(UserLoggedService);
 
   constructor() {
     let isValidTokenSaved: boolean = !!this.tokenService.getCurrentToken();

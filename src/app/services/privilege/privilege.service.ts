@@ -21,9 +21,9 @@ export class PrivilegeService {
   privileges: BehaviorSubject<Privilege[]> = new BehaviorSubject<Privilege[]>([]);
   isLoading: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
 
-  private apollo: Apollo = inject(Apollo);
-  private alertService: AlertService = inject(AlertService);
-  private userLoggedService: UserLoggedService = inject(UserLoggedService);
+  private readonly apollo: Apollo = inject(Apollo);
+  private readonly alertService: AlertService = inject(AlertService);
+  private readonly userLoggedService: UserLoggedService = inject(UserLoggedService);
 
   constructor() {
     this.userLoggedService.currentUser.subscribe(() => {

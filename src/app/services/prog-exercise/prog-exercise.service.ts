@@ -29,10 +29,10 @@ export class ProgExerciseService {
   isLoading: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
 
   private user: User | undefined;
-  private router: Router = inject(Router);
-  private apollo: Apollo = inject(Apollo);
-  private alertService: AlertService = inject(AlertService);
-  private userLoggedService: UserLoggedService = inject(UserLoggedService);
+  private readonly router: Router = inject(Router);
+  private readonly apollo: Apollo = inject(Apollo);
+  private readonly alertService: AlertService = inject(AlertService);
+  private readonly userLoggedService: UserLoggedService = inject(UserLoggedService);
 
   constructor() {
     this.getProgExercises();

@@ -8,8 +8,8 @@ import {AuthToken} from "../../interface/dto/token";
 })
 export class TokenService {
 
-  authToken: BehaviorSubject<AuthToken | null> = new BehaviorSubject<AuthToken | null>(null);
-  private localStorageService: LocalStorageService = inject(LocalStorageService);
+  private authToken: BehaviorSubject<AuthToken | null> = new BehaviorSubject<AuthToken | null>(null);
+  private readonly localStorageService: LocalStorageService = inject(LocalStorageService);
 
   constructor() {
     let token: AuthToken | null = this.getSavedToken();

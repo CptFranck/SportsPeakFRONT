@@ -18,9 +18,9 @@ import {PerformanceLog} from "../../interface/dto/performance-log";
 export class PerformanceLogService {
 
   private progExercise: ProgExercise | undefined;
-  private apollo: Apollo = inject(Apollo);
-  private alertService: AlertService = inject(AlertService);
-  private progExerciseService: ProgExerciseService = inject(ProgExerciseService);
+  private readonly apollo: Apollo = inject(Apollo);
+  private readonly alertService: AlertService = inject(AlertService);
+  private readonly progExerciseService: ProgExerciseService = inject(ProgExerciseService);
 
   constructor() {
     this.progExerciseService.progExercise.subscribe((progExercise: ProgExercise | undefined) => {

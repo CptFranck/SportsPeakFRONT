@@ -19,9 +19,9 @@ import {GET_PROG_EXERCISE_BY_ID} from "../../graphql/operations/prog-exercise.op
 export class TargetSetService {
 
   private progExercise: ProgExercise | undefined;
-  private apollo: Apollo = inject(Apollo);
-  private alertService: AlertService = inject(AlertService);
-  private progExerciseService: ProgExerciseService = inject(ProgExerciseService);
+  private readonly apollo: Apollo = inject(Apollo);
+  private readonly alertService: AlertService = inject(AlertService);
+  private readonly progExerciseService: ProgExerciseService = inject(ProgExerciseService);
 
   constructor() {
     this.progExerciseService.progExercise.subscribe((progExercise: ProgExercise | undefined) => {

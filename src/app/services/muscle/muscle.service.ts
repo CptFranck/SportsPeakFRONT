@@ -15,8 +15,8 @@ export class MuscleService {
   muscles: BehaviorSubject<Muscle[]> = new BehaviorSubject<Muscle[]>([]);
   isLoading: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
 
-  private apollo: Apollo = inject(Apollo);
-  private alertService: AlertService = inject(AlertService);
+  private readonly apollo: Apollo = inject(Apollo);
+  private readonly alertService: AlertService = inject(AlertService);
 
   constructor() {
     this.getMuscles();
