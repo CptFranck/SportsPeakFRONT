@@ -1,6 +1,6 @@
 <form *ngIf="userForm" [formGroup]="userForm" class="container-fluid">
   <div class="mb-3">
-    <label class="form-label">New Email address</label>
+    <span class="form-label">New Email address</span>
     <input aria-describedby="emailHelp" class="form-control" formControlName="newEmail" type="email">
     <app-input-control
       [formGroup]="userForm"
@@ -9,7 +9,7 @@
     />
   </div>
   <div class="mb-3">
-    <label class="form-label">Password :</label>
+    <span class="form-label">Password :</span>
     <input class="form-control" formControlName="password" type="password">
     <app-input-control
       [formGroup]="userForm"

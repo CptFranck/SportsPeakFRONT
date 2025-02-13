@@ -1,18 +1,18 @@
 <div class="container-fluid">
   <div class="mb-3">
-    <label class="form-label fw-bold">Name :</label>
+    <span class="form-label fw-bold">Name :</span>
     <p>{{ exercise?.name }}</p>
   </div>
   <div class="mb-3">
-    <label class="form-label fw-bold">Description :</label>
+    <span class="form-label fw-bold">Description :</span>
     <p>{{ exercise?.description }}</p>
   </div>
   <div class="mb-3">
-    <label class="form-label fw-bold">Goal :</label>
+    <span class="form-label fw-bold">Goal :</span>
     <p>{{ exercise?.goal }}</p>
   </div>
   <div class="mb-3 ">
-    <label class="form-label fw-bold">Muscle(s) :</label>
+    <span class="form-label fw-bold">Muscle(s) :</span>
     <p *ngIf="exercise?.muscles?.length === 0">No muscle is used this exercise</p>
     <ol *ngIf="exercise?.muscles?.length !== 0"
         class="list-group list-group-numbered"
@@ -22,16 +22,16 @@
       >
         <div class="ms-2 me-auto">
           <h4 class="fw-bold">{{ exercise?.name }}</h4>
-          <label class="form-label fw-bold">Description :</label>
+          <span class="form-label fw-bold">Description :</span>
           <p>{{ exercise?.description }}</p>
-          <label class="form-label fw-bold">Function :</label>
+          <span class="form-label fw-bold">Function :</span>
           <p>{{ exercise?.function }}</p>
         </div>
       </li>
     </ol>
   </div>
   <div class="mb-3">
-    <label class="form-label fw-bold">ExerciseType(s) :</label>
+    <span class="form-label fw-bold">ExerciseType(s) :</span>
     <p *ngIf="exercise?.exerciseTypes?.length === 0">This exercise has no type set</p>
     <ol *ngIf="exercise?.exerciseTypes?.length !== 0"
         class="list-group list-group-numbered "
@@ -42,7 +42,7 @@
       >
         <div class="ms-2 me-auto">
           <h4 class="fw-bold">{{ exercise?.name }}</h4>
-          <label class="form-label fw-bold">Goal :</label>
+          <span class="form-label fw-bold">Goal :</span>
           <p>{{ exercise?.goal }}</p>
         </div>
       </li>
