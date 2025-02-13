@@ -10,7 +10,7 @@ export interface Alert {
   closed: boolean;
   errorInformation?: {
     errorType?: AlertErrorType;
-    errorExtension?: { [key: string]: unknown } | undefined,
+    errorExtension?: { [key: string]: unknown },
     errorLocation?: ReadonlyArray<SourceLocation>,
     errorPath?: ReadonlyArray<string | number>,
   };
