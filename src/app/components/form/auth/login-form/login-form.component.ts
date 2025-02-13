@@ -18,7 +18,7 @@ export class LoginFormComponent implements OnInit {
   loginForm: FormGroup | null = null;
   submitInvalidForm: boolean = false;
 
-  private authService: AuthService = inject(AuthService);
+  private readonly authService: AuthService = inject(AuthService);
 
   ngOnInit() {
     this.initializeLoginForm();
