@@ -2,7 +2,7 @@
   <div class="mb-3">
     <div class="row">
       <div class="col">
-        <label class="form-label">Set index :</label>
+        <span class="form-label">Set index :</span>
         <app-performance-log-index-select [index]='performanceLogForm.controls["setIndex"].value'
                                           [logDate]='performanceLogForm.controls["logDate"].value'
                                           [targetSet]="targetSet"
@@ -17,7 +17,7 @@
         />
       </div>
       <div class="col">
-        <label class="form-label">Date :</label>
+        <span class="form-label">Date :</span>
         <input class="form-control" formControlName="logDate" type="date"/>
         <app-input-control
           [formGroup]="performanceLogForm"
@@ -31,7 +31,7 @@
     </div>
   </div>
   <div class="mb-3">
-    <label class="form-label">Number of Repetition(s) :</label>
+    <span class="form-label">Number of Repetition(s) :</span>
     <input class="form-control" formControlName="repetitionNumber" type="text">
     <app-input-control
       [formGroup]="performanceLogForm"
@@ -44,7 +44,7 @@
   <div class="mb-3">
     <div class="row">
       <div class="col">
-        <label class="form-label">Weight :</label>
+        <span class="form-label">Weight :</span>
         <input class="form-control" formControlName="weight" type="text">
         <app-input-control
           [formGroup]="performanceLogForm"
@@ -56,7 +56,7 @@
         />
       </div>
       <div class="col">
-        <label class="form-label">Weight Unit:</label>
+        <span class="form-label">Weight Unit:</span>
         <app-weight-select [weightUnit]='performanceLogForm.controls["weightUnit"].value' formControlName="weightUnit"/>
         <app-input-control
           [formGroup]="performanceLogForm"

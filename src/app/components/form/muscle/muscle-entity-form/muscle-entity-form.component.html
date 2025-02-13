@@ -1,6 +1,6 @@
 <form *ngIf="muscleForm" [formGroup]="muscleForm" class="container-fluid">
   <div class="mb-3">
-    <label class="form-label">Name :</label>
+    <span class="form-label">Name :</span>
     <input class="form-control" formControlName="name" type="text">
     <app-input-control
       [formGroup]="muscleForm"
@@ -11,7 +11,7 @@
   </div>
 
   <div class="mb-3">
-    <label class="form-label">Description :</label>
+    <span class="form-label">Description :</span>
     <textarea aria-label="textarea" class="form-control" formControlName="description"></textarea>
     <app-input-control
       [formGroup]="muscleForm"
@@ -22,7 +22,7 @@
   </div>
 
   <div class="mb-3">
-    <label class="form-label">Function :</label>
+    <span class="form-label">Function :</span>
     <textarea aria-label="textarea" class="form-control" formControlName="function"></textarea>
     <app-input-control
       [formGroup]="muscleForm"
@@ -32,7 +32,7 @@
     />
   </div>
   <div class="mb-3">
-    <label class="form-label">Exercise(s) :</label>
+    <span class="form-label">Exercise(s) :</span>
     <app-exercise-selector [exerciseIds]='muscleForm.controls["exerciseIds"].value' formControlName="exerciseIds"/>
     <app-input-control
       [formGroup]="muscleForm"

@@ -1,6 +1,6 @@
 <form *ngIf="targetSetForm" [formGroup]="targetSetForm" class="container-fluid">
   <div class="mb-3">
-    <label class="form-label">Set index :</label>
+    <span class="form-label">Set index :</span>
     <input class="form-control" formControlName="index" type="text">
     <app-input-control
       [formGroup]="targetSetForm"
@@ -12,7 +12,7 @@
     />
   </div>
   <div class="mb-3">
-    <label class="form-label">Number of set(s) :</label>
+    <span class="form-label">Number of set(s) :</span>
     <input class="form-control" formControlName="setNumber" type="text">
     <app-input-control
       [formGroup]="targetSetForm"
@@ -24,7 +24,7 @@
     />
   </div>
   <div class="mb-3">
-    <label class="form-label">Number of Repetition(s) :</label>
+    <span class="form-label">Number of Repetition(s) :</span>
     <input class="form-control" formControlName="repetitionNumber" type="text">
     <app-input-control
       [formGroup]="targetSetForm"
@@ -37,7 +37,7 @@
   <div class="mb-3">
     <div class="row">
       <div class="col">
-        <label class="form-label">Weight :</label>
+        <span class="form-label">Weight :</span>
         <input class="form-control" formControlName="weight" type="text">
         <app-input-control
           [formGroup]="targetSetForm"
@@ -49,7 +49,7 @@
         />
       </div>
       <div class="col">
-        <label class="form-label">Weight Unit:</label>
+        <span class="form-label">Weight Unit:</span>
         <app-weight-select [weightUnit]='targetSetForm.controls["weightUnit"].value' formControlName="weightUnit"/>
         <app-input-control
           [formGroup]="targetSetForm"
@@ -79,7 +79,7 @@
       </div>
       <div class="col">
         <div class="row">
-          <label class="form-label">Rest Time :</label>
+          <span class="form-label">Rest Time :</span>
           <app-duration-input [rootFormGroupInput]="targetSetForm" fieldName="restTime"/>
           <app-input-control
             [formGroup]="targetSetForm"

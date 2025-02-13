@@ -1,6 +1,6 @@
 <form *ngIf="exerciseForm" [formGroup]="exerciseForm" class="container-fluid">
   <div class="mb-3">
-    <label class="form-label">Name :</label>
+    <span class="form-label">Name :</span>
     <input class="form-control" formControlName="name" type="text">
     <app-input-control
       [formGroup]="exerciseForm"
@@ -11,7 +11,7 @@
   </div>
 
   <div class="mb-3">
-    <label class="form-label">Description :</label>
+    <span class="form-label">Description :</span>
     <textarea aria-label="textarea" class="form-control" formControlName="description"></textarea>
     <app-input-control
       [formGroup]="exerciseForm"
@@ -22,7 +22,7 @@
   </div>
 
   <div class="mb-3">
-    <label class="form-label">Goal :</label>
+    <span class="form-label">Goal :</span>
     <textarea aria-label="textarea" class="form-control" formControlName="goal"></textarea>
     <app-input-control
       [formGroup]="exerciseForm"
@@ -32,7 +32,7 @@
     />
   </div>
   <div class="mb-3">
-    <label class="form-label">Muscle :</label>
+    <span class="form-label">Muscle :</span>
     <app-muscle-selector [muscleIds]='exerciseForm.controls["muscleIds"].value'
                          formControlName="muscleIds"/>
     <app-input-control
@@ -44,7 +44,7 @@
     />
   </div>
   <div class="mb-3">
-    <label class="form-label">ExerciseTypes :</label>
+    <span class="form-label">ExerciseTypes :</span>
     <app-exercise-type-selector [exerciseTypeIds]='exerciseForm.controls["exerciseTypeIds"].value'
                                 formControlName="exerciseTypeIds"/>
     <app-input-control

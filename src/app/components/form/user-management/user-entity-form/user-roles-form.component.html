@@ -1,17 +1,17 @@
 <form *ngIf="userForm" [formGroup]="userForm" class="d-flex flex-column">
   <div class="row">
     <div class="col-auto">
-      <p><label class="form-label fw-bold">Email : </label> {{ user?.email }}</p>
+      <p><span class="form-label fw-bold">Email : </span> {{ user?.email }}</p>
     </div>
     <div class="col-auto">
-      <p><label class="form-label fw-bold">Username : </label> {{ user?.username }}</p>
+      <p><span class="form-label fw-bold">Username : </span> {{ user?.username }}</p>
     </div>
     <div class="row">
       <div class="col-auto">
-        <p><label class="form-label fw-bold">Firstname : </label> {{ user?.firstName }}</p>
+        <p><span class="form-label fw-bold">Firstname : </span> {{ user?.firstName }}</p>
       </div>
       <div class="col-auto">
-        <p><label class="form-label fw-bold">LastName : </label> {{ user?.lastName }}</p>
+        <p><span class="form-label fw-bold">LastName : </span> {{ user?.lastName }}</p>
       </div>
     </div>
   </div>
