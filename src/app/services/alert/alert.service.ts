@@ -11,8 +11,8 @@ import {NetworkError} from "@apollo/client/errors";
 })
 export class AlertService {
   private alertId: number = 0;
-  private alerts: Alert[] = [];
-  private alertsSubject: Subject<Alert[]> = new Subject<Alert[]>();
+  private readonly alerts: Alert[] = [];
+  private readonly alertsSubject: Subject<Alert[]> = new Subject<Alert[]>();
 
   constructor() {
     this.updateAlert();
