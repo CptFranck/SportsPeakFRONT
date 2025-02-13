@@ -12,8 +12,8 @@ export class UserLoggedService {
 
   currentUser: BehaviorSubject<User | undefined> = new BehaviorSubject<User | undefined>(undefined);
   private roles: string[] = [];
-  private router: Router = inject(Router);
-  private localStorageService: LocalStorageService = inject(LocalStorageService);
+  private readonly router: Router = inject(Router);
+  private readonly localStorageService: LocalStorageService = inject(LocalStorageService);
 
   constructor() {
     let user: User | undefined | null = this.getSavedUser();
