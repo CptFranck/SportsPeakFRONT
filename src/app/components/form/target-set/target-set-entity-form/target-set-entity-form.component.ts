@@ -74,21 +74,29 @@ export class TargetSetEntityFormComponent implements OnInit, OnDestroy {
 
   initializeTargetSetForm() {
     const defaultDuration: Duration = {seconds: 0, minutes: 0, hours: 0};
-    const targetSetIndex: number = this.targetSet ? this.targetSet.index :
-      (this.progExercise ? getUpToDateTargetSets(this.progExercise).length + 1 : 1);
-    const targetSetSetNumber: number = this.targetSet ? this.targetSet.setNumber : 1;
-    const targetSetRepetitionNumber: number = this.targetSet ? this.targetSet.repetitionNumber : 1;
-    const targetSetWeight: number = this.targetSet ? this.targetSet.weight : 0;
-    const targetSetWeightUnit: string = this.targetSet ? this.targetSet.weightUnit : WeightUnit.KILOGRAMME;
-
-    const targetSetPhysicalExertionUnitTime: Duration = this.targetSet ?
-      this.targetSet.physicalExertionUnitTime : defaultDuration;
-    const targetSetRestTime: Duration = this.targetSet ? this.targetSet.restTime : defaultDuration;
-
+    let targetSetIndex: number = 1;
+    let targetSetSetNumber: number = 1;
+    let targetSetRepetitionNumber: number = 1;
+    let targetSetWeight: number = 0;
+    let targetSetWeightUnit: WeightUnit = WeightUnit.KILOGRAMME;
+    let targetSetPhysicalExertionUnitTime: Duration = defaultDuration;
+    let targetSetRestTime: Duration = defaultDuration;
     const targetSetDate: Date = new Date();
-    const targetSetUpdateId: number | null = this.targetSet && this.actionType === ActionType.addEvolution ?
-      this.targetSet.id : null;
+    let targetSetUpdateId: number | null = null;
     const targetSetProgExerciseId: number | undefined = this.progExercise?.id;
+
+    if (this.targetSet) {
+      targetSetIndex = this.targetSet.index;
+      targetSetSetNumber = this.targetSet.setNumber;
+      targetSetRepetitionNumber = this.targetSet.repetitionNumber;
+      targetSetWeight = this.targetSet.weight;
+      targetSetWeightUnit = this.targetSet.weightUnit;
+      targetSetPhysicalExertionUnitTime = this.targetSet.physicalExertionUnitTime;
+      targetSetRestTime = this.targetSet.restTime;
+      if (this.actionType === ActionType.addEvolution)
+        targetSetUpdateId = this.targetSet.id;
+    } else if (this.progExercise)
+      targetSetIndex = getUpToDateTargetSets(this.progExercise).length + 1;
 
     this.targetSetForm = new FormGroup(
       {
