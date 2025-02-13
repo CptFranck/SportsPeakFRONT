@@ -40,9 +40,6 @@ export class ModalComponent {
     this.validateButtonClass = "btn-success";
     this.closeButtonTitle = "Cancel";
     switch (this.action) {
-      case ActionType.read:
-        this.closeButtonTitle = "Close";
-        return
       case ActionType.create:
         this.validationButtonTitle = "Create";
         return
