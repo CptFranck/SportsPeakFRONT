@@ -31,7 +31,7 @@ export class ExerciseTypeArrayComponent implements OnInit, OnDestroy {
   private readonly userLoggedService: UserLoggedService = inject(UserLoggedService);
 
   ngOnInit(): void {
-    this.exerciseTypes.map((exerciseType: ExerciseType) => this.showDetails[exerciseType.id] = false);
+    this.exerciseTypes.forEach((exerciseType: ExerciseType) => this.showDetails[exerciseType.id] = false);
     this.userLoggedService.currentUser.pipe(takeUntil(this.unsubscribe$))
       .subscribe(() => this.isAdmin = this.userLoggedService.isAdmin());
   }
