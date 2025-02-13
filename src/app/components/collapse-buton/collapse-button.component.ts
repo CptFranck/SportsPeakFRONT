@@ -19,7 +19,7 @@ export class CollapseButtonComponent implements OnInit {
 
   @Output() onClickEvent: EventEmitter<any> = new EventEmitter();
 
-  constructor(private elementRef: ElementRef) {
+  constructor(private readonly elementRef: ElementRef) {
   }
 
   ngOnInit(): void {
