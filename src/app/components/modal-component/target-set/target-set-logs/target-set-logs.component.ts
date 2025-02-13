@@ -71,7 +71,7 @@ export class TargetSetLogsComponent implements OnInit {
     this.action = formIndicator.actionType;
     this.targetSetLog = formIndicator.object;
     if (this.action === ActionType.checkPerformance) {
-
+      this.blocTitle = undefined;
     } else {
       this.blocTitle = "Set created on " + new Date(formIndicator.object?.creationDate).toLocaleDateString();
     }
