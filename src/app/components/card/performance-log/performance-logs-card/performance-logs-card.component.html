@@ -5,19 +5,19 @@
         <div class="col-auto">
           <div class="row">
             <div class="col-auto">
-              <label class="fw-bold me-1"> Performed : </label>
+              <span class="fw-bold me-1"> Performed : </span>
               {{ performanceLog.logDate | date: 'dd/MM/yyyy' }}
             </div>
             <div class="col-auto">
-              <label class="fw-bold me-1"> Set N°: </label>
+              <span class="fw-bold me-1"> Set N°: </span>
               {{ performanceLog.setIndex }}
             </div>
             <div class="col-auto">
-              <label class="fw-bold"> Reps : </label>
+              <span class="fw-bold"> Reps : </span>
               {{ performanceLog.repetitionNumber }}
             </div>
             <div class="col">
-              <label class="fw-bold"> Weight : </label>
+              <span class="fw-bold"> Weight : </span>
               {{ performanceLog.weight + " " + performanceLog.weightUnit }}
             </div>
           </div>
