@@ -26,10 +26,10 @@ export class UserService {
   users: BehaviorSubject<User[]> = new BehaviorSubject<User[]>([]);
   isLoading: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
 
-  private apollo: Apollo = inject(Apollo);
-  private authService: AuthService = inject(AuthService);
-  private alertService: AlertService = inject(AlertService);
-  private userLoggedService: UserLoggedService = inject(UserLoggedService);
+  private readonly apollo: Apollo = inject(Apollo);
+  private readonly authService: AuthService = inject(AuthService);
+  private readonly alertService: AlertService = inject(AlertService);
+  private readonly userLoggedService: UserLoggedService = inject(UserLoggedService);
 
   constructor() {
     this.userLoggedService.currentUser.subscribe(() => {
