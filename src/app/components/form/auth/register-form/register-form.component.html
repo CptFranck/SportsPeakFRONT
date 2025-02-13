@@ -1,6 +1,6 @@
 <form *ngIf="registerFormGroup" [formGroup]="registerFormGroup" class="d-flex flex-column">
   <div class="mb-3">
-    <label class="form-label">First Name :</label>
+    <span class="form-label">First Name :</span>
     <input class="form-control" formControlName="firstName">
     <app-input-control
       [formGroup]="registerFormGroup"
@@ -11,7 +11,7 @@
     />
   </div>
   <div class="mb-3">
-    <label class="form-label">Last Name :</label>
+    <span class="form-label">Last Name :</span>
     <input class="form-control" formControlName="lastName">
     <app-input-control
       [formGroup]="registerFormGroup"
@@ -22,7 +22,7 @@
     />
   </div>
   <div class="mb-3">
-    <label class="form-label">Username :</label>
+    <span class="form-label">Username :</span>
     <div class="input-group">
       <span class="input-group-text">&#64;</span>
       <input class="form-control" formControlName="username" type="text">
@@ -35,7 +35,7 @@
     />
   </div>
   <div class="mb-3">
-    <label class="form-label">Email address :</label>
+    <span class="form-label">Email address :</span>
     <input class="form-control" formControlName="email" type="email">
     <app-input-control
       [formGroup]="registerFormGroup"
@@ -44,7 +44,7 @@
     />
   </div>
   <div class="mb-3">
-    <label class="form-label">Password :</label>
+    <span class="form-label">Password :</span>
     <input class="form-control" formControlName="password" type="password">
     <app-input-control
       [formGroup]="registerFormGroup"
@@ -55,7 +55,7 @@
     />
   </div>
   <div class="mb-3">
-    <label class="form-label">Confirm Password :</label>
+    <span class="form-label">Confirm Password :</span>
     <input class="form-control" formControlName="confirmPassword" type="password">
     <app-input-control
       [formGroup]="registerFormGroup"

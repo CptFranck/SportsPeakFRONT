@@ -26,7 +26,7 @@ export class RegisterFormComponent implements OnInit {
     "password": "ChangeMeInProd1!",
     "confirmPassword": "ChangeMeInProd1!"
   }
-  private authService: AuthService = inject(AuthService);
+  private readonly authService: AuthService = inject(AuthService);
 
   ngOnInit() {
     this.initializeRegisterForm();
