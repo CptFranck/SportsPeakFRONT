@@ -30,9 +30,9 @@ export class ExerciseTypeEntityFormComponent implements OnInit, OnDestroy {
   @Input() btnCloseRef!: HTMLButtonElement;
   @Input() submitEventActionType$!: Subject<ActionType> | undefined;
 
-  private unsubscribe$: Subject<void> = new Subject<void>();
-  private userLoggedService: UserLoggedService = inject(UserLoggedService);
-  private exerciseTypeService: ExerciseTypeService = inject(ExerciseTypeService);
+  private readonly unsubscribe$: Subject<void> = new Subject<void>();
+  private readonly userLoggedService: UserLoggedService = inject(UserLoggedService);
+  private readonly exerciseTypeService: ExerciseTypeService = inject(ExerciseTypeService);
 
   @Input() set exerciseTypeInput(value: ExerciseType | undefined) {
     this.exerciseType = value;

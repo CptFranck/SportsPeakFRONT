@@ -16,8 +16,8 @@ export class PerformanceLogDeleteFormComponent implements OnInit, OnDestroy {
   @Input() btnCloseRef!: HTMLButtonElement;
   @Input() submitEventActionType$!: Observable<ActionType> | undefined;
 
-  private unsubscribe$: Subject<void> = new Subject<void>();
-  private performanceLogService: PerformanceLogService = inject(PerformanceLogService);
+  private readonly unsubscribe$: Subject<void> = new Subject<void>();
+  private readonly performanceLogService: PerformanceLogService = inject(PerformanceLogService);
 
   @Input() set performanceLogInput(performanceLog: PerformanceLog | undefined) {
     this.performanceLog = performanceLog;

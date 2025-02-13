@@ -16,8 +16,8 @@ export class ExerciseTypeDeleteFormComponent implements OnInit, OnDestroy {
   @Input() btnCloseRef!: HTMLButtonElement;
   @Input() submitEventActionType$!: Observable<ActionType> | undefined;
 
-  private unsubscribe$: Subject<void> = new Subject<void>();
-  private exerciseTypeService: ExerciseTypeService = inject(ExerciseTypeService);
+  private readonly unsubscribe$: Subject<void> = new Subject<void>();
+  private readonly exerciseTypeService: ExerciseTypeService = inject(ExerciseTypeService);
 
   ngOnInit() {
     if (this.submitEventActionType$)

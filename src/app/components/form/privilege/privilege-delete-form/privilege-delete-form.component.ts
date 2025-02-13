@@ -16,8 +16,8 @@ export class PrivilegeDeleteFormComponent implements OnInit, OnDestroy {
   @Input() btnCloseRef!: HTMLButtonElement;
   @Input() submitEventActionType$!: Observable<ActionType> | undefined;
 
-  private unsubscribe$: Subject<void> = new Subject<void>();
-  private privilegeService: PrivilegeService = inject(PrivilegeService);
+  private readonly unsubscribe$: Subject<void> = new Subject<void>();
+  private readonly privilegeService: PrivilegeService = inject(PrivilegeService);
 
   ngOnInit() {
     if (this.submitEventActionType$)

@@ -32,9 +32,9 @@ export class MuscleEntityFormComponent implements OnInit, OnDestroy {
   @Input() btnCloseRef!: HTMLButtonElement;
   @Input() submitEventActionType$!: Subject<ActionType> | undefined;
 
-  private unsubscribe$: Subject<void> = new Subject<void>();
-  private muscleService: MuscleService = inject(MuscleService);
-  private userLoggedService: UserLoggedService = inject(UserLoggedService);
+  private readonly unsubscribe$: Subject<void> = new Subject<void>();
+  private readonly muscleService: MuscleService = inject(MuscleService);
+  private readonly userLoggedService: UserLoggedService = inject(UserLoggedService);
 
   @Input() set muscleInput(value: Muscle | undefined) {
     this.muscle = value;

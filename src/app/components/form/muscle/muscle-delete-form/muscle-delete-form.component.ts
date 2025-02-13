@@ -19,8 +19,8 @@ export class MuscleDeleteFormComponent implements OnInit, OnDestroy {
   @Input() btnCloseRef!: HTMLButtonElement;
   @Input() submitEventActionType$!: Observable<ActionType> | undefined;
 
-  private unsubscribe$: Subject<void> = new Subject<void>();
-  private muscleService: MuscleService = inject(MuscleService);
+  private readonly unsubscribe$: Subject<void> = new Subject<void>();
+  private readonly muscleService: MuscleService = inject(MuscleService);
 
   ngOnInit() {
     if (this.submitEventActionType$)
