@@ -63,8 +63,10 @@ export function sortPerformanceLogsBy(
   }
 
   performanceLogSortedDictionaryItem.forEach((performanceLogSet: DictionaryItem<PerformanceLog[]>) => {
-    performanceLogSet.value = performanceLogSet.value.sort(
-      logDateTrueSetIndexFalse ? sortPerformanceLogsBySetIndex : sortPerformanceLogsByLogDate);
+    if (logDateTrueSetIndexFalse)
+      performanceLogSet.value = performanceLogSet.value.sort(sortPerformanceLogsBySetIndex)
+    else
+      performanceLogSet.value = performanceLogSet.value.sort(sortPerformanceLogsByLogDate)
     // invert sort type to be date/set or set/date
   })
 
