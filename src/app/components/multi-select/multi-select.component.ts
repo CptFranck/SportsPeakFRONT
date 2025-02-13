@@ -128,9 +128,9 @@ export class MultiSelectComponent implements OnInit, OnChanges, AfterViewInit {
 
     if (this.addDescriptionToTag)
       this.displayedSelectedOptions.forEach((option: MultiSelectOptionSelected) => {
-          let opt: MultiSelectOption | undefined = this.optionList
-            .find((opt: MultiSelectOption) => option.id === opt.id);
-          if (opt && opt.description)
+          let opt: MultiSelectOption | undefined =
+            this.optionList.find((opt: MultiSelectOption) => option.id === opt.id);
+          if (opt?.description)
             option.title += " : " + opt.description;
         }
       )
