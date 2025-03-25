@@ -9,7 +9,9 @@ describe('ExerciseDeleteFormComponent', () => {
   let mockExerciseService: jasmine.SpyObj<ExerciseService>;
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      providers: [{provide: ExerciseService, useValue: mockExerciseService}],
+      providers: [
+        {provide: ExerciseService, useValue: mockExerciseService}
+      ],
       imports: [ExerciseDeleteFormComponent]
     })
       .compileComponents();

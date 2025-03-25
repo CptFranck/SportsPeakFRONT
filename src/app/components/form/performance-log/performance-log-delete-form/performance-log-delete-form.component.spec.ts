@@ -11,7 +11,9 @@ describe('PerformanceLogDeleteFormComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      providers: [{provide: PerformanceLogService, useValue: mockPerformanceLogService}],
+      providers: [
+        {provide: PerformanceLogService, useValue: mockPerformanceLogService}
+      ],
       imports: [PerformanceLogDeleteFormComponent]
     })
       .compileComponents();

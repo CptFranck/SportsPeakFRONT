@@ -13,8 +13,8 @@ describe('ProgExerciseCardComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ProgExerciseCardComponent],
       providers: [provideRouter([])],
+      imports: [ProgExerciseCardComponent],
     })
       .compileComponents();
 
