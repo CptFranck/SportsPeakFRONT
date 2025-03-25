@@ -20,14 +20,6 @@ export const LOGIN = gql`
             name
           }
         }
-        progExercisesCreated {
-          id
-          name
-        }
-        subscribedProgExercises {
-          id
-          name
-        }
       }
     }
   }`;
@@ -51,14 +43,6 @@ export const REGISTER = gql`
             id
             name
           }
-        }
-        progExercisesCreated {
-          id
-          name
-        }
-        subscribedProgExercises {
-          id
-          name
         }
       }
     }
