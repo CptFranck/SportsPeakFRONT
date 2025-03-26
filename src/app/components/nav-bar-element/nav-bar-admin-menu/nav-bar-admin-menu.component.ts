@@ -1,19 +1,17 @@
 import {Component, inject, OnDestroy, OnInit} from '@angular/core';
 import {UserLoggedService} from "../../../services/user-logged/user-logged.service";
 import {RouterLink, RouterLinkActive} from "@angular/router";
-import {NgForOf, NgIf} from "@angular/common";
+import {NgIf} from "@angular/common";
 import {Subject, takeUntil} from "rxjs";
 
 @Component({
   selector: 'app-nav-bar-admin-menu',
-  standalone: true,
   imports: [
     RouterLink,
     RouterLinkActive,
-    NgIf,
-    NgForOf
+    NgIf
   ],
-  templateUrl: './nav-bar-admin-menu.component.html',
+  templateUrl: './nav-bar-admin-menu.component.html'
 })
 export class NavBarAdminMenuComponent implements OnInit, OnDestroy {
   isAdmin: boolean = false;

@@ -5,26 +5,21 @@ import {NgIf} from "@angular/common";
 import {Role} from "../../../../interface/dto/role";
 import {RoleService} from "../../../../services/role/role.service";
 import {Privilege} from "../../../../interface/dto/privilege";
-import {ExerciseSelectorComponent} from "../../../selectors/exercise-selector/exercise-selector.component";
 import {InputControlComponent} from "../../../input-control/input-control.component";
 import {PrivilegeSelectorComponent} from "../../../selectors/privilege-selector/privilege-selector.component";
-import {UserSelectorComponent} from "../../../selectors/user-selector/user-selector.component";
 import {UserLoggedService} from "../../../../services/user-logged/user-logged.service";
 import {ActionType} from "../../../../interface/enum/action-type";
 
 @Component({
   selector: 'app-role-entity-form',
-  standalone: true,
   imports: [
-    ExerciseSelectorComponent,
     FormsModule,
     InputControlComponent,
     NgIf,
     ReactiveFormsModule,
     PrivilegeSelectorComponent,
-    UserSelectorComponent
   ],
-  templateUrl: './role-entity-form.component.html',
+  templateUrl: './role-entity-form.component.html'
 })
 export class RoleEntityFormComponent implements OnInit, OnDestroy {
 

@@ -5,7 +5,6 @@ import {
 import {
   UserRolesFormComponent
 } from "../../../../components/form/user-management/user-entity-form/user-roles-form.component";
-import {ModalButtonComponent} from "../../../../components/modal/modal-button/modal-button.component";
 import {ModalComponent} from "../../../../components/modal/modal/modal.component";
 import {NgIf} from "@angular/common";
 import {User} from "../../../../interface/dto/user";
@@ -13,15 +12,13 @@ import {ActionType} from "../../../../interface/enum/action-type";
 
 @Component({
   selector: 'app-user-modal',
-  standalone: true,
   imports: [
-    ModalButtonComponent,
     ModalComponent,
     NgIf,
     UserDetailsDisplayComponent,
     UserRolesFormComponent
   ],
-  templateUrl: './users-management-modal.component.html',
+  templateUrl: './users-management-modal.component.html'
 })
 export class UsersManagementModalComponent {
   @Input() modalTitle!: string;

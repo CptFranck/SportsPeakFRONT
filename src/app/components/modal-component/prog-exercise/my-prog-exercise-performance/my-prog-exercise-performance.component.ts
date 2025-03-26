@@ -1,10 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {ProgExercise} from "../../../../interface/dto/prog-exercise";
 import {ifFirstShow, ifNotFirstCollapse} from "../../../../utils/accordion-function";
-import {DatePipe, NgForOf} from "@angular/common";
-import {
-  PerformanceLogsCardComponent
-} from "../../../card/performance-log/performance-logs-card/performance-logs-card.component";
+import {NgForOf} from "@angular/common";
 import {TargetSet} from "../../../../interface/dto/target-set";
 import {getUpToDateTargetSets, sortLastTargetSetsByIndex} from "../../../../utils/target-set-functions";
 import {TargetSetState} from "../../../../interface/enum/targetSetState";
@@ -18,15 +15,12 @@ import {RangeInputComponent} from "../../../input/range-input/range-input.compon
 
 @Component({
   selector: 'app-my-prog-exercise-performance',
-  standalone: true,
   imports: [
-    DatePipe,
     NgForOf,
-    PerformanceLogsCardComponent,
     PerformanceLogsSetChartComponent,
     RangeInputComponent
   ],
-  templateUrl: './my-prog-exercise-performance.component.html',
+  templateUrl: './my-prog-exercise-performance.component.html'
 })
 export class MyProgExercisePerformanceComponent implements OnInit {
   progExercise!: ProgExercise;

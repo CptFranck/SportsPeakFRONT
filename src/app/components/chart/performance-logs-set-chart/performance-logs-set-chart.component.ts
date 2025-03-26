@@ -8,9 +8,7 @@ import {sortPerformanceLogsByDictionaryDate} from "../../../utils/performance-lo
 
 @Component({
   selector: 'app-performance-logs-set-chart',
-  standalone: true,
-  imports: [],
-  templateUrl: './performance-logs-set-chart.component.html',
+  templateUrl: './performance-logs-set-chart.component.html'
 })
 export class PerformanceLogsSetChartComponent implements AfterViewInit {
 

@@ -4,7 +4,6 @@ import {ExerciseType} from "../../../../interface/dto/exercise-type";
 import {ActionType} from "../../../../interface/enum/action-type";
 import {ExerciseTypeService} from "../../../../services/exercise-type/exercise-type.service";
 import {FormIndicator} from "../../../../interface/utils/form-indicator";
-import {AlertDisplayComponent} from "../../../../components/alert-display/alert-display.component";
 import {LoadingComponent} from "../../../../components/loading/loading.component";
 import {ExerciseTypeArrayComponent} from "../exercise-types-array/exercise-type-array.component";
 import {ExerciseTypeModalComponent} from "../exercise-type-modal/exercise-type-modal.component";
@@ -14,16 +13,14 @@ import {Subject, takeUntil} from "rxjs";
 
 @Component({
   selector: 'app-exercise-types',
-  standalone: true,
   imports: [
     CommonModule,
-    AlertDisplayComponent,
     LoadingComponent,
     ExerciseTypeArrayComponent,
     ExerciseTypeModalComponent,
     SearchBarComponent
   ],
-  templateUrl: './exercise-types.component.html',
+  templateUrl: './exercise-types.component.html'
 })
 export class ExerciseTypesComponent implements OnInit, OnDestroy {
   loading: boolean = true;

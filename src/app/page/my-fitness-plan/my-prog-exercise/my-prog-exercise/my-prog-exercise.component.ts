@@ -2,16 +2,13 @@ import {Component, inject, OnDestroy, OnInit} from '@angular/core';
 import {ProgExercise} from "../../../../interface/dto/prog-exercise";
 import {ProgExerciseService} from "../../../../services/prog-exercise/prog-exercise.service";
 import {ActivatedRoute, Params} from "@angular/router";
-import {NgForOf, NgIf} from "@angular/common";
+import {NgIf} from "@angular/common";
 import {FormIndicator} from "../../../../interface/utils/form-indicator";
 import {ActionType} from "../../../../interface/enum/action-type";
 import {LoadingComponent} from "../../../../components/loading/loading.component";
 import {
   ProgExerciseCardDetailsComponent
 } from "../../../../components/card/prog-exercise/prog-exercise-card-details/prog-exercise-card-details.component";
-import {
-  MyProgExerciseModalComponent
-} from "../../my-prog-exercises/my-prog-exercise-modal/my-prog-exercise-modal.component";
 import {
   MyProgExerciseDetailsModalComponent
 } from "../my-prog-exercise-details-modal/my-prog-exercise-details-modal.component";
@@ -26,19 +23,16 @@ import {
 
 @Component({
   selector: 'app-my-prog-exercise',
-  standalone: true,
   imports: [
-    NgForOf,
     NgIf,
     LoadingComponent,
     ProgExerciseCardDetailsComponent,
-    MyProgExerciseModalComponent,
     MyProgExerciseDetailsModalComponent,
     TargetSetModalComponent,
     TargetSetsComponent,
     PerformanceLogModalComponent
   ],
-  templateUrl: './my-prog-exercise.component.html',
+  templateUrl: './my-prog-exercise.component.html'
 })
 export class MyProgExerciseComponent implements OnInit, OnDestroy {
   loading: boolean = true;

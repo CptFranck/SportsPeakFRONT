@@ -2,8 +2,6 @@ import {Component, inject, OnDestroy, OnInit, TemplateRef, ViewChild} from '@ang
 import {RolesArrayComponent} from "../roles-array/roles-array.component";
 import {RoleModalComponent} from "../role-modal/role-modal.component";
 import {LoadingComponent} from "../../../../components/loading/loading.component";
-import {MuscleModalComponent} from "../../../docs/muscles/muscle-modal/muscle-modal.component";
-import {MusclesArrayComponent} from "../../../docs/muscles/muscles-array/muscles-array.component";
 import {Role} from "../../../../interface/dto/role";
 import {ActionType} from "../../../../interface/enum/action-type";
 import {RoleService} from "../../../../services/role/role.service";
@@ -12,15 +10,12 @@ import {Subject, takeUntil} from "rxjs";
 
 @Component({
   selector: 'app-roles',
-  standalone: true,
   imports: [
     LoadingComponent,
-    MuscleModalComponent,
-    MusclesArrayComponent,
     RolesArrayComponent,
     RoleModalComponent
   ],
-  templateUrl: './roles.component.html',
+  templateUrl: './roles.component.html'
 })
 export class RolesComponent implements OnInit, OnDestroy {
   loading: boolean = true;

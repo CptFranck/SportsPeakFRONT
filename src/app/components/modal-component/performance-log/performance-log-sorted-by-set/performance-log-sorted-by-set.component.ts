@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {DatePipe, NgForOf, NgIf} from "@angular/common";
+import {NgForOf} from "@angular/common";
 import {
   PerformanceLogsCardComponent
 } from "../../../card/performance-log/performance-logs-card/performance-logs-card.component";
@@ -11,14 +11,11 @@ import {ifFirstShow, ifNotFirstCollapse} from "../../../../utils/accordion-funct
 
 @Component({
   selector: 'app-performance-log-sorted-by-set',
-  standalone: true,
   imports: [
-    NgIf,
     NgForOf,
-    PerformanceLogsCardComponent,
-    DatePipe
+    PerformanceLogsCardComponent
   ],
-  templateUrl: './performance-log-sorted-by-set.component.html',
+  templateUrl: './performance-log-sorted-by-set.component.html'
 })
 export class PerformanceLogSortedBySetComponent {
   @Input() formCollapseId!: string;

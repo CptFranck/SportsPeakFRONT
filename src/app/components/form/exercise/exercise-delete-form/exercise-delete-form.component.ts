@@ -6,9 +6,7 @@ import {ActionType} from "../../../../interface/enum/action-type";
 
 @Component({
   selector: 'app-exercise-delete-form',
-  standalone: true,
-  imports: [],
-  templateUrl: './exercise-delete-form.component.html',
+  templateUrl: './exercise-delete-form.component.html'
 })
 export class ExerciseDeleteFormComponent implements OnInit, OnDestroy {
 

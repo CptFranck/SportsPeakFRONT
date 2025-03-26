@@ -2,7 +2,6 @@ import {Component, EventEmitter, inject, Input, OnChanges, OnDestroy, Output} fr
 import {NgForOf, NgIf} from "@angular/common";
 import {Muscle} from "../../../../interface/dto/muscle";
 import {ModalButtonComponent} from "../../../../components/modal/modal-button/modal-button.component";
-import {ModalComponent} from "../../../../components/modal/modal/modal.component";
 import {FormIndicator} from "../../../../interface/utils/form-indicator";
 import {ActionType} from "../../../../interface/enum/action-type";
 import {UserLoggedService} from "../../../../services/user-logged/user-logged.service";
@@ -11,14 +10,12 @@ import {Subject, takeUntil} from "rxjs";
 
 @Component({
   selector: 'app-muscles-array',
-  standalone: true,
   imports: [
     NgForOf,
     NgIf,
     ModalButtonComponent,
-    ModalComponent,
   ],
-  templateUrl: './muscles-array.component.html',
+  templateUrl: './muscles-array.component.html'
 })
 export class MusclesArrayComponent implements OnChanges, OnDestroy {
   isAdmin: boolean = false;

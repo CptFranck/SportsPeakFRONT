@@ -5,9 +5,6 @@ import {PerformanceLog} from "../../../../../interface/dto/performance-log";
 import {ModalComponent} from "../../../../../components/modal/modal/modal.component";
 import {NgIf} from "@angular/common";
 import {
-  PerformanceLogDeleteFormComponent
-} from "../../../../../components/form/performance-log/performance-log-delete-form/performance-log-delete-form.component";
-import {
   PerformanceLogEntityFormComponent
 } from "../../../../../components/form/performance-log/performance-log-entity-form/performance-log-entity-form.component";
 import {
@@ -17,15 +14,13 @@ import {ProgExercise} from "../../../../../interface/dto/prog-exercise";
 
 @Component({
   selector: 'app-performance-log-modal',
-  standalone: true,
   imports: [
     ModalComponent,
     NgIf,
-    PerformanceLogDeleteFormComponent,
     PerformanceLogEntityFormComponent,
     PerformanceLogsComponent
   ],
-  templateUrl: './performance-log-modal.component.html',
+  templateUrl: './performance-log-modal.component.html'
 })
 export class PerformanceLogModalComponent {
   @Input() performanceLogModalId!: string;

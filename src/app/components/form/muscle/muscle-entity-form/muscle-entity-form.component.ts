@@ -1,6 +1,6 @@
 import {Component, inject, Input, OnDestroy, OnInit} from '@angular/core';
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
-import {NgIf, NgTemplateOutlet} from "@angular/common";
+import {NgIf} from "@angular/common";
 import {InputControlComponent} from "../../../input-control/input-control.component";
 import {Muscle} from "../../../../interface/dto/muscle";
 import {Subject, takeUntil} from "rxjs";
@@ -12,15 +12,13 @@ import {ActionType} from "../../../../interface/enum/action-type";
 
 @Component({
   selector: 'app-muscle-entity-form',
-  standalone: true,
   imports: [
     ExerciseSelectorComponent,
     ReactiveFormsModule,
     NgIf,
-    NgTemplateOutlet,
     InputControlComponent
   ],
-  templateUrl: './muscle-entity-form.component.html',
+  templateUrl: './muscle-entity-form.component.html'
 })
 export class MuscleEntityFormComponent implements OnInit, OnDestroy {
 

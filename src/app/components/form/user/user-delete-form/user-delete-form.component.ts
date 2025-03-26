@@ -6,9 +6,7 @@ import {ActionType} from "../../../../interface/enum/action-type";
 
 @Component({
   selector: 'app-user-delete-form',
-  standalone: true,
-  imports: [],
-  templateUrl: './user-delete-form.component.html',
+  templateUrl: './user-delete-form.component.html'
 })
 export class UserDeleteFormComponent implements OnInit, OnDestroy {
   @Input() user!: User | undefined;

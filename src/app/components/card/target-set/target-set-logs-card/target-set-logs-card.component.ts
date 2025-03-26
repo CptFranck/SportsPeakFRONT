@@ -1,11 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {ModalButtonComponent} from "../../../modal/modal-button/modal-button.component";
 import {TargetSet} from "../../../../interface/dto/target-set";
 import {ActionType} from "../../../../interface/enum/action-type";
 import {FormIndicator} from "../../../../interface/utils/form-indicator";
-import {
-  TargetSetStateFormComponent
-} from "../../../form/target-set/target-set-state-form/target-set-state-form.component";
 import {getTargetSetInformation, getTargetSetTimeToString} from "../../../../utils/target-set-functions";
 import {getStringTime} from "../../../../utils/duration-functions";
 import {CollapseBlockComponent} from "../../../collapse-block/collapse-block.component";
@@ -13,13 +9,10 @@ import {CollapseButtonComponent} from "../../../collapse-buton/collapse-button.c
 
 @Component({
   selector: 'app-target-set-logs-card',
-  standalone: true,
   imports: [
-    ModalButtonComponent,
-    TargetSetStateFormComponent,
     CollapseButtonComponent
   ],
-  templateUrl: './target-set-logs-card.component.html',
+  templateUrl: './target-set-logs-card.component.html'
 })
 export class TargetSetLogsCardComponent implements OnInit {
   targetSets: string = "";

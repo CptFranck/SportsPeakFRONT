@@ -2,8 +2,6 @@ import {Component, inject, OnDestroy, OnInit, TemplateRef, ViewChild} from '@ang
 import {UsersManagementArrayComponent} from "../users-management-array/users-management-array.component";
 import {UsersManagementModalComponent} from "../user-management-modal/users-management-modal.component";
 import {LoadingComponent} from "../../../../components/loading/loading.component";
-import {MuscleModalComponent} from "../../../docs/muscles/muscle-modal/muscle-modal.component";
-import {MusclesArrayComponent} from "../../../docs/muscles/muscles-array/muscles-array.component";
 import {User} from "../../../../interface/dto/user";
 import {ActionType} from "../../../../interface/enum/action-type";
 import {UserService} from "../../../../services/user/user.service";
@@ -12,15 +10,12 @@ import {Subject, takeUntil} from "rxjs";
 
 @Component({
   selector: 'app-users',
-  standalone: true,
   imports: [
     LoadingComponent,
-    MuscleModalComponent,
-    MusclesArrayComponent,
     UsersManagementArrayComponent,
     UsersManagementModalComponent
   ],
-  templateUrl: './users-management.component.html',
+  templateUrl: './users-management.component.html'
 })
 export class UsersManagementComponent implements OnInit, OnDestroy {
   loading: boolean = true;

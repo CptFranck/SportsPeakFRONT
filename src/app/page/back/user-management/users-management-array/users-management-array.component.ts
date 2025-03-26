@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {NgForOf, NgIf} from "@angular/common";
+import {NgForOf} from "@angular/common";
 import {ModalButtonComponent} from "../../../../components/modal/modal-button/modal-button.component";
 import {User} from "../../../../interface/dto/user";
 import {FormIndicator} from "../../../../interface/utils/form-indicator";
@@ -7,13 +7,11 @@ import {ActionType} from "../../../../interface/enum/action-type";
 
 @Component({
   selector: 'app-users-array',
-  standalone: true,
   imports: [
     ModalButtonComponent,
-    NgForOf,
-    NgIf
+    NgForOf
   ],
-  templateUrl: './users-management-array.component.html',
+  templateUrl: './users-management-array.component.html'
 })
 export class UsersManagementArrayComponent {
   @Input() users!: User[];

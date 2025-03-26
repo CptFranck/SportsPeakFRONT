@@ -3,9 +3,7 @@ import {CollapseBlockComponent} from "../collapse-block/collapse-block.component
 
 @Component({
   selector: 'app-collapse-button',
-  standalone: true,
-  imports: [],
-  templateUrl: './collapse-button.component.html',
+  templateUrl: './collapse-button.component.html'
 })
 export class CollapseButtonComponent implements OnInit {
   AllWidthStyle: string = "";

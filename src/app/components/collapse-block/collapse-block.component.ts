@@ -1,19 +1,15 @@
 import {Component, ElementRef, Input, TemplateRef, ViewChild} from '@angular/core';
-import {NgForOf, NgIf, NgTemplateOutlet} from "@angular/common";
+import {NgIf, NgTemplateOutlet} from "@angular/common";
 import {Subject} from "rxjs";
 import {ActionType} from "../../interface/enum/action-type";
-import {CollapseButtonComponent} from "../collapse-buton/collapse-button.component";
 
 @Component({
   selector: 'app-collapse-block',
-  standalone: true,
   imports: [
-    NgForOf,
     NgTemplateOutlet,
     NgIf,
-    CollapseButtonComponent
   ],
-  templateUrl: './collapse-block.component.html',
+  templateUrl: './collapse-block.component.html'
 })
 export class CollapseBlockComponent {
 

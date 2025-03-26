@@ -2,9 +2,7 @@ import {Component, EventEmitter, Input, Output} from '@angular/core';
 
 @Component({
   selector: 'app-range-input',
-  standalone: true,
-  imports: [],
-  templateUrl: './range-input.component.html',
+  templateUrl: './range-input.component.html'
 })
 export class RangeInputComponent {
 

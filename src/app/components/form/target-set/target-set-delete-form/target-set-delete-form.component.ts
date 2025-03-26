@@ -7,9 +7,7 @@ import {ProgExercise} from "../../../../interface/dto/prog-exercise";
 
 @Component({
   selector: 'app-target-set-delete-form',
-  standalone: true,
-  imports: [],
-  templateUrl: './target-set-delete-form.component.html',
+  templateUrl: './target-set-delete-form.component.html'
 })
 export class TargetSetDeleteFormComponent implements OnInit, OnDestroy {
 

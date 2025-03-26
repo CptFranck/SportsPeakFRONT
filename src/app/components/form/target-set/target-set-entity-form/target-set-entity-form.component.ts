@@ -2,9 +2,7 @@ import {Component, inject, Input, OnDestroy, OnInit} from '@angular/core';
 import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
 import {NgIf} from "@angular/common";
 import {Observable, Subject, takeUntil} from "rxjs";
-import {ExerciseSelectComponent} from "../../../selects/exercise-select/exercise-select.component";
 import {InputControlComponent} from "../../../input-control/input-control.component";
-import {VisibilitySelectComponent} from "../../../selects/visibility-select/visibility-select.component";
 import {WeightSelectComponent} from "../../../selects/weight-select/weight-select.component";
 import {DurationInputComponent} from "../../../input/duration-inputs/duration-input.component";
 import {TargetSet} from "../../../../interface/dto/target-set";
@@ -18,18 +16,15 @@ import {getUpToDateTargetSets} from "../../../../utils/target-set-functions";
 
 @Component({
   selector: 'app-target-set-entity-form',
-  standalone: true,
   imports: [
-    ExerciseSelectComponent,
     FormsModule,
     InputControlComponent,
     NgIf,
     ReactiveFormsModule,
-    VisibilitySelectComponent,
     WeightSelectComponent,
     DurationInputComponent,
   ],
-  templateUrl: './target-set-entity-form.component.html',
+  templateUrl: './target-set-entity-form.component.html'
 })
 export class TargetSetEntityFormComponent implements OnInit, OnDestroy {
   targetSet: TargetSet | undefined;

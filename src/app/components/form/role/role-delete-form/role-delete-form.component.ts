@@ -6,9 +6,7 @@ import {ActionType} from "../../../../interface/enum/action-type";
 
 @Component({
   selector: 'app-role-delete-form',
-  standalone: true,
-  imports: [],
-  templateUrl: './role-delete-form.component.html',
+  templateUrl: './role-delete-form.component.html'
 })
 export class RoleDeleteFormComponent implements OnInit, OnDestroy {
 

@@ -3,8 +3,6 @@ import {FormIndicator} from "../../../../interface/utils/form-indicator";
 import {ActionType} from "../../../../interface/enum/action-type";
 import {ProgExercise} from "../../../../interface/dto/prog-exercise";
 import {LoadingComponent} from "../../../../components/loading/loading.component";
-import {MuscleModalComponent} from "../../../docs/muscles/muscle-modal/muscle-modal.component";
-import {MusclesArrayComponent} from "../../../docs/muscles/muscles-array/muscles-array.component";
 import {SearchBarComponent} from "../../../../components/search-bar/search-bar.component";
 import {ProgExerciseService} from "../../../../services/prog-exercise/prog-exercise.service";
 import {Visibility} from "../../../../interface/enum/visibility";
@@ -15,16 +13,13 @@ import {Subject, takeUntil} from "rxjs";
 
 @Component({
   selector: 'app-prog-exercises',
-  standalone: true,
   imports: [
     LoadingComponent,
-    MuscleModalComponent,
-    MusclesArrayComponent,
     SearchBarComponent,
     ProgExercisesArrayComponent,
     ProgExerciseModalComponent
   ],
-  templateUrl: './prog-exercises.component.html',
+  templateUrl: './prog-exercises.component.html'
 })
 export class ProgExercisesComponent implements OnInit, OnDestroy {
   loading: boolean = true;

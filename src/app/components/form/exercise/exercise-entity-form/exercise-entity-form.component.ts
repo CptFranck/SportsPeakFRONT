@@ -7,7 +7,6 @@ import {InputControlComponent} from "../../../input-control/input-control.compon
 import {NgIf} from "@angular/common";
 import {Muscle} from "../../../../interface/dto/muscle";
 import {ExerciseType} from "../../../../interface/dto/exercise-type";
-import {ExerciseSelectorComponent} from "../../../selectors/exercise-selector/exercise-selector.component";
 import {MuscleSelectorComponent} from "../../../selectors/muscle-selector/muscle-selector.component";
 import {
   ExerciseTypeSelectorComponent
@@ -17,17 +16,15 @@ import {ActionType} from "../../../../interface/enum/action-type";
 
 @Component({
   selector: 'app-exercise-entity-form',
-  standalone: true,
   imports: [
     FormsModule,
     InputControlComponent,
     NgIf,
     ReactiveFormsModule,
-    ExerciseSelectorComponent,
     MuscleSelectorComponent,
     ExerciseTypeSelectorComponent
   ],
-  templateUrl: './exercise-entity-form.component.html',
+  templateUrl: './exercise-entity-form.component.html'
 })
 export class ExerciseEntityFormComponent implements OnInit, OnDestroy {
   isAdmin: boolean = false;

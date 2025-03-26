@@ -6,9 +6,7 @@ import {PerformanceLogService} from "../../../../services/performance-log/perfor
 
 @Component({
   selector: 'app-performance-log-delete-form',
-  standalone: true,
-  imports: [],
-  templateUrl: './performance-log-delete-form.component.html',
+  templateUrl: './performance-log-delete-form.component.html'
 })
 export class PerformanceLogDeleteFormComponent implements OnInit, OnDestroy {
   performanceLog: PerformanceLog | undefined;

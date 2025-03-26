@@ -1,5 +1,4 @@
 import {Component, forwardRef, Input} from '@angular/core';
-import {NgForOf, NgIf} from "@angular/common";
 import {SelectOption} from "../../../interface/components/select/selectOption";
 import {ControlValueAccessor, NG_VALUE_ACCESSOR} from "@angular/forms";
 import {SelectComponent} from "../../select/select.component";
@@ -9,10 +8,7 @@ import {filterPerformanceLogByDate} from "../../../utils/performance-log-functio
 
 @Component({
   selector: 'app-performance-log-index-select',
-  standalone: true,
   imports: [
-    NgForOf,
-    NgIf,
     SelectComponent
   ],
   providers: [
@@ -22,7 +18,7 @@ import {filterPerformanceLogByDate} from "../../../utils/performance-log-functio
       multi: true,
     }
   ],
-  templateUrl: './performance-log-index-select.component.html',
+  templateUrl: './performance-log-index-select.component.html'
 })
 export class PerformanceLogIndexSelectComponent implements ControlValueAccessor {
   indexOptions: SelectOption[] = [];

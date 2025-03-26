@@ -1,7 +1,6 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {ModalButtonComponent} from "../../../modal/modal-button/modal-button.component";
 import {PerformanceLog} from "../../../../interface/dto/performance-log";
-import {DatePipe, JsonPipe, NgIf} from "@angular/common";
+import {DatePipe, NgIf} from "@angular/common";
 import {FormIndicator} from "../../../../interface/utils/form-indicator";
 import {ActionType} from "../../../../interface/enum/action-type";
 import {CollapseButtonComponent} from "../../../collapse-buton/collapse-button.component";
@@ -9,15 +8,12 @@ import {CollapseBlockComponent} from "../../../collapse-block/collapse-block.com
 
 @Component({
   selector: 'app-performance-logs-card',
-  standalone: true,
   imports: [
-    ModalButtonComponent,
-    JsonPipe,
-    CollapseButtonComponent,
     DatePipe,
+    CollapseButtonComponent,
     NgIf
   ],
-  templateUrl: './performance-logs-card.component.html',
+  templateUrl: './performance-logs-card.component.html'
 })
 export class PerformanceLogsCardComponent {
 

@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {NgForOf, NgIf} from "@angular/common";
+import {NgForOf} from "@angular/common";
 import {ModalButtonComponent} from "../../../../components/modal/modal-button/modal-button.component";
 import {Role} from "../../../../interface/dto/role";
 import {FormIndicator} from "../../../../interface/utils/form-indicator";
@@ -8,13 +8,11 @@ import {ActionType} from "../../../../interface/enum/action-type";
 
 @Component({
   selector: 'app-roles-array',
-  standalone: true,
   imports: [
     ModalButtonComponent,
-    NgForOf,
-    NgIf
+    NgForOf
   ],
-  templateUrl: './roles-array.component.html',
+  templateUrl: './roles-array.component.html'
 })
 export class RolesArrayComponent {
 

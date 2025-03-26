@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {NgForOf, NgIf} from "@angular/common";
+import {NgForOf} from "@angular/common";
 import {ModalButtonComponent} from "../../../../components/modal/modal-button/modal-button.component";
 import {Privilege} from "../../../../interface/dto/privilege";
 import {FormIndicator} from "../../../../interface/utils/form-indicator";
@@ -7,13 +7,11 @@ import {ActionType} from "../../../../interface/enum/action-type";
 
 @Component({
   selector: 'app-privileges-array',
-  standalone: true,
   imports: [
     ModalButtonComponent,
     NgForOf,
-    NgIf
   ],
-  templateUrl: './privileges-array.component.html',
+  templateUrl: './privileges-array.component.html'
 })
 export class PrivilegesArrayComponent {
 

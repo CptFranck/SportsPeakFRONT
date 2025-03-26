@@ -3,7 +3,6 @@ import {ModalButtonComponent} from "../../../modal/modal-button/modal-button.com
 import {FormIndicator} from "../../../../interface/utils/form-indicator";
 import {ActionType} from "../../../../interface/enum/action-type";
 import {TargetSet} from "../../../../interface/dto/target-set";
-import {CollapseButtonComponent} from "../../../collapse-buton/collapse-button.component";
 import {
   TargetSetStateFormComponent
 } from "../../../form/target-set/target-set-state-form/target-set-state-form.component";
@@ -12,13 +11,11 @@ import {getStringTime} from "../../../../utils/duration-functions";
 
 @Component({
   selector: 'app-target-set-card',
-  standalone: true,
   imports: [
     ModalButtonComponent,
     TargetSetStateFormComponent,
-    CollapseButtonComponent
   ],
-  templateUrl: './target-set-card.component.html',
+  templateUrl: './target-set-card.component.html'
 })
 export class TargetSetCardComponent implements OnInit {
   targetSets: string = "";

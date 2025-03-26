@@ -1,5 +1,4 @@
 import {Component, Input, TemplateRef, ViewChild} from '@angular/core';
-import {ModalButtonComponent} from "../../../../components/modal/modal-button/modal-button.component";
 import {ModalComponent} from "../../../../components/modal/modal/modal.component";
 import {NgIf} from "@angular/common";
 import {ProgExercise} from "../../../../interface/dto/prog-exercise";
@@ -16,16 +15,14 @@ import {
 
 @Component({
   selector: 'app-my-prog-exercise-details-modal',
-  standalone: true,
   imports: [
-    ModalButtonComponent,
     ModalComponent,
     NgIf,
     MyProgExerciseDeleteFormComponent,
     MyProgExerciseEntityFormComponent,
     MyProgExercisePerformanceComponent,
   ],
-  templateUrl: './my-prog-exercise-details-modal.component.html',
+  templateUrl: './my-prog-exercise-details-modal.component.html'
 })
 export class MyProgExerciseDetailsModalComponent {
   @Input() modalTitle!: string;

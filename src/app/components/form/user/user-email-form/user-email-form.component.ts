@@ -5,22 +5,17 @@ import {User} from "../../../../interface/dto/user";
 import {InputControlComponent} from "../../../input-control/input-control.component";
 import {NgIf} from "@angular/common";
 import {UserService} from "../../../../services/user/user.service";
-import {PrivilegeSelectorComponent} from "../../../selectors/privilege-selector/privilege-selector.component";
-import {UserSelectorComponent} from "../../../selectors/user-selector/user-selector.component";
 import {ModificationField} from "../../../../interface/enum/modification-field";
 import {ActionType} from "../../../../interface/enum/action-type";
 
 @Component({
   selector: 'app-user-email-form',
-  standalone: true,
   imports: [
     InputControlComponent,
     NgIf,
-    PrivilegeSelectorComponent,
     ReactiveFormsModule,
-    UserSelectorComponent
   ],
-  templateUrl: './user-email-form.component.html',
+  templateUrl: './user-email-form.component.html'
 })
 export class UserEmailFormComponent implements OnInit, OnDestroy {
   user: User | undefined;

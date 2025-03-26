@@ -6,9 +6,7 @@ import {ActionType} from "../../../../interface/enum/action-type";
 
 @Component({
   selector: 'app-privilege-delete-forms',
-  standalone: true,
-  imports: [],
-  templateUrl: './privilege-delete-form.component.html',
+  templateUrl: './privilege-delete-form.component.html'
 })
 export class PrivilegeDeleteFormComponent implements OnInit, OnDestroy {
 
