@@ -4,14 +4,13 @@ import {NgForOf, NgIf} from "@angular/common";
 import {FormsModule} from "@angular/forms";
 
 @Component({
-  selector: 'app-select',
-  standalone: true,
-  imports: [
-    NgForOf,
-    NgIf,
-    FormsModule
-  ],
-  templateUrl: './select.component.html',
+    selector: 'app-select',
+    imports: [
+        NgForOf,
+        NgIf,
+        FormsModule
+    ],
+    templateUrl: './select.component.html'
 })
 export class SelectComponent {
   @Input() value: string | undefined;

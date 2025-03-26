@@ -7,19 +7,18 @@ import {ControlValueAccessor, NG_VALUE_ACCESSOR} from "@angular/forms";
 import {Subject, takeUntil} from "rxjs";
 
 @Component({
-  selector: 'app-exercise-select',
-  standalone: true,
-  imports: [
-    SelectComponent
-  ],
-  providers: [
-    {
-      provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => ExerciseSelectComponent),
-      multi: true,
-    }
-  ],
-  templateUrl: './exercise-select.component.html',
+    selector: 'app-exercise-select',
+    imports: [
+        SelectComponent
+    ],
+    providers: [
+        {
+            provide: NG_VALUE_ACCESSOR,
+            useExisting: forwardRef(() => ExerciseSelectComponent),
+            multi: true,
+        }
+    ],
+    templateUrl: './exercise-select.component.html'
 })
 export class ExerciseSelectComponent implements OnInit, OnDestroy, ControlValueAccessor {
 

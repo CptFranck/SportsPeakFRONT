@@ -13,14 +13,13 @@ import {CollapseBlockComponent} from "../../collapse-block/collapse-block.compon
 import {ifFirstShow, ifNotFirstCollapse} from "../../../utils/accordion-function";
 
 @Component({
-  selector: 'app-performance-logs-charts',
-  standalone: true,
-  imports: [
-    NgForOf,
-    PerformanceLogsSetChartComponent,
-    PerformanceLogsCardComponent
-  ],
-  templateUrl: './performance-logs-charts.component.html',
+    selector: 'app-performance-logs-charts',
+    imports: [
+        NgForOf,
+        PerformanceLogsSetChartComponent,
+        PerformanceLogsCardComponent
+    ],
+    templateUrl: './performance-logs-charts.component.html'
 })
 export class PerformanceLogsChartsComponent {
 

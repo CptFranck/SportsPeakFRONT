@@ -7,19 +7,18 @@ import {MultiSelectComponent} from "../../multi-select/multi-select.component";
 import {Subject, takeUntil} from "rxjs";
 
 @Component({
-  selector: 'app-user-selector',
-  standalone: true,
-  imports: [
-    MultiSelectComponent
-  ],
-  providers: [
-    {
-      provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => UserSelectorComponent),
-      multi: true,
-    }
-  ],
-  templateUrl: './user-selector.component.html',
+    selector: 'app-user-selector',
+    imports: [
+        MultiSelectComponent
+    ],
+    providers: [
+        {
+            provide: NG_VALUE_ACCESSOR,
+            useExisting: forwardRef(() => UserSelectorComponent),
+            multi: true,
+        }
+    ],
+    templateUrl: './user-selector.component.html'
 })
 export class UserSelectorComponent implements OnInit, OnDestroy, ControlValueAccessor {
   loading: boolean = true;

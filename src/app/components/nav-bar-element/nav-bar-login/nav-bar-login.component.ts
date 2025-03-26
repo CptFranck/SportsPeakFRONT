@@ -5,13 +5,12 @@ import {AuthService} from "../../../services/auth/auth.service";
 import {Subject, takeUntil} from "rxjs";
 
 @Component({
-  selector: 'app-nav-bar-login',
-  standalone: true,
-  imports: [
-    NgIf,
-    RouterLink
-  ],
-  templateUrl: './nav-bar-login.component.html',
+    selector: 'app-nav-bar-login',
+    imports: [
+        NgIf,
+        RouterLink
+    ],
+    templateUrl: './nav-bar-login.component.html'
 })
 export class NavBarLoginComponent implements OnInit, OnDestroy {
   isLogged: boolean = false;

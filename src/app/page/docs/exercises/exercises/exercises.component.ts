@@ -13,16 +13,15 @@ import {ExerciseType} from "../../../../interface/dto/exercise-type";
 import {Subject, takeUntil} from "rxjs";
 
 @Component({
-  selector: 'app-exercises',
-  standalone: true,
-  imports: [
-    CommonModule,
-    ExercisesArrayComponent,
-    LoadingComponent,
-    ExerciseModalComponent,
-    SearchBarComponent
-  ],
-  templateUrl: './exercises.component.html',
+    selector: 'app-exercises',
+    imports: [
+        CommonModule,
+        ExercisesArrayComponent,
+        LoadingComponent,
+        ExerciseModalComponent,
+        SearchBarComponent
+    ],
+    templateUrl: './exercises.component.html'
 })
 export class ExercisesComponent implements OnInit, OnDestroy {
   loading: boolean = true;

@@ -6,14 +6,13 @@ import {NgIf} from "@angular/common";
 import {confirmValidator} from "../../../../validators/confirmValidator";
 
 @Component({
-  selector: 'app-register-form',
-  standalone: true,
-  imports: [
-    InputControlComponent,
-    ReactiveFormsModule,
-    NgIf
-  ],
-  templateUrl: './register-form.component.html',
+    selector: 'app-register-form',
+    imports: [
+        InputControlComponent,
+        ReactiveFormsModule,
+        NgIf
+    ],
+    templateUrl: './register-form.component.html'
 })
 export class RegisterFormComponent implements OnInit {
   submitInvalidForm: boolean = false;

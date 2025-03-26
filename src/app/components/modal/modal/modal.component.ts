@@ -4,13 +4,12 @@ import {Subject} from "rxjs";
 import {ActionType} from "../../../interface/enum/action-type";
 
 @Component({
-  selector: 'app-modal',
-  standalone: true,
-  imports: [
-    NgTemplateOutlet,
-    NgIf
-  ],
-  templateUrl: './modal.component.html',
+    selector: 'app-modal',
+    imports: [
+        NgTemplateOutlet,
+        NgIf
+    ],
+    templateUrl: './modal.component.html'
 })
 export class ModalComponent {
   action!: ActionType | undefined;

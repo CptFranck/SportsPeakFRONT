@@ -7,19 +7,18 @@ import {MultiSelectComponent} from "../../multi-select/multi-select.component";
 import {Subject, takeUntil} from "rxjs";
 
 @Component({
-  selector: 'app-exercise-type-selector',
-  standalone: true,
-  imports: [
-    MultiSelectComponent
-  ],
-  providers: [
-    {
-      provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => ExerciseTypeSelectorComponent),
-      multi: true,
-    }
-  ],
-  templateUrl: './exercise-type-selector.component.html',
+    selector: 'app-exercise-type-selector',
+    imports: [
+        MultiSelectComponent
+    ],
+    providers: [
+        {
+            provide: NG_VALUE_ACCESSOR,
+            useExisting: forwardRef(() => ExerciseTypeSelectorComponent),
+            multi: true,
+        }
+    ],
+    templateUrl: './exercise-type-selector.component.html'
 })
 export class ExerciseTypeSelectorComponent implements OnInit, OnDestroy, ControlValueAccessor {
   loading: boolean = true;

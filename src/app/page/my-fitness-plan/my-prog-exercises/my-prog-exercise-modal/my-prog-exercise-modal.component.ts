@@ -15,17 +15,16 @@ import {
 } from "../../../../components/modal-component/prog-exercise/my-prog-exercise-performance/my-prog-exercise-performance.component";
 
 @Component({
-  selector: 'app-my-prog-exercise-modal',
-  standalone: true,
-  imports: [
-    ModalButtonComponent,
-    ModalComponent,
-    NgIf,
-    MyProgExerciseDetailsDisplayComponent,
-    MyProgExerciseEntityFormComponent,
-    MyProgExercisePerformanceComponent,
-  ],
-  templateUrl: './my-prog-exercise-modal.component.html',
+    selector: 'app-my-prog-exercise-modal',
+    imports: [
+        ModalButtonComponent,
+        ModalComponent,
+        NgIf,
+        MyProgExerciseDetailsDisplayComponent,
+        MyProgExerciseEntityFormComponent,
+        MyProgExercisePerformanceComponent,
+    ],
+    templateUrl: './my-prog-exercise-modal.component.html'
 })
 export class MyProgExerciseModalComponent {
   @Input() modalTitle!: string;

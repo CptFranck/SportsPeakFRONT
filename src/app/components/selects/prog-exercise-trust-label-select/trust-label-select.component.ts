@@ -5,19 +5,18 @@ import {SelectOption} from "../../../interface/components/select/selectOption";
 import {TrustLabel} from "../../../interface/enum/trustLabel";
 
 @Component({
-  selector: 'app-prog-exercise-trust-label-select',
-  standalone: true,
-  imports: [
-    SelectComponent
-  ],
-  providers: [
-    {
-      provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => TrustLabelSelectComponent),
-      multi: true,
-    }
-  ],
-  templateUrl: './trust-label-select.component.html',
+    selector: 'app-prog-exercise-trust-label-select',
+    imports: [
+        SelectComponent
+    ],
+    providers: [
+        {
+            provide: NG_VALUE_ACCESSOR,
+            useExisting: forwardRef(() => TrustLabelSelectComponent),
+            multi: true,
+        }
+    ],
+    templateUrl: './trust-label-select.component.html'
 })
 export class TrustLabelSelectComponent implements ControlValueAccessor {
 

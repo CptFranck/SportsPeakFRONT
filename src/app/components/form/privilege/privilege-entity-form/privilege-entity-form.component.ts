@@ -11,15 +11,14 @@ import {UserLoggedService} from "../../../../services/user-logged/user-logged.se
 import {ActionType} from "../../../../interface/enum/action-type";
 
 @Component({
-  selector: 'app-privilege-entity-form',
-  standalone: true,
-  imports: [
-    InputControlComponent,
-    RoleSelectorComponent,
-    NgIf,
-    ReactiveFormsModule
-  ],
-  templateUrl: './privilege-entity-form.component.html',
+    selector: 'app-privilege-entity-form',
+    imports: [
+        InputControlComponent,
+        RoleSelectorComponent,
+        NgIf,
+        ReactiveFormsModule
+    ],
+    templateUrl: './privilege-entity-form.component.html'
 })
 export class PrivilegeEntityFormComponent implements OnInit, OnDestroy {
 

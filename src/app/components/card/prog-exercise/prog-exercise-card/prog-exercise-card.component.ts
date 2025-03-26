@@ -9,15 +9,14 @@ import {RouterLink} from "@angular/router";
 import {getTargetSetsInformation} from "../../../../utils/target-set-functions";
 
 @Component({
-  selector: 'app-prog-exercise-card',
-  standalone: true,
-  imports: [
-    NgForOf,
-    ModalButtonComponent,
-    NgIf,
-    RouterLink
-  ],
-  templateUrl: './prog-exercise-card.component.html',
+    selector: 'app-prog-exercise-card',
+    imports: [
+        NgForOf,
+        ModalButtonComponent,
+        NgIf,
+        RouterLink
+    ],
+    templateUrl: './prog-exercise-card.component.html'
 })
 export class ProgExerciseCardComponent implements OnInit {
   exerciseTime: string = "";

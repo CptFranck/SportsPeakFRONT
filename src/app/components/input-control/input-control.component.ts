@@ -3,12 +3,11 @@ import {NgIf} from "@angular/common";
 import {FormGroup} from "@angular/forms";
 
 @Component({
-  selector: 'app-input-control',
-  standalone: true,
-  imports: [
-    NgIf
-  ],
-  templateUrl: './input-control.component.html',
+    selector: 'app-input-control',
+    imports: [
+        NgIf
+    ],
+    templateUrl: './input-control.component.html'
 })
 export class InputControlComponent implements OnInit {
   @Input() formGroup!: FormGroup;

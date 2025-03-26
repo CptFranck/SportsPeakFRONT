@@ -5,19 +5,18 @@ import {SelectOption} from "../../../interface/components/select/selectOption";
 import {TargetSetState} from "../../../interface/enum/targetSetState";
 
 @Component({
-  selector: 'app-target-set-state-select',
-  standalone: true,
-  imports: [
-    SelectComponent
-  ],
-  providers: [
-    {
-      provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => TargetSetSateSelectComponent),
-      multi: true,
-    }
-  ],
-  templateUrl: './target-set-sate-select.component.html',
+    selector: 'app-target-set-state-select',
+    imports: [
+        SelectComponent
+    ],
+    providers: [
+        {
+            provide: NG_VALUE_ACCESSOR,
+            useExisting: forwardRef(() => TargetSetSateSelectComponent),
+            multi: true,
+        }
+    ],
+    templateUrl: './target-set-sate-select.component.html'
 })
 export class TargetSetSateSelectComponent implements ControlValueAccessor {
 

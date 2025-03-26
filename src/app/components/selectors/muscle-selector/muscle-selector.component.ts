@@ -7,19 +7,18 @@ import {MultiSelectComponent} from "../../multi-select/multi-select.component";
 import {Subject, takeUntil} from "rxjs";
 
 @Component({
-  selector: 'app-muscle-selector',
-  standalone: true,
-  imports: [
-    MultiSelectComponent,
-  ],
-  providers: [
-    {
-      provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => MuscleSelectorComponent),
-      multi: true,
-    }
-  ],
-  templateUrl: './muscle-selector.component.html',
+    selector: 'app-muscle-selector',
+    imports: [
+        MultiSelectComponent,
+    ],
+    providers: [
+        {
+            provide: NG_VALUE_ACCESSOR,
+            useExisting: forwardRef(() => MuscleSelectorComponent),
+            multi: true,
+        }
+    ],
+    templateUrl: './muscle-selector.component.html'
 })
 export class MuscleSelectorComponent implements OnInit, OnDestroy, ControlValueAccessor {
   loading: boolean = true;

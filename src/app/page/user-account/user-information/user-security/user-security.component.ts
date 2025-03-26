@@ -6,12 +6,11 @@ import {ActionType} from "../../../../interface/enum/action-type";
 import {ModificationField} from "../../../../interface/enum/modification-field";
 
 @Component({
-  selector: 'app-user-security',
-  standalone: true,
-  imports: [
-    ModalButtonComponent
-  ],
-  templateUrl: './user-security.component.html',
+    selector: 'app-user-security',
+    imports: [
+        ModalButtonComponent
+    ],
+    templateUrl: './user-security.component.html'
 })
 export class UserSecurityComponent {
   btnClass: string = "btn btn-secondary"

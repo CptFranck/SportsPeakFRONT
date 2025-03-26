@@ -21,17 +21,16 @@ import {
 } from "./multi-select-selected-options/multi-select-selected-options.component";
 
 @Component({
-  selector: 'app-multi-select',
-  standalone: true,
-  imports: [
-    NgForOf,
-    FormsModule,
-    NgIf,
-    LoadingComponent,
-    MultiSelectSelectedOptionsComponent,
-  ],
-  templateUrl: './multi-select.component.html',
-  styleUrl: './multi-select.component.css'
+    selector: 'app-multi-select',
+    imports: [
+        NgForOf,
+        FormsModule,
+        NgIf,
+        LoadingComponent,
+        MultiSelectSelectedOptionsComponent,
+    ],
+    templateUrl: './multi-select.component.html',
+    styleUrl: './multi-select.component.css'
 })
 export class MultiSelectComponent implements OnInit, OnChanges, AfterViewInit {
   displayedSelectedOptions: MultiSelectOptionSelected[] = [];

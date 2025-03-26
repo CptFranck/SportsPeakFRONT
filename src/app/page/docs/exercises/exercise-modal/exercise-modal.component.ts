@@ -18,17 +18,16 @@ import {Subject, takeUntil} from "rxjs";
 import {FormIndicator} from "../../../../interface/utils/form-indicator";
 
 @Component({
-  selector: 'app-exercise-modal',
-  standalone: true,
-  imports: [
-    ModalButtonComponent,
-    ModalComponent,
-    NgIf,
-    ExerciseEntityFormComponent,
-    ExerciseDeleteFormComponent,
-    ExerciseDetailsDisplayComponent
-  ],
-  templateUrl: './exercise-modal.component.html',
+    selector: 'app-exercise-modal',
+    imports: [
+        ModalButtonComponent,
+        ModalComponent,
+        NgIf,
+        ExerciseEntityFormComponent,
+        ExerciseDeleteFormComponent,
+        ExerciseDetailsDisplayComponent
+    ],
+    templateUrl: './exercise-modal.component.html'
 })
 export class ExerciseModalComponent implements OnInit, OnDestroy {
   isAdmin: boolean = false;

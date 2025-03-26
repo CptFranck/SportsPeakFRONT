@@ -2,12 +2,11 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {TooltipComponent} from "../../tooltip/tooltip.component";
 
 @Component({
-  selector: 'app-modal-button',
-  standalone: true,
-  imports: [
-    TooltipComponent
-  ],
-  templateUrl: './modal-button.component.html',
+    selector: 'app-modal-button',
+    imports: [
+        TooltipComponent
+    ],
+    templateUrl: './modal-button.component.html'
 })
 export class ModalButtonComponent implements OnInit {
   AllWidthStyle: string = "";

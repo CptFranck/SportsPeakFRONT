@@ -1,10 +1,9 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
 
 @Component({
-  selector: 'app-check-box',
-  standalone: true,
-  imports: [],
-  templateUrl: './check-box.component.html',
+    selector: 'app-check-box',
+    imports: [],
+    templateUrl: './check-box.component.html'
 })
 export class CheckBoxComponent {
 

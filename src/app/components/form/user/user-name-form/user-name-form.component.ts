@@ -9,14 +9,13 @@ import {ModificationField} from "../../../../interface/enum/modification-field";
 import {ActionType} from "../../../../interface/enum/action-type";
 
 @Component({
-  selector: 'app-user-name-form',
-  standalone: true,
-  imports: [
-    InputControlComponent,
-    ReactiveFormsModule,
-    NgIf
-  ],
-  templateUrl: './user-name-form.component.html',
+    selector: 'app-user-name-form',
+    imports: [
+        InputControlComponent,
+        ReactiveFormsModule,
+        NgIf
+    ],
+    templateUrl: './user-name-form.component.html'
 })
 export class UserNameFormComponent implements OnInit, OnDestroy {
   user: User | undefined;

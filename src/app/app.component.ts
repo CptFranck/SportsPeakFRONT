@@ -5,9 +5,12 @@ import {AlertDisplayComponent} from "./components/alert-display/alert-display.co
 
 @Component({
   selector: 'app-root',
-  standalone: true,
-  imports: [RouterOutlet, NavBarComponent, AlertDisplayComponent],
-  templateUrl: './app.component.html',
+  imports: [
+    RouterOutlet,
+    NavBarComponent,
+    AlertDisplayComponent
+  ],
+  templateUrl: './app.component.html'
 })
 export class AppComponent {
   title = 'SportsPeak';

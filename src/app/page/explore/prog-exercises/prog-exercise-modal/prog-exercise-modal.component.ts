@@ -11,15 +11,14 @@ import {
 import {Subject, takeUntil} from "rxjs";
 
 @Component({
-  selector: 'app-prog-exercise-modal',
-  standalone: true,
-  imports: [
-    ModalButtonComponent,
-    ModalComponent,
-    NgIf,
-    MyProgExerciseDetailsDisplayComponent
-  ],
-  templateUrl: './prog-exercise-modal.component.html',
+    selector: 'app-prog-exercise-modal',
+    imports: [
+        ModalButtonComponent,
+        ModalComponent,
+        NgIf,
+        MyProgExerciseDetailsDisplayComponent
+    ],
+    templateUrl: './prog-exercise-modal.component.html'
 })
 export class ProgExerciseModalComponent implements OnInit, OnDestroy {
   isAdmin: boolean = false;

@@ -8,19 +8,18 @@ import {MultiSelectComponent} from "../../multi-select/multi-select.component";
 import {Subject, takeUntil} from "rxjs";
 
 @Component({
-  selector: 'app-roles-selector',
-  standalone: true,
-  imports: [
-    MultiSelectComponent
-  ],
-  providers: [
-    {
-      provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => RoleSelectorComponent),
-      multi: true,
-    }
-  ],
-  templateUrl: './role-selector.component.html',
+    selector: 'app-roles-selector',
+    imports: [
+        MultiSelectComponent
+    ],
+    providers: [
+        {
+            provide: NG_VALUE_ACCESSOR,
+            useExisting: forwardRef(() => RoleSelectorComponent),
+            multi: true,
+        }
+    ],
+    templateUrl: './role-selector.component.html'
 })
 export class RoleSelectorComponent implements OnInit, OnDestroy, ControlValueAccessor {
   loading: boolean = true;

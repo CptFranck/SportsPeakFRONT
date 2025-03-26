@@ -18,17 +18,16 @@ import {FormIndicator} from "../../../../../interface/utils/form-indicator";
 import {PerformanceLog} from "../../../../../interface/dto/performance-log";
 
 @Component({
-  selector: 'app-target-set-modal',
-  standalone: true,
-  imports: [
-    ModalComponent,
-    NgIf,
-    ModalButtonComponent,
-    TargetSetDeleteFormComponent,
-    TargetSetEntityFormComponent,
-    TargetSetLogsComponent,
-  ],
-  templateUrl: './target-set-modal.component.html',
+    selector: 'app-target-set-modal',
+    imports: [
+        ModalComponent,
+        NgIf,
+        ModalButtonComponent,
+        TargetSetDeleteFormComponent,
+        TargetSetEntityFormComponent,
+        TargetSetLogsComponent,
+    ],
+    templateUrl: './target-set-modal.component.html'
 })
 export class TargetSetModalComponent {
 

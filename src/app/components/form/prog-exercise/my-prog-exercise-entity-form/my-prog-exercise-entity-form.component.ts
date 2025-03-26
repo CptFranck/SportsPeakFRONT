@@ -13,16 +13,15 @@ import {ProgExerciseService} from "../../../../services/prog-exercise/prog-exerc
 import {ActionType} from "../../../../interface/enum/action-type";
 
 @Component({
-  selector: 'app-my-prog-exercise-entity-form',
-  standalone: true,
-  imports: [
-    InputControlComponent,
-    NgIf,
-    ReactiveFormsModule,
-    ExerciseSelectComponent,
-    VisibilitySelectComponent
-  ],
-  templateUrl: './my-prog-exercise-entity-form.component.html',
+    selector: 'app-my-prog-exercise-entity-form',
+    imports: [
+        InputControlComponent,
+        NgIf,
+        ReactiveFormsModule,
+        ExerciseSelectComponent,
+        VisibilitySelectComponent
+    ],
+    templateUrl: './my-prog-exercise-entity-form.component.html'
 })
 export class MyProgExerciseEntityFormComponent implements OnInit, OnDestroy {
   progExercise: ProgExercise | undefined;

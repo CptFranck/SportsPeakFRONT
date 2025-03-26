@@ -11,15 +11,14 @@ import {UserLoggedService} from "../../../../services/user-logged/user-logged.se
 import {ActionType} from "../../../../interface/enum/action-type";
 
 @Component({
-  selector: 'app-exercise-type-entity-form',
-  standalone: true,
-  imports: [
-    InputControlComponent,
-    ReactiveFormsModule,
-    ExerciseSelectorComponent,
-    NgIf
-  ],
-  templateUrl: './exercise-type-entity-form.component.html',
+    selector: 'app-exercise-type-entity-form',
+    imports: [
+        InputControlComponent,
+        ReactiveFormsModule,
+        ExerciseSelectorComponent,
+        NgIf
+    ],
+    templateUrl: './exercise-type-entity-form.component.html'
 })
 export class ExerciseTypeEntityFormComponent implements OnInit, OnDestroy {
   exerciseType: ExerciseType | undefined;

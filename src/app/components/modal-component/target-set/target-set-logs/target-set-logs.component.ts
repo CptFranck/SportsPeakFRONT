@@ -16,18 +16,17 @@ import {
 import {PerformanceLogsComponent} from "../../performance-log/performance-logs/performance-logs.component";
 
 @Component({
-  selector: 'app-target-set-logs',
-  standalone: true,
-  imports: [
-    NgForOf,
-    TargetSetLogsCardComponent,
-    NgIf,
-    CollapseBlockComponent,
-    TargetSetEntityFormComponent,
-    TargetSetDeleteFormComponent,
-    PerformanceLogsComponent
-  ],
-  templateUrl: './target-set-logs.component.html',
+    selector: 'app-target-set-logs',
+    imports: [
+        NgForOf,
+        TargetSetLogsCardComponent,
+        NgIf,
+        CollapseBlockComponent,
+        TargetSetEntityFormComponent,
+        TargetSetDeleteFormComponent,
+        PerformanceLogsComponent
+    ],
+    templateUrl: './target-set-logs.component.html'
 })
 export class TargetSetLogsComponent implements OnInit {
   switch: boolean = true;

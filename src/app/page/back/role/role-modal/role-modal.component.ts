@@ -12,17 +12,16 @@ import {ActionType} from "../../../../interface/enum/action-type";
 import {FormIndicator} from "../../../../interface/utils/form-indicator";
 
 @Component({
-  selector: 'app-role-modal',
-  standalone: true,
-  imports: [
-    ModalButtonComponent,
-    ModalComponent,
-    NgIf,
-    RoleDeleteFormComponent,
-    RoleDetailsDisplayComponent,
-    RoleEntityFormComponent
-  ],
-  templateUrl: './role-modal.component.html',
+    selector: 'app-role-modal',
+    imports: [
+        ModalButtonComponent,
+        ModalComponent,
+        NgIf,
+        RoleDeleteFormComponent,
+        RoleDetailsDisplayComponent,
+        RoleEntityFormComponent
+    ],
+    templateUrl: './role-modal.component.html'
 })
 export class RoleModalComponent {
   @Input() modalTitle!: string;

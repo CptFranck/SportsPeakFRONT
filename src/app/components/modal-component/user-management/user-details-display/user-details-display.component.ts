@@ -6,13 +6,12 @@ import {Privilege} from "../../../../interface/dto/privilege";
 import {Dictionary} from "../../../../interface/utils/dictionary";
 
 @Component({
-  selector: 'app-user-details-display',
-  standalone: true,
-  imports: [
-    NgForOf,
-    NgIf
-  ],
-  templateUrl: './user-details-display.component.html',
+    selector: 'app-user-details-display',
+    imports: [
+        NgForOf,
+        NgIf
+    ],
+    templateUrl: './user-details-display.component.html'
 })
 export class UserDetailsDisplayComponent implements OnChanges {
   rolePrivileges: Dictionary<string> = {};

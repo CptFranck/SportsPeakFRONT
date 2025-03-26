@@ -16,17 +16,16 @@ import {ActionType} from "../../../../interface/enum/action-type";
 import {FormIndicator} from "../../../../interface/utils/form-indicator";
 
 @Component({
-  selector: 'app-privilege-modal',
-  standalone: true,
-  imports: [
-    ModalButtonComponent,
-    ModalComponent,
-    NgIf,
-    PrivilegeDeleteFormComponent,
-    PrivilegeDetailDisplayComponent,
-    PrivilegeEntityFormComponent
-  ],
-  templateUrl: './privilege-modal.component.html',
+    selector: 'app-privilege-modal',
+    imports: [
+        ModalButtonComponent,
+        ModalComponent,
+        NgIf,
+        PrivilegeDeleteFormComponent,
+        PrivilegeDetailDisplayComponent,
+        PrivilegeEntityFormComponent
+    ],
+    templateUrl: './privilege-modal.component.html'
 })
 export class PrivilegeModalComponent {
 

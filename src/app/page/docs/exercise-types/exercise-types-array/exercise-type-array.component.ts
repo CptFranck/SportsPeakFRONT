@@ -9,14 +9,13 @@ import {Dictionary} from "../../../../interface/utils/dictionary";
 import {Subject, takeUntil} from "rxjs";
 
 @Component({
-  selector: 'app-exercise-type-array',
-  standalone: true,
-  imports: [
-    NgForOf,
-    NgIf,
-    ModalButtonComponent
-  ],
-  templateUrl: './exercise-type-array.component.html',
+    selector: 'app-exercise-type-array',
+    imports: [
+        NgForOf,
+        NgIf,
+        ModalButtonComponent
+    ],
+    templateUrl: './exercise-type-array.component.html'
 })
 export class ExerciseTypeArrayComponent implements OnInit, OnDestroy {
   isAdmin: boolean = false;

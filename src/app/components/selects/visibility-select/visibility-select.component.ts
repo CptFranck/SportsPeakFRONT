@@ -5,19 +5,18 @@ import {SelectOption} from "../../../interface/components/select/selectOption";
 import {Visibility} from "../../../interface/enum/visibility";
 
 @Component({
-  selector: 'app-visibility-select',
-  standalone: true,
-  imports: [
-    SelectComponent
-  ],
-  providers: [
-    {
-      provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => VisibilitySelectComponent),
-      multi: true,
-    }
-  ],
-  templateUrl: './visibility-select.component.html',
+    selector: 'app-visibility-select',
+    imports: [
+        SelectComponent
+    ],
+    providers: [
+        {
+            provide: NG_VALUE_ACCESSOR,
+            useExisting: forwardRef(() => VisibilitySelectComponent),
+            multi: true,
+        }
+    ],
+    templateUrl: './visibility-select.component.html'
 })
 export class VisibilitySelectComponent implements ControlValueAccessor {
 

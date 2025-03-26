@@ -9,16 +9,15 @@ import {
 } from "../nav-bar-main-menu-components/nav-bar-doc-my-fitness-plan/nav-bar-my-fitness-plan-menu.component";
 
 @Component({
-  selector: 'app-nav-bar-main-menu',
-  standalone: true,
-  imports: [
-    RouterLink,
-    RouterLinkActive,
-    NavBarExploreMenuComponent,
-    NavBarDocMenuComponent,
-    NavBarMyFitnessPlanMenuComponent
-  ],
-  templateUrl: './nav-bar-main-menu.component.html',
+    selector: 'app-nav-bar-main-menu',
+    imports: [
+        RouterLink,
+        RouterLinkActive,
+        NavBarExploreMenuComponent,
+        NavBarDocMenuComponent,
+        NavBarMyFitnessPlanMenuComponent
+    ],
+    templateUrl: './nav-bar-main-menu.component.html'
 })
 export class NavBarMainMenuComponent {
 

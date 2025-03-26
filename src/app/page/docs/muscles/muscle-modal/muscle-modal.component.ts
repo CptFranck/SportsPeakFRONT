@@ -18,17 +18,16 @@ import {FormIndicator} from "../../../../interface/utils/form-indicator";
 import {Subject, takeUntil} from "rxjs";
 
 @Component({
-  selector: 'app-muscle-modal',
-  standalone: true,
-  imports: [
-    ModalButtonComponent,
-    ModalComponent,
-    MuscleDetailsDisplayComponent,
-    MuscleEntityFormComponent,
-    NgIf,
-    MuscleDeleteFormComponent
-  ],
-  templateUrl: './muscle-modal.component.html',
+    selector: 'app-muscle-modal',
+    imports: [
+        ModalButtonComponent,
+        ModalComponent,
+        MuscleDetailsDisplayComponent,
+        MuscleEntityFormComponent,
+        NgIf,
+        MuscleDeleteFormComponent
+    ],
+    templateUrl: './muscle-modal.component.html'
 })
 export class MuscleModalComponent implements OnInit, OnDestroy {
   isAdmin: boolean = false;

@@ -12,16 +12,15 @@ import {Exercise} from "../../../../interface/dto/exercise";
 import {Subject, takeUntil} from "rxjs";
 
 @Component({
-  selector: 'app-muscles',
-  standalone: true,
-  imports: [
-    CommonModule,
-    MusclesArrayComponent,
-    LoadingComponent,
-    MuscleModalComponent,
-    SearchBarComponent
-  ],
-  templateUrl: './muscles.component.html',
+    selector: 'app-muscles',
+    imports: [
+        CommonModule,
+        MusclesArrayComponent,
+        LoadingComponent,
+        MuscleModalComponent,
+        SearchBarComponent
+    ],
+    templateUrl: './muscles.component.html'
 })
 export class MusclesComponent implements OnInit, OnDestroy {
   loading: boolean = true;

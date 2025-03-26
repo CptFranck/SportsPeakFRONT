@@ -15,15 +15,14 @@ import {TabHeaderComponent} from "../../../../../components/tab-header/tab-heade
 import {TabOption} from "../../../../../interface/components/tab/tabOption";
 
 @Component({
-  selector: 'app-target-sets',
-  standalone: true,
-  imports: [
-    NgForOf,
-    NgIf,
-    TargetSetCardComponent,
-    TabHeaderComponent
-  ],
-  templateUrl: './target-sets.component.html',
+    selector: 'app-target-sets',
+    imports: [
+        NgForOf,
+        NgIf,
+        TargetSetCardComponent,
+        TabHeaderComponent
+    ],
+    templateUrl: './target-sets.component.html'
 })
 export class TargetSetsComponent {
   tabId: string = "targetSetTab";

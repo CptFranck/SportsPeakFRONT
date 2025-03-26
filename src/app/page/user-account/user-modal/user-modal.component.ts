@@ -11,18 +11,17 @@ import {UserPasswordFormComponent} from "../../../components/form/user/user-pass
 import {UserDeleteFormComponent} from "../../../components/form/user/user-delete-form/user-delete-form.component";
 
 @Component({
-  selector: 'app-user-modal',
-  standalone: true,
-  imports: [
-    ModalComponent,
-    NgIf,
-    UserEmailFormComponent,
-    UserUsernameFormComponent,
-    UserNameFormComponent,
-    UserPasswordFormComponent,
-    UserDeleteFormComponent,
-  ],
-  templateUrl: './user-modal.component.html',
+    selector: 'app-user-modal',
+    imports: [
+        ModalComponent,
+        NgIf,
+        UserEmailFormComponent,
+        UserUsernameFormComponent,
+        UserNameFormComponent,
+        UserPasswordFormComponent,
+        UserDeleteFormComponent,
+    ],
+    templateUrl: './user-modal.component.html'
 })
 export class UserModalComponent {
   @Input() modalTitle!: string;

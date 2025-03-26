@@ -6,13 +6,12 @@ import {AlertService} from "../../services/alert/alert.service";
 import {Subject, takeUntil} from "rxjs";
 
 @Component({
-  selector: 'app-alert-display',
-  standalone: true,
-  imports: [
-    AlertComponent,
-    NgForOf
-  ],
-  templateUrl: './alert-display.component.html',
+    selector: 'app-alert-display',
+    imports: [
+        AlertComponent,
+        NgForOf
+    ],
+    templateUrl: './alert-display.component.html'
 })
 export class AlertDisplayComponent implements OnInit, OnDestroy {
   alerts: Alert[] = [];

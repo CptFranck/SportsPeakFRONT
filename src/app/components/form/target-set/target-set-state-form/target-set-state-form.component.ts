@@ -6,14 +6,13 @@ import {TargetSet} from "../../../../interface/dto/target-set";
 import {TargetSetService} from "../../../../services/target-set/target-set.service";
 
 @Component({
-  selector: 'app-target-set-state-form',
-  standalone: true,
-  imports: [
-    NgIf,
-    TargetSetSateSelectComponent,
-    ReactiveFormsModule
-  ],
-  templateUrl: './target-set-state-form.component.html',
+    selector: 'app-target-set-state-form',
+    imports: [
+        NgIf,
+        TargetSetSateSelectComponent,
+        ReactiveFormsModule
+    ],
+    templateUrl: './target-set-state-form.component.html'
 })
 export class TargetSetStateFormComponent implements OnInit {
   modify: boolean = false;

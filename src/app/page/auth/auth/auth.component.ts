@@ -5,15 +5,14 @@ import {TabHeaderComponent} from "../../../components/tab-header/tab-header.comp
 import {TabOption} from "../../../interface/components/tab/tabOption";
 
 @Component({
-  selector: 'app-login',
-  standalone: true,
-  imports: [
-    LoginFormComponent,
-    RegisterFormComponent,
-    TabHeaderComponent
-  ],
-  styleUrl: "auth.component.css",
-  templateUrl: './auth.component.html',
+    selector: 'app-login',
+    imports: [
+        LoginFormComponent,
+        RegisterFormComponent,
+        TabHeaderComponent
+    ],
+    styleUrl: "auth.component.css",
+    templateUrl: './auth.component.html'
 })
 export class AuthComponent implements OnInit {
   tabId: string = "targetLogsTab";

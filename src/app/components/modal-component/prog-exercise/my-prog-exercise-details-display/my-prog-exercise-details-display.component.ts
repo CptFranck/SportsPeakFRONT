@@ -14,13 +14,12 @@ import {
 import {getStringTime} from "../../../../utils/duration-functions";
 
 @Component({
-  selector: 'app-my-prog-exercise-details-display',
-  standalone: true,
-  imports: [
-    NgForOf,
-    NgIf
-  ],
-  templateUrl: './my-prog-exercise-details-display.component.html',
+    selector: 'app-my-prog-exercise-details-display',
+    imports: [
+        NgForOf,
+        NgIf
+    ],
+    templateUrl: './my-prog-exercise-details-display.component.html'
 })
 export class MyProgExerciseDetailsDisplayComponent {
   progExercise: ProgExercise | undefined;

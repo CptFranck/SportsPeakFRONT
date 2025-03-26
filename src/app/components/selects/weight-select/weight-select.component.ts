@@ -5,19 +5,18 @@ import {SelectComponent} from "../../select/select.component";
 import {WeightUnit} from "../../../interface/enum/weightUnit";
 
 @Component({
-  selector: 'app-weight-select',
-  standalone: true,
-  imports: [
-    SelectComponent
-  ],
-  providers: [
-    {
-      provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => WeightSelectComponent),
-      multi: true,
-    }
-  ],
-  templateUrl: './weight-select.component.html',
+    selector: 'app-weight-select',
+    imports: [
+        SelectComponent
+    ],
+    providers: [
+        {
+            provide: NG_VALUE_ACCESSOR,
+            useExisting: forwardRef(() => WeightSelectComponent),
+            multi: true,
+        }
+    ],
+    templateUrl: './weight-select.component.html'
 })
 export class WeightSelectComponent implements ControlValueAccessor {
 

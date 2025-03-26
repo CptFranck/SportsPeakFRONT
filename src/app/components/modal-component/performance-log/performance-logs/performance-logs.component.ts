@@ -26,20 +26,19 @@ import {
 import {CheckBoxComponent} from "../../../input/check-box/check-box.component";
 
 @Component({
-  selector: 'app-performance-logs',
-  standalone: true,
-  imports: [
-    PerformanceLogEntityFormComponent,
-    CollapseBlockComponent,
-    PerformanceLogDeleteFormComponent,
-    NgIf,
-    PerformanceLogSortedBySetComponent,
-    PerformanceLogsChartsComponent,
-    TabHeaderComponent,
-    PerformanceLogSortedByLogDateComponent,
-    CheckBoxComponent
-  ],
-  templateUrl: './performance-logs.component.html',
+    selector: 'app-performance-logs',
+    imports: [
+        PerformanceLogEntityFormComponent,
+        CollapseBlockComponent,
+        PerformanceLogDeleteFormComponent,
+        NgIf,
+        PerformanceLogSortedBySetComponent,
+        PerformanceLogsChartsComponent,
+        TabHeaderComponent,
+        PerformanceLogSortedByLogDateComponent,
+        CheckBoxComponent
+    ],
+    templateUrl: './performance-logs.component.html'
 })
 export class PerformanceLogsComponent implements OnInit {
 

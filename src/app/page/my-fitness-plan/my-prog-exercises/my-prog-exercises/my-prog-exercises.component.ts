@@ -14,16 +14,15 @@ import {
 import {Subject, takeUntil} from "rxjs";
 
 @Component({
-  selector: 'app-my-prog-exercises',
-  standalone: true,
-  imports: [
-    LoadingComponent,
-    SearchBarComponent,
-    MyProgExerciseModalComponent,
-    NgForOf,
-    ProgExerciseCardComponent,
-  ],
-  templateUrl: './my-prog-exercises.component.html',
+    selector: 'app-my-prog-exercises',
+    imports: [
+        LoadingComponent,
+        SearchBarComponent,
+        MyProgExerciseModalComponent,
+        NgForOf,
+        ProgExerciseCardComponent,
+    ],
+    templateUrl: './my-prog-exercises.component.html'
 })
 export class MyProgExercisesComponent implements OnInit, OnDestroy {
   loading: boolean = true;

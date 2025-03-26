@@ -6,12 +6,11 @@ import {ModificationField} from "../../../../interface/enum/modification-field";
 import {ModalButtonComponent} from "../../../../components/modal/modal-button/modal-button.component";
 
 @Component({
-  selector: 'app-user-information-display',
-  standalone: true,
-  imports: [
-    ModalButtonComponent
-  ],
-  templateUrl: './user-information-display.component.html',
+    selector: 'app-user-information-display',
+    imports: [
+        ModalButtonComponent
+    ],
+    templateUrl: './user-information-display.component.html'
 })
 export class UserInformationDisplayComponent {
 

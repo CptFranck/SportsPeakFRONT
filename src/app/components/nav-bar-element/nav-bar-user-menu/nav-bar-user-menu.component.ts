@@ -6,15 +6,14 @@ import {RouterLink, RouterLinkActive} from "@angular/router";
 import {Subject, takeUntil} from "rxjs";
 
 @Component({
-  selector: 'app-nav-bar-user-menu',
-  standalone: true,
-  imports: [
-    NgForOf,
-    NgIf,
-    RouterLink,
-    RouterLinkActive
-  ],
-  templateUrl: './nav-bar-user-menu.component.html',
+    selector: 'app-nav-bar-user-menu',
+    imports: [
+        NgForOf,
+        NgIf,
+        RouterLink,
+        RouterLinkActive
+    ],
+    templateUrl: './nav-bar-user-menu.component.html'
 })
 export class NavBarUserMenuComponent implements OnInit, OnDestroy {
   user: User | undefined = undefined;

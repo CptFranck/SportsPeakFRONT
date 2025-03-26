@@ -10,14 +10,13 @@ import {ModificationField} from "../../../../interface/enum/modification-field";
 import {ActionType} from "../../../../interface/enum/action-type";
 
 @Component({
-  selector: 'app-user-password-form',
-  standalone: true,
-  imports: [
-    InputControlComponent,
-    ReactiveFormsModule,
-    NgIf
-  ],
-  templateUrl: './user-password-form.component.html',
+    selector: 'app-user-password-form',
+    imports: [
+        InputControlComponent,
+        ReactiveFormsModule,
+        NgIf
+    ],
+    templateUrl: './user-password-form.component.html'
 })
 export class UserPasswordFormComponent implements OnInit, OnDestroy {
   user: User | undefined;

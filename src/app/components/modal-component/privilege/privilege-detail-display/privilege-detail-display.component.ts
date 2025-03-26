@@ -3,13 +3,12 @@ import {NgForOf, NgIf} from "@angular/common";
 import {Privilege} from "../../../../interface/dto/privilege";
 
 @Component({
-  selector: 'app-privilege-details-display',
-  standalone: true,
-  imports: [
-    NgForOf,
-    NgIf
-  ],
-  templateUrl: './privilege-detail-display.component.html',
+    selector: 'app-privilege-details-display',
+    imports: [
+        NgForOf,
+        NgIf
+    ],
+    templateUrl: './privilege-detail-display.component.html'
 })
 export class PrivilegeDetailDisplayComponent {
   @Input() privilege: Privilege | undefined;

@@ -9,14 +9,13 @@ import {Dictionary} from "../../../../interface/utils/dictionary";
 import {Subject, takeUntil} from "rxjs";
 
 @Component({
-  selector: 'app-exercises-array',
-  standalone: true,
-  imports: [
-    NgForOf,
-    NgIf,
-    ModalButtonComponent
-  ],
-  templateUrl: './exercises-array.component.html',
+    selector: 'app-exercises-array',
+    imports: [
+        NgForOf,
+        NgIf,
+        ModalButtonComponent
+    ],
+    templateUrl: './exercises-array.component.html'
 })
 export class ExercisesArrayComponent implements OnChanges, OnDestroy {
   isAdmin: boolean = false;

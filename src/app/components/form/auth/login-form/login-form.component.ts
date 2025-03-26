@@ -5,14 +5,13 @@ import {InputControlComponent} from "../../../input-control/input-control.compon
 import {NgIf} from "@angular/common";
 
 @Component({
-  selector: 'app-login-form',
-  standalone: true,
-  imports: [
-    InputControlComponent,
-    NgIf,
-    ReactiveFormsModule
-  ],
-  templateUrl: './login-form.component.html',
+    selector: 'app-login-form',
+    imports: [
+        InputControlComponent,
+        NgIf,
+        ReactiveFormsModule
+    ],
+    templateUrl: './login-form.component.html'
 })
 export class LoginFormComponent implements OnInit {
   loginForm: FormGroup | null = null;

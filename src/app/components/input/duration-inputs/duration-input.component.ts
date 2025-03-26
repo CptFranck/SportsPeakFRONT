@@ -4,14 +4,13 @@ import {InputControlComponent} from "../../input-control/input-control.component
 import {NgIf} from "@angular/common";
 
 @Component({
-  selector: 'app-duration-input',
-  standalone: true,
-  imports: [
-    InputControlComponent,
-    NgIf,
-    ReactiveFormsModule
-  ],
-  templateUrl: './duration-input.component.html',
+    selector: 'app-duration-input',
+    imports: [
+        InputControlComponent,
+        NgIf,
+        ReactiveFormsModule
+    ],
+    templateUrl: './duration-input.component.html'
 })
 export class DurationInputComponent {
   durationForm!: FormGroup;

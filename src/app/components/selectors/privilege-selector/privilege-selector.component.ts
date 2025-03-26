@@ -7,19 +7,18 @@ import {MultiSelectComponent} from "../../multi-select/multi-select.component";
 import {Subject, takeUntil} from "rxjs";
 
 @Component({
-  selector: 'app-privilege-selector',
-  standalone: true,
-  imports: [
-    MultiSelectComponent
-  ],
-  providers: [
-    {
-      provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => PrivilegeSelectorComponent),
-      multi: true,
-    }
-  ],
-  templateUrl: './privilege-selector.component.html',
+    selector: 'app-privilege-selector',
+    imports: [
+        MultiSelectComponent
+    ],
+    providers: [
+        {
+            provide: NG_VALUE_ACCESSOR,
+            useExisting: forwardRef(() => PrivilegeSelectorComponent),
+            multi: true,
+        }
+    ],
+    templateUrl: './privilege-selector.component.html'
 })
 export class PrivilegeSelectorComponent implements OnInit, OnDestroy, ControlValueAccessor {
   loading: boolean = true;

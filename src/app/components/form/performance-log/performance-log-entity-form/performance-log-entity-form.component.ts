@@ -16,16 +16,15 @@ import {filterPerformanceLogByDate} from "../../../../utils/performance-log-func
 import {stringToDateString} from "../../../../utils/time-functions";
 
 @Component({
-  selector: 'app-performance-log-entity-form',
-  standalone: true,
-  imports: [
-    ReactiveFormsModule,
-    InputControlComponent,
-    NgIf,
-    WeightSelectComponent,
-    PerformanceLogIndexSelectComponent,
-  ],
-  templateUrl: './performance-log-entity-form.component.html',
+    selector: 'app-performance-log-entity-form',
+    imports: [
+        ReactiveFormsModule,
+        InputControlComponent,
+        NgIf,
+        WeightSelectComponent,
+        PerformanceLogIndexSelectComponent,
+    ],
+    templateUrl: './performance-log-entity-form.component.html'
 })
 export class PerformanceLogEntityFormComponent implements OnInit, OnDestroy {
 

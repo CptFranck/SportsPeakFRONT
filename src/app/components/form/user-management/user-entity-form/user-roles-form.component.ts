@@ -11,15 +11,14 @@ import {UserLoggedService} from "../../../../services/user-logged/user-logged.se
 import {ActionType} from "../../../../interface/enum/action-type";
 
 @Component({
-  selector: 'app-user-roles-form',
-  standalone: true,
-  imports: [
-    InputControlComponent,
-    NgIf,
-    ReactiveFormsModule,
-    RoleSelectorComponent,
-  ],
-  templateUrl: './user-roles-form.component.html',
+    selector: 'app-user-roles-form',
+    imports: [
+        InputControlComponent,
+        NgIf,
+        ReactiveFormsModule,
+        RoleSelectorComponent,
+    ],
+    templateUrl: './user-roles-form.component.html'
 })
 export class UserRolesFormComponent implements OnInit, OnDestroy {
   user: User | undefined;

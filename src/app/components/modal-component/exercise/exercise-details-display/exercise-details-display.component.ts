@@ -3,13 +3,12 @@ import {NgForOf, NgIf} from "@angular/common";
 import {Exercise} from "../../../../interface/dto/exercise";
 
 @Component({
-  selector: 'app-exercise-details-display',
-  standalone: true,
-  imports: [
-    NgForOf,
-    NgIf
-  ],
-  templateUrl: './exercise-details-display.component.html',
+    selector: 'app-exercise-details-display',
+    imports: [
+        NgForOf,
+        NgIf
+    ],
+    templateUrl: './exercise-details-display.component.html'
 })
 export class ExerciseDetailsDisplayComponent {
   @Input() exercise: Exercise | undefined;
