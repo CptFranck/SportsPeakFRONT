@@ -35,28 +35,15 @@ function apolloOptionsFactory(): ApolloClientOptions<any> {
       alertService.createNetWorkErrorAlert(errorResponse.networkError)
   });
 
-  const HttpLinkHandler: HttpLinkHandler = httpLink.create({uri})
+  const httpLinkHandler: HttpLinkHandler = httpLink.create({uri})
+
   return {
     link: ApolloLink.from([
       auth,
       errorLinkHandler,
-      HttpLinkHandler,
+      httpLinkHandler,
     ]),
     cache: new InMemoryCache(),
-    // defaultOptions: {
-    //   query: {
-    //     fetchPolicy: 'no-cache',
-    //     errorPolicy: 'all'
-    //   },
-    //   watchQuery: {
-    //     fetchPolicy: 'no-cache',
-    //     errorPolicy: 'all'
-    //   },
-    //   mutate: {
-    //     fetchPolicy: 'no-cache',
-    //     errorPolicy: "all"
-    //   }
-    // }
   };
 }
 
