@@ -1,4 +1,4 @@
-import {inject, Injectable} from '@angular/core';
+import {computed, inject, Injectable, signal, WritableSignal} from '@angular/core';
 import {Apollo, MutationResult} from "apollo-angular";
 import {FormGroup} from "@angular/forms";
 import {
@@ -7,7 +7,6 @@ import {
   GET_EXERCISE_TYPES,
   MOD_EXERCISE_TYPES
 } from "../../graphql/operations/exercise-type.operation";
-import {BehaviorSubject} from "rxjs";
 import {AlertService} from "../alert/alert.service";
 import {ExerciseType} from "../../interface/dto/exercise-type";
 import {ApolloCache, ApolloQueryResult} from "@apollo/client";
@@ -17,30 +16,55 @@ import {ApolloCache, ApolloQueryResult} from "@apollo/client";
 })
 export class ExerciseTypeService {
 
-  exerciseTypes: BehaviorSubject<ExerciseType[]> = new BehaviorSubject<ExerciseType[]>([]);
-  isLoading: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
+  // exerciseTypes: BehaviorSubject<ExerciseType[]> = new BehaviorSubject<ExerciseType[]>([]);
+  // isLoading: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
 
   private readonly apollo: Apollo = inject(Apollo);
   private readonly alertService: AlertService = inject(AlertService);
+
+  private exerciseTypes: WritableSignal<ExerciseType[]> = signal<ExerciseType[]>([]);
+  private isLoading: WritableSignal<boolean> = signal<boolean>(true);
 
   constructor() {
     this.getExerciseTypes();
   }
 
+  get allExerciseTypes() {
+    return computed(() => this.exerciseTypes());
+  }
+
+  get loadingStatus() {
+    return computed(() => this.isLoading());
+  }
+
+  // getExerciseTypes() {
+  //   this.isLoading.next(true);
+  //   this.apollo.watchQuery({
+  //     query: GET_EXERCISE_TYPES,
+  //   })
+  //     .valueChanges
+  //     .subscribe((result: ApolloQueryResult<any>): void => {
+  //       if (result.errors) {
+  //         this.alertService.graphQLErrorAlertHandler(result.errors);
+  //       } else {
+  //         this.exerciseTypes.next(result.data.getExerciseTypes);
+  //         this.isLoading.next(result.loading);
+  //       }
+  //     });
+  // }
+
   getExerciseTypes() {
-    this.isLoading.next(true);
+    this.isLoading.set(true);
     this.apollo.watchQuery({
       query: GET_EXERCISE_TYPES,
-    })
-      .valueChanges
-      .subscribe((result: ApolloQueryResult<any>): void => {
-        if (result.errors) {
-          this.alertService.graphQLErrorAlertHandler(result.errors);
-        } else {
-          this.exerciseTypes.next(result.data.getExerciseTypes);
-          this.isLoading.next(result.loading);
-        }
-      });
+    }).valueChanges.subscribe(({data, errors, loading}: ApolloQueryResult<any>) => {
+      if (errors) {
+        this.alertService.graphQLErrorAlertHandler(errors);
+      } else {
+        this.exerciseTypes.set(data.getExerciseTypes);
+        this.isLoading.set(loading);
+      }
+    });
   }
 
   // addExerciseType(exerciseTypeForm: FormGroup) {
