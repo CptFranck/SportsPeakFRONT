@@ -1,4 +1,15 @@
-import {Component, EventEmitter, inject, Input, OnDestroy, OnInit, Output, TemplateRef, ViewChild} from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  inject,
+  input,
+  OnDestroy,
+  OnInit,
+  Output,
+  signal,
+  TemplateRef,
+  ViewChild
+} from '@angular/core';
 import {ModalButtonComponent} from "../../../../components/modal/modal-button/modal-button.component";
 import {ModalComponent} from "../../../../components/modal/modal/modal.component";
 import {NgIf} from "@angular/common";
@@ -18,24 +29,24 @@ import {Subject, takeUntil} from "rxjs";
 import {FormIndicator} from "../../../../interface/utils/form-indicator";
 
 @Component({
-    selector: 'app-exercise-modal',
-    imports: [
-        ModalButtonComponent,
-        ModalComponent,
-        NgIf,
-        ExerciseEntityFormComponent,
-        ExerciseDeleteFormComponent,
-        ExerciseDetailsDisplayComponent
-    ],
-    templateUrl: './exercise-modal.component.html'
+  selector: 'app-exercise-modal',
+  imports: [
+    ModalButtonComponent,
+    ModalComponent,
+    NgIf,
+    ExerciseEntityFormComponent,
+    ExerciseDeleteFormComponent,
+    ExerciseDetailsDisplayComponent
+  ],
+  templateUrl: './exercise-modal.component.html'
 })
 export class ExerciseModalComponent implements OnInit, OnDestroy {
-  isAdmin: boolean = false;
+  isAdmin = signal<boolean>(false);
 
-  @Input() modalTitle!: string;
-  @Input() exerciseModalId!: string;
-  @Input() exercise: Exercise | undefined;
-  @Input() action!: ActionType;
+  readonly action = input.required<ActionType>();
+  readonly exercise = input<Exercise>();
+  readonly modalTitle = input.required<string>();
+  readonly exerciseModalId = input.required<string>();
 
   @Output() exerciseAction: EventEmitter<FormIndicator> = new EventEmitter();
 
@@ -50,7 +61,7 @@ export class ExerciseModalComponent implements OnInit, OnDestroy {
     this.userLoggedService.currentUser
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe(() =>
-        this.isAdmin = this.userLoggedService.isAdmin());
+        this.isAdmin.set(this.userLoggedService.isAdmin()));
   }
 
   ngOnDestroy() {
@@ -64,5 +75,4 @@ export class ExerciseModalComponent implements OnInit, OnDestroy {
       actionType: ActionType.create
     });
   }
-
 }
