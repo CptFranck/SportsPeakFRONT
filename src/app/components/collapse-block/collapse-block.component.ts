@@ -1,4 +1,4 @@
-import {Component, ElementRef, Input, TemplateRef, ViewChild} from '@angular/core';
+import {Component, ElementRef, Input, input, signal, TemplateRef, ViewChild} from '@angular/core';
 import {NgIf, NgTemplateOutlet} from "@angular/common";
 import {Subject} from "rxjs";
 import {ActionType} from "../../interface/enum/action-type";
@@ -14,53 +14,54 @@ import {ActionType} from "../../interface/enum/action-type";
 export class CollapseBlockComponent {
 
   action!: ActionType | undefined;
-  submitButton: boolean = false;
-  closeButtonTitle: string = "Close";
-  validateButtonClass: string = "btn-success";
-  validationButtonTitle: string = "Ok";
   submitEventActionType$: Subject<ActionType> = new Subject<ActionType>();
   lastButton: ElementRef | undefined;
 
+  hidden = signal<boolean>(true);
+  submitButton = signal<boolean>(false);
+  closeButtonTitle = signal<string>("Close");
+  validateButtonClass = signal<string>("btn-success");
+  validationButtonTitle = signal<string>("Ok");
+
   @ViewChild("btnClose") btnClose: ElementRef | undefined;
 
-  @Input() visible: boolean = false;
-  @Input() collapseId!: string;
-  @Input() classArgs: string = "";
-  @Input() contentTemplate: TemplateRef<any> | undefined;
+  readonly collapseId = input.required<string>();
+  readonly classArgs = input<string>("");
+  readonly contentTemplate = input<TemplateRef<any>>();
 
   constructor(private readonly elementRef: ElementRef) {
   }
 
   @Input() set actionType(action: ActionType | undefined) {
-    this.submitButton = action === ActionType.update || action === ActionType.delete;
+    this.submitButton.set(action === ActionType.update || action === ActionType.delete);
 
     this.action = action
-    this.validateButtonClass = "btn-success";
-    this.closeButtonTitle = "Cancel";
+    this.validateButtonClass.set("btn-success");
+    this.closeButtonTitle.set("Cancel");
     switch (this.action) {
       case ActionType.update:
-        this.validationButtonTitle = "Update";
+        this.validationButtonTitle.set("Update");
         return
       case ActionType.delete:
-        this.validationButtonTitle = "Delete";
-        this.validateButtonClass = "btn-danger";
+        this.validationButtonTitle.set("Delete");
+        this.validateButtonClass.set("btn-danger");
         return
       default:
-        this.closeButtonTitle = "Close";
+        this.closeButtonTitle.set("Close");
         return
     }
   }
 
   toggle(elementRef: ElementRef) {
     this.elementRef.nativeElement.scrollIntoView();
-    if (!this.visible || this.visible && elementRef === this.lastButton) {
-      this.visible = !this.visible;
+    if (!this.hidden || this.hidden && elementRef === this.lastButton) {
+      this.hidden.update(value => !value);
     }
     this.lastButton = elementRef;
   }
 
   hide() {
-    this.visible = false;
+    this.hidden.set(false);
   }
 
   onSubmit() {
