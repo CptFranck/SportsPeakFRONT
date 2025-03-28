@@ -1,4 +1,4 @@
-import {Component, ElementRef, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, ElementRef, EventEmitter, input, OnInit, Output, signal} from '@angular/core';
 import {CollapseBlockComponent} from "../collapse-block/collapse-block.component";
 
 @Component({
@@ -6,14 +6,14 @@ import {CollapseBlockComponent} from "../collapse-block/collapse-block.component
   templateUrl: './collapse-button.component.html'
 })
 export class CollapseButtonComponent implements OnInit {
-  AllWidthStyle: string = "";
+  AllWidthStyle = signal<string>("");
 
-  @Input() value!: any;
-  @Input() btnClass!: string;
-  @Input() collapseId!: string;
-  @Input() onlyClose: boolean = false;
-  @Input() allWidth: boolean = false;
-  @Input() collapseBlockComponent?: CollapseBlockComponent;
+  readonly value = input.required<any>();
+  readonly allWidth = input<boolean>(false);
+  readonly btnClass = input.required<string>();
+  readonly onlyClose = input<boolean>(false);
+  readonly collapseId = input.required<string>();
+  readonly collapseBlockComponent = input<CollapseBlockComponent>();
 
   @Output() onClickEvent: EventEmitter<any> = new EventEmitter();
 
@@ -21,16 +21,18 @@ export class CollapseButtonComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    if (this.allWidth)
-      this.AllWidthStyle = "width:100%"
+    if (this.allWidth())
+      this.AllWidthStyle.set("width:100%");
   }
 
   onClick() {
-    if (this.value && this.onClickEvent) {
-      this.onClickEvent.emit(this.value);
+    const value = this.value();
+    if (value && this.onClickEvent) {
+      this.onClickEvent.emit(value);
     }
-    if (this.collapseBlockComponent) {
-      this.collapseBlockComponent.toggle(this.elementRef)
+    const collapseBlockComponent = this.collapseBlockComponent();
+    if (collapseBlockComponent) {
+      collapseBlockComponent.toggle(this.elementRef)
     }
   }
 }
