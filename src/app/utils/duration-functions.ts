@@ -7,7 +7,7 @@ export function createDurationForm(duration: Duration) {
       duration.hours,
       [Validators.required,
         Validators.min(0),
-        Validators.max(24),
+        Validators.max(23),
         Validators.pattern("^[0-9]*$")]),
     minutes: new FormControl(
       duration.minutes,
