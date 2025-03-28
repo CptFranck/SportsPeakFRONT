@@ -67,7 +67,7 @@
       <div class="col">
         <div class="row">
           <span class="form-label">One Rep Time :</span>
-          <app-duration-input [rootFormGroupInput]="targetSetForm" fieldName="physicalExertionUnitTime"/>
+          <app-duration-input [formGroup]="targetSetForm" fieldName="physicalExertionUnitTime"/>
           <app-input-control
             [formGroup]="targetSetForm"
             [onlyValidMessage]="true"
@@ -80,7 +80,7 @@
       <div class="col">
         <div class="row">
           <span class="form-label">Rest Time :</span>
-          <app-duration-input [rootFormGroupInput]="targetSetForm" fieldName="restTime"/>
+          <app-duration-input [formGroup]="targetSetForm" fieldName="restTime"/>
           <app-input-control
             [formGroup]="targetSetForm"
             [onlyValidMessage]="true"
