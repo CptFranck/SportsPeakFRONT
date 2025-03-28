@@ -1,22 +1,22 @@
-<div [class]="'alert ' + alert.type + ' alert-dismissible fade show'" role="alert">
-  <h5><strong>{{ alert.title }}</strong></h5>
+<div [class]="'alert ' + alert().type + ' alert-dismissible fade show'" role="alert">
+  <h5><strong>{{ alert().title }}</strong></h5>
   <div class="row ">
-    <div *ngIf="alert.errorInformation?.errorPath" class="col-auto m-0">
-      <strong>ErrorPath : </strong> {{ alert.errorInformation?.errorPath }}
+    <div *ngIf="alert().errorInformation?.errorPath" class="col-auto m-0">
+      <strong>ErrorPath : </strong> {{ alert().errorInformation?.errorPath }}
     </div>
-    <div *ngIf="alert.errorInformation?.errorType" class="col-auto">
-      <strong>ErrorType : </strong> {{ alert.errorInformation?.errorType }}
+    <div *ngIf="alert().errorInformation?.errorType" class="col-auto">
+      <strong>ErrorType : </strong> {{ alert().errorInformation?.errorType }}
     </div>
-    <div *ngIf="alert.errorInformation?.errorPath" class="col-auto">
-      <strong>ErrorLocation : </strong>{{ alert.errorInformation?.errorLocation }}
+    <div *ngIf="alert().errorInformation?.errorPath" class="col-auto">
+      <strong>ErrorLocation : </strong>{{ alert().errorInformation?.errorLocation }}
     </div>
-    <div *ngIf="alert.errorInformation?.errorExtension" class="col-auto">
-      <strong>ErrorExtension : </strong> {{ alert.errorInformation?.errorExtension }}
+    <div *ngIf="alert().errorInformation?.errorExtension" class="col-auto">
+      <strong>ErrorExtension : </strong> {{ alert().errorInformation?.errorExtension }}
     </div>
   </div>
   <div class="row">
     <div class="col">
-      <strong>Message : </strong>{{ alert.message }}
+      <strong>Message : </strong>{{ alert().message }}
     </div>
   </div>
   <div class="col-1 align-items-center">
