@@ -1,4 +1,4 @@
-import {Component, inject, Input, OnDestroy, OnInit} from '@angular/core';
+import {Component, inject, input, OnDestroy, OnInit} from '@angular/core';
 import {Observable, Subject, takeUntil} from "rxjs";
 import {ProgExerciseService} from "../../../../services/prog-exercise/prog-exercise.service";
 import {ProgExercise} from "../../../../interface/dto/prog-exercise";
@@ -10,16 +10,17 @@ import {ActionType} from "../../../../interface/enum/action-type";
 })
 export class MyProgExerciseDeleteFormComponent implements OnInit, OnDestroy {
 
-  @Input() progExercise!: ProgExercise | undefined;
-  @Input() btnCloseRef!: HTMLButtonElement;
-  @Input() submitEventActionType$!: Observable<ActionType> | undefined;
+  readonly progExercise = input.required<ProgExercise | undefined>();
+  readonly btnCloseRef = input.required<HTMLButtonElement>();
+  readonly submitEventActionType$ = input.required<Observable<ActionType> | undefined>();
 
-  private readonly unsubscribe$: Subject<void> = new Subject<void>();
-  private readonly progExerciseService: ProgExerciseService = inject(ProgExerciseService);
+  private readonly unsubscribe$ = new Subject<void>();
+  private readonly progExerciseService = inject(ProgExerciseService);
 
   ngOnInit() {
-    if (this.submitEventActionType$)
-      this.submitEventActionType$
+    const submitEventActionType$ = this.submitEventActionType$();
+    if (submitEventActionType$)
+      submitEventActionType$
         .pipe(takeUntil(this.unsubscribe$))
         .subscribe((actionType: ActionType) => {
           if (actionType === ActionType.delete)
@@ -33,8 +34,9 @@ export class MyProgExerciseDeleteFormComponent implements OnInit, OnDestroy {
   }
 
   onSubmit() {
-    if (!this.progExercise) return;
-    this.progExerciseService.deleteProgExercises(this.progExercise);
-    this.btnCloseRef.click();
+    const progExercise = this.progExercise();
+    if (!progExercise) return;
+    this.progExerciseService.deleteProgExercises(progExercise);
+    this.btnCloseRef().click();
   }
 }
