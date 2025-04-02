@@ -1,4 +1,4 @@
-import {Component, inject, Input, OnDestroy, OnInit} from '@angular/core';
+import {Component, inject, OnDestroy, OnInit, input} from '@angular/core';
 import {Muscle} from "../../../../interface/dto/muscle";
 import {Observable, Subject, takeUntil} from "rxjs";
 import {MuscleService} from "../../../../services/muscle/muscle.service";
@@ -10,16 +10,17 @@ import {ActionType} from "../../../../interface/enum/action-type";
 })
 export class MuscleDeleteFormComponent implements OnInit, OnDestroy {
 
-  @Input() muscle!: Muscle | undefined;
-  @Input() btnCloseRef!: HTMLButtonElement;
-  @Input() submitEventActionType$!: Observable<ActionType> | undefined;
+  readonly muscle = input.required<Muscle | undefined>();
+  readonly btnCloseRef = input.required<HTMLButtonElement>();
+  readonly submitEventActionType$ = input.required<Observable<ActionType> | undefined>();
 
   private readonly unsubscribe$: Subject<void> = new Subject<void>();
   private readonly muscleService: MuscleService = inject(MuscleService);
 
   ngOnInit() {
-    if (this.submitEventActionType$)
-      this.submitEventActionType$
+    const submitEventActionType$ = this.submitEventActionType$();
+    if (submitEventActionType$)
+      submitEventActionType$
         .pipe(takeUntil(this.unsubscribe$))
         .subscribe((actionType: ActionType) => {
           if (actionType === ActionType.delete)
@@ -33,8 +34,9 @@ export class MuscleDeleteFormComponent implements OnInit, OnDestroy {
   }
 
   onSubmit() {
-    if (!this.muscle) return;
-    this.muscleService.deleteMuscle(this.muscle);
-    this.btnCloseRef.click();
+    const muscle = this.muscle();
+    if (!muscle) return;
+    this.muscleService.deleteMuscle(muscle);
+    this.btnCloseRef().click();
   }
 }
