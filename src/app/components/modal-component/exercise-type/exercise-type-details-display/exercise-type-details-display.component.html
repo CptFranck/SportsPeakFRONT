@@ -1,19 +1,19 @@
 <div class="container-fluid">
   <div class="mb-3">
     <span class="form-label fw-bold">Name :</span>
-    <p>{{ exerciseType?.name }}</p>
+    <p>{{ exerciseType()?.name }}</p>
   </div>
   <div class="mb-3">
     <span class="form-label fw-bold">Description :</span>
-    <p>{{ exerciseType?.goal }}</p>
+    <p>{{ exerciseType()?.goal }}</p>
   </div>
   <div class="mb-3">
     <span class="form-label fw-bold">Exercise(s) :</span>
-    <p *ngIf="exerciseType?.exercises?.length === 0">No exercise is type of this exercise type</p>
-    <ol *ngIf="exerciseType?.exercises?.length !== 0"
+    <p *ngIf="exerciseType()?.exercises?.length === 0">No exercise is type of this exercise type</p>
+    <ol *ngIf="exerciseType()?.exercises?.length !== 0"
         class="list-group list-group-numbered"
     >
-      <li *ngFor="let exercise of exerciseType?.exercises"
+      <li *ngFor="let exercise of exerciseType()?.exercises"
           class="list-group-item d-flex justify-content-between align-items-start"
       >
         <div class="ms-2 me-auto">
