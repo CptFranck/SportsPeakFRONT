@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, input} from '@angular/core';
 import {NgIf} from "@angular/common";
 
 @Component({
@@ -9,5 +9,5 @@ import {NgIf} from "@angular/common";
     templateUrl: './loading.component.html'
 })
 export class LoadingComponent {
-  @Input() loading!: boolean;
+  readonly loading = input.required<boolean>();
 }
