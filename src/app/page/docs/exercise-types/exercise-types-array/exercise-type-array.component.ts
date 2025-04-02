@@ -1,4 +1,4 @@
-import {Component, EventEmitter, inject, Input, OnDestroy, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, inject, input, OnDestroy, OnInit, Output, signal} from '@angular/core';
 import {FormIndicator} from "../../../../interface/utils/form-indicator";
 import {ActionType} from "../../../../interface/enum/action-type";
 import {ExerciseType} from "../../../../interface/dto/exercise-type";
@@ -9,30 +9,31 @@ import {Dictionary} from "../../../../interface/utils/dictionary";
 import {Subject, takeUntil} from "rxjs";
 
 @Component({
-    selector: 'app-exercise-type-array',
-    imports: [
-        NgForOf,
-        NgIf,
-        ModalButtonComponent
-    ],
-    templateUrl: './exercise-type-array.component.html'
+  selector: 'app-exercise-type-array',
+  imports: [
+    NgForOf,
+    NgIf,
+    ModalButtonComponent
+  ],
+  templateUrl: './exercise-type-array.component.html'
 })
 export class ExerciseTypeArrayComponent implements OnInit, OnDestroy {
-  isAdmin: boolean = false;
-  showDetails: Dictionary<boolean> = {};
+  isAdmin = signal<boolean>(false);
+  showDetails = signal<Dictionary<boolean>>({});
 
-  @Input() exerciseTypes!: ExerciseType[];
-  @Input() modalId!: string;
+  readonly exerciseTypes = input.required<ExerciseType[]>();
+  readonly modalId = input.required<string>();
 
-  @Output() actionExerciseType: EventEmitter<FormIndicator> = new EventEmitter<FormIndicator>();
+  @Output() actionExerciseType = new EventEmitter<FormIndicator>();
 
-  private readonly unsubscribe$: Subject<void> = new Subject<void>();
-  private readonly userLoggedService: UserLoggedService = inject(UserLoggedService);
+  private readonly unsubscribe$ = new Subject<void>();
+  private readonly userLoggedService = inject(UserLoggedService);
 
   ngOnInit(): void {
-    this.exerciseTypes.forEach((exerciseType: ExerciseType) => this.showDetails[exerciseType.id] = false);
-    this.userLoggedService.currentUser.pipe(takeUntil(this.unsubscribe$))
-      .subscribe(() => this.isAdmin = this.userLoggedService.isAdmin());
+    this.exerciseTypes().forEach((exerciseType: ExerciseType) => this.showDetails()[exerciseType.id] = false);
+    this.userLoggedService.currentUser
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe(() => this.isAdmin.set(this.userLoggedService.isAdmin()));
   }
 
   ngOnDestroy() {
@@ -42,7 +43,7 @@ export class ExerciseTypeArrayComponent implements OnInit, OnDestroy {
 
   expendExerciseTypeDetails(id: number): void {
     let idKey: string = id.toString();
-    this.showDetails[idKey] = !this.showDetails[idKey];
+    this.showDetails.update(value => ({...value, [idKey]: !value[idKey]}));
   }
 
   showExerciseTypeDetails(exerciseType: ExerciseType): void {

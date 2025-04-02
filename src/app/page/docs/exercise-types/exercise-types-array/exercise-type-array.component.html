@@ -6,20 +6,20 @@
     <th class="col-auto" scope="col">Used in</th>
     <th class="col-1 text-center" scope="col">Collapse</th>
     <th class="col-1 text-center" scope="col">Details</th>
-    <th *ngIf="isAdmin" class="col-1 text-center" scope="col">Modify</th>
-    <th *ngIf="isAdmin" class="col-1 text-center" scope="col">Delete</th>
+    <th *ngIf="isAdmin()" class="col-1 text-center" scope="col">Modify</th>
+    <th *ngIf="isAdmin()" class="col-1 text-center" scope="col">Delete</th>
   </tr>
   </thead>
   <tbody class="table-group-divider">
-  <tr *ngFor="let exerciseType of exerciseTypes">
+  <tr *ngFor="let exerciseType of exerciseTypes()">
     <td>{{ exerciseType.name }}</td>
-    <td *ngIf="!showDetails[exerciseType.id]" class="truncate-td">
+    <td *ngIf="!showDetails()[exerciseType.id]" class="truncate-td">
       {{ exerciseType.goal }}
     </td>
-    <td *ngIf="showDetails[exerciseType.id]">
+    <td *ngIf="showDetails()[exerciseType.id]">
       {{ exerciseType.goal }}
     </td>
-    <td *ngIf="!showDetails[exerciseType.id]">
+    <td *ngIf="!showDetails()[exerciseType.id]">
       <ul class="list-group list-group-flush">
         <li
           *ngFor="let exercise of exerciseType.exercises.slice(0, 2)"
@@ -34,7 +34,7 @@
         </li>
       </ul>
     </td>
-    <td *ngIf="showDetails[exerciseType.id]">
+    <td *ngIf="showDetails()[exerciseType.id]">
       <ul class="list-group list-group-flush">
         <li
           *ngFor="let exercise of exerciseType.exercises"
@@ -58,7 +58,7 @@
       <div class="col p-1 text-center">
         <app-modal-button
           (onCLickModalButton)="showExerciseTypeDetails($event)"
-          [modalId]="modalId"
+          [modalId]="modalId()"
           [modalValue]="exerciseType"
           btnClass="btn-info"
         >
@@ -66,11 +66,11 @@
         </app-modal-button>
       </div>
     </td>
-    <td *ngIf="isAdmin">
+    <td *ngIf="isAdmin()">
       <div class="col p-1 text-center">
         <app-modal-button
           (onCLickModalButton)="modifyExerciseType($event)"
-          [modalId]="modalId"
+          [modalId]="modalId()"
           [modalValue]="exerciseType"
           btnClass="btn-warning"
         >
@@ -78,12 +78,12 @@
         </app-modal-button>
       </div>
     </td>
-    <td *ngIf="isAdmin">
+    <td *ngIf="isAdmin()">
       <div class="col p-1 text-center">
         <app-modal-button
           (onCLickModalButton)="delExerciseType($event)"
           [disabled]="exerciseType.exercises.length !== 0"
-          [modalId]="modalId"
+          [modalId]="modalId()"
           [modalValue]="exerciseType"
           [useTooltip]="exerciseType.exercises.length !== 0"
           btnClass="btn-danger"
