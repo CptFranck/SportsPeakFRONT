@@ -1,23 +1,23 @@
 <div class="container-fluid">
   <div class="mb-3">
     <span class="form-label fw-bold">Name :</span>
-    <p>{{ muscle?.name }}</p>
+    <p>{{ muscle()?.name }}</p>
   </div>
   <div class="mb-3">
     <span class="form-label fw-bold">Description :</span>
-    <p>{{ muscle?.description }}</p>
+    <p>{{ muscle()?.description }}</p>
   </div>
   <div class="mb-3">
     <span class="form-label fw-bold">Function :</span>
-    <p>{{ muscle?.function }}</p>
+    <p>{{ muscle()?.function }}</p>
   </div>
   <div class="mb-3">
     <span class="form-label fw-bold">Exercise(s) :</span>
-    <p *ngIf="muscle?.exercises?.length === 0">No exercise uses this muscle</p>
-    <ol *ngIf="muscle?.exercises?.length !== 0"
+    <p *ngIf="muscle()?.exercises?.length === 0">No exercise uses this muscle</p>
+    <ol *ngIf="muscle()?.exercises?.length !== 0"
         class="list-group list-group-numbered"
     >
-      <li *ngFor="let exercise of muscle?.exercises"
+      <li *ngFor="let exercise of muscle()?.exercises"
           class="list-group-item d-flex justify-content-between align-items-start"
       >
         <div class="ms-2 me-auto">

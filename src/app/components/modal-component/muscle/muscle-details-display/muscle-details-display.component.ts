@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, input} from '@angular/core';
 import {Muscle} from "../../../../interface/dto/muscle";
 import {NgForOf, NgIf} from "@angular/common";
 import {ReactiveFormsModule} from "@angular/forms";
@@ -13,6 +13,5 @@ import {ReactiveFormsModule} from "@angular/forms";
   templateUrl: './muscle-details-display.component.html'
 })
 export class MuscleDetailsDisplayComponent {
-  @Input() muscle: Muscle | undefined;
-  @Input() action!: string;
+  readonly muscle = input<Muscle>();
 }
