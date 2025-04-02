@@ -1,12 +1,12 @@
-<div *ngIf="formGroup.controls[formGroupFieldName].valid && !onlyErrorMessage"
+<div *ngIf="formGroup().controls[formGroupFieldName()].valid && !onlyErrorMessage()"
      class="text-success"
 >
   Looks good !
 </div>
-<div *ngIf="formGroup.controls[formGroupFieldName].invalid && !onlyValidMessage &&
-            (formGroup.controls[formGroupFieldName].touched || submitInvalid || ifInvalid)"
+<div *ngIf="formGroup().controls[formGroupFieldName()].invalid && !onlyValidMessage() &&
+            (formGroup().controls[formGroupFieldName()].touched || submitInvalid() || ifInvalid())"
      class="text-danger"
 >
-  {{ errorMessage }}
+  {{ errorMessageDisplayed() }}
 </div>
 

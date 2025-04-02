@@ -1,40 +1,46 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, computed, input} from '@angular/core';
 import {NgIf} from "@angular/common";
 import {FormGroup} from "@angular/forms";
 
 @Component({
-    selector: 'app-input-control',
-    imports: [
-        NgIf
-    ],
-    templateUrl: './input-control.component.html'
+  selector: 'app-input-control',
+  imports: [
+    NgIf
+  ],
+  templateUrl: './input-control.component.html'
 })
-export class InputControlComponent implements OnInit {
-  @Input() formGroup!: FormGroup;
-  @Input() formGroupFieldName!: string;
-  @Input() ifInvalid: boolean = false;
-  @Input() submitInvalid: boolean = false;
-  @Input() onlyErrorMessage: boolean = false;
-  @Input() onlyValidMessage: boolean = false;
-  @Input() rules: string | undefined;
-  @Input() errorMessage: string | undefined;
-  @Input() displayedFieldName: string | undefined;
+export class InputControlComponent {
+  readonly formGroup = input.required<FormGroup>();
+  readonly formGroupFieldName = input.required<string>();
 
-  ngOnInit() {
-    let fieldName: string;
-    if (this.displayedFieldName !== undefined)
-      fieldName = this.displayedFieldName;
-    else
-      fieldName = this.formGroupFieldName
+  readonly ifInvalid = input<boolean>(false);
+  readonly submitInvalid = input<boolean>(false);
 
-    if (this.rules !== undefined)
-      this.rules = " (" + this.rules + ")"
-    else
-      this.rules = "";
+  readonly onlyErrorMessage = input<boolean>(false);
+  readonly onlyValidMessage = input<boolean>(false);
 
-    if (this.errorMessage === undefined)
-      this.errorMessage = "Please write a correct " + fieldName + this.rules;
-    else
-      this.errorMessage += this.rules;
-  }
+  readonly rules = input<string>();
+  readonly errorMessage = input<string>();
+  readonly displayedFieldName = input<string>();
+
+  errorMessageDisplayed = computed<string>(() => {
+      let displayedFieldName = this.displayedFieldName();
+      if (displayedFieldName === undefined)
+        displayedFieldName = this.formGroupFieldName();
+
+      let rules = this.rules();
+      if (rules !== undefined)
+        rules = " (" + rules + ")"
+      else
+        rules = "";
+
+      let errorMessage = this.errorMessage();
+      if (errorMessage === undefined)
+        errorMessage = "Please write a correct " + displayedFieldName + rules;
+      else
+        errorMessage += rules;
+
+      return errorMessage;
+    }
+  );
 }

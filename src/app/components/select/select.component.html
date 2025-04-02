@@ -1,11 +1,9 @@
 <select (change)="onSelect($event)"
         (click)="onClick()"
-        [(ngModel)]="value" class='form-select form-control'
+        [(ngModel)]="value"
+        class='form-select form-control'
 >
-  <option *ngIf="defaultOption" [value]="defaultValue" selected>
-    {{ defaultTitle }}
-  </option>
-  <option *ngFor="let option of options"
+  <option *ngFor="let option of options()"
           [value]="option.value"
   >
     {{ option.title }}
