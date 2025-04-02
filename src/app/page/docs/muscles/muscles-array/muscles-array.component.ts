@@ -1,4 +1,4 @@
-import {Component, EventEmitter, inject, Input, OnChanges, OnDestroy, Output} from '@angular/core';
+import {Component, EventEmitter, inject, input, OnChanges, OnDestroy, Output, signal} from '@angular/core';
 import {NgForOf, NgIf} from "@angular/common";
 import {Muscle} from "../../../../interface/dto/muscle";
 import {ModalButtonComponent} from "../../../../components/modal/modal-button/modal-button.component";
@@ -18,22 +18,22 @@ import {Subject, takeUntil} from "rxjs";
   templateUrl: './muscles-array.component.html'
 })
 export class MusclesArrayComponent implements OnChanges, OnDestroy {
-  isAdmin: boolean = false;
-  showDetails: Dictionary<boolean> = {};
+  isAdmin = signal<boolean>(false);
+  showDetails = signal<Dictionary<boolean>>({});
 
-  @Input() muscles!: Muscle[];
-  @Input() modalId!: string;
+  readonly muscles = input.required<Muscle[]>();
+  readonly modalId = input.required<string>();
 
   @Output() actionMuscle: EventEmitter<FormIndicator> = new EventEmitter<FormIndicator>();
 
-  private readonly unsubscribe$: Subject<void> = new Subject<void>();
-  private readonly userLoggedService: UserLoggedService = inject(UserLoggedService);
+  private readonly unsubscribe$ = new Subject<void>();
+  private readonly userLoggedService = inject(UserLoggedService);
 
   ngOnChanges(): void {
-    this.muscles.forEach((muscle: Muscle) => this.showDetails[muscle.id] = false);
+    this.muscles().forEach((muscle: Muscle) => this.showDetails.update(value => ({...value, [muscle.id]: false})));
     this.userLoggedService.currentUser
       .pipe(takeUntil(this.unsubscribe$))
-      .subscribe(() => this.isAdmin = this.userLoggedService.isAdmin());
+      .subscribe(() => this.isAdmin.set(this.userLoggedService.isAdmin()));
   }
 
   ngOnDestroy() {
@@ -43,7 +43,7 @@ export class MusclesArrayComponent implements OnChanges, OnDestroy {
 
   expendMuscleDetails(id: number): void {
     let idKey: string = id.toString()
-    this.showDetails[idKey] = !this.showDetails[idKey];
+    this.showDetails.update(value => ({...value, [idKey]: !value[idKey]}));
   }
 
   showMuscleDetails(muscle: Muscle): void {

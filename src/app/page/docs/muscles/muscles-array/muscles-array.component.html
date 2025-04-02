@@ -12,21 +12,21 @@
   </tr>
   </thead>
   <tbody class="table-group-divider">
-  <tr *ngFor="let muscle of muscles">
+  <tr *ngFor="let muscle of muscles()">
     <td>{{ muscle.name }}</td>
-    <td *ngIf="!showDetails[muscle.id]" class="truncate-td">
+    <td *ngIf="!showDetails()[muscle.id]" class="truncate-td">
       {{ muscle.description }}
     </td>
-    <td *ngIf="showDetails[muscle.id]">
+    <td *ngIf="showDetails()[muscle.id]">
       {{ muscle.description }}
     </td>
-    <td *ngIf="!showDetails[muscle.id]" class="truncate-td">
+    <td *ngIf="!showDetails()[muscle.id]" class="truncate-td">
       {{ muscle.function }}
     </td>
-    <td *ngIf="showDetails[muscle.id]">
+    <td *ngIf="showDetails()[muscle.id]">
       {{ muscle.function }}
     </td>
-    <td *ngIf="!showDetails[muscle.id]">
+    <td *ngIf="!showDetails()[muscle.id]">
       <ul class="list-group list-group-flush">
         <li
           *ngFor="let exercise of muscle.exercises.slice(0, 2)"
@@ -42,7 +42,7 @@
         </li>
       </ul>
     </td>
-    <td *ngIf="showDetails[muscle.id]">
+    <td *ngIf="showDetails()[muscle.id]">
       <ul class="list-group list-group-flush">
         <li
           *ngFor="let exercise of muscle.exercises"
@@ -66,7 +66,7 @@
       <div class="col p-1 text-center">
         <app-modal-button
           (onCLickModalButton)="showMuscleDetails($event)"
-          [modalId]="modalId"
+          [modalId]="modalId()"
           [modalValue]="muscle"
           btnClass="btn-info"
         >
@@ -78,7 +78,7 @@
       <div class="col p-1 text-center">
         <app-modal-button
           (onCLickModalButton)="modifyMuscle($event)"
-          [modalId]="modalId"
+          [modalId]="modalId()"
           [modalValue]="muscle"
           btnClass="btn-warning"
         >
@@ -91,7 +91,7 @@
         <app-modal-button
           (onCLickModalButton)="delMuscle($event)"
           [disabled]="muscle.exercises.length !== 0"
-          [modalId]="modalId"
+          [modalId]="modalId()"
           [modalValue]="muscle"
           [useTooltip]="muscle.exercises.length !== 0"
           btnClass="btn-danger"
