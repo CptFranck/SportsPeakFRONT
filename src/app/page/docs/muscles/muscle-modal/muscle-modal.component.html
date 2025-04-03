@@ -1,26 +1,26 @@
 <app-modal-button (onCLickModalButton)="onClick()"
                   *ngIf="isAdmin"
-                  [modalId]="muscleModalId"
+                  [modalId]="muscleModalId()"
 >
   Add new
   <i class="fa-regular fa-square-plus"></i>
 </app-modal-button>
-<app-modal [actionType]="action"
+<app-modal [actionType]="action()"
            [contentTemplate]="modalTemplate"
-           [modalId]="muscleModalId"
-           [title]="modalTitle"
+           [modalId]="muscleModalId()"
+           [title]="modalTitle()"
 >
 </app-modal>
 <ng-template #modalTemplate let-btnClose="btnClose" let-submitEventActionType$="submitEventActionType$">
-  <app-muscle-entity-form *ngIf="action === ActionType.create || action === ActionType.update"
+  <app-muscle-entity-form *ngIf="action() === ActionType.create || action() === ActionType.update"
                           [btnCloseRef]="btnClose"
-                          [muscleInput]="muscle"
+                          [muscleInput]="muscle()"
                           [submitEventActionType$]="submitEventActionType$"
   />
-  <app-muscle-details-display *ngIf="action === ActionType.read"
-                              [muscle]="muscle"/>
-  <app-muscle-delete-form *ngIf="action === ActionType.delete"
+  <app-muscle-details-display *ngIf="action() === ActionType.read"
+                              [muscle]="muscle()"/>
+  <app-muscle-delete-form *ngIf="action() === ActionType.delete"
                           [btnCloseRef]="btnClose"
-                          [muscle]="muscle"
+                          [muscle]="muscle()"
                           [submitEventActionType$]="submitEventActionType$"/>
 </ng-template>

@@ -1,4 +1,4 @@
-import {Component, EventEmitter, inject, Input, OnDestroy, OnInit, Output, TemplateRef, ViewChild} from '@angular/core';
+import {Component, EventEmitter, inject, OnDestroy, OnInit, Output, TemplateRef, ViewChild, input} from '@angular/core';
 import {ActionType} from "../../../../interface/enum/action-type";
 import {ModalButtonComponent} from "../../../../components/modal/modal-button/modal-button.component";
 import {ModalComponent} from "../../../../components/modal/modal/modal.component";
@@ -32,10 +32,10 @@ import {Subject, takeUntil} from "rxjs";
 export class MuscleModalComponent implements OnInit, OnDestroy {
   isAdmin: boolean = false;
 
-  @Input() modalTitle!: string;
-  @Input() muscleModalId!: string;
-  @Input() muscle: Muscle | undefined;
-  @Input() action!: ActionType;
+  readonly modalTitle = input.required<string>();
+  readonly muscleModalId = input.required<string>();
+  readonly muscle = input<Muscle>();
+  readonly action = input.required<ActionType>();
 
   @Output() actionMuscle: EventEmitter<FormIndicator> = new EventEmitter();
 
