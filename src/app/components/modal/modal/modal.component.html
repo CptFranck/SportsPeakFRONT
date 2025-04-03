@@ -1,5 +1,5 @@
-<div [attr.data-bs-backdrop]="staticBackdrop ? 'static' : null"
-     [id]="modalId"
+<div [attr.data-bs-backdrop]="staticBackdrop() ? 'static' : null"
+     [id]="modalId()"
      aria-hidden="true"
      class="modal fade"
      tabindex="-1"
@@ -7,13 +7,13 @@
   <div class="modal-dialog modal-xl">
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="fw-bold">{{ title }}</h4>
+        <h4 class="fw-bold">{{ title() }}</h4>
         <button aria-label="Close" class="btn-close" data-bs-dismiss="modal" type="button">
         </button>
       </div>
       <div class="modal-body">
         <ng-container [ngTemplateOutletContext]="{submitEventActionType$: submitEventActionType$, btnClose:btnClose}"
-                      [ngTemplateOutlet]=" contentTemplate || defaultModalNgTemplate">
+                      [ngTemplateOutlet]=" contentTemplate() || defaultModalNgTemplate">
         </ng-container>
         <ng-template #defaultModalNgTemplate>
           <ng-content/>
@@ -21,14 +21,14 @@
       </div>
       <div class="modal-footer">
         <button #btnClose class="btn btn-secondary" data-bs-dismiss="modal" type="button">
-          {{ closeButtonTitle }}
+          {{ closeButtonTitle() }}
         </button>
         <button (click)="onSubmit()"
-                *ngIf="submitButton"
-                [class]="'btn ' + validateButtonClass"
+                *ngIf="submitButton()"
+                [class]="'btn ' + validateButtonClass()"
                 type="button"
         >
-          {{ validationButtonTitle }}
+          {{ validationButtonTitle() }}
         </button>
       </div>
     </div>
