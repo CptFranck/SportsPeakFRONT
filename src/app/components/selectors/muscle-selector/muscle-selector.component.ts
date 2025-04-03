@@ -1,4 +1,4 @@
-import {Component, forwardRef, inject, Input, OnDestroy, OnInit} from '@angular/core';
+import {Component, forwardRef, inject, OnDestroy, OnInit, signal} from '@angular/core';
 import {MultiSelectOption} from "../../../interface/components/multi-select/multiSelectOption";
 import {MuscleService} from "../../../services/muscle/muscle.service";
 import {Muscle} from "../../../interface/dto/muscle";
@@ -7,33 +7,27 @@ import {MultiSelectComponent} from "../../multi-select/multi-select.component";
 import {Subject, takeUntil} from "rxjs";
 
 @Component({
-    selector: 'app-muscle-selector',
-    imports: [
-        MultiSelectComponent,
-    ],
-    providers: [
-        {
-            provide: NG_VALUE_ACCESSOR,
-            useExisting: forwardRef(() => MuscleSelectorComponent),
-            multi: true,
-        }
-    ],
-    templateUrl: './muscle-selector.component.html'
+  selector: 'app-muscle-selector',
+  imports: [
+    MultiSelectComponent,
+  ],
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => MuscleSelectorComponent),
+      multi: true,
+    }
+  ],
+  templateUrl: './muscle-selector.component.html'
 })
 export class MuscleSelectorComponent implements OnInit, OnDestroy, ControlValueAccessor {
-  loading: boolean = true;
+  loading = true;
   muscleOptions: MultiSelectOption[] = [];
 
-  @Input() muscleIds: number[] = [];
+  muscleIds = signal<number[]>([]);
 
-  private readonly unsubscribe$: Subject<void> = new Subject<void>();
-  private readonly muscleService: MuscleService = inject(MuscleService);
-
-  onChange: (value: number[]) => void = () => {
-  };
-
-  onTouched: ($event: boolean) => void = () => {
-  };
+  private readonly unsubscribe$ = new Subject<void>();
+  private readonly muscleService = inject(MuscleService);
 
   ngOnInit(): void {
     this.muscleService.muscles
@@ -55,13 +49,19 @@ export class MuscleSelectorComponent implements OnInit, OnDestroy, ControlValueA
       .subscribe((loading: boolean) => this.loading = loading);
   }
 
+  onChange: (value: number[]) => void = () => {
+  };
+
+  onTouched: () => void = () => {
+  };
+
   ngOnDestroy() {
     this.unsubscribe$.next();
     this.unsubscribe$.complete();
   }
 
   writeValue(muscleIds: number[]): void {
-    this.muscleIds = muscleIds;
+    this.muscleIds.set([...muscleIds]);
   }
 
   registerOnChange(fn: (value: number[]) => void): void {
@@ -73,7 +73,7 @@ export class MuscleSelectorComponent implements OnInit, OnDestroy, ControlValueA
   }
 
   setExerciseIds(muscleIds: number[]) {
-    this.muscleIds = muscleIds;
+    this.muscleIds.set([...muscleIds]);
     this.onChange(muscleIds);
   }
 }
