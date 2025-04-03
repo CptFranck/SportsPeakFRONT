@@ -40,7 +40,7 @@ export class PerformanceLogIndexSelectComponent implements ControlValueAccessor 
     return options;
   });
 
-  index = signal<number | undefined>(undefined);
+  index = signal<number | null>(null);
 
   onChange: (value: number) => void = () => {
   };
@@ -60,7 +60,8 @@ export class PerformanceLogIndexSelectComponent implements ControlValueAccessor 
     this.onTouched = fn;
   }
 
-  setIndex(stringIndex: string) {
+  setIndex(stringIndex: string | null) {
+    if (stringIndex === null) return;
     let index: number = parseInt(stringIndex)
     this.index.set(index);
     this.onChange(index);
