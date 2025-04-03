@@ -1,5 +1,5 @@
 <app-select (onChange)="setTargetSetId($event)"
-            (onTouched)="onTouched($event)"
+            (onTouched)="onTouched()"
             [options]="targetSetStateOptions"
-            [value]="targetSetState"
+            [value]="targetSetState()"
 />

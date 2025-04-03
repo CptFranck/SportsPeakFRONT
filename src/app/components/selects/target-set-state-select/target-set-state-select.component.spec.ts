@@ -1,18 +1,18 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import {TargetSetSateSelectComponent} from './target-set-sate-select.component';
+import {TargetSetStateSelectComponent} from './target-set-state-select.component';
 
 describe('VisibilitySelectComponent', () => {
-  let component: TargetSetSateSelectComponent;
-  let fixture: ComponentFixture<TargetSetSateSelectComponent>;
+  let component: TargetSetStateSelectComponent;
+  let fixture: ComponentFixture<TargetSetStateSelectComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [TargetSetSateSelectComponent]
+      imports: [TargetSetStateSelectComponent]
     })
       .compileComponents();
 
-    fixture = TestBed.createComponent(TargetSetSateSelectComponent);
+    fixture = TestBed.createComponent(TargetSetStateSelectComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

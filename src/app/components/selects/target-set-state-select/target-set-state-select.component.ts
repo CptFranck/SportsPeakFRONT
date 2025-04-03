@@ -1,24 +1,24 @@
-import {Component, forwardRef, Input} from '@angular/core';
+import {Component, forwardRef, signal} from '@angular/core';
 import {SelectComponent} from "../../select/select.component";
 import {ControlValueAccessor, NG_VALUE_ACCESSOR} from "@angular/forms";
 import {SelectOption} from "../../../interface/components/select/selectOption";
 import {TargetSetState} from "../../../interface/enum/targetSetState";
 
 @Component({
-    selector: 'app-target-set-state-select',
-    imports: [
-        SelectComponent
-    ],
-    providers: [
-        {
-            provide: NG_VALUE_ACCESSOR,
-            useExisting: forwardRef(() => TargetSetSateSelectComponent),
-            multi: true,
-        }
-    ],
-    templateUrl: './target-set-sate-select.component.html'
+  selector: 'app-target-set-state-select',
+  imports: [
+    SelectComponent
+  ],
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => TargetSetStateSelectComponent),
+      multi: true,
+    }
+  ],
+  templateUrl: './target-set-state-select.component.html'
 })
-export class TargetSetSateSelectComponent implements ControlValueAccessor {
+export class TargetSetStateSelectComponent implements ControlValueAccessor {
 
   targetSetStateOptions: SelectOption[] = [{
     title: TargetSetState.USED,
@@ -31,16 +31,16 @@ export class TargetSetSateSelectComponent implements ControlValueAccessor {
     value: TargetSetState.HIDDEN,
   }];
 
-  @Input() targetSetState!: string;
+  targetSetState = signal<string>(TargetSetState.USED);
 
   onChange: (value: string) => void = () => {
   };
 
-  onTouched: ($event: boolean) => void = () => {
+  onTouched: () => void = () => {
   };
 
   writeValue(targetSetState: string): void {
-    this.targetSetState = targetSetState;
+    this.targetSetState.set(targetSetState);
   }
 
   registerOnChange(fn: (value: string) => void): void {
@@ -51,10 +51,8 @@ export class TargetSetSateSelectComponent implements ControlValueAccessor {
     this.onTouched = fn;
   }
 
-  setTargetSetId(targetSetState: string | undefined): void {
-    if (targetSetState) {
-      this.targetSetState = targetSetState;
-      this.onChange(targetSetState)
-    }
+  setTargetSetId(targetSetState: string): void {
+    this.targetSetState.set(targetSetState);
+    this.onChange(targetSetState)
   }
 }
