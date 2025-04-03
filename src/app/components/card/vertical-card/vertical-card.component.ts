@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, input} from '@angular/core';
 import {NgOptimizedImage} from "@angular/common";
 
 @Component({
@@ -9,6 +9,6 @@ import {NgOptimizedImage} from "@angular/common";
     templateUrl: './vertical-card.component.html'
 })
 export class VerticalCardComponent {
-  @Input() title: string = "Card title";
-  @Input() srcImage: string = "...";
+  readonly title = input<string>("Card title");
+  readonly srcImage = input<string>("...");
 }
