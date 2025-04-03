@@ -3,6 +3,9 @@
         [(ngModel)]="value"
         class='form-select form-control'
 >
+  <option *ngIf="defaultOption()" [value]="null" selected>
+    ...
+  </option>
   <option *ngFor="let option of options()"
           [value]="option.value"
   >
