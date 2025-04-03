@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, input} from '@angular/core';
 import {NgOptimizedImage} from "@angular/common";
 
 @Component({
@@ -9,8 +9,8 @@ import {NgOptimizedImage} from "@angular/common";
   templateUrl: './home-card.component.html'
 })
 export class HomeCardComponent {
-  @Input() title: string = "Card title";
-  @Input() srcImage: string = "...";
-  @Input() imgHeight: string = "250";
-  @Input() imgWidth: string = "250";
+  readonly title = input<string>("Card title");
+  readonly srcImage = input<string>("...");
+  readonly imgHeight = input<string>("250");
+  readonly imgWidth = input<string>("250");
 }
