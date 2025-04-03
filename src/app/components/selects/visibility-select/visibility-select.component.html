@@ -1,5 +1,5 @@
 <app-select (onChange)="setVisibilityId($event)"
-            (onTouched)="onTouched($event)"
+            (onTouched)="onTouched()"
             [options]="visibilityOptions"
-            [value]="visibility"
+            [value]="visibility()"
 />

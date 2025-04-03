@@ -1,22 +1,22 @@
-import {Component, forwardRef, Input} from '@angular/core';
+import {Component, forwardRef, signal} from '@angular/core';
 import {SelectComponent} from "../../select/select.component";
 import {ControlValueAccessor, NG_VALUE_ACCESSOR} from "@angular/forms";
 import {SelectOption} from "../../../interface/components/select/selectOption";
 import {Visibility} from "../../../interface/enum/visibility";
 
 @Component({
-    selector: 'app-visibility-select',
-    imports: [
-        SelectComponent
-    ],
-    providers: [
-        {
-            provide: NG_VALUE_ACCESSOR,
-            useExisting: forwardRef(() => VisibilitySelectComponent),
-            multi: true,
-        }
-    ],
-    templateUrl: './visibility-select.component.html'
+  selector: 'app-visibility-select',
+  imports: [
+    SelectComponent
+  ],
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => VisibilitySelectComponent),
+      multi: true,
+    }
+  ],
+  templateUrl: './visibility-select.component.html'
 })
 export class VisibilitySelectComponent implements ControlValueAccessor {
 
@@ -28,16 +28,16 @@ export class VisibilitySelectComponent implements ControlValueAccessor {
     value: Visibility.PUBLIC,
   }];
 
-  @Input() visibility!: string;
+  visibility = signal<string>("");
 
   onChange: (value: string) => void = () => {
   };
 
-  onTouched: ($event: boolean) => void = () => {
+  onTouched: () => void = () => {
   };
 
   writeValue(visibility: string): void {
-    this.visibility = visibility;
+    this.visibility.set(visibility);
   }
 
   registerOnChange(fn: (value: string) => void): void {
@@ -50,7 +50,7 @@ export class VisibilitySelectComponent implements ControlValueAccessor {
 
   setVisibilityId(visibility: string | undefined): void {
     if (visibility) {
-      this.visibility = visibility;
+      this.visibility.set(visibility);
       this.onChange(visibility)
     }
   }
