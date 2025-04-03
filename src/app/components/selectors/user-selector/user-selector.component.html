@@ -1,7 +1,7 @@
 <app-multi-select (onChange)="setUserIds($event)"
-                  (onTouched)="onTouched($event)"
+                  (onTouched)="onTouched()"
                   [addDescriptionToOption]="true"
                   [isLoading]="loading"
                   [optionList]="userOptions"
-                  [selectedOptions]="userIds"
+                  [selectedOptions]="userIds()"
 />

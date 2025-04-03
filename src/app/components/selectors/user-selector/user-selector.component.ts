@@ -1,4 +1,4 @@
-import {Component, forwardRef, inject, Input, OnDestroy, OnInit} from '@angular/core';
+import {Component, forwardRef, inject, OnDestroy, OnInit, signal} from '@angular/core';
 import {ControlValueAccessor, NG_VALUE_ACCESSOR} from "@angular/forms";
 import {MultiSelectOption} from "../../../interface/components/multi-select/multiSelectOption";
 import {UserService} from "../../../services/user/user.service";
@@ -7,33 +7,27 @@ import {MultiSelectComponent} from "../../multi-select/multi-select.component";
 import {Subject, takeUntil} from "rxjs";
 
 @Component({
-    selector: 'app-user-selector',
-    imports: [
-        MultiSelectComponent
-    ],
-    providers: [
-        {
-            provide: NG_VALUE_ACCESSOR,
-            useExisting: forwardRef(() => UserSelectorComponent),
-            multi: true,
-        }
-    ],
-    templateUrl: './user-selector.component.html'
+  selector: 'app-user-selector',
+  imports: [
+    MultiSelectComponent
+  ],
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => UserSelectorComponent),
+      multi: true,
+    }
+  ],
+  templateUrl: './user-selector.component.html'
 })
 export class UserSelectorComponent implements OnInit, OnDestroy, ControlValueAccessor {
-  loading: boolean = true;
+  loading = true;
   userOptions: MultiSelectOption[] = [];
 
-  @Input() userIds: number[] = [];
+  userIds = signal<number[]>([]);
 
-  private readonly unsubscribe$: Subject<void> = new Subject<void>();
-  private readonly userService: UserService = inject(UserService);
-
-  onChange: (value: number[]) => void = () => {
-  };
-
-  onTouched: ($event: boolean) => void = () => {
-  };
+  private readonly unsubscribe$ = new Subject<void>();
+  private readonly userService = inject(UserService);
 
   ngOnInit(): void {
     this.userService.users
@@ -60,8 +54,14 @@ export class UserSelectorComponent implements OnInit, OnDestroy, ControlValueAcc
     this.unsubscribe$.complete();
   }
 
-  writeValue(roleIds: number[]): void {
-    this.userIds = roleIds;
+  onChange: (value: number[]) => void = () => {
+  };
+
+  onTouched: () => void = () => {
+  };
+
+  writeValue(userIds: number[]): void {
+    this.userIds.set([...userIds]);
   }
 
   registerOnChange(fn: (value: number[]) => void): void {
@@ -73,7 +73,7 @@ export class UserSelectorComponent implements OnInit, OnDestroy, ControlValueAcc
   }
 
   setUserIds(userIds: number[]) {
-    this.userIds = userIds;
+    this.userIds.set([...userIds]);
     this.onChange(userIds);
   }
 }
