@@ -1,6 +1,6 @@
 <app-multi-select (onChange)="setPrivilegeIds($event)"
                   (onTouched)="onTouched()"
-                  [isLoading]="loading"
-                  [optionList]="privilegeOptions"
+                  [isLoading]="loading()"
+                  [optionList]="privilegeOptions()"
                   [selectedOptions]="privilegeIds()"
 />

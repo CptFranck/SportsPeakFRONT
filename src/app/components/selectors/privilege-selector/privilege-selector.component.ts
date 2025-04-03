@@ -21,10 +21,9 @@ import {Subject, takeUntil} from "rxjs";
   templateUrl: './privilege-selector.component.html'
 })
 export class PrivilegeSelectorComponent implements OnInit, OnDestroy, ControlValueAccessor {
-  loading = true;
-  privilegeOptions: MultiSelectOption[] = [];
-
+  loading = signal<boolean>(true);
   privilegeIds = signal<number[]>([]);
+  privilegeOptions = signal<MultiSelectOption[]>([]);
 
   private readonly unsubscribe$ = new Subject<void>();
   private readonly privilegeService = inject(PrivilegeService);
@@ -41,11 +40,11 @@ export class PrivilegeSelectorComponent implements OnInit, OnDestroy, ControlVal
             value: privilege,
           });
         });
-        this.privilegeOptions = [...options];
+        this.privilegeOptions.set([...options]);
       });
     this.privilegeService.isLoading
       .pipe(takeUntil(this.unsubscribe$))
-      .subscribe((loading: boolean) => this.loading = loading);
+      .subscribe((loading: boolean) => this.loading.set(loading));
   }
 
   ngOnDestroy() {

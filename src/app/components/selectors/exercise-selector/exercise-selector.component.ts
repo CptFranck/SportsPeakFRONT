@@ -21,10 +21,10 @@ import {Subject, takeUntil} from "rxjs";
   templateUrl: './exercise-selector.component.html'
 })
 export class ExerciseSelectorComponent implements OnInit, OnDestroy, ControlValueAccessor {
-  loading = true;
-  exerciseOptions: MultiSelectOption[] = [];
-
+  loading = signal<boolean>(true);
   exerciseIds = signal<number[]>([]);
+  exerciseOptions = signal<MultiSelectOption[]>([]);
+
 
   private readonly unsubscribe$ = new Subject<void>();
   private readonly exerciseService = inject(ExerciseService);
@@ -42,11 +42,11 @@ export class ExerciseSelectorComponent implements OnInit, OnDestroy, ControlValu
             description: exercise.description
           });
         });
-        this.exerciseOptions = [...options];
+        this.exerciseOptions.set([...options]);
       });
     this.exerciseService.isLoading
       .pipe(takeUntil(this.unsubscribe$))
-      .subscribe((loading: boolean) => this.loading = loading);
+      .subscribe((loading: boolean) => this.loading.set(loading));
   }
 
   ngOnDestroy() {

@@ -22,10 +22,9 @@ import {Subject, takeUntil} from "rxjs";
   templateUrl: './role-selector.component.html'
 })
 export class RoleSelectorComponent implements OnInit, OnDestroy, ControlValueAccessor {
-  loading = true;
-  roleOptions: MultiSelectOption[] = [];
-
   roleIds = signal<number[]>([]);
+  loading = signal<boolean>(true);
+  roleOptions = signal<MultiSelectOption[]>([]);
 
   private readonly unsubscribe$ = new Subject<void>();
   private readonly roleService = inject(RoleService);
@@ -44,11 +43,11 @@ export class RoleSelectorComponent implements OnInit, OnDestroy, ControlValueAcc
             description: "Privilege(s) included : " + role.privileges.map((privilege: Privilege) => privilege.name).join(", ")
           });
         });
-        this.roleOptions = [...options];
+        this.roleOptions.set([...options]);
       });
     this.roleService.isLoading
       .pipe(takeUntil(this.unsubscribe$))
-      .subscribe((loading: boolean) => this.loading = loading);
+      .subscribe((loading: boolean) => this.loading.set(loading));
   }
 
   ngOnDestroy() {

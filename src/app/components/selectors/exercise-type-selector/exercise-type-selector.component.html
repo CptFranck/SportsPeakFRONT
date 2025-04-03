@@ -1,7 +1,7 @@
 <app-multi-select (onChange)="setExerciseIds($event)"
                   (onTouched)="onTouched()"
                   [addDescriptionToOption]="true"
-                  [isLoading]="loading"
-                  [optionList]="exerciseTypes"
+                  [isLoading]="loading()"
+                  [optionList]="exerciseTypesOptions()"
                   [selectedOptions]="exerciseTypeIds()"
 />

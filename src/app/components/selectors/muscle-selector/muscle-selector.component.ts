@@ -21,11 +21,10 @@ import {Subject, takeUntil} from "rxjs";
   templateUrl: './muscle-selector.component.html'
 })
 export class MuscleSelectorComponent implements OnInit, OnDestroy, ControlValueAccessor {
-  loading = true;
-  muscleOptions: MultiSelectOption[] = [];
-
+  loading = signal<boolean>(true);
   muscleIds = signal<number[]>([]);
-
+  muscleOptions = signal<MultiSelectOption[]>([]);
+  
   private readonly unsubscribe$ = new Subject<void>();
   private readonly muscleService = inject(MuscleService);
 
@@ -42,11 +41,11 @@ export class MuscleSelectorComponent implements OnInit, OnDestroy, ControlValueA
             description: muscle.description
           });
         });
-        this.muscleOptions = [...options];
+        this.muscleOptions.set([...options]);
       });
     this.muscleService.isLoading
       .pipe(takeUntil(this.unsubscribe$))
-      .subscribe((loading: boolean) => this.loading = loading);
+      .subscribe((loading: boolean) => this.loading.set(loading));
   }
 
   onChange: (value: number[]) => void = () => {
