@@ -24,7 +24,7 @@ export class ExerciseSelectorComponent implements OnInit, OnDestroy, ControlValu
   loading = true;
   exerciseOptions: MultiSelectOption[] = [];
 
-  readonly exerciseIds = signal<number[]>([]);
+  exerciseIds = signal<number[]>([]);
 
   private readonly unsubscribe$ = new Subject<void>();
   private readonly exerciseService = inject(ExerciseService);
