@@ -57,7 +57,7 @@ export class ExerciseSelectorComponent implements OnInit, OnDestroy, ControlValu
   onChange: (value: number[]) => void = () => {
   };
 
-  onTouched: (value: boolean) => void = () => {
+  onTouched: () => void = () => {
   };
 
   writeValue(exerciseIds: number[]): void {
