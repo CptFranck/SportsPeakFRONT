@@ -26,10 +26,7 @@ export class CollapseButtonComponent implements OnInit {
   }
 
   onClick() {
-    const value = this.value();
-    if (value && this.onClickEvent) {
-      this.onClickEvent.emit(value);
-    }
+    this.onClickEvent.emit(this.value());
     const collapseBlockComponent = this.collapseBlockComponent();
     if (collapseBlockComponent) {
       collapseBlockComponent.toggle(this.elementRef)

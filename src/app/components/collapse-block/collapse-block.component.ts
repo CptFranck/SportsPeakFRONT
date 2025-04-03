@@ -54,14 +54,14 @@ export class CollapseBlockComponent {
 
   toggle(elementRef: ElementRef) {
     this.elementRef.nativeElement.scrollIntoView();
-    if (!this.hidden || this.hidden && elementRef === this.lastButton) {
+    if (this.hidden() || !this.hidden() && elementRef === this.lastButton) {
       this.hidden.update(value => !value);
     }
     this.lastButton = elementRef;
   }
 
   hide() {
-    this.hidden.set(false);
+    this.hidden.set(true);
   }
 
   onSubmit() {
