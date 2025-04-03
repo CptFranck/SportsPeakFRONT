@@ -1,4 +1,4 @@
-import {Component, forwardRef, inject, Input, OnDestroy, OnInit} from '@angular/core';
+import {Component, forwardRef, inject, OnDestroy, OnInit, signal} from '@angular/core';
 import {ControlValueAccessor, NG_VALUE_ACCESSOR} from "@angular/forms";
 import {MultiSelectOption} from "../../../interface/components/multi-select/multiSelectOption";
 import {Privilege} from "../../../interface/dto/privilege";
@@ -7,33 +7,27 @@ import {MultiSelectComponent} from "../../multi-select/multi-select.component";
 import {Subject, takeUntil} from "rxjs";
 
 @Component({
-    selector: 'app-privilege-selector',
-    imports: [
-        MultiSelectComponent
-    ],
-    providers: [
-        {
-            provide: NG_VALUE_ACCESSOR,
-            useExisting: forwardRef(() => PrivilegeSelectorComponent),
-            multi: true,
-        }
-    ],
-    templateUrl: './privilege-selector.component.html'
+  selector: 'app-privilege-selector',
+  imports: [
+    MultiSelectComponent
+  ],
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => PrivilegeSelectorComponent),
+      multi: true,
+    }
+  ],
+  templateUrl: './privilege-selector.component.html'
 })
 export class PrivilegeSelectorComponent implements OnInit, OnDestroy, ControlValueAccessor {
-  loading: boolean = true;
+  loading = true;
   privilegeOptions: MultiSelectOption[] = [];
 
-  @Input() privilegeIds: number[] = [];
+  privilegeIds = signal<number[]>([]);
 
-  private readonly unsubscribe$: Subject<void> = new Subject<void>();
-  private readonly privilegeService: PrivilegeService = inject(PrivilegeService);
-
-  onChange: (value: number[]) => void = () => {
-  };
-
-  onTouched: ($event: boolean) => void = () => {
-  };
+  private readonly unsubscribe$ = new Subject<void>();
+  private readonly privilegeService = inject(PrivilegeService);
 
   ngOnInit(): void {
     this.privilegeService.privileges
@@ -59,8 +53,14 @@ export class PrivilegeSelectorComponent implements OnInit, OnDestroy, ControlVal
     this.unsubscribe$.complete();
   }
 
-  writeValue(roleIds: number[]): void {
-    this.privilegeIds = roleIds;
+  onChange: (value: number[]) => void = () => {
+  };
+
+  onTouched: () => void = () => {
+  };
+
+  writeValue(privilegeIds: number[]): void {
+    this.privilegeIds.set([...privilegeIds]);
   }
 
   registerOnChange(fn: (value: number[]) => void): void {
@@ -71,8 +71,8 @@ export class PrivilegeSelectorComponent implements OnInit, OnDestroy, ControlVal
     this.onTouched = fn
   }
 
-  setPrivilegeIds(roleIds: number[]) {
-    this.privilegeIds = roleIds;
-    this.onChange(roleIds);
+  setPrivilegeIds(privilegeIds: number[]) {
+    this.privilegeIds.set([...privilegeIds]);
+    this.onChange(privilegeIds);
   }
 }
