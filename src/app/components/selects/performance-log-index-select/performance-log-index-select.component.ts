@@ -1,10 +1,8 @@
-import {Component, forwardRef, Input} from '@angular/core';
+import {Component, computed, forwardRef, input, signal} from '@angular/core';
 import {SelectOption} from "../../../interface/components/select/selectOption";
 import {ControlValueAccessor, NG_VALUE_ACCESSOR} from "@angular/forms";
 import {SelectComponent} from "../../select/select.component";
 import {TargetSet} from "../../../interface/dto/target-set";
-import {PerformanceLog} from "../../../interface/dto/performance-log";
-import {filterPerformanceLogByDate} from "../../../utils/performance-log-functions";
 
 @Component({
   selector: 'app-performance-log-index-select',
@@ -21,19 +19,13 @@ import {filterPerformanceLogByDate} from "../../../utils/performance-log-functio
   templateUrl: './performance-log-index-select.component.html'
 })
 export class PerformanceLogIndexSelectComponent implements ControlValueAccessor {
-  indexOptions: SelectOption[] = [];
+  readonly targetSet = input.required<TargetSet | undefined>();
 
-  @Input() index!: number;
-  @Input() logDate!: string;
-
-  @Input() set targetSet(targetSet: TargetSet | undefined) {
-    this.indexOptions = []
+  indexOptions = computed<SelectOption[]>(() => {
+    const options: SelectOption[] = [];
+    const targetSet = this.targetSet();
     if (targetSet) {
-      const performanceLogThisDate: PerformanceLog[] = filterPerformanceLogByDate(targetSet, this.logDate);
-      let totalSets: number = targetSet.setNumber;
-      if (performanceLogThisDate?.length >= totalSets)
-        totalSets = performanceLogThisDate.length + 1;
-
+      let totalSets: number = targetSet.setNumber + 1;
       for (let index: number = 1; index <= totalSets; index++) {
         let option: SelectOption = {
           title: index.toString(),
@@ -42,22 +34,25 @@ export class PerformanceLogIndexSelectComponent implements ControlValueAccessor 
         if (index > targetSet.setNumber) {
           option.title += " (additional rep)";
         }
-        this.indexOptions.push(option);
+        options.push(option);
       }
     }
-  }
+    return options;
+  });
+
+  index = signal<number | undefined>(undefined);
 
   onChange: (value: number) => void = () => {
   };
 
-  onTouched: ($event: boolean) => void = () => {
+  onTouched: () => void = () => {
   };
 
   writeValue(index: number): void {
-    this.index = index;
+    this.index.set(index);
   }
 
-  registerOnChange(fn: (value: number | undefined) => void): void {
+  registerOnChange(fn: (value: number) => void): void {
     this.onChange = fn;
   }
 
@@ -65,11 +60,9 @@ export class PerformanceLogIndexSelectComponent implements ControlValueAccessor 
     this.onTouched = fn;
   }
 
-  setIndex(stringIndex: string | undefined) {
-    if (stringIndex) {
-      let index: number = parseInt(stringIndex)
-      this.index = index;
-      this.onChange(index);
-    }
+  setIndex(stringIndex: string) {
+    let index: number = parseInt(stringIndex)
+    this.index.set(index);
+    this.onChange(index);
   }
 }
