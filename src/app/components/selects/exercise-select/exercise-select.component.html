@@ -1,5 +1,7 @@
+@let localExerciseId = exerciseId();
 <app-select (onChange)="setExerciseId($event)"
-            (onTouched)="onTouched($event)"
-            [options]="exerciseOptions"
-            [value]="exerciseId()?.toString()"
+            (onTouched)="onTouched()"
+            [defaultOption]="true"
+            [options]="exerciseOptions()"
+            [value]="localExerciseId !== null ? localExerciseId.toString() : null"
 />

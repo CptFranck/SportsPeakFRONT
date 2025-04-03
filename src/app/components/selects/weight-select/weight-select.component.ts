@@ -48,7 +48,8 @@ export class WeightSelectComponent implements ControlValueAccessor {
     this.onTouched = fn;
   }
 
-  setWeightUnitId(weightUnit: string): void {
+  setWeightUnitId(weightUnit: string | null): void {
+    if (weightUnit == null) return;
     this.weightUnit.set(weightUnit);
     this.onChange(weightUnit)
   }
