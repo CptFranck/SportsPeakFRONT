@@ -1,4 +1,4 @@
-import {Component, forwardRef, inject, Input, OnDestroy, OnInit} from '@angular/core';
+import {Component, forwardRef, inject, OnDestroy, OnInit, signal} from '@angular/core';
 import {MultiSelectOption} from "../../../interface/components/multi-select/multiSelectOption";
 import {ControlValueAccessor, NG_VALUE_ACCESSOR} from "@angular/forms";
 import {RoleService} from "../../../services/role/role.service";
@@ -8,33 +8,28 @@ import {MultiSelectComponent} from "../../multi-select/multi-select.component";
 import {Subject, takeUntil} from "rxjs";
 
 @Component({
-    selector: 'app-roles-selector',
-    imports: [
-        MultiSelectComponent
-    ],
-    providers: [
-        {
-            provide: NG_VALUE_ACCESSOR,
-            useExisting: forwardRef(() => RoleSelectorComponent),
-            multi: true,
-        }
-    ],
-    templateUrl: './role-selector.component.html'
+  selector: 'app-roles-selector',
+  imports: [
+    MultiSelectComponent
+  ],
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => RoleSelectorComponent),
+      multi: true,
+    }
+  ],
+  templateUrl: './role-selector.component.html'
 })
 export class RoleSelectorComponent implements OnInit, OnDestroy, ControlValueAccessor {
-  loading: boolean = true;
+  loading = true;
   roleOptions: MultiSelectOption[] = [];
 
-  @Input() roleIds: number[] = [];
+  roleIds = signal<number[]>([]);
 
-  private readonly unsubscribe$: Subject<void> = new Subject<void>();
-  private readonly roleService: RoleService = inject(RoleService);
+  private readonly unsubscribe$ = new Subject<void>();
+  private readonly roleService = inject(RoleService);
 
-  onChange: (value: number[]) => void = () => {
-  };
-
-  onTouched: ($event: boolean) => void = () => {
-  };
 
   ngOnInit(): void {
     this.roleService.roles
@@ -61,8 +56,14 @@ export class RoleSelectorComponent implements OnInit, OnDestroy, ControlValueAcc
     this.unsubscribe$.complete();
   }
 
+  onChange: (value: number[]) => void = () => {
+  };
+
+  onTouched: () => void = () => {
+  };
+
   writeValue(roleIds: number[]): void {
-    this.roleIds = roleIds;
+    this.roleIds.set([...roleIds]);
   }
 
   registerOnChange(fn: (value: number[]) => void): void {
@@ -74,7 +75,7 @@ export class RoleSelectorComponent implements OnInit, OnDestroy, ControlValueAcc
   }
 
   setRoleIds(roleIds: number[]) {
-    this.roleIds = roleIds;
+    this.roleIds.set([...roleIds]);
     this.onChange(roleIds);
   }
 }
