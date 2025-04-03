@@ -1,4 +1,4 @@
-import {Component, forwardRef, inject, Input, OnDestroy, OnInit} from '@angular/core';
+import {Component, forwardRef, inject, OnDestroy, OnInit, signal} from '@angular/core';
 import {Exercise} from "../../../interface/dto/exercise";
 import {MultiSelectOption} from "../../../interface/components/multi-select/multiSelectOption";
 import {ControlValueAccessor, NG_VALUE_ACCESSOR} from "@angular/forms";
@@ -7,33 +7,27 @@ import {MultiSelectComponent} from "../../multi-select/multi-select.component";
 import {Subject, takeUntil} from "rxjs";
 
 @Component({
-    selector: 'app-exercise-selector',
-    imports: [
-        MultiSelectComponent,
-    ],
-    providers: [
-        {
-            provide: NG_VALUE_ACCESSOR,
-            useExisting: forwardRef(() => ExerciseSelectorComponent),
-            multi: true,
-        }
-    ],
-    templateUrl: './exercise-selector.component.html'
+  selector: 'app-exercise-selector',
+  imports: [
+    MultiSelectComponent,
+  ],
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => ExerciseSelectorComponent),
+      multi: true,
+    }
+  ],
+  templateUrl: './exercise-selector.component.html'
 })
 export class ExerciseSelectorComponent implements OnInit, OnDestroy, ControlValueAccessor {
-  loading: boolean = true;
+  loading = true;
   exerciseOptions: MultiSelectOption[] = [];
 
-  @Input() exerciseIds: number[] = [];
+  readonly exerciseIds = signal<number[]>([]);
 
-  private readonly unsubscribe$: Subject<void> = new Subject<void>();
-  private readonly exerciseService: ExerciseService = inject(ExerciseService);
-
-  onChange: (value: number[]) => void = () => {
-  };
-
-  onTouched: ($event: boolean) => void = () => {
-  };
+  private readonly unsubscribe$ = new Subject<void>();
+  private readonly exerciseService = inject(ExerciseService);
 
   ngOnInit(): void {
     this.exerciseService.exercises
@@ -60,8 +54,14 @@ export class ExerciseSelectorComponent implements OnInit, OnDestroy, ControlValu
     this.unsubscribe$.complete();
   }
 
+  onChange: (value: number[]) => void = () => {
+  };
+
+  onTouched: (value: boolean) => void = () => {
+  };
+
   writeValue(exerciseIds: number[]): void {
-    this.exerciseIds = exerciseIds;
+    this.exerciseIds.set([...exerciseIds]);
   }
 
   registerOnChange(fn: (value: number[]) => void): void {
@@ -73,7 +73,7 @@ export class ExerciseSelectorComponent implements OnInit, OnDestroy, ControlValu
   }
 
   setExerciseIds(exerciseIds: number[]) {
-    this.exerciseIds = exerciseIds;
+    this.exerciseIds.set([...exerciseIds]);
     this.onChange(exerciseIds);
   }
 }
