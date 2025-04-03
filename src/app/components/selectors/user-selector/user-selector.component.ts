@@ -21,10 +21,9 @@ import {Subject, takeUntil} from "rxjs";
   templateUrl: './user-selector.component.html'
 })
 export class UserSelectorComponent implements OnInit, OnDestroy, ControlValueAccessor {
-  loading = true;
-  userOptions: MultiSelectOption[] = [];
-
   userIds = signal<number[]>([]);
+  loading = signal<boolean>(true);
+  userOptions = signal<MultiSelectOption[]>([]);
 
   private readonly unsubscribe$ = new Subject<void>();
   private readonly userService = inject(UserService);
@@ -42,11 +41,11 @@ export class UserSelectorComponent implements OnInit, OnDestroy, ControlValueAcc
             description: "First Name : " + user.firstName + " Last Name : " + user.lastName,
           });
         });
-        this.userOptions = [...options];
+        this.userOptions.set([...options]);
       });
     this.userService.isLoading
       .pipe(takeUntil(this.unsubscribe$))
-      .subscribe((loading: boolean) => this.loading = loading);
+      .subscribe((loading: boolean) => this.loading.set(loading));
   }
 
   ngOnDestroy() {
