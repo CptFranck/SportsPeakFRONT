@@ -7,7 +7,7 @@
       <app-modal-button
         (onCLickModalButton)="onChangePassword()"
         [btnClass]="btnClass"
-        [modalId]="modalId"
+        [modalId]="modalId()"
       >
         Change password
       </app-modal-button>
@@ -21,7 +21,7 @@
       <app-modal-button
         (onCLickModalButton)="onDeleteAccount()"
         [btnClass]="btnClass"
-        [modalId]="modalId"
+        [modalId]="modalId()"
       >
         Delete account
       </app-modal-button>

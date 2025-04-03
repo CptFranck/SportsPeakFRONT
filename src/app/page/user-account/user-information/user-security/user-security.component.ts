@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {Component, EventEmitter, Output, input} from '@angular/core';
 import {ModalButtonComponent} from "../../../../components/modal/modal-button/modal-button.component";
 import {User} from "../../../../interface/dto/user";
 import {FormIndicator} from "../../../../interface/utils/form-indicator";
@@ -15,8 +15,8 @@ import {ModificationField} from "../../../../interface/enum/modification-field";
 export class UserSecurityComponent {
   btnClass: string = "btn btn-secondary"
 
-  @Input() user!: User | undefined;
-  @Input() modalId!: string;
+  readonly user = input.required<User | undefined>();
+  readonly modalId = input.required<string>();
 
   @Output() userAction: EventEmitter<FormIndicator> = new EventEmitter<FormIndicator>();
 
@@ -24,14 +24,14 @@ export class UserSecurityComponent {
     this.userAction.emit({
       actionType: ActionType.update,
       modificationField: ModificationField.password,
-      object: this.user
+      object: this.user()
     });
   }
 
   onDeleteAccount() {
     this.userAction.emit({
       actionType: ActionType.delete,
-      object: this.user
+      object: this.user()
     });
   }
 }
