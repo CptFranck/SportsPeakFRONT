@@ -28,7 +28,7 @@ export class VisibilitySelectComponent implements ControlValueAccessor {
     value: Visibility.PUBLIC,
   }];
 
-  visibility = signal<string>("");
+  visibility = signal<string>(Visibility.PRIVATE);
 
   onChange: (value: string) => void = () => {
   };
@@ -48,7 +48,7 @@ export class VisibilitySelectComponent implements ControlValueAccessor {
     this.onTouched = fn;
   }
 
-  setVisibilityId(visibility: string | undefined): void {
+  setVisibilityId(visibility: string): void {
     if (visibility) {
       this.visibility.set(visibility);
       this.onChange(visibility)
