@@ -23,7 +23,7 @@ export class UserRolesFormComponent implements OnInit, OnDestroy {
 
   user = input.required<User | undefined>();
 
-  userForm = computed<FormGroup | null>(() => {
+  userForm = computed<FormGroup>(() => {
     const user = this.user();
     const userRoleIds: number[] = user?.lastName ?
       user?.roles?.map((role: Role) => role.id) : [];
@@ -64,7 +64,6 @@ export class UserRolesFormComponent implements OnInit, OnDestroy {
 
   onSubmit() {
     const userForm = this.userForm();
-    if (!userForm) return;
     if (userForm.valid) {
       this.submitInvalidForm.set(false);
       this.userService.modifyUserRoles(userForm);
