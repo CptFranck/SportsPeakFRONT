@@ -1,4 +1,4 @@
-import {Component, Input, TemplateRef, ViewChild} from '@angular/core';
+import {Component, input, TemplateRef, ViewChild} from '@angular/core';
 import {User} from "../../../interface/dto/user";
 import {ActionType} from "../../../interface/enum/action-type";
 import {ModalComponent} from "../../../components/modal/modal/modal.component";
@@ -11,24 +11,24 @@ import {UserPasswordFormComponent} from "../../../components/form/user/user-pass
 import {UserDeleteFormComponent} from "../../../components/form/user/user-delete-form/user-delete-form.component";
 
 @Component({
-    selector: 'app-user-modal',
-    imports: [
-        ModalComponent,
-        NgIf,
-        UserEmailFormComponent,
-        UserUsernameFormComponent,
-        UserNameFormComponent,
-        UserPasswordFormComponent,
-        UserDeleteFormComponent,
-    ],
-    templateUrl: './user-modal.component.html'
+  selector: 'app-user-modal',
+  imports: [
+    ModalComponent,
+    NgIf,
+    UserEmailFormComponent,
+    UserUsernameFormComponent,
+    UserNameFormComponent,
+    UserPasswordFormComponent,
+    UserDeleteFormComponent,
+  ],
+  templateUrl: './user-modal.component.html'
 })
 export class UserModalComponent {
-  @Input() modalTitle!: string;
-  @Input() userModalId!: string;
-  @Input() user: User | undefined;
-  @Input() action!: ActionType;
-  @Input() modification!: ModificationField;
+  readonly modalTitle = input.required<string>();
+  readonly userModalId = input.required<string>();
+  readonly user = input.required<User | undefined>();
+  readonly action = input.required<ActionType>();
+  readonly modification = input.required<ModificationField>();
 
   @ViewChild("modalTemplate") modalTemplate!: TemplateRef<any>;
 
