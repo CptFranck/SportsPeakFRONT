@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {Component, EventEmitter, input, Output} from '@angular/core';
 import {NgForOf} from "@angular/common";
 import {ModalButtonComponent} from "../../../../components/modal/modal-button/modal-button.component";
 import {User} from "../../../../interface/dto/user";
@@ -14,10 +14,10 @@ import {ActionType} from "../../../../interface/enum/action-type";
   templateUrl: './users-management-array.component.html'
 })
 export class UsersManagementArrayComponent {
-  @Input() users!: User[];
-  @Input() modalId!: string;
+  readonly users = input.required<User[]>();
+  readonly modalId = input.required<string>();
 
-  @Output() actionUser: EventEmitter<FormIndicator> = new EventEmitter<FormIndicator>();
+  @Output() actionUser = new EventEmitter<FormIndicator>();
 
   showUserDetails(user: User): void {
     this.actionUser.emit({
