@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, Output, TemplateRef, ViewChild} from '@angular/core';
+import {Component, EventEmitter, input, Output, TemplateRef, ViewChild} from '@angular/core';
 import {ActionType} from "../../../../../interface/enum/action-type";
 import {ModalComponent} from "../../../../../components/modal/modal/modal.component";
 import {NgIf} from "@angular/common";
@@ -14,31 +14,30 @@ import {ProgExercise} from "../../../../../interface/dto/prog-exercise";
 import {
   TargetSetLogsComponent
 } from "../../../../../components/modal-component/target-set/target-set-logs/target-set-logs.component";
-import {FormIndicator} from "../../../../../interface/utils/form-indicator";
 import {PerformanceLog} from "../../../../../interface/dto/performance-log";
 
 @Component({
-    selector: 'app-target-set-modal',
-    imports: [
-        ModalComponent,
-        NgIf,
-        ModalButtonComponent,
-        TargetSetDeleteFormComponent,
-        TargetSetEntityFormComponent,
-        TargetSetLogsComponent,
-    ],
-    templateUrl: './target-set-modal.component.html'
+  selector: 'app-target-set-modal',
+  imports: [
+    ModalComponent,
+    NgIf,
+    ModalButtonComponent,
+    TargetSetDeleteFormComponent,
+    TargetSetEntityFormComponent,
+    TargetSetLogsComponent,
+  ],
+  templateUrl: './target-set-modal.component.html'
 })
 export class TargetSetModalComponent {
 
-  @Input() targetSetModalId!: string;
-  @Input() targetSetModalTitle!: string;
-  @Input() targetSet: TargetSet | undefined;
-  @Input() progExercise: ProgExercise | undefined;
-  @Input() performanceLog: PerformanceLog | undefined;
-  @Input() action!: ActionType;
+  readonly targetSetModalId = input.required<string>();
+  readonly targetSetModalTitle = input.required<string>();
+  readonly targetSet = input.required<TargetSet | undefined>();
+  readonly progExercise = input.required<ProgExercise | undefined>();
+  readonly performanceLog = input.required<PerformanceLog | undefined>();
+  readonly action = input.required<ActionType>();
 
-  @Output() targetSetAction: EventEmitter<FormIndicator> = new EventEmitter();
+  @Output() targetSetAction = new EventEmitter();
 
   @ViewChild("targetSetModalTemplate") modalTemplate!: TemplateRef<any>;
 
