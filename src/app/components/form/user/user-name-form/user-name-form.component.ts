@@ -1,4 +1,4 @@
-import {Component, inject, Input, OnDestroy, OnInit} from '@angular/core';
+import {Component, computed, inject, input, OnDestroy, OnInit, signal} from '@angular/core';
 import {InputControlComponent} from "../../../input-control/input-control.component";
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {User} from "../../../../interface/dto/user";
@@ -9,51 +9,23 @@ import {ModificationField} from "../../../../interface/enum/modification-field";
 import {ActionType} from "../../../../interface/enum/action-type";
 
 @Component({
-    selector: 'app-user-name-form',
-    imports: [
-        InputControlComponent,
-        ReactiveFormsModule,
-        NgIf
-    ],
-    templateUrl: './user-name-form.component.html'
+  selector: 'app-user-name-form',
+  imports: [
+    InputControlComponent,
+    ReactiveFormsModule,
+    NgIf
+  ],
+  templateUrl: './user-name-form.component.html'
 })
 export class UserNameFormComponent implements OnInit, OnDestroy {
-  user: User | undefined;
-  userForm: FormGroup | null = null;
-  submitInvalidForm: boolean = false;
+  readonly user = input.required<User | undefined>();
 
-  @Input() btnCloseRef!: HTMLButtonElement;
-  @Input() submitEventActionType$!: Observable<ActionType> | undefined;
-  @Input() modification!: ModificationField;
-
-  private readonly unsubscribe$: Subject<void> = new Subject<void>();
-  private readonly userService: UserService = inject(UserService);
-
-  @Input() set userInput(value: User | undefined) {
-    this.user = value;
-    this.initializeUserNameForm();
-  }
-
-  ngOnInit() {
-    this.initializeUserNameForm()
-    if (this.submitEventActionType$)
-      this.submitEventActionType$
-        .pipe(takeUntil(this.unsubscribe$))
-        .subscribe((actionType: ActionType) => {
-          if (actionType === ActionType.update && this.modification === ModificationField.name)
-            this.onSubmit();
-        });
-  }
-
-  ngOnDestroy() {
-    this.unsubscribe$.next();
-    this.unsubscribe$.complete();
-  }
-
-  initializeUserNameForm() {
-    const userFirstName: string = this.user?.firstName ? this.user?.firstName : "";
-    const userLastName: string = this.user?.lastName ? this.user?.lastName : "";
-    this.userForm = new FormGroup({
+  readonly userForm = computed<FormGroup>(() => {
+    const user = this.user();
+    const userFirstName: string = user?.firstName ? user?.firstName : "";
+    const userLastName: string = user?.lastName ? user?.lastName : "";
+    
+    const userForm: FormGroup = new FormGroup({
       firstName: new FormControl(
         userFirstName,
         [Validators.required,
@@ -66,18 +38,44 @@ export class UserNameFormComponent implements OnInit, OnDestroy {
           Validators.maxLength(50)]),
     });
 
-    if (this.user)
-      this.userForm.addControl("id", new FormControl(this.user.id));
+    if (user)
+      userForm.addControl("id", new FormControl(user.id));
+    return userForm;
+  });
+
+  submitInvalidForm = signal<boolean>(false);
+
+  readonly btnCloseRef = input.required<HTMLButtonElement>();
+  readonly submitEventActionType$ = input.required<Observable<ActionType> | undefined>();
+  readonly modification = input.required<ModificationField>();
+
+  private readonly unsubscribe$: Subject<void> = new Subject<void>();
+  private readonly userService: UserService = inject(UserService);
+
+  ngOnInit() {
+    const submitEventActionType$ = this.submitEventActionType$();
+    if (submitEventActionType$)
+      submitEventActionType$
+        .pipe(takeUntil(this.unsubscribe$))
+        .subscribe((actionType: ActionType) => {
+          if (actionType === ActionType.update && this.modification() === ModificationField.name)
+            this.onSubmit();
+        });
+  }
+
+  ngOnDestroy() {
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
   }
 
   onSubmit() {
-    if (!this.userForm) return;
-    if (this.userForm.valid) {
-      this.submitInvalidForm = false;
-      this.userService.modifyUserIdentity(this.userForm);
-      this.btnCloseRef.click();
+    const userForm = this.userForm();
+    if (userForm.valid) {
+      this.submitInvalidForm.set(false);
+      this.userService.modifyUserIdentity(userForm);
+      this.btnCloseRef().click();
     } else {
-      this.submitInvalidForm = true;
+      this.submitInvalidForm.set(true);
     }
   }
 }

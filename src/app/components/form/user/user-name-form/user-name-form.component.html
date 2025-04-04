@@ -1,10 +1,10 @@
-<form *ngIf="userForm" [formGroup]="userForm" class="container-fluid">
+<form *ngIf="userForm()" [formGroup]="userForm()" class="container-fluid">
   <div class="mb-3">
     <span class="form-label">First Name :</span>
     <input class="form-control" formControlName="firstName">
     <app-input-control
-      [formGroup]="userForm"
-      [submitInvalid]="submitInvalidForm"
+      [formGroup]="userForm()"
+      [submitInvalid]="submitInvalidForm()"
       displayedFieldName="first name"
       formGroupFieldName="firstName"
       rules="min : 1 ; max : 50"
@@ -14,8 +14,8 @@
     <span class="form-label">Last Name :</span>
     <input class="form-control" formControlName="lastName">
     <app-input-control
-      [formGroup]="userForm"
-      [submitInvalid]="submitInvalidForm"
+      [formGroup]="userForm()"
+      [submitInvalid]="submitInvalidForm()"
       displayedFieldName="last name"
       formGroupFieldName="lastName"
       rules="min : 1 ; max : 50"
