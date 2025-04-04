@@ -1,4 +1,4 @@
-import {Component, Input, TemplateRef, ViewChild} from '@angular/core';
+import {Component, input, TemplateRef, ViewChild} from '@angular/core';
 import {ModalComponent} from "../../../../components/modal/modal/modal.component";
 import {NgIf} from "@angular/common";
 import {ProgExercise} from "../../../../interface/dto/prog-exercise";
@@ -25,10 +25,10 @@ import {
   templateUrl: './my-prog-exercise-details-modal.component.html'
 })
 export class MyProgExerciseDetailsModalComponent {
-  @Input() modalTitle!: string;
-  @Input() progExerciseModalId!: string;
-  @Input() progExercise: ProgExercise | undefined;
-  @Input() action!: ActionType;
+  readonly modalTitle = input.required<string>();
+  readonly progExerciseModalId = input.required<string>();
+  readonly progExercise = input.required<ProgExercise | undefined>();
+  readonly action = input.required<ActionType>();
 
   @ViewChild("modalTemplate") modalTemplate!: TemplateRef<any>;
 
