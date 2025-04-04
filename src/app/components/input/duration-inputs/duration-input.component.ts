@@ -16,7 +16,7 @@ export class DurationInputComponent {
   readonly fieldName = input.required<string>();
   readonly formGroup = input.required<FormGroup>();
 
-  durationForm = computed<FormGroup>(() =>
+  readonly durationForm = computed<FormGroup>(() =>
     this.formGroup().get(this.fieldName()) as FormGroup
   );
 }
