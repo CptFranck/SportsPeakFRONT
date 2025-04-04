@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, input, signal} from '@angular/core';
 
 @Component({
   selector: 'app-tooltip',
@@ -6,14 +6,13 @@ import {Component, Input} from '@angular/core';
   styleUrl: './tooltip.component.css'
 })
 export class TooltipComponent {
-  tooltipHidden: boolean = true;
+  tooltipHidden = signal<boolean>(true);
 
-  @Input() used: boolean = true;
-  @Input() tooltipText: string =
-    "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit...";
+  readonly used = input<boolean>(true);
+  readonly tooltipText = input<string>("Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit...");
 
   showTooltip() {
-    if (this.used)
-      this.tooltipHidden = !this.tooltipHidden;
+    if (this.used())
+      this.tooltipHidden.update(value => !value);
   }
 }
