@@ -13,7 +13,6 @@ import {
 } from "../../../../components/form/privilege/privilege-entity-form/privilege-entity-form.component";
 import {Privilege} from "../../../../interface/dto/privilege";
 import {ActionType} from "../../../../interface/enum/action-type";
-import {FormIndicator} from "../../../../interface/utils/form-indicator";
 
 @Component({
   selector: 'app-privilege-modal',
@@ -34,7 +33,7 @@ export class PrivilegeModalComponent {
   readonly privilege = input.required<Privilege | undefined>();
   readonly action = input.required<ActionType>();
 
-  @Output() privilegeAction: EventEmitter<FormIndicator> = new EventEmitter();
+  @Output() privilegeAction = new EventEmitter();
 
   @ViewChild("modalTemplate") modalTemplate!: TemplateRef<any>;
 

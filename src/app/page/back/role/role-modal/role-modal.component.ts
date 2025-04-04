@@ -29,7 +29,7 @@ export class RoleModalComponent {
   readonly role = input.required<Role | undefined>();
   readonly action = input.required<ActionType>();
 
-  @Output() roleAction: EventEmitter<FormIndicator> = new EventEmitter<FormIndicator>();
+  @Output() roleAction = new EventEmitter<FormIndicator>();
 
   @ViewChild("modalTemplate") modalTemplate!: TemplateRef<any>;
 
