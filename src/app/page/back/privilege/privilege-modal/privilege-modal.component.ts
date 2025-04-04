@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, Output, TemplateRef, ViewChild} from '@angular/core';
+import {Component, EventEmitter, input, Output, TemplateRef, ViewChild} from '@angular/core';
 import {ModalButtonComponent} from "../../../../components/modal/modal-button/modal-button.component";
 import {ModalComponent} from "../../../../components/modal/modal/modal.component";
 import {NgIf} from "@angular/common";
@@ -16,23 +16,23 @@ import {ActionType} from "../../../../interface/enum/action-type";
 import {FormIndicator} from "../../../../interface/utils/form-indicator";
 
 @Component({
-    selector: 'app-privilege-modal',
-    imports: [
-        ModalButtonComponent,
-        ModalComponent,
-        NgIf,
-        PrivilegeDeleteFormComponent,
-        PrivilegeDetailDisplayComponent,
-        PrivilegeEntityFormComponent
-    ],
-    templateUrl: './privilege-modal.component.html'
+  selector: 'app-privilege-modal',
+  imports: [
+    ModalButtonComponent,
+    ModalComponent,
+    NgIf,
+    PrivilegeDeleteFormComponent,
+    PrivilegeDetailDisplayComponent,
+    PrivilegeEntityFormComponent
+  ],
+  templateUrl: './privilege-modal.component.html'
 })
 export class PrivilegeModalComponent {
 
-  @Input() modalTitle!: string;
-  @Input() privilegeModalId!: string;
-  @Input() privilege: Privilege | undefined;
-  @Input() action!: ActionType;
+  readonly modalTitle = input.required<string>();
+  readonly privilegeModalId = input.required<string>();
+  readonly privilege = input.required<Privilege | undefined>();
+  readonly action = input.required<ActionType>();
 
   @Output() privilegeAction: EventEmitter<FormIndicator> = new EventEmitter();
 
