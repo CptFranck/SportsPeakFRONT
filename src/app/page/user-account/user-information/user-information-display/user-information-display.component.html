@@ -1,13 +1,13 @@
 <div class="md-3 border rounded border-1 p-3">
   <div class="row align-items-center my-2">
     <div class="col ">
-      <p class="my-auto"><span class="my-auto form-label fw-bold">Username : </span> {{ user?.username }}</p>
+      <p class="my-auto"><span class="my-auto form-label fw-bold">Username : </span> {{ user()?.username }}</p>
     </div>
     <div class="col-auto">
       <app-modal-button
         (onCLickModalButton)="onChangeUsername()"
         [btnClass]="btnClass"
-        [modalId]="modalId"
+        [modalId]="modalId()"
       >
         Change username
       </app-modal-button>
@@ -15,13 +15,13 @@
   </div>
   <div class="row align-items-center my-2">
     <div class="col">
-      <p class="my-auto"><span class=" my-autoform-label fw-bold">Email : </span> {{ user?.email }}</p>
+      <p class="my-auto"><span class=" my-autoform-label fw-bold">Email : </span> {{ user()?.email }}</p>
     </div>
     <div class="col-auto">
       <app-modal-button
         (onCLickModalButton)="onChangeEmail()"
         [btnClass]="btnClass"
-        [modalId]="modalId"
+        [modalId]="modalId()"
       >
         Change email
       </app-modal-button>
@@ -29,16 +29,16 @@
   </div>
   <div class="row align-items-center my-2">
     <div class="col-auto">
-      <p class="my-auto"><span class="my-auto form-label fw-bold">Firstname : </span> {{ user?.firstName }}</p>
+      <p class="my-auto"><span class="my-auto form-label fw-bold">Firstname : </span> {{ user()?.firstName }}</p>
     </div>
     <div class="col">
-      <p class="my-auto"><span class="my-auto form-label fw-bold">LastName : </span> {{ user?.lastName }}</p>
+      <p class="my-auto"><span class="my-auto form-label fw-bold">LastName : </span> {{ user()?.lastName }}</p>
     </div>
     <div class="col-auto">
       <app-modal-button
         (onCLickModalButton)="onChangeName()"
         [btnClass]="btnClass"
-        [modalId]="modalId"
+        [modalId]="modalId()"
       >
         Change name
       </app-modal-button>
