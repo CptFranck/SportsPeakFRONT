@@ -1,4 +1,4 @@
-import {Component, inject, Input, OnDestroy, OnInit} from '@angular/core';
+import {Component, computed, inject, input, OnDestroy, OnInit, signal} from '@angular/core';
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {Observable, Subject, takeUntil} from "rxjs";
 import {User} from "../../../../interface/dto/user";
@@ -18,40 +18,10 @@ import {ActionType} from "../../../../interface/enum/action-type";
   templateUrl: './user-email-form.component.html'
 })
 export class UserEmailFormComponent implements OnInit, OnDestroy {
-  user: User | undefined;
-  userForm: FormGroup | null = null;
-  submitInvalidForm: boolean = false;
+  readonly user = input.required<User | undefined>();
 
-  @Input() btnCloseRef!: HTMLButtonElement;
-  @Input() submitEventActionType$!: Observable<ActionType> | undefined;
-  @Input() modification!: ModificationField;
-
-  private readonly unsubscribe$: Subject<void> = new Subject<void>();
-  private readonly userService: UserService = inject(UserService);
-
-  @Input() set userInput(value: User | undefined) {
-    this.user = value;
-    this.initializeUserEmailForm();
-  }
-
-  ngOnInit() {
-    this.initializeUserEmailForm()
-    if (this.submitEventActionType$)
-      this.submitEventActionType$
-        .pipe(takeUntil(this.unsubscribe$))
-        .subscribe((actionType: ActionType) => {
-          if (actionType === ActionType.update && this.modification === ModificationField.email)
-            this.onSubmit();
-        });
-  }
-
-  ngOnDestroy() {
-    this.unsubscribe$.next();
-    this.unsubscribe$.complete();
-  }
-
-  initializeUserEmailForm() {
-    this.userForm = new FormGroup({
+  readonly userForm = computed<FormGroup>(() => {
+    const userForm: FormGroup = new FormGroup({
       newEmail: new FormControl("",
         [Validators.required,
           Validators.email]),
@@ -61,18 +31,45 @@ export class UserEmailFormComponent implements OnInit, OnDestroy {
       ),
     });
 
-    if (this.user)
-      this.userForm.addControl("id", new FormControl(this.user.id));
+    const user = this.user();
+    if (user)
+      userForm.addControl("id", new FormControl(user.id));
+    return userForm;
+  });
+
+  submitInvalidForm = signal<boolean>(false);
+
+  readonly btnCloseRef = input.required<HTMLButtonElement>();
+  readonly submitEventActionType$ = input.required<Observable<ActionType> | undefined>();
+  readonly modification = input.required<ModificationField>();
+
+  private readonly unsubscribe$ = new Subject<void>();
+  private readonly userService = inject(UserService);
+
+  ngOnInit() {
+    const submitEventActionType$ = this.submitEventActionType$();
+    if (submitEventActionType$)
+      submitEventActionType$
+        .pipe(takeUntil(this.unsubscribe$))
+        .subscribe((actionType: ActionType) => {
+          if (actionType === ActionType.update && this.modification() === ModificationField.email)
+            this.onSubmit();
+        });
+  }
+
+  ngOnDestroy() {
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
   }
 
   onSubmit() {
-    if (!this.userForm) return;
-    if (this.userForm.valid) {
-      this.submitInvalidForm = false;
-      this.userService.modifyUserEmail(this.userForm);
-      this.btnCloseRef.click();
+    const userForm = this.userForm();
+    if (userForm.valid) {
+      this.submitInvalidForm.set(false);
+      this.userService.modifyUserEmail(userForm);
+      this.btnCloseRef().click();
     } else {
-      this.submitInvalidForm = true;
+      this.submitInvalidForm.set(true);
     }
   }
 }

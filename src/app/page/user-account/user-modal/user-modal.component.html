@@ -15,7 +15,7 @@
                        [btnCloseRef]="btnClose"
                        [modification]="modification()"
                        [submitEventActionType$]="submitEventActionType$"
-                       [userInput]="user()"
+                       [user]="user()"
   />
   <app-user-name-form *ngIf="action() === ActionType.update && modification() === ModificationField.name"
                       [btnCloseRef]="btnClose"

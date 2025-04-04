@@ -1,10 +1,10 @@
-<form *ngIf="userForm" [formGroup]="userForm" class="container-fluid">
+<form *ngIf="userForm()" [formGroup]="userForm()" class="container-fluid">
   <div class="mb-3">
     <span class="form-label">New Email address</span>
     <input aria-describedby="emailHelp" class="form-control" formControlName="newEmail" type="email">
     <app-input-control
-      [formGroup]="userForm"
-      [submitInvalid]="submitInvalidForm"
+      [formGroup]="userForm()"
+      [submitInvalid]="submitInvalidForm()"
       formGroupFieldName="newEmail"
     />
   </div>
@@ -12,8 +12,8 @@
     <span class="form-label">Password :</span>
     <input class="form-control" formControlName="password" type="password">
     <app-input-control
-      [formGroup]="userForm"
-      [submitInvalid]="submitInvalidForm"
+      [formGroup]="userForm()"
+      [submitInvalid]="submitInvalidForm()"
       errorMessage="Passwords write your password"
       formGroupFieldName="password"
     />
