@@ -1,21 +1,21 @@
 <app-modal-button (onCLickModalButton)="onClick($event)"
-                  [modalId]="muscleModalId"
+                  [modalId]="muscleModalId()"
 >
   Add new
   <i class="fa-regular fa-square-plus"></i>
 </app-modal-button>
-<app-modal [actionType]="action"
+<app-modal [actionType]="action()"
            [contentTemplate]="progExerciseModalTemplate"
-           [modalId]="muscleModalId"
-           [title]="modalTitle"
+           [modalId]="muscleModalId()"
+           [title]="modalTitle()"
 >
 </app-modal>
 <ng-template #progExerciseModalTemplate let-btnClose="btnClose" let-submitEventActionType$="submitEventActionType$">
-  <app-my-prog-exercise-entity-form *ngIf="action === ActionType.create"
+  <app-my-prog-exercise-entity-form *ngIf="action() === ActionType.create"
                                     [btnCloseRef]="btnClose"
-                                    [progExerciseInput]="progExercise"
+                                    [progExerciseInput]="progExercise()"
                                     [submitEventActionType$]="submitEventActionType$"/>
-  <app-my-prog-exercise-details-display *ngIf="action === ActionType.read"
-                                        [progExerciseInput]="progExercise"/>
-  <app-my-prog-exercise-performance *ngIf="action === ActionType.checkPerformance"/>
+  <app-my-prog-exercise-details-display *ngIf="action() === ActionType.read"
+                                        [progExercise]="progExercise()"/>
+  <app-my-prog-exercise-performance *ngIf="action() === ActionType.checkPerformance"/>
 </ng-template>
