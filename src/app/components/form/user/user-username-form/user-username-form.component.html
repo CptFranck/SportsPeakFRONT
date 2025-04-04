@@ -1,13 +1,14 @@
-<form *ngIf="userForm" [formGroup]="userForm" class="container-fluid">
+@let localUserForm = userForm();
+<form *ngIf="localUserForm" [formGroup]="localUserForm" class="container-fluid">
   <div class="mb-3">
     <span class="form-label">New Username :</span>
     <div class="input-group">
-      <span class="input-group-text">&#64;</span>
+      <span class="input-group-text">{{ "@" }}</span>
       <input class="form-control" formControlName="newUsername" type="text">
     </div>
     <app-input-control
-      [formGroup]="userForm"
-      [submitInvalid]="submitInvalidForm"
+      [formGroup]="localUserForm"
+      [submitInvalid]="submitInvalidForm()"
       formGroupFieldName="newUsername"
       rules="min : 1 ; max : 50 ; support only character, number or underscore ; must not already taken"
     />
