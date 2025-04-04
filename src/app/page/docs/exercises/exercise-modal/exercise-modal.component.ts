@@ -26,7 +26,6 @@ import {
 } from "../../../../components/modal-component/exercise/exercise-details-display/exercise-details-display.component";
 import {UserLoggedService} from "../../../../services/user-logged/user-logged.service";
 import {Subject, takeUntil} from "rxjs";
-import {FormIndicator} from "../../../../interface/utils/form-indicator";
 
 @Component({
   selector: 'app-exercise-modal',
@@ -44,18 +43,18 @@ export class ExerciseModalComponent implements OnInit, OnDestroy {
   isAdmin = signal<boolean>(false);
 
   readonly action = input.required<ActionType>();
-  readonly exercise = input<Exercise>();
+  readonly exercise = input.required<Exercise | undefined>();
   readonly modalTitle = input.required<string>();
   readonly exerciseModalId = input.required<string>();
 
-  @Output() exerciseAction: EventEmitter<FormIndicator> = new EventEmitter();
+  @Output() exerciseAction = new EventEmitter();
 
   @ViewChild("modalTemplate") modalTemplate!: TemplateRef<any>
 
   protected readonly ActionType = ActionType;
 
-  private readonly unsubscribe$: Subject<void> = new Subject<void>();
-  private readonly userLoggedService: UserLoggedService = inject(UserLoggedService);
+  private readonly unsubscribe$ = new Subject<void>();
+  private readonly userLoggedService = inject(UserLoggedService);
 
   ngOnInit(): void {
     this.userLoggedService.currentUser
