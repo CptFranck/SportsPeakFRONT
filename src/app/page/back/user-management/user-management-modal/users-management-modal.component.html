@@ -1,17 +1,17 @@
-<app-modal [actionType]="action"
+<app-modal [actionType]="action()"
            [contentTemplate]="modalTemplate"
-           [modalId]="userModalId"
-           [title]="modalTitle"
+           [modalId]="userModalId()"
+           [title]="modalTitle()"
 >
 </app-modal>
 <ng-template #modalTemplate let-btnClose="btnClose" let-submitEventActionType$="submitEventActionType$">
-  <app-user-roles-form *ngIf="action === ActionType.create || action === ActionType.update"
+  <app-user-roles-form *ngIf="action() === ActionType.create || action() === ActionType.update"
                        [btnCloseRef]="btnClose"
                        [submitEvents]="submitEventActionType$"
-                       [userInput]="user"
+                       [userInput]="user()"
   />
-  <app-user-details-display *ngIf="action === ActionType.read"
-                            [user]="user"/>
+  <app-user-details-display *ngIf="action() === ActionType.read"
+                            [user]="user()"/>
   <!--  <app-user-delete-form [btnCloseRef]="btnClose"-->
   <!--                        [submitEventActionType$]="submitEventActionType$"-->
   <!--                        [user]="user"-->
