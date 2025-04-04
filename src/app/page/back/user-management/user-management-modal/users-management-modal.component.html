@@ -8,7 +8,7 @@
   <app-user-roles-form *ngIf="action() === ActionType.create || action() === ActionType.update"
                        [btnCloseRef]="btnClose"
                        [submitEvents]="submitEventActionType$"
-                       [userInput]="user()"
+                       [user]="user()"
   />
   <app-user-details-display *ngIf="action() === ActionType.read"
                             [user]="user()"/>

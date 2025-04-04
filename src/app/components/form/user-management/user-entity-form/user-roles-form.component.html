@@ -1,26 +1,27 @@
-<form *ngIf="userForm" [formGroup]="userForm" class="d-flex flex-column">
+@let localUserForm = userForm();
+<form *ngIf="localUserForm" [formGroup]="localUserForm" class="d-flex flex-column">
   <div class="row">
     <div class="col-auto">
-      <p><span class="form-label fw-bold">Email : </span> {{ user?.email }}</p>
+      <p><span class="form-label fw-bold">Email : </span> {{ user()?.email }}</p>
     </div>
     <div class="col-auto">
-      <p><span class="form-label fw-bold">Username : </span> {{ user?.username }}</p>
+      <p><span class="form-label fw-bold">Username : </span> {{ user()?.username }}</p>
     </div>
     <div class="row">
       <div class="col-auto">
-        <p><span class="form-label fw-bold">Firstname : </span> {{ user?.firstName }}</p>
+        <p><span class="form-label fw-bold">Firstname : </span> {{ user()?.firstName }}</p>
       </div>
       <div class="col-auto">
-        <p><span class="form-label fw-bold">LastName : </span> {{ user?.lastName }}</p>
+        <p><span class="form-label fw-bold">LastName : </span> {{ user()?.lastName }}</p>
       </div>
     </div>
   </div>
   <div class="mb-3">
     <span class="form-label">Role(s) :</span>
-    <app-roles-selector [roleIds]='userForm.controls["roleIds"].value' formControlName="roleIds"/>
+    <app-roles-selector formControlName="roleIds"/>
     <app-input-control
-      [formGroup]="userForm"
-      [submitInvalid]="submitInvalidForm"
+      [formGroup]="localUserForm"
+      [submitInvalid]="submitInvalidForm()"
       errorMessage="Please select roles for this user"
       formGroupFieldName="roleIds"
       rules="min : 1"
