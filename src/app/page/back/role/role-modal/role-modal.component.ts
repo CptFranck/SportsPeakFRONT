@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, Output, TemplateRef, ViewChild} from '@angular/core';
+import {Component, EventEmitter, input, Output, TemplateRef, ViewChild} from '@angular/core';
 import {RoleDeleteFormComponent} from "../../../../components/form/role/role-delete-form/role-delete-form.component";
 import {
   RoleDetailsDisplayComponent
@@ -12,22 +12,22 @@ import {ActionType} from "../../../../interface/enum/action-type";
 import {FormIndicator} from "../../../../interface/utils/form-indicator";
 
 @Component({
-    selector: 'app-role-modal',
-    imports: [
-        ModalButtonComponent,
-        ModalComponent,
-        NgIf,
-        RoleDeleteFormComponent,
-        RoleDetailsDisplayComponent,
-        RoleEntityFormComponent
-    ],
-    templateUrl: './role-modal.component.html'
+  selector: 'app-role-modal',
+  imports: [
+    ModalButtonComponent,
+    ModalComponent,
+    NgIf,
+    RoleDeleteFormComponent,
+    RoleDetailsDisplayComponent,
+    RoleEntityFormComponent
+  ],
+  templateUrl: './role-modal.component.html'
 })
 export class RoleModalComponent {
-  @Input() modalTitle!: string;
-  @Input() roleModalId!: string;
-  @Input() role: Role | undefined;
-  @Input() action!: ActionType;
+  readonly modalTitle = input.required<string>();
+  readonly roleModalId = input.required<string>();
+  readonly role = input.required<Role | undefined>();
+  readonly action = input.required<ActionType>();
 
   @Output() roleAction: EventEmitter<FormIndicator> = new EventEmitter<FormIndicator>();
 
