@@ -21,13 +21,13 @@
                       [btnCloseRef]="btnClose"
                       [modification]="modification()"
                       [submitEventActionType$]="submitEventActionType$"
-                      [userInput]="user()"
+                      [user]="user()"
   />
   <app-user-password-form *ngIf="action() === ActionType.update && modification() === ModificationField.password"
                           [btnCloseRef]="btnClose"
                           [modification]="modification()"
                           [submitEventActionType$]="submitEventActionType$"
-                          [userInput]="user()"
+                          [user]="user()"
   />
   <app-user-delete-form *ngIf="action() === ActionType.delete"
                         [btnCloseRef]="btnClose"
