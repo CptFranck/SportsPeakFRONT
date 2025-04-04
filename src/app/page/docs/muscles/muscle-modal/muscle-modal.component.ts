@@ -1,4 +1,15 @@
-import {Component, EventEmitter, inject, OnDestroy, OnInit, Output, TemplateRef, ViewChild, input} from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  inject,
+  input,
+  OnDestroy,
+  OnInit,
+  Output,
+  signal,
+  TemplateRef,
+  ViewChild
+} from '@angular/core';
 import {ActionType} from "../../../../interface/enum/action-type";
 import {ModalButtonComponent} from "../../../../components/modal/modal-button/modal-button.component";
 import {ModalComponent} from "../../../../components/modal/modal/modal.component";
@@ -18,19 +29,19 @@ import {FormIndicator} from "../../../../interface/utils/form-indicator";
 import {Subject, takeUntil} from "rxjs";
 
 @Component({
-    selector: 'app-muscle-modal',
-    imports: [
-        ModalButtonComponent,
-        ModalComponent,
-        MuscleDetailsDisplayComponent,
-        MuscleEntityFormComponent,
-        NgIf,
-        MuscleDeleteFormComponent
-    ],
-    templateUrl: './muscle-modal.component.html'
+  selector: 'app-muscle-modal',
+  imports: [
+    ModalButtonComponent,
+    ModalComponent,
+    MuscleDetailsDisplayComponent,
+    MuscleEntityFormComponent,
+    NgIf,
+    MuscleDeleteFormComponent
+  ],
+  templateUrl: './muscle-modal.component.html'
 })
 export class MuscleModalComponent implements OnInit, OnDestroy {
-  isAdmin: boolean = false;
+  isAdmin = signal<boolean>(false);
 
   readonly modalTitle = input.required<string>();
   readonly muscleModalId = input.required<string>();
@@ -42,14 +53,15 @@ export class MuscleModalComponent implements OnInit, OnDestroy {
   @ViewChild("modalTemplate") modalTemplate!: TemplateRef<any>;
 
   protected readonly ActionType = ActionType;
-  private readonly unsubscribe$: Subject<void> = new Subject<void>();
-  private readonly userLoggedService: UserLoggedService = inject(UserLoggedService);
+  
+  private readonly unsubscribe$ = new Subject<void>();
+  private readonly userLoggedService = inject(UserLoggedService);
 
   ngOnInit(): void {
     this.userLoggedService.currentUser
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe(() =>
-        this.isAdmin = this.userLoggedService.isAdmin());
+        this.isAdmin.set(this.userLoggedService.isAdmin()));
   }
 
   ngOnDestroy() {
