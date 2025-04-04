@@ -1,4 +1,15 @@
-import {Component, EventEmitter, inject, Input, OnDestroy, OnInit, Output, TemplateRef, ViewChild} from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  inject,
+  input,
+  OnDestroy,
+  OnInit,
+  Output,
+  signal,
+  TemplateRef,
+  ViewChild
+} from '@angular/core';
 import {ModalButtonComponent} from "../../../../components/modal/modal-button/modal-button.component";
 import {ModalComponent} from "../../../../components/modal/modal/modal.component";
 import {NgIf} from "@angular/common";
@@ -18,39 +29,39 @@ import {FormIndicator} from "../../../../interface/utils/form-indicator";
 import {Subject, takeUntil} from "rxjs";
 
 @Component({
-    selector: 'app-exercise-type-modal',
-    imports: [
-        ModalButtonComponent,
-        ModalComponent,
-        NgIf,
-        ExerciseTypeDetailsDisplayComponent,
-        ExerciseTypeEntityFormComponent,
-        ExerciseTypeDeleteFormComponent
-    ],
-    templateUrl: './exercise-type-modal.component.html'
+  selector: 'app-exercise-type-modal',
+  imports: [
+    ModalButtonComponent,
+    ModalComponent,
+    NgIf,
+    ExerciseTypeDetailsDisplayComponent,
+    ExerciseTypeEntityFormComponent,
+    ExerciseTypeDeleteFormComponent
+  ],
+  templateUrl: './exercise-type-modal.component.html'
 })
 export class ExerciseTypeModalComponent implements OnInit, OnDestroy {
-  isAdmin: boolean = false;
+  isAdmin = signal<boolean>(false);
 
-  @Input() modalTitle!: string;
-  @Input() exerciseTypeModalId!: string;
-  @Input() exerciseType: ExerciseType | undefined;
-  @Input() action!: ActionType;
+  readonly modalTitle = input.required<string>();
+  readonly exerciseTypeModalId = input.required<string>();
+  readonly exerciseType = input.required<ExerciseType | undefined>();
+  readonly action = input.required<ActionType>();
 
-  @Output() exerciseTypeAction: EventEmitter<FormIndicator> = new EventEmitter<FormIndicator>();
+  @Output() exerciseTypeAction = new EventEmitter<FormIndicator>();
 
   @ViewChild("modalTemplate") modalTemplate!: TemplateRef<any>
 
   protected readonly ActionType = ActionType;
 
-  private readonly unsubscribe$: Subject<void> = new Subject<void>();
-  private readonly userLoggedService: UserLoggedService = inject(UserLoggedService);
+  private readonly unsubscribe$ = new Subject<void>();
+  private readonly userLoggedService = inject(UserLoggedService);
 
   ngOnInit(): void {
     this.userLoggedService.currentUser
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe(() =>
-        this.isAdmin = this.userLoggedService.isAdmin());
+        this.isAdmin.set(this.userLoggedService.isAdmin()));
   }
 
   ngOnDestroy() {
