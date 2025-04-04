@@ -1,34 +1,34 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-auto">
-      <p><span class="form-label fw-bold">Email : </span> {{ user?.email }}</p>
+      <p><span class="form-label fw-bold">Email : </span> {{ user()?.email }}</p>
     </div>
     <div class="col-auto">
-      <p><span class="form-label fw-bold">Username : </span> {{ user?.username }}</p>
+      <p><span class="form-label fw-bold">Username : </span> {{ user()?.username }}</p>
     </div>
     <div class="row">
       <div class="col-auto">
-        <p><span class="form-label fw-bold">Firstname : </span> {{ user?.firstName }}</p>
+        <p><span class="form-label fw-bold">Firstname : </span> {{ user()?.firstName }}</p>
       </div>
       <div class="col-auto">
-        <p><span class="form-label fw-bold">LastName : </span> {{ user?.lastName }}</p>
+        <p><span class="form-label fw-bold">LastName : </span> {{ user()?.lastName }}</p>
       </div>
     </div>
   </div>
   <div class="mb-3">
     <span class="form-label fw-bold">Role(s) :</span>
-    <p *ngIf="user?.roles?.length === 0">No roles attributed to this user</p>
-    <ol *ngIf="user?.roles?.length !== 0"
+    <p *ngIf="user()?.roles?.length === 0">No roles attributed to this user</p>
+    <ol *ngIf="user()?.roles?.length !== 0"
         class="list-group list-group-numbered"
     >
-      <li *ngFor="let role of user?.roles"
+      <li *ngFor="let role of user()?.roles"
           class="list-group-item d-flex justify-content-between align-items-start"
       >
         <div class="ms-2 me-auto">
           <p class="fw-bold">{{ role?.name }}</p>
           <span class="form-label fw-bold">Privilege(s) :</span>
           <p *ngIf="role?.privileges?.length === 0">No privileges attributed to this role</p>
-          <p *ngIf="role?.privileges?.length !== 0">{{ rolePrivileges[role.id] }}</p>
+          <p *ngIf="role?.privileges?.length !== 0">{{ rolePrivileges()[role.id] }}</p>
         </div>
       </li>
     </ol>

@@ -10,8 +10,7 @@
                        [submitEvents]="submitEventActionType$"
                        [user]="user()"
   />
-  <app-user-details-display *ngIf="action() === ActionType.read"
-                            [user]="user()"/>
+  <app-user-details-display *ngIf="action() === ActionType.read" [user]="user()"/>
   <!--  <app-user-delete-form [btnCloseRef]="btnClose"-->
   <!--                        [submitEventActionType$]="submitEventActionType$"-->
   <!--                        [user]="user"-->
