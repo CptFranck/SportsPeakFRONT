@@ -1,6 +1,5 @@
-@let localIndex = index();
 <app-select (onChange)="setIndex($event)"
             (onTouched)="onTouched()"
             [options]="indexOptions()"
-            [value]="localIndex !== null ? localIndex.toString() : null"
+            [value]="index()"
 />

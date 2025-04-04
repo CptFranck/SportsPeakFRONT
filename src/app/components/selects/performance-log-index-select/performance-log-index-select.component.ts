@@ -21,7 +21,7 @@ import {TargetSet} from "../../../interface/dto/target-set";
 export class PerformanceLogIndexSelectComponent implements ControlValueAccessor {
   readonly targetSet = input.required<TargetSet | undefined>();
 
-  indexOptions = computed<SelectOption[]>(() => {
+  readonly indexOptions = computed<SelectOption[]>(() => {
     const options: SelectOption[] = [];
     const targetSet = this.targetSet();
     if (targetSet) {
@@ -40,7 +40,7 @@ export class PerformanceLogIndexSelectComponent implements ControlValueAccessor 
     return options;
   });
 
-  index = signal<number | null>(null);
+  index = signal<string | null>(null);
 
   onChange: (value: number) => void = () => {
   };
@@ -49,7 +49,7 @@ export class PerformanceLogIndexSelectComponent implements ControlValueAccessor 
   };
 
   writeValue(index: number): void {
-    this.index.set(index);
+    this.index.set(index.toString());
   }
 
   registerOnChange(fn: (value: number) => void): void {
@@ -62,8 +62,7 @@ export class PerformanceLogIndexSelectComponent implements ControlValueAccessor 
 
   setIndex(stringIndex: string | null) {
     if (stringIndex === null) return;
-    let index: number = parseInt(stringIndex)
-    this.index.set(index);
-    this.onChange(index);
+    this.index.set(stringIndex);
+    this.onChange(parseInt(stringIndex));
   }
 }

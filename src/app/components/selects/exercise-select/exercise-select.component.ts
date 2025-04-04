@@ -24,7 +24,7 @@ export class ExerciseSelectComponent implements OnInit, OnDestroy, ControlValueA
 
   exerciseOptions = signal<SelectOption[]>([]);
 
-  exerciseId = signal<number | null>(null);
+  exerciseId = signal<string | null>(null);
 
   private readonly unsubscribe$ = new Subject<void>();
   private readonly exerciseService = inject(ExerciseService)
@@ -54,7 +54,10 @@ export class ExerciseSelectComponent implements OnInit, OnDestroy, ControlValueA
   };
 
   writeValue(exerciseId: number | null): void {
-    this.exerciseId.set(exerciseId);
+    if (exerciseId !== null)
+      this.exerciseId.set(exerciseId.toString())
+    else
+      this.exerciseId.set(exerciseId);
   }
 
   registerOnChange(fn: (value: number | null) => void): void {
@@ -66,9 +69,10 @@ export class ExerciseSelectComponent implements OnInit, OnDestroy, ControlValueA
   }
 
   setExerciseId(exerciseId: string | null) {
-    let exId: number | null = null;
-    if (exerciseId) exId = parseInt(exerciseId)
-    this.exerciseId.set(exId);
-    this.onChange(exId);
+    this.exerciseId.set(exerciseId);
+    if (exerciseId !== null)
+      this.onChange(parseInt(exerciseId))
+    else
+      this.onChange(exerciseId)
   }
 }
