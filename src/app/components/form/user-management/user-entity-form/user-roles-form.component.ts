@@ -21,9 +21,9 @@ import {Role} from "../../../../interface/dto/role";
 })
 export class UserRolesFormComponent implements OnInit, OnDestroy {
 
-  user = input.required<User | undefined>();
+  readonly user = input.required<User | undefined>();
 
-  userForm = computed<FormGroup>(() => {
+  readonly userForm = computed<FormGroup>(() => {
     const user = this.user();
     const userRoleIds: number[] = user?.lastName ?
       user?.roles?.map((role: Role) => role.id) : [];

@@ -19,9 +19,9 @@ import {confirmValidator} from "../../../../validators/confirmValidator";
   templateUrl: './user-password-form.component.html'
 })
 export class UserPasswordFormComponent implements OnInit, OnDestroy {
-  user = input.required<User | undefined>();
+  readonly user = input.required<User | undefined>();
 
-  userForm = computed<FormGroup>(() => {
+  readonly userForm = computed<FormGroup>(() => {
     const userForm: FormGroup = new FormGroup({
         oldPassword: new FormControl(
           "",
@@ -78,7 +78,6 @@ export class UserPasswordFormComponent implements OnInit, OnDestroy {
     const userForm = this.userForm();
     if (userForm.valid) {
       this.submitInvalidForm.set(false);
-      console.log(userForm.value);
       this.userService.modifyUserPassword(userForm);
       this.btnCloseRef().click();
     } else {

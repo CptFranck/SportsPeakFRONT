@@ -23,7 +23,7 @@ export class UserUsernameFormComponent implements OnInit, OnDestroy {
   readonly modification = input.required<ModificationField>();
   readonly submitEventActionType$ = input.required<Observable<ActionType> | undefined>();
 
-  userForm = computed<FormGroup>(() => {
+  readonly userForm = computed<FormGroup>(() => {
     const userForm: FormGroup = new FormGroup({
       newUsername: new FormControl("",
         [Validators.required,
