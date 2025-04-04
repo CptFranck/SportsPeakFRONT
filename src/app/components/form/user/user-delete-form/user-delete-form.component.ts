@@ -1,4 +1,4 @@
-import {Component, inject, Input, OnDestroy, OnInit} from '@angular/core';
+import {Component, inject, input, OnDestroy, OnInit} from '@angular/core';
 import {Observable, Subject, takeUntil} from "rxjs";
 import {User} from "../../../../interface/dto/user";
 import {UserService} from "../../../../services/user/user.service";
@@ -9,16 +9,17 @@ import {ActionType} from "../../../../interface/enum/action-type";
   templateUrl: './user-delete-form.component.html'
 })
 export class UserDeleteFormComponent implements OnInit, OnDestroy {
-  @Input() user!: User | undefined;
-  @Input() btnCloseRef!: HTMLButtonElement;
-  @Input() submitEventActionType$!: Observable<ActionType> | undefined;
+  readonly user = input.required<User | undefined>();
+  readonly btnCloseRef = input.required<HTMLButtonElement>();
+  readonly submitEventActionType$ = input.required<Observable<ActionType> | undefined>();
 
-  private readonly unsubscribe$: Subject<void> = new Subject<void>();
-  private readonly userService: UserService = inject(UserService);
+  private readonly unsubscribe$ = new Subject<void>();
+  private readonly userService = inject(UserService);
 
   ngOnInit() {
-    if (this.submitEventActionType$)
-      this.submitEventActionType$
+    const submitEventActionType$ = this.submitEventActionType$();
+    if (submitEventActionType$)
+      submitEventActionType$
         .pipe(takeUntil(this.unsubscribe$))
         .subscribe((actionType: ActionType) => {
           if (actionType === ActionType.delete)
@@ -32,9 +33,9 @@ export class UserDeleteFormComponent implements OnInit, OnDestroy {
   }
 
   onSubmit() {
-    if (!this.user) return;
+    if (!this.user()) return;
     console.log("not fully implemented")
     // this.userService.deleteUser(this.user);
-    this.btnCloseRef.click();
+    this.btnCloseRef().click();
   }
 }
