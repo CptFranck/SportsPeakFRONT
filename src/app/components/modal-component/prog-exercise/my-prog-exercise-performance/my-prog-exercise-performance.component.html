@@ -3,11 +3,12 @@
                    [max]="5"
                    [min]="1"
                    [step]="1"
-                   [value]="rowColNumber"
+                   [value]="rowColNumber()"
                    label="Number of graphes per line"/>
 </div>
 <div [id]="accordionAllPerformance" class="accordion">
-  <div *ngFor="let targetSetPerformance of targetSetsPerformanceLogsSortedByLogDate, index as i" class="accordion-item">
+  <div *ngFor="let targetSetPerformance of targetSetsPerformanceLogsSortedByLogDate(), index as i"
+       class="accordion-item">
     <h2 class="accordion-header">
       <button [attr.data-bs-target]='"#" + accordionAllPerformance + targetSetPerformance.key'
               [class]='"accordion-button fw-bold " + ifNotFirstCollapse(i)'
@@ -23,7 +24,7 @@
     >
       <div class="accordion-body p-0 ">
         <div class="container py-1">
-          <div [class]='"row align-items-center " + rowColNumberClass'>
+          <div [class]='"row align-items-center " + rowColNumberClass()'>
             <div *ngFor="let test of targetSetPerformance.value" class="col p-2">
               <p class="fw-bold"> Set N° {{ test.key }} </p>
               <app-performance-logs-set-chart [performanceLogSetInput]="test.value"/>
