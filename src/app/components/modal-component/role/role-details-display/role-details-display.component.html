@@ -1,16 +1,16 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-auto">
-      <p><span class="form-label fw-bold">Name : </span> {{ role?.name }}</p>
+      <p><span class="form-label fw-bold">Name : </span> {{ role()?.name }}</p>
     </div>
   </div>
   <div class="mb-3">
     <span class="form-label fw-bold">Privilege(s) :</span>
-    <p *ngIf="role?.privileges?.length === 0">No roles attributed to this user</p>
-    <ol *ngIf="role?.privileges?.length !== 0"
+    <p *ngIf="role()?.privileges?.length === 0">No roles attributed to this user</p>
+    <ol *ngIf="role()?.privileges?.length !== 0"
         class="list-group list-group-numbered"
     >
-      <li *ngFor="let privilege of role?.privileges"
+      <li *ngFor="let privilege of role()?.privileges"
           class="list-group-item d-flex justify-content-between align-items-start"
       >
         <div class="ms-2 me-auto">
