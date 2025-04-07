@@ -17,5 +17,7 @@
                                     [submitEventActionType$]="submitEventActionType$"/>
   <app-my-prog-exercise-details-display *ngIf="action() === ActionType.read"
                                         [progExercise]="progExercise()"/>
-  <app-my-prog-exercise-performance *ngIf="action() === ActionType.checkPerformance"/>
+  @let localProgExercise = progExercise();
+  <app-my-prog-exercise-performance *ngIf="action() === ActionType.checkPerformance && localProgExercise"
+                                    [progExercise]="localProgExercise"/>
 </ng-template>

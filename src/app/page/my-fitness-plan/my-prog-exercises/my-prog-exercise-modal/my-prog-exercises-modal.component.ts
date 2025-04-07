@@ -24,9 +24,9 @@ import {
     MyProgExerciseEntityFormComponent,
     MyProgExercisePerformanceComponent,
   ],
-  templateUrl: './my-prog-exercise-modal.component.html'
+  templateUrl: './my-prog-exercises-modal.component.html'
 })
-export class MyProgExerciseModalComponent {
+export class MyProgExercisesModalComponent {
   readonly modalTitle = model.required<string>();
   readonly muscleModalId = input.required<string>();
   readonly progExercise = model.required<ProgExercise | undefined>();
