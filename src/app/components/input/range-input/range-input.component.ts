@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {Component, EventEmitter, input, Output} from '@angular/core';
 
 @Component({
   selector: 'app-range-input',
@@ -6,17 +6,17 @@ import {Component, EventEmitter, Input, Output} from '@angular/core';
 })
 export class RangeInputComponent {
 
-  @Input() label!: string;
-  @Input() min !: number;
-  @Input() max !: number;
-  @Input() step !: number;
-  @Input() value !: number;
+  readonly label = input.required<string>();
+  readonly min = input.required<number>();
+  readonly max = input.required<number>();
+  readonly step = input.required<number>();
 
-  @Output() onChange: EventEmitter<number> = new EventEmitter();
+  readonly value = input.required<number>();
+
+  @Output() onChange = new EventEmitter();
 
   change($event: Event) {
     if ($event.target instanceof HTMLInputElement) {
-      this.value = parseInt($event.target.value);
       this.onChange.emit(parseInt($event.target.value));
     }
   }
