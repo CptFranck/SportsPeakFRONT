@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {Component, EventEmitter, Output, input} from '@angular/core';
 import {NgForOf} from "@angular/common";
 import {ModalButtonComponent} from "../../../../components/modal/modal-button/modal-button.component";
 import {Role} from "../../../../interface/dto/role";
@@ -16,8 +16,8 @@ import {ActionType} from "../../../../interface/enum/action-type";
 })
 export class RolesArrayComponent {
 
-  @Input() roles!: Role[];
-  @Input() modalId!: string;
+  readonly roles = input.required<Role[]>();
+  readonly modalId = input.required<string>();
 
   @Output() actionRole: EventEmitter<FormIndicator> = new EventEmitter<FormIndicator>();
 
