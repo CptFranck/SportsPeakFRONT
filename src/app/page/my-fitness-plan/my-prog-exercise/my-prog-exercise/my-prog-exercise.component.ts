@@ -1,4 +1,4 @@
-import {Component, inject, OnDestroy, OnInit} from '@angular/core';
+import {Component, inject, OnDestroy, OnInit, signal} from '@angular/core';
 import {ProgExercise} from "../../../../interface/dto/prog-exercise";
 import {ProgExerciseService} from "../../../../services/prog-exercise/prog-exercise.service";
 import {ActivatedRoute, Params} from "@angular/router";
@@ -35,50 +35,50 @@ import {
   templateUrl: './my-prog-exercise.component.html'
 })
 export class MyProgExerciseComponent implements OnInit, OnDestroy {
-  loading: boolean = true;
-
-  progExercise: ProgExercise | undefined;
-  progExerciseAction: ActionType = ActionType.update;
+  loading = signal<boolean>(true);
+  
+  progExercise = signal<ProgExercise | undefined>(undefined);
+  progExerciseAction = signal<ActionType>(ActionType.update);
+  progExerciseModalTitle = signal<string>("");
   progExerciseModalId: string = "progExerciseModal";
-  progExerciseModalTitle: string = "";
 
-  targetSet: TargetSet | undefined;
-  targetSetAction: ActionType = ActionType.update;
+  targetSet = signal<TargetSet | undefined>(undefined);
+  targetSetAction = signal<ActionType>(ActionType.update);
+  targetSetModalTitle = signal<string>("");
   targetSetModalId: string = "targetSetModalId";
-  targetSetModalTitle: string = "";
 
-  performanceLog: PerformanceLog | undefined;
-  performanceLogAction: ActionType = ActionType.update;
+  performanceLog = signal<PerformanceLog | undefined>(undefined);
+  performanceLogAction = signal<ActionType>(ActionType.update);
+  performanceLogModalTitle = signal<string>("");
   performanceLogModalId: string = "performanceLogModalId";
-  performanceLogModalTitle: string = "";
 
-
-  private readonly unsubscribe$: Subject<void> = new Subject<void>();
-  private readonly activatedRoute: ActivatedRoute = inject(ActivatedRoute);
-  private readonly proExerciseService: ProgExerciseService = inject(ProgExerciseService);
+  private readonly unsubscribe$ = new Subject<void>();
+  private readonly activatedRoute = inject(ActivatedRoute);
+  private readonly proExerciseService = inject(ProgExerciseService);
 
   ngOnInit(): void {
     this.proExerciseService.progExercise
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe((progExercise: ProgExercise | undefined) => {
         if (progExercise) {
-          this.progExercise = progExercise;
-          if (this.targetSet) {
-            this.targetSet =
-              this.progExercise.targetSets.find((targetSet: TargetSet) => this.targetSet?.id === targetSet.id);
+          this.progExercise.set(progExercise);
+          const currentTargetSet = this.targetSet()
+          if (currentTargetSet) {
+            this.targetSet.set(
+              progExercise.targetSets.find((targetSet: TargetSet) => currentTargetSet?.id === targetSet.id));
           }
         }
       });
     this.activatedRoute.params
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe((params: Params) => {
-        if (params['id'] !== this.progExercise?.id)
+        if (params['id'] !== this.progExercise()?.id)
           this.proExerciseService.getProgExerciseById(params['id']);
       });
     this.proExerciseService.isLoading
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe((isLoading: boolean) =>
-        this.loading = isLoading);
+        this.loading.set(isLoading));
   }
 
   ngOnDestroy() {
@@ -87,38 +87,41 @@ export class MyProgExerciseComponent implements OnInit, OnDestroy {
   }
 
   setProgExercise(formIndicator: FormIndicator) {
-    this.progExercise = formIndicator.object;
-    this.progExerciseAction = formIndicator.actionType;
-    this.progExerciseModalTitle = formIndicator.object.name;
+    this.progExercise.set(formIndicator.object);
+    this.progExerciseAction.set(formIndicator.actionType);
+    this.progExerciseModalTitle.set(formIndicator.object.name);
   }
 
   setTargetSet(formIndicator: FormIndicator) {
-    this.targetSet = formIndicator.object;
-    this.targetSetAction = formIndicator.actionType;
 
-    if (formIndicator.object === undefined)
-      this.targetSetModalTitle = "Add new set's step";
-    else if (formIndicator.actionType === ActionType.addEvolution)
-      this.targetSetModalTitle = "Add evolution to set's step N°" + formIndicator.object.index;
-    else
-      this.targetSetModalTitle = "Set's step N° " + formIndicator.object.index;
+    this.targetSetAction.set(formIndicator.actionType);
+    if (formIndicator.actionType === ActionType.create) {
+      this.targetSetModalTitle.set("Add new set's step");
+      this.targetSet.set(undefined);
+    } else if (formIndicator.actionType === ActionType.addEvolution) {
+      this.targetSetModalTitle.set("Add evolution to set's step N°" + formIndicator.object.index);
+      this.targetSet.set(formIndicator.object);
+    } else {
+      this.targetSetModalTitle.set("Set's step N° " + formIndicator.object.index);
+      this.targetSet.set(formIndicator.object);
+    }
   }
 
   setPerformanceLog(formIndicator: FormIndicator) {
-    this.performanceLogAction = formIndicator.actionType;
+    this.performanceLogAction.set(formIndicator.actionType);
     if (formIndicator.actionType === ActionType.create) {
-      this.targetSet = formIndicator.object;
-      this.performanceLog = undefined;
-      this.performanceLogModalTitle = "Add new performance log";
+      this.targetSet.set(formIndicator.object);
+      this.performanceLog.set(undefined);
+      this.performanceLogModalTitle.set("Add new performance log");
     } else if (formIndicator.actionType === ActionType.checkPerformance) {
-      this.targetSet = formIndicator.object;
-      this.performanceLog = undefined;
-      this.performanceLogModalTitle = "Check step N° " + this.targetSet?.index + " performances";
+      this.targetSet.set(formIndicator.object);
+      this.performanceLog.set(undefined);
+      this.performanceLogModalTitle.set("Check step N° " + this.targetSet()?.index + " performances");
     } else {
-      this.targetSet = undefined;
-      this.performanceLog = formIndicator.object;
-      this.performanceLogModalTitle = "Performance log of set N° " + formIndicator.object.setIndex +
-        " the " + formIndicator.object.logDate.substring(0, 10);
+      this.targetSet.set(undefined);
+      this.performanceLog.set(formIndicator.object);
+      this.performanceLogModalTitle.set("Performance log of set N° " + formIndicator.object.setIndex +
+        " the " + formIndicator.object.logDate.substring(0, 10));
     }
   }
 }

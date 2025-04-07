@@ -1,23 +1,24 @@
 <div class="container">
-  <app-loading [loading]="loading"/>
+  <app-loading [loading]="loading()"/>
   <div class="container-fluid">
     <div class="row">
       <div class="col">
-        <h2> {{ progExercise?.name }} </h2>
+        <h2> {{ progExercise()?.name }} </h2>
       </div>
       <div class="col-auto">
-        <app-my-prog-exercise-details-modal [action]="progExerciseAction"
-                                            [modalTitle]="progExerciseModalTitle"
+        <app-my-prog-exercise-details-modal [action]="progExerciseAction()"
+                                            [modalTitle]="progExerciseModalTitle()"
                                             [progExerciseModalId]="progExerciseModalId"
-                                            [progExercise]="progExercise"
+                                            [progExercise]="progExercise()"
         />
       </div>
     </div>
     <div class="row">
+      @let localProgExercise = progExercise();
       <app-prog-exercise-card-details (actionProgExercises)="setProgExercise($event)"
-                                      *ngIf="progExercise"
+                                      *ngIf="localProgExercise"
                                       [modalId]="progExerciseModalId"
-                                      [progExercise]="progExercise"
+                                      [progExercise]="localProgExercise"
       />
     </div>
     <div class="row pt-4 pb-1">
@@ -26,25 +27,25 @@
       </div>
       <div class="col-auto">
         <app-target-set-modal (targetSetAction)="setTargetSet($event)"
-                              [action]="targetSetAction"
-                              [performanceLog]="performanceLog"
-                              [progExercise]="progExercise"
+                              [action]="targetSetAction()"
+                              [performanceLog]="performanceLog()"
+                              [progExercise]="progExercise()"
                               [targetSetModalId]="targetSetModalId"
-                              [targetSetModalTitle]="targetSetModalTitle"
-                              [targetSet]="targetSet"/>
-        <app-performance-log-modal [action]="performanceLogAction"
+                              [targetSetModalTitle]="targetSetModalTitle()"
+                              [targetSet]="targetSet()"/>
+        <app-performance-log-modal [action]="performanceLogAction()"
                                    [performanceLogModalId]="performanceLogModalId"
-                                   [performanceLogModalTitle]="performanceLogModalTitle"
-                                   [performanceLog]="performanceLog"
-                                   [progExercise]="progExercise"
-                                   [targetSet]="targetSet"/>
+                                   [performanceLogModalTitle]="performanceLogModalTitle()"
+                                   [performanceLog]="performanceLog()"
+                                   [progExercise]="progExercise()"
+                                   [targetSet]="targetSet()"/>
       </div>
     </div>
     <div class="row">
       <app-target-sets (actionPerformanceLogs)="setPerformanceLog($event)"
                        (actionTargetSets)="setTargetSet($event)"
                        [performanceLogModalId]="performanceLogModalId"
-                       [progExerciseInput]="progExercise"
+                       [progExercise]="progExercise()"
                        [targetSetModalId]="targetSetModalId"/>
     </div>
   </div>
