@@ -5,13 +5,6 @@ export const GET_ROLES = gql`
     getRoles {
       id
       name
-      users {
-        id
-        email
-        firstName
-        lastName
-        username
-      }
       privileges {
         id
         name
@@ -25,13 +18,6 @@ export const ADD_ROLE = gql`
     addRole(inputNewRole: $inputNewRole) {
       id
       name
-      users {
-        id
-        email
-        firstName
-        lastName
-        username
-      }
       privileges {
         id
         name
@@ -45,13 +31,6 @@ export const MOD_ROLE = gql`
     modifyRole(inputRole: $inputRole) {
       id
       name
-      users {
-        id
-        email
-        firstName
-        lastName
-        username
-      }
       privileges {
         id
         name

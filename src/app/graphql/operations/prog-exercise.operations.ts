@@ -38,6 +38,14 @@ export const GET_PROG_EXERCISES = gql`
         targetSetUpdate {
           id
         }
+        performanceLogs {
+          id
+          setIndex
+          repetitionNumber
+          weight
+          weightUnit
+          logDate
+        }
       }
       creator {
         id
@@ -143,6 +151,14 @@ export const GET_USER_PROG_EXERCISES = gql`
         targetSetUpdate {
           id
         }
+        performanceLogs {
+          id
+          setIndex
+          repetitionNumber
+          weight
+          weightUnit
+          logDate
+        }
       }
       creator {
         id
@@ -194,6 +210,14 @@ export const ADD_PROG_EXERCISE = gql`
         targetSetUpdate {
           id
         }
+        performanceLogs {
+          id
+          setIndex
+          repetitionNumber
+          weight
+          weightUnit
+          logDate
+        }
       }
       creator {
         id
@@ -243,6 +267,14 @@ export const MOD_PROG_EXERCISE = gql`
         targetSetUpdate {
           id
         }
+        performanceLogs {
+          id
+          setIndex
+          repetitionNumber
+          weight
+          weightUnit
+          logDate
+        }
       }
       creator {
         id
@@ -291,6 +323,14 @@ export const MOD_PROG_EXERCISE_TRUST_LABEL = gql`
         state
         targetSetUpdate {
           id
+        }
+        performanceLogs {
+          id
+          setIndex
+          repetitionNumber
+          weight
+          weightUnit
+          logDate
         }
       }
       creator {
