@@ -1,8 +1,8 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, computed, EventEmitter, input, Output} from '@angular/core';
 import {TargetSet} from "../../../../interface/dto/target-set";
 import {ActionType} from "../../../../interface/enum/action-type";
 import {FormIndicator} from "../../../../interface/utils/form-indicator";
-import {getTargetSetInformation, getTargetSetTimeToString} from "../../../../utils/target-set-functions";
+import {getTargetSetTimeToString} from "../../../../utils/target-set-functions";
 import {getStringTime} from "../../../../utils/duration-functions";
 import {CollapseBlockComponent} from "../../../collapse-block/collapse-block.component";
 import {CollapseButtonComponent} from "../../../collapse-buton/collapse-button.component";
@@ -14,27 +14,19 @@ import {CollapseButtonComponent} from "../../../collapse-buton/collapse-button.c
   ],
   templateUrl: './target-set-logs-card.component.html'
 })
-export class TargetSetLogsCardComponent implements OnInit {
-  targetSets: string = "";
-  targetSetTime: string = "";
-  targetSetRestTime: string = "";
-  targetSetRepetition: string = "";
-  targetSetCreationDate!: Date;
+export class TargetSetLogsCardComponent {
 
-  @Input() targetSet!: TargetSet;
-  @Input() collapseBlockComponent!: CollapseBlockComponent;
-  @Input() formCollapseId!: string;
-  @Input() isLastTargetSet: boolean = false;
+  readonly targetSet = input.required<TargetSet>();
+  readonly collapseBlockComponent = input.required<CollapseBlockComponent>();
+  readonly formCollapseId = input.required<string>();
+  readonly isLastTargetSet = input<boolean>(false);
 
-  @Output() actionTargetSets: EventEmitter<FormIndicator> = new EventEmitter<FormIndicator>();
+  targetSetTime = computed<string>(() => getTargetSetTimeToString(this.targetSet(), this.isLastTargetSet()));
+  targetSetRestTime = computed<string>(() => getStringTime(this.targetSet().restTime));
+  targetSetRepetition = computed<string>(() => getStringTime(this.targetSet().physicalExertionUnitTime));
+  targetSetCreationDate = computed<Date>(() => new Date(this.targetSet().creationDate));
 
-  ngOnInit() {
-    this.targetSetTime = getTargetSetTimeToString(this.targetSet, this.isLastTargetSet);
-    this.targetSets = getTargetSetInformation(this.targetSet);
-    this.targetSetRestTime = getStringTime(this.targetSet.restTime);
-    this.targetSetRepetition = getStringTime(this.targetSet.physicalExertionUnitTime);
-    this.targetSetCreationDate = new Date(this.targetSet.creationDate);
-  }
+  @Output() actionTargetSets = new EventEmitter<FormIndicator>();
 
   checkPerformanceLogs(targetSet: TargetSet) {
     this.actionTargetSets.emit({

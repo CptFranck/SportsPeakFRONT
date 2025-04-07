@@ -1,39 +1,39 @@
-<div class="col-auto card my-3 shadow">
+<div class="card my-3 shadow">
   <div class="card-body ">
+    <h5 class="card-title">
+      {{ "Set from " + targetSetCreationDate().toLocaleDateString() }}
+    </h5>
     <div class="row">
-      <div class="col-auto">
-        <h5 class="fw-bold">
-          {{ "Set from " + targetSetCreationDate.toLocaleDateString() }}
-        </h5>
+      <div class="col">
         <div class="row">
           <div class="col-auto d-flex">
             <span class="fw-bold me-1"> Set : </span>
-            {{ targetSet.setNumber }}
+            {{ targetSet().setNumber }}
           </div>
           <div class="col-auto d-flex">
             <span class="fw-bold me-1"> Reps : </span>
-            {{ targetSet.repetitionNumber }}
+            {{ targetSet().repetitionNumber }}
           </div>
           <div class="col-auto d-flex">
             <span class="fw-bold me-1"> Weight : </span>
-            {{ targetSet.weight + " " + targetSet.weightUnit }}
+            {{ targetSet().weight + " " + targetSet().weightUnit }}
           </div>
           <div class="col-auto d-flex">
             <span class="fw-bold me-1"> Created : </span>
-            {{ targetSetCreationDate.toLocaleDateString() }}
+            {{ targetSetCreationDate().toLocaleDateString() }}
           </div>
           <div class="col-auto d-flex">
             <span class="fw-bold me-1"> State : </span>
-            {{ targetSet.state }}
+            {{ targetSet().state }}
           </div>
         </div>
         <div class="row align-content-center pt-1">
           <app-collapse-button
             (onClickEvent)="checkPerformanceLogs($event)"
             [allWidth]="true"
-            [collapseBlockComponent]="collapseBlockComponent"
-            [collapseId]="formCollapseId"
-            [value]="targetSet"
+            [collapseBlockComponent]="collapseBlockComponent()"
+            [collapseId]="formCollapseId()"
+            [value]="targetSet()"
             btnClass="btn-secondary"
           >
             Check performances
@@ -42,46 +42,50 @@
           </app-collapse-button>
         </div>
       </div>
-      <div class="col align-content-center">
+      <div class="col ">
         <div class="row">
-          <span class="col-auto fw-bold me-1 "> One Rep : </span>
-          {{ targetSetRepetition }}
-        </div>
-        <div class="row">
-          <span class="col-auto fw-bold me-1"> Rest : </span>
-          {{ targetSetRestTime }}
-        </div>
-        <div class="row">
-          <span class="col-auto fw-bold me-1"> Total : </span>
-          {{ targetSetTime }}
-        </div>
-      </div>
-      <div class="col text-center align-content-center">
-        <div class="row py-1">
-          <app-collapse-button
-            (onClickEvent)="modifyTargetSet($event)"
-            [allWidth]="true"
-            [collapseBlockComponent]="collapseBlockComponent"
-            [collapseId]="formCollapseId"
-            [value]="targetSet"
-            btnClass="btn-secondary"
-          >
-            Modify
-            <i class="fa-solid fa-pen-to-square"></i>
-          </app-collapse-button>
-        </div>
-        <div class="row py-1">
-          <app-collapse-button
-            (onClickEvent)="delTargetSet($event)"
-            [allWidth]="true"
-            [collapseBlockComponent]="collapseBlockComponent"
-            [collapseId]="formCollapseId"
-            [value]="targetSet"
-            btnClass="btn-danger"
-          >
-            Delete
-            <i class="fa-solid fa-trash"></i>
-          </app-collapse-button>
+          <div class="col align-content-center">
+            <div class="d-flex justify-content-between">
+              <div class="col fw-bold">One Rep:</div>
+              <div class="col align-content-center">{{ targetSetRepetition() }}</div>
+            </div>
+            <div class="d-flex justify-content-between">
+              <span class="col fw-bold"> Rest : </span>
+              <div class="col align-content-center"> {{ targetSetRestTime() }}</div>
+            </div>
+            <div class="d-flex justify-content-between">
+              <span class="col fw-bold"> Total : </span>
+              <div class="col align-content-center"> {{ targetSetTime() }}</div>
+            </div>
+          </div>
+          <div class="col text-center align-content-center">
+            <div class="row py-1">
+              <app-collapse-button
+                (onClickEvent)="modifyTargetSet($event)"
+                [allWidth]="true"
+                [collapseBlockComponent]="collapseBlockComponent()"
+                [collapseId]="formCollapseId()"
+                [value]="targetSet()"
+                btnClass="btn-secondary"
+              >
+                Modify
+                <i class="fa-solid fa-pen-to-square"></i>
+              </app-collapse-button>
+            </div>
+            <div class="row py-1">
+              <app-collapse-button
+                (onClickEvent)="delTargetSet($event)"
+                [allWidth]="true"
+                [collapseBlockComponent]="collapseBlockComponent()"
+                [collapseId]="formCollapseId()"
+                [value]="targetSet()"
+                btnClass="btn-danger"
+              >
+                Delete
+                <i class="fa-solid fa-trash"></i>
+              </app-collapse-button>
+            </div>
+          </div>
         </div>
       </div>
     </div>
