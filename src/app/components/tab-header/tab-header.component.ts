@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, input} from '@angular/core';
 import {NgForOf} from "@angular/common";
 import {TabOption} from "../../interface/components/tab/tabOption";
 
@@ -10,6 +10,6 @@ import {TabOption} from "../../interface/components/tab/tabOption";
     templateUrl: './tab-header.component.html'
 })
 export class TabHeaderComponent {
-  @Input() tabId!: string;
-  @Input() tabOptions!: TabOption[];
+  readonly tabId = input.required<string>();
+  readonly tabOptions = input.required<TabOption[]>();
 }

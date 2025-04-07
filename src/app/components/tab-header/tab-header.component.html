@@ -1,5 +1,5 @@
-<ul [id]="tabId" class="nav nav-tabs">
-  <li *ngFor="let tabOption of tabOptions" class="nav-item">
+<ul [id]="tabId()" class="nav nav-tabs">
+  <li *ngFor="let tabOption of tabOptions()" class="nav-item">
     <button [attr.data-bs-target]="'#' + tabOption.id"
             [class]='"nav-link link-secondary " + tabOption.active'
             data-bs-toggle="tab"
