@@ -22,8 +22,8 @@
   />
   <app-target-set-logs *ngIf="action() === ActionType.checkEvolution"
                        [modalId]="targetSetModalId()"
-                       [progExerciseInput]="progExercise()"
-                       [targetSetInput]="targetSet()"/>
+                       [progExercise]="progExercise()"
+                       [targetSet]="targetSet()"/>
   <app-target-set-delete-form *ngIf="action() === ActionType.delete"
                               [btnCloseRef]="btnClose"
                               [progExercise]="progExercise()"

@@ -1,5 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output, TemplateRef, ViewChild} from '@angular/core';
-import {ProgExercise} from "../../../../interface/dto/prog-exercise";
+import {Component, computed, EventEmitter, input, Output, signal, TemplateRef, ViewChild} from '@angular/core';
 import {TargetSet} from "../../../../interface/dto/target-set";
 import {NgForOf, NgIf} from "@angular/common";
 import {TargetSetLogsCardComponent} from "../../../card/target-set/target-set-logs-card/target-set-logs-card.component";
@@ -14,65 +13,52 @@ import {
   TargetSetDeleteFormComponent
 } from "../../../form/target-set/target-set-delete-form/target-set-delete-form.component";
 import {PerformanceLogsComponent} from "../../performance-log/performance-logs/performance-logs.component";
+import {ProgExercise} from "../../../../interface/dto/prog-exercise";
 
 @Component({
-    selector: 'app-target-set-logs',
-    imports: [
-        NgForOf,
-        TargetSetLogsCardComponent,
-        NgIf,
-        CollapseBlockComponent,
-        TargetSetEntityFormComponent,
-        TargetSetDeleteFormComponent,
-        PerformanceLogsComponent
-    ],
-    templateUrl: './target-set-logs.component.html'
+  selector: 'app-target-set-logs',
+  imports: [
+    NgForOf,
+    TargetSetLogsCardComponent,
+    NgIf,
+    CollapseBlockComponent,
+    TargetSetEntityFormComponent,
+    TargetSetDeleteFormComponent,
+    PerformanceLogsComponent
+  ],
+  templateUrl: './target-set-logs.component.html'
 })
-export class TargetSetLogsComponent implements OnInit {
-  switch: boolean = true;
-  action: ActionType = ActionType.read;
-  targetSetLog: TargetSet | undefined;
-  blocTitle: string | undefined;
+export class TargetSetLogsComponent {
   targetSetFormCollapseId: string = "TargetSetFormCollapseId";
 
-  targetSet: TargetSet | undefined;
-  progExercise: ProgExercise | undefined;
-  targetSetLogs: TargetSet[] = [];
+  readonly modalId = input.required<string>();
+  readonly targetSet = input.required<TargetSet | undefined>();
+  readonly progExercise = input.required<ProgExercise | undefined>();
+
+  targetSetLogs = computed<TargetSet[]>(() => {
+    const targetSet = this.targetSet();
+    const progExercise = this.progExercise();
+    if (targetSet && progExercise) {
+      return getTargetSetLogs(targetSet, progExercise);
+    }
+    return [];
+  });
+
+  action = signal<ActionType>(ActionType.read);
+  blocTitle = signal<string | undefined>(undefined);
+  targetSetLog = signal<TargetSet | undefined>(undefined);
 
   @ViewChild("performanceCollapseTemplate") modalTemplate!: TemplateRef<any>;
-
-  @Input() modalId!: string;
-
-  @Output() actionTargetSets: EventEmitter<FormIndicator> = new EventEmitter<FormIndicator>();
+  @Output() actionTargetSets = new EventEmitter<FormIndicator>();
 
   protected readonly ActionType = ActionType;
 
-  @Input() set targetSetInput(targetSet: TargetSet | undefined) {
-    this.targetSet = targetSet;
-    this.initialize()
-  }
-
-  @Input() set progExerciseInput(progExercise: ProgExercise | undefined) {
-    this.progExercise = progExercise;
-    this.initialize()
-  }
-
-  ngOnInit() {
-    this.initialize()
-  }
-
-  initialize() {
-    if (this.targetSet && this.progExercise)
-      this.targetSetLogs = getTargetSetLogs(this.targetSet, this.progExercise);
-  }
-
   setTargetSet(formIndicator: FormIndicator) {
-    this.action = formIndicator.actionType;
-    this.targetSetLog = formIndicator.object;
-    if (this.action === ActionType.checkPerformance) {
-      this.blocTitle = undefined;
-    } else {
-      this.blocTitle = "Set created on " + new Date(formIndicator.object?.creationDate).toLocaleDateString();
-    }
+    this.action.set(formIndicator.actionType);
+    this.targetSetLog.set(formIndicator.object);
+    if (this.action() === ActionType.checkPerformance)
+      this.blocTitle.set(undefined);
+    else
+      this.blocTitle.set("Set created on " + new Date(formIndicator.object?.creationDate).toLocaleDateString());
   }
 }
