@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, computed, EventEmitter, input, Output} from '@angular/core';
 import {ModalButtonComponent} from "../../../modal/modal-button/modal-button.component";
 import {FormIndicator} from "../../../../interface/utils/form-indicator";
 import {ActionType} from "../../../../interface/enum/action-type";
@@ -6,39 +6,36 @@ import {TargetSet} from "../../../../interface/dto/target-set";
 import {
   TargetSetStateFormComponent
 } from "../../../form/target-set/target-set-state-form/target-set-state-form.component";
-import {getTargetSetInformation, getTargetSetTimeToString} from "../../../../utils/target-set-functions";
+import {getTargetSetTimeToString} from "../../../../utils/target-set-functions";
 import {getStringTime} from "../../../../utils/duration-functions";
+import {TooltipComponent} from "../../../tooltip/tooltip.component";
+import {NgIf} from "@angular/common";
 
 @Component({
   selector: 'app-target-set-card',
   imports: [
     ModalButtonComponent,
     TargetSetStateFormComponent,
+    TooltipComponent,
+    NgIf,
   ],
   templateUrl: './target-set-card.component.html'
 })
-export class TargetSetCardComponent implements OnInit {
-  targetSets: string = "";
-  targetSetTime: string = "";
-  targetSetRestTime: string = "";
-  targetSetRepetition: string = "";
+export class TargetSetCardComponent {
 
-  @Input() targetSetModalId!: string;
-  @Input() performanceLogModalId!: string;
-  @Input() targetSet!: TargetSet;
-  @Input() isLastTargetSet: boolean = false;
+  readonly targetSetModalId = input.required<string>();
+  readonly performanceLogModalId = input.required<string>();
+  readonly targetSet = input.required<TargetSet>();
+  readonly isLastTargetSet = input<boolean>(false);
+
+  targetSetTime = computed<string>(() => getTargetSetTimeToString(this.targetSet(), this.isLastTargetSet()));
+  targetSetRestTime = computed<string>(() => getStringTime(this.targetSet().restTime));
+  targetSetRepetition = computed<string>(() => getStringTime(this.targetSet().physicalExertionUnitTime));
 
   @Output() actionTargetSets: EventEmitter<FormIndicator> = new EventEmitter<FormIndicator>();
   @Output() actionPerformanceLogs: EventEmitter<FormIndicator> = new EventEmitter<FormIndicator>();
 
   protected readonly ActionType = ActionType;
-
-  ngOnInit() {
-    this.targetSetTime = getTargetSetTimeToString(this.targetSet, this.isLastTargetSet);
-    this.targetSets = getTargetSetInformation(this.targetSet);
-    this.targetSetRestTime = getStringTime(this.targetSet.restTime)
-    this.targetSetRepetition = getStringTime(this.targetSet.physicalExertionUnitTime)
-  }
 
   addNewPerformance(targetSet: TargetSet) {
     this.actionPerformanceLogs.emit({

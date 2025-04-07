@@ -3,27 +3,27 @@
     <h5 class="card-title">
       {{ "Set from " + targetSetCreationDate().toLocaleDateString() }}
     </h5>
-    <div class="row">
+    <div class="row ">
       <div class="col">
         <div class="row">
           <div class="col-auto d-flex">
-            <span class="fw-bold me-1"> Set : </span>
+            <span class="fw-bold me-1"> Set&#8239;: </span>
             {{ targetSet().setNumber }}
           </div>
           <div class="col-auto d-flex">
-            <span class="fw-bold me-1"> Reps : </span>
+            <span class="fw-bold me-1"> Reps&#8239;: </span>
             {{ targetSet().repetitionNumber }}
           </div>
           <div class="col-auto d-flex">
-            <span class="fw-bold me-1"> Weight : </span>
+            <span class="fw-bold me-1"> Weight&#8239;: </span>
             {{ targetSet().weight + " " + targetSet().weightUnit }}
           </div>
           <div class="col-auto d-flex">
-            <span class="fw-bold me-1"> Created : </span>
+            <span class="fw-bold me-1"> Created&#8239;: </span>
             {{ targetSetCreationDate().toLocaleDateString() }}
           </div>
           <div class="col-auto d-flex">
-            <span class="fw-bold me-1"> State : </span>
+            <span class="fw-bold me-1"> State&#8239;: </span>
             {{ targetSet().state }}
           </div>
         </div>
@@ -42,19 +42,19 @@
           </app-collapse-button>
         </div>
       </div>
-      <div class="col ">
+      <div class="col align-content-center">
         <div class="row">
           <div class="col align-content-center">
             <div class="d-flex justify-content-between">
-              <div class="col fw-bold">One Rep:</div>
+              <div class="col fw-bold me-1">One&#8239;Rep&#8239;:</div>
               <div class="col align-content-center">{{ targetSetRepetition() }}</div>
             </div>
             <div class="d-flex justify-content-between">
-              <span class="col fw-bold"> Rest : </span>
+              <span class="col fw-bold me-1"> Rest&#8239;: </span>
               <div class="col align-content-center"> {{ targetSetRestTime() }}</div>
             </div>
             <div class="d-flex justify-content-between">
-              <span class="col fw-bold"> Total : </span>
+              <span class="col fw-bold me-1"> Total&#8239;: </span>
               <div class="col align-content-center"> {{ targetSetTime() }}</div>
             </div>
           </div>
