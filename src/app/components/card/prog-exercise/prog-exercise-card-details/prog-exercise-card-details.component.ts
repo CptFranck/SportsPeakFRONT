@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, input, OnInit, Output, signal} from '@angular/core';
 import {ProgExercise} from "../../../../interface/dto/prog-exercise";
 import {FormIndicator} from "../../../../interface/utils/form-indicator";
 import {getProgExerciseTime} from "../../../../utils/prog-exercise-functions";
@@ -7,7 +7,6 @@ import {ModalButtonComponent} from "../../../modal/modal-button/modal-button.com
 import {
   ProgExerciseTrustLabelFormComponent
 } from "../../../form/prog-exercise/prog-exercise-trust-label-form/prog-exercise-trust-label-form.component";
-import {getTargetSetsInformation} from "../../../../utils/target-set-functions";
 
 @Component({
   selector: 'app-prog-exercise-card-details',
@@ -18,16 +17,15 @@ import {getTargetSetsInformation} from "../../../../utils/target-set-functions";
   templateUrl: './prog-exercise-card-details.component.html'
 })
 export class ProgExerciseCardDetailsComponent implements OnInit {
-  exerciseTime: string = "";
-  targetSets: string[] = [];
-  @Input() modalId!: string;
-  @Input() progExercise!: ProgExercise;
+  exerciseTime = signal<string>("");
 
-  @Output() actionProgExercises: EventEmitter<FormIndicator> = new EventEmitter<FormIndicator>();
+  readonly modalId = input.required<string>();
+  readonly progExercise = input.required<ProgExercise>();
+
+  @Output() actionProgExercises = new EventEmitter<FormIndicator>();
 
   ngOnInit() {
-    this.exerciseTime = getProgExerciseTime(this.progExercise);
-    this.targetSets = getTargetSetsInformation(this.progExercise);
+    this.exerciseTime.set(getProgExerciseTime(this.progExercise()));
   }
 
   showProgExercisePerformance(progExercise: ProgExercise): void {
