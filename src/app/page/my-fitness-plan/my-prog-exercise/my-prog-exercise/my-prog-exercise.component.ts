@@ -10,8 +10,8 @@ import {
   ProgExerciseCardDetailsComponent
 } from "../../../../components/card/prog-exercise/prog-exercise-card-details/prog-exercise-card-details.component";
 import {
-  MyProgExerciseDetailsModalComponent
-} from "../my-prog-exercise-details-modal/my-prog-exercise-details-modal.component";
+  MyProgExerciseEditorModalComponent
+} from "../my-prog-exercise-editor-modal/my-prog-exercise-editor-modal.component";
 import {TargetSetModalComponent} from "../my-prog-exercise-target-sets/target-set-modal/target-set-modal.component";
 import {TargetSet} from "../../../../interface/dto/target-set";
 import {Subject, takeUntil} from "rxjs";
@@ -27,7 +27,7 @@ import {
     NgIf,
     LoadingComponent,
     ProgExerciseCardDetailsComponent,
-    MyProgExerciseDetailsModalComponent,
+    MyProgExerciseEditorModalComponent,
     TargetSetModalComponent,
     TargetSetsComponent,
     PerformanceLogModalComponent
@@ -36,7 +36,7 @@ import {
 })
 export class MyProgExerciseComponent implements OnInit, OnDestroy {
   loading = signal<boolean>(true);
-  
+
   progExercise = signal<ProgExercise | undefined>(undefined);
   progExerciseAction = signal<ActionType>(ActionType.update);
   progExerciseModalTitle = signal<string>("");

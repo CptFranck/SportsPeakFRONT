@@ -22,9 +22,9 @@ import {
     MyProgExerciseEntityFormComponent,
     MyProgExercisePerformanceComponent,
   ],
-  templateUrl: './my-prog-exercise-details-modal.component.html'
+  templateUrl: './my-prog-exercise-editor-modal.component.html'
 })
-export class MyProgExerciseDetailsModalComponent {
+export class MyProgExerciseEditorModalComponent {
   readonly modalTitle = input.required<string>();
   readonly progExerciseModalId = input.required<string>();
   readonly progExercise = input.required<ProgExercise | undefined>();
