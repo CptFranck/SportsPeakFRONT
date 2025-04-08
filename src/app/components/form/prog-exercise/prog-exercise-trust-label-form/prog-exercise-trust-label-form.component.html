@@ -1,14 +1,16 @@
 <div>
-  <div *ngIf="!modify" class="d-flex align-items-center">
+  <div *ngIf="!modify()" class="d-flex align-items-center">
     <span class="fw-bold me-1"> TrustLabel : </span>
-    {{ progExercise.trustLabel }}
-    <button (click)="openForm()" *ngIf="isStaff" class="d-flex btn btn-outline-secondary p-2 ms-2">
+    {{ progExercise().trustLabel }}
+    <button (click)="openForm()" *ngIf="isStaff()" class="d-flex btn btn-outline-secondary p-2 ms-2">
       <i class="fa-solid fa-pen-to-square"></i>
     </button>
   </div>
-  <form *ngIf="progExerciseTrustLabel && modify" [formGroup]="progExerciseTrustLabel" class="d-flex align-items-center">
-    <app-prog-exercise-trust-label-select [trustLabel]='progExerciseTrustLabel.controls["trustLabel"].value'
-                                          class="mx-auto" formControlName="trustLabel"/>
+  <form *ngIf="progExerciseTrustLabel() && modify()"
+        [formGroup]="progExerciseTrustLabel()"
+        class="d-flex align-items-center"
+  >
+    <app-prog-exercise-trust-label-select class="mx-auto" formControlName="trustLabel"/>
     <button (click)="submit()" class="btn btn-outline-secondary mx-auto">
       <i class="fa-solid fa-check"></i>
     </button>

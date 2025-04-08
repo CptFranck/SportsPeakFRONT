@@ -1,4 +1,4 @@
-import {Component, inject, Input, OnDestroy, OnInit} from '@angular/core';
+import {Component, computed, inject, input, OnDestroy, OnInit, signal} from '@angular/core';
 import {NgIf} from "@angular/common";
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {ProgExercise} from "../../../../interface/dto/prog-exercise";
@@ -19,22 +19,29 @@ import {Subject, takeUntil} from "rxjs";
   templateUrl: './prog-exercise-trust-label-form.component.html'
 })
 export class ProgExerciseTrustLabelFormComponent implements OnInit, OnDestroy {
-  modify: boolean = false;
-  isStaff: boolean = false;
-  progExerciseTrustLabel: FormGroup | null = null;
+  readonly progExercise = input.required<ProgExercise>();
 
-  @Input() progExercise!: ProgExercise;
+  modify = signal<boolean>(false);
+  isStaff = signal<boolean>(false);
+  progExerciseTrustLabel = computed<FormGroup>(() => {
+    const progExerciseTrustLabel: FormGroup = new FormGroup({
+      trustLabel: new FormControl(
+        this.progExercise().trustLabel,
+        [Validators.required]),
+    });
+    progExerciseTrustLabel.addControl("id", new FormControl(this.progExercise().id));
+    return progExerciseTrustLabel;
+  });
 
-  private readonly unsubscribe$: Subject<void> = new Subject<void>();
-  private readonly userLoggedService: UserLoggedService = inject(UserLoggedService);
-  private readonly progExerciseService: ProgExerciseService = inject(ProgExerciseService);
+  private readonly unsubscribe$ = new Subject<void>();
+  private readonly userLoggedService = inject(UserLoggedService);
+  private readonly progExerciseService = inject(ProgExerciseService);
 
   ngOnInit() {
-    this.initializeProgExerciseForm();
     this.userLoggedService.currentUser
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe(() => {
-        this.isStaff = this.userLoggedService.isStaff();
+        this.isStaff.set(this.userLoggedService.isStaff());
       })
   }
 
@@ -43,25 +50,15 @@ export class ProgExerciseTrustLabelFormComponent implements OnInit, OnDestroy {
     this.unsubscribe$.complete();
   }
 
-  initializeProgExerciseForm() {
-    this.progExerciseTrustLabel = new FormGroup(
-      {
-        trustLabel: new FormControl(
-          this.progExercise.trustLabel,
-          [Validators.required]),
-      });
-    this.progExerciseTrustLabel.addControl("id", new FormControl(this.progExercise.id));
-  }
-
   openForm(): void {
-    this.modify = true;
+    this.modify.set(true);
   }
 
   submit() {
-    if (!this.progExerciseTrustLabel) return;
-    if (this.progExerciseTrustLabel.valid) {
-      this.progExerciseService.modifyProgExerciseTrustLabel(this.progExerciseTrustLabel);
-      this.modify = false;
+    const progExerciseTrustLabel = this.progExerciseTrustLabel();
+    if (progExerciseTrustLabel.valid) {
+      this.progExerciseService.modifyProgExerciseTrustLabel(progExerciseTrustLabel);
+      this.modify.set(false);
     }
   }
 }
