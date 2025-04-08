@@ -8,22 +8,22 @@
     <th class="col-auto text-center" scope="col">Trust Label</th>
     <th class="col-1 text-center" scope="col">Collapse</th>
     <th class="col-1 text-center" scope="col">Details</th>
-    <th *ngIf="userLogged" class="col-1 text-center" scope="col">Subscribe</th>
+    <th *ngIf="userLogged()" class="col-1 text-center" scope="col">Subscribe</th>
   </tr>
   </thead>
   <tbody class="table-group-divider">
-  <tr *ngFor="let progExercise of progExercises">
+  <tr *ngFor="let progExercise of progExercises()">
     <td>{{ progExercise.name }}</td>
-    <td *ngIf="!progExerciseDetails[progExercise.id].show" class="truncate-td">
+    <td *ngIf="!progExerciseDetails()[progExercise.id].show" class="truncate-td">
       {{ progExercise.note }}
     </td>
-    <td *ngIf="progExerciseDetails[progExercise.id].show">
+    <td *ngIf="progExerciseDetails()[progExercise.id].show">
       {{ progExercise.note }}
     </td>
     <td class="text-center">
       {{ progExercise.exercise.name }}
     </td>
-    <td *ngIf="!progExerciseDetails[progExercise.id].show">
+    <td *ngIf="!progExerciseDetails()[progExercise.id].show">
       <ul class="list-group list-group-flush">
         <li
           *ngFor="let muscle of progExercise.exercise.muscles.slice(0, 2)"
@@ -39,7 +39,7 @@
         </li>
       </ul>
     </td>
-    <td *ngIf="progExerciseDetails[progExercise.id].show">
+    <td *ngIf="progExerciseDetails()[progExercise.id].show">
       <ul class="list-group list-group-flush">
         <li
           *ngFor="let muscle of progExercise.exercise.muscles"
@@ -69,7 +69,7 @@
       <div class="col p-1 text-center">
         <app-modal-button
           (onCLickModalButton)="showMuscleDetails($event)"
-          [modalId]="modalId"
+          [modalId]="modalId()"
           [modalValue]="progExercise"
           btnClass="btn-info"
         >
@@ -78,11 +78,11 @@
         </app-modal-button>
       </div>
     </td>
-    <td *ngIf="userLogged">
+    <td *ngIf="userLogged()">
       <div class="col p-1 text-center">
         <button
           (click)="expendProgExerciseDetails(progExercise.id.toString())"
-          [class]="'btn ' + subscribeClassButton" type="button"
+          [class]="'btn ' + subscribeClassButton()" type="button"
         >
           <i class="fa-regular fa-square-plus"></i>
           <i class="fa-solid fa-minus"></i>
