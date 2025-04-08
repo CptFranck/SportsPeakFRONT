@@ -1,6 +1,6 @@
 <div>
-  <div *ngIf="!modify()" class="d-flex align-items-center">
-    <span class="fw-bold me-1"> TrustLabel : </span>
+  <div *ngIf="!modify()" class="d-flex justify-content-between align-items-center">
+    <div class="fw-bold me-1"> TrustLabel&#8239;:</div>
     {{ progExercise().trustLabel }}
     <button (click)="openForm()" *ngIf="isStaff()" class="d-flex btn btn-outline-secondary p-2 ms-2">
       <i class="fa-solid fa-pen-to-square"></i>
