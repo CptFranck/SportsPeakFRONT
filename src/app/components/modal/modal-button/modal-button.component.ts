@@ -16,6 +16,7 @@ export class ModalButtonComponent implements OnInit {
   readonly modalValue = input<any>();
   readonly btnClass = input<string>("btn-success");
   readonly allWidth = input<boolean>(false);
+  readonly onOneLine = input<boolean>(false);
   readonly useTooltip = input<boolean>(false);
   readonly tooltipText = input<string>("Modal tooltip text");
 
@@ -30,6 +31,8 @@ export class ModalButtonComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.allWidth())
-      this.allWidthStyle.set("width:100%")
+      this.allWidthStyle.update(value => value + " width:100%;")
+    if (this.onOneLine())
+      this.allWidthStyle.update(value => value + " white-space: nowrap; text-align: center;")
   }
 }
