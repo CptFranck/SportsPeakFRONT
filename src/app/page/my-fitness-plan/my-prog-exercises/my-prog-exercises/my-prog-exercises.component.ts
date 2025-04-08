@@ -1,4 +1,4 @@
-import {Component, inject, OnDestroy, OnInit, TemplateRef, ViewChild} from '@angular/core';
+import {Component, inject, OnDestroy, OnInit, signal, TemplateRef, ViewChild} from '@angular/core';
 import {ProgExercise} from "../../../../interface/dto/prog-exercise";
 import {ActionType} from "../../../../interface/enum/action-type";
 import {ProgExerciseService} from "../../../../services/prog-exercise/prog-exercise.service";
@@ -6,7 +6,7 @@ import {FormIndicator} from "../../../../interface/utils/form-indicator";
 import {LoadingComponent} from "../../../../components/loading/loading.component";
 import {SearchBarComponent} from "../../../../components/search-bar/search-bar.component";
 import {Muscle} from "../../../../interface/dto/muscle";
-import {MyProgExerciseModalComponent} from "../my-prog-exercise-modal/my-prog-exercise-modal.component";
+import {MyProgExercisesModalComponent} from "../my-prog-exercise-modal/my-prog-exercises-modal.component";
 import {NgForOf} from "@angular/common";
 import {
   ProgExerciseCardComponent
@@ -14,30 +14,31 @@ import {
 import {Subject, takeUntil} from "rxjs";
 
 @Component({
-    selector: 'app-my-prog-exercises',
-    imports: [
-        LoadingComponent,
-        SearchBarComponent,
-        MyProgExerciseModalComponent,
-        NgForOf,
-        ProgExerciseCardComponent,
-    ],
-    templateUrl: './my-prog-exercises.component.html'
+  selector: 'app-my-prog-exercises',
+  imports: [
+    LoadingComponent,
+    SearchBarComponent,
+    MyProgExercisesModalComponent,
+    NgForOf,
+    ProgExerciseCardComponent,
+  ],
+  templateUrl: './my-prog-exercises.component.html'
 })
 export class MyProgExercisesComponent implements OnInit, OnDestroy {
-  loading: boolean = true;
+  loading = signal<boolean>(true);
   progExercises: ProgExercise[] = [];
-  displayedProgExercises: ProgExercise[] = [];
-  progExercise: ProgExercise | undefined;
-  action: ActionType = ActionType.create;
-  modalTitle: string = "";
-  progExerciseModalId: string = "progExerciseModal";
-  searchInput: string = "";
+  displayedProgExercises = signal<ProgExercise[]>([]);
+
+  action = signal<ActionType>(ActionType.create);
+  modalTitle = signal<string>("");
+  progExercise = signal<ProgExercise | undefined>(undefined);
+  readonly progExerciseModalId = "progExerciseModal";
+  searchInput = "";
 
   @ViewChild("modalTemplate") modalTemplate!: TemplateRef<any>;
 
-  private readonly unsubscribe$: Subject<void> = new Subject<void>();
-  private readonly progExerciseService: ProgExerciseService = inject(ProgExerciseService);
+  private readonly unsubscribe$ = new Subject<void>();
+  private readonly progExerciseService = inject(ProgExerciseService);
 
   ngOnInit(): void {
     this.progExerciseService.userProgExercises
@@ -48,7 +49,7 @@ export class MyProgExercisesComponent implements OnInit, OnDestroy {
       });
     this.progExerciseService.isLoading
       .pipe(takeUntil(this.unsubscribe$))
-      .subscribe((isLoading: boolean) => this.loading = isLoading);
+      .subscribe((isLoading: boolean) => this.loading.set(isLoading));
   }
 
   ngOnDestroy() {
@@ -57,9 +58,9 @@ export class MyProgExercisesComponent implements OnInit, OnDestroy {
   }
 
   setProgExercise(formIndicator: FormIndicator) {
-    this.progExercise = formIndicator.object;
-    this.action = formIndicator.actionType;
-    this.modalTitle = formIndicator.object.name;
+    this.action.set(formIndicator.actionType);
+    this.modalTitle.set(formIndicator.object.name);
+    this.progExercise.set(formIndicator.object);
   }
 
   searchProgExercise(input: string) {
@@ -68,15 +69,18 @@ export class MyProgExercisesComponent implements OnInit, OnDestroy {
   }
 
   updateDisplayedProgExercise() {
+    const localInput = this.searchInput.toLowerCase();
     if (this.searchInput === "") {
-      this.displayedProgExercises = this.progExercises;
+      this.displayedProgExercises.set(this.progExercises);
       return;
     }
+    const exercisesFiltered = this.filterProgExercises(localInput);
+    this.displayedProgExercises.set(exercisesFiltered);
+  }
 
-    let localInput: string = this.searchInput.toLowerCase();
-    let includeMuscleExerciseName: boolean = false;
-
-    this.displayedProgExercises = this.progExercises.filter((progExercise: ProgExercise) => {
+  filterProgExercises(localInput: string) {
+    let includeMuscleExerciseName = false;
+    return this.progExercises.filter((progExercise: ProgExercise) => {
       includeMuscleExerciseName = false;
 
       progExercise.exercise.muscles.forEach((muscle: Muscle) =>
@@ -86,6 +90,6 @@ export class MyProgExercisesComponent implements OnInit, OnDestroy {
         progExercise.note.toLowerCase().includes(localInput) ||
         progExercise.exercise.name.toLowerCase().includes(localInput) ||
         includeMuscleExerciseName;
-    });
+    })
   }
 }
