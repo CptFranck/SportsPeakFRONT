@@ -1,7 +1,7 @@
 <div class="card m-3 shadow">
   <div class="card-body">
-    <h5 class="card-title"> {{ "Step N°" + targetSet().index }}</h5>
-    <div class="row justify-content-center align-items-center">
+    <h5 class="card-title m-0"> {{ "Step N°" + targetSet().index }}</h5>
+    <div class="row align-items-center">
       <div class="col-auto align-items-center">
         <div class="row d-flex align-items-center">
           <div class="col-auto">
@@ -22,7 +22,7 @@
         </div>
         <div class="row d-flex align-items-center">
           <div class="col align-content-center">
-            <div class="p-1">
+            <div class="py-1">
               <app-modal-button
                 (onCLickModalButton)="addNewPerformance($event)"
                 [allWidth]="true"
@@ -36,7 +36,7 @@
             </div>
           </div>
           <div class="col align-content-center">
-            <div class="p-1">
+            <div class="py-1">
               <app-modal-button
                 (onCLickModalButton)="checkPerformance($event)"
                 [allWidth]="true"
@@ -57,38 +57,40 @@
           {{ targetSetRepetition() }}
         </div>
         <div class="d-flex justify-content-between">
-          <span class="fw-bold me-1"> Rest&#8239;: </span>
+          <span class="fw-bold me-1">Rest&#8239;:</span>
           {{ targetSetRestTime() }}
         </div>
         <div class="d-flex justify-content-between">
-          <span class="fw-bold me-1"> Total&#8239;: </span>
-          {{ targetSetTime() }}
-          <app-tooltip *ngIf="isLastTargetSet()" tooltipText="last rest time is not included">
-            <sup class="fw-bold">*</sup>
+          <span class="fw-bold me-1">Total&#8239;:</span>
+          <app-tooltip [used]="isLastTargetSet()" tooltipText="last rest time is not included">
+            {{ targetSetTime() }}
+            <sup *ngIf="isLastTargetSet()" class="fw-bold">*</sup>
           </app-tooltip>
         </div>
       </div>
       <div class="col align-content-center">
         <div class="row">
           <div class="col align-content-center">
-            <div class="p-1">
+            <div class="py-1">
               <app-modal-button
                 (onCLickModalButton)="adjustTargetSet($event)"
                 [allWidth]="true"
                 [modalId]="targetSetModalId()"
                 [modalValue]="targetSet()"
+                [onOneLine]="true"
                 btnClass="btn-secondary"
               >
                 Adjust objective
                 <i class="fa-solid fa-sliders"></i>
               </app-modal-button>
             </div>
-            <div class="p-1">
+            <div class="py-1">
               <app-modal-button
                 (onCLickModalButton)="checkTargetSet($event)"
                 [allWidth]="true"
                 [modalId]="targetSetModalId()"
                 [modalValue]="targetSet()"
+                [onOneLine]="true"
                 btnClass="btn-secondary"
               >
                 Objectives evolution
@@ -97,7 +99,7 @@
             </div>
           </div>
           <div class="col align-content-center">
-            <div class="p-1">
+            <div class="py-1">
               <app-modal-button
                 (onCLickModalButton)="modifyTargetSet($event)"
                 [allWidth]="true"
@@ -109,7 +111,7 @@
                 <i class="fa-solid fa-pen-to-square"></i>
               </app-modal-button>
             </div>
-            <div class="p-1">
+            <div class="py-1">
               <app-modal-button
                 (onCLickModalButton)="delTargetSet($event)"
                 [allWidth]="true"
