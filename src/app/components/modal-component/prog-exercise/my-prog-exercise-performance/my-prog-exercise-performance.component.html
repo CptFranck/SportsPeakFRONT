@@ -25,9 +25,9 @@
       <div class="accordion-body p-0 ">
         <div class="container py-1">
           <div [class]='"row align-items-center " + rowColNumberClass()'>
-            <div *ngFor="let test of targetSetPerformance.value" class="col p-2">
-              <p class="fw-bold"> Set N° {{ test.key }} </p>
-              <app-performance-logs-set-chart [performanceLogSetInput]="test.value"/>
+            <div *ngFor="let performanceLogsSet of targetSetPerformance.value" class="col p-2">
+              <p class="fw-bold"> Set N° {{ performanceLogsSet.key }} </p>
+              <app-performance-logs-set-chart [performanceLogSet]="performanceLogsSet.value"/>
             </div>
           </div>
         </div>

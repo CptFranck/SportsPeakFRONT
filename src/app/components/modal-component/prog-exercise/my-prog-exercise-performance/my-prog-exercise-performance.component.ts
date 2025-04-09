@@ -23,9 +23,9 @@ import {sortPerformanceLogsBySet} from "../../../../utils/performance-log-functi
   templateUrl: './my-prog-exercise-performance.component.html'
 })
 export class MyProgExercisePerformanceComponent {
-  progExercise = input.required<ProgExercise | undefined>();
+  readonly progExercise = input.required<ProgExercise | undefined>();
 
-  targetSetsPerformanceLogsSortedByLogDate = computed<DictionaryItem<DictionaryItem<PerformanceLog[]>[]>[]>(() => {
+  readonly targetSetsPerformanceLogsSortedByLogDate = computed<DictionaryItem<DictionaryItem<PerformanceLog[]>[]>[]>(() => {
     const progExercise = this.progExercise();
     const targetSetsPerformanceLogsSortedByLogDate: DictionaryItem<DictionaryItem<PerformanceLog[]>[]>[] = [];
     if (progExercise) {
@@ -49,6 +49,7 @@ export class MyProgExercisePerformanceComponent {
 
   protected readonly ifFirstShow = ifFirstShow;
   protected readonly ifNotFirstCollapse = ifNotFirstCollapse;
+  protected readonly console = console;
 
   changeRowColNumber(value: number) {
     this.rowColNumber.set(value)
