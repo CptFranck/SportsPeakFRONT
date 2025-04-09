@@ -25,7 +25,6 @@ export class ExerciseSelectorComponent implements OnInit, OnDestroy, ControlValu
   exerciseIds = signal<number[]>([]);
   exerciseOptions = signal<MultiSelectOption[]>([]);
 
-
   private readonly unsubscribe$ = new Subject<void>();
   private readonly exerciseService = inject(ExerciseService);
 
