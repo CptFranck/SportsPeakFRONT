@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {Component, EventEmitter, input, Output} from '@angular/core';
 import {NgForOf} from "@angular/common";
 import {
   PerformanceLogsCardComponent
@@ -18,12 +18,13 @@ import {ifFirstShow, ifNotFirstCollapse} from "../../../../utils/accordion-funct
   templateUrl: './performance-log-sorted-by-set.component.html'
 })
 export class PerformanceLogSortedBySetComponent {
-  @Input() formCollapseId!: string;
-  @Input() accordionParentIdSet!: string;
-  @Input() collapseBlock!: CollapseBlockComponent;
-  @Input() performanceLogsSortedBySet!: DictionaryItem<PerformanceLog[]>[];
+  readonly formCollapseId = input.required<string>();
+  readonly accordionParentIdSet = input.required<string>();
+  readonly collapseBlock = input.required<CollapseBlockComponent>();
+  readonly performanceLogsSortedBySet = input.required<DictionaryItem<PerformanceLog[]>[]>();
 
-  @Output() actionPerformanceLog: EventEmitter<FormIndicator> = new EventEmitter<FormIndicator>();
+  @Output() actionPerformanceLog = new EventEmitter<FormIndicator>();
+  
   protected readonly ifFirstShow = ifFirstShow;
   protected readonly ifNotFirstCollapse = ifNotFirstCollapse;
 
