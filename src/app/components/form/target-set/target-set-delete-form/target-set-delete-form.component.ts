@@ -1,4 +1,4 @@
-import {Component, inject, Input, OnDestroy, OnInit} from '@angular/core';
+import {Component, inject, input, OnDestroy, OnInit} from '@angular/core';
 import {Observable, Subject, takeUntil} from "rxjs";
 import {TargetSet} from "../../../../interface/dto/target-set";
 import {ActionType} from "../../../../interface/enum/action-type";
@@ -11,18 +11,18 @@ import {ProgExercise} from "../../../../interface/dto/prog-exercise";
 })
 export class TargetSetDeleteFormComponent implements OnInit, OnDestroy {
 
-  @Input() targetSet!: TargetSet | undefined;
-  @Input() progExercise!: ProgExercise | undefined;
-  @Input() btnCloseRef!: HTMLButtonElement;
-  @Input() submitEventActionType$!: Observable<ActionType> | undefined;
+  readonly targetSet = input.required<TargetSet | undefined>();
+  readonly progExercise = input.required<ProgExercise | undefined>();
+  readonly btnCloseRef = input.required<HTMLButtonElement>();
+  readonly submitEventActionType$ = input.required<Observable<ActionType> | undefined>();
 
-  private readonly unsubscribe$: Subject<void> = new Subject<void>();
-  private readonly targetSetService: TargetSetService = inject(TargetSetService);
+  private readonly unsubscribe$ = new Subject<void>();
+  private readonly targetSetService = inject(TargetSetService);
 
   ngOnInit() {
-    console.log(this.targetSet)
-    if (this.submitEventActionType$)
-      this.submitEventActionType$
+    const submitEventActionType$ = this.submitEventActionType$();
+    if (submitEventActionType$)
+      submitEventActionType$
         .pipe(takeUntil(this.unsubscribe$))
         .subscribe((actionType: ActionType) => {
           if (actionType === ActionType.delete)
@@ -36,8 +36,9 @@ export class TargetSetDeleteFormComponent implements OnInit, OnDestroy {
   }
 
   onSubmit() {
-    if (!this.targetSet) return;
-    this.targetSetService.deleteTargetSet(this.targetSet);
-    this.btnCloseRef.click();
+    const targetSet = this.targetSet();
+    if (!targetSet) return;
+    this.targetSetService.deleteTargetSet(targetSet);
+    this.btnCloseRef().click();
   }
 }
