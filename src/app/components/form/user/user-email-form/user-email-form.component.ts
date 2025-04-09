@@ -3,7 +3,6 @@ import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/
 import {Observable, Subject, takeUntil} from "rxjs";
 import {User} from "../../../../interface/dto/user";
 import {InputControlComponent} from "../../../input-control/input-control.component";
-import {NgIf} from "@angular/common";
 import {UserService} from "../../../../services/user/user.service";
 import {ModificationField} from "../../../../interface/enum/modification-field";
 import {ActionType} from "../../../../interface/enum/action-type";
@@ -12,7 +11,6 @@ import {ActionType} from "../../../../interface/enum/action-type";
   selector: 'app-user-email-form',
   imports: [
     InputControlComponent,
-    NgIf,
     ReactiveFormsModule,
   ],
   templateUrl: './user-email-form.component.html'
