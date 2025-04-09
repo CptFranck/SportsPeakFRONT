@@ -16,9 +16,9 @@
                                     action() === ActionType.addEvolution"
                               [actionType]="action()"
                               [btnCloseRef]="btnClose"
-                              [progExerciseInput]="progExercise()"
+                              [progExercise]="progExercise()"
                               [submitEventActionType$]="submitEventActionType$"
-                              [targetSetInput]="targetSet()"
+                              [targetSet]="targetSet()"
   />
   <app-target-set-logs *ngIf="action() === ActionType.checkEvolution"
                        [modalId]="targetSetModalId()"

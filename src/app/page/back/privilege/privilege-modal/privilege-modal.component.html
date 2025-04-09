@@ -13,7 +13,7 @@
 <ng-template #modalTemplate let-btnClose="btnClose" let-submitEventActionType$="submitEventActionType$">
   <app-privilege-entity-form *ngIf="action() === ActionType.create || action() === ActionType.update"
                              [btnCloseRef]="btnClose"
-                             [privilegeInput]="privilege()"
+                             [privilege]="privilege()"
                              [submitEventActionType$]="submitEventActionType$"
   />
   <app-privilege-details-display *ngIf="action() === ActionType.read"

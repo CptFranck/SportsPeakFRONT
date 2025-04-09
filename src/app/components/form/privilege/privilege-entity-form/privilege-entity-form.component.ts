@@ -20,14 +20,15 @@ import {ActionType} from "../../../../interface/enum/action-type";
 })
 export class PrivilegeEntityFormComponent implements OnInit, OnDestroy {
 
-  isAdmin: boolean = false;
-
   readonly privilege = input.required<Privilege | undefined>();
   readonly btnCloseRef = input.required<HTMLButtonElement>();
   readonly submitEventActionType$ = input.required<Observable<ActionType> | undefined>();
 
   submitInvalidForm = signal<boolean>(false);
-  privilegeForm = computed<FormGroup>(() => {
+
+  private isAdmin = false;
+
+  readonly privilegeForm = computed<FormGroup>(() => {
     const exerciseIdsValidator = this.isAdmin ? null : Validators.required;
 
     const privilege = this.privilege();
@@ -48,6 +49,7 @@ export class PrivilegeEntityFormComponent implements OnInit, OnDestroy {
       privilegeForm.addControl("id", new FormControl(privilege.id));
     return privilegeForm;
   });
+  
   private readonly unsubscribe$ = new Subject<void>();
   private readonly privilegeService = inject(PrivilegeService);
   private readonly userLoggedService = inject(UserLoggedService);

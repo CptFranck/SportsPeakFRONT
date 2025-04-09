@@ -14,6 +14,7 @@ import {confirmValidator} from "../../../../validators/confirmValidator";
 })
 export class RegisterFormComponent {
   submitInvalidForm = signal<boolean>(false);
+
   private draft = {
     "firstName": "Admin",
     "lastName": "Admin",
@@ -64,7 +65,7 @@ export class RegisterFormComponent {
     {
       validators: confirmValidator('password', 'confirmPassword')
     }));
-
+  
   private readonly authService = inject(AuthService);
 
   onSubmitRegisterForm() {
