@@ -1,4 +1,4 @@
-import {Component, inject, Input, OnDestroy, OnInit} from '@angular/core';
+import {Component, inject, OnDestroy, OnInit, input} from '@angular/core';
 import {Observable, Subject, takeUntil} from "rxjs";
 import {Role} from "../../../../interface/dto/role";
 import {RoleService} from "../../../../services/role/role.service";
@@ -10,16 +10,17 @@ import {ActionType} from "../../../../interface/enum/action-type";
 })
 export class RoleDeleteFormComponent implements OnInit, OnDestroy {
 
-  @Input() role!: Role | undefined;
-  @Input() btnCloseRef!: HTMLButtonElement;
-  @Input() submitEventActionType$!: Observable<ActionType> | undefined;
+  readonly role = input.required<Role | undefined>();
+  readonly btnCloseRef = input.required<HTMLButtonElement>();
+  readonly submitEventActionType$ = input.required<Observable<ActionType> | undefined>();
 
   private readonly unsubscribe$: Subject<void> = new Subject<void>();
   private readonly roleService: RoleService = inject(RoleService);
 
   ngOnInit() {
-    if (this.submitEventActionType$)
-      this.submitEventActionType$
+    const submitEventActionType$ = this.submitEventActionType$();
+    if (submitEventActionType$)
+      submitEventActionType$
         .pipe(takeUntil(this.unsubscribe$))
         .subscribe((actionType: ActionType) => {
           if (actionType === ActionType.delete)
@@ -33,8 +34,9 @@ export class RoleDeleteFormComponent implements OnInit, OnDestroy {
   }
 
   onSubmit() {
-    if (!this.role) return;
-    this.roleService.deleteRole(this.role);
-    this.btnCloseRef.click();
+    const role = this.role();
+    if (!role) return;
+    this.roleService.deleteRole(role);
+    this.btnCloseRef().click();
   }
 }
