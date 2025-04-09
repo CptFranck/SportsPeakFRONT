@@ -1,10 +1,10 @@
-<form *ngIf="exerciseForm" [formGroup]="exerciseForm" class="container-fluid">
+<form [formGroup]="exerciseForm()" class="container-fluid">
   <div class="mb-3">
     <span class="form-label">Name :</span>
     <input class="form-control" formControlName="name" type="text">
     <app-input-control
-      [formGroup]="exerciseForm"
-      [submitInvalid]="submitInvalidForm"
+      [formGroup]="exerciseForm()"
+      [submitInvalid]="submitInvalidForm()"
       formGroupFieldName="name"
       rules="min : 3 ; max : 50"
     />
@@ -14,8 +14,8 @@
     <span class="form-label">Description :</span>
     <textarea aria-label="textarea" class="form-control" formControlName="description"></textarea>
     <app-input-control
-      [formGroup]="exerciseForm"
-      [submitInvalid]="submitInvalidForm"
+      [formGroup]="exerciseForm()"
+      [submitInvalid]="submitInvalidForm()"
       formGroupFieldName="description"
       rules="min : 3 ; max : 2000"
     />
@@ -25,19 +25,18 @@
     <span class="form-label">Goal :</span>
     <textarea aria-label="textarea" class="form-control" formControlName="goal"></textarea>
     <app-input-control
-      [formGroup]="exerciseForm"
-      [submitInvalid]="submitInvalidForm"
+      [formGroup]="exerciseForm()"
+      [submitInvalid]="submitInvalidForm()"
       formGroupFieldName="goal"
       rules="min : 3 ; max : 2000"
     />
   </div>
   <div class="mb-3">
     <span class="form-label">Muscle :</span>
-    <app-muscle-selector [muscleIds]='exerciseForm.controls["muscleIds"].value'
-                         formControlName="muscleIds"/>
+    <app-muscle-selector formControlName="muscleIds"/>
     <app-input-control
-      [formGroup]="exerciseForm"
-      [submitInvalid]="submitInvalidForm"
+      [formGroup]="exerciseForm()"
+      [submitInvalid]="submitInvalidForm()"
       errorMessage="Please select muscles used in this exercise"
       formGroupFieldName="muscleIds"
       rules="min : 1"
@@ -45,11 +44,10 @@
   </div>
   <div class="mb-3">
     <span class="form-label">ExerciseTypes :</span>
-    <app-exercise-type-selector [exerciseTypeIds]='exerciseForm.controls["exerciseTypeIds"].value'
-                                formControlName="exerciseTypeIds"/>
+    <app-exercise-type-selector formControlName="exerciseTypeIds"/>
     <app-input-control
-      [formGroup]="exerciseForm"
-      [submitInvalid]="submitInvalidForm"
+      [formGroup]="exerciseForm()"
+      [submitInvalid]="submitInvalidForm()"
       errorMessage="Please select exerciseTypes of this exercise"
       formGroupFieldName="exerciseTypeIds"
       rules="min : 1"

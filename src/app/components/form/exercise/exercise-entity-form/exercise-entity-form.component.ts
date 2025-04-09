@@ -1,10 +1,9 @@
-import {Component, inject, Input, OnDestroy, OnInit} from '@angular/core';
+import {Component, computed, inject, input, OnDestroy, OnInit, signal} from '@angular/core';
 import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
 import {Subject, takeUntil} from "rxjs";
 import {Exercise} from "../../../../interface/dto/exercise";
 import {ExerciseService} from "../../../../services/exercise/exercise.service";
 import {InputControlComponent} from "../../../input-control/input-control.component";
-import {NgIf} from "@angular/common";
 import {Muscle} from "../../../../interface/dto/muscle";
 import {ExerciseType} from "../../../../interface/dto/exercise-type";
 import {MuscleSelectorComponent} from "../../../selectors/muscle-selector/muscle-selector.component";
@@ -19,7 +18,6 @@ import {ActionType} from "../../../../interface/enum/action-type";
   imports: [
     FormsModule,
     InputControlComponent,
-    NgIf,
     ReactiveFormsModule,
     MuscleSelectorComponent,
     ExerciseTypeSelectorComponent
@@ -27,55 +25,24 @@ import {ActionType} from "../../../../interface/enum/action-type";
   templateUrl: './exercise-entity-form.component.html'
 })
 export class ExerciseEntityFormComponent implements OnInit, OnDestroy {
-  isAdmin: boolean = false;
-  exercise: Exercise | undefined;
-  exerciseForm: FormGroup | null = null;
-  submitInvalidForm: boolean = false;
+  isAdmin = false;
 
-  @Input() btnCloseRef!: HTMLButtonElement;
-  @Input() submitEventActionType$!: Subject<ActionType> | undefined;
+  readonly exercise = input.required<Exercise | undefined>();
+  readonly btnCloseRef = input.required<HTMLButtonElement>();
+  readonly submitEventActionType$ = input.required<Subject<ActionType> | undefined>();
 
-  private readonly unsubscribe$: Subject<void> = new Subject<void>();
-  private readonly exerciseService: ExerciseService = inject(ExerciseService);
-  private readonly userLoggedService: UserLoggedService = inject(UserLoggedService);
+  readonly exerciseForm = computed<FormGroup>(() => {
+    const exerciseIdsValidator = this.isAdmin ? null : Validators.required;
+    const exercise = this.exercise();
+    const exerciseName: string = exercise ? exercise.name : "";
+    const exerciseDescription: string = exercise ? exercise.description : "";
+    const exerciseGoal: string = exercise ? exercise.goal : "";
+    const exerciseMuscleIds: number[] = exercise?.muscles ?
+      exercise.muscles?.map((muscle: Muscle) => muscle.id) : [];
+    const exerciseExerciseTypeIds: number [] = exercise ?
+      exercise.exerciseTypes?.map((exerciseType: ExerciseType) => exerciseType.id) : [];
 
-  @Input() set exerciseInput(value: Exercise | undefined) {
-    this.exercise = value;
-    this.initializeExerciseForm();
-  }
-
-  ngOnInit() {
-    this.userLoggedService.currentUser
-      .pipe(takeUntil(this.unsubscribe$))
-      .subscribe(() =>
-        this.isAdmin = this.userLoggedService.isAdmin());
-    if (this.submitEventActionType$)
-      this.submitEventActionType$
-        .pipe(takeUntil(this.unsubscribe$))
-        .subscribe((actionType: ActionType) => {
-          if (actionType === ActionType.create || actionType === ActionType.update)
-            this.onSubmit();
-        });
-    this.initializeExerciseForm();
-  }
-
-  ngOnDestroy() {
-    this.unsubscribe$.next();
-    this.unsubscribe$.complete();
-  }
-
-  initializeExerciseForm() {
-    const exerciseIdsValidator =
-      this.isAdmin ? null : Validators.required;
-    const exerciseName: string = this.exercise ? this.exercise.name : "";
-    const exerciseDescription: string = this.exercise ? this.exercise.description : "";
-    const exerciseGoal: string = this.exercise ? this.exercise.goal : "";
-    const exerciseMuscleIds: number[] = this.exercise?.muscles ?
-      this.exercise.muscles?.map((muscle: Muscle) => muscle.id) : [];
-    const exerciseExerciseTypeIds: number [] = this.exercise ?
-      this.exercise.exerciseTypes?.map((exerciseType: ExerciseType) => exerciseType.id) : [];
-
-    this.exerciseForm = new FormGroup({
+    let exerciseForm: FormGroup = new FormGroup({
       name: new FormControl(exerciseName,
         [Validators.required,
           Validators.minLength(3),
@@ -98,22 +65,49 @@ export class ExerciseEntityFormComponent implements OnInit, OnDestroy {
       ),
     });
 
-    if (this.exercise)
-      this.exerciseForm.addControl("id", new FormControl(this.exercise.id));
+    if (exercise)
+      exerciseForm.addControl("id", new FormControl(exercise.id));
+
+    return exerciseForm;
+  });
+
+  submitInvalidForm = signal<boolean>(false);
+
+  private readonly unsubscribe$ = new Subject<void>();
+  private readonly exerciseService = inject(ExerciseService);
+  private readonly userLoggedService = inject(UserLoggedService);
+
+  ngOnInit() {
+    this.userLoggedService.currentUser
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe(() => this.isAdmin = this.userLoggedService.isAdmin());
+    const submitEventActionType$ = this.submitEventActionType$();
+    if (submitEventActionType$)
+      submitEventActionType$
+        .pipe(takeUntil(this.unsubscribe$))
+        .subscribe((actionType: ActionType) => {
+          if (actionType === ActionType.create || actionType === ActionType.update)
+            this.onSubmit();
+        });
+  }
+
+  ngOnDestroy() {
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
   }
 
   onSubmit() {
-    if (!this.exerciseForm) return;
-    if (this.exerciseForm.valid) {
-      this.submitInvalidForm = false;
-      if (!this.exerciseForm.value.id) {
-        this.exerciseService.addExercise(this.exerciseForm);
+    const exerciseForm = this.exerciseForm();
+    if (exerciseForm.valid) {
+      this.submitInvalidForm.set(false);
+      if (!exerciseForm.value.id) {
+        this.exerciseService.addExercise(exerciseForm);
       } else {
-        this.exerciseService.modifyExercise(this.exerciseForm);
+        this.exerciseService.modifyExercise(exerciseForm);
       }
-      this.btnCloseRef.click();
+      this.btnCloseRef().click();
     } else {
-      this.submitInvalidForm = true;
+      this.submitInvalidForm.set(true);
     }
   }
 }
