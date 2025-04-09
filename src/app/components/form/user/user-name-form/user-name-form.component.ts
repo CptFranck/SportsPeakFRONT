@@ -24,7 +24,7 @@ export class UserNameFormComponent implements OnInit, OnDestroy {
     const user = this.user();
     const userFirstName: string = user?.firstName ? user?.firstName : "";
     const userLastName: string = user?.lastName ? user?.lastName : "";
-    
+
     const userForm: FormGroup = new FormGroup({
       firstName: new FormControl(
         userFirstName,
@@ -49,8 +49,8 @@ export class UserNameFormComponent implements OnInit, OnDestroy {
   readonly submitEventActionType$ = input.required<Observable<ActionType> | undefined>();
   readonly modification = input.required<ModificationField>();
 
-  private readonly unsubscribe$: Subject<void> = new Subject<void>();
-  private readonly userService: UserService = inject(UserService);
+  private readonly unsubscribe$ = new Subject<void>();
+  private readonly userService = inject(UserService);
 
   ngOnInit() {
     const submitEventActionType$ = this.submitEventActionType$();

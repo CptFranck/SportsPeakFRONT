@@ -32,7 +32,7 @@ export class TargetSetStateFormComponent {
     return targetSetForm;
   });
 
-  private readonly targetSetService: TargetSetService = inject(TargetSetService);
+  private readonly targetSetService = inject(TargetSetService);
 
   openForm(): void {
     this.modify.set(true);
