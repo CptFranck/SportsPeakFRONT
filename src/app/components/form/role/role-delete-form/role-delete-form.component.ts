@@ -1,4 +1,4 @@
-import {Component, inject, OnDestroy, OnInit, input} from '@angular/core';
+import {Component, inject, input, OnDestroy, OnInit} from '@angular/core';
 import {Observable, Subject, takeUntil} from "rxjs";
 import {Role} from "../../../../interface/dto/role";
 import {RoleService} from "../../../../services/role/role.service";
@@ -14,8 +14,8 @@ export class RoleDeleteFormComponent implements OnInit, OnDestroy {
   readonly btnCloseRef = input.required<HTMLButtonElement>();
   readonly submitEventActionType$ = input.required<Observable<ActionType> | undefined>();
 
-  private readonly unsubscribe$: Subject<void> = new Subject<void>();
-  private readonly roleService: RoleService = inject(RoleService);
+  private readonly unsubscribe$ = new Subject<void>();
+  private readonly roleService = inject(RoleService);
 
   ngOnInit() {
     const submitEventActionType$ = this.submitEventActionType$();
