@@ -29,7 +29,7 @@ import {ProgExercise} from "../../../../interface/dto/prog-exercise";
   templateUrl: './target-set-logs.component.html'
 })
 export class TargetSetLogsComponent {
-  targetSetFormCollapseId: string = "TargetSetFormCollapseId";
+  readonly targetSetFormCollapseId: string = "TargetSetFormCollapseId";
 
   readonly modalId = input.required<string>();
   readonly targetSet = input.required<TargetSet | undefined>();
@@ -49,6 +49,7 @@ export class TargetSetLogsComponent {
   targetSetLog = signal<TargetSet | undefined>(undefined);
 
   @ViewChild("performanceCollapseTemplate") modalTemplate!: TemplateRef<any>;
+
   @Output() actionTargetSets = new EventEmitter<FormIndicator>();
 
   protected readonly ActionType = ActionType;

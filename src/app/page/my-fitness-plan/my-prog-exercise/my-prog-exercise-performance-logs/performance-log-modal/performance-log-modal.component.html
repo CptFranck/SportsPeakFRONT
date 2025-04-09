@@ -7,11 +7,11 @@
 <ng-template #performanceLogModalTemplate let-btnClose="btnClose" let-submitEventActionType$="submitEventActionType$">
   <app-performance-log-entity-form *ngIf="action() === ActionType.create"
                                    [btnCloseRef]="btnClose"
-                                   [performanceLogInput]="performanceLog()"
+                                   [performanceLog]="performanceLog()"
                                    [submitEventActionType$]="submitEventActionType$"
-                                   [targetSetInput]="targetSet()"/>
+                                   [targetSet]="targetSet()"/>
   <app-performance-logs *ngIf="action() === ActionType.checkPerformance"
-                        [progExerciseInput]="progExercise()"
-                        [targetSetInput]="targetSet()"
+                        [progExercise]="progExercise()"
+                        [targetSet]="targetSet()"
                         [useRelativeInformationOnly]="true"/>
 </ng-template>

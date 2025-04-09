@@ -1,4 +1,4 @@
-import {Component, Input, OnInit, TemplateRef, ViewChild} from '@angular/core';
+import {Component, computed, input, model, signal, TemplateRef, ViewChild} from '@angular/core';
 import {TargetSet} from "../../../../interface/dto/target-set";
 import {ProgExercise} from "../../../../interface/dto/prog-exercise";
 import {PerformanceLog} from "../../../../interface/dto/performance-log";
@@ -26,83 +26,80 @@ import {
 import {CheckBoxComponent} from "../../../input/check-box/check-box.component";
 
 @Component({
-    selector: 'app-performance-logs',
-    imports: [
-        PerformanceLogEntityFormComponent,
-        CollapseBlockComponent,
-        PerformanceLogDeleteFormComponent,
-        NgIf,
-        PerformanceLogSortedBySetComponent,
-        PerformanceLogsChartsComponent,
-        TabHeaderComponent,
-        PerformanceLogSortedByLogDateComponent,
-        CheckBoxComponent
-    ],
-    templateUrl: './performance-logs.component.html'
+  selector: 'app-performance-logs',
+  imports: [
+    PerformanceLogEntityFormComponent,
+    CollapseBlockComponent,
+    PerformanceLogDeleteFormComponent,
+    NgIf,
+    PerformanceLogSortedBySetComponent,
+    PerformanceLogsChartsComponent,
+    TabHeaderComponent,
+    PerformanceLogSortedByLogDateComponent,
+    CheckBoxComponent
+  ],
+  templateUrl: './performance-logs.component.html'
 })
-export class PerformanceLogsComponent implements OnInit {
+export class PerformanceLogsComponent {
 
-  tabId: string = "targetLogsTab";
-  tabOptions: TabOption[] = [];
+  readonly tabId = "targetLogsTab";
+  readonly accordionParentIdSet = "accordionParentIdSet";
+  readonly accordionParentIdDate = "accordionParentIdDate";
+  readonly accordionParentIdGraph = "accordionParentIdGraph";
+  readonly performanceLogFormCollapseId = "PerformanceLogFormCollapseId";
 
-  accordionParentIdSet: string = "accordionParentIdSet";
-  accordionParentIdDate: string = "accordionParentIdDate";
-  performanceLogFormCollapseId: string = "PerformanceLogFormCollapseId";
+  readonly targetSet = input.required<TargetSet | undefined>();
+  readonly progExercise = input.required<ProgExercise | undefined>();
+  readonly useRelativeInformationOnly = model<boolean>(false);
 
-  progExercise: ProgExercise | undefined;
-  targetSet: TargetSet | undefined;
-  performanceLog: PerformanceLog | undefined;
-  performanceLogDate: string | undefined;
-  performanceLogsSortedBySet: DictionaryItem<PerformanceLog[]>[] = [];
-  performanceLogsSortedByLogDate: DictionaryItem<PerformanceLog[]>[] = [];
+  readonly tabOptions = computed<TabOption[]>(() => {
+    const targetSet = this.targetSet();
+    const progExercise = this.progExercise();
+    if (targetSet && progExercise)
+      return [
+        {id: "performanceListId" + targetSet.id, title: "Performance list", active: "active"},
+        {id: "performanceGraphId" + targetSet.id, title: "Performances graph", active: ""},
+      ]
+    else return [];
+  });
 
-  switch: boolean = true;
-  action: ActionType = ActionType.read;
-  @Input() useRelativeInformationOnly: boolean = false;
+  readonly performanceLogsSortedBySet = computed<DictionaryItem<PerformanceLog[]>[]>(() => {
+    const targetSet = this.targetSet();
+    const progExercise = this.progExercise();
+    if (targetSet && progExercise)
+      return sortPerformanceLogsBySet(progExercise, targetSet, this.useRelativeInformationOnly())
+    else return [];
+  });
+
+  readonly performanceLogsSortedByLogDate = computed<DictionaryItem<PerformanceLog[]>[]>(() => {
+    const targetSet = this.targetSet();
+    const progExercise = this.progExercise();
+    if (targetSet && progExercise)
+      return sortPerformanceLogsByDate(progExercise, targetSet, this.useRelativeInformationOnly())
+    else return [];
+  });
+
+  switchSortByDate = signal<boolean>(true);
+  action = signal<ActionType>(ActionType.read);
+  performanceLog = signal<PerformanceLog | undefined>(undefined);
+  performanceLogDate = signal<string | undefined>(undefined);
 
   @ViewChild("performanceCollapseTemplate") modalTemplate!: TemplateRef<any>;
 
   protected readonly ActionType = ActionType;
   protected readonly Object: ObjectConstructor = Object;
 
-  @Input() set progExerciseInput(progExercise: ProgExercise | undefined) {
-    this.progExercise = progExercise;
-    this.initialize();
-  }
-
-  @Input() set targetSetInput(targetSet: TargetSet | undefined) {
-    this.targetSet = targetSet;
-    this.initialize();
-  }
-
-  ngOnInit() {
-    this.initialize();
-  }
-
-  initialize() {
-    if (this.targetSet && this.progExercise) {
-      this.tabOptions = [
-        {id: "performanceListId" + this.targetSet.id, title: "Performance list", active: "active"},
-        {id: "performanceGraphId" + this.targetSet.id, title: "Performances graph", active: ""},
-      ]
-      this.performanceLogsSortedBySet = sortPerformanceLogsBySet(this.progExercise, this.targetSet, this.useRelativeInformationOnly);
-      this.performanceLogsSortedByLogDate = sortPerformanceLogsByDate(this.progExercise, this.targetSet, this.useRelativeInformationOnly)
-    }
-  }
-
   setPerformanceLog(formIndicator: FormIndicator) {
-    this.action = formIndicator.actionType;
-    this.performanceLog = formIndicator.object;
-    this.performanceLogDate = new Date(formIndicator.object?.logDate).toLocaleDateString();
+    this.action.set(formIndicator.actionType);
+    this.performanceLog.set(formIndicator.object);
+    this.performanceLogDate.set(new Date(formIndicator.object?.logDate).toLocaleDateString());
   }
 
   onUseRelativeInformationOnlyClick() {
-    this.useRelativeInformationOnly = !this.useRelativeInformationOnly;
-    this.initialize()
+    this.useRelativeInformationOnly.update(value => !value);
   }
 
   onCheckBoxClick() {
-    this.switch = !this.switch;
+    this.switchSortByDate.update(value => !value);
   }
-
 }

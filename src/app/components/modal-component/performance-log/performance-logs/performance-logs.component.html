@@ -1,62 +1,62 @@
 <app-tab-header [tabId]="tabId"
-                [tabOptions]="tabOptions"
+                [tabOptions]="tabOptions()"
                 type="pill"
 />
 <div [id]="tabId" class="tab-content border border-top-0 rounded-bottom border-1">
   <app-collapse-block #collapseBlock
-                      [actionType]="action"
+                      [actionType]="action()"
                       [collapseId]="performanceLogFormCollapseId"
                       [contentTemplate]="performanceCollapseTemplate"
   />
   <ng-template #performanceCollapseTemplate let-btnClose="btnClose" let-submitEventActionType$="submitEventActionType$">
     <h5 *ngIf="performanceLogDate" class="fw-bold"> {{ "Performance from " + performanceLogDate }} </h5>
-    <app-performance-log-entity-form *ngIf="action === ActionType.update"
+    <app-performance-log-entity-form *ngIf="action() === ActionType.update"
                                      [btnCloseRef]="btnClose"
-                                     [performanceLogInput]="performanceLog"
+                                     [performanceLog]="performanceLog()"
                                      [submitEventActionType$]="submitEventActionType$"
-                                     [targetSetInput]="targetSet"/>
-    <app-performance-log-delete-form *ngIf="action === ActionType.delete"
+                                     [targetSet]="targetSet()"/>
+    <app-performance-log-delete-form *ngIf="action() === ActionType.delete"
                                      [btnCloseRef]="btnClose"
-                                     [performanceLogInput]="performanceLog"
+                                     [performanceLog]="performanceLog()"
                                      [submitEventActionType$]="submitEventActionType$"/>
   </ng-template>
-  <div *ngIf="tabOptions[0]" [id]="tabOptions[0].id" class="tab-pane fade show active">
+  <div *ngIf="tabOptions()[0]" [id]="tabOptions()[0].id" class="tab-pane fade show active">
     <div class="container">
       <div class="container d-flex p-2">
         <div class="p-2">
           <app-check-box (actionPerformanceLog)="onCheckBoxClick()"
-                         [checkedInput]="switch"
+                         [checkedInput]="switchSortByDate()"
                          labelCheck="sort by date"
                          labelUnchecked="sort by set"
           />
         </div>
         <div class="p-2">
           <app-check-box (actionPerformanceLog)="onUseRelativeInformationOnlyClick()"
-                         [checkedInput]="useRelativeInformationOnly"
+                         [checkedInput]="useRelativeInformationOnly()"
                          labelCheck="see only performance logs of current version set"
           />
         </div>
       </div>
-      <div *ngIf="Object.keys(performanceLogsSortedByLogDate).length !== 0" class="container overflow-auto p-3"
+      <div *ngIf="Object.keys(performanceLogsSortedByLogDate()).length !== 0" class="container overflow-auto p-3"
            style="max-height: calc(100vh - 50vh)"
       >
         <app-performance-log-sorted-by-log-date (actionPerformanceLog)="setPerformanceLog($event)"
                                                 [accordionParentIdDate]="accordionParentIdDate"
                                                 [collapseBlock]="collapseBlock"
                                                 [formCollapseId]="performanceLogFormCollapseId"
-                                                [hidden]="!switch"
-                                                [performanceLogsSortByDate]="performanceLogsSortedByLogDate"
+                                                [hidden]="!switchSortByDate()"
+                                                [performanceLogsSortByDate]="performanceLogsSortedByLogDate()"
         />
         <app-performance-log-sorted-by-set (actionPerformanceLog)="setPerformanceLog($event)"
                                            [accordionParentIdSet]="accordionParentIdSet"
                                            [collapseBlock]="collapseBlock"
                                            [formCollapseId]="performanceLogFormCollapseId"
-                                           [hidden]="switch"
-                                           [performanceLogsSortedBySet]="performanceLogsSortedBySet"
+                                           [hidden]="switchSortByDate()"
+                                           [performanceLogsSortedBySet]="performanceLogsSortedBySet()"
         />
       </div>
     </div>
-    <div *ngIf="Object.keys(performanceLogsSortedByLogDate).length === 0" class="container p-2">
+    <div *ngIf="Object.keys(performanceLogsSortedByLogDate()).length === 0" class="container p-2">
       <div class="col-auto card m-3 shadow">
         <div class="card-body ">
           <div class="row">
@@ -68,26 +68,27 @@
       </div>
     </div>
   </div>
-  <div *ngIf="tabOptions[1]" [id]="tabOptions[1].id" class="tab-pane fade">
+  <div *ngIf="tabOptions()[1]" [id]="tabOptions()[1].id" class="tab-pane fade">
     <div class="container">
       <div class="container d-flex p-2">
         <div class="p-2">
           <app-check-box (actionPerformanceLog)="onUseRelativeInformationOnlyClick()"
-                         [checkedInput]="switch"
+                         [checkedInput]="switchSortByDate()"
                          labelCheck="see also old performance logs"
           />
         </div>
       </div>
-      <div *ngIf="Object.keys(performanceLogsSortedByLogDate).length !== 0" class="container overflow-auto p-3"
+      <div *ngIf="Object.keys(performanceLogsSortedByLogDate()).length !== 0" class="container overflow-auto p-3"
            style="max-height: calc(100vh - 50vh)"
       >
         <app-performance-logs-charts (actionPerformanceLog)="setPerformanceLog($event)"
+                                     [accordionParentIdGraph]="accordionParentIdGraph"
                                      [collapseBlock]="collapseBlock"
-                                     [performanceLogsInputSortedByLogDateInput]="performanceLogsSortedByLogDate"
-                                     [performanceLogsInputSortedBySetInput]="performanceLogsSortedBySet"/>
+                                     [performanceLogsInputSortedByLogDateInput]="performanceLogsSortedByLogDate()"
+                                     [performanceLogsInputSortedBySetInput]="performanceLogsSortedBySet()"/>
       </div>
     </div>
-    <div *ngIf="Object.keys(performanceLogsSortedByLogDate).length === 0" class="container p-2">
+    <div *ngIf="Object.keys(performanceLogsSortedByLogDate()).length === 0" class="container p-2">
       <div class="col-auto card m-3 shadow">
         <div class="card-body ">
           <div class="row">
