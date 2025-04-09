@@ -1,10 +1,10 @@
-<form *ngIf="exerciseTypeForm" [formGroup]="exerciseTypeForm" class="container-fluid">
+<form [formGroup]="exerciseTypeForm()" class="container-fluid">
   <div class="mb-3">
     <span class="form-label">Name :</span>
     <input class="form-control" formControlName="name" type="text">
     <app-input-control
-      [formGroup]="exerciseTypeForm"
-      [submitInvalid]="submitInvalidForm"
+      [formGroup]="exerciseTypeForm()"
+      [submitInvalid]="submitInvalidForm()"
       formGroupFieldName="name"
       rules="min : 3 ; max : 50"
     />
@@ -14,8 +14,8 @@
     <span class="form-label">Goal :</span>
     <textarea aria-label="textarea" class="form-control" formControlName="goal"></textarea>
     <app-input-control
-      [formGroup]="exerciseTypeForm"
-      [submitInvalid]="submitInvalidForm"
+      [formGroup]="exerciseTypeForm()"
+      [submitInvalid]="submitInvalidForm()"
       formGroupFieldName="goal"
       rules="min : 3 ; max : 2000"
     />
@@ -23,11 +23,10 @@
 
   <div class="mb-3">
     <span class="form-label">ExerciseExercises :</span>
-    <app-exercise-selector [exerciseIds]='exerciseTypeForm.controls["exerciseIds"].value'
-                           formControlName="exerciseIds"/>
+    <app-exercise-selector formControlName="exerciseIds"/>
     <app-input-control
-      [formGroup]="exerciseTypeForm"
-      [submitInvalid]="submitInvalidForm"
+      [formGroup]="exerciseTypeForm()"
+      [submitInvalid]="submitInvalidForm()"
       errorMessage="Please select exercises whose category is this exerciseType"
       formGroupFieldName="exerciseIds"
       rules="min : 1"
