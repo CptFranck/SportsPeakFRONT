@@ -5,12 +5,12 @@
   >
     <input class="tags_input" hidden name="tags" type="text"/>
     <app-multi-select-selected-options (onRemoveTag)="onCLickRemoveTag($event)"
-                                       [displayedSelectedOptions]="displayedSelectedOptions"
-                                       [selectedOptions]="selectedOptions"/>
+                                       [displayedSelectedOptions]="displayedSelectedOptions()"
+                                       [selectedOptions]="selectedOptions()"/>
   </div>
   <div class="options rounded">
-    <app-loading [loading]="isLoading"/>
-    <div *ngIf="!isLoading">
+    <app-loading [loading]="isLoading()"/>
+    <div *ngIf="!isLoading()">
       <div class="option-search-tags input-group">
         <input
           #searchInput
@@ -33,12 +33,12 @@
       </div>
       <div #option
            (click)="onClickOption($event)"
-           *ngFor="let option of optionList"
+           *ngFor="let option of optionList()"
            [attr.data-value]="option.id"
            class="option"
       >
-        <div class="text-truncate"> {{ option.title }} {{ addDescriptionToOption ? ":" : "" }}</div>
-        <div *ngIf="addDescriptionToOption"> {{ option.description }}</div>
+        <div class="text-truncate"> {{ option.title }} {{ addDescriptionToOption() ? ":" : "" }}</div>
+        <div *ngIf="addDescriptionToOption()"> {{ option.description }}</div>
       </div>
       <div #noResultMessage class="no-result-message" style="display: none">
         No result match

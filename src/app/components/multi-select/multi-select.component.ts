@@ -3,11 +3,12 @@ import {
   Component,
   ElementRef,
   EventEmitter,
-  Input,
+  input,
   OnChanges,
   OnInit,
   Output,
   QueryList,
+  signal,
   ViewChild,
   ViewChildren
 } from '@angular/core';
@@ -21,33 +22,34 @@ import {
 } from "./multi-select-selected-options/multi-select-selected-options.component";
 
 @Component({
-    selector: 'app-multi-select',
-    imports: [
-        NgForOf,
-        FormsModule,
-        NgIf,
-        LoadingComponent,
-        MultiSelectSelectedOptionsComponent,
-    ],
-    templateUrl: './multi-select.component.html',
-    styleUrl: './multi-select.component.css'
+  selector: 'app-multi-select',
+  imports: [
+    NgForOf,
+    FormsModule,
+    NgIf,
+    LoadingComponent,
+    MultiSelectSelectedOptionsComponent,
+  ],
+  templateUrl: './multi-select.component.html',
+  styleUrl: './multi-select.component.css'
 })
 export class MultiSelectComponent implements OnInit, OnChanges, AfterViewInit {
-  displayedSelectedOptions: MultiSelectOptionSelected[] = [];
-  @Input() selectedOptions: number[] = [1, 2, 3, 4];
-  @Input() optionList: MultiSelectOption[] = [
+  readonly selectedOptions = input<number[]>([1, 2, 3, 4]);
+  readonly optionList = input<MultiSelectOption[]>([
     {id: "1", title: "un", value: "un", description: "ceci est un chiffre, 123456789"},
     {id: "2", title: "deux", value: "deux", description: "ceci est un chiffre"},
     {id: "3", title: "trois", value: "trois", description: "ceci est un chiffre"},
     {id: "4", title: "quatrequatrequatrequatre", value: "quatre", description: "ceci est un chiffre"},
-  ];
-  @Input() isLoading: boolean = true;
-  @Input() addDescriptionToTag: boolean = false; // can add description to the tag
-  @Input() addDescriptionToOption: boolean = false; // can add description to option field
-  @Input() limitOfDisplayedSelectedOptions: number = 0;
+  ]);
+  readonly isLoading = input<boolean>(true);
+  readonly addDescriptionToTag = input<boolean>(false); // can add description to the tag
+  readonly addDescriptionToOption = input<boolean>(false); // can add description to option field
+  readonly limitOfDisplayedSelectedOptions = input<number>(0);
 
-  @Output() onTouched: EventEmitter<boolean> = new EventEmitter<boolean>();
-  @Output() onChange: EventEmitter<number[]> = new EventEmitter<number[]>();
+  displayedSelectedOptions = signal<MultiSelectOptionSelected[]>([]);
+
+  @Output() onTouched = new EventEmitter<boolean>();
+  @Output() onChange = new EventEmitter<number[]>();
 
   @ViewChild('allTagsOption') allTagsOption!: ElementRef;
   @ViewChild('selectBox') selectBox!: ElementRef;
@@ -86,10 +88,10 @@ export class MultiSelectComponent implements OnInit, OnChanges, AfterViewInit {
   }
 
   setSelectedOptionActive(): void {
-    let allTagsUsed: boolean = true;
+    let allTagsUsed = true;
     this.options.forEach((option: ElementRef) => {
       if (!option.nativeElement.classList.contains("all-tags")) {
-        let isSelected: string | undefined = this.selectedOptions.find((id: number) =>
+        let isSelected: string | undefined = this.selectedOptions().find((id: number) =>
           id.toString() === option.nativeElement.getAttribute("data-value"))?.toString();
         if (isSelected)
           option.nativeElement.classList.toggle("active");
@@ -97,14 +99,13 @@ export class MultiSelectComponent implements OnInit, OnChanges, AfterViewInit {
           allTagsUsed = false;
       }
     });
-    if (allTagsUsed && this.options.length > 1) {
+    if (allTagsUsed && this.options.length > 1)
       this.allTagsOption.nativeElement.classList.toggle("active");
-    }
   }
 
   optionSelectedToDisplayed(): MultiSelectOptionSelected[] {
-    return this.selectedOptions.map((id: number) => {
-      let option: MultiSelectOption | undefined = this.optionList.find(opt => opt.id.toString() === id.toString())
+    return this.selectedOptions().map((id: number) => {
+      let option: MultiSelectOption | undefined = this.optionList().find(opt => opt.id.toString() === id.toString())
       return {
         id: id.toString(),
         title: option ? option.title : ""
@@ -113,22 +114,23 @@ export class MultiSelectComponent implements OnInit, OnChanges, AfterViewInit {
   }
 
   updateDisplayedSelectedOptions(): void {
-    if (this.limitOfDisplayedSelectedOptions === 0) {
-      this.displayedSelectedOptions = this.optionSelectedToDisplayed();
+    const limitOfDisplayedSelectedOptions = this.limitOfDisplayedSelectedOptions();
+    if (limitOfDisplayedSelectedOptions === 0) {
+      this.displayedSelectedOptions.set(this.optionSelectedToDisplayed());
     } else {
-      let length: number = this.selectedOptions.length;
-      this.displayedSelectedOptions = this.optionSelectedToDisplayed().slice(0, this.limitOfDisplayedSelectedOptions);
-      if (length > this.limitOfDisplayedSelectedOptions)
-        this.displayedSelectedOptions.push({
+      let length: number = this.selectedOptions().length;
+      this.displayedSelectedOptions.set(this.optionSelectedToDisplayed().slice(0, limitOfDisplayedSelectedOptions));
+      if (length > limitOfDisplayedSelectedOptions)
+        this.displayedSelectedOptions.update(value => [...value, {
           id: "more",
-          title: '+' + (length - this.limitOfDisplayedSelectedOptions).toString()
-        });
+          title: '+' + (length - limitOfDisplayedSelectedOptions).toString()
+        }]);
     }
 
-    if (this.addDescriptionToTag)
-      this.displayedSelectedOptions.forEach((option: MultiSelectOptionSelected) => {
+    if (this.addDescriptionToTag())
+      this.displayedSelectedOptions().forEach((option: MultiSelectOptionSelected) => {
           let opt: MultiSelectOption | undefined =
-            this.optionList.find((opt: MultiSelectOption) => option.id === opt.id);
+            this.optionList().find((opt: MultiSelectOption) => option.id === opt.id);
           if (opt?.description)
             option.title += " : " + opt.description;
         }
@@ -142,7 +144,6 @@ export class MultiSelectComponent implements OnInit, OnChanges, AfterViewInit {
       .map((option: ElementRef) => {
         return option.nativeElement.getAttribute("data-value");
       });
-    this.selectedOptions = newSelectedOptions
     this.onChange.emit(newSelectedOptions);
     this.onTouched.emit(true)
     this.updateDisplayedSelectedOptions()
@@ -182,9 +183,7 @@ export class MultiSelectComponent implements OnInit, OnChanges, AfterViewInit {
 
   onClickClear() {
     this.searchInput.nativeElement.value = "";
-    this.options.forEach((option: ElementRef) => {
-      option.nativeElement.style.display = "block";
-    });
+    this.options.forEach((option: ElementRef) => option.nativeElement.style.display = "block");
     this.noResultMessage.nativeElement.style.display = "none";
   }
 
