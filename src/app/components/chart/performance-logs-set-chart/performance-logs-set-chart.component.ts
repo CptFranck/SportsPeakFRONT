@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, ElementRef, Input, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, effect, ElementRef, input, OnInit, ViewChild} from '@angular/core';
 import {Chart, registerables} from "chart.js";
 import zoomPlugin from 'chartjs-plugin-zoom';
 import {addDateTime, stringToDate} from "../../../utils/time-functions";
@@ -10,28 +10,27 @@ import {sortPerformanceLogsByDictionaryDate} from "../../../utils/performance-lo
   selector: 'app-performance-logs-set-chart',
   templateUrl: './performance-logs-set-chart.component.html'
 })
-export class PerformanceLogsSetChartComponent implements AfterViewInit {
+export class PerformanceLogsSetChartComponent implements OnInit, AfterViewInit {
 
-  refChart: any;
-
-  reps: number[] = [];
-  dates: Date[] = [];
-  weights: number[] = [];
-
-  data: any;
-  options: any;
-  chart: Chart | undefined;
-
-  performanceLogSet!: PerformanceLog[];
   @ViewChild('chartRef', {static: false}) chartRef!: ElementRef;
 
-  @Input() set performanceLogSetInput(performanceLogs: PerformanceLog[] | undefined) {
-    if (performanceLogs) {
-      this.performanceLogSet = performanceLogs
+  readonly performanceLogSet = input.required<PerformanceLog[]>();
+
+  private data: any;
+  private options: any;
+  private chart: Chart | undefined;
+  private reps: number[] = [];
+  private dates: Date[] = [];
+  private weights: number[] = [];
+  private refChart: any;
+
+  ngOnInit() {
+    effect(() => {
+      this.performanceLogSet()
       this.defineData();
       this.defineOption();
       this.draw();
-    }
+    })
   }
 
   ngAfterViewInit() {
@@ -40,27 +39,18 @@ export class PerformanceLogsSetChartComponent implements AfterViewInit {
 
     this.refChart = this.chartRef.nativeElement.getContext('2d');
 
-    this.initChart()
-  }
-
-  initChart() {
     this.defineData()
     this.defineOption()
     this.draw()
   }
 
   resetZoom() {
-    if (this.chart) {
-      this.chart.resetZoom()
-    }
+    if (this.chart) this.chart.resetZoom()
   }
 
   draw() {
     if (this.refChart)
-      this.chart = new Chart(this.refChart, {
-        data: this.data,
-        options: this.options
-      });
+      this.chart = new Chart(this.refChart, {data: this.data, options: this.options});
   }
 
   defineOption() {
@@ -125,16 +115,18 @@ export class PerformanceLogsSetChartComponent implements AfterViewInit {
     this.reps = [];
     this.dates = [];
     this.weights = [];
-
-    const performanceLogsSorted: DictionaryItem<PerformanceLog[]>[] = sortPerformanceLogsByDictionaryDate(this.performanceLogSet);
-    performanceLogsSorted.forEach((performanceLogs: DictionaryItem<PerformanceLog[]>) => {
-      const perfLogsLength: number = performanceLogs.value.length;
-      performanceLogs.value.forEach((performanceLog: PerformanceLog, index: number) => {
-        this.dates.push(addDateTime(stringToDate(performanceLog.logDate), index * 23 / perfLogsLength));
-        this.weights.push(performanceLog.weight + index);
-        this.reps.push(performanceLog.repetitionNumber);
+    const performanceLogSet = this.performanceLogSet();
+    if (performanceLogSet) {
+      const performanceLogsSorted: DictionaryItem<PerformanceLog[]>[] = sortPerformanceLogsByDictionaryDate(performanceLogSet);
+      performanceLogsSorted.forEach((performanceLogs: DictionaryItem<PerformanceLog[]>) => {
+        const perfLogsLength: number = performanceLogs.value.length;
+        performanceLogs.value.forEach((performanceLog: PerformanceLog, index: number) => {
+          this.dates.push(addDateTime(stringToDate(performanceLog.logDate), index * 23 / perfLogsLength));
+          this.weights.push(performanceLog.weight + index);
+          this.reps.push(performanceLog.repetitionNumber);
+        });
       });
-    });
+    }
 
     this.data = {
       labels: this.dates,

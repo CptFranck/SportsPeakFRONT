@@ -15,7 +15,7 @@ describe('PerformanceLogsSetChartComponent', () => {
     fixture = TestBed.createComponent(PerformanceLogsSetChartComponent);
     component = fixture.componentInstance;
 
-    component.performanceLogSetInput = [];
+    fixture.componentRef.setInput('performanceLogSet', []);
     fixture.detectChanges();
   });
 
