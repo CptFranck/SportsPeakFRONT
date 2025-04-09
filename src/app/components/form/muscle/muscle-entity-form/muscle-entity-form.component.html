@@ -1,10 +1,10 @@
-<form *ngIf="muscleForm" [formGroup]="muscleForm" class="container-fluid">
+<form [formGroup]="muscleForm()" class="container-fluid">
   <div class="mb-3">
     <span class="form-label">Name :</span>
     <input class="form-control" formControlName="name" type="text">
     <app-input-control
-      [formGroup]="muscleForm"
-      [submitInvalid]="submitInvalidForm"
+      [formGroup]="muscleForm()"
+      [submitInvalid]="submitInvalidForm()"
       formGroupFieldName="name"
       rules="min : 3 ; max : 50"
     />
@@ -14,8 +14,8 @@
     <span class="form-label">Description :</span>
     <textarea aria-label="textarea" class="form-control" formControlName="description"></textarea>
     <app-input-control
-      [formGroup]="muscleForm"
-      [submitInvalid]="submitInvalidForm"
+      [formGroup]="muscleForm()"
+      [submitInvalid]="submitInvalidForm()"
       formGroupFieldName="description"
       rules="min : 3 ; max : 2000"
     />
@@ -25,18 +25,18 @@
     <span class="form-label">Function :</span>
     <textarea aria-label="textarea" class="form-control" formControlName="function"></textarea>
     <app-input-control
-      [formGroup]="muscleForm"
-      [submitInvalid]="submitInvalidForm"
+      [formGroup]="muscleForm()"
+      [submitInvalid]="submitInvalidForm()"
       formGroupFieldName="function"
       rules="min : 3 ; max : 2000"
     />
   </div>
   <div class="mb-3">
     <span class="form-label">Exercise(s) :</span>
-    <app-exercise-selector [exerciseIds]='muscleForm.controls["exerciseIds"].value' formControlName="exerciseIds"/>
+    <app-exercise-selector formControlName="exerciseIds"/>
     <app-input-control
-      [formGroup]="muscleForm"
-      [submitInvalid]="submitInvalidForm"
+      [formGroup]="muscleForm()"
+      [submitInvalid]="submitInvalidForm()"
       errorMessage="Please select exercises that use this muscle"
       formGroupFieldName="exerciseIds"
       rules="min : 1"

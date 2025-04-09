@@ -1,6 +1,5 @@
-import {Component, inject, Input, OnDestroy, OnInit} from '@angular/core';
+import {Component, computed, inject, input, OnDestroy, OnInit, signal} from '@angular/core';
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
-import {NgIf} from "@angular/common";
 import {InputControlComponent} from "../../../input-control/input-control.component";
 import {Muscle} from "../../../../interface/dto/muscle";
 import {Subject, takeUntil} from "rxjs";
@@ -15,61 +14,30 @@ import {ActionType} from "../../../../interface/enum/action-type";
   imports: [
     ExerciseSelectorComponent,
     ReactiveFormsModule,
-    NgIf,
     InputControlComponent
   ],
   templateUrl: './muscle-entity-form.component.html'
 })
 export class MuscleEntityFormComponent implements OnInit, OnDestroy {
 
-  isAdmin: boolean = false;
-  muscle: Muscle | undefined;
-  muscleForm: FormGroup | null = null;
-  submitInvalidForm: boolean = false;
+  readonly muscle = input.required<Muscle | undefined>();
+  readonly btnCloseRef = input.required<HTMLButtonElement>();
+  readonly submitEventActionType$ = input.required<Subject<ActionType> | undefined>();
 
-  @Input() btnCloseRef!: HTMLButtonElement;
-  @Input() submitEventActionType$!: Subject<ActionType> | undefined;
+  submitInvalidForm = signal<boolean>(false);
 
-  private readonly unsubscribe$: Subject<void> = new Subject<void>();
-  private readonly muscleService: MuscleService = inject(MuscleService);
-  private readonly userLoggedService: UserLoggedService = inject(UserLoggedService);
+  private isAdmin = false;
 
-  @Input() set muscleInput(value: Muscle | undefined) {
-    this.muscle = value;
-    this.initializeMuscleForm();
-  }
+  readonly muscleForm = computed<FormGroup>(() => {
+    const exerciseIdsValidator = this.isAdmin ? null : Validators.required;
 
-  ngOnInit() {
-    this.userLoggedService.currentUser
-      .pipe(takeUntil(this.unsubscribe$))
-      .subscribe(() =>
-        this.isAdmin = this.userLoggedService.isAdmin());
-    if (this.submitEventActionType$)
-      this.submitEventActionType$
-        .pipe(takeUntil(this.unsubscribe$))
-        .subscribe((actionType: ActionType) => {
-          if (actionType === ActionType.create || actionType === ActionType.update) {
-            this.onSubmit();
-          }
-        });
-    this.initializeMuscleForm();
-  }
+    const muscle = this.muscle();
+    const muscleName: string = muscle ? muscle.name : "";
+    const muscleDescription: string = muscle ? muscle.description : "";
+    const muscleFunction: string = muscle ? muscle.function : "";
+    const muscleExerciseIds: number[] = muscle?.exercises ? muscle.exercises?.map((ex: Exercise) => ex.id) : [];
 
-  ngOnDestroy() {
-    this.unsubscribe$.next();
-    this.unsubscribe$.complete();
-  }
-
-  initializeMuscleForm() {
-    const exerciseIdsValidator =
-      this.isAdmin ? null : Validators.required;
-    const muscleName: string = this.muscle ? this.muscle.name : "";
-    const muscleDescription: string = this.muscle ? this.muscle.description : "";
-    const muscleFunction: string = this.muscle ? this.muscle.function : "";
-    const muscleExerciseIds: number[] = this.muscle?.exercises ?
-      this.muscle.exercises?.map((ex: Exercise) => ex.id) : [];
-
-    this.muscleForm = new FormGroup({
+    const muscleForm: FormGroup = new FormGroup({
       name: new FormControl(muscleName,
         [Validators.required,
           Validators.minLength(3),
@@ -89,22 +57,48 @@ export class MuscleEntityFormComponent implements OnInit, OnDestroy {
       ),
     });
 
-    if (this.muscle)
-      this.muscleForm.addControl("id", new FormControl(this.muscle.id));
+    if (muscle)
+      muscleForm.addControl("id", new FormControl(muscle.id));
+
+    return muscleForm;
+  });
+
+  private readonly unsubscribe$: Subject<void> = new Subject<void>();
+  private readonly muscleService: MuscleService = inject(MuscleService);
+  private readonly userLoggedService: UserLoggedService = inject(UserLoggedService);
+
+  ngOnInit() {
+    this.userLoggedService.currentUser
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe(() =>
+        this.isAdmin = this.userLoggedService.isAdmin());
+    const submitEventActionType$ = this.submitEventActionType$();
+    if (submitEventActionType$)
+      submitEventActionType$
+        .pipe(takeUntil(this.unsubscribe$))
+        .subscribe((actionType: ActionType) => {
+          if (actionType === ActionType.create || actionType === ActionType.update) {
+            this.onSubmit();
+          }
+        });
+  }
+
+  ngOnDestroy() {
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
   }
 
   onSubmit() {
-    if (!this.muscleForm) return;
-    if (this.muscleForm.valid) {
-      this.submitInvalidForm = false;
-      if (!this.muscleForm.value.id) {
-        this.muscleService.addMuscle(this.muscleForm);
-      } else {
-        this.muscleService.modifyMuscle(this.muscleForm);
-      }
-      this.btnCloseRef.click();
+    const muscleForm = this.muscleForm();
+    if (muscleForm.valid) {
+      this.submitInvalidForm.set(false);
+      if (!muscleForm.value.id)
+        this.muscleService.addMuscle(muscleForm);
+      else
+        this.muscleService.modifyMuscle(muscleForm);
+      this.btnCloseRef().click();
     } else {
-      this.submitInvalidForm = true;
+      this.submitInvalidForm.set(true);
     }
   }
 }
