@@ -1,74 +1,45 @@
-import {Component, inject, Input, OnDestroy, OnInit} from '@angular/core';
+import {Component, computed, inject, input, OnDestroy, OnInit, signal} from '@angular/core';
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {Observable, Subject, takeUntil} from "rxjs";
 import {UserLoggedService} from "../../../../services/user-logged/user-logged.service";
-import {ProgExercise} from "../../../../interface/dto/prog-exercise";
 import {User} from "../../../../interface/dto/user";
 import {Visibility} from "../../../../interface/enum/visibility";
 import {InputControlComponent} from "../../../input-control/input-control.component";
-import {NgIf} from "@angular/common";
 import {ExerciseSelectComponent} from "../../../selects/exercise-select/exercise-select.component";
 import {VisibilitySelectComponent} from "../../../selects/visibility-select/visibility-select.component";
 import {ProgExerciseService} from "../../../../services/prog-exercise/prog-exercise.service";
 import {ActionType} from "../../../../interface/enum/action-type";
+import {ProgExercise} from "../../../../interface/dto/prog-exercise";
 
 @Component({
-    selector: 'app-my-prog-exercise-entity-form',
-    imports: [
-        InputControlComponent,
-        NgIf,
-        ReactiveFormsModule,
-        ExerciseSelectComponent,
-        VisibilitySelectComponent
-    ],
-    templateUrl: './my-prog-exercise-entity-form.component.html'
+  selector: 'app-my-prog-exercise-entity-form',
+  imports: [
+    InputControlComponent,
+    ReactiveFormsModule,
+    ExerciseSelectComponent,
+    VisibilitySelectComponent
+  ],
+  templateUrl: './my-prog-exercise-entity-form.component.html'
 })
 export class MyProgExerciseEntityFormComponent implements OnInit, OnDestroy {
-  progExercise: ProgExercise | undefined;
-  progExerciseForm: FormGroup | null = null;
-  submitInvalidForm: boolean = false;
+  readonly progExercise = input.required<ProgExercise | undefined>();
+  readonly btnCloseRef = input.required<HTMLButtonElement>();
+  readonly submitEventActionType$ = input.required<Observable<ActionType> | undefined>();
 
-  @Input() btnCloseRef!: HTMLButtonElement;
-  @Input() submitEventActionType$!: Observable<ActionType> | undefined;
+  submitInvalidForm = signal<boolean>(false);
 
   private user: User | undefined;
-  private readonly unsubscribe$: Subject<void> = new Subject<void>();
-  private readonly userLoggedService: UserLoggedService = inject(UserLoggedService);
-  private readonly progExerciseService: ProgExerciseService = inject(ProgExerciseService);
 
-  @Input() set progExerciseInput(value: ProgExercise | undefined) {
-    this.progExercise = value;
-    this.initializeProgExerciseForm();
-  }
+  readonly progExerciseForm = computed<FormGroup>(() => {
+    const progExercise = this.progExercise();
 
-  ngOnInit() {
-    this.userLoggedService.currentUser
-      .pipe(takeUntil(this.unsubscribe$))
-      .subscribe((user: User | undefined) =>
-        this.user = user);
-    if (this.submitEventActionType$)
-      this.submitEventActionType$
-        .pipe(takeUntil(this.unsubscribe$))
-        .subscribe((actionType: ActionType) => {
-          if (actionType === ActionType.create || actionType === ActionType.update)
-            this.onSubmit();
-        });
-    this.initializeProgExerciseForm();
-  }
+    const creatorId: number | undefined = this.user ? this.user.id : undefined;
+    const progExerciseName: string = progExercise ? progExercise.name : "";
+    const progExerciseNote: string = progExercise ? progExercise.note : "";
+    const progExerciseVisibility: string = progExercise ? progExercise.visibility : Visibility.PRIVATE;
+    const progExerciseExerciseId: number | undefined = progExercise ? progExercise.exercise.id : undefined;
 
-  ngOnDestroy() {
-    this.unsubscribe$.next();
-    this.unsubscribe$.complete();
-  }
-
-  initializeProgExerciseForm() {
-    const creatorId: number | null = this.user ? this.user.id : null;
-    const progExerciseName: string = this.progExercise ? this.progExercise.name : "";
-    const progExerciseNote: string = this.progExercise ? this.progExercise.note : "";
-    const progExerciseVisibility: string = this.progExercise ? this.progExercise.visibility : Visibility.PRIVATE;
-    const progExerciseExerciseId: number | null = this.progExercise ? this.progExercise.exercise.id : null;
-
-    this.progExerciseForm = new FormGroup({
+    const progExerciseForm: FormGroup = new FormGroup({
       name: new FormControl(
         progExerciseName,
         [Validators.required,
@@ -88,24 +59,49 @@ export class MyProgExerciseEntityFormComponent implements OnInit, OnDestroy {
       creatorId: new FormControl(creatorId),
     });
 
-    if (this.progExercise) {
-      this.progExerciseForm.addControl("id", new FormControl(this.progExercise.id));
-      this.progExerciseForm.removeControl("creatorId");
+    if (progExercise) {
+      progExerciseForm.addControl("id", new FormControl(progExercise.id));
+      progExerciseForm.removeControl("creatorId");
     }
+    return progExerciseForm;
+  });
+
+  private readonly unsubscribe$ = new Subject<void>();
+  private readonly userLoggedService = inject(UserLoggedService);
+  private readonly progExerciseService = inject(ProgExerciseService);
+
+  ngOnInit() {
+    this.userLoggedService.currentUser
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe((user: User | undefined) =>
+        this.user = user);
+    const submitEventActionType$ = this.submitEventActionType$();
+    if (submitEventActionType$)
+      submitEventActionType$
+        .pipe(takeUntil(this.unsubscribe$))
+        .subscribe((actionType: ActionType) => {
+          if (actionType === ActionType.create || actionType === ActionType.update)
+            this.onSubmit();
+        });
+  }
+
+  ngOnDestroy() {
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
   }
 
   onSubmit() {
-    if (!this.progExerciseForm) return;
-    if (this.progExerciseForm.valid) {
-      this.submitInvalidForm = false;
-      if (!this.progExerciseForm.value.id) {
-        this.progExerciseService.addProgExercise(this.progExerciseForm);
+    const progExerciseForm = this.progExerciseForm();
+    if (progExerciseForm.valid) {
+      this.submitInvalidForm.set(false);
+      if (!progExerciseForm.value.id) {
+        this.progExerciseService.addProgExercise(progExerciseForm);
       } else {
-        this.progExerciseService.modifyProgExercise(this.progExerciseForm);
+        this.progExerciseService.modifyProgExercise(progExerciseForm);
       }
-      this.btnCloseRef.click();
+      this.btnCloseRef().click();
     } else {
-      this.submitInvalidForm = true;
+      this.submitInvalidForm.set(true);
     }
   }
 }

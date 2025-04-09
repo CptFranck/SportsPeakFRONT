@@ -1,21 +1,21 @@
-<form *ngIf="progExerciseForm" [formGroup]="progExerciseForm" class="container-fluid">
+<form [formGroup]="progExerciseForm()" class="container-fluid">
   <div class="mb-3">
     <span class="form-label">Name :</span>
     <input class="form-control" formControlName="name" type="text">
     <app-input-control
-      [formGroup]="progExerciseForm"
-      [submitInvalid]="submitInvalidForm"
+      [formGroup]="progExerciseForm()"
+      [submitInvalid]="submitInvalidForm()"
       formGroupFieldName="name"
       rules="min : 3 ; max : 50"
     />
   </div>
   <div class="mb-3">
     <span class="form-label">Exercise(s) :</span>
-    <app-exercise-select [exerciseId]='progExerciseForm.controls["exerciseId"].value' formControlName="exerciseId"/>
+    <app-exercise-select formControlName="exerciseId"/>
     <app-input-control
-      [formGroup]="progExerciseForm"
-      [submitInvalid]="submitInvalidForm"
-      errorMessage="Please select exercises that use this muscle"
+      [formGroup]="progExerciseForm()"
+      [submitInvalid]="submitInvalidForm()"
+      errorMessage="Please select an exercise that use this muscle"
       formGroupFieldName="exerciseId"
     />
   </div>
@@ -23,18 +23,18 @@
     <span class="form-label">Note :</span>
     <textarea aria-label="textarea" class="form-control" formControlName="note"></textarea>
     <app-input-control
-      [formGroup]="progExerciseForm"
-      [submitInvalid]="submitInvalidForm"
+      [formGroup]="progExerciseForm()"
+      [submitInvalid]="submitInvalidForm()"
       formGroupFieldName="note"
       rules="min : 3 ; max : 2000"
     />
   </div>
   <div class="mb-3">
     <span class="form-label">Visibility :</span>
-    <app-visibility-select [visibility]='progExerciseForm.controls["visibility"].value' formControlName="visibility"/>
+    <app-visibility-select formControlName="visibility"/>
     <app-input-control
-      [formGroup]="progExerciseForm"
-      [submitInvalid]="submitInvalidForm"
+      [formGroup]="progExerciseForm()"
+      [submitInvalid]="submitInvalidForm()"
       formGroupFieldName="visibility"
     />
   </div>

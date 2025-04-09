@@ -10,7 +10,7 @@
   />
   <app-my-prog-exercise-entity-form *ngIf="action() === ActionType.update"
                                     [btnCloseRef]="btnClose"
-                                    [progExerciseInput]="progExercise()"
+                                    [progExercise]="progExercise()"
                                     [submitEventActionType$]="submitEventActionType$"
   />
   <app-my-prog-exercise-delete-form *ngIf="action() === ActionType.delete"
