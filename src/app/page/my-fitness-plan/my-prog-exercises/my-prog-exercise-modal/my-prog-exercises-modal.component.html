@@ -13,7 +13,7 @@
 <ng-template #progExerciseModalTemplate let-btnClose="btnClose" let-submitEventActionType$="submitEventActionType$">
   <app-my-prog-exercise-entity-form *ngIf="action() === ActionType.create"
                                     [btnCloseRef]="btnClose"
-                                    [progExerciseInput]="progExercise()"
+                                    [progExercise]="progExercise()"
                                     [submitEventActionType$]="submitEventActionType$"/>
   <app-my-prog-exercise-details-display *ngIf="action() === ActionType.read"
                                         [progExercise]="progExercise()"/>
