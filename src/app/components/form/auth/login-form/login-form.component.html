@@ -1,12 +1,12 @@
-<form *ngIf="loginForm" [formGroup]="loginForm" class="d-flex flex-column">
+<form [formGroup]="loginForm()" class="d-flex flex-column">
   <p> {{ "bob@lebricoleur.fr // ChangeMeInProd1!" }} </p>
   <p> {{ "admin@sportspeak.com // ChangeMeInProd1! " }} </p>
   <div class="mb-3">
     <span class="form-label">Email address</span>
     <input aria-describedby="emailHelp" class="form-control" formControlName="email" type="email">
     <app-input-control
-      [formGroup]="loginForm"
-      [submitInvalid]="submitInvalidForm"
+      [formGroup]="loginForm()"
+      [submitInvalid]="submitInvalidForm()"
       formGroupFieldName="email"
     />
   </div>
@@ -14,8 +14,8 @@
     <span class="form-label">Password</span>
     <input class="form-control" formControlName="password" type="password">
     <app-input-control
-      [formGroup]="loginForm"
-      [submitInvalid]="submitInvalidForm"
+      [formGroup]="loginForm()"
+      [submitInvalid]="submitInvalidForm()"
       formGroupFieldName="password"
     />
   </div>
