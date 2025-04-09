@@ -84,8 +84,7 @@
         <app-performance-logs-charts (actionPerformanceLog)="setPerformanceLog($event)"
                                      [accordionParentIdGraph]="accordionParentIdGraph"
                                      [collapseBlock]="collapseBlock"
-                                     [performanceLogsInputSortedByLogDateInput]="performanceLogsSortedByLogDate()"
-                                     [performanceLogsInputSortedBySetInput]="performanceLogsSortedBySet()"/>
+                                     [performanceLogsInputSortedBySet]="performanceLogsSortedBySet()"/>
       </div>
     </div>
     <div *ngIf="Object.keys(performanceLogsSortedByLogDate()).length === 0" class="container p-2">
