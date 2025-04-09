@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {Component, EventEmitter, input, Output} from '@angular/core';
 import {PerformanceLog} from "../../../../interface/dto/performance-log";
 import {DatePipe, NgIf} from "@angular/common";
 import {FormIndicator} from "../../../../interface/utils/form-indicator";
@@ -17,11 +17,12 @@ import {CollapseBlockComponent} from "../../../collapse-block/collapse-block.com
 })
 export class PerformanceLogsCardComponent {
 
-  @Input() activeButton!: boolean;
-  @Input() formCollapseId: string = "";
-  @Input() performanceLog!: PerformanceLog;
-  @Input() collapseBlockComponent?: CollapseBlockComponent;
-  @Output() actionPerformanceLog: EventEmitter<FormIndicator> = new EventEmitter<FormIndicator>();
+  readonly activeButton = input.required<boolean>();
+  readonly formCollapseId = input<string>("");
+  readonly performanceLog = input.required<PerformanceLog>();
+  readonly collapseBlockComponent = input<CollapseBlockComponent>();
+
+  @Output() actionPerformanceLog = new EventEmitter<FormIndicator>();
 
   modPerformanceLog($event: any) {
     this.actionPerformanceLog.emit({

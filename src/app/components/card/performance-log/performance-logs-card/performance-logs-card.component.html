@@ -6,30 +6,30 @@
           <div class="row">
             <div class="col-auto">
               <span class="fw-bold me-1"> Performed : </span>
-              {{ performanceLog.logDate | date: 'dd/MM/yyyy' }}
+              {{ performanceLog().logDate | date: 'dd/MM/yyyy' }}
             </div>
             <div class="col-auto">
               <span class="fw-bold me-1"> Set N°: </span>
-              {{ performanceLog.setIndex }}
+              {{ performanceLog().setIndex }}
             </div>
             <div class="col-auto">
               <span class="fw-bold"> Reps : </span>
-              {{ performanceLog.repetitionNumber }}
+              {{ performanceLog().repetitionNumber }}
             </div>
             <div class="col">
               <span class="fw-bold"> Weight : </span>
-              {{ performanceLog.weight + " " + performanceLog.weightUnit }}
+              {{ performanceLog().weight + " " + performanceLog().weightUnit }}
             </div>
           </div>
         </div>
-        <div *ngIf="activeButton" class="col">
+        <div *ngIf="activeButton()" class="col">
           <div class="row justify-content-center">
             <div class="col-auto d-flex justify-content-center py-1">
               <app-collapse-button
                 (onClickEvent)="modPerformanceLog($event)"
-                [collapseBlockComponent]="collapseBlockComponent"
-                [collapseId]="formCollapseId"
-                [value]="performanceLog"
+                [collapseBlockComponent]="collapseBlockComponent()"
+                [collapseId]="formCollapseId()"
+                [value]="performanceLog()"
                 btnClass="btn-secondary"
               >
                 Modify
@@ -39,9 +39,9 @@
             <div class="col-auto d-flex justify-content-center py-1">
               <app-collapse-button
                 (onClickEvent)="delPerformanceLog($event)"
-                [collapseBlockComponent]="collapseBlockComponent"
-                [collapseId]="formCollapseId"
-                [value]="performanceLog"
+                [collapseBlockComponent]="collapseBlockComponent()"
+                [collapseId]="formCollapseId()"
+                [value]="performanceLog()"
                 btnClass="btn-danger"
               >
                 Delete
