@@ -1,4 +1,4 @@
-import {Component, inject, Input, OnDestroy, OnInit} from '@angular/core';
+import {Component, inject, input, OnDestroy, OnInit} from '@angular/core';
 import {Observable, Subject, takeUntil} from "rxjs";
 import {ActionType} from "../../../../interface/enum/action-type";
 import {PerformanceLog} from "../../../../interface/dto/performance-log";
@@ -9,21 +9,17 @@ import {PerformanceLogService} from "../../../../services/performance-log/perfor
   templateUrl: './performance-log-delete-form.component.html'
 })
 export class PerformanceLogDeleteFormComponent implements OnInit, OnDestroy {
-  performanceLog: PerformanceLog | undefined;
+  readonly btnCloseRef = input.required<HTMLButtonElement>();
+  readonly performanceLog = input.required<PerformanceLog | undefined>();
+  readonly submitEventActionType$ = input.required<Observable<ActionType> | undefined>();
 
-  @Input() btnCloseRef!: HTMLButtonElement;
-  @Input() submitEventActionType$!: Observable<ActionType> | undefined;
-
-  private readonly unsubscribe$: Subject<void> = new Subject<void>();
-  private readonly performanceLogService: PerformanceLogService = inject(PerformanceLogService);
-
-  @Input() set performanceLogInput(performanceLog: PerformanceLog | undefined) {
-    this.performanceLog = performanceLog;
-  }
+  private readonly unsubscribe$ = new Subject<void>();
+  private readonly performanceLogService = inject(PerformanceLogService);
 
   ngOnInit() {
-    if (this.submitEventActionType$)
-      this.submitEventActionType$
+    const submitEventActionType$ = this.submitEventActionType$();
+    if (submitEventActionType$)
+      submitEventActionType$
         .pipe(takeUntil(this.unsubscribe$))
         .subscribe((actionType: ActionType) => {
           if (actionType === ActionType.delete)
@@ -37,8 +33,9 @@ export class PerformanceLogDeleteFormComponent implements OnInit, OnDestroy {
   }
 
   onSubmit() {
-    if (!this.performanceLog) return;
-    this.performanceLogService.deletePerformanceLog(this.performanceLog);
-    this.btnCloseRef.click();
+    const performanceLog = this.performanceLog();
+    if (!performanceLog) return;
+    this.performanceLogService.deletePerformanceLog(performanceLog);
+    this.btnCloseRef().click();
   }
 }
