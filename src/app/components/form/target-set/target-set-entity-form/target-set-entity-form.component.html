@@ -1,11 +1,11 @@
-<form *ngIf="targetSetForm" [formGroup]="targetSetForm" class="container-fluid">
+<form [formGroup]="targetSetForm()" class="container-fluid">
   <div class="mb-3">
     <span class="form-label">Set index :</span>
     <input class="form-control" formControlName="index" type="text">
     <app-input-control
-      [formGroup]="targetSetForm"
+      [formGroup]="targetSetForm()"
       [ifInvalid]="true"
-      [submitInvalid]="submitInvalidForm"
+      [submitInvalid]="submitInvalidForm()"
       errorMessage="Please write the number corresponding to the index"
       formGroupFieldName="index"
       rules="only integer number ; min : 1; max : 50"
@@ -15,9 +15,9 @@
     <span class="form-label">Number of set(s) :</span>
     <input class="form-control" formControlName="setNumber" type="text">
     <app-input-control
-      [formGroup]="targetSetForm"
+      [formGroup]="targetSetForm()"
       [ifInvalid]="true"
-      [submitInvalid]="submitInvalidForm"
+      [submitInvalid]="submitInvalidForm()"
       errorMessage="Please write the number of sets you wish to make"
       formGroupFieldName="setNumber"
       rules="only integer number ; min : 1 ; max : 1000"
@@ -27,8 +27,8 @@
     <span class="form-label">Number of Repetition(s) :</span>
     <input class="form-control" formControlName="repetitionNumber" type="text">
     <app-input-control
-      [formGroup]="targetSetForm"
-      [submitInvalid]="submitInvalidForm"
+      [formGroup]="targetSetForm()"
+      [submitInvalid]="submitInvalidForm()"
       errorMessage="Please write the number of sets you wish to make"
       formGroupFieldName="repetitionNumber"
       rules="only integer number ; min : 1 ; max : 1000"
@@ -40,9 +40,9 @@
         <span class="form-label">Weight :</span>
         <input class="form-control" formControlName="weight" type="text">
         <app-input-control
-          [formGroup]="targetSetForm"
+          [formGroup]="targetSetForm()"
           [ifInvalid]="true"
-          [submitInvalid]="submitInvalidForm"
+          [submitInvalid]="submitInvalidForm()"
           errorMessage="Please write the weight of sets you wish to use"
           formGroupFieldName="weight"
           rules="only number, two digits after the decimal point are accepted ; min : 0 ; max : 1000"
@@ -50,11 +50,11 @@
       </div>
       <div class="col">
         <span class="form-label">Weight Unit:</span>
-        <app-weight-select [weightUnit]='targetSetForm.controls["weightUnit"].value' formControlName="weightUnit"/>
+        <app-weight-select formControlName="weightUnit"/>
         <app-input-control
-          [formGroup]="targetSetForm"
+          [formGroup]="targetSetForm()"
           [ifInvalid]="true"
-          [submitInvalid]="submitInvalidForm"
+          [submitInvalid]="submitInvalidForm()"
           errorMessage="Please write the weight of sets you wish to use"
           formGroupFieldName="weightUnit"
           rules="only number, two digits after the decimal point are accepted ; min : 0 ; max : 1000"
@@ -67,11 +67,11 @@
       <div class="col">
         <div class="row">
           <span class="form-label">One Rep Time :</span>
-          <app-duration-input [formGroup]="targetSetForm" fieldName="physicalExertionUnitTime"/>
+          <app-duration-input [formGroup]="targetSetForm()" fieldName="physicalExertionUnitTime"/>
           <app-input-control
-            [formGroup]="targetSetForm"
+            [formGroup]="targetSetForm()"
             [onlyValidMessage]="true"
-            [submitInvalid]="submitInvalidForm"
+            [submitInvalid]="submitInvalidForm()"
             displayedFieldName="one rep time"
             formGroupFieldName="physicalExertionUnitTime"
           />
@@ -80,11 +80,11 @@
       <div class="col">
         <div class="row">
           <span class="form-label">Rest Time :</span>
-          <app-duration-input [formGroup]="targetSetForm" fieldName="restTime"/>
+          <app-duration-input [formGroup]="targetSetForm()" fieldName="restTime"/>
           <app-input-control
-            [formGroup]="targetSetForm"
+            [formGroup]="targetSetForm()"
             [onlyValidMessage]="true"
-            [submitInvalid]="submitInvalidForm"
+            [submitInvalid]="submitInvalidForm()"
             displayedFieldName="rest time"
             formGroupFieldName="restTime"
           />

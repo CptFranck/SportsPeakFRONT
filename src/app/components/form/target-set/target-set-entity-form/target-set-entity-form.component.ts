@@ -1,6 +1,5 @@
-import {Component, inject, Input, OnDestroy, OnInit} from '@angular/core';
+import {Component, computed, inject, input, OnDestroy, OnInit, signal} from '@angular/core';
 import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
-import {NgIf} from "@angular/common";
 import {Observable, Subject, takeUntil} from "rxjs";
 import {InputControlComponent} from "../../../input-control/input-control.component";
 import {WeightSelectComponent} from "../../../selects/weight-select/weight-select.component";
@@ -19,7 +18,6 @@ import {getUpToDateTargetSets} from "../../../../utils/target-set-functions";
   imports: [
     FormsModule,
     InputControlComponent,
-    NgIf,
     ReactiveFormsModule,
     WeightSelectComponent,
     DurationInputComponent,
@@ -27,47 +25,17 @@ import {getUpToDateTargetSets} from "../../../../utils/target-set-functions";
   templateUrl: './target-set-entity-form.component.html'
 })
 export class TargetSetEntityFormComponent implements OnInit, OnDestroy {
-  targetSet: TargetSet | undefined;
-  progExercise: ProgExercise | undefined;
-  targetSetForm: FormGroup | null = null;
-  submitInvalidForm: boolean = false;
 
-  @Input() actionType!: ActionType;
-  @Input() btnCloseRef!: HTMLButtonElement;
-  @Input() submitEventActionType$!: Observable<ActionType> | undefined;
+  readonly targetSet = input.required<TargetSet | undefined>();
+  readonly progExercise = input.required<ProgExercise | undefined>();
+  readonly actionType = input.required<ActionType>();
+  readonly btnCloseRef = input.required<HTMLButtonElement>();
+  readonly submitEventActionType$ = input.required<Observable<ActionType> | undefined>();
 
-  private readonly unsubscribe$: Subject<void> = new Subject<void>();
-  private readonly targetSetService: TargetSetService = inject(TargetSetService);
+  targetSetForm = computed<FormGroup>(() => {
+    const targetSet = this.targetSet();
+    const progExercise = this.progExercise();
 
-  @Input() set progExerciseInput(value: ProgExercise | undefined) {
-    this.progExercise = value;
-    this.initializeTargetSetForm();
-  }
-
-  @Input() set targetSetInput(value: TargetSet | undefined) {
-    this.targetSet = value;
-    this.initializeTargetSetForm();
-  }
-
-  ngOnInit() {
-    this.initializeTargetSetForm();
-    if (this.submitEventActionType$)
-      this.submitEventActionType$
-        .pipe(takeUntil(this.unsubscribe$))
-        .subscribe((actionType: ActionType) => {
-          if (actionType === ActionType.create || actionType === ActionType.addEvolution)
-            this.onCreateOrEvolutionSubmit();
-          else if (actionType === ActionType.update)
-            this.onUpdateSubmit();
-        });
-  }
-
-  ngOnDestroy() {
-    this.unsubscribe$.next();
-    this.unsubscribe$.complete();
-  }
-
-  initializeTargetSetForm() {
     const defaultDuration: Duration = {seconds: 0, minutes: 0, hours: 0};
     let targetSetIndex: number = 1;
     let targetSetSetNumber: number = 1;
@@ -78,22 +46,22 @@ export class TargetSetEntityFormComponent implements OnInit, OnDestroy {
     let targetSetRestTime: Duration = defaultDuration;
     const targetSetDate: Date = new Date();
     let targetSetUpdateId: number | null = null;
-    const targetSetProgExerciseId: number | undefined = this.progExercise?.id;
+    const targetSetProgExerciseId: number | undefined = progExercise?.id;
 
-    if (this.targetSet) {
-      targetSetIndex = this.targetSet.index;
-      targetSetSetNumber = this.targetSet.setNumber;
-      targetSetRepetitionNumber = this.targetSet.repetitionNumber;
-      targetSetWeight = this.targetSet.weight;
-      targetSetWeightUnit = this.targetSet.weightUnit;
-      targetSetPhysicalExertionUnitTime = this.targetSet.physicalExertionUnitTime;
-      targetSetRestTime = this.targetSet.restTime;
-      if (this.actionType === ActionType.addEvolution)
-        targetSetUpdateId = this.targetSet.id;
-    } else if (this.progExercise)
-      targetSetIndex = getUpToDateTargetSets(this.progExercise).length + 1;
+    if (targetSet) {
+      targetSetIndex = targetSet.index;
+      targetSetSetNumber = targetSet.setNumber;
+      targetSetRepetitionNumber = targetSet.repetitionNumber;
+      targetSetWeight = targetSet.weight;
+      targetSetWeightUnit = targetSet.weightUnit;
+      targetSetPhysicalExertionUnitTime = targetSet.physicalExertionUnitTime;
+      targetSetRestTime = targetSet.restTime;
+      if (this.actionType() === ActionType.addEvolution)
+        targetSetUpdateId = targetSet.id;
+    } else if (progExercise)
+      targetSetIndex = getUpToDateTargetSets(progExercise).length + 1;
 
-    this.targetSetForm = new FormGroup(
+    return new FormGroup(
       {
         index: new FormControl(
           targetSetIndex,
@@ -130,33 +98,57 @@ export class TargetSetEntityFormComponent implements OnInit, OnDestroy {
         progExerciseId: new FormControl(targetSetProgExerciseId),
         targetSetUpdateId: new FormControl(targetSetUpdateId),
       });
+  });
+
+  submitInvalidForm = signal<boolean>(false);
+
+  private readonly unsubscribe$: Subject<void> = new Subject<void>();
+  private readonly targetSetService: TargetSetService = inject(TargetSetService);
+
+  ngOnInit() {
+    const submitEventActionType$ = this.submitEventActionType$();
+    if (submitEventActionType$)
+      submitEventActionType$
+        .pipe(takeUntil(this.unsubscribe$))
+        .subscribe((actionType: ActionType) => {
+          if (actionType === ActionType.create || actionType === ActionType.addEvolution)
+            this.onCreateOrEvolutionSubmit();
+          else if (actionType === ActionType.update)
+            this.onUpdateSubmit();
+        });
+  }
+
+  ngOnDestroy() {
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
   }
 
   onCreateOrEvolutionSubmit() {
-    if (!this.targetSetForm) return;
-    if (this.targetSetForm.valid) {
-      this.submitInvalidForm = false;
-      this.targetSetService.addTargetSet(this.targetSetForm);
-      this.btnCloseRef.click();
+    const targetSetForm = this.targetSetForm();
+    if (targetSetForm.valid) {
+      this.submitInvalidForm.set(false);
+      this.targetSetService.addTargetSet(targetSetForm);
+      this.btnCloseRef().click();
     } else {
-      this.submitInvalidForm = true;
+      this.submitInvalidForm.set(true);
     }
   }
 
   onUpdateSubmit() {
-    if (!this.targetSetForm) return;
-    if (this.targetSetForm.valid) {
-      if (this.targetSet) {
-        this.targetSetForm.addControl("id", new FormControl(this.targetSet.id));
-        this.targetSetForm.removeControl("creationDate");
-        this.targetSetForm.removeControl("progExerciseId");
-        this.targetSetForm.removeControl("targetSetUpdateId");
+    const targetSetForm = this.targetSetForm();
+    if (targetSetForm.valid) {
+      const targetSet = this.targetSet();
+      if (targetSet) {
+        targetSetForm.addControl("id", new FormControl(targetSet.id));
+        targetSetForm.removeControl("creationDate");
+        targetSetForm.removeControl("progExerciseId");
+        targetSetForm.removeControl("targetSetUpdateId");
       }
-      this.submitInvalidForm = false;
-      this.targetSetService.modifyTargetSet(this.targetSetForm);
-      this.btnCloseRef.click();
+      this.submitInvalidForm.set(false);
+      this.targetSetService.modifyTargetSet(targetSetForm);
+      this.btnCloseRef().click();
     } else {
-      this.submitInvalidForm = true;
+      this.submitInvalidForm.set(true);
     }
   }
 }
