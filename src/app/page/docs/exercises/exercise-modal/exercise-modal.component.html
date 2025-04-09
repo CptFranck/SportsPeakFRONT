@@ -14,7 +14,7 @@
 <ng-template #modalTemplate let-btnClose="btnClose" let-submitEventActionType$="submitEventActionType$">
   <app-exercise-entity-form *ngIf="action() === ActionType.create || action() === ActionType.update"
                             [btnCloseRef]="btnClose"
-                            [exerciseInput]="exercise()"
+                            [exercise]="exercise()"
                             [submitEventActionType$]="submitEventActionType$"
   />
   <app-exercise-details-display *ngIf="action() === ActionType.read"
