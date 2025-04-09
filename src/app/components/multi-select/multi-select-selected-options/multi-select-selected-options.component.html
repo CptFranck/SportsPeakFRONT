@@ -1,6 +1,6 @@
 <div class="selected-options">
-  <span *ngIf="selectedOptions.length === 0">Select tags</span>
-  <span *ngFor="let selectedOption of displayedSelectedOptions" class="tag">
+  <span *ngIf="selectedOptions().length === 0">Select tags</span>
+  <span *ngFor="let selectedOption of displayedSelectedOptions()" class="tag">
         {{ selectedOption.title }}
     <i (click)="onCLickRemoveTag($event)"
        [attr.data-value]="selectedOption.id"
