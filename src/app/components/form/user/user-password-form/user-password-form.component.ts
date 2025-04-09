@@ -4,7 +4,6 @@ import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/
 import {Observable, Subject, takeUntil} from "rxjs";
 import {UserService} from "../../../../services/user/user.service";
 import {InputControlComponent} from "../../../input-control/input-control.component";
-import {NgIf} from "@angular/common";
 import {ModificationField} from "../../../../interface/enum/modification-field";
 import {ActionType} from "../../../../interface/enum/action-type";
 import {confirmValidator} from "../../../../validators/confirmValidator";
@@ -14,7 +13,6 @@ import {confirmValidator} from "../../../../validators/confirmValidator";
   imports: [
     InputControlComponent,
     ReactiveFormsModule,
-    NgIf
   ],
   templateUrl: './user-password-form.component.html'
 })

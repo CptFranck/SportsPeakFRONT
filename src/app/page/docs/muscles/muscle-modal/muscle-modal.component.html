@@ -14,7 +14,7 @@
 <ng-template #modalTemplate let-btnClose="btnClose" let-submitEventActionType$="submitEventActionType$">
   <app-muscle-entity-form *ngIf="action() === ActionType.create || action() === ActionType.update"
                           [btnCloseRef]="btnClose"
-                          [muscleInput]="muscle()"
+                          [muscle]="muscle()"
                           [submitEventActionType$]="submitEventActionType$"
   />
   <app-muscle-details-display *ngIf="action() === ActionType.read"

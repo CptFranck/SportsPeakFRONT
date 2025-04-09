@@ -3,7 +3,6 @@ import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/
 import {Observable, Subject, takeUntil} from "rxjs";
 import {UserService} from "../../../../services/user/user.service";
 import {InputControlComponent} from "../../../input-control/input-control.component";
-import {NgIf} from "@angular/common";
 import {ActionType} from "../../../../interface/enum/action-type";
 import {ModificationField} from "../../../../interface/enum/modification-field";
 import {User} from "../../../../interface/dto/user";
@@ -12,7 +11,6 @@ import {User} from "../../../../interface/dto/user";
   selector: 'app-user-username-form',
   imports: [
     InputControlComponent,
-    NgIf,
     ReactiveFormsModule
   ],
   templateUrl: './user-username-form.component.html'

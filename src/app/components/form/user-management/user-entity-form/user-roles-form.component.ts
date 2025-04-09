@@ -1,7 +1,6 @@
 import {Component, computed, inject, input, OnDestroy, OnInit, signal} from '@angular/core';
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {Observable, Subject, takeUntil} from "rxjs";
-import {NgIf} from "@angular/common";
 import {InputControlComponent} from "../../../input-control/input-control.component";
 import {User} from "../../../../interface/dto/user";
 import {UserService} from "../../../../services/user/user.service";
@@ -13,7 +12,6 @@ import {Role} from "../../../../interface/dto/role";
   selector: 'app-user-roles-form',
   imports: [
     InputControlComponent,
-    NgIf,
     ReactiveFormsModule,
     RoleSelectorComponent,
   ],
