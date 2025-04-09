@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {Component, EventEmitter, input, Output} from '@angular/core';
 import {DatePipe, NgForOf} from "@angular/common";
 import {
   PerformanceLogsCardComponent
@@ -19,12 +19,12 @@ import {ifFirstShow, ifNotFirstCollapse} from "../../../../utils/accordion-funct
   templateUrl: './performance-log-sorted-by-log-date.component.html'
 })
 export class PerformanceLogSortedByLogDateComponent {
-  @Input() formCollapseId!: string;
-  @Input() accordionParentIdDate!: string;
-  @Input() collapseBlock!: CollapseBlockComponent;
-  @Input() performanceLogsSortByDate!: DictionaryItem<PerformanceLog[]>[];
+  readonly formCollapseId = input.required<string>();
+  readonly accordionParentIdDate = input.required<string>();
+  readonly collapseBlock = input.required<CollapseBlockComponent>();
+  readonly performanceLogsSortByDate = input.required<DictionaryItem<PerformanceLog[]>[]>();
 
-  @Output() actionPerformanceLog: EventEmitter<FormIndicator> = new EventEmitter<FormIndicator>();
+  @Output() actionPerformanceLog = new EventEmitter<FormIndicator>();
 
   protected readonly ifFirstShow = ifFirstShow;
   protected readonly ifNotFirstCollapse = ifNotFirstCollapse;
