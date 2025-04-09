@@ -32,21 +32,6 @@ export const GET_TARGET_SET_BY_PROG_EXERCISE_ID = gql`
         weightUnit
         logDate
       }
-      progExercise {
-        id
-        name
-        note
-        exercise {
-          id
-          name
-        }
-        trustLabel
-        visibility
-        creator {
-          id
-          username
-        }
-      }
     }
   }
 `;
@@ -82,21 +67,6 @@ export const ADD_TARGET_SET = gql`
         weight
         weightUnit
         logDate
-      }
-      progExercise {
-        id
-        name
-        note
-        exercise {
-          id
-          name
-        }
-        trustLabel
-        visibility
-        creator {
-          id
-          username
-        }
       }
     }
   }
