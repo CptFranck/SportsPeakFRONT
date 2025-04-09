@@ -1,7 +1,6 @@
-import {Component, inject, Input, OnDestroy, OnInit} from '@angular/core';
+import {Component, computed, inject, input, OnDestroy, OnInit, signal} from '@angular/core';
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {Observable, Subject, takeUntil} from "rxjs";
-import {NgIf} from "@angular/common";
 import {InputControlComponent} from "../../../input-control/input-control.component";
 import {Privilege} from "../../../../interface/dto/privilege";
 import {PrivilegeService} from "../../../../services/privilege/privilege.service";
@@ -11,62 +10,31 @@ import {UserLoggedService} from "../../../../services/user-logged/user-logged.se
 import {ActionType} from "../../../../interface/enum/action-type";
 
 @Component({
-    selector: 'app-privilege-entity-form',
-    imports: [
-        InputControlComponent,
-        RoleSelectorComponent,
-        NgIf,
-        ReactiveFormsModule
-    ],
-    templateUrl: './privilege-entity-form.component.html'
+  selector: 'app-privilege-entity-form',
+  imports: [
+    InputControlComponent,
+    RoleSelectorComponent,
+    ReactiveFormsModule
+  ],
+  templateUrl: './privilege-entity-form.component.html'
 })
 export class PrivilegeEntityFormComponent implements OnInit, OnDestroy {
 
-  privilege: Privilege | undefined;
-  privilegeForm: FormGroup | null = null;
-  submitInvalidForm: boolean = false;
   isAdmin: boolean = false;
 
-  @Input() btnCloseRef!: HTMLButtonElement;
-  @Input() submitEventActionType$!: Observable<ActionType> | undefined;
+  readonly privilege = input.required<Privilege | undefined>();
+  readonly btnCloseRef = input.required<HTMLButtonElement>();
+  readonly submitEventActionType$ = input.required<Observable<ActionType> | undefined>();
 
-  private readonly unsubscribe$: Subject<void> = new Subject<void>();
-  private readonly privilegeService: PrivilegeService = inject(PrivilegeService);
-  private readonly userLoggedService: UserLoggedService = inject(UserLoggedService);
+  submitInvalidForm = signal<boolean>(false);
+  privilegeForm = computed<FormGroup>(() => {
+    const exerciseIdsValidator = this.isAdmin ? null : Validators.required;
 
-  @Input() set privilegeInput(value: Privilege | undefined) {
-    this.privilege = value;
-    this.initializePrivilegeForm();
-  }
+    const privilege = this.privilege();
+    const privilegeName: string = privilege ? privilege.name : "";
+    const privilegeRoleIds: number[] = privilege?.roles ? privilege.roles?.map((role: Role) => role.id) : [];
 
-  ngOnInit() {
-    this.userLoggedService.currentUser
-      .pipe(takeUntil(this.unsubscribe$))
-      .subscribe(() => this.isAdmin =
-        this.userLoggedService.isAdmin());
-    if (this.submitEventActionType$)
-      this.submitEventActionType$
-        .pipe(takeUntil(this.unsubscribe$))
-        .subscribe((actionType: ActionType) => {
-          if (actionType === ActionType.create || actionType === ActionType.update)
-            this.onSubmit();
-        });
-    this.initializePrivilegeForm();
-  }
-
-  ngOnDestroy() {
-    this.unsubscribe$.next();
-    this.unsubscribe$.complete();
-  }
-
-  initializePrivilegeForm() {
-    const exerciseIdsValidator =
-      this.isAdmin ? null : Validators.required;
-    const privilegeName: string = this.privilege ? this.privilege.name : "";
-    const privilegeRoleIds: number[] = this.privilege?.roles ?
-      this.privilege.roles?.map((role: Role) => role.id) : [];
-
-    this.privilegeForm = new FormGroup({
+    const privilegeForm: FormGroup = new FormGroup({
       name: new FormControl(privilegeName,
         [Validators.required,
           Validators.minLength(3),
@@ -76,22 +44,46 @@ export class PrivilegeEntityFormComponent implements OnInit, OnDestroy {
       ),
     });
 
-    if (this.privilege)
-      this.privilegeForm.addControl("id", new FormControl(this.privilege.id));
+    if (privilege)
+      privilegeForm.addControl("id", new FormControl(privilege.id));
+    return privilegeForm;
+  });
+  private readonly unsubscribe$ = new Subject<void>();
+  private readonly privilegeService = inject(PrivilegeService);
+  private readonly userLoggedService = inject(UserLoggedService);
+
+  ngOnInit() {
+    this.userLoggedService.currentUser
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe(() => this.isAdmin =
+        this.userLoggedService.isAdmin());
+    const submitEventActionType$ = this.submitEventActionType$();
+    if (submitEventActionType$)
+      submitEventActionType$
+        .pipe(takeUntil(this.unsubscribe$))
+        .subscribe((actionType: ActionType) => {
+          if (actionType === ActionType.create || actionType === ActionType.update)
+            this.onSubmit();
+        });
+  }
+
+  ngOnDestroy() {
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
   }
 
   onSubmit() {
-    if (!this.privilegeForm) return;
-    if (this.privilegeForm.valid) {
-      this.submitInvalidForm = false;
-      if (!this.privilegeForm.value.id) {
-        this.privilegeService.addPrivilege(this.privilegeForm);
+    const privilegeForm = this.privilegeForm()
+    if (privilegeForm.valid) {
+      this.submitInvalidForm.set(false);
+      if (!privilegeForm.value.id) {
+        this.privilegeService.addPrivilege(privilegeForm);
       } else {
-        this.privilegeService.modifyPrivilege(this.privilegeForm);
+        this.privilegeService.modifyPrivilege(privilegeForm);
       }
-      this.btnCloseRef.click();
+      this.btnCloseRef().click();
     } else {
-      this.submitInvalidForm = true;
+      this.submitInvalidForm.set(true);
     }
   }
 }
