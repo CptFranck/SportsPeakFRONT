@@ -9,9 +9,6 @@ export const ADD_PERFORMANCE_LOG = gql`
       weight
       weightUnit
       logDate
-      targetSet {
-        id
-      }
     }
   }
 `;
@@ -25,9 +22,6 @@ export const MOD_PERFORMANCE_LOG = gql`
       weight
       weightUnit
       logDate
-      targetSet {
-        id
-      }
     }
   }
 `;
