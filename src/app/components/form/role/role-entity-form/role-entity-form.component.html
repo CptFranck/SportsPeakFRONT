@@ -1,20 +1,20 @@
-<form *ngIf="roleForm" [formGroup]="roleForm" class="container-fluid">
+<form [formGroup]="roleForm()" class="container-fluid">
   <div class="mb-3">
     <span class="form-label">Name :</span>
     <input class="form-control" formControlName="name" type="text">
     <app-input-control
-      [formGroup]="roleForm"
-      [submitInvalid]="submitInvalidForm"
+      [formGroup]="roleForm()"
+      [submitInvalid]="submitInvalidForm()"
       formGroupFieldName="name"
       rules="min : 3 ; max : 50"
     />
   </div>
   <div class="mb-3">
     <span class="form-label">Privilege(s) :</span>
-    <app-privilege-selector [privilegeIds]='roleForm.controls["privilegeIds"].value' formControlName="privilegeIds"/>
+    <app-privilege-selector formControlName="privilegeIds"/>
     <app-input-control
-      [formGroup]="roleForm"
-      [submitInvalid]="submitInvalidForm"
+      [formGroup]="roleForm()"
+      [submitInvalid]="submitInvalidForm()"
       errorMessage="Please select the privileges this role must have"
       formGroupFieldName="privilegeIds"
       rules="min : 1"

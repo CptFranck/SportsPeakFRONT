@@ -1,21 +1,19 @@
-import {Component, inject, Input, OnDestroy, OnInit} from '@angular/core';
+import {Component, computed, inject, input, OnDestroy, OnInit, signal} from '@angular/core';
 import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
 import {Observable, Subject, takeUntil} from "rxjs";
-import {NgIf} from "@angular/common";
-import {Role} from "../../../../interface/dto/role";
 import {RoleService} from "../../../../services/role/role.service";
 import {Privilege} from "../../../../interface/dto/privilege";
 import {InputControlComponent} from "../../../input-control/input-control.component";
 import {PrivilegeSelectorComponent} from "../../../selectors/privilege-selector/privilege-selector.component";
 import {UserLoggedService} from "../../../../services/user-logged/user-logged.service";
 import {ActionType} from "../../../../interface/enum/action-type";
+import {Role} from "../../../../interface/dto/role";
 
 @Component({
   selector: 'app-role-entity-form',
   imports: [
     FormsModule,
     InputControlComponent,
-    NgIf,
     ReactiveFormsModule,
     PrivilegeSelectorComponent,
   ],
@@ -23,50 +21,20 @@ import {ActionType} from "../../../../interface/enum/action-type";
 })
 export class RoleEntityFormComponent implements OnInit, OnDestroy {
 
-  role: Role | undefined;
   isAdmin: boolean = false;
-  roleForm: FormGroup | null = null;
-  submitInvalidForm: boolean = false;
 
-  @Input() btnCloseRef!: HTMLButtonElement;
-  @Input() submitEventActionType$!: Observable<ActionType> | undefined;
+  readonly role = input.required<Role | undefined>();
+  readonly btnCloseRef = input.required<HTMLButtonElement>();
+  readonly submitEventActionType$ = input.required<Observable<ActionType> | undefined>();
 
-  private readonly unsubscribe$: Subject<void> = new Subject<void>();
-  private readonly roleService: RoleService = inject(RoleService);
-  private readonly userLoggedService: UserLoggedService = inject(UserLoggedService);
+  roleForm = computed<FormGroup>(() => {
+    const exerciseIdsValidator = this.isAdmin ? null : Validators.required;
 
-  @Input() set roleInput(value: Role | undefined) {
-    this.role = value;
-    this.initializeRoleForm();
-  }
+    const role = this.role()
+    const roleName: string = role ? role.name : "";
+    const rolePrivilegeIds: number[] = role?.privileges ? role.privileges?.map((privilege: Privilege) => privilege.id) : [];
 
-  ngOnInit() {
-    this.userLoggedService.currentUser
-      .pipe(takeUntil(this.unsubscribe$))
-      .subscribe(() => this.isAdmin = this.userLoggedService.isAdmin());
-    if (this.submitEventActionType$)
-      this.submitEventActionType$
-        .pipe(takeUntil(this.unsubscribe$))
-        .subscribe((actionType: ActionType) => {
-          if (actionType === ActionType.create || actionType === ActionType.update)
-            this.onSubmit();
-        });
-    this.initializeRoleForm();
-  }
-
-  ngOnDestroy() {
-    this.unsubscribe$.next();
-    this.unsubscribe$.complete();
-  }
-
-  initializeRoleForm() {
-    const exerciseIdsValidator =
-      this.isAdmin ? null : Validators.required;
-    const roleName: string = this.role ? this.role.name : "";
-    const rolePrivilegeIds: number[] = this.role?.privileges ?
-      this.role.privileges?.map((privilege: Privilege) => privilege.id) : [];
-
-    this.roleForm = new FormGroup({
+    const roleForm: FormGroup = new FormGroup({
       name: new FormControl(roleName,
         [Validators.required,
           Validators.minLength(3),
@@ -76,22 +44,49 @@ export class RoleEntityFormComponent implements OnInit, OnDestroy {
       ),
     });
 
-    if (this.role)
-      this.roleForm.addControl("id", new FormControl(this.role.id));
+    if (role)
+      roleForm.addControl("id", new FormControl(role.id));
+
+    return roleForm;
+  });
+
+  submitInvalidForm = signal<boolean>(false);
+
+  private readonly unsubscribe$ = new Subject<void>();
+  private readonly roleService = inject(RoleService);
+  private readonly userLoggedService = inject(UserLoggedService);
+
+  ngOnInit() {
+    this.userLoggedService.currentUser
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe(() => this.isAdmin = this.userLoggedService.isAdmin());
+    const submitEventActionType$ = this.submitEventActionType$();
+    if (submitEventActionType$)
+      submitEventActionType$
+        .pipe(takeUntil(this.unsubscribe$))
+        .subscribe((actionType: ActionType) => {
+          if (actionType === ActionType.create || actionType === ActionType.update)
+            this.onSubmit();
+        });
+  }
+
+  ngOnDestroy() {
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
   }
 
   onSubmit() {
-    if (!this.roleForm) return;
-    if (this.roleForm.valid) {
-      this.submitInvalidForm = false;
-      if (!this.roleForm.value.id) {
-        this.roleService.addRole(this.roleForm);
+    const roleForm = this.roleForm()
+    if (roleForm.valid) {
+      this.submitInvalidForm.set(false);
+      if (!roleForm.value.id) {
+        this.roleService.addRole(roleForm);
       } else {
-        this.roleService.modifyRole(this.roleForm);
+        this.roleService.modifyRole(roleForm);
       }
-      this.btnCloseRef.click();
+      this.btnCloseRef().click();
     } else {
-      this.submitInvalidForm = true;
+      this.submitInvalidForm.set(true);
     }
   }
 }
