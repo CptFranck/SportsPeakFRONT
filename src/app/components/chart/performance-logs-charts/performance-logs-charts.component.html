@@ -1,7 +1,7 @@
-<div [id]="accordionParentIdGraph" class="accordion p-2">
-  <div *ngFor="let performanceLogsSet of performanceLogsInputSortedBySet, index as i" class="accordion-item">
+<div [id]="accordionParentIdGraph()" class="accordion p-2">
+  <div *ngFor="let performanceLogsSet of performanceLogsInputSortedBySet(), index as i" class="accordion-item">
     <h2 class="accordion-header">
-      <button [attr.data-bs-target]='"#" + accordionParentIdGraph + performanceLogsSet.key'
+      <button [attr.data-bs-target]='"#" + accordionParentIdGraph() + performanceLogsSet.key'
               [class]='"accordion-button fw-bold " + ifNotFirstCollapse(i)'
               data-bs-toggle="collapse"
               type="button"
@@ -9,24 +9,23 @@
         {{ "Set N°" + performanceLogsSet.key }}
       </button>
     </h2>
-    <div [attr.data-bs-parent]='accordionParentIdGraph'
+    <div [attr.data-bs-parent]='accordionParentIdGraph()'
          [class]='"accordion-collapse collapse " + ifFirstShow(i)'
-         [id]="accordionParentIdGraph + performanceLogsSet.key"
+         [id]="accordionParentIdGraph() + performanceLogsSet.key"
     >
       <div class="accordion-body p-0 ">
         <div class="container py-1">
           <div class="row row-cols-lg-2 align-items-center">
             <div class="col p-2">
-              <app-performance-logs-set-chart [performanceLogSetInput]="performanceLogsSet.value"/>
+              <app-performance-logs-set-chart [performanceLogSet]="performanceLogsSet.value"/>
             </div>
             <div class="col p-2">
               <div class="overflow-auto border-1 border" style="max-height: calc(100vh - 70vh)">
                 <app-performance-logs-card (actionPerformanceLog)="setPerformanceLog($event)"
                                            *ngFor="let perfLog of performanceLogsSet.value"
                                            [activeButton]="true"
-                                           [collapseBlockComponent]="collapseBlock"
+                                           [collapseBlockComponent]="collapseBlock()"
                                            [performanceLog]="perfLog"
-                                           class=""
                 />
               </div>
             </div>

@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {Component, EventEmitter, input, Output} from '@angular/core';
 import 'chartjs-adapter-date-fns';
 
 import {DictionaryItem} from "../../../interface/utils/dictionary-item";
@@ -13,33 +13,24 @@ import {CollapseBlockComponent} from "../../collapse-block/collapse-block.compon
 import {ifFirstShow, ifNotFirstCollapse} from "../../../utils/accordion-function";
 
 @Component({
-    selector: 'app-performance-logs-charts',
-    imports: [
-        NgForOf,
-        PerformanceLogsSetChartComponent,
-        PerformanceLogsCardComponent
-    ],
-    templateUrl: './performance-logs-charts.component.html'
+  selector: 'app-performance-logs-charts',
+  imports: [
+    NgForOf,
+    PerformanceLogsSetChartComponent,
+    PerformanceLogsCardComponent
+  ],
+  templateUrl: './performance-logs-charts.component.html'
 })
 export class PerformanceLogsChartsComponent {
 
-  performanceLogsInputSortedBySet!: DictionaryItem<PerformanceLog[]>[];
-  performanceLogsInputSortedByLogDate!: DictionaryItem<PerformanceLog[]>[];
+  readonly collapseBlock = input.required<CollapseBlockComponent>();
+  readonly accordionParentIdGraph = input.required<string>();
+  readonly performanceLogsInputSortedBySet = input.required<DictionaryItem<PerformanceLog[]>[]>();
 
-  @Input() collapseBlock!: CollapseBlockComponent;
-  @Input() accordionParentIdGraph!: string;
+  @Output() actionPerformanceLog = new EventEmitter<FormIndicator>();
 
-  @Output() actionPerformanceLog: EventEmitter<FormIndicator> = new EventEmitter<FormIndicator>();
   protected readonly ifFirstShow = ifFirstShow;
   protected readonly ifNotFirstCollapse = ifNotFirstCollapse;
-
-  @Input() set performanceLogsInputSortedBySetInput(performanceLogs: DictionaryItem<PerformanceLog[]>[]) {
-    this.performanceLogsInputSortedBySet = performanceLogs;
-  }
-
-  @Input() set performanceLogsInputSortedByLogDateInput(performanceLogs: DictionaryItem<PerformanceLog[]>[]) {
-    this.performanceLogsInputSortedByLogDate = performanceLogs;
-  }
 
   setPerformanceLog($event: FormIndicator) {
     this.actionPerformanceLog.emit($event);
