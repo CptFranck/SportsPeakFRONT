@@ -16,8 +16,13 @@ export class MultiSelectSelectedOptionsComponent {
   readonly displayedSelectedOptions = input.required<MultiSelectOptionSelected[]>();
 
   readonly onRemoveTag = output<MouseEvent>();
+  readonly onRemoveAllTag = output<void>();
 
   onCLickRemoveTag($event: MouseEvent) {
     this.onRemoveTag.emit($event);
+  }
+
+  onCLickRemoveAllTag() {
+    this.onRemoveAllTag.emit();
   }
 }

@@ -5,5 +5,9 @@
     <i (click)="onCLickRemoveTag($event)"
        [attr.data-value]="selectedOption.id"
        class="fa fa-close remove-tag"></i>
-      </span>
+  </span>
+  <span *ngIf="selectedOptions().length !== 0" class="remove-all-tag">
+    <i (click)="onCLickRemoveAllTag()"
+       class="fa fa-close"></i>
+  </span>
 </div>

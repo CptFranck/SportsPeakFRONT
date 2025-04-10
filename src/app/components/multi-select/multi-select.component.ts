@@ -2,11 +2,10 @@ import {
   AfterViewInit,
   Component,
   ElementRef,
-  EventEmitter,
   input,
   OnChanges,
   OnInit,
-  Output,
+  output,
   QueryList,
   signal,
   ViewChild,
@@ -48,8 +47,8 @@ export class MultiSelectComponent implements OnInit, OnChanges, AfterViewInit {
 
   displayedSelectedOptions = signal<MultiSelectOptionSelected[]>([]);
 
-  @Output() onTouched = new EventEmitter<boolean>();
-  @Output() onChange = new EventEmitter<number[]>();
+  readonly onTouched = output<boolean>();
+  readonly onChange = output<number[]>();
 
   @ViewChild('allTagsOption') allTagsOption!: ElementRef;
   @ViewChild('selectBox') selectBox!: ElementRef;
@@ -152,8 +151,8 @@ export class MultiSelectComponent implements OnInit, OnChanges, AfterViewInit {
   onCLickSelect($event: MouseEvent) {
     const selectBox: EventTarget | null = $event.target
     if (!(selectBox instanceof Element)) return;
-    if (!selectBox.closest(".tag")) {
-      this.selectBox.nativeElement.parentNode.classList.toggle("open")
+    if (!selectBox.closest(".tag") && !selectBox.closest(".remove-all-tag")) {
+      this.selectBox.nativeElement.parentNode.classList.toggle("open");
       this.onTouched.emit(true)
     }
   }
@@ -223,6 +222,10 @@ export class MultiSelectComponent implements OnInit, OnChanges, AfterViewInit {
     if (otherSelectedOptions.length === 0)
       this.allTagsOption.nativeElement.classList.remove("active");
     this.updateSelectedOptions();
+  }
+
+  onCLickRemoveAllTag() {
+    this.onChange.emit([]);
   }
 }
 

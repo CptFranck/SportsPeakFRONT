@@ -27,3 +27,14 @@
   margin-bottom: 2px;
   margin-top: 2px;
 }
+
+.remove-all-tag {
+  cursor: pointer;
+  border-radius: 5px;
+  padding: 2px 14px;
+  margin-right: 5px;
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+}
