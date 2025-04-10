@@ -1,4 +1,4 @@
-import {Component, computed, EventEmitter, input, Output} from '@angular/core';
+import {Component, computed, input, output} from '@angular/core';
 import {NgForOf, NgIf} from "@angular/common";
 import {ProgExercise} from "../../../../interface/dto/prog-exercise";
 import {ModalButtonComponent} from "../../../modal/modal-button/modal-button.component";
@@ -20,14 +20,13 @@ import {getTargetSetsInformation} from "../../../../utils/target-set-functions";
 })
 export class ProgExerciseCardComponent {
 
-
   readonly modalId = input.required<string>();
   readonly progExercise = input.required<ProgExercise>();
 
-  exerciseTime = computed<string>(() => getProgExerciseTime(this.progExercise()));
-  targetSets = computed<string[]>(() => getTargetSetsInformation(this.progExercise()));
+  readonly exerciseTime = computed<string>(() => getProgExerciseTime(this.progExercise()));
+  readonly targetSets = computed<string[]>(() => getTargetSetsInformation(this.progExercise()));
 
-  @Output() actionProgExercises: EventEmitter<FormIndicator> = new EventEmitter<FormIndicator>();
+  readonly actionProgExercises = output<FormIndicator>();
 
   showProgExercisePreview(progExercise: ProgExercise): void {
     this.actionProgExercises.emit({
