@@ -1,4 +1,4 @@
-import {Component, EventEmitter, input, Output} from '@angular/core';
+import {Component, input, output} from '@angular/core';
 import {NgForOf} from "@angular/common";
 import {ModalButtonComponent} from "../../../../components/modal/modal-button/modal-button.component";
 import {Privilege} from "../../../../interface/dto/privilege";
@@ -18,7 +18,7 @@ export class PrivilegesArrayComponent {
   readonly privileges = input.required<Privilege[]>();
   readonly modalId = input.required<string>();
 
-  @Output() actionPrivilege = new EventEmitter<FormIndicator>();
+  readonly actionPrivilege = output<FormIndicator>();
 
   showPrivilegeDetails(privilege: Privilege): void {
     this.actionPrivilege.emit({
