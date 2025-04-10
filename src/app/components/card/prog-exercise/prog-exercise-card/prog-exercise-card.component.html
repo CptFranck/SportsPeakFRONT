@@ -2,7 +2,7 @@
   <div class="card-body">
     <h5 class="card-title">{{ progExercise().name }}</h5>
     <div class="row ">
-      <div class="col-12 col-sm-12 col-md-12 col-lg-6 py-1 align-content-center">
+      <div class="col-12 col-sm-12 col-md-12 col-lg-auto col-xl-6 py-1 align-content-center">
         <div class="row">
           <div class="col">
             <div class="row">
@@ -25,18 +25,18 @@
           </div>
         </div>
       </div>
-      <div class="col-12 col-sm-12 col-md-12 col-lg-6 py-1 align-content-center">
-        <div class="row">
-          <div class="col-auto col-sm-6 col-md-4 col-lg py-1 align-content-center">
+      <div class="col-12 col-sm-12 col-md-12 col-lg py-1 align-content-center">
+        <div class="row ">
+          <div class="col-auto col-sm-6  col-md-4 col-lg py-1 align-content-center">
             <div class="d-flex fw-bold">
               Set(s)&#8239;:
             </div>
             <p *ngIf="targetSets().length === 0 "> No sets added</p>
-            <div *ngFor="let set of targetSets()" class="d-flex justify-content-between">
+            <div *ngFor="let set of targetSets()" class="d-flex">
               {{ set }}
             </div>
           </div>
-          <div class="col col-sm-6 col-md-4 col-lg py-1 align-content-center">
+          <div class="col      col-sm-6  col-md-4 col-lg py-1 align-content-center">
             <div class="d-flex justify-content-between">
               <div class="fw-bold me-1"> Trust&#8239;Label&#8239;:</div>
               {{ progExercise().trustLabel }}
@@ -50,7 +50,7 @@
               {{ exerciseTime() }}
             </div>
           </div>
-          <div class="col-12  col-sm-12 col-md-4 col-lg-auto py-1 align-content-center">
+          <div class="col-12   col-sm-12 col-md-4 col-lg py-1 align-content-center">
             <div class="row py-1 text-center">
               <app-modal-button
                 (onCLickModalButton)="showProgExercisePreview($event)"

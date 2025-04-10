@@ -14,9 +14,9 @@ export function getTargetSetsInformation(progExercise: ProgExercise) {
 }
 
 export function getTargetSetInformation(targetSet: TargetSet) {
-  let set: string = targetSet.setNumber + " set of " + targetSet.repetitionNumber + " reps";
+  let set: string = targetSet.setNumber + "x" + targetSet.repetitionNumber + " reps";
   if (targetSet.weight > 0)
-    set += " with " + targetSet.weight + " " + targetSet.weightUnit;
+    set += " at " + targetSet.weight + targetSet.weightUnit;
   return set;
 }
 
