@@ -2,31 +2,32 @@
   <div class="card-body py-2">
     <div class="container">
       <div class="row align-items-center">
-        <div class="col-auto">
-          <div class="row">
-            <div class="col-auto">
+        <div class="col-12 col-sm-12 col-md-12 col-lg-8">
+          <div class="row ">
+            <div class="col d-flex justify-content-between text-nowrap">
               <span class="fw-bold me-1"> Performed : </span>
               {{ performanceLog().logDate | date: 'dd/MM/yyyy' }}
             </div>
-            <div class="col-auto">
+            <div class="col d-flex justify-content-between text-nowrap">
               <span class="fw-bold me-1"> Set N°: </span>
               {{ performanceLog().setIndex }}
             </div>
-            <div class="col-auto">
+            <div class="col d-flex justify-content-between text-nowrap">
               <span class="fw-bold"> Reps : </span>
               {{ performanceLog().repetitionNumber }}
             </div>
-            <div class="col">
+            <div class="col d-flex justify-content-between text-nowrap">
               <span class="fw-bold"> Weight : </span>
               {{ performanceLog().weight + " " + performanceLog().weightUnit }}
             </div>
           </div>
         </div>
-        <div *ngIf="activeButton()" class="col">
+        <div *ngIf="activeButton()" class="col-12 col-sm-12 col-md-12 col-lg-4">
           <div class="row justify-content-center">
-            <div class="col-auto d-flex justify-content-center py-1">
+            <div class="col py-1">
               <app-collapse-button
                 (onClickEvent)="modPerformanceLog($event)"
+                [allWidth]="true"
                 [collapseBlockComponent]="collapseBlockComponent()"
                 [collapseId]="formCollapseId()"
                 [value]="performanceLog()"
@@ -36,9 +37,10 @@
                 <i class="fa-solid fa-pen-to-square"></i>
               </app-collapse-button>
             </div>
-            <div class="col-auto d-flex justify-content-center py-1">
+            <div class="col py-1">
               <app-collapse-button
                 (onClickEvent)="delPerformanceLog($event)"
+                [allWidth]="true"
                 [collapseBlockComponent]="collapseBlockComponent()"
                 [collapseId]="formCollapseId()"
                 [value]="performanceLog()"
