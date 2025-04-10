@@ -1,4 +1,4 @@
-import {Component, EventEmitter, input, Output} from '@angular/core';
+import {Component, input, output} from '@angular/core';
 
 @Component({
   selector: 'app-range-input',
@@ -13,7 +13,7 @@ export class RangeInputComponent {
 
   readonly value = input.required<number>();
 
-  @Output() onChange = new EventEmitter();
+  readonly onChange = output<number>();
 
   change($event: Event) {
     if ($event.target instanceof HTMLInputElement) {
