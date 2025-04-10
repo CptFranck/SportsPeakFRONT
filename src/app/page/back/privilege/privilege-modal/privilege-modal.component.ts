@@ -1,4 +1,4 @@
-import {Component, EventEmitter, input, Output, TemplateRef, ViewChild} from '@angular/core';
+import {Component, input, output, TemplateRef, ViewChild} from '@angular/core';
 import {ModalButtonComponent} from "../../../../components/modal/modal-button/modal-button.component";
 import {ModalComponent} from "../../../../components/modal/modal/modal.component";
 import {NgIf} from "@angular/common";
@@ -13,6 +13,7 @@ import {
 } from "../../../../components/form/privilege/privilege-entity-form/privilege-entity-form.component";
 import {Privilege} from "../../../../interface/dto/privilege";
 import {ActionType} from "../../../../interface/enum/action-type";
+import {FormIndicator} from "../../../../interface/utils/form-indicator";
 
 @Component({
   selector: 'app-privilege-modal',
@@ -33,7 +34,7 @@ export class PrivilegeModalComponent {
   readonly privilege = input.required<Privilege | undefined>();
   readonly action = input.required<ActionType>();
 
-  @Output() privilegeAction = new EventEmitter();
+  readonly privilegeAction = output<FormIndicator>();
 
   @ViewChild("modalTemplate") modalTemplate!: TemplateRef<any>;
 
