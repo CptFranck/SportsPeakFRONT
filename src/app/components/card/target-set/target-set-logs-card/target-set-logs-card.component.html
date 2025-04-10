@@ -4,35 +4,36 @@
       {{ "Set from " + targetSetCreationDate().toLocaleDateString() }}
     </h5>
     <div class="row ">
-      <div class="col">
-        <div class="row">
-          <div class="col-auto d-flex">
+      <div class="col-12 col-sm-12 col-lg-6">
+        <div class="row py-1">
+          <div class="col col d-flex justify-content-between text-nowrap">
             <span class="fw-bold me-1"> Set&#8239;: </span>
             {{ targetSet().setNumber }}
           </div>
-          <div class="col-auto d-flex">
+          <div class="col d-flex justify-content-between text-nowrap">
             <span class="fw-bold me-1"> Reps&#8239;: </span>
             {{ targetSet().repetitionNumber }}
           </div>
-          <div class="col-auto d-flex">
+          <div class="col d-flex justify-content-between text-nowrap">
             <span class="fw-bold me-1"> Weight&#8239;: </span>
             {{ targetSet().weight + " " + targetSet().weightUnit }}
           </div>
-          <div class="col-auto d-flex">
+          <div class="col d-flex justify-content-between text-nowrap">
             <span class="fw-bold me-1"> Created&#8239;: </span>
             {{ targetSetCreationDate().toLocaleDateString() }}
           </div>
-          <div class="col-auto d-flex">
+          <div class="col d-flex justify-content-between text-nowrap">
             <span class="fw-bold me-1"> State&#8239;: </span>
             {{ targetSet().state }}
           </div>
         </div>
-        <div class="row align-content-center pt-1">
+        <div class="row align-content-center py-1">
           <app-collapse-button
             (onClickEvent)="checkPerformanceLogs($event)"
             [allWidth]="true"
             [collapseBlockComponent]="collapseBlockComponent()"
             [collapseId]="formCollapseId()"
+            [onOneLine]="true"
             [value]="targetSet()"
             btnClass="btn-secondary"
           >
@@ -44,7 +45,7 @@
       </div>
       <div class="col align-content-center">
         <div class="row">
-          <div class="col align-content-center">
+          <div class="col  align-content-center">
             <div class="d-flex justify-content-between">
               <div class="col fw-bold me-1">One&#8239;Rep&#8239;:</div>
               <div class="col align-content-center">{{ targetSetRepetition() }}</div>
@@ -58,7 +59,7 @@
               <div class="col align-content-center"> {{ targetSetTime() }}</div>
             </div>
           </div>
-          <div class="col text-center align-content-center">
+          <div class="col  text-center align-content-center">
             <div class="row py-1">
               <app-collapse-button
                 (onClickEvent)="modifyTargetSet($event)"
