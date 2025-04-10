@@ -1,15 +1,13 @@
-<div>
-  <div *ngIf="!modify()" class="d-flex align-items-center">
-    <span class="fw-bold me-1"> State : </span>
-    {{ targetSet().state }}
-    <button (click)="openForm()" class="d-flex btn btn-outline-secondary p-2 ms-2">
-      <i class="fa-solid fa-pen-to-square"></i>
-    </button>
-  </div>
-  <form *ngIf="modify()" [formGroup]="targetSetForm()" class="d-flex align-items-center">
-    <app-target-set-state-select class="mx-auto" formControlName="state"/>
-    <button (click)="submit()" class="btn btn-outline-secondary mx-auto">
-      <i class="fa-solid fa-check"></i>
-    </button>
-  </form>
+<div *ngIf="!modify()" class="d-flex align-items-center text-nowrap">
+  <span class="fw-bold me-1"> State&#8239;: </span>
+  {{ targetSet().state }}
+  <button (click)="openForm()" class="d-flex btn btn-outline-secondary p-2 ms-2">
+    <i class="fa-solid fa-pen-to-square"></i>
+  </button>
 </div>
+<form *ngIf="modify()" [formGroup]="targetSetForm()" class="d-flex align-items-center">
+  <app-target-set-state-select class="mx-auto" formControlName="state"/>
+  <button (click)="submit()" class="btn btn-outline-secondary mx-auto">
+    <i class="fa-solid fa-check"></i>
+  </button>
+</form>
