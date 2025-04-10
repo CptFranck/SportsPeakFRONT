@@ -1,4 +1,4 @@
-import {Component, EventEmitter, input, Output} from '@angular/core';
+import {Component, input, output} from '@angular/core';
 import {DatePipe, NgForOf} from "@angular/common";
 import {
   PerformanceLogsCardComponent
@@ -24,7 +24,7 @@ export class PerformanceLogSortedByLogDateComponent {
   readonly collapseBlock = input.required<CollapseBlockComponent>();
   readonly performanceLogsSortByDate = input.required<DictionaryItem<PerformanceLog[]>[]>();
 
-  @Output() actionPerformanceLog = new EventEmitter<FormIndicator>();
+  readonly actionPerformanceLog = output<FormIndicator>();
 
   protected readonly ifFirstShow = ifFirstShow;
   protected readonly ifNotFirstCollapse = ifNotFirstCollapse;
