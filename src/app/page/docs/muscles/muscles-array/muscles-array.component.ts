@@ -1,4 +1,4 @@
-import {Component, EventEmitter, inject, input, OnChanges, OnDestroy, Output, signal} from '@angular/core';
+import {Component, inject, input, OnChanges, OnDestroy, signal, output} from '@angular/core';
 import {NgForOf, NgIf} from "@angular/common";
 import {Muscle} from "../../../../interface/dto/muscle";
 import {ModalButtonComponent} from "../../../../components/modal/modal-button/modal-button.component";
@@ -24,7 +24,7 @@ export class MusclesArrayComponent implements OnChanges, OnDestroy {
   readonly muscles = input.required<Muscle[]>();
   readonly modalId = input.required<string>();
 
-  @Output() actionMuscle: EventEmitter<FormIndicator> = new EventEmitter<FormIndicator>();
+  readonly actionMuscle = output<FormIndicator>();
 
   private readonly unsubscribe$ = new Subject<void>();
   private readonly userLoggedService = inject(UserLoggedService);
