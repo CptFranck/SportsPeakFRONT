@@ -40,17 +40,17 @@ export class MyProgExerciseComponent implements OnInit, OnDestroy {
   progExercise = signal<ProgExercise | undefined>(undefined);
   progExerciseAction = signal<ActionType>(ActionType.update);
   progExerciseModalTitle = signal<string>("");
-  progExerciseModalId: string = "progExerciseModal";
+  readonly progExerciseModalId = "progExerciseModal";
 
   targetSet = signal<TargetSet | undefined>(undefined);
   targetSetAction = signal<ActionType>(ActionType.update);
   targetSetModalTitle = signal<string>("");
-  targetSetModalId: string = "targetSetModalId";
+  readonly targetSetModalId = "targetSetModalId";
 
   performanceLog = signal<PerformanceLog | undefined>(undefined);
   performanceLogAction = signal<ActionType>(ActionType.update);
   performanceLogModalTitle = signal<string>("");
-  performanceLogModalId: string = "performanceLogModalId";
+  readonly performanceLogModalId = "performanceLogModalId";
 
   private readonly unsubscribe$ = new Subject<void>();
   private readonly activatedRoute = inject(ActivatedRoute);
@@ -93,7 +93,6 @@ export class MyProgExerciseComponent implements OnInit, OnDestroy {
   }
 
   setTargetSet(formIndicator: FormIndicator) {
-
     this.targetSetAction.set(formIndicator.actionType);
     if (formIndicator.actionType === ActionType.create) {
       this.targetSetModalTitle.set("Add new set's step");
