@@ -1,14 +1,13 @@
 import {
   Component,
-  EventEmitter,
   inject,
   input,
   OnDestroy,
   OnInit,
-  Output,
   signal,
   TemplateRef,
-  ViewChild
+  ViewChild,
+  output
 } from '@angular/core';
 import {ModalButtonComponent} from "../../../../components/modal/modal-button/modal-button.component";
 import {ModalComponent} from "../../../../components/modal/modal/modal.component";
@@ -48,7 +47,7 @@ export class ExerciseTypeModalComponent implements OnInit, OnDestroy {
   readonly exerciseType = input.required<ExerciseType | undefined>();
   readonly action = input.required<ActionType>();
 
-  @Output() exerciseTypeAction = new EventEmitter<FormIndicator>();
+  readonly exerciseTypeAction = output<FormIndicator>();
 
   @ViewChild("modalTemplate") modalTemplate!: TemplateRef<any>
 
