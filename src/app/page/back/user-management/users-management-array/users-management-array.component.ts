@@ -1,4 +1,4 @@
-import {Component, EventEmitter, input, Output} from '@angular/core';
+import {Component, input, output} from '@angular/core';
 import {NgForOf} from "@angular/common";
 import {ModalButtonComponent} from "../../../../components/modal/modal-button/modal-button.component";
 import {User} from "../../../../interface/dto/user";
@@ -17,7 +17,7 @@ export class UsersManagementArrayComponent {
   readonly users = input.required<User[]>();
   readonly modalId = input.required<string>();
 
-  @Output() actionUser = new EventEmitter<FormIndicator>();
+  readonly actionUser = output<FormIndicator>();
 
   showUserDetails(user: User): void {
     this.actionUser.emit({
