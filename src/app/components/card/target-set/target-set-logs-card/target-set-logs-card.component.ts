@@ -1,4 +1,4 @@
-import {Component, computed, EventEmitter, input, Output} from '@angular/core';
+import {Component, computed, input, output} from '@angular/core';
 import {TargetSet} from "../../../../interface/dto/target-set";
 import {ActionType} from "../../../../interface/enum/action-type";
 import {FormIndicator} from "../../../../interface/utils/form-indicator";
@@ -21,12 +21,12 @@ export class TargetSetLogsCardComponent {
   readonly formCollapseId = input.required<string>();
   readonly isLastTargetSet = input<boolean>(false);
 
-  targetSetTime = computed<string>(() => getTargetSetTimeToString(this.targetSet(), this.isLastTargetSet()));
-  targetSetRestTime = computed<string>(() => getStringTime(this.targetSet().restTime));
-  targetSetRepetition = computed<string>(() => getStringTime(this.targetSet().physicalExertionUnitTime));
-  targetSetCreationDate = computed<Date>(() => new Date(this.targetSet().creationDate));
+  readonly targetSetTime = computed<string>(() => getTargetSetTimeToString(this.targetSet(), this.isLastTargetSet()));
+  readonly targetSetRestTime = computed<string>(() => getStringTime(this.targetSet().restTime));
+  readonly targetSetRepetition = computed<string>(() => getStringTime(this.targetSet().physicalExertionUnitTime));
+  readonly targetSetCreationDate = computed<Date>(() => new Date(this.targetSet().creationDate));
 
-  @Output() actionTargetSets = new EventEmitter<FormIndicator>();
+  readonly actionTargetSets = output<FormIndicator>();
 
   checkPerformanceLogs(targetSet: TargetSet) {
     this.actionTargetSets.emit({
