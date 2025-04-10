@@ -1,4 +1,4 @@
-import {Component, EventEmitter, input, Output} from '@angular/core';
+import {Component, input, output} from '@angular/core';
 import {User} from "../../../../interface/dto/user";
 import {FormIndicator} from "../../../../interface/utils/form-indicator";
 import {ActionType} from "../../../../interface/enum/action-type";
@@ -14,12 +14,12 @@ import {ModalButtonComponent} from "../../../../components/modal/modal-button/mo
 })
 export class UserInformationDisplayComponent {
 
-  btnClass = "btn btn-secondary"
+  readonly btnClass = "btn btn-secondary";
 
   readonly user = input.required<User | undefined>();
   readonly modalId = input.required<string>();
 
-  @Output() userAction = new EventEmitter<FormIndicator>();
+  readonly userAction = output<FormIndicator>();
 
   onChangeEmail() {
     this.userAction.emit({
