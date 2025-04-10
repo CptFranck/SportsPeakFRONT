@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, input, Output, signal} from '@angular/core';
+import {Component, computed, input, output} from '@angular/core';
 
 @Component({
   selector: 'app-check-box',
@@ -6,30 +6,25 @@ import {Component, EventEmitter, Input, input, Output, signal} from '@angular/co
 })
 export class CheckBoxComponent {
 
-  label = signal<string>("");
-  checked = signal<boolean>(false)
-
+  readonly checked = input.required<boolean>()
   readonly labelCheck = input.required<string>();
   readonly labelUnchecked = input<string>();
 
-  @Output() actionPerformanceLog: EventEmitter<void> = new EventEmitter();
+  readonly label = computed<string>(() => {
+    const checked = this.checked();
+    const labelCheck = this.labelCheck();
+    const labelUnchecked = this.labelUnchecked();
+    if (checked)
+      return labelCheck;
+    else if (labelUnchecked)
+      return labelUnchecked;
+    else
+      return labelCheck;
+  });
 
-  @Input() set checkedInput(checked: boolean) {
-    this.checked.set(checked);
-    this.updateLabel();
-  }
+  readonly actionPerformanceLog = output<void>();
 
   onCheckBoxClick() {
     this.actionPerformanceLog.emit();
-  }
-
-  updateLabel() {
-    const labelUnchecked = this.labelUnchecked();
-    if (this.checked())
-      this.label.set(this.labelCheck());
-    else if (labelUnchecked)
-      this.label.set(labelUnchecked);
-    else
-      this.label.set(this.labelCheck());
   }
 }
