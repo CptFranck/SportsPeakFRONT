@@ -1,14 +1,13 @@
 import {
   Component,
-  EventEmitter,
   inject,
   input,
   OnDestroy,
   OnInit,
-  Output,
   signal,
   TemplateRef,
-  ViewChild
+  ViewChild,
+  output
 } from '@angular/core';
 import {ActionType} from "../../../../interface/enum/action-type";
 import {ModalButtonComponent} from "../../../../components/modal/modal-button/modal-button.component";
@@ -48,7 +47,7 @@ export class MuscleModalComponent implements OnInit, OnDestroy {
   readonly muscle = input<Muscle>();
   readonly action = input.required<ActionType>();
 
-  @Output() actionMuscle: EventEmitter<FormIndicator> = new EventEmitter();
+  readonly actionMuscle = output<FormIndicator>();
 
   @ViewChild("modalTemplate") modalTemplate!: TemplateRef<any>;
 
