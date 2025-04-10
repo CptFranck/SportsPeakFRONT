@@ -1,5 +1,6 @@
-import {Component, ElementRef, EventEmitter, input, OnInit, Output, signal} from '@angular/core';
+import {Component, ElementRef, input, OnInit, output, signal} from '@angular/core';
 import {CollapseBlockComponent} from "../collapse-block/collapse-block.component";
+import {TargetSet} from "../../interface/dto/target-set";
 
 @Component({
   selector: 'app-collapse-button',
@@ -16,7 +17,7 @@ export class CollapseButtonComponent implements OnInit {
   readonly collapseId = input.required<string>();
   readonly collapseBlockComponent = input<CollapseBlockComponent>();
 
-  @Output() onClickEvent = new EventEmitter();
+  readonly onClickEvent = output<TargetSet>();
 
   constructor(private readonly elementRef: ElementRef) {
   }
