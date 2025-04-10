@@ -1,4 +1,4 @@
-import {Component, EventEmitter, inject, input, OnDestroy, OnInit, Output, signal} from '@angular/core';
+import {Component, inject, input, OnDestroy, OnInit, output, signal} from '@angular/core';
 import {FormIndicator} from "../../../../interface/utils/form-indicator";
 import {ActionType} from "../../../../interface/enum/action-type";
 import {ExerciseType} from "../../../../interface/dto/exercise-type";
@@ -21,10 +21,10 @@ export class ExerciseTypeArrayComponent implements OnInit, OnDestroy {
   isAdmin = signal<boolean>(false);
   showDetails = signal<Dictionary<boolean>>({});
 
-  readonly exerciseTypes = input.required<ExerciseType[]>();
   readonly modalId = input.required<string>();
+  readonly exerciseTypes = input.required<ExerciseType[]>();
 
-  @Output() actionExerciseType = new EventEmitter<FormIndicator>();
+  readonly actionExerciseType = output<FormIndicator>();
 
   private readonly unsubscribe$ = new Subject<void>();
   private readonly userLoggedService = inject(UserLoggedService);
