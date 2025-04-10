@@ -23,7 +23,7 @@ export class CollapseButtonComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.allWidth())
-      this.style.set("width:100%");
+      this.style.update(value => value + " width:100%;")
     if (this.onOneLine())
       this.style.update(value => value + " white-space: nowrap; text-align: center;")
   }
