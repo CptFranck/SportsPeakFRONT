@@ -1,4 +1,4 @@
-import {Component, EventEmitter, input, Output} from '@angular/core';
+import {Component, input, output} from '@angular/core';
 import 'chartjs-adapter-date-fns';
 
 import {DictionaryItem} from "../../../interface/utils/dictionary-item";
@@ -27,7 +27,7 @@ export class PerformanceLogsChartsComponent {
   readonly accordionParentIdGraph = input.required<string>();
   readonly performanceLogsInputSortedBySet = input.required<DictionaryItem<PerformanceLog[]>[]>();
 
-  @Output() actionPerformanceLog = new EventEmitter<FormIndicator>();
+  readonly actionPerformanceLog = output<FormIndicator>();
 
   protected readonly ifFirstShow = ifFirstShow;
   protected readonly ifNotFirstCollapse = ifNotFirstCollapse;
