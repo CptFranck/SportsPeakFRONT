@@ -25,14 +25,14 @@
       <div class="container d-flex p-2">
         <div class="p-2">
           <app-check-box (actionPerformanceLog)="onCheckBoxClick()"
-                         [checkedInput]="switchSortByDate()"
+                         [checked]="switchSortByDate()"
                          labelCheck="sort by date"
                          labelUnchecked="sort by set"
           />
         </div>
         <div class="p-2">
           <app-check-box (actionPerformanceLog)="onUseRelativeInformationOnlyClick()"
-                         [checkedInput]="useRelativeInformationOnly()"
+                         [checked]="useRelativeInformationOnly()"
                          labelCheck="see only performance logs of current version set"
           />
         </div>
@@ -73,7 +73,7 @@
       <div class="container d-flex p-2">
         <div class="p-2">
           <app-check-box (actionPerformanceLog)="onUseRelativeInformationOnlyClick()"
-                         [checkedInput]="switchSortByDate()"
+                         [checked]="switchSortByDate()"
                          labelCheck="see also old performance logs"
           />
         </div>
