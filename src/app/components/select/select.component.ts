@@ -1,4 +1,4 @@
-import {Component, EventEmitter, input, model, Output} from '@angular/core';
+import {Component, input, model, output} from '@angular/core';
 import {SelectOption} from "../../interface/components/select/selectOption";
 import {NgForOf, NgIf} from "@angular/common";
 import {FormsModule} from "@angular/forms";
@@ -17,8 +17,8 @@ export class SelectComponent {
   readonly options = input.required<SelectOption[]>();
   readonly defaultOption = input<boolean>(false);
 
-  @Output() onTouched = new EventEmitter<boolean>();
-  @Output() onChange = new EventEmitter<string | null>();
+  readonly onTouched = output<boolean>();
+  readonly onChange = output<string | null>();
 
   onSelect(event: Event) {
     if (event.target instanceof HTMLSelectElement) {

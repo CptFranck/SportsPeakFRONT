@@ -1,6 +1,6 @@
 <select (change)="onSelect($event)"
         (click)="onClick()"
-        [(ngModel)]="value"
+        [ngModel]="value()"
         class='form-select form-control'
 >
   <option *ngIf="defaultOption()" [value]="null" selected>
