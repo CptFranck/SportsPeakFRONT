@@ -1,4 +1,4 @@
-import {Component, EventEmitter, input, OnInit, Output, signal} from '@angular/core';
+import {Component, input, OnInit, output, signal} from '@angular/core';
 import {TooltipComponent} from "../../tooltip/tooltip.component";
 
 @Component({
@@ -11,8 +11,8 @@ import {TooltipComponent} from "../../tooltip/tooltip.component";
 export class ModalButtonComponent implements OnInit {
   style = signal<string>("");
 
-  readonly disabled = input<boolean>(false);
   readonly modalId = input.required<string>();
+  readonly disabled = input<boolean>(false);
   readonly modalValue = input<any>();
   readonly btnClass = input<string>("btn-success");
   readonly allWidth = input<boolean>(false);
@@ -20,13 +20,11 @@ export class ModalButtonComponent implements OnInit {
   readonly useTooltip = input<boolean>(false);
   readonly tooltipText = input<string>("Modal tooltip text");
 
-  @Output() onCLickModalButton: EventEmitter<any> = new EventEmitter();
-
+  readonly onCLickModalButton = output<any>();
 
   onClick() {
-    if (this.onCLickModalButton) {
+    if (this.onCLickModalButton)
       this.onCLickModalButton.emit(this.modalValue())
-    }
   }
 
   ngOnInit(): void {
