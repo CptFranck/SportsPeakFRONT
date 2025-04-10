@@ -9,7 +9,7 @@ import {TooltipComponent} from "../../tooltip/tooltip.component";
   templateUrl: './modal-button.component.html'
 })
 export class ModalButtonComponent implements OnInit {
-  allWidthStyle = signal<string>("");
+  style = signal<string>("");
 
   readonly disabled = input<boolean>(false);
   readonly modalId = input.required<string>();
@@ -31,8 +31,8 @@ export class ModalButtonComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.allWidth())
-      this.allWidthStyle.update(value => value + " width:100%;")
+      this.style.update(value => value + " width:100%;")
     if (this.onOneLine())
-      this.allWidthStyle.update(value => value + " white-space: nowrap; text-align: center;")
+      this.style.update(value => value + " white-space: nowrap; text-align: center;")
   }
 }
