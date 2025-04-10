@@ -1,4 +1,4 @@
-import {Component, EventEmitter, input, Output} from '@angular/core';
+import {Component, input, output} from '@angular/core';
 import {NgForOf} from "@angular/common";
 import {
   PerformanceLogsCardComponent
@@ -23,7 +23,7 @@ export class PerformanceLogSortedBySetComponent {
   readonly collapseBlock = input.required<CollapseBlockComponent>();
   readonly performanceLogsSortedBySet = input.required<DictionaryItem<PerformanceLog[]>[]>();
 
-  @Output() actionPerformanceLog = new EventEmitter<FormIndicator>();
+  readonly actionPerformanceLog = output<FormIndicator>();
   
   protected readonly ifFirstShow = ifFirstShow;
   protected readonly ifNotFirstCollapse = ifNotFirstCollapse;
