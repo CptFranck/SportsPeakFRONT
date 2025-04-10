@@ -1,4 +1,4 @@
-import {Component, computed, EventEmitter, input, Output, signal, TemplateRef, ViewChild} from '@angular/core';
+import {Component, computed, input, output, signal, TemplateRef, ViewChild} from '@angular/core';
 import {TargetSet} from "../../../../interface/dto/target-set";
 import {NgForOf, NgIf} from "@angular/common";
 import {TargetSetLogsCardComponent} from "../../../card/target-set/target-set-logs-card/target-set-logs-card.component";
@@ -35,7 +35,7 @@ export class TargetSetLogsComponent {
   readonly targetSet = input.required<TargetSet | undefined>();
   readonly progExercise = input.required<ProgExercise | undefined>();
 
-  targetSetLogs = computed<TargetSet[]>(() => {
+  readonly targetSetLogs = computed<TargetSet[]>(() => {
     const targetSet = this.targetSet();
     const progExercise = this.progExercise();
     if (targetSet && progExercise) {
@@ -50,7 +50,7 @@ export class TargetSetLogsComponent {
 
   @ViewChild("performanceCollapseTemplate") modalTemplate!: TemplateRef<any>;
 
-  @Output() actionTargetSets = new EventEmitter<FormIndicator>();
+  readonly actionTargetSets = output<FormIndicator>();
 
   protected readonly ActionType = ActionType;
 
