@@ -1,4 +1,4 @@
-import {Component, computed, EventEmitter, input, Output} from '@angular/core';
+import {Component, computed, input, output} from '@angular/core';
 import {ModalButtonComponent} from "../../../modal/modal-button/modal-button.component";
 import {FormIndicator} from "../../../../interface/utils/form-indicator";
 import {ActionType} from "../../../../interface/enum/action-type";
@@ -28,12 +28,12 @@ export class TargetSetCardComponent {
   readonly targetSet = input.required<TargetSet>();
   readonly isLastTargetSet = input<boolean>(false);
 
-  targetSetTime = computed<string>(() => getTargetSetTimeToString(this.targetSet(), this.isLastTargetSet()));
-  targetSetRestTime = computed<string>(() => getStringTime(this.targetSet().restTime));
-  targetSetRepetition = computed<string>(() => getStringTime(this.targetSet().physicalExertionUnitTime));
+  readonly targetSetTime = computed<string>(() => getTargetSetTimeToString(this.targetSet(), this.isLastTargetSet()));
+  readonly targetSetRestTime = computed<string>(() => getStringTime(this.targetSet().restTime));
+  readonly targetSetRepetition = computed<string>(() => getStringTime(this.targetSet().physicalExertionUnitTime));
 
-  @Output() actionTargetSets: EventEmitter<FormIndicator> = new EventEmitter<FormIndicator>();
-  @Output() actionPerformanceLogs: EventEmitter<FormIndicator> = new EventEmitter<FormIndicator>();
+  readonly actionTargetSets = output<FormIndicator>();
+  readonly actionPerformanceLogs = output<FormIndicator>();
 
   protected readonly ActionType = ActionType;
 
