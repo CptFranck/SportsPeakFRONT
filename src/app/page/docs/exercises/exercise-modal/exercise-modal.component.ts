@@ -1,15 +1,4 @@
-import {
-  Component,
-  EventEmitter,
-  inject,
-  input,
-  OnDestroy,
-  OnInit,
-  Output,
-  signal,
-  TemplateRef,
-  ViewChild
-} from '@angular/core';
+import {Component, inject, input, OnDestroy, OnInit, output, signal, TemplateRef, ViewChild} from '@angular/core';
 import {ModalButtonComponent} from "../../../../components/modal/modal-button/modal-button.component";
 import {ModalComponent} from "../../../../components/modal/modal/modal.component";
 import {NgIf} from "@angular/common";
@@ -26,6 +15,7 @@ import {
 } from "../../../../components/modal-component/exercise/exercise-details-display/exercise-details-display.component";
 import {UserLoggedService} from "../../../../services/user-logged/user-logged.service";
 import {Subject, takeUntil} from "rxjs";
+import {FormIndicator} from "../../../../interface/utils/form-indicator";
 
 @Component({
   selector: 'app-exercise-modal',
@@ -47,7 +37,7 @@ export class ExerciseModalComponent implements OnInit, OnDestroy {
   readonly modalTitle = input.required<string>();
   readonly exerciseModalId = input.required<string>();
 
-  @Output() exerciseAction = new EventEmitter();
+  readonly exerciseAction = output<FormIndicator>();
 
   @ViewChild("modalTemplate") modalTemplate!: TemplateRef<any>
 
