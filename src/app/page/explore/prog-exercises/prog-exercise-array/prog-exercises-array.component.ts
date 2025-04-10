@@ -1,4 +1,4 @@
-import {Component, EventEmitter, inject, input, OnChanges, OnDestroy, OnInit, Output, signal} from '@angular/core';
+import {Component, inject, input, OnChanges, OnDestroy, OnInit, signal, output} from '@angular/core';
 import {FormIndicator} from "../../../../interface/utils/form-indicator";
 import {UserLoggedService} from "../../../../services/user-logged/user-logged.service";
 import {ActionType} from "../../../../interface/enum/action-type";
@@ -32,7 +32,7 @@ export class ProgExercisesArrayComponent implements OnInit, OnChanges, OnDestroy
   // userCreatedProExercise: ProgExercise[] | undefined;
   // userSubscribedProExercise: ProgExercise[] | undefined;
 
-  @Output() actionMuscle = new EventEmitter<FormIndicator>();
+  readonly actionMuscle = output<FormIndicator>();
 
   private readonly unsubscribe$ = new Subject<void>();
   private readonly userLoggedService = inject(UserLoggedService);
