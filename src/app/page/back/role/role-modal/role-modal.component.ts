@@ -1,4 +1,4 @@
-import {Component, EventEmitter, input, Output, TemplateRef, ViewChild} from '@angular/core';
+import {Component, input, TemplateRef, ViewChild, output} from '@angular/core';
 import {RoleDeleteFormComponent} from "../../../../components/form/role/role-delete-form/role-delete-form.component";
 import {
   RoleDetailsDisplayComponent
@@ -29,7 +29,7 @@ export class RoleModalComponent {
   readonly role = input.required<Role | undefined>();
   readonly action = input.required<ActionType>();
 
-  @Output() roleAction = new EventEmitter<FormIndicator>();
+  readonly roleAction = output<FormIndicator>();
 
   @ViewChild("modalTemplate") modalTemplate!: TemplateRef<any>;
 
