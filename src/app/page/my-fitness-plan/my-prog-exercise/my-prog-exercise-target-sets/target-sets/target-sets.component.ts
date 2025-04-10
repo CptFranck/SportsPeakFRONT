@@ -1,4 +1,4 @@
-import {Component, computed, EventEmitter, input, Output} from '@angular/core';
+import {Component, computed, input, output} from '@angular/core';
 import {NgForOf, NgIf} from "@angular/common";
 import {FormIndicator} from "../../../../../interface/utils/form-indicator";
 import {ProgExerciseTargetSets} from "../../../../../interface/utils/progExerciseTargetSets";
@@ -56,8 +56,8 @@ export class TargetSetsComponent {
     return isLastTargetSetUsed;
   });
 
-  @Output() actionTargetSets: EventEmitter<FormIndicator> = new EventEmitter<FormIndicator>();
-  @Output() actionPerformanceLogs: EventEmitter<FormIndicator> = new EventEmitter<FormIndicator>();
+  readonly actionTargetSets = output<FormIndicator>();
+  readonly actionPerformanceLogs = output<FormIndicator>();
 
   protected readonly ActionType = ActionType;
 
