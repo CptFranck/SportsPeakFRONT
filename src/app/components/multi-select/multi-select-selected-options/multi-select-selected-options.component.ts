@@ -1,4 +1,4 @@
-import {Component, EventEmitter, input, Output} from '@angular/core';
+import {Component, input, output} from '@angular/core';
 import {NgForOf, NgIf} from "@angular/common";
 import {MultiSelectOptionSelected} from "../../../interface/components/multi-select/multiSelectOptionSelected";
 
@@ -15,7 +15,7 @@ export class MultiSelectSelectedOptionsComponent {
   readonly selectedOptions = input.required<number[]>();
   readonly displayedSelectedOptions = input.required<MultiSelectOptionSelected[]>();
 
-  @Output() onRemoveTag = new EventEmitter();
+  readonly onRemoveTag = output<MouseEvent>();
 
   onCLickRemoveTag($event: MouseEvent) {
     this.onRemoveTag.emit($event);
