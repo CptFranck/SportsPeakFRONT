@@ -2,21 +2,21 @@
   <div class="card-body">
     <h5 class="card-title m-0"> {{ "Step N°" + targetSet().index }}</h5>
     <div class="row align-items-center">
-      <div class="col-auto align-items-center">
+      <div class="col-12 col-sm-12 col-md-12 col-lg-6 align-items-center">
         <div class="row d-flex align-items-center">
-          <div class="col-auto">
-            <span class="fw-bold me-1"> Set&#8239;: </span>
+          <div class="col d-flex justify-content-between text-nowrap">
+            <span class="fw-bold me-1"> Set&#8239;:</span>
             {{ targetSet().setNumber }}
           </div>
-          <div class="col-auto">
+          <div class="col d-flex justify-content-between text-nowrap">
             <span class="fw-bold me-1"> Reps&#8239;: </span>
             {{ targetSet().repetitionNumber }}
           </div>
-          <div class="col-auto">
-            <span class="fw-bold me-1"> Weight&#8239;: </span>
+          <div class="col d-flex justify-content-between text-nowrap">
+            <span class="fw-bold me-1 now"> Weight&#8239;: </span>
             {{ targetSet().weight + " " + targetSet().weightUnit }}
           </div>
-          <div class="col-auto">
+          <div class="col d-flex justify-content-between text-nowrap">
             <app-target-set-state-form [targetSet]="targetSet()"/>
           </div>
         </div>
@@ -28,6 +28,7 @@
                 [allWidth]="true"
                 [modalId]="performanceLogModalId()"
                 [modalValue]="targetSet()"
+                [onOneLine]="true"
                 btnClass="btn-secondary"
               >
                 New performance
@@ -42,6 +43,7 @@
                 [allWidth]="true"
                 [modalId]="performanceLogModalId()"
                 [modalValue]="targetSet()"
+                [onOneLine]="true"
                 btnClass="btn-secondary"
               >
                 Check performances
@@ -51,7 +53,7 @@
           </div>
         </div>
       </div>
-      <div class="col-auto align-content-center">
+      <div class="col-12 col-sm-4 col-md-4 col-lg-2 align-content-center">
         <div class="d-flex justify-content-between">
           <div class="fw-bold me-1">One&#8239;Rep&#8239;:</div>
           {{ targetSetRepetition() }}
@@ -68,7 +70,7 @@
           </app-tooltip>
         </div>
       </div>
-      <div class="col align-content-center">
+      <div class="col-12 col-sm-8 col-md-8 col-lg-4 align-content-center">
         <div class="row">
           <div class="col align-content-center">
             <div class="py-1">
