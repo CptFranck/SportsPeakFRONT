@@ -1,4 +1,4 @@
-import {Component, EventEmitter, input, Output, TemplateRef, ViewChild} from '@angular/core';
+import {Component, input, output, TemplateRef, ViewChild} from '@angular/core';
 import {ActionType} from "../../../../../interface/enum/action-type";
 import {ModalComponent} from "../../../../../components/modal/modal/modal.component";
 import {NgIf} from "@angular/common";
@@ -15,6 +15,7 @@ import {
   TargetSetLogsComponent
 } from "../../../../../components/modal-component/target-set/target-set-logs/target-set-logs.component";
 import {PerformanceLog} from "../../../../../interface/dto/performance-log";
+import {FormIndicator} from "../../../../../interface/utils/form-indicator";
 
 @Component({
   selector: 'app-target-set-modal',
@@ -37,7 +38,7 @@ export class TargetSetModalComponent {
   readonly performanceLog = input.required<PerformanceLog | undefined>();
   readonly action = input.required<ActionType>();
 
-  @Output() targetSetAction = new EventEmitter();
+  readonly targetSetAction = output<FormIndicator>();
 
   @ViewChild("targetSetModalTemplate") modalTemplate!: TemplateRef<any>;
 
