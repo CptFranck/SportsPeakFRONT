@@ -1,4 +1,4 @@
-import {Component, EventEmitter, inject, input, OnChanges, OnDestroy, Output, signal} from '@angular/core';
+import {Component, inject, input, OnChanges, OnDestroy, output, signal} from '@angular/core';
 import {NgForOf, NgIf} from "@angular/common";
 import {FormIndicator} from "../../../../interface/utils/form-indicator";
 import {ActionType} from "../../../../interface/enum/action-type";
@@ -21,10 +21,10 @@ export class ExercisesArrayComponent implements OnChanges, OnDestroy {
   isAdmin = signal<boolean>(false);
   showDetails = signal<Dictionary<boolean>>({});
 
-  readonly exercises = input.required<Exercise[]>();
   readonly modalId = input.required<string>();
+  readonly exercises = input.required<Exercise[]>();
 
-  @Output() actionExercise = new EventEmitter<FormIndicator>();
+  readonly actionExercise = output<FormIndicator>();
 
   private readonly unsubscribe$ = new Subject<void>();
   private readonly userLoggedService = inject(UserLoggedService);
