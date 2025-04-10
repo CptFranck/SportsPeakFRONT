@@ -1,4 +1,4 @@
-import {Component, EventEmitter, input, OnInit, Output, signal} from '@angular/core';
+import {Component, computed, input, output} from '@angular/core';
 import {ProgExercise} from "../../../../interface/dto/prog-exercise";
 import {FormIndicator} from "../../../../interface/utils/form-indicator";
 import {getProgExerciseTime} from "../../../../utils/prog-exercise-functions";
@@ -16,17 +16,14 @@ import {
   ],
   templateUrl: './prog-exercise-card-details.component.html'
 })
-export class ProgExerciseCardDetailsComponent implements OnInit {
-  exerciseTime = signal<string>("");
+export class ProgExerciseCardDetailsComponent {
 
   readonly modalId = input.required<string>();
   readonly progExercise = input.required<ProgExercise>();
+  
+  readonly exerciseTime = computed<string>(() => getProgExerciseTime(this.progExercise()));
 
-  @Output() actionProgExercises = new EventEmitter<FormIndicator>();
-
-  ngOnInit() {
-    this.exerciseTime.set(getProgExerciseTime(this.progExercise()));
-  }
+  readonly actionProgExercises = output<FormIndicator>();
 
   showProgExercisePerformance(progExercise: ProgExercise): void {
     this.actionProgExercises.emit({
