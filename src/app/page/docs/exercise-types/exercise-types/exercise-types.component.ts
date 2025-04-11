@@ -1,4 +1,4 @@
-import {Component, inject, OnDestroy, OnInit, TemplateRef, ViewChild} from '@angular/core';
+import {Component, inject, OnDestroy, OnInit, signal} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {ExerciseType} from "../../../../interface/dto/exercise-type";
 import {ActionType} from "../../../../interface/enum/action-type";
@@ -23,19 +23,19 @@ import {Subject, takeUntil} from "rxjs";
   templateUrl: './exercise-types.component.html'
 })
 export class ExerciseTypesComponent implements OnInit, OnDestroy {
-  loading: boolean = true;
-  exerciseTypes: ExerciseType[] = [];
-  displayedExerciseTypes: ExerciseType[] = [];
-  exerciseType: ExerciseType | undefined;
-  action: ActionType = ActionType.create;
-  modalTitle: string = "";
-  exerciseTypeModalId: string = "exercisesTypeModal";
-  searchInput: string = "";
+  loading = signal<boolean>(true);
+  displayedExerciseTypes = signal<ExerciseType[]>([]);
+  action = signal<ActionType>(ActionType.create);
+  modalTitle = signal<string>("");
+  exerciseType = signal<ExerciseType | undefined>(undefined);
 
-  @ViewChild("modalTemplate") modalTemplate!: TemplateRef<any>
+  readonly exerciseTypeModalId = "exercisesTypeModal";
 
-  private readonly unsubscribe$: Subject<void> = new Subject<void>();
-  private readonly exerciseTypeService: ExerciseTypeService = inject(ExerciseTypeService);
+  private searchInput = "";
+  private exerciseTypes: ExerciseType[] = [];
+
+  private readonly unsubscribe$ = new Subject<void>();
+  private readonly exerciseTypeService = inject(ExerciseTypeService);
 
   ngOnInit(): void {
     this.exerciseTypeService.getExerciseTypes();
@@ -48,8 +48,7 @@ export class ExerciseTypesComponent implements OnInit, OnDestroy {
       });
     this.exerciseTypeService.isLoading
       .pipe(takeUntil(this.unsubscribe$))
-      .subscribe((loading: boolean) =>
-        this.loading = loading)
+      .subscribe((loading: boolean) => this.loading.set(loading));
   }
 
   ngOnDestroy() {
@@ -58,12 +57,12 @@ export class ExerciseTypesComponent implements OnInit, OnDestroy {
   }
 
   setExerciseType(formIndicator: FormIndicator) {
-    this.exerciseType = formIndicator.object;
-    this.action = formIndicator.actionType;
+    this.exerciseType.set(formIndicator.object);
+    this.action.set(formIndicator.actionType);
     if (formIndicator.object === undefined)
-      this.modalTitle = "Add new exerciseType"
+      this.modalTitle.set("Add new exerciseType");
     else
-      this.modalTitle = formIndicator.object.name;
+      this.modalTitle.set(formIndicator.object.name);
   }
 
   searchExerciseType(input: string) {
@@ -73,14 +72,19 @@ export class ExerciseTypesComponent implements OnInit, OnDestroy {
 
   updateDisplayedExerciseTypes() {
     if (this.searchInput === "") {
-      this.displayedExerciseTypes = this.exerciseTypes;
+      this.displayedExerciseTypes.set(this.exerciseTypes);
       return;
     }
 
     let localInput: string = this.searchInput.toLowerCase();
-    let includeExerciseTypeExerciseName: boolean = false;
 
-    this.displayedExerciseTypes = this.exerciseTypes.filter((exerciseType: ExerciseType) => {
+    const exerciseTypesFiltered = this.filterProgExercises(localInput);
+    this.displayedExerciseTypes.set(exerciseTypesFiltered);
+  }
+
+  filterProgExercises(localInput: string) {
+    let includeExerciseTypeExerciseName: boolean = false;
+    return this.exerciseTypes.filter((exerciseType: ExerciseType) => {
       includeExerciseTypeExerciseName = false;
       if (exerciseType.exercises) {
         exerciseType.exercises.forEach((exercise: Exercise) => {

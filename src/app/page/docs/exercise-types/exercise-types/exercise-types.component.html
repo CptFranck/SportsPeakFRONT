@@ -1,5 +1,5 @@
 <div class="container">
-  <app-loading [loading]="loading"/>
+  <app-loading [loading]="loading()"/>
   <div class="container-fluid">
     <div class="row">
       <div class="col">
@@ -8,10 +8,10 @@
       <div class="col-auto">
         <app-exercise-type-modal
           (exerciseTypeAction)="setExerciseType($event)"
-          [action]="action"
+          [action]="action()"
           [exerciseTypeModalId]="exerciseTypeModalId"
-          [exerciseType]="exerciseType"
-          [modalTitle]="modalTitle"
+          [exerciseType]="exerciseType()"
+          [modalTitle]="modalTitle()"
         />
       </div>
       <div class="row">
@@ -19,7 +19,7 @@
       </div>
     </div>
     <app-exercise-type-array (actionExerciseType)="setExerciseType($event)"
-                             [exerciseTypes]="displayedExerciseTypes"
+                             [exerciseTypes]="displayedExerciseTypes()"
                              [modalId]="exerciseTypeModalId"/>
   </div>
 </div>
