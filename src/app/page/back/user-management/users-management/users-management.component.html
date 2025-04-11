@@ -1,20 +1,23 @@
 <div class="container">
-  <app-loading [loading]="loading"/>
+  <app-loading [loading]="loading()"/>
   <div class="container-fluid">
     <div class="row">
       <div class="col">
         <h2>Users saved in database</h2>
       </div>
       <div class="col-auto">
-        <app-user-modal [action]="action"
-                        [modalTitle]="modalTitle"
+        <app-user-modal [action]="action()"
+                        [modalTitle]="modalTitle()"
                         [userModalId]="muscleModalId"
-                        [user]="user"
+                        [user]="user()"
         />
       </div>
     </div>
+    <div class="row">
+      <app-search-bar (onInput)="searchUser($event)"/>
+    </div>
     <app-users-array (actionUser)="setUser($event)"
                      [modalId]="muscleModalId"
-                     [users]="users"/>
+                     [users]="displayedUsers()"/>
   </div>
 </div>
