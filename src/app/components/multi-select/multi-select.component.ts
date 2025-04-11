@@ -6,9 +6,8 @@ import {
   input,
   OnChanges,
   output,
-  QueryList,
-  ViewChild,
-  ViewChildren
+  viewChild,
+  viewChildren
 } from '@angular/core';
 import {NgForOf, NgIf} from "@angular/common";
 import {FormsModule} from "@angular/forms";
@@ -67,15 +66,15 @@ export class MultiSelectComponent implements OnChanges, AfterViewInit {
   readonly onTouched = output<boolean>();
   readonly onChange = output<number[]>();
 
-  @ViewChild('allTagsOption') allTagsOption!: ElementRef;
-  @ViewChild('selectBox') selectBox!: ElementRef;
-  @ViewChild('noResultMessage') noResultMessage!: ElementRef;
-  @ViewChild('searchInput') searchInput!: ElementRef;
-  @ViewChildren('option') options!: QueryList<ElementRef>;
+  readonly allTagsOption = viewChild.required<ElementRef>('allTagsOption');
+  readonly selectBox = viewChild.required<ElementRef>('selectBox');
+  readonly noResultMessage = viewChild.required<ElementRef>('noResultMessage');
+  readonly searchInput = viewChild.required<ElementRef>('searchInput');
+  readonly options = viewChildren<ElementRef>('option');
 
   ngOnChanges(): void {
-    if (this.options) {
-      this.resetSelectedOption();
+    if (this.options()) {
+      this.options().forEach((option: ElementRef) => option.nativeElement.classList.remove("active"));
       this.setSelectedOptionActive();
     }
   }
@@ -87,17 +86,13 @@ export class MultiSelectComponent implements OnChanges, AfterViewInit {
       if (!event.target.closest(".custom-select")
         && !event.target.classList.contains("remove-tag")
         && !event.target.classList.contains("fa-close"))
-        this.selectBox.nativeElement.parentNode.classList.remove("open");
+        this.selectBox().nativeElement.parentNode.classList.remove("open");
     });
-  }
-
-  resetSelectedOption(): void {
-    this.options.forEach((option: ElementRef) => option.nativeElement.classList.remove("active"));
   }
 
   setSelectedOptionActive(): void {
     let allTagsUsed = true;
-    this.options.forEach((option: ElementRef) => {
+    this.options().forEach((option: ElementRef) => {
       if (!option.nativeElement.classList.contains("all-tags")) {
         let isSelected: string | undefined = this.selectedOptions().find((id: number) =>
           id.toString() === option.nativeElement.getAttribute("data-value"))?.toString();
@@ -107,12 +102,12 @@ export class MultiSelectComponent implements OnChanges, AfterViewInit {
           allTagsUsed = false;
       }
     });
-    if (allTagsUsed && this.options.length > 1)
-      this.allTagsOption.nativeElement.classList.toggle("active");
+    if (allTagsUsed && this.options().length > 1)
+      this.allTagsOption().nativeElement.classList.toggle("active");
   }
 
   updateSelectedOptions() {
-    let newSelectedOptions: any[] = Array.from(this.options)
+    let newSelectedOptions: any[] = Array.from(this.options())
       .filter((option: ElementRef) => option.nativeElement.classList.contains("active"))
       .filter((option: ElementRef) => !option.nativeElement.classList.contains("all-tags"))
       .map((option: ElementRef) => {
@@ -126,14 +121,14 @@ export class MultiSelectComponent implements OnChanges, AfterViewInit {
     const selectBox: EventTarget | null = $event.target
     if (!(selectBox instanceof Element)) return;
     if (!selectBox.closest(".tag") && !selectBox.closest(".remove-all-tag")) {
-      this.selectBox.nativeElement.parentNode.classList.toggle("open");
+      this.selectBox().nativeElement.parentNode.classList.toggle("open");
       this.onTouched.emit(true)
     }
   }
 
   onInputSearch() {
-    const searchTerm = this.searchInput.nativeElement.value.toLowerCase();
-    this.options.forEach((option: ElementRef) => {
+    const searchTerm = this.searchInput().nativeElement.value.toLowerCase();
+    this.options().forEach((option: ElementRef) => {
       if (option.nativeElement.textContent) {
         const optionText = option.nativeElement.textContent.trim().toLocaleString().toLowerCase();
         const shouldShow = optionText.includes(searchTerm);
@@ -141,26 +136,26 @@ export class MultiSelectComponent implements OnChanges, AfterViewInit {
       }
     });
 
-    const anyOptionsMatch: boolean = Array.from(this.options).some((option: ElementRef) =>
+    const anyOptionsMatch: boolean = Array.from(this.options()).some((option: ElementRef) =>
       (option.nativeElement.style.display === "block"));
-    this.noResultMessage.nativeElement.style.display = anyOptionsMatch ? "none" : "block";
+    this.noResultMessage().nativeElement.style.display = anyOptionsMatch ? "none" : "block";
 
     if (searchTerm.length !== 0)
-      this.allTagsOption.nativeElement.style.display = "none";
+      this.allTagsOption().nativeElement.style.display = "none";
     else
-      this.allTagsOption.nativeElement.style.display = "block";
+      this.allTagsOption().nativeElement.style.display = "block";
   }
 
   onClickClear() {
-    this.searchInput.nativeElement.value = "";
-    this.options.forEach((option: ElementRef) => option.nativeElement.style.display = "block");
-    this.noResultMessage.nativeElement.style.display = "none";
+    this.searchInput().nativeElement.value = "";
+    this.options().forEach((option: ElementRef) => option.nativeElement.style.display = "block");
+    this.noResultMessage().nativeElement.style.display = "none";
   }
 
   onClickAllOption() {
-    const isActive = this.allTagsOption.nativeElement.classList.contains("active");
-    this.options.forEach((option: ElementRef) => {
-      if (option !== this.allTagsOption.nativeElement)
+    const isActive = this.allTagsOption().nativeElement.classList.contains("active");
+    this.options().forEach((option: ElementRef) => {
+      if (option !== this.allTagsOption().nativeElement)
         option.nativeElement.classList.toggle("active", isActive);
     });
     this.updateSelectedOptions();
@@ -189,7 +184,7 @@ export class MultiSelectComponent implements OnChanges, AfterViewInit {
     const otherSelectedOptions: NodeList =
       customSelect.querySelectorAll(".option.active:not(.all-tags)");
     if (otherSelectedOptions.length === 0)
-      this.allTagsOption.nativeElement.classList.remove("active");
+      this.allTagsOption().nativeElement.classList.remove("active");
     this.updateSelectedOptions();
   }
 
