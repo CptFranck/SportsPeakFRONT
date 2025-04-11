@@ -1,4 +1,4 @@
-import {Component, input, TemplateRef, ViewChild} from '@angular/core';
+import {Component, input} from '@angular/core';
 import {User} from "../../../interface/dto/user";
 import {ActionType} from "../../../interface/enum/action-type";
 import {ModalComponent} from "../../../components/modal/modal/modal.component";
@@ -29,8 +29,6 @@ export class UserModalComponent {
   readonly user = input.required<User | undefined>();
   readonly action = input.required<ActionType>();
   readonly modification = input.required<ModificationField>();
-
-  @ViewChild("modalTemplate") modalTemplate!: TemplateRef<any>;
 
   protected readonly ActionType = ActionType;
   protected readonly ModificationField = ModificationField;

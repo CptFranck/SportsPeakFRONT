@@ -1,4 +1,4 @@
-import {Component, computed, ElementRef, input, TemplateRef, ViewChild} from '@angular/core';
+import {Component, computed, input, TemplateRef} from '@angular/core';
 import {NgIf, NgTemplateOutlet} from "@angular/common";
 import {Subject} from "rxjs";
 import {ActionType} from "../../../interface/enum/action-type";
@@ -17,7 +17,7 @@ export class ModalComponent {
   readonly title = input.required<string>();
   readonly modalId = input.required<string>();
   readonly actionType = input.required<ActionType | undefined>();
-  readonly staticBackdrop = input<boolean>(false);
+  readonly staticBackdrop = input<boolean>(true);
   readonly contentTemplate = input<TemplateRef<any>>();
 
   submitButton = computed(() => {
@@ -56,8 +56,6 @@ export class ModalComponent {
 
   readonly ActionType = ActionType;
   submitEventActionType$ = new Subject<ActionType>();
-
-  @ViewChild("btnClose") btnClose: ElementRef | undefined;
 
   onSubmit() {
     const action = this.actionType();

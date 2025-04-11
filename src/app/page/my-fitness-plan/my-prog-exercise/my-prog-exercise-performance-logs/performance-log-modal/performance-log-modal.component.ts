@@ -1,4 +1,4 @@
-import {Component, input, TemplateRef, ViewChild} from '@angular/core';
+import {Component, input} from '@angular/core';
 import {ActionType} from "../../../../../interface/enum/action-type";
 import {TargetSet} from "../../../../../interface/dto/target-set";
 import {PerformanceLog} from "../../../../../interface/dto/performance-log";
@@ -29,8 +29,6 @@ export class PerformanceLogModalComponent {
   readonly targetSet = input.required<TargetSet | undefined>();
   readonly performanceLog = input.required<PerformanceLog | undefined>();
   readonly action = input.required<ActionType>();
-
-  @ViewChild("performanceLogModalTemplate") modalTemplate!: TemplateRef<any>;
 
   protected readonly ActionType = ActionType;
 }

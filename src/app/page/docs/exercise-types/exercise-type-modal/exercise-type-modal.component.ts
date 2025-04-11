@@ -1,14 +1,4 @@
-import {
-  Component,
-  inject,
-  input,
-  OnDestroy,
-  OnInit,
-  signal,
-  TemplateRef,
-  ViewChild,
-  output
-} from '@angular/core';
+import {Component, inject, input, OnDestroy, OnInit, output, signal} from '@angular/core';
 import {ModalButtonComponent} from "../../../../components/modal/modal-button/modal-button.component";
 import {ModalComponent} from "../../../../components/modal/modal/modal.component";
 import {NgIf} from "@angular/common";
@@ -48,8 +38,6 @@ export class ExerciseTypeModalComponent implements OnInit, OnDestroy {
   readonly action = input.required<ActionType>();
 
   readonly exerciseTypeAction = output<FormIndicator>();
-
-  @ViewChild("modalTemplate") modalTemplate!: TemplateRef<any>
 
   protected readonly ActionType = ActionType;
 

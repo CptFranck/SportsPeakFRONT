@@ -1,4 +1,4 @@
-import {Component, input, TemplateRef, ViewChild} from '@angular/core';
+import {Component, input} from '@angular/core';
 import {ModalComponent} from "../../../../components/modal/modal/modal.component";
 import {NgIf} from "@angular/common";
 import {ProgExercise} from "../../../../interface/dto/prog-exercise";
@@ -29,8 +29,6 @@ export class MyProgExerciseEditorModalComponent {
   readonly progExerciseModalId = input.required<string>();
   readonly progExercise = input.required<ProgExercise | undefined>();
   readonly action = input.required<ActionType>();
-
-  @ViewChild("modalTemplate") modalTemplate!: TemplateRef<any>;
 
   protected readonly ActionType = ActionType;
 }

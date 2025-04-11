@@ -1,4 +1,4 @@
-import {Component, input, output, TemplateRef, ViewChild} from '@angular/core';
+import {Component, input, output} from '@angular/core';
 import {ActionType} from "../../../../../interface/enum/action-type";
 import {ModalComponent} from "../../../../../components/modal/modal/modal.component";
 import {NgIf} from "@angular/common";
@@ -39,8 +39,6 @@ export class TargetSetModalComponent {
   readonly action = input.required<ActionType>();
 
   readonly targetSetAction = output<FormIndicator>();
-
-  @ViewChild("targetSetModalTemplate") modalTemplate!: TemplateRef<any>;
 
   protected readonly ActionType = ActionType;
 

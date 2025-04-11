@@ -1,4 +1,4 @@
-import {Component, input, TemplateRef, ViewChild} from '@angular/core';
+import {Component, input} from '@angular/core';
 import {
   UserDetailsDisplayComponent
 } from "../../../../components/modal-component/user-management/user-details-display/user-details-display.component";
@@ -25,8 +25,6 @@ export class UsersManagementModalComponent {
   readonly userModalId = input.required<string>();
   readonly user = input.required<User | undefined>();
   readonly action = input.required<ActionType>();
-
-  @ViewChild("modalTemplate") modalTemplate!: TemplateRef<any>;
 
   protected readonly ActionType = ActionType;
 }

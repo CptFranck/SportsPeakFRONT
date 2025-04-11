@@ -1,4 +1,4 @@
-import {Component, input, output, TemplateRef, ViewChild} from '@angular/core';
+import {Component, input, output} from '@angular/core';
 import {ModalButtonComponent} from "../../../../components/modal/modal-button/modal-button.component";
 import {ModalComponent} from "../../../../components/modal/modal/modal.component";
 import {NgIf} from "@angular/common";
@@ -35,8 +35,6 @@ export class PrivilegeModalComponent {
   readonly action = input.required<ActionType>();
 
   readonly privilegeAction = output<FormIndicator>();
-
-  @ViewChild("modalTemplate") modalTemplate!: TemplateRef<any>;
 
   protected readonly ActionType = ActionType;
 
