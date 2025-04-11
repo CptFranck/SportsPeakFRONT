@@ -1,15 +1,15 @@
 <div class="container">
-  <app-loading [loading]="loading"/>
+  <app-loading [loading]="loading()"/>
   <div class="container-fluid">
     <div class="row">
       <div class="col">
         <h2>Programed Exercises </h2>
       </div>
       <div class="col-auto">
-        <app-prog-exercise-modal [action]="action"
-                                 [modalTitle]="modalTitle"
+        <app-prog-exercise-modal [action]="action()"
+                                 [modalTitle]="modalTitle()"
                                  [progExerciseModalId]="muscleModalId"
-                                 [progExercise]="progExercise"
+                                 [progExercise]="progExercise()"
         />
       </div>
     </div>
@@ -18,6 +18,6 @@
     </div>
     <app-prog-exercises-array (actionMuscle)="setProgExercise($event)"
                               [modalId]="muscleModalId"
-                              [progExercises]="displayedProgExercises"/>
+                              [progExercises]="displayedProgExercises()"/>
   </div>
 </div>

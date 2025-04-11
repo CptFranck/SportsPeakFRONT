@@ -1,4 +1,4 @@
-import {Component, inject, OnDestroy, OnInit, TemplateRef, ViewChild} from '@angular/core';
+import {Component, inject, OnDestroy, OnInit, signal} from '@angular/core';
 import {FormIndicator} from "../../../../interface/utils/form-indicator";
 import {ActionType} from "../../../../interface/enum/action-type";
 import {ProgExercise} from "../../../../interface/dto/prog-exercise";
@@ -22,18 +22,18 @@ import {Subject, takeUntil} from "rxjs";
   templateUrl: './prog-exercises.component.html'
 })
 export class ProgExercisesComponent implements OnInit, OnDestroy {
-  loading: boolean = true;
-  progExercises: ProgExercise[] = [];
-  displayedProgExercises: ProgExercise[] = [];
-  progExercise: ProgExercise | undefined;
-  action: ActionType = ActionType.create;
-  modalTitle: string = "";
-  muscleModalId: string = "progExerciseModal";
+  loading = signal<boolean>(true);
+  displayedProgExercises = signal<ProgExercise[]>([]);
+  action = signal<ActionType>(ActionType.create);
+  modalTitle = signal<string>("");
+  progExercise = signal<ProgExercise | undefined>(undefined);
 
-  @ViewChild("modalTemplate") modalTemplate!: TemplateRef<any>;
+  readonly muscleModalId = "progExerciseModal";
 
-  private readonly unsubscribe$: Subject<void> = new Subject<void>();
-  private readonly proExerciseService: ProgExerciseService = inject(ProgExerciseService);
+  private progExercises: ProgExercise[] = [];
+
+  private readonly unsubscribe$ = new Subject<void>();
+  private readonly proExerciseService = inject(ProgExerciseService);
 
   ngOnInit(): void {
     this.proExerciseService.progExercises
@@ -42,11 +42,11 @@ export class ProgExercisesComponent implements OnInit, OnDestroy {
         let publicProgExercise: ProgExercise[] = progExercises.filter((progExercise: ProgExercise) =>
           progExercise.visibility === Visibility.PUBLIC)
         this.progExercises = publicProgExercise;
-        this.displayedProgExercises = publicProgExercise;
+        this.displayedProgExercises.set(publicProgExercise);
       });
     this.proExerciseService.isLoading
       .pipe(takeUntil(this.unsubscribe$))
-      .subscribe((isLoading: boolean) => this.loading = isLoading);
+      .subscribe((isLoading: boolean) => this.loading.set(isLoading));
   }
 
   ngOnDestroy() {
@@ -55,23 +55,23 @@ export class ProgExercisesComponent implements OnInit, OnDestroy {
   }
 
   setProgExercise(formIndicator: FormIndicator) {
-    this.progExercise = formIndicator.object;
-    this.action = formIndicator.actionType;
-    this.modalTitle = formIndicator.object.name;
+    this.progExercise.set(formIndicator.object);
+    this.action.set(formIndicator.actionType);
+    this.modalTitle.set(formIndicator.object.name);
   }
 
   searchProgExercise(input: string) {
-    if (input === "") {
-      this.displayedProgExercises = this.progExercises
-      return;
-    }
+    if (input === "")
+      return this.displayedProgExercises.set(this.progExercises);
+    const localInput = input.toLowerCase();
+    this.displayedProgExercises.set(this.filterProgExercises(localInput));
+  }
 
-    let localInput: string = input.toLowerCase();
-    let includeMuscleExerciseName: boolean = false;
+  filterProgExercises(localInput: string) {
+    let includeMuscleExerciseName = false;
 
-    this.displayedProgExercises = this.progExercises.filter((progExercise: ProgExercise) => {
+    return this.progExercises.filter((progExercise: ProgExercise) => {
       includeMuscleExerciseName = false;
-
       progExercise.exercise.muscles.forEach((muscle: Muscle) =>
         includeMuscleExerciseName = muscle.name.toLowerCase().includes(localInput))
 
@@ -82,4 +82,5 @@ export class ProgExercisesComponent implements OnInit, OnDestroy {
         includeMuscleExerciseName;
     });
   }
+
 }
