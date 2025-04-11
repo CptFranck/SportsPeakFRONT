@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Output, input} from '@angular/core';
+import {Component, input, output} from '@angular/core';
 import {Alert} from "../../interface/utils/alert";
 import {NgIf} from "@angular/common";
 
@@ -11,7 +11,7 @@ import {NgIf} from "@angular/common";
 })
 export class AlertComponent {
   readonly alert = input.required<Alert>();
-  @Output() removedAlert: EventEmitter<Alert> = new EventEmitter();
+  readonly removedAlert = output<Alert>();
 
   removeAlert() {
     this.removedAlert.emit(this.alert())
