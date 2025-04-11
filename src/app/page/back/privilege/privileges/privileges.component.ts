@@ -1,4 +1,4 @@
-import {Component, inject, OnDestroy, OnInit, TemplateRef, ViewChild} from '@angular/core';
+import {Component, inject, OnDestroy, OnInit, signal} from '@angular/core';
 import {PrivilegesArrayComponent} from "../privileges-array/privileges-array.component";
 import {PrivilegeModalComponent} from "../privilege-modal/privilege-modal.component";
 import {LoadingComponent} from "../../../../components/loading/loading.component";
@@ -18,14 +18,13 @@ import {Subject, takeUntil} from "rxjs";
   templateUrl: './privileges.component.html'
 })
 export class PrivilegesComponent implements OnInit, OnDestroy {
-  loading: boolean = true;
+  loading = signal<boolean>(true);
   privileges: Privilege[] = [];
-  privilege: Privilege | undefined;
-  action: ActionType = ActionType.create;
-  modalTitle: string = "";
-  privilegeModalId: string = "privilegeModal";
+  privilege = signal<Privilege | undefined>(undefined);
+  action = signal<ActionType>(ActionType.create);
+  modalTitle = signal<string>("");
 
-  @ViewChild("modalTemplate") modalTemplate!: TemplateRef<any>;
+  readonly privilegeModalId: string = "privilegeModal";
 
   private readonly unsubscribe$: Subject<void> = new Subject<void>();
   private readonly privilegeService: PrivilegeService = inject(PrivilegeService);
@@ -37,8 +36,7 @@ export class PrivilegesComponent implements OnInit, OnDestroy {
         this.privileges = privileges);
     this.privilegeService.isLoading
       .pipe(takeUntil(this.unsubscribe$))
-      .subscribe((isLoading: boolean) =>
-        this.loading = isLoading);
+      .subscribe((isLoading: boolean) => this.loading.set(isLoading));
   }
 
   ngOnDestroy() {
@@ -47,11 +45,11 @@ export class PrivilegesComponent implements OnInit, OnDestroy {
   }
 
   setPrivilege(formIndicator: FormIndicator) {
-    this.privilege = formIndicator.object;
-    this.action = formIndicator.actionType;
+    this.privilege = (formIndicator.object);
+    this.action.set(formIndicator.actionType);
     if (formIndicator.object === undefined)
-      this.modalTitle = "Add new muscle";
+      this.modalTitle.set("Add new muscle");
     else
-      this.modalTitle = formIndicator.object.name;
+      this.modalTitle.set(formIndicator.object.name);
   }
 }

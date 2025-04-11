@@ -1,5 +1,5 @@
 <div class="container">
-  <app-loading [loading]="loading"/>
+  <app-loading [loading]="loading()"/>
   <div class="container-fluid">
     <div class="row">
       <div class="col">
@@ -7,10 +7,10 @@
       </div>
       <div class="col-auto">
         <app-privilege-modal (actionPrivilege)="setPrivilege($event)"
-                             [action]="action"
-                             [modalTitle]="modalTitle"
+                             [action]="action()"
+                             [modalTitle]="modalTitle()"
                              [privilegeModalId]="privilegeModalId"
-                             [privilege]="privilege"
+                             [privilege]="privilege()"
         />
       </div>
     </div>
