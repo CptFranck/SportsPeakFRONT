@@ -1,4 +1,4 @@
-import {Component, inject, OnDestroy, OnInit, TemplateRef, ViewChild} from '@angular/core';
+import {Component, inject, OnDestroy, OnInit, signal} from '@angular/core';
 import {RolesArrayComponent} from "../roles-array/roles-array.component";
 import {RoleModalComponent} from "../role-modal/role-modal.component";
 import {LoadingComponent} from "../../../../components/loading/loading.component";
@@ -18,27 +18,24 @@ import {Subject, takeUntil} from "rxjs";
   templateUrl: './roles.component.html'
 })
 export class RolesComponent implements OnInit, OnDestroy {
-  loading: boolean = true;
+  loading = signal<boolean>(true);
   roles: Role[] = [];
-  role: Role | undefined;
-  action: ActionType = ActionType.create;
-  modalTitle: string = "";
-  muscleModalId: string = "roleModal";
+  role = signal<Role | undefined>(undefined);
+  action = signal<ActionType>(ActionType.create);
+  modalTitle = signal<string>("");
 
-  @ViewChild("modalTemplate") modalTemplate!: TemplateRef<any>;
+  readonly muscleModalId: string = "roleModal";
 
-  private readonly unsubscribe$: Subject<void> = new Subject<void>();
-  private readonly roleService: RoleService = inject(RoleService);
+  private readonly unsubscribe$ = new Subject<void>();
+  private readonly roleService = inject(RoleService);
 
   ngOnInit(): void {
     this.roleService.roles
       .pipe(takeUntil(this.unsubscribe$))
-      .subscribe((roles: Role[]) =>
-        this.roles = roles);
+      .subscribe((roles: Role[]) => this.roles = roles);
     this.roleService.isLoading
       .pipe(takeUntil(this.unsubscribe$))
-      .subscribe((isLoading: boolean) =>
-        this.loading = isLoading);
+      .subscribe((isLoading: boolean) => this.loading.set(isLoading));
   }
 
   ngOnDestroy() {
@@ -47,11 +44,11 @@ export class RolesComponent implements OnInit, OnDestroy {
   }
 
   setRole(formIndicator: FormIndicator) {
-    this.role = formIndicator.object;
-    this.action = formIndicator.actionType;
+    this.role.set(formIndicator.object);
+    this.action.set(formIndicator.actionType);
     if (formIndicator.object === undefined)
-      this.modalTitle = "Add new role";
+      this.modalTitle.set("Add new role");
     else
-      this.modalTitle = formIndicator.object.name;
+      this.modalTitle.set(formIndicator.object.name);
   }
 }

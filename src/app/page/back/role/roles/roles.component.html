@@ -1,15 +1,15 @@
 <div class="container">
-  <app-loading [loading]="loading"/>
+  <app-loading [loading]="loading()"/>
   <div class="container-fluid">
     <div class="row">
       <div class="col">
         <h2>Roles saved in database</h2>
       </div>
       <div class="col-auto">
-        <app-role-modal (actionRole)="setRole($event)" [action]="action"
-                        [modalTitle]="modalTitle"
+        <app-role-modal (actionRole)="setRole($event)" [action]="action()"
+                        [modalTitle]="modalTitle()"
                         [roleModalId]="muscleModalId"
-                        [role]="role"
+                        [role]="role()"
         />
       </div>
     </div>
