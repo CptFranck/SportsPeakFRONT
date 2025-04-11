@@ -6,7 +6,8 @@
         <h2>My Programed Exercises </h2>
       </div>
       <div class="col-auto">
-        <app-my-prog-exercise-modal [action]="action()"
+        <app-my-prog-exercise-modal (progExerciseAction)="setProgExercise($event)"
+                                    [action]="action()"
                                     [modalTitle]="modalTitle()"
                                     [muscleModalId]="progExerciseModalId"
                                     [progExercise]="progExercise()"

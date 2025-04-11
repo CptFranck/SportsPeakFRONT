@@ -1,4 +1,4 @@
-import {Component, inject, OnDestroy, OnInit, signal, TemplateRef, ViewChild} from '@angular/core';
+import {Component, inject, OnDestroy, OnInit, signal} from '@angular/core';
 import {ProgExercise} from "../../../../interface/dto/prog-exercise";
 import {ActionType} from "../../../../interface/enum/action-type";
 import {ProgExerciseService} from "../../../../services/prog-exercise/prog-exercise.service";
@@ -26,16 +26,15 @@ import {Subject, takeUntil} from "rxjs";
 })
 export class MyProgExercisesComponent implements OnInit, OnDestroy {
   loading = signal<boolean>(true);
-  progExercises: ProgExercise[] = [];
   displayedProgExercises = signal<ProgExercise[]>([]);
-
   action = signal<ActionType>(ActionType.create);
   modalTitle = signal<string>("");
   progExercise = signal<ProgExercise | undefined>(undefined);
-  readonly progExerciseModalId = "progExerciseModal";
-  searchInput = "";
 
-  @ViewChild("modalTemplate") modalTemplate!: TemplateRef<any>;
+  readonly progExerciseModalId = "progExerciseModal";
+
+  private searchInput = "";
+  private progExercises: ProgExercise[] = [];
 
   private readonly unsubscribe$ = new Subject<void>();
   private readonly progExerciseService = inject(ProgExerciseService);
@@ -59,8 +58,11 @@ export class MyProgExercisesComponent implements OnInit, OnDestroy {
 
   setProgExercise(formIndicator: FormIndicator) {
     this.action.set(formIndicator.actionType);
-    this.modalTitle.set(formIndicator.object.name);
     this.progExercise.set(formIndicator.object);
+    if (formIndicator.object === undefined)
+      this.modalTitle.set("Add new programed exercise");
+    else
+      this.modalTitle.set(formIndicator.object.name);
   }
 
   searchProgExercise(input: string) {
