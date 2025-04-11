@@ -33,7 +33,6 @@ export class MyProgExercisesComponent implements OnInit, OnDestroy {
 
   readonly progExerciseModalId = "progExerciseModal";
 
-  private searchInput = "";
   private progExercises: ProgExercise[] = [];
 
   private readonly unsubscribe$ = new Subject<void>();
@@ -44,7 +43,7 @@ export class MyProgExercisesComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe((progExercises: ProgExercise[]) => {
         this.progExercises = progExercises;
-        this.updateDisplayedProgExercise();
+        this.displayedProgExercises.set(progExercises)
       });
     this.progExerciseService.isLoading
       .pipe(takeUntil(this.unsubscribe$))
@@ -66,32 +65,23 @@ export class MyProgExercisesComponent implements OnInit, OnDestroy {
   }
 
   searchProgExercise(input: string) {
-    this.searchInput = input;
-    this.updateDisplayedProgExercise();
-  }
-
-  updateDisplayedProgExercise() {
-    const localInput = this.searchInput.toLowerCase();
-    if (this.searchInput === "") {
-      this.displayedProgExercises.set(this.progExercises);
-      return;
-    }
-    const exercisesFiltered = this.filterProgExercises(localInput);
-    this.displayedProgExercises.set(exercisesFiltered);
+    if (input === "")
+      return this.displayedProgExercises.set(this.progExercises);
+    const localInput = input.toLowerCase();
+    this.displayedProgExercises.set(this.filterProgExercises(localInput));
   }
 
   filterProgExercises(localInput: string) {
-    let includeMuscleExerciseName = false;
+    let includeMuscleName = false;
     return this.progExercises.filter((progExercise: ProgExercise) => {
-      includeMuscleExerciseName = false;
-
+      includeMuscleName = false;
       progExercise.exercise.muscles.forEach((muscle: Muscle) =>
-        includeMuscleExerciseName = muscle.name.toLowerCase().includes(localInput))
+        includeMuscleName = muscle.name.toLowerCase().includes(localInput))
 
       return progExercise.name.toLowerCase().includes(localInput) ||
         progExercise.note.toLowerCase().includes(localInput) ||
         progExercise.exercise.name.toLowerCase().includes(localInput) ||
-        includeMuscleExerciseName;
+        includeMuscleName;
     })
   }
 }
