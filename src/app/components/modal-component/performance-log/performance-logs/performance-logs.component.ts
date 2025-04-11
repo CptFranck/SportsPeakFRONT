@@ -1,4 +1,4 @@
-import {Component, computed, input, model, signal, TemplateRef, ViewChild} from '@angular/core';
+import {Component, computed, input, model, signal} from '@angular/core';
 import {TargetSet} from "../../../../interface/dto/target-set";
 import {ProgExercise} from "../../../../interface/dto/prog-exercise";
 import {PerformanceLog} from "../../../../interface/dto/performance-log";
@@ -83,8 +83,6 @@ export class PerformanceLogsComponent {
   action = signal<ActionType>(ActionType.read);
   performanceLog = signal<PerformanceLog | undefined>(undefined);
   performanceLogDate = signal<string | undefined>(undefined);
-
-  @ViewChild("performanceCollapseTemplate") modalTemplate!: TemplateRef<any>;
 
   protected readonly ActionType = ActionType;
   protected readonly Object: ObjectConstructor = Object;

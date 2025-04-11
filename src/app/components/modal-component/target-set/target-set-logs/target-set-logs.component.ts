@@ -1,4 +1,4 @@
-import {Component, computed, input, output, signal, TemplateRef, ViewChild} from '@angular/core';
+import {Component, computed, input, output, signal} from '@angular/core';
 import {TargetSet} from "../../../../interface/dto/target-set";
 import {NgForOf, NgIf} from "@angular/common";
 import {TargetSetLogsCardComponent} from "../../../card/target-set/target-set-logs-card/target-set-logs-card.component";
@@ -47,8 +47,6 @@ export class TargetSetLogsComponent {
   action = signal<ActionType>(ActionType.read);
   blocTitle = signal<string | undefined>(undefined);
   targetSetLog = signal<TargetSet | undefined>(undefined);
-
-  @ViewChild("performanceCollapseTemplate") modalTemplate!: TemplateRef<any>;
 
   readonly actionTargetSets = output<FormIndicator>();
 

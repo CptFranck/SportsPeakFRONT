@@ -1,14 +1,4 @@
-import {
-  Component,
-  inject,
-  input,
-  OnDestroy,
-  OnInit,
-  signal,
-  TemplateRef,
-  ViewChild,
-  output
-} from '@angular/core';
+import {Component, inject, input, OnDestroy, OnInit, output, signal} from '@angular/core';
 import {ActionType} from "../../../../interface/enum/action-type";
 import {ModalButtonComponent} from "../../../../components/modal/modal-button/modal-button.component";
 import {ModalComponent} from "../../../../components/modal/modal/modal.component";
@@ -49,10 +39,8 @@ export class MuscleModalComponent implements OnInit, OnDestroy {
 
   readonly actionMuscle = output<FormIndicator>();
 
-  @ViewChild("modalTemplate") modalTemplate!: TemplateRef<any>;
-
   protected readonly ActionType = ActionType;
-  
+
   private readonly unsubscribe$ = new Subject<void>();
   private readonly userLoggedService = inject(UserLoggedService);
 
