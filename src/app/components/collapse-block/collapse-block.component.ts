@@ -1,4 +1,4 @@
-import {Component, ElementRef, Input, input, signal, TemplateRef, ViewChild} from '@angular/core';
+import {Component, ElementRef, Input, input, signal, TemplateRef} from '@angular/core';
 import {NgIf, NgTemplateOutlet} from "@angular/common";
 import {Subject} from "rxjs";
 import {ActionType} from "../../interface/enum/action-type";
@@ -22,8 +22,6 @@ export class CollapseBlockComponent {
   closeButtonTitle = signal<string>("Close");
   validateButtonClass = signal<string>("btn-success");
   validationButtonTitle = signal<string>("Ok");
-
-  @ViewChild("btnClose") btnClose: ElementRef | undefined;
 
   readonly collapseId = input.required<string>();
   readonly classArgs = input<string>("");
