@@ -28,7 +28,6 @@ export class UsersManagementComponent implements OnInit, OnDestroy {
 
   readonly muscleModalId: string = "userModal";
 
-  private searchInput = "";
   private users: User[] = [];
 
   private readonly unsubscribe$ = new Subject<void>();
@@ -39,7 +38,7 @@ export class UsersManagementComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe((users: User[]) => {
         this.users = users;
-        this.updateDisplayedUsers();
+        this.displayedUsers.set(users);
       });
     this.userService.isLoading
       .pipe(takeUntil(this.unsubscribe$))
@@ -58,22 +57,13 @@ export class UsersManagementComponent implements OnInit, OnDestroy {
   }
 
   searchUser(input: string) {
-    this.searchInput = input;
-    this.updateDisplayedUsers();
-  }
-
-  updateDisplayedUsers() {
-    const localInput = this.searchInput.toLowerCase();
-    if (this.searchInput === "") {
-      this.displayedUsers.set(this.users);
-      return;
-    }
-    const exercisesFiltered = this.filterUsers(localInput);
-    this.displayedUsers.set(exercisesFiltered);
+    if (input === "")
+      return this.displayedUsers.set(this.users);
+    const localInput = input.toLowerCase();
+    this.displayedUsers.set(this.filterUsers(localInput));
   }
 
   filterUsers(localInput: string) {
-
     return this.users.filter((user: User) => {
       return user.firstName.toLowerCase().includes(localInput) ||
         user.lastName.toLowerCase().includes(localInput) ||

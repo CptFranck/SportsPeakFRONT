@@ -32,7 +32,6 @@ export class MusclesComponent implements OnInit, OnDestroy {
   readonly muscleModalId: string = "muscleModal";
 
   private muscles: Muscle[] = [];
-  private searchInput: string = "";
 
   private readonly unsubscribe$ = new Subject<void>();
   private readonly muscleService = inject(MuscleService);
@@ -42,7 +41,7 @@ export class MusclesComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe((muscles: Muscle[]) => {
         this.muscles = muscles;
-        this.updateDisplayedMuscles();
+        this.displayedMuscles.set(muscles);
       });
     this.muscleService.isLoading
       .pipe(takeUntil(this.unsubscribe$))
@@ -64,33 +63,26 @@ export class MusclesComponent implements OnInit, OnDestroy {
   }
 
   searchMuscle(input: string) {
-    this.searchInput = input;
-    this.updateDisplayedMuscles();
-  }
-
-  updateDisplayedMuscles() {
-    if (this.searchInput === "")
+    if (input === "")
       return this.displayedMuscles.set(this.muscles);
-
-    const localInput = this.searchInput.toLowerCase();
-    const musclesFiltered = this.filterMuscles(localInput);
-    this.displayedMuscles.set(musclesFiltered);
+    const localInput = input.toLowerCase();
+    this.displayedMuscles.set(this.filterMuscles(localInput));
   }
 
   filterMuscles(localInput: string) {
-    let includeMuscleExerciseName = false;
+    let includeExerciseName = false;
     return this.muscles.filter((muscle: Muscle) => {
-      includeMuscleExerciseName = false;
+      includeExerciseName = false;
       muscle.exercises.forEach((exercise: Exercise) => {
         if (exercise.name.toLowerCase().includes(localInput)) {
-          includeMuscleExerciseName = true;
+          includeExerciseName = true;
         }
       })
 
       return muscle.name.toLowerCase().includes(localInput) ||
         muscle.description.toLowerCase().includes(localInput) ||
         muscle.function.toLowerCase().includes(localInput) ||
-        includeMuscleExerciseName;
+        includeExerciseName;
     });
 
   }

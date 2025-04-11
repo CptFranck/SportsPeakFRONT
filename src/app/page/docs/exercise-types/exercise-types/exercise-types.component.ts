@@ -31,7 +31,6 @@ export class ExerciseTypesComponent implements OnInit, OnDestroy {
 
   readonly exerciseTypeModalId = "exercisesTypeModal";
 
-  private searchInput = "";
   private exerciseTypes: ExerciseType[] = [];
 
   private readonly unsubscribe$ = new Subject<void>();
@@ -44,7 +43,7 @@ export class ExerciseTypesComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe((exerciseType: ExerciseType[]) => {
         this.exerciseTypes = exerciseType;
-        this.updateDisplayedExerciseTypes();
+        this.displayedExerciseTypes.set(exerciseType);
       });
     this.exerciseTypeService.isLoading
       .pipe(takeUntil(this.unsubscribe$))
@@ -66,37 +65,26 @@ export class ExerciseTypesComponent implements OnInit, OnDestroy {
   }
 
   searchExerciseType(input: string) {
-    this.searchInput = input;
-    this.updateDisplayedExerciseTypes();
+    if (input === "")
+      return this.displayedExerciseTypes.set(this.exerciseTypes);
+    let localInput = input.toLowerCase();
+    this.displayedExerciseTypes.set(this.filterExerciseTypes(localInput));
   }
 
-  updateDisplayedExerciseTypes() {
-    if (this.searchInput === "") {
-      this.displayedExerciseTypes.set(this.exerciseTypes);
-      return;
-    }
-
-    let localInput: string = this.searchInput.toLowerCase();
-
-    const exerciseTypesFiltered = this.filterProgExercises(localInput);
-    this.displayedExerciseTypes.set(exerciseTypesFiltered);
-  }
-
-  filterProgExercises(localInput: string) {
-    let includeExerciseTypeExerciseName: boolean = false;
+  filterExerciseTypes(localInput: string) {
+    let includeExerciseName = false;
     return this.exerciseTypes.filter((exerciseType: ExerciseType) => {
-      includeExerciseTypeExerciseName = false;
-      if (exerciseType.exercises) {
+      includeExerciseName = false;
+      if (exerciseType.exercises)
         exerciseType.exercises.forEach((exercise: Exercise) => {
           if (exercise.name.toLowerCase().includes(localInput)) {
-            includeExerciseTypeExerciseName = true;
+            includeExerciseName = true;
           }
         })
-      }
 
       return exerciseType.name.toLowerCase().includes(localInput) ||
         exerciseType.goal.toLowerCase().includes(localInput) ||
-        includeExerciseTypeExerciseName;
+        includeExerciseName;
     });
   }
 }

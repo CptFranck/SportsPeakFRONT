@@ -33,7 +33,6 @@ export class ExercisesComponent implements OnInit, OnDestroy {
   readonly exerciseModalId: string = "exerciseModal"
 
   private exercises: Exercise[] = [];
-  private searchInput: string = "";
 
   private readonly unsubscribe$: Subject<void> = new Subject<void>();
   private readonly exerciseService: ExerciseService = inject(ExerciseService);
@@ -43,7 +42,7 @@ export class ExercisesComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe((exercises: Exercise[]) => {
         this.exercises = exercises;
-        this.updateDisplayedExercise();
+        this.displayedExercises.set(exercises);
       });
     this.exerciseService.isLoading
       .pipe(takeUntil(this.unsubscribe$))
@@ -65,35 +64,30 @@ export class ExercisesComponent implements OnInit, OnDestroy {
   }
 
   searchExercise(input: string) {
-    this.searchInput = input;
-    this.updateDisplayedExercise();
-  }
-
-  updateDisplayedExercise() {
-    if (this.searchInput === "")
+    if (input === "")
       return this.displayedExercises.set(this.exercises);
-    let localInput: string = this.searchInput.toLowerCase();
-    this.displayedExercises.set(this.filterProgExercises(localInput));
+    let localInput: string = input.toLowerCase();
+    this.displayedExercises.set(this.filterExercises(localInput));
   }
 
-  filterProgExercises(localInput: string) {
-    let includeExerciseMuscleName = false;
-    let includeExerciseExerciseTypeName = false;
+  filterExercises(localInput: string) {
+    let includeMuscleName = false;
+    let includeExerciseTypeName = false;
 
     return this.exercises.filter((exercise: Exercise) => {
-      includeExerciseMuscleName = false;
+      includeMuscleName = false;
       if (exercise.muscles) {
         exercise.muscles.forEach((muscle: Muscle) => {
           if (muscle.name.toLowerCase().includes(localInput)) {
-            includeExerciseMuscleName = true;
+            includeMuscleName = true;
           }
         })
       }
-      includeExerciseExerciseTypeName = false;
+      includeExerciseTypeName = false;
       if (exercise.exerciseTypes) {
         exercise.exerciseTypes.forEach((exerciseType: ExerciseType) => {
           if (exerciseType.name.toLowerCase().includes(localInput)) {
-            includeExerciseExerciseTypeName = true;
+            includeExerciseTypeName = true;
           }
         })
       }
@@ -101,7 +95,7 @@ export class ExercisesComponent implements OnInit, OnDestroy {
       return exercise.name.toLowerCase().includes(localInput) ||
         exercise.description.toLowerCase().includes(localInput) ||
         exercise.goal.toLowerCase().includes(localInput) ||
-        includeExerciseMuscleName || includeExerciseExerciseTypeName;
+        includeMuscleName || includeExerciseTypeName;
     });
   }
 }

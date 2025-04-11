@@ -68,18 +68,17 @@ export class ProgExercisesComponent implements OnInit, OnDestroy {
   }
 
   filterProgExercises(localInput: string) {
-    let includeMuscleExerciseName = false;
-
+    let includeMuscleName = false;
     return this.progExercises.filter((progExercise: ProgExercise) => {
-      includeMuscleExerciseName = false;
+      includeMuscleName = false;
       progExercise.exercise.muscles.forEach((muscle: Muscle) =>
-        includeMuscleExerciseName = muscle.name.toLowerCase().includes(localInput))
+        includeMuscleName = muscle.name.toLowerCase().includes(localInput))
 
       return progExercise.name.toLowerCase().includes(localInput) ||
         progExercise.note.toLowerCase().includes(localInput) ||
         progExercise.creator.username.toLowerCase().includes(localInput) ||
         progExercise.exercise.name.toLowerCase().includes(localInput) ||
-        includeMuscleExerciseName;
+        includeMuscleName;
     });
   }
 
