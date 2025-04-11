@@ -18,10 +18,10 @@ export class UserSecurityComponent {
   readonly user = input.required<User | undefined>();
   readonly modalId = input.required<string>();
 
-  readonly userAction = output<FormIndicator>();
+  readonly actionUser = output<FormIndicator>();
 
   onChangePassword() {
-    this.userAction.emit({
+    this.actionUser.emit({
       actionType: ActionType.update,
       modificationField: ModificationField.password,
       object: this.user()
@@ -29,7 +29,7 @@ export class UserSecurityComponent {
   }
 
   onDeleteAccount() {
-    this.userAction.emit({
+    this.actionUser.emit({
       actionType: ActionType.delete,
       object: this.user()
     });

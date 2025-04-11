@@ -33,12 +33,12 @@ export class MyProgExercisesModalComponent {
   readonly progExercise = input.required<ProgExercise | undefined>();
   readonly action = model.required<ActionType>();
 
-  readonly progExerciseAction = output<FormIndicator>();
+  readonly actionProgExercises = output<FormIndicator>();
 
   protected readonly ActionType = ActionType;
 
   onClick() {
-    this.progExerciseAction.emit({
+    this.actionProgExercises.emit({
       object: undefined,
       actionType: ActionType.create
     })

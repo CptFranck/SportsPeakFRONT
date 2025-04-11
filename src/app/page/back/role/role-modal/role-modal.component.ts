@@ -29,12 +29,12 @@ export class RoleModalComponent {
   readonly role = input.required<Role | undefined>();
   readonly action = input.required<ActionType>();
 
-  readonly roleAction = output<FormIndicator>();
+  readonly actionRole = output<FormIndicator>();
 
   protected readonly ActionType = ActionType;
 
   onClick() {
-    this.roleAction.emit({
+    this.actionRole.emit({
       object: undefined,
       actionType: ActionType.create
     })

@@ -19,10 +19,10 @@ export class UserInformationDisplayComponent {
   readonly user = input.required<User | undefined>();
   readonly modalId = input.required<string>();
 
-  readonly userAction = output<FormIndicator>();
+  readonly actionUser = output<FormIndicator>();
 
   onChangeEmail() {
-    this.userAction.emit({
+    this.actionUser.emit({
       actionType: ActionType.update,
       modificationField: ModificationField.email,
       object: this.user()
@@ -30,7 +30,7 @@ export class UserInformationDisplayComponent {
   }
 
   onChangeUsername() {
-    this.userAction.emit({
+    this.actionUser.emit({
       actionType: ActionType.update,
       modificationField: ModificationField.username,
       object: this.user()
@@ -38,7 +38,7 @@ export class UserInformationDisplayComponent {
   }
 
   onChangeName() {
-    this.userAction.emit({
+    this.actionUser.emit({
       actionType: ActionType.update,
       modificationField: ModificationField.name,
       object: this.user()

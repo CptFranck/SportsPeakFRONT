@@ -34,12 +34,12 @@ export class PrivilegeModalComponent {
   readonly privilege = input.required<Privilege | undefined>();
   readonly action = input.required<ActionType>();
 
-  readonly privilegeAction = output<FormIndicator>();
+  readonly actionPrivilege = output<FormIndicator>();
 
   protected readonly ActionType = ActionType;
 
   onClick() {
-    this.privilegeAction.emit({
+    this.actionPrivilege.emit({
       object: undefined,
       actionType: ActionType.create
     })

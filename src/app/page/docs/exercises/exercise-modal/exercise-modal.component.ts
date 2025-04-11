@@ -37,7 +37,7 @@ export class ExerciseModalComponent implements OnInit, OnDestroy {
   readonly modalTitle = input.required<string>();
   readonly exerciseModalId = input.required<string>();
 
-  readonly exerciseAction = output<FormIndicator>();
+  readonly actionExercise = output<FormIndicator>();
 
   protected readonly ActionType = ActionType;
 
@@ -57,7 +57,7 @@ export class ExerciseModalComponent implements OnInit, OnDestroy {
   }
 
   onClick() {
-    this.exerciseAction.emit({
+    this.actionExercise.emit({
       object: undefined,
       actionType: ActionType.create
     });

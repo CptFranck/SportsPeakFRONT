@@ -12,13 +12,13 @@
                         [user]="user"
         />
       </div>
-      <app-user-information-display (userAction)="setUser($event)" [modalId]="userModalId" [user]="user"/>
+      <app-user-information-display (actionUser)="setUser($event)" [modalId]="userModalId" [user]="user"/>
     </div>
     <div class="row">
       <div class="col">
         <h2>Account security</h2>
       </div>
-      <app-user-security (userAction)="setUser($event)" [modalId]="userModalId" [user]="user"/>
+      <app-user-security (actionUser)="setUser($event)" [modalId]="userModalId" [user]="user"/>
     </div>
   </div>
 </div>

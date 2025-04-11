@@ -38,12 +38,12 @@ export class TargetSetModalComponent {
   readonly performanceLog = input.required<PerformanceLog | undefined>();
   readonly action = input.required<ActionType>();
 
-  readonly targetSetAction = output<FormIndicator>();
+  readonly actionTargetSet = output<FormIndicator>();
 
   protected readonly ActionType = ActionType;
 
   onClick() {
-    this.targetSetAction.emit({
+    this.actionTargetSet.emit({
       object: undefined,
       actionType: ActionType.create
     })
