@@ -1,5 +1,5 @@
 <div class="container">
-  <app-loading [loading]="loading"/>
+  <app-loading [loading]="loading()"/>
   <div class="container-fluid">
     <div class="row">
       <div class="col">
@@ -7,10 +7,10 @@
       </div>
       <div class="col-auto">
         <app-muscle-modal (actionMuscle)="setMuscle($event)"
-                          [action]="action"
-                          [modalTitle]="modalTitle"
+                          [action]="action()"
+                          [modalTitle]="modalTitle()"
                           [muscleModalId]="muscleModalId"
-                          [muscle]="muscle"
+                          [muscle]="muscle()"
         />
       </div>
     </div>
@@ -19,6 +19,6 @@
     </div>
     <app-muscles-array (actionMuscle)="setMuscle($event)"
                        [modalId]="muscleModalId"
-                       [muscles]="displayedMuscles"/>
+                       [muscles]="displayedMuscles()"/>
   </div>
 </div>

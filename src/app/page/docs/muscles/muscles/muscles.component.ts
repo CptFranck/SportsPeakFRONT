@@ -1,4 +1,4 @@
-import {Component, inject, OnDestroy, OnInit, TemplateRef, ViewChild} from '@angular/core';
+import {Component, inject, OnDestroy, OnInit, signal} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {MusclesArrayComponent} from "../muscles-array/muscles-array.component";
 import {LoadingComponent} from "../../../../components/loading/loading.component";
@@ -12,42 +12,41 @@ import {Exercise} from "../../../../interface/dto/exercise";
 import {Subject, takeUntil} from "rxjs";
 
 @Component({
-    selector: 'app-muscles',
-    imports: [
-        CommonModule,
-        MusclesArrayComponent,
-        LoadingComponent,
-        MuscleModalComponent,
-        SearchBarComponent
-    ],
-    templateUrl: './muscles.component.html'
+  selector: 'app-muscles',
+  imports: [
+    CommonModule,
+    MusclesArrayComponent,
+    LoadingComponent,
+    MuscleModalComponent,
+    SearchBarComponent
+  ],
+  templateUrl: './muscles.component.html'
 })
 export class MusclesComponent implements OnInit, OnDestroy {
-  loading: boolean = true;
-  muscles: Muscle[] = [];
-  displayedMuscles: Muscle[] = [];
-  muscle: Muscle | undefined;
-  action: ActionType = ActionType.create;
-  modalTitle: string = "";
-  muscleModalId: string = "muscleModal";
-  searchInput: string = "";
+  loading = signal<boolean>(true);
+  displayedMuscles = signal<Muscle[]>([]);
+  muscle = signal<Muscle | undefined>(undefined);
+  action = signal<ActionType>(ActionType.create);
+  modalTitle = signal<string>("");
 
-  @ViewChild("modalTemplate") modalTemplate!: TemplateRef<any>;
+  readonly muscleModalId: string = "muscleModal";
 
-  private readonly unsubscribe$: Subject<void> = new Subject<void>();
-  private readonly muscleService: MuscleService = inject(MuscleService);
+  private muscles: Muscle[] = [];
+  private searchInput: string = "";
+
+  private readonly unsubscribe$ = new Subject<void>();
+  private readonly muscleService = inject(MuscleService);
 
   ngOnInit(): void {
     this.muscleService.muscles
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe((muscles: Muscle[]) => {
-        this.muscles = muscles
-        this.updateDisplayedMuscles()
+        this.muscles = muscles;
+        this.updateDisplayedMuscles();
       });
     this.muscleService.isLoading
       .pipe(takeUntil(this.unsubscribe$))
-      .subscribe((isLoading: boolean) =>
-        this.loading = isLoading);
+      .subscribe((isLoading: boolean) => this.loading.set(isLoading));
   }
 
   ngOnDestroy() {
@@ -56,12 +55,12 @@ export class MusclesComponent implements OnInit, OnDestroy {
   }
 
   setMuscle(formIndicator: FormIndicator) {
-    this.muscle = formIndicator.object;
-    this.action = formIndicator.actionType;
+    this.muscle.set(formIndicator.object);
+    this.action.set(formIndicator.actionType);
     if (formIndicator.object === undefined)
-      this.modalTitle = "Add new muscle";
+      this.modalTitle.set("Add new muscle");
     else
-      this.modalTitle = formIndicator.object.name;
+      this.modalTitle.set(formIndicator.object.name);
   }
 
   searchMuscle(input: string) {
@@ -70,15 +69,17 @@ export class MusclesComponent implements OnInit, OnDestroy {
   }
 
   updateDisplayedMuscles() {
-    if (this.searchInput === "") {
-      this.displayedMuscles = this.muscles
-      return;
-    }
+    if (this.searchInput === "")
+      return this.displayedMuscles.set(this.muscles);
 
-    let localInput: string = this.searchInput.toLowerCase();
-    let includeMuscleExerciseName: boolean = false;
+    const localInput = this.searchInput.toLowerCase();
+    const musclesFiltered = this.filterMuscles(localInput);
+    this.displayedMuscles.set(musclesFiltered);
+  }
 
-    this.displayedMuscles = this.muscles.filter((muscle: Muscle) => {
+  filterMuscles(localInput: string) {
+    let includeMuscleExerciseName = false;
+    return this.muscles.filter((muscle: Muscle) => {
       includeMuscleExerciseName = false;
       muscle.exercises.forEach((exercise: Exercise) => {
         if (exercise.name.toLowerCase().includes(localInput)) {
@@ -91,5 +92,6 @@ export class MusclesComponent implements OnInit, OnDestroy {
         muscle.function.toLowerCase().includes(localInput) ||
         includeMuscleExerciseName;
     });
+
   }
 }
