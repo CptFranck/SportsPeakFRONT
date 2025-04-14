@@ -10,20 +10,18 @@ import {Router} from "@angular/router";
 })
 export class UserLoggedService {
 
-  currentUser: BehaviorSubject<User | undefined> = new BehaviorSubject<User | undefined>(undefined);
+  currentUser = new BehaviorSubject<User | undefined>(undefined);
   private roles: string[] = [];
-  private readonly router: Router = inject(Router);
-  private readonly localStorageService: LocalStorageService = inject(LocalStorageService);
+  private readonly router = inject(Router);
+  private readonly localStorageService = inject(LocalStorageService);
 
   constructor() {
     let user: User | undefined | null = this.getSavedUser();
-    if (user) {
+    if (user)
       this.currentUser.next(user);
-    }
     this.currentUser.subscribe((user: User | undefined) => {
-      if (user) {
+      if (user)
         this.roles = user.roles.map((role: Role) => role.name);
-      }
     })
   }
 
@@ -37,8 +35,8 @@ export class UserLoggedService {
       let userJson: string = JSON.stringify(user);
       this.localStorageService.saveData("user", userJson);
     } else {
-      this.removeCurrentUser()
-      this.router.navigate([''])
+      this.removeCurrentUser();
+      this.router.navigateByUrl('/');
     }
   }
 
@@ -49,12 +47,7 @@ export class UserLoggedService {
   }
 
   isStaff() {
-    let isStaffOrHigher: boolean = false;
-    if (this.roles.includes("ROLE_ADMIN"))
-      isStaffOrHigher = true;
-    if (this.roles.includes("ROLE_STAFF"))
-      isStaffOrHigher = true;
-    return isStaffOrHigher;
+    return this.roles.includes("ROLE_ADMIN") || this.roles.includes("ROLE_STAFF");
   }
 
   isAdmin() {
@@ -63,9 +56,8 @@ export class UserLoggedService {
 
   private getSavedUser(): User | null {
     let userJson: string | null = this.localStorageService.getData("user");
-    if (userJson) {
+    if (userJson)
       return JSON.parse(userJson);
-    }
     return null;
   }
 }

@@ -93,6 +93,6 @@ export class AuthService {
     this.userLoggedService.removeCurrentUser();
     this.tokenService.removeCurrentToken();
     if (redirect)
-      this.router.navigateByUrl('/')
+      this.router.navigateByUrl('/');
   }
 }
