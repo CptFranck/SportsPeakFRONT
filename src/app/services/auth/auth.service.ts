@@ -2,27 +2,25 @@ import {inject, Injectable} from '@angular/core';
 import {Apollo, MutationResult} from "apollo-angular";
 import {FormGroup} from "@angular/forms";
 import {LOGIN, REGISTER} from "../../graphql/operations/auth.operations";
-import {BehaviorSubject} from "rxjs";
 import {AlertService} from "../alert/alert.service";
 import {Router} from "@angular/router";
 import {Auth} from "../../interface/dto/auth";
 import {UserLoggedService} from "../user-logged/user-logged.service";
 import {TokenService} from "../token/token.service";
-import {AuthToken} from "../../interface/dto/token";
+import {BehaviorSubject} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
+  isAuthenticated = new BehaviorSubject(false);
 
-  isAuthenticated: BehaviorSubject<boolean> = new BehaviorSubject(false);
-
-  private redirectUrl: string = "/";
-  private readonly router: Router = inject(Router);
-  private readonly apollo: Apollo = inject(Apollo);
-  private readonly alertService: AlertService = inject(AlertService);
-  private readonly tokenService: TokenService = inject(TokenService);
-  private readonly userLoggedService: UserLoggedService = inject(UserLoggedService);
+  private redirectUrl = "/";
+  private readonly router = inject(Router);
+  private readonly apollo = inject(Apollo);
+  private readonly alertService = inject(AlertService);
+  private readonly tokenService = inject(TokenService);
+  private readonly userLoggedService = inject(UserLoggedService);
 
   constructor() {
     let isValidTokenSaved: boolean = !!this.tokenService.getCurrentToken();
@@ -34,73 +32,67 @@ export class AuthService {
   }
 
   register(registerFormGroup: FormGroup) {
-    let inputNewUser = registerFormGroup.value
-    delete inputNewUser.confirmPassword
-    return this.apollo.mutate({
+    const inputNewUser = registerFormGroup.value;
+    delete inputNewUser.confirmPassword;
+    this.apollo.mutate({
       mutation: REGISTER,
       variables: {
         inputRegisterNewUser: inputNewUser,
       },
     }).subscribe((result: MutationResult) => {
-      if (result.errors) {
+      if (result.errors)
         this.alertService.graphQLErrorAlertHandler(result.errors);
-      }
-      if (result.data) {
+      if (result.data)
         this.setDataAuth(result.data.register, true);
-      }
     });
   }
 
   login(loginForm: FormGroup) {
-    return this.apollo.mutate({
+    this.apollo.mutate({
       mutation: LOGIN,
       variables: {
         inputCredentials: loginForm.value,
       },
     }).subscribe((result: MutationResult) => {
-      if (result.errors) {
+      if (result.errors)
         this.alertService.graphQLErrorAlertHandler(result.errors);
-      } else {
+      else
         this.setDataAuth(result.data.login, true);
-      }
     });
   }
 
   logout() {
     this.apollo.client.resetStore().then(() => {
-      this.removeDataAuth(true)
+      this.removeDataAuth(true);
       this.isAuthenticated.next(false);
     });
   }
 
-  setDataAuth(auth: Auth, redirect: boolean = false) {
+  setDataAuth(auth: Auth, redirect = false) {
     this.isAuthenticated.next(true);
     this.userLoggedService.setCurrentUser(auth.user);
-    let authToken: AuthToken = this.createAuthToken(auth);
-    this.tokenService.setCurrentToken(authToken);
-    if (redirect) {
+    this.tokenService.setCurrentToken(auth);
+    if (redirect)
       this.router.navigateByUrl(this.redirectUrl).then(() => this.setRedirectUrl('/'));
-    }
   }
 
   setRedirectUrl(redirectUrl: string) {
     this.redirectUrl = redirectUrl;
   }
 
-  private removeDataAuth(redirect: boolean = false) {
-    this.userLoggedService.removeCurrentUser();
-    this.tokenService.removeCurrentToken();
-    if (redirect) {
-      this.router.navigateByUrl('/')
-    }
+  isAuthenticationValid() {
+    const currentToken = this.tokenService.getCurrentToken();
+    const isTokenValid = this.tokenService.isTokenValid(currentToken);
+    if (!isTokenValid)
+      this.removeDataAuth();
+    this.isAuthenticated.next(isTokenValid);
+    return isTokenValid;
   }
 
-  private createAuthToken(data: Auth) {
-    const authToken: AuthToken = {
-      tokenType: data.tokenType,
-      accessToken: data.accessToken,
-      expiration: new Date(data.expiration)
-    };
-    return authToken;
+  private removeDataAuth(redirect = false) {
+    this.userLoggedService.removeCurrentUser();
+    this.tokenService.removeCurrentToken();
+    if (redirect)
+      this.router.navigateByUrl('/')
   }
 }
