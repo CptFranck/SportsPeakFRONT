@@ -28,7 +28,12 @@
     </div>
   </div>
   <div class="col-1 align-items-center">
-    <button (click)="removeAlert()" aria-label="Close" class="btn-close" data-bs-dismiss="alert" type="button">
+    <button (click)="removeAlert()"
+            [disabled]="disableCloseButton()"
+            aria-label="Close"
+            class="btn-close"
+            data-bs-dismiss="alert"
+            type="button">
     </button>
   </div>
 </div>
