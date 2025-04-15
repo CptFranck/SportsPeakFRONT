@@ -4,10 +4,12 @@ import {provideRouter, RouterLink, RouterLinkActive, RouterOutlet,} from '@angul
 
 import {routes} from './app.routes';
 import {graphqlProvider} from './graphql/graphql.provider';
+import {provideAnimationsAsync} from "@angular/platform-browser/animations/async";
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(routes),
+    provideAnimationsAsync(),
     provideHttpClient(),
     graphqlProvider,
     RouterOutlet,
