@@ -10,9 +10,9 @@ import {NetworkError} from "@apollo/client/errors";
   providedIn: 'root'
 })
 export class AlertService {
-  private alertId: number = 0;
+  private alertId = 0;
   private readonly alerts: Alert[] = [];
-  private readonly alertsSubject: Subject<Alert[]> = new Subject<Alert[]>();
+  private readonly alertsSubject = new Subject<Alert[]>();
 
   constructor() {
     this.updateAlert();
@@ -62,9 +62,8 @@ export class AlertService {
   createNetWorkErrorAlert(networkError: NetworkError): void {
     if (!networkError) return
     let networkAlert: Alert = this.createErrorAlert(networkError)
-    if (networkAlert.errorInformation) {
+    if (networkAlert.errorInformation)
       networkAlert.errorInformation["errorType"] = AlertErrorType.NetworkError;
-    }
     this.alerts.push(networkAlert);
     this.updateAlert()
     this.alertId += 1;
@@ -75,7 +74,7 @@ export class AlertService {
   }
 
   private createAlert(title: string, message: string, alertType: AlertType): Alert {
-    const alert: Alert = {
+    const alert = {
       id: this.alertId,
       title: title,
       message: message,
@@ -87,7 +86,7 @@ export class AlertService {
   }
 
   private createGraphQLErrorAlert(graphQLError: GraphQLFormattedError): void {
-    let graphQLAlert: Alert = this.createErrorAlert(graphQLError)
+    let graphQLAlert = this.createErrorAlert(graphQLError)
     if (graphQLAlert.errorInformation) {
       graphQLAlert.errorInformation["errorType"] = AlertErrorType.GraphQLError;
       graphQLAlert.errorInformation["errorLocation"] = graphQLError.locations;
@@ -99,7 +98,7 @@ export class AlertService {
   }
 
   private createErrorAlert(error: GraphQLFormattedError): Alert {
-    const errorAlert: Alert = this.createAlert("Unsuccessful operation :(", error.message, AlertType.error);
+    const errorAlert = this.createAlert("Unsuccessful operation :(", error.message, AlertType.error);
     errorAlert.errorInformation = {
       errorExtension: error.extensions,
       errorLocation: error.locations,

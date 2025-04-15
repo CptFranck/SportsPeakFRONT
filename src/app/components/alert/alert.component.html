@@ -1,27 +1,34 @@
-<div [class]="'alert ' + alert().type + ' alert-dismissible fade show'" role="alert">
-  <h5><strong>{{ alert().title }}</strong></h5>
+<div (mouseenter)="pauseFadeOut()"
+     [class]="'alert ' + alert().type + ' alert-dismissible fade show'"
+     [ngStyle]="transitionStyle()"
+     role="alert"
+>
+  <div class="row ">
+    <div class="col">
+      <h5 class="fw-bold">{{ alert().title }}</h5>
+    </div>
+  </div>
   <div class="row ">
     <div *ngIf="alert().errorInformation?.errorPath" class="col-auto m-0">
-      <strong>ErrorPath : </strong> {{ alert().errorInformation?.errorPath }}
+      <span class="fw-bold">ErrorPath : </span> {{ alert().errorInformation?.errorPath }}
     </div>
     <div *ngIf="alert().errorInformation?.errorType" class="col-auto">
-      <strong>ErrorType : </strong> {{ alert().errorInformation?.errorType }}
+      <span class="fw-bold">ErrorType : </span> {{ alert().errorInformation?.errorType }}
     </div>
     <div *ngIf="alert().errorInformation?.errorPath" class="col-auto">
-      <strong>ErrorLocation : </strong>{{ alert().errorInformation?.errorLocation }}
+      <span class="fw-bold">ErrorLocation : </span>{{ alert().errorInformation?.errorLocation }}
     </div>
     <div *ngIf="alert().errorInformation?.errorExtension" class="col-auto">
-      <strong>ErrorExtension : </strong> {{ alert().errorInformation?.errorExtension }}
+      <span class="fw-bold">ErrorExtension : </span> {{ alert().errorInformation?.errorExtension }}
     </div>
   </div>
   <div class="row">
     <div class="col">
-      <strong>Message : </strong>{{ alert().message }}
+      <span class="fw-bold">Message : </span>{{ alert().message }}
     </div>
   </div>
   <div class="col-1 align-items-center">
-    <button (click)="removeAlert()" aria-label="Close" class="btn-close" data-bs-dismiss="alert"
-            type="button">
+    <button (click)="removeAlert()" aria-label="Close" class="btn-close" data-bs-dismiss="alert" type="button">
     </button>
   </div>
 </div>
