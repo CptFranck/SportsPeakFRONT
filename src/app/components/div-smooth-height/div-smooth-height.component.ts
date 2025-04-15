@@ -15,7 +15,7 @@ import {animate, style, transition, trigger} from "@angular/animations";
     trigger('grow', [
       transition('* <=> *', [
         style({height: '{{height}}px'}),
-        animate('2s ease')
+        animate('500ms ease')
       ], {params: {height: 0}})
     ])
   ]
