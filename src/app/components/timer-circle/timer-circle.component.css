@@ -1,0 +1,27 @@
+.circle-timer {
+  width: 40px;
+  height: 40px;
+  margin: auto;
+  display: block;
+}
+
+.circle-bg {
+  fill: none;
+}
+
+.circle-fg {
+  fill: none;
+  stroke: #fd0d0d;
+  stroke-dasharray: 100;
+  stroke-linecap: round;
+  stroke-width: 4;
+  transition: stroke-dashoffset 1s linear;
+}
+
+.circle-text {
+  fill: #212529;
+  font-size: smaller;
+  font-weight: 600;
+  text-anchor: middle;
+  dominant-baseline: middle;
+}
