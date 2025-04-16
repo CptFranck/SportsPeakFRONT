@@ -1,7 +1,9 @@
-<div *ngIf="loading()" [@collapseHeight] class="container">
-  <div class="d-inline-flex d-flex align-items-center">
-    <strong class="p-2">Loading...</strong>
-    <div aria-hidden="true" class="spinner-border ms-auto" role="status"></div>
+<div [@collapseHeight]="loading()">
+  <div *ngIf="loading()" class="container">
+    <div class="d-inline-flex d-flex align-items-center">
+      <strong class="p-2">Loading...</strong>
+      <div aria-hidden="true" class="spinner-border ms-auto" role="status"></div>
+    </div>
   </div>
 </div>
 
