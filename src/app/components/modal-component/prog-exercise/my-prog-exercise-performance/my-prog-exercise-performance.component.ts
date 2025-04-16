@@ -47,9 +47,8 @@ export class MyProgExercisePerformanceComponent {
 
   readonly accordionAllPerformance: string = "accordionAllPerformance";
 
-  protected readonly ifFirstShow = ifFirstShow;
-  protected readonly ifNotFirstCollapse = ifNotFirstCollapse;
-  protected readonly console = console;
+  readonly ifFirstShow = ifFirstShow;
+  readonly ifNotFirstCollapse = ifNotFirstCollapse;
 
   changeRowColNumber(value: number) {
     this.rowColNumber.set(value)

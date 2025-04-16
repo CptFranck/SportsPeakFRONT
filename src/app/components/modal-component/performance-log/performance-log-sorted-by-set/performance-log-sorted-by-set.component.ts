@@ -24,9 +24,9 @@ export class PerformanceLogSortedBySetComponent {
   readonly performanceLogsSortedBySet = input.required<DictionaryItem<PerformanceLog[]>[]>();
 
   readonly actionPerformanceLog = output<FormIndicator>();
-  
-  protected readonly ifFirstShow = ifFirstShow;
-  protected readonly ifNotFirstCollapse = ifNotFirstCollapse;
+
+  readonly ifFirstShow = ifFirstShow;
+  readonly ifNotFirstCollapse = ifNotFirstCollapse;
 
   setPerformanceLog($event: FormIndicator) {
     this.actionPerformanceLog.emit($event);

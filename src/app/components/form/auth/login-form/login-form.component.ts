@@ -25,7 +25,7 @@ export class LoginFormComponent {
   }));
   submitInvalidForm = signal<boolean>(false);
 
-  private readonly authService: AuthService = inject(AuthService);
+  private readonly authService = inject(AuthService);
 
   onSubmitLoginForm() {
     const loginForm = this.loginForm();

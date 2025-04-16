@@ -16,8 +16,7 @@ export class RangeInputComponent {
   readonly onChange = output<number>();
 
   change($event: Event) {
-    if ($event.target instanceof HTMLInputElement) {
+    if ($event.target instanceof HTMLInputElement)
       this.onChange.emit(parseInt($event.target.value));
-    }
   }
 }
