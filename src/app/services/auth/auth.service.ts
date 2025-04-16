@@ -63,7 +63,7 @@ export class AuthService {
 
   logout() {
     this.apollo.client.resetStore().then(() => {
-      this.removeDataAuth(true);
+      this.removeDataAuth();
       this.isAuthenticated.next(false);
     });
   }
