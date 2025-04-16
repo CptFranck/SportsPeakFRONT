@@ -13,12 +13,13 @@ import {Dictionary} from "../../interface/utils/dictionary";
 })
 export class AlertComponent implements OnInit {
   readonly alert = input.required<Alert>();
-  readonly timeout = input<number>(3);
+  readonly timeoutFading = input<number>(3);
+  readonly timeoutFade = input<number>(3);
   readonly activeTimeout = input<boolean>(true);
 
   disableCloseButton = signal<boolean>(false);
   transitionStyle = signal<Dictionary<string>>({
-    'transition': `opacity ${this.timeout()}s ease-out`,
+    'transition': `opacity ${this.timeoutFading()}s ease-out`,
     'opacity': '1'
   });
 
@@ -34,7 +35,7 @@ export class AlertComponent implements OnInit {
         this.removeTimeout = setTimeout(() => {
           this.removedAlert.emit(this.alert())
         }, 3000)
-      }, 100);
+      }, this.timeoutFade() * 1000);
   }
 
   pauseFadeOut() {
@@ -44,7 +45,7 @@ export class AlertComponent implements OnInit {
       this.transitionStyle.set({'transition': 'none', 'opacity': '1',});
       setTimeout(() => this.transitionStyle.update(value => ({
         ...value,
-        ['transition']: `opacity ${this.timeout()}s ease-out`
+        ['transition']: `opacity ${this.timeoutFading()}s ease-out`
       })), 100)
     }
   }
