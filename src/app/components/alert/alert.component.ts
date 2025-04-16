@@ -8,6 +8,7 @@ import {Dictionary} from "../../interface/utils/dictionary";
   imports: [
     NgIf,
     NgStyle,
+
   ],
   templateUrl: './alert.component.html',
 })
@@ -19,7 +20,7 @@ export class AlertComponent implements OnInit {
 
   disableCloseButton = signal<boolean>(false);
   transitionStyle = signal<Dictionary<string>>({
-    'transition': `opacity ${this.timeoutFading()}s ease-out`,
+    'transition': `opacity ${this.timeoutFading()}s ease-in-out`,
     'opacity': '1'
   });
 
@@ -45,7 +46,7 @@ export class AlertComponent implements OnInit {
       this.transitionStyle.set({'transition': 'none', 'opacity': '1',});
       setTimeout(() => this.transitionStyle.update(value => ({
         ...value,
-        ['transition']: `opacity ${this.timeoutFading()}s ease-out`
+        ['transition']: `opacity ${this.timeoutFading()}s ease-in-out`
       })), 100)
     }
   }
@@ -54,10 +55,6 @@ export class AlertComponent implements OnInit {
     this.disableCloseButton.set(true);
     clearTimeout(this.fadeTimeout);
     clearTimeout(this.removeTimeout);
-    this.transitionStyle.set({
-      'transition': `opacity .2s ease-out`,
-      'opacity': '0',
-    });
-    setTimeout(() => this.removedAlert.emit(this.alert()), 400)
+    this.removedAlert.emit(this.alert())
   }
 }

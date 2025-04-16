@@ -1,7 +1,6 @@
 <div (mouseenter)="pauseFadeOut()"
-     [class]="'alert ' + alert().type + ' alert-dismissible fade show'"
+     [class]="'alert ' + alert().type + ' alert-dismissible'"
      [ngStyle]="transitionStyle()"
-     role="alert"
 >
   <div class="row ">
     <div class="col">
@@ -32,7 +31,6 @@
             [disabled]="disableCloseButton()"
             aria-label="Close"
             class="btn-close m-1"
-            data-bs-dismiss="alert"
             type="button">
     </button>
   </div>
