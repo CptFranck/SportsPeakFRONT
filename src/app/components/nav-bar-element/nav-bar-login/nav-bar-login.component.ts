@@ -1,6 +1,6 @@
 import {Component, inject, OnDestroy, OnInit} from '@angular/core';
 import {NgIf} from "@angular/common";
-import {RouterLink} from "@angular/router";
+import {Router, RouterLink} from "@angular/router";
 import {AuthService} from "../../../services/auth/auth.service";
 import {Subject, takeUntil} from "rxjs";
 
@@ -17,6 +17,8 @@ export class NavBarLoginComponent implements OnInit, OnDestroy {
 
   private readonly unsubscribe$ = new Subject<void>();
   private readonly authService = inject(AuthService);
+  private readonly router = inject(Router);
+
 
   ngOnInit() {
     this.authService.isAuthenticated
@@ -33,5 +35,10 @@ export class NavBarLoginComponent implements OnInit, OnDestroy {
 
   logout() {
     this.authService.logout();
+  }
+
+  setRedirectUrlFromCurrentPage() {
+    const currentUrl = this.router.url;
+    this.authService.setRedirectUrl(currentUrl);
   }
 }

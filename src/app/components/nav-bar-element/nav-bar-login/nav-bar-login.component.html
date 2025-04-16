@@ -1,6 +1,7 @@
 <ul class="navbar-nav h4">
   <li class="nav-item px-0">
-    <a *ngIf="!isLogged"
+    <a (click)="setRedirectUrlFromCurrentPage()"
+       *ngIf="!isLogged"
        class="nav-link py-auto"
        routerLink="/auth"
     >
