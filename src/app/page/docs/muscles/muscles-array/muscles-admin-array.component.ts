@@ -1,12 +1,11 @@
-import {Component, inject, input, OnChanges, OnDestroy, signal, output} from '@angular/core';
+import {Component, input, OnChanges, OnDestroy, output, signal} from '@angular/core';
 import {NgForOf, NgIf} from "@angular/common";
 import {Muscle} from "../../../../interface/dto/muscle";
 import {ModalButtonComponent} from "../../../../components/modal/modal-button/modal-button.component";
 import {FormIndicator} from "../../../../interface/utils/form-indicator";
 import {ActionType} from "../../../../interface/enum/action-type";
-import {UserLoggedService} from "../../../../services/user-logged/user-logged.service";
 import {Dictionary} from "../../../../interface/utils/dictionary";
-import {Subject, takeUntil} from "rxjs";
+import {Subject} from "rxjs";
 
 @Component({
   selector: 'app-muscles-array',
@@ -15,10 +14,9 @@ import {Subject, takeUntil} from "rxjs";
     NgIf,
     ModalButtonComponent,
   ],
-  templateUrl: './muscles-array.component.html'
+  templateUrl: './muscles-admin-array.component.html'
 })
-export class MusclesArrayComponent implements OnChanges, OnDestroy {
-  isAdmin = signal<boolean>(false);
+export class MusclesAdminArrayComponent implements OnChanges, OnDestroy {
   showDetails = signal<Dictionary<boolean>>({});
 
   readonly muscles = input.required<Muscle[]>();
@@ -27,13 +25,9 @@ export class MusclesArrayComponent implements OnChanges, OnDestroy {
   readonly actionMuscle = output<FormIndicator>();
 
   private readonly unsubscribe$ = new Subject<void>();
-  private readonly userLoggedService = inject(UserLoggedService);
 
   ngOnChanges(): void {
     this.muscles().forEach((muscle: Muscle) => this.showDetails.update(value => ({...value, [muscle.id]: false})));
-    this.userLoggedService.currentUser
-      .pipe(takeUntil(this.unsubscribe$))
-      .subscribe(() => this.isAdmin.set(this.userLoggedService.isAdmin()));
   }
 
   ngOnDestroy() {

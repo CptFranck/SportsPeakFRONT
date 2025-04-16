@@ -7,8 +7,8 @@
     <th class="col-auto" scope="col">Used in</th>
     <th class="col-1 text-center" scope="col">Collapse</th>
     <th class="col-1 text-center" scope="col">Details</th>
-    <th *ngIf="isAdmin()" class="col-1 text-center" scope="col">Modify</th>
-    <th *ngIf="isAdmin()" class="col-1 text-center" scope="col">Delete</th>
+    <th class="col-1 text-center" scope="col">Modify</th>
+    <th class="col-1 text-center" scope="col">Delete</th>
   </tr>
   </thead>
   <tbody class="table-group-divider">
@@ -74,7 +74,7 @@
         </app-modal-button>
       </div>
     </td>
-    <td *ngIf="isAdmin()">
+    <td>
       <div class="col p-1 text-center">
         <app-modal-button
           (onCLickModalButton)="modifyMuscle($event)"
@@ -86,7 +86,7 @@
         </app-modal-button>
       </div>
     </td>
-    <td *ngIf="isAdmin()">
+    <td>
       <div class="col p-1 text-center">
         <app-modal-button
           (onCLickModalButton)="delMuscle($event)"
