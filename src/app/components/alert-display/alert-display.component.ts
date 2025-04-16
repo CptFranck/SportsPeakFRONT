@@ -1,26 +1,27 @@
 import {Component, inject, input, OnDestroy, OnInit, signal} from '@angular/core';
-import {AlertComponent} from "../alert/alert.component";
 import {NgForOf, NgIf} from "@angular/common";
 import {Alert} from "../../interface/utils/alert";
 import {AlertService} from "../../services/alert/alert.service";
 import {Subject, takeUntil} from "rxjs";
-import {DivSmoothHeightComponent} from "../div-smooth-height/div-smooth-height.component";
+import {AlertComponent} from "../alert/alert.component";
+import {collapseHeight} from "../../animation/collapseHeigh";
 
 @Component({
   selector: 'app-alert-display',
   imports: [
+    NgIf,
     AlertComponent,
     NgForOf,
-    NgIf,
-    DivSmoothHeightComponent
   ],
   templateUrl: './alert-display.component.html',
+  animations: [collapseHeight]
 })
 export class AlertDisplayComponent implements OnInit, OnDestroy {
   alerts = signal<Alert[]>([]);
 
   displayMockAlertButton = input<boolean>(false);
 
+  protected readonly alert = alert;
   private readonly unsubscribe$ = new Subject<void>();
   private readonly alertService = inject(AlertService);
 

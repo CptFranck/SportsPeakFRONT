@@ -1,12 +1,9 @@
-<div class="container">
-  <button (click)="createAlert()" *ngIf="displayMockAlertButton()" class="btn btn-secondary m-1" type="button">
-    generate mock alert
-  </button>
-  <app-div-smooth-height [trigger]="alerts().length">
-    <app-alert (removedAlert)="removeAlert($event)"
-               *ngFor="let alert of alerts()"
-               [alert]="alert"
-
-    />
-  </app-div-smooth-height>
+<button (click)="createAlert()" *ngIf="displayMockAlertButton()" class="btn btn-secondary m-1" type="button">
+  generate mock alert
+</button>
+<div [@collapseHeight]="alerts()">
+  <div *ngFor="let alert of alerts()" class="container">
+    <app-alert (removedAlert)="removeAlert($event)" [alert]="alert"/>
+  </div>
 </div>
+
