@@ -13,9 +13,9 @@
                             [modalTitle]="modalTitle()"
         />
       </div>
-      <div class="row">
-        <app-search-bar (onInput)="searchExercise($event)"/>
-      </div>
+    </div>
+    <div class="row">
+      <app-search-bar (onInput)="searchExercise($event)"/>
     </div>
     <div [@collapseHeight]="!isAdmin()">
       <div *ngIf="!isAdmin()" [@collapseHeight]="displayedExercises()" class="container px-0">
