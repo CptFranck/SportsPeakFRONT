@@ -1,3 +1,7 @@
+<style>
+
+</style>
+
 <table class="table">
   <thead>
   <tr>
@@ -11,44 +15,27 @@
     <th class="col-1 text-center" scope="col">Delete</th>
   </tr>
   </thead>
-  <tbody class="table-group-divider">
+  <tbody [@collapseHeight]="muscles()" class="table-group-divider container">
   <tr *ngFor="let muscle of muscles()">
     <td>{{ muscle.name }}</td>
-    <td *ngIf="!showDetails()[muscle.id]" class="truncate-td">
+    <td [ngClass]="!showDetails()[muscle.id] ? 'truncate-td' : ''">
       {{ muscle.description }}
     </td>
-    <td *ngIf="showDetails()[muscle.id]">
-      {{ muscle.description }}
-    </td>
-    <td *ngIf="!showDetails()[muscle.id]" class="truncate-td">
+    <td [ngClass]=" !showDetails()[muscle.id] ? 'truncate-td' : ''">
       {{ muscle.function }}
     </td>
-    <td *ngIf="showDetails()[muscle.id]">
-      {{ muscle.function }}
-    </td>
-    <td *ngIf="!showDetails()[muscle.id]">
+    <td>
       <ul class="list-group list-group-flush">
-        <li
-          *ngFor="let exercise of muscle.exercises.slice(0, 2)"
-          class="list-group-item d-flex justify-content-center text-center p-0"
+        <li *ngFor="let exercise of getVisibleExercises(muscle)"
+            class="list-group-item d-flex justify-content-center text-center p-0"
         >
           {{ exercise.name }}
         </li>
         <li
-          *ngIf="muscle.exercises.length > 3"
+          *ngIf="!showDetails()[muscle.id] && muscle.exercises.length > 2"
           class="list-group-item d-flex justify-content-center text-center p-0"
         >
           ...
-        </li>
-      </ul>
-    </td>
-    <td *ngIf="showDetails()[muscle.id]">
-      <ul class="list-group list-group-flush">
-        <li
-          *ngFor="let exercise of muscle.exercises"
-          class="list-group-item d-flex justify-content-center text-center p-0"
-        >
-          {{ exercise.name }}
         </li>
       </ul>
     </td>
@@ -58,7 +45,7 @@
           (click)="expendMuscleDetails(muscle.id)"
           class="btn btn-secondary" type="button"
         >
-          <i class="fa-solid fa-angle-down"></i>
+          <i [@rotateIcon]="showDetails()[muscle.id] ? 'up' : 'down'" class="fa-solid fa-angle-down"> </i>
         </button>
       </div>
     </td>

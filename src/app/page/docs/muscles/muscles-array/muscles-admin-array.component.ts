@@ -1,20 +1,25 @@
 import {Component, input, OnChanges, OnDestroy, output, signal} from '@angular/core';
-import {NgForOf, NgIf} from "@angular/common";
+import {NgClass, NgForOf, NgIf} from "@angular/common";
 import {Muscle} from "../../../../interface/dto/muscle";
 import {ModalButtonComponent} from "../../../../components/modal/modal-button/modal-button.component";
 import {FormIndicator} from "../../../../interface/utils/form-indicator";
 import {ActionType} from "../../../../interface/enum/action-type";
 import {Dictionary} from "../../../../interface/utils/dictionary";
 import {Subject} from "rxjs";
+import {collapseHeight} from "../../../../animation/collapseHeigh";
+import {rotateIcon} from "../../../../animation/rotateIcon";
 
 @Component({
   selector: 'app-muscles-array',
   imports: [
     NgForOf,
-    NgIf,
     ModalButtonComponent,
+    NgClass,
+    NgIf,
+
   ],
-  templateUrl: './muscles-admin-array.component.html'
+  templateUrl: './muscles-admin-array.component.html',
+  animations: [collapseHeight, rotateIcon]
 })
 export class MusclesAdminArrayComponent implements OnChanges, OnDestroy {
   showDetails = signal<Dictionary<boolean>>({});
@@ -59,5 +64,11 @@ export class MusclesAdminArrayComponent implements OnChanges, OnDestroy {
       actionType: ActionType.delete,
       object: muscle
     });
+  }
+
+  getVisibleExercises(muscle: Muscle) {
+    return this.showDetails()[muscle.id]
+      ? muscle.exercises
+      : muscle.exercises.slice(0, 2);
   }
 }
