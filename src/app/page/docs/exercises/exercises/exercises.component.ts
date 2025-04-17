@@ -1,6 +1,6 @@
 import {Component, inject, OnDestroy, OnInit, signal} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {ExercisesArrayComponent} from "../exercises-array/exercises-array.component";
+import {ExercisesAdminArrayComponent} from "../exercises-array/exercises-admin-array.component";
 import {ActionType} from "../../../../interface/enum/action-type";
 import {Exercise} from "../../../../interface/dto/exercise";
 import {ExerciseService} from "../../../../services/exercise/exercise.service";
@@ -11,19 +11,25 @@ import {SearchBarComponent} from "../../../../components/search-bar/search-bar.c
 import {Muscle} from "../../../../interface/dto/muscle";
 import {ExerciseType} from "../../../../interface/dto/exercise-type";
 import {Subject, takeUntil} from "rxjs";
+import {UserLoggedService} from "../../../../services/user-logged/user-logged.service";
+import {ExerciceCardComponent} from "../../../../components/card/exercice-card/exercice-card.component";
+import {collapseHeight} from "../../../../animation/collapseHeigh";
 
 @Component({
   selector: 'app-exercises',
   imports: [
     CommonModule,
-    ExercisesArrayComponent,
+    ExercisesAdminArrayComponent,
     LoadingComponent,
     ExerciseModalComponent,
-    SearchBarComponent
+    SearchBarComponent,
+    ExerciceCardComponent
   ],
-  templateUrl: './exercises.component.html'
+  templateUrl: './exercises.component.html',
+  animations: [collapseHeight]
 })
 export class ExercisesComponent implements OnInit, OnDestroy {
+  isAdmin = signal<boolean>(false);
   loading = signal<boolean>(true);
   displayedExercises = signal<Exercise[]>([]);
   action = signal<ActionType>(ActionType.create);
@@ -36,6 +42,7 @@ export class ExercisesComponent implements OnInit, OnDestroy {
 
   private readonly unsubscribe$: Subject<void> = new Subject<void>();
   private readonly exerciseService: ExerciseService = inject(ExerciseService);
+  private readonly userLoggedService = inject(UserLoggedService);
 
   ngOnInit(): void {
     this.exerciseService.exercises
@@ -47,6 +54,9 @@ export class ExercisesComponent implements OnInit, OnDestroy {
     this.exerciseService.isLoading
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe((isLoading: boolean) => this.loading.set(isLoading));
+    this.userLoggedService.currentUser
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe(() => this.isAdmin.set(this.userLoggedService.isAdmin()));
   }
 
   ngOnDestroy() {
