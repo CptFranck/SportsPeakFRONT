@@ -1,0 +1,33 @@
+<style>
+
+</style>
+
+<div class="card my-1">
+  <div class="card-body">
+    <h3 class="card-title m-0">
+      <a class="link-dark" routerLink="muscleDetail/{{muscle().id}}"> {{ muscle().name }}</a>
+    </h3>
+    <div class="row">
+      <div class="col truncate-multiline">
+        <span class="fw-bold me-1"> Description&#8239;:</span>
+        {{ muscle().description }}
+      </div>
+    </div>
+    <div class="row">
+      <div class="col truncate-multiline">
+        <span class="fw-bold me-1"> Function&#8239;: </span>
+        {{ muscle().function }}
+      </div>
+    </div>
+    <div class="row">
+      <div class="truncate-multiline col">
+        <span class="fw-bold me-1 now"> Used in &#8239;: </span>
+        <a *ngFor="let exercise of muscle().exercises"
+           class="link-dark"
+           routerLink="exerciseDetail/{{exercise.id}}">
+          {{ exercise.name }}
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
