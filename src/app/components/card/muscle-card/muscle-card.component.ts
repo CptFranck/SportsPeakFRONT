@@ -4,7 +4,7 @@ import {RouterLink} from "@angular/router";
 import {NgForOf} from "@angular/common";
 
 @Component({
-  selector: 'app-muscle',
+  selector: 'app-muscle-card',
   imports: [
     RouterLink,
     NgForOf,
