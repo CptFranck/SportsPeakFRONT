@@ -7,11 +7,11 @@ import {NgForOf} from "@angular/common";
   selector: 'app-muscle',
   imports: [
     RouterLink,
-    NgForOf
+    NgForOf,
   ],
-  templateUrl: './muscle.component.html',
-  styleUrl: 'muscle.component.css'
+  templateUrl: './muscle-card.component.html',
+  styleUrl: 'muscle-card.component.css'
 })
-export class MuscleComponent {
+export class MuscleCardComponent {
   muscle = input.required<Muscle>();
 }

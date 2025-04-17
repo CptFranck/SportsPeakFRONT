@@ -1,8 +1,4 @@
-<style>
-
-</style>
-
-<div class="card my-1">
+<div class="card my-1 limiter-hauteur">
   <div class="card-body">
     <h3 class="card-title m-0">
       <a class="link-dark" routerLink="muscleDetail/{{muscle().id}}"> {{ muscle().name }}</a>
@@ -23,7 +19,7 @@
       <div class="truncate-multiline col">
         <span class="fw-bold me-1 now"> Used in &#8239;: </span>
         <a *ngFor="let exercise of muscle().exercises"
-           class="link-dark"
+           class="link-dark m-1"
            routerLink="exerciseDetail/{{exercise.id}}">
           {{ exercise.name }}
         </a>
