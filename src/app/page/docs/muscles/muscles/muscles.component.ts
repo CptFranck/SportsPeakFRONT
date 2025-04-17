@@ -12,7 +12,7 @@ import {Exercise} from "../../../../interface/dto/exercise";
 import {Subject, takeUntil} from "rxjs";
 import {UserLoggedService} from "../../../../services/user-logged/user-logged.service";
 import {collapseHeight} from "../../../../animation/collapseHeigh";
-import {MuscleCardComponent} from "../../../../components/card/muscle/muscle-card.component";
+import {MuscleCardComponent} from "../../../../components/card/muscle-card/muscle-card.component";
 
 @Component({
   selector: 'app-muscles',

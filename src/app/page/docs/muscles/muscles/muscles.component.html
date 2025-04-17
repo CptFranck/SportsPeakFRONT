@@ -20,7 +20,7 @@
     <div [@collapseHeight]="!isAdmin()">
       <div *ngIf="!isAdmin()" [@collapseHeight]="displayedMuscles()" class="container px-0">
         <div *ngFor="let muscle of displayedMuscles()" class="container px-0">
-          <app-muscle [muscle]="muscle"/>
+          <app-muscle-card [muscle]="muscle"/>
         </div>
       </div>
     </div>
