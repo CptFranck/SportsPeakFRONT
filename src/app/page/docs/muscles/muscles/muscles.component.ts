@@ -1,6 +1,6 @@
 import {Component, inject, OnDestroy, OnInit, signal} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {MusclesArrayComponent} from "../muscles-array/muscles-array.component";
+import {MusclesAdminArrayComponent} from "../muscles-array/muscles-admin-array.component";
 import {LoadingComponent} from "../../../../components/loading/loading.component";
 import {FormIndicator} from "../../../../interface/utils/form-indicator";
 import {ActionType} from "../../../../interface/enum/action-type";
@@ -10,19 +10,25 @@ import {Muscle} from "../../../../interface/dto/muscle";
 import {SearchBarComponent} from "../../../../components/search-bar/search-bar.component";
 import {Exercise} from "../../../../interface/dto/exercise";
 import {Subject, takeUntil} from "rxjs";
+import {UserLoggedService} from "../../../../services/user-logged/user-logged.service";
+import {collapseHeight} from "../../../../animation/collapseHeigh";
+import {MuscleCardComponent} from "../../../../components/card/muscle/muscle-card.component";
 
 @Component({
   selector: 'app-muscles',
   imports: [
     CommonModule,
-    MusclesArrayComponent,
+    MusclesAdminArrayComponent,
     LoadingComponent,
     MuscleModalComponent,
-    SearchBarComponent
+    SearchBarComponent,
+    MuscleCardComponent
   ],
-  templateUrl: './muscles.component.html'
+  templateUrl: './muscles.component.html',
+  animations: [collapseHeight]
 })
 export class MusclesComponent implements OnInit, OnDestroy {
+  isAdmin = signal<boolean>(false);
   loading = signal<boolean>(true);
   displayedMuscles = signal<Muscle[]>([]);
   muscle = signal<Muscle | undefined>(undefined);
@@ -30,11 +36,11 @@ export class MusclesComponent implements OnInit, OnDestroy {
   modalTitle = signal<string>("");
 
   readonly muscleModalId: string = "muscleModal";
-
+  protected readonly alert = alert;
   private muscles: Muscle[] = [];
-
   private readonly unsubscribe$ = new Subject<void>();
   private readonly muscleService = inject(MuscleService);
+  private readonly userLoggedService = inject(UserLoggedService);
 
   ngOnInit(): void {
     this.muscleService.muscles
@@ -46,6 +52,9 @@ export class MusclesComponent implements OnInit, OnDestroy {
     this.muscleService.isLoading
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe((isLoading: boolean) => this.loading.set(isLoading));
+    this.userLoggedService.currentUser
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe(() => this.isAdmin.set(this.userLoggedService.isAdmin()));
   }
 
   ngOnDestroy() {
@@ -78,12 +87,10 @@ export class MusclesComponent implements OnInit, OnDestroy {
           includeExerciseName = true;
         }
       })
-
       return muscle.name.toLowerCase().includes(localInput) ||
         muscle.description.toLowerCase().includes(localInput) ||
         muscle.function.toLowerCase().includes(localInput) ||
         includeExerciseName;
     });
-
   }
 }

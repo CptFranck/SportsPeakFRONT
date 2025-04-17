@@ -17,8 +17,19 @@
     <div class="row">
       <app-search-bar (onInput)="searchMuscle($event)"/>
     </div>
-    <app-muscles-array (actionMuscle)="setMuscle($event)"
-                       [modalId]="muscleModalId"
-                       [muscles]="displayedMuscles()"/>
+    <div [@collapseHeight]="!isAdmin()">
+      <div *ngIf="!isAdmin()" [@collapseHeight]="displayedMuscles()" class="container px-0">
+        <div *ngFor="let muscle of displayedMuscles()" class="container px-0">
+          <app-muscle [muscle]="muscle"/>
+        </div>
+      </div>
+    </div>
+    <div [@collapseHeight]="isAdmin()">
+      <div *ngIf="isAdmin()" class="container">
+        <app-muscles-array (actionMuscle)="setMuscle($event)"
+                           [modalId]="muscleModalId"
+                           [muscles]="displayedMuscles()"/>
+      </div>
+    </div>
   </div>
 </div>
