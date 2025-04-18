@@ -26,8 +26,7 @@ export class TokenService {
   setCurrentToken(data: Auth) {
     const authToken = this.createAuthToken(data);
     this.authToken = authToken;
-    let authTokenJson = JSON.stringify(authToken);
-    this.localStorageService.saveData("authToken", authTokenJson);
+    this.localStorageService.saveData("authToken", authToken);
   }
 
   removeCurrentToken() {
@@ -51,9 +50,6 @@ export class TokenService {
   }
 
   private getSavedToken(): AuthToken | null {
-    let authTokenJson: string | null = this.localStorageService.getData("authToken");
-    if (authTokenJson)
-      return JSON.parse(authTokenJson);
-    return null;
+    return this.localStorageService.getData("authToken");
   }
 }

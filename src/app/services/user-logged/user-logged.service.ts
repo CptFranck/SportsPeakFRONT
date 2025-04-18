@@ -23,8 +23,7 @@ export class UserLoggedService {
 
   setCurrentUser(user: User) {
     this.currentUser.next(user);
-    let userJson: string = JSON.stringify(user);
-    this.localStorageService.saveData("user", userJson);
+    this.localStorageService.saveData("user", user);
   }
 
   removeCurrentUser() {
@@ -47,9 +46,6 @@ export class UserLoggedService {
   }
 
   private getSavedUser(): User | null {
-    let userJson: string | null = this.localStorageService.getData("user");
-    if (userJson)
-      return JSON.parse(userJson);
-    return null;
+    return this.localStorageService.getData("user");
   }
 }
