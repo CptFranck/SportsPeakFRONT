@@ -1,8 +1,7 @@
 import {inject, Injectable} from '@angular/core';
 import {BehaviorSubject} from "rxjs";
-import {Apollo, MutationResult} from "apollo-angular";
+import {MutationResult} from "apollo-angular";
 import {AlertService} from "../alert/alert.service";
-import {DEL_MUSCLE} from "../../graphql/operations/muscle.operations";
 import {ApolloQueryResult} from "@apollo/client";
 import {FormGroup} from "@angular/forms";
 import {User} from "../../interface/dto/user";
@@ -14,152 +13,127 @@ import {
   MOD_USER_ROLES,
   MOD_USER_USERNAME
 } from "../../graphql/operations/user.operations";
+import {ApolloWrapperService} from "../apollo-wrapper/apollo-wrapper.service";
 import {UserLoggedService} from "../user-logged/user-logged.service";
-import {AuthService} from "../auth/auth.service";
 import {Auth} from "../../interface/dto/auth";
+import {DEL_MUSCLE} from "../../graphql/operations/muscle.operations";
+import {AuthService} from "../auth/auth.service";
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
 
-  users: BehaviorSubject<User[]> = new BehaviorSubject<User[]>([]);
-  isLoading: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
+  users = new BehaviorSubject<User[]>([]);
+  isLoading = new BehaviorSubject<boolean>(true);
 
-  private readonly apollo: Apollo = inject(Apollo);
-  private readonly authService: AuthService = inject(AuthService);
-  private readonly alertService: AlertService = inject(AlertService);
-  private readonly userLoggedService: UserLoggedService = inject(UserLoggedService);
+  private readonly authService = inject(AuthService);
+  private readonly alertService = inject(AlertService);
+  private readonly userLoggedService = inject(UserLoggedService);
+  private readonly apolloWrapperService = inject(ApolloWrapperService);
 
   constructor() {
-    this.userLoggedService.currentUser.subscribe(() => {
-      if (this.userLoggedService.isAdmin()) {
-        this.getUsers();
-      }
-    })
+    this.userLoggedService.currentUser.subscribe(() => this.userLoggedService.isAdmin() ? this.getUsers() : null)
   }
 
   getUsers() {
     this.isLoading.next(true);
-    return this.apollo.watchQuery({
+    this.apolloWrapperService.watchQuery({
       query: GET_USERS,
-    }).valueChanges.subscribe((result: ApolloQueryResult<any>): void => {
-      if (result.errors) {
-        this.alertService.graphQLErrorAlertHandler(result.errors);
-      }
-      this.users.next(result.data.getUsers);
-      this.isLoading.next(result.loading);
-    });
-  }
-
-  modifyUserIdentity(userForm: FormGroup) {
-    return this.apollo.mutate({
-      mutation: MOD_USER_IDENTITY,
-      variables: {
-        inputUserIdentity: userForm.value,
-      },
-      refetchQueries: [{
-        query: GET_USERS,
-      }]
-    }).subscribe((result: MutationResult): void => {
-      if (result.errors) {
-        this.alertService.graphQLErrorAlertHandler(result.errors);
-      } else {
-        let message: string = "User " + result.data.modifyUserIdentity.username + " been successfully updated.";
-        this.alertService.addSuccessAlert(message);
-        this.userLoggedService.setCurrentUser(result.data.modifyUserIdentity);
-      }
+    }).valueChanges.subscribe(({data, errors, loading}: ApolloQueryResult<any>) => {
+      if (errors)
+        this.alertService.graphQLErrorAlertHandler(errors);
+      this.users.next(data.getUsers);
+      this.isLoading.next(loading);
     });
   }
 
   modifyUserRoles(userForm: FormGroup) {
-    return this.apollo.mutate({
+    this.apolloWrapperService.mutate({
       mutation: MOD_USER_ROLES,
       variables: {
         inputUserRoles: userForm.value,
-      },
-      refetchQueries: [{
-        query: GET_USERS,
-      }]
-    }).subscribe((result: MutationResult): void => {
-      if (result.errors) {
-        this.alertService.graphQLErrorAlertHandler(result.errors);
-      } else {
-        let message: string = "User " + result.data.modifyUserRoles.username + " been successfully updated.";
-        this.alertService.addSuccessAlert(message);
       }
+    }).subscribe(({data, errors}: MutationResult) => {
+      if (errors)
+        this.alertService.graphQLErrorAlertHandler(errors);
+      this.alertService.addSuccessAlert(`User ${data.modifyUserRoles.username} been successfully updated.`);
     });
   }
 
+  //////////////////// CurrentUser  ///////////////////////
+
   modifyUserEmail(userForm: FormGroup) {
-    return this.apollo.mutate({
+    this.apolloWrapperService.mutate({
       mutation: MOD_USER_EMAIL,
       variables: {
         inputUserEmail: userForm.value,
       },
-    }).subscribe((result: MutationResult): void => {
-      if (result.errors) {
-        this.alertService.graphQLErrorAlertHandler(result.errors);
-      } else {
-        const auth: Auth = result.data.modifyUserEmail;
-        let message: string = "User " + auth.user.username + " been successfully updated.";
-        this.alertService.addSuccessAlert(message);
-        this.authService.setDataAuth(auth)
-        this.userLoggedService.setCurrentUser(auth.user);
-      }
+    }).subscribe(({data, errors}: MutationResult) => {
+      if (errors)
+        this.alertService.graphQLErrorAlertHandler(errors);
+      const auth: Auth = data.modifyUserEmail;
+      this.alertService.addSuccessAlert(`User ${auth.user.username} been successfully updated.`);
+      this.authService.setDataAuth(auth)
+      this.userLoggedService.setCurrentUser(auth.user);
     });
   }
 
   modifyUserUsername(userForm: FormGroup) {
-    return this.apollo.mutate({
+    this.apolloWrapperService.mutate({
       mutation: MOD_USER_USERNAME,
       variables: {
         inputUserUsername: userForm.value,
       },
-    }).subscribe((result: MutationResult): void => {
-      if (result.errors) {
-        this.alertService.graphQLErrorAlertHandler(result.errors);
-      } else {
-        let message: string = "User " + result.data.modifyUserUsername.username + " been successfully updated.";
-        this.alertService.addSuccessAlert(message);
-        this.userLoggedService.setCurrentUser(result.data.modifyUserUsername);
-      }
+    }).subscribe(({data, errors}: MutationResult) => {
+      if (errors)
+        this.alertService.graphQLErrorAlertHandler(errors);
+      this.alertService.addSuccessAlert(`User ${data.modifyUserUsername.username} been successfully updated.`);
+      this.userLoggedService.setCurrentUser(data.modifyUserUsername);
     });
   }
 
   modifyUserPassword(userForm: FormGroup) {
     let inputUserPassword = userForm.value
     delete inputUserPassword.confirmPassword
-    return this.apollo.mutate({
+    this.apolloWrapperService.mutate({
       mutation: MOD_USER_PASSWORD,
       variables: {
         inputUserPassword: inputUserPassword,
       },
-    }).subscribe((result: MutationResult): void => {
-      if (result.errors) {
-        this.alertService.graphQLErrorAlertHandler(result.errors);
-      } else {
-        let message: string = "User " + result.data.modifyUserPassword.username + " been successfully updated.";
-        this.userLoggedService.setCurrentUser(result.data.modifyUserPassword);
-        this.alertService.addSuccessAlert(message);
+    }).subscribe(({data, errors}: MutationResult) => {
+      if (errors)
+        this.alertService.graphQLErrorAlertHandler(errors);
+      this.alertService.addSuccessAlert(`User ${data.modifyUserPassword.username} been successfully updated.`);
+      this.userLoggedService.setCurrentUser(data.modifyUserPassword);
+    });
+  }
+
+  modifyUserIdentity(userForm: FormGroup) {
+    this.apolloWrapperService.mutate({
+      mutation: MOD_USER_IDENTITY,
+      variables: {
+        inputUserIdentity: userForm.value,
       }
+    }).subscribe(({data, errors}: MutationResult) => {
+      if (errors)
+        this.alertService.graphQLErrorAlertHandler(errors);
+      this.alertService.addSuccessAlert(`User ${data.modifyUserIdentity.username} been successfully updated.`);
+      this.userLoggedService.setCurrentUser(data.modifyUserIdentity);
     });
   }
 
   deleteUser(user: User) {
-    return this.apollo.mutate({
+    this.apolloWrapperService.mutate({
       mutation: DEL_MUSCLE,
       variables: {
         userId: user.id,
       },
-    }).subscribe((result: MutationResult): void => {
-      if (result.errors) {
-        this.alertService.graphQLErrorAlertHandler(result.errors);
-      } else {
-        let message: string = "User " + user.username + " has been successfully deleted.";
-        this.alertService.addSuccessAlert(message);
-        this.authService.logout();
-      }
+    }).subscribe(({errors}: MutationResult) => {
+      if (errors)
+        this.alertService.graphQLErrorAlertHandler(errors);
+      this.alertService.addSuccessAlert(`User ${user.username} been successfully deleted.`);
+      this.authService.logout();
     });
   }
 }

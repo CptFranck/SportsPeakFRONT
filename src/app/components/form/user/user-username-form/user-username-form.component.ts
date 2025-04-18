@@ -5,7 +5,7 @@ import {InputControlComponent} from "../../../input-control/input-control.compon
 import {ActionType} from "../../../../interface/enum/action-type";
 import {ModificationField} from "../../../../interface/enum/modification-field";
 import {User} from "../../../../interface/dto/user";
-import {UserLoggedService} from "../../../../services/user-logged/user-logged.service";
+import {UserService} from "../../../../services/user/user.service";
 
 @Component({
   selector: 'app-user-username-form',
@@ -40,7 +40,7 @@ export class UserUsernameFormComponent implements OnInit, OnDestroy {
   submitInvalidForm = signal<boolean>(false);
 
   private readonly unsubscribe$ = new Subject<void>();
-  private readonly userLoggedService = inject(UserLoggedService);
+  private readonly userService = inject(UserService);
 
   ngOnInit() {
     const submitEventActionType$ = this.submitEventActionType$();
@@ -62,7 +62,7 @@ export class UserUsernameFormComponent implements OnInit, OnDestroy {
     const userForm = this.userForm();
     if (userForm.valid) {
       this.submitInvalidForm.set(false);
-      this.userLoggedService.modifyUserUsername(userForm);
+      this.userService.modifyUserUsername(userForm);
       this.btnCloseRef().click();
     } else {
       this.submitInvalidForm.set(true);

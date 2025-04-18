@@ -6,7 +6,7 @@ import {InputControlComponent} from "../../../input-control/input-control.compon
 import {ModificationField} from "../../../../interface/enum/modification-field";
 import {ActionType} from "../../../../interface/enum/action-type";
 import {confirmValidator} from "../../../../validators/confirmValidator";
-import {UserLoggedService} from "../../../../services/user-logged/user-logged.service";
+import {UserService} from "../../../../services/user/user.service";
 
 @Component({
   selector: 'app-user-password-form',
@@ -54,7 +54,7 @@ export class UserPasswordFormComponent implements OnInit, OnDestroy {
   readonly modification = input.required<ModificationField>();
 
   private readonly unsubscribe$ = new Subject<void>();
-  private readonly userLoggedService = inject(UserLoggedService);
+  private readonly userService = inject(UserService);
 
   ngOnInit() {
     const submitEventActionType$ = this.submitEventActionType$();
@@ -76,7 +76,7 @@ export class UserPasswordFormComponent implements OnInit, OnDestroy {
     const userForm = this.userForm();
     if (userForm.valid) {
       this.submitInvalidForm.set(false);
-      this.userLoggedService.modifyUserPassword(userForm);
+      this.userService.modifyUserPassword(userForm);
       this.btnCloseRef().click();
     } else {
       this.submitInvalidForm.set(true);

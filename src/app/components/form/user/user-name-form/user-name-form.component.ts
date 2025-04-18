@@ -5,7 +5,7 @@ import {User} from "../../../../interface/dto/user";
 import {Observable, Subject, takeUntil} from "rxjs";
 import {ModificationField} from "../../../../interface/enum/modification-field";
 import {ActionType} from "../../../../interface/enum/action-type";
-import {UserLoggedService} from "../../../../services/user-logged/user-logged.service";
+import {UserService} from "../../../../services/user/user.service";
 
 @Component({
   selector: 'app-user-name-form',
@@ -48,7 +48,7 @@ export class UserNameFormComponent implements OnInit, OnDestroy {
   readonly modification = input.required<ModificationField>();
 
   private readonly unsubscribe$ = new Subject<void>();
-  private readonly userLoggedService = inject(UserLoggedService);
+  private readonly UserService = inject(UserService);
 
   ngOnInit() {
     const submitEventActionType$ = this.submitEventActionType$();
@@ -70,7 +70,7 @@ export class UserNameFormComponent implements OnInit, OnDestroy {
     const userForm = this.userForm();
     if (userForm.valid) {
       this.submitInvalidForm.set(false);
-      this.userLoggedService.modifyUserIdentity(userForm);
+      this.UserService.modifyUserIdentity(userForm);
       this.btnCloseRef().click();
     } else {
       this.submitInvalidForm.set(true);
