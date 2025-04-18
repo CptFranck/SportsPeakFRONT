@@ -1,6 +1,6 @@
 import {inject, Injectable} from '@angular/core';
 import {BehaviorSubject} from "rxjs";
-import {Apollo, MutationResult} from "apollo-angular";
+import {MutationResult} from "apollo-angular";
 import {AlertService} from "../alert/alert.service";
 import {ApolloQueryResult} from "@apollo/client";
 import {FormGroup} from "@angular/forms";
@@ -12,94 +12,72 @@ import {
   MOD_PRIVILEGE
 } from "../../graphql/operations/privilege.operations";
 import {UserLoggedService} from "../user-logged/user-logged.service";
+import {ApolloWrapperService} from "../apollo-wrapper/apollo-wrapper.service";
 
 @Injectable({
   providedIn: 'root'
 })
 export class PrivilegeService {
 
-  privileges: BehaviorSubject<Privilege[]> = new BehaviorSubject<Privilege[]>([]);
-  isLoading: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
+  privileges = new BehaviorSubject<Privilege[]>([]);
+  isLoading = new BehaviorSubject<boolean>(true);
 
-  private readonly apollo: Apollo = inject(Apollo);
-  private readonly alertService: AlertService = inject(AlertService);
-  private readonly userLoggedService: UserLoggedService = inject(UserLoggedService);
+  private readonly alertService = inject(AlertService);
+  private readonly userLoggedService = inject(UserLoggedService);
+  private readonly apolloWrapperService = inject(ApolloWrapperService);
 
   constructor() {
-    this.userLoggedService.currentUser.subscribe(() => {
-      if (this.userLoggedService.isAdmin()) {
-        this.getPrivileges();
-      }
-    })
+    this.userLoggedService.currentUser.subscribe(() => this.userLoggedService.isAdmin() ? this.getPrivileges() : null)
   }
 
   getPrivileges() {
     this.isLoading.next(true)
-    return this.apollo.watchQuery({
+    this.apolloWrapperService.watchQuery({
       query: GET_PRIVILEGES,
-    }).valueChanges.subscribe((result: ApolloQueryResult<any>): void => {
-      if (result.errors) {
-        this.alertService.graphQLErrorAlertHandler(result.errors);
-      }
-      this.privileges.next(result.data.getPrivileges);
-      this.isLoading.next(result.loading);
+    }).valueChanges.subscribe(({data, errors, loading}: ApolloQueryResult<any>) => {
+      if (errors)
+        this.alertService.graphQLErrorAlertHandler(errors);
+      this.privileges.next(data.getPrivileges);
+      this.isLoading.next(loading);
     });
   }
 
   addPrivilege(privilegeForm: FormGroup) {
-    return this.apollo.mutate({
+    this.apolloWrapperService.mutate({
       mutation: ADD_PRIVILEGE,
       variables: {
         inputNewPrivilege: privilegeForm.value,
-      },
-      refetchQueries: [{
-        query: GET_PRIVILEGES,
-      }]
-    }).subscribe((result: MutationResult) => {
-      if (result.errors) {
-        this.alertService.graphQLErrorAlertHandler(result.errors);
-      } else {
-        let message: string = "Privilege " + result.data.addPrivilege.name + " been successfully created."
-        this.alertService.addSuccessAlert(message);
       }
+    }).subscribe(({data, errors}: MutationResult) => {
+      if (errors)
+        this.alertService.graphQLErrorAlertHandler(errors);
+      this.alertService.addSuccessAlert(`Privilege ${data.addPrivilege.name} created successfully.`);
     });
   }
 
   modifyPrivilege(privilegeForm: FormGroup) {
-    return this.apollo.mutate({
+    this.apolloWrapperService.mutate({
       mutation: MOD_PRIVILEGE,
       variables: {
         inputPrivilege: privilegeForm.value,
-      },
-      refetchQueries: [{
-        query: GET_PRIVILEGES,
-      }]
-    }).subscribe((result: MutationResult) => {
-      if (result.errors) {
-        this.alertService.graphQLErrorAlertHandler(result.errors);
-      } else {
-        let message: string = "Privilege " + result.data.modifyPrivilege.name + " has been successfully updated."
-        this.alertService.addSuccessAlert(message);
       }
+    }).subscribe(({data, errors}: MutationResult) => {
+      if (errors)
+        this.alertService.graphQLErrorAlertHandler(errors);
+      this.alertService.addSuccessAlert(`Privilege ${data.modifyPrivilege.name} has been successfully updated.`);
     });
   }
 
-  deletePrivilege(privilegeForm: Privilege) {
-    return this.apollo.mutate({
+  deletePrivilege(privilege: Privilege) {
+    this.apolloWrapperService.mutate({
       mutation: DEL_PRIVILEGE,
       variables: {
-        privilegeId: privilegeForm.id,
-      },
-      refetchQueries: [{
-        query: GET_PRIVILEGES,
-      }]
-    }).subscribe((result: MutationResult) => {
-      if (result.errors) {
-        this.alertService.graphQLErrorAlertHandler(result.errors);
-      } else {
-        let message: string = "Privilege " + privilegeForm.name + " has been successfully deleted."
-        this.alertService.addSuccessAlert(message);
+        privilegeId: privilege.id,
       }
+    }).subscribe(({errors}: MutationResult) => {
+      if (errors)
+        this.alertService.graphQLErrorAlertHandler(errors);
+      this.alertService.addSuccessAlert(`Privilege ${privilege.name} has been successfully deleted.`);
     });
   }
 }
