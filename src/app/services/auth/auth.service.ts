@@ -41,11 +41,11 @@ export class AuthService {
       variables: {
         inputRegisterNewUser: inputNewUser,
       },
-    }).subscribe((result: MutationResult) => {
-      if (result.errors)
-        this.alertService.graphQLErrorAlertHandler(result.errors);
-      if (result.data)
-        this.setDataAuth(result.data.register, true);
+    }).subscribe(({data, errors}: MutationResult) => {
+      if (errors)
+        this.alertService.graphQLErrorAlertHandler(errors);
+      if (data)
+        this.setDataAuth(data.register, true);
     });
   }
 
@@ -55,11 +55,11 @@ export class AuthService {
       variables: {
         inputCredentials: loginForm.value,
       },
-    }).subscribe((result: MutationResult) => {
-      if (result.errors)
-        this.alertService.graphQLErrorAlertHandler(result.errors);
+    }).subscribe(({data, errors}: MutationResult) => {
+      if (errors)
+        this.alertService.graphQLErrorAlertHandler(errors);
       else
-        this.setDataAuth(result.data.login, true);
+        this.setDataAuth(data.login, true);
     });
   }
 
