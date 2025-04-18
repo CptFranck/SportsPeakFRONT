@@ -1,11 +1,11 @@
 import {Component, computed, inject, input, OnDestroy, OnInit, signal} from '@angular/core';
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {Observable, Subject, takeUntil} from "rxjs";
-import {UserService} from "../../../../services/user/user.service";
 import {InputControlComponent} from "../../../input-control/input-control.component";
 import {ActionType} from "../../../../interface/enum/action-type";
 import {ModificationField} from "../../../../interface/enum/modification-field";
 import {User} from "../../../../interface/dto/user";
+import {UserLoggedService} from "../../../../services/user-logged/user-logged.service";
 
 @Component({
   selector: 'app-user-username-form',
@@ -40,7 +40,7 @@ export class UserUsernameFormComponent implements OnInit, OnDestroy {
   submitInvalidForm = signal<boolean>(false);
 
   private readonly unsubscribe$ = new Subject<void>();
-  private readonly userService = inject(UserService);
+  private readonly userLoggedService = inject(UserLoggedService);
 
   ngOnInit() {
     const submitEventActionType$ = this.submitEventActionType$();
@@ -62,7 +62,7 @@ export class UserUsernameFormComponent implements OnInit, OnDestroy {
     const userForm = this.userForm();
     if (userForm.valid) {
       this.submitInvalidForm.set(false);
-      this.userService.modifyUserUsername(userForm);
+      this.userLoggedService.modifyUserUsername(userForm);
       this.btnCloseRef().click();
     } else {
       this.submitInvalidForm.set(true);

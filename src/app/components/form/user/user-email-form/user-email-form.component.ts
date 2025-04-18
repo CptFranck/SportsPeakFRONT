@@ -3,9 +3,9 @@ import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/
 import {Observable, Subject, takeUntil} from "rxjs";
 import {User} from "../../../../interface/dto/user";
 import {InputControlComponent} from "../../../input-control/input-control.component";
-import {UserService} from "../../../../services/user/user.service";
 import {ModificationField} from "../../../../interface/enum/modification-field";
 import {ActionType} from "../../../../interface/enum/action-type";
+import {UserLoggedService} from "../../../../services/user-logged/user-logged.service";
 
 @Component({
   selector: 'app-user-email-form',
@@ -42,7 +42,7 @@ export class UserEmailFormComponent implements OnInit, OnDestroy {
   readonly modification = input.required<ModificationField>();
 
   private readonly unsubscribe$ = new Subject<void>();
-  private readonly userService = inject(UserService);
+  private readonly userLoggedService = inject(UserLoggedService);
 
   ngOnInit() {
     const submitEventActionType$ = this.submitEventActionType$();
@@ -64,7 +64,7 @@ export class UserEmailFormComponent implements OnInit, OnDestroy {
     const userForm = this.userForm();
     if (userForm.valid) {
       this.submitInvalidForm.set(false);
-      this.userService.modifyUserEmail(userForm);
+      this.userLoggedService.modifyUserEmail(userForm);
       this.btnCloseRef().click();
     } else {
       this.submitInvalidForm.set(true);
