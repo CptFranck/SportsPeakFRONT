@@ -8,11 +8,13 @@ import {Auth} from "../../interface/dto/auth";
 import {UserLoggedService} from "../user-logged/user-logged.service";
 import {TokenService} from "../token/token.service";
 import {BehaviorSubject} from "rxjs";
+import {User} from "../../interface/dto/user";
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
+  currentUser = new BehaviorSubject<User | undefined>(undefined);
   isAuthenticated = new BehaviorSubject(false);
 
   private redirectUrl = "/";
