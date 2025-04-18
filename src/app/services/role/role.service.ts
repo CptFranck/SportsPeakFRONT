@@ -1,6 +1,6 @@
 import {inject, Injectable} from '@angular/core';
 import {BehaviorSubject} from "rxjs";
-import {Apollo, MutationResult} from "apollo-angular";
+import {MutationResult} from "apollo-angular";
 import {AlertService} from "../alert/alert.service";
 import {DEL_EXERCISE} from "../../graphql/operations/exercise.operations";
 import {ApolloQueryResult} from "@apollo/client";
@@ -8,94 +8,72 @@ import {FormGroup} from "@angular/forms";
 import {Role} from "../../interface/dto/role";
 import {ADD_ROLE, GET_ROLES, MOD_ROLE} from "../../graphql/operations/role.operations";
 import {UserLoggedService} from "../user-logged/user-logged.service";
+import {ApolloWrapperService} from "../apollo-wrapper/apollo-wrapper.service";
 
 @Injectable({
   providedIn: 'root'
 })
 export class RoleService {
 
-  roles: BehaviorSubject<Role[]> = new BehaviorSubject<Role[]>([]);
-  isLoading: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
+  roles = new BehaviorSubject<Role[]>([]);
+  isLoading = new BehaviorSubject<boolean>(true);
 
-  private readonly apollo: Apollo = inject(Apollo);
-  private readonly alertService: AlertService = inject(AlertService);
-  private readonly userLoggedService: UserLoggedService = inject(UserLoggedService);
+  private readonly alertService = inject(AlertService);
+  private readonly userLoggedService = inject(UserLoggedService);
+  private readonly apolloWrapperService = inject(ApolloWrapperService);
 
   constructor() {
-    this.userLoggedService.currentUser.subscribe(() => {
-      if (this.userLoggedService.isAdmin()) {
-        this.getRoles();
-      }
-    })
+    this.userLoggedService.currentUser.subscribe(() => this.userLoggedService.isAdmin() ? this.getRoles() : null);
   }
 
   getRoles() {
     this.isLoading.next(true);
-    return this.apollo.watchQuery({
+    this.apolloWrapperService.watchQuery({
       query: GET_ROLES,
-    }).valueChanges.subscribe((result: ApolloQueryResult<any>): void => {
-      if (result.errors) {
-        this.alertService.graphQLErrorAlertHandler(result.errors);
-      }
-      this.roles.next(result.data.getRoles);
-      this.isLoading.next(result.loading);
+    }).valueChanges.subscribe(({data, errors, loading}: ApolloQueryResult<any>) => {
+      if (errors)
+        this.alertService.graphQLErrorAlertHandler(errors);
+      this.roles.next(data.getRoles);
+      this.isLoading.next(loading);
     });
   }
 
   addRole(roleForm: FormGroup) {
-    return this.apollo.mutate({
+    this.apolloWrapperService.mutate({
       mutation: ADD_ROLE,
       variables: {
         inputNewRole: roleForm.value,
-      },
-      refetchQueries: [{
-        query: GET_ROLES,
-      }]
-    }).subscribe((result: MutationResult) => {
-      if (result.errors) {
-        this.alertService.graphQLErrorAlertHandler(result.errors);
-      } else {
-        let message: string = "Role " + result.data.addRole.name + " been successfully created."
-        this.alertService.addSuccessAlert(message);
       }
+    }).subscribe(({data, errors}: MutationResult) => {
+      if (errors)
+        this.alertService.graphQLErrorAlertHandler(errors);
+      this.alertService.addSuccessAlert(`Role ${data.addRole.name} has been successfully created.`);
     });
   }
 
   modifyRole(roleForm: FormGroup) {
-    return this.apollo.mutate({
+    this.apolloWrapperService.mutate({
       mutation: MOD_ROLE,
       variables: {
         inputRole: roleForm.value,
-      },
-      refetchQueries: [{
-        query: GET_ROLES,
-      }]
-    }).subscribe((result: MutationResult) => {
-      if (result.errors) {
-        this.alertService.graphQLErrorAlertHandler(result.errors);
-      } else {
-        let message: string = "Role " + result.data.modifyRole.name + " has been successfully updated."
-        this.alertService.addSuccessAlert(message);
       }
+    }).subscribe(({data, errors}: MutationResult) => {
+      if (errors)
+        this.alertService.graphQLErrorAlertHandler(errors);
+      this.alertService.addSuccessAlert(`Role ${data.modifyRole.name} has been successfully updated.`);
     });
   }
 
   deleteRole(role: Role) {
-    return this.apollo.mutate({
+    return this.apolloWrapperService.mutate({
       mutation: DEL_EXERCISE,
       variables: {
         roleId: role.id,
-      },
-      refetchQueries: [{
-        query: GET_ROLES,
-      }]
-    }).subscribe((result: MutationResult) => {
-      if (result.errors) {
-        this.alertService.graphQLErrorAlertHandler(result.errors);
-      } else {
-        let message: string = "Role " + role.name + " has been successfully deleted."
-        this.alertService.addSuccessAlert(message);
       }
+    }).subscribe(({errors}: MutationResult) => {
+      if (errors)
+        this.alertService.graphQLErrorAlertHandler(errors);
+      this.alertService.addSuccessAlert(`Role ${role.name} has been successfully deleted.`);
     });
   }
 }
