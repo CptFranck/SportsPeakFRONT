@@ -2,7 +2,6 @@ import {inject, Injectable} from '@angular/core';
 import {LocalStorageService} from "../local-storage/local-storage.service";
 import {User} from "../../interface/dto/user";
 import {BehaviorSubject} from "rxjs";
-import {Router} from "@angular/router";
 import {FormGroup} from "@angular/forms";
 import {
   MOD_USER_EMAIL,
@@ -24,7 +23,6 @@ export class UserLoggedService {
 
   currentUser = new BehaviorSubject<User | undefined>(undefined);
 
-  private readonly router = inject(Router);
   private readonly authService = inject(AuthService);
   private readonly alertService = inject(AlertService);
   private readonly localStorageService = inject(LocalStorageService);
