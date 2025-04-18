@@ -8,6 +8,7 @@ export interface Alert {
   message: string;
   type: AlertType;
   closed: boolean;
+  autoClose: boolean;
   errorInformation?: {
     errorType?: AlertErrorType;
     errorExtension?: { [key: string]: unknown },

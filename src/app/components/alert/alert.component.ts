@@ -16,7 +16,6 @@ export class AlertComponent implements OnInit {
   readonly alert = input.required<Alert>();
   readonly timeoutFading = input<number>(3);
   readonly timeoutFade = input<number>(3);
-  readonly activeTimeout = input<boolean>(true);
 
   disableCloseButton = signal<boolean>(false);
   transitionStyle = signal<Dictionary<string>>({
@@ -30,7 +29,7 @@ export class AlertComponent implements OnInit {
   private removeTimeout: any;
 
   ngOnInit() {
-    if (this.activeTimeout())
+    if (this.alert().autoClose)
       this.fadeTimeout = setTimeout(() => {
         this.transitionStyle.update(value => ({...value, ['opacity']: '0'}));
         this.removeTimeout = setTimeout(() => {
@@ -40,7 +39,7 @@ export class AlertComponent implements OnInit {
   }
 
   pauseFadeOut() {
-    if (this.activeTimeout()) {
+    if (this.alert().autoClose) {
       clearTimeout(this.fadeTimeout);
       clearTimeout(this.removeTimeout);
       this.transitionStyle.set({'transition': 'none', 'opacity': '1',});

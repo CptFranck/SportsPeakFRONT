@@ -59,8 +59,10 @@ export class AlertService {
   }
 
   createNetWorkErrorAlert(networkError: NetworkError) {
+    const lastAlert = this.alerts.at(-1);
     if (!networkError) return;
-    const networkAlert: Alert = this.createErrorAlert(networkError);
+    if (lastAlert !== undefined && this.isSameAlertError(lastAlert, networkError)) return;
+    const networkAlert: Alert = this.createErrorAlert(networkError, false);
     if (networkAlert.errorInformation)
       networkAlert.errorInformation.errorType = AlertErrorType.NetworkError;
     this.alerts.push(networkAlert);
@@ -72,13 +74,14 @@ export class AlertService {
     this.alertsSubject.next(this.alerts.filter((alert: Alert) => !alert.closed));
   }
 
-  private createAlert(title: string, message: string, alertType: AlertType): Alert {
+  private createAlert(title: string, message: string, alertType: AlertType, autoClose: boolean = true): Alert {
     const alert = {
       id: this.alertId,
       title: title,
       message: message,
       type: alertType,
-      closed: false
+      closed: false,
+      autoClose: autoClose
     }
     this.alertId += 1;
     return alert;
@@ -96,13 +99,20 @@ export class AlertService {
     this.alertId += 1;
   }
 
-  private createErrorAlert(error: GraphQLFormattedError): Alert {
-    const errorAlert = this.createAlert("Unsuccessful operation :(", error.message, AlertType.error);
+  private createErrorAlert(error: GraphQLFormattedError, autoClose = true): Alert {
+    const errorAlert = this.createAlert("Unsuccessful operation :(", error.message, AlertType.error, autoClose);
     errorAlert.errorInformation = {
       errorExtension: error.extensions,
       errorLocation: error.locations,
       errorPath: error.path,
     }
     return errorAlert;
+  }
+
+  private isSameAlertError(alert: Alert, error: GraphQLFormattedError): boolean {
+    return alert?.message === error.message ||
+      alert?.errorInformation?.errorPath === error.path ||
+      alert?.errorInformation?.errorLocation === error.locations ||
+      alert?.errorInformation?.errorExtension === error.extensions;
   }
 }
