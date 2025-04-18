@@ -1,6 +1,6 @@
 import {inject, Injectable} from '@angular/core';
 import {BehaviorSubject} from "rxjs";
-import {Apollo, MutationResult} from "apollo-angular";
+import {MutationResult} from "apollo-angular";
 import {AlertService} from "../alert/alert.service";
 import {ApolloQueryResult} from "@apollo/client";
 import {FormGroup} from "@angular/forms";
@@ -17,179 +17,121 @@ import {
 import {User} from "../../interface/dto/user";
 import {UserLoggedService} from "../user-logged/user-logged.service";
 import {Router} from "@angular/router";
+import {ApolloWrapperService} from "../apollo-wrapper/apollo-wrapper.service";
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProgExerciseService {
 
-  progExercise: BehaviorSubject<ProgExercise | undefined> = new BehaviorSubject<ProgExercise | undefined>(undefined);
-  progExercises: BehaviorSubject<ProgExercise[]> = new BehaviorSubject<ProgExercise[]>([]);
-  userProgExercises: BehaviorSubject<ProgExercise[]> = new BehaviorSubject<ProgExercise[]>([]);
-  isLoading: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
+  progExercise = new BehaviorSubject<ProgExercise | undefined>(undefined);
+  progExercises = new BehaviorSubject<ProgExercise[]>([]);
+  userProgExercises = new BehaviorSubject<ProgExercise[]>([]);
+  isLoading = new BehaviorSubject<boolean>(true);
 
-  private user: User | undefined;
-  private readonly router: Router = inject(Router);
-  private readonly apollo: Apollo = inject(Apollo);
-  private readonly alertService: AlertService = inject(AlertService);
-  private readonly userLoggedService: UserLoggedService = inject(UserLoggedService);
+  private readonly router = inject(Router);
+  private readonly alertService = inject(AlertService);
+  private readonly userLoggedService = inject(UserLoggedService);
+  private readonly apolloWrapperService = inject(ApolloWrapperService);
 
   constructor() {
     this.getProgExercises();
-    this.userLoggedService.currentUser.subscribe((user: User | undefined) => {
-      if (user) {
-        this.user = user;
-        this.getUserProgExercises(user)
-      }
-    })
+    this.userLoggedService.currentUser.subscribe((user: User | undefined) => user ? this.getUserProgExercises(user) : null)
   }
 
   getProgExercises() {
     this.isLoading.next(true);
-    this.apollo.watchQuery({
+    this.apolloWrapperService.watchQuery({
       query: GET_PROG_EXERCISES,
-    }).valueChanges.subscribe((result: ApolloQueryResult<any>): void => {
-      if (result.errors) {
-        this.alertService.graphQLErrorAlertHandler(result.errors);
-      }
-      this.progExercises.next(result.data.getProgExercises);
-      this.isLoading.next(result.loading);
+    }).valueChanges.subscribe(({data, errors, loading}: ApolloQueryResult<any>) => {
+      if (errors)
+        this.alertService.graphQLErrorAlertHandler(errors);
+      this.progExercises.next(data.getProgExercises);
+      this.isLoading.next(loading);
     });
   }
 
   getProgExerciseById(progExerciseId: number) {
     this.progExercise.next(undefined);
     this.isLoading.next(true);
-    this.apollo.watchQuery({
+    this.apolloWrapperService.watchQuery({
       query: GET_PROG_EXERCISE_BY_ID,
       variables: {
         id: progExerciseId
       }
-    }).valueChanges.subscribe((result: ApolloQueryResult<any>): void => {
-      if (result.errors) {
-        this.alertService.graphQLErrorAlertHandler(result.errors);
-      }
-      this.progExercise.next(result.data.getProgExerciseById);
-      this.isLoading.next(result.loading);
+    }).valueChanges.subscribe(({data, errors, loading}: ApolloQueryResult<any>) => {
+      if (errors)
+        this.alertService.graphQLErrorAlertHandler(errors);
+      this.progExercise.next(data.getProgExerciseById);
+      this.isLoading.next(loading);
     });
   }
 
   getUserProgExercises(user: User) {
     this.isLoading.next(true);
-    this.apollo.watchQuery({
+    this.apolloWrapperService.watchQuery({
       query: GET_USER_PROG_EXERCISES,
       variables: {
         userId: user.id
       }
-    }).valueChanges.subscribe((result: ApolloQueryResult<any>): void => {
-      if (result.errors) {
-        this.alertService.graphQLErrorAlertHandler(result.errors);
-      }
-      this.userProgExercises.next(result.data.getUserProgExercises);
-      this.isLoading.next(result.loading);
+    }).valueChanges.subscribe(({data, errors, loading}: ApolloQueryResult<any>) => {
+      if (errors)
+        this.alertService.graphQLErrorAlertHandler(errors);
+      this.userProgExercises.next(data.getUserProgExercises);
+      this.isLoading.next(loading);
     });
   }
 
   addProgExercise(progExercisesForm: FormGroup) {
-    if (this.user)
-      this.apollo.mutate({
-        mutation: ADD_PROG_EXERCISE,
-        variables: {
-          inputNewProgExercise: progExercisesForm.value,
-        },
-        refetchQueries: [{
-          query: GET_USER_PROG_EXERCISES,
-          variables: {
-            userId: this.user.id
-          }
-        }]
-      }).subscribe(
-        (result: MutationResult): void => {
-          if (result.errors) {
-            this.alertService.graphQLErrorAlertHandler(result.errors);
-          } else {
-            let message: string = "Programed exercise " + result.data.addProgExercise.name + " been successfully created.";
-            this.alertService.addSuccessAlert(message);
-          }
-        });
-    else
-      this.alertService.addErrorAlert("User not logged in.");
+    this.apolloWrapperService.mutate({
+      mutation: ADD_PROG_EXERCISE,
+      variables: {
+        inputNewProgExercise: progExercisesForm.value,
+      }
+    }).subscribe(({data, errors}: MutationResult): void => {
+      if (errors)
+        this.alertService.graphQLErrorAlertHandler(errors);
+      this.alertService.addSuccessAlert(`Programed exercise ${data.addProgExercise.name} has been successfully created.`);
+    });
   }
 
   modifyProgExercise(progExercisesForm: FormGroup) {
-    if (this.user)
-      this.apollo.mutate({
-        mutation: MOD_PROG_EXERCISE,
-        variables: {
-          inputProgExercise: progExercisesForm.value,
-        },
-        refetchQueries: [{
-          query: GET_USER_PROG_EXERCISES,
-          variables: {
-            userId: this.user.id
-          }
-        }]
-      }).subscribe((result: MutationResult): void => {
-        if (result.errors) {
-          this.alertService.graphQLErrorAlertHandler(result.errors);
-        } else {
-          let message: string = "Programed exercise " + result.data.modifyProgExercise.name + " been successfully updated.";
-          this.alertService.addSuccessAlert(message);
-        }
-      });
-    else
-      this.alertService.addErrorAlert("User not logged in.");
+    this.apolloWrapperService.mutate({
+      mutation: MOD_PROG_EXERCISE,
+      variables: {
+        inputProgExercise: progExercisesForm.value,
+      }
+    }).subscribe(({data, errors}: MutationResult): void => {
+      if (errors)
+        this.alertService.graphQLErrorAlertHandler(errors);
+      this.alertService.addSuccessAlert(`Programed exercise ${data.modifyProgExercise.name} has been successfully updated.`);
+    });
   }
 
   modifyProgExerciseTrustLabel(progExercisesForm: FormGroup) {
-    if (this.user)
-      this.apollo.mutate({
-        mutation: MOD_PROG_EXERCISE_TRUST_LABEL,
-        variables: {
-          inputProgExerciseTrustLabel: progExercisesForm.value,
-        },
-        refetchQueries: [{
-          query: GET_USER_PROG_EXERCISES,
-          variables: {
-            userId: this.user.id
-          }
-        }]
-      }).subscribe((result: MutationResult): void => {
-        if (result.errors) {
-          this.alertService.graphQLErrorAlertHandler(result.errors);
-        } else {
-          let message: string = "Programed exercise " + result.data.modifyProgExerciseTrustLabel.name + " been successfully updated.";
-          this.alertService.addSuccessAlert(message);
-        }
-      });
-    else
-      this.alertService.addErrorAlert("User not logged in.");
+    this.apolloWrapperService.mutate({
+      mutation: MOD_PROG_EXERCISE_TRUST_LABEL,
+      variables: {
+        inputProgExerciseTrustLabel: progExercisesForm.value,
+      }
+    }).subscribe(({data, errors}: MutationResult): void => {
+      if (errors)
+        this.alertService.graphQLErrorAlertHandler(errors);
+      this.alertService.addSuccessAlert(`Programed exercise ${data.modifyProgExerciseTrustLabel.name} has been successfully updated.`);
+    });
   }
 
   deleteProgExercises(progExercise: ProgExercise) {
-    if (this.user) {
-      this.apollo.mutate({
-        mutation: DEL_PROG_EXERCISE,
-        variables: {
-          progExerciseId: progExercise.id,
-        },
-        refetchQueries: [{
-          query: GET_USER_PROG_EXERCISES,
-          variables: {
-            userId: this.user.id
-          }
-        }]
-      }).subscribe((result: MutationResult): void => {
-        if (result.errors) {
-          this.alertService.graphQLErrorAlertHandler(result.errors);
-        } else {
-          let message: string = "Programed exercise " + progExercise.name + " has been successfully deleted.";
-          this.alertService.addSuccessAlert(message);
-        }
-      });
+    this.apolloWrapperService.mutate({
+      mutation: DEL_PROG_EXERCISE,
+      variables: {
+        progExerciseId: progExercise.id,
+      }
+    }).subscribe(({errors}: MutationResult): void => {
+      if (errors)
+        this.alertService.graphQLErrorAlertHandler(errors);
+      this.alertService.addSuccessAlert(`Programed exercise ${progExercise.name} has been successfully deleted.`);
       this.router.navigateByUrl('/my-fitness-plan/my-programed-exercises')
-    } else {
-      this.alertService.addErrorAlert("User not logged in.");
-    }
+    });
   }
 }
