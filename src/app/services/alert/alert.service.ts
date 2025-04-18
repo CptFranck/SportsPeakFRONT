@@ -26,19 +26,19 @@ export class AlertService {
     return this.alerts;
   }
 
-  addSuccessAlert(message: string): void {
+  addSuccessAlert(message: string) {
     const successAlert: Alert = this.createAlert("Successful operation :D", message, AlertType.success);
     this.alerts.push(successAlert);
     this.updateAlert();
   }
 
-  addWarningAlert(message: string): void {
+  addWarningAlert(message: string) {
     const successAlert: Alert = this.createAlert("Warning :/", message, AlertType.warning);
     this.alerts.push(successAlert);
     this.updateAlert();
   }
 
-  addErrorAlert(message: string): void {
+  addErrorAlert(message: string) {
     const successAlert: Alert = this.createAlert("Unsuccessful operation :(", message, AlertType.error);
     this.alerts.push(successAlert);
     this.updateAlert();
@@ -54,18 +54,17 @@ export class AlertService {
 
   ///////////// APOLLO / GRAPHQL /////////////
 
-  graphQLErrorAlertHandler(graphQLErrors: ReadonlyArray<GraphQLFormattedError>): void {
-    graphQLErrors.map((err: GraphQLFormattedError) =>
-      this.createGraphQLErrorAlert(err));
+  graphQLErrorAlertHandler(graphQLErrors: ReadonlyArray<GraphQLFormattedError>) {
+    graphQLErrors.map((err: GraphQLFormattedError) => this.createGraphQLErrorAlert(err));
   }
 
-  createNetWorkErrorAlert(networkError: NetworkError): void {
-    if (!networkError) return
-    let networkAlert: Alert = this.createErrorAlert(networkError)
+  createNetWorkErrorAlert(networkError: NetworkError) {
+    if (!networkError) return;
+    const networkAlert: Alert = this.createErrorAlert(networkError);
     if (networkAlert.errorInformation)
-      networkAlert.errorInformation["errorType"] = AlertErrorType.NetworkError;
+      networkAlert.errorInformation.errorType = AlertErrorType.NetworkError;
     this.alerts.push(networkAlert);
-    this.updateAlert()
+    this.updateAlert();
     this.alertId += 1;
   }
 
@@ -85,12 +84,12 @@ export class AlertService {
     return alert;
   }
 
-  private createGraphQLErrorAlert(graphQLError: GraphQLFormattedError): void {
-    let graphQLAlert = this.createErrorAlert(graphQLError)
+  private createGraphQLErrorAlert(graphQLError: GraphQLFormattedError) {
+    const graphQLAlert = this.createErrorAlert(graphQLError);
     if (graphQLAlert.errorInformation) {
-      graphQLAlert.errorInformation["errorType"] = AlertErrorType.GraphQLError;
-      graphQLAlert.errorInformation["errorLocation"] = graphQLError.locations;
-      graphQLAlert.errorInformation["errorPath"] = graphQLError.path;
+      graphQLAlert.errorInformation.errorType = AlertErrorType.GraphQLError;
+      graphQLAlert.errorInformation.errorLocation = graphQLError.locations;
+      graphQLAlert.errorInformation.errorPath = graphQLError.path;
     }
     this.alerts.push(graphQLAlert);
     this.updateAlert();
