@@ -40,11 +40,17 @@ export class UserService {
     this.isLoading.next(true);
     this.apolloWrapperService.watchQuery({
       query: GET_USERS,
-    }).valueChanges.subscribe(({data, errors, loading}: ApolloQueryResult<any>) => {
-      if (errors)
-        this.alertService.graphQLErrorAlertHandler(errors);
-      this.users.next(data.getUsers);
-      this.isLoading.next(loading);
+    }).valueChanges.subscribe({
+      next: ({data, errors, loading}
+             :
+             ApolloQueryResult<any>
+      ) => {
+        if (errors)
+          this.alertService.graphQLErrorAlertHandler(errors);
+        this.users.next(data.getUsers);
+        this.isLoading.next(loading);
+      },
+      error: () => this.isLoading.next(false),
     });
   }
 

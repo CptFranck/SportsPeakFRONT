@@ -32,11 +32,14 @@ export class ExerciseTypeService {
     this.isLoading.next(true);
     this.apolloWrapperService.watchQuery({
       query: GET_EXERCISE_TYPES,
-    }).valueChanges.subscribe(({data, errors, loading}: ApolloQueryResult<any>) => {
-      if (errors)
-        this.alertService.graphQLErrorAlertHandler(errors);
-      this.exerciseTypes.next(data.getExerciseTypes);
-      this.isLoading.next(loading);
+    }).valueChanges.subscribe({
+      next: ({data, errors, loading}: ApolloQueryResult<any>) => {
+        if (errors)
+          this.alertService.graphQLErrorAlertHandler(errors);
+        this.exerciseTypes.next(data.getExerciseTypes);
+        this.isLoading.next(loading);
+      },
+      error: () => this.isLoading.next(false),
     });
   }
 

@@ -5,8 +5,8 @@ import {ADD_EXERCISE, DEL_EXERCISE, GET_EXERCISES, MOD_EXERCISE} from "../../gra
 import {BehaviorSubject} from "rxjs";
 import {AlertService} from "../alert/alert.service";
 import {Exercise} from "../../interface/dto/exercise";
-import {ApolloQueryResult} from "@apollo/client";
 import {ApolloWrapperService} from "../apollo-wrapper/apollo-wrapper.service";
+import {ApolloQueryResult} from "@apollo/client";
 
 @Injectable({
   providedIn: 'root'
@@ -27,12 +27,16 @@ export class ExerciseService {
     this.isLoading.next(true);
     this.apolloWrapperService.watchQuery({
       query: GET_EXERCISES,
-    }).valueChanges.subscribe(({data, errors, loading}: ApolloQueryResult<any>) => {
-      if (errors)
-        this.alertService.graphQLErrorAlertHandler(errors);
-      this.exercises.next(data.getExercises);
-      this.isLoading.next(loading);
-    });
+    }).valueChanges.subscribe({
+        next: ({data, errors, loading}: ApolloQueryResult<any>) => {
+          if (errors)
+            this.alertService.graphQLErrorAlertHandler(errors);
+          this.exercises.next(data?.getExercises ?? []);
+          this.isLoading.next(loading);
+        },
+        error: () => this.isLoading.next(false),
+      }
+    );
   }
 
   addExercise(exerciseForm: FormGroup) {

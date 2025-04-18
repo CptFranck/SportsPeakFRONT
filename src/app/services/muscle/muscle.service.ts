@@ -27,11 +27,14 @@ export class MuscleService {
     this.isLoading.next(true);
     this.apolloWrapperService.watchQuery({
       query: GET_MUSCLES,
-    }).valueChanges.subscribe(({data, errors, loading}: ApolloQueryResult<any>) => {
-      if (errors)
-        this.alertService.graphQLErrorAlertHandler(errors);
-      this.muscles.next(data.getMuscles);
-      this.isLoading.next(loading);
+    }).valueChanges.subscribe({
+      next: ({data, errors, loading}: ApolloQueryResult<any>) => {
+        if (errors)
+          this.alertService.graphQLErrorAlertHandler(errors);
+        this.muscles.next(data.getMuscles);
+        this.isLoading.next(loading);
+      },
+      error: () => this.isLoading.next(false),
     });
   }
 

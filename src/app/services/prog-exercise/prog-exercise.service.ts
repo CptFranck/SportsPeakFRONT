@@ -43,11 +43,14 @@ export class ProgExerciseService {
     this.isLoading.next(true);
     this.apolloWrapperService.watchQuery({
       query: GET_PROG_EXERCISES,
-    }).valueChanges.subscribe(({data, errors, loading}: ApolloQueryResult<any>) => {
-      if (errors)
-        this.alertService.graphQLErrorAlertHandler(errors);
-      this.progExercises.next(data.getProgExercises);
-      this.isLoading.next(loading);
+    }).valueChanges.subscribe({
+      next: ({data, errors, loading}: ApolloQueryResult<any>) => {
+        if (errors)
+          this.alertService.graphQLErrorAlertHandler(errors);
+        this.progExercises.next(data.getProgExercises);
+        this.isLoading.next(loading);
+      },
+      error: () => this.isLoading.next(false),
     });
   }
 
