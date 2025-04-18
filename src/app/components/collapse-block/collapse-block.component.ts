@@ -47,7 +47,6 @@ export class CollapseBlockComponent {
     return "Ok"
   });
 
-  private action!: ActionType | undefined;
   private lastButton: ElementRef | undefined;
 
   constructor(private readonly elementRef: ElementRef) {
@@ -65,7 +64,8 @@ export class CollapseBlockComponent {
   }
 
   onSubmit() {
-    if (this.action)
-      this.submitEventActionType$.next(this.action);
+    const actionType = this.actionType()
+    if (actionType)
+      this.submitEventActionType$.next(actionType);
   }
 }
