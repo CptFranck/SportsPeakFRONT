@@ -14,6 +14,7 @@ import {Subject, takeUntil} from "rxjs";
 import {UserLoggedService} from "../../../../services/user-logged/user-logged.service";
 import {ExerciceCardComponent} from "../../../../components/card/exercice-card/exercice-card.component";
 import {collapseHeight} from "../../../../animation/collapseHeigh";
+import {sortExerciseByName} from "../../../../utils/exercise-function";
 
 @Component({
   selector: 'app-exercises',
@@ -49,7 +50,7 @@ export class ExercisesComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe((exercises: Exercise[]) => {
         this.exercises = exercises;
-        this.displayedExercises.set(exercises);
+        this.displayedExercises.set(Array.from(exercises).sort(sortExerciseByName));
       });
     this.exerciseService.isLoading
       .pipe(takeUntil(this.unsubscribe$))
