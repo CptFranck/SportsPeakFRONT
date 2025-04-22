@@ -10,6 +10,10 @@ import {ExerciseTypeModalComponent} from "../exercise-type-modal/exercise-type-m
 import {SearchBarComponent} from "../../../../components/search-bar/search-bar.component";
 import {Exercise} from "../../../../interface/dto/exercise";
 import {Subject, takeUntil} from "rxjs";
+import {UserLoggedService} from "../../../../services/user-logged/user-logged.service";
+import {collapseHeight} from "../../../../animation/collapseHeigh";
+import {ExerciseTypeCardComponent} from "../../../../components/card/exercise-type-card/exercise-type-card.component";
+import {sortExerciseTypeByName} from "../../../../utils/exercise-type-function";
 
 @Component({
   selector: 'app-exercise-types',
@@ -18,11 +22,14 @@ import {Subject, takeUntil} from "rxjs";
     LoadingComponent,
     ExerciseTypeArrayComponent,
     ExerciseTypeModalComponent,
-    SearchBarComponent
+    SearchBarComponent,
+    ExerciseTypeCardComponent
   ],
-  templateUrl: './exercise-types.component.html'
+  templateUrl: './exercise-types.component.html',
+  animations: [collapseHeight]
 })
 export class ExerciseTypesComponent implements OnInit, OnDestroy {
+  isAdmin = signal<boolean>(false);
   loading = signal<boolean>(true);
   displayedExerciseTypes = signal<ExerciseType[]>([]);
   action = signal<ActionType>(ActionType.create);
@@ -34,6 +41,7 @@ export class ExerciseTypesComponent implements OnInit, OnDestroy {
   private exerciseTypes: ExerciseType[] = [];
 
   private readonly unsubscribe$ = new Subject<void>();
+  private readonly userLoggedService = inject(UserLoggedService);
   private readonly exerciseTypeService = inject(ExerciseTypeService);
 
   ngOnInit(): void {
@@ -43,11 +51,14 @@ export class ExerciseTypesComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe((exerciseType: ExerciseType[]) => {
         this.exerciseTypes = exerciseType;
-        this.displayedExerciseTypes.set(exerciseType);
+        this.displayedExerciseTypes.set(Array.from(exerciseType).sort(sortExerciseTypeByName));
       });
     this.exerciseTypeService.isLoading
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe((loading: boolean) => this.loading.set(loading));
+    this.userLoggedService.currentUser
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe(() => this.isAdmin.set(this.userLoggedService.isAdmin()));
   }
 
   ngOnDestroy() {
