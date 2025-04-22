@@ -1,0 +1,25 @@
+<div class="card mb-3 shadow-sm my-1 exercise-type-card">
+  <div class="row g-0 flex-column flex-md-row">
+    <div class="col-md-8 p-3 d-flex flex-column justify-content-between">
+      <h5 class="card-title mb-2">{{ exerciseType().name }}</h5>
+      <div class="multi-line-truncate mb-2">
+        <p class="card-text"> {{ exerciseType().goal }} </p>
+      </div>
+      <div class="row justify-content-center">
+        <a class="mt-auto btn btn-outline-dark btn-sm w-50" routerLink="muscleDetail/{{exerciseType().id}}">
+          En savoir plus
+        </a>
+      </div>
+    </div>
+    <div class="col-md-4">
+      @let image = `assets/exercise-type/${exerciseType().name.replace(' / ', '-').toLowerCase()}.png`;
+      <img
+        [ngSrc]="image"
+        alt="{{exerciseType().name.toLowerCase()}}"
+        class="img-card-thumbnail rounded"
+        height="1200"
+        width="1200">
+    </div>
+  </div>
+</div>
+
