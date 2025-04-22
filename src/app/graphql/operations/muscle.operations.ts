@@ -5,6 +5,7 @@ export const GET_MUSCLES = gql`
     getMuscles {
       id
       name
+      latinName
       description
       function
       exercises {
@@ -22,6 +23,7 @@ export const ADD_MUSCLE = gql`
     addMuscle(inputNewMuscle: $inputNewMuscle) {
       id
       name
+      latinName
       description
       function
       exercises {
@@ -39,6 +41,7 @@ export const MOD_MUSCLE = gql`
     modifyMuscle(inputMuscle: $inputMuscle) {
       id
       name
+      latinName
       function
       description
       exercises {
