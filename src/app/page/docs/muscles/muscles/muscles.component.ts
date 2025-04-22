@@ -13,6 +13,7 @@ import {Subject, takeUntil} from "rxjs";
 import {UserLoggedService} from "../../../../services/user-logged/user-logged.service";
 import {collapseHeight} from "../../../../animation/collapseHeigh";
 import {MuscleCardComponent} from "../../../../components/card/muscle-card/muscle-card.component";
+import {sortMuscleByName} from "../../../../utils/muscle-functions";
 
 @Component({
   selector: 'app-muscles',
@@ -47,7 +48,7 @@ export class MusclesComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe((muscles: Muscle[]) => {
         this.muscles = muscles;
-        this.displayedMuscles.set(muscles);
+        this.displayedMuscles.set(Array.from(muscles).sort(sortMuscleByName));
       });
     this.muscleService.isLoading
       .pipe(takeUntil(this.unsubscribe$))
