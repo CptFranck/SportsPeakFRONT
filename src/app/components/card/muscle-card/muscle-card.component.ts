@@ -1,13 +1,13 @@
 import {Component, input} from '@angular/core';
 import {Muscle} from "../../../interface/dto/muscle";
 import {RouterLink} from "@angular/router";
-import {NgForOf} from "@angular/common";
+import {NgOptimizedImage} from "@angular/common";
 
 @Component({
   selector: 'app-muscle-card',
   imports: [
     RouterLink,
-    NgForOf,
+    NgOptimizedImage,
   ],
   templateUrl: './muscle-card.component.html',
   styleUrl: 'muscle-card.component.css'

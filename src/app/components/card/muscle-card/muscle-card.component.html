@@ -1,29 +1,23 @@
-<div class="card my-1 limiter-hauteur">
-  <div class="card-body">
-    <h3 class="card-title m-0">
-      <a class="link-dark" routerLink="muscleDetail/{{muscle().id}}"> {{ muscle().name }}</a>
-    </h3>
-    <div class="row">
-      <div class="col truncate-multiline">
-        <span class="fw-bold me-1"> Description&#8239;:</span>
-        {{ muscle().description }}
+<div class="card mb-3 shadow-sm my-1 muscle-card">
+  <div class="row g-0 flex-column flex-md-row">
+    <div class="col-md-8 p-3 d-flex flex-column justify-content-between">
+      <h5 class="card-title mb-2">{{ muscle().name }}</h5>
+      <div class="multi-line-truncate mb-2">
+        <p class="card-text"> {{ muscle().description }} </p>
       </div>
-    </div>
-    <div class="row">
-      <div class="col truncate-multiline">
-        <span class="fw-bold me-1"> Function&#8239;: </span>
-        {{ muscle().function }}
-      </div>
-    </div>
-    <div class="row">
-      <div class="truncate-multiline col">
-        <span class="fw-bold me-1 now"> Used in &#8239;: </span>
-        <a *ngFor="let exercise of muscle().exercises"
-           class="link-dark m-1"
-           routerLink="exerciseDetail/{{exercise.id}}">
-          {{ exercise.name }}
+      <div class="row justify-content-center">
+        <a class="mt-auto btn btn-outline-dark btn-sm w-50" routerLink="muscleDetail/{{muscle().id}}">
+          En savoir plus
         </a>
       </div>
     </div>
+    <div class="col-md-4">
+      <img
+        alt="Image du muscle"
+        class="img-card-thumbnail rounded"
+        height="1200"
+        ngSrc="assets/muscle/latissimus-dorsi.png" width="1200">
+    </div>
   </div>
 </div>
+
