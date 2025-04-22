@@ -1,9 +1,23 @@
-.truncate-multiline {
+.exercise-card {
+  max-width: 100%;
+}
+
+.img-card-thumbnail {
+  max-height: 150px;
+  width: 100%;
+  object-fit: cover;
+}
+
+.multi-line-truncate {
   display: -webkit-box;
+  -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
-  max-height: 100px;
-  line-height: 1.5em;
-  -webkit-line-clamp: 3;
 }
+
+img {
+  width: 100%;
+  height: auto;
+}
+

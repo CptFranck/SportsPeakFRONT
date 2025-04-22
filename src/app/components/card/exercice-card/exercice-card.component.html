@@ -1,29 +1,25 @@
-<div class="card my-1 limiter-hauteur">
-  <div class="card-body">
-    <h3 class="card-title m-0">
-      <a class="link-dark" routerLink="muscleDetail/{{exercise().id}}"> {{ exercise().name }}</a>
-    </h3>
-    <div class="row">
-      <div class="col truncate-multiline">
-        <span class="fw-bold me-1"> Description&#8239;:</span>
-        {{ exercise().description }}
+<div class="card mb-3 shadow-sm my-1 exercise-card">
+  <div class="row g-0 flex-column flex-md-row">
+    <div class="col-md-8 p-3 d-flex flex-column justify-content-between">
+      <h5 class="card-title mb-2">{{ exercise().name }}</h5>
+      <div class="multi-line-truncate mb-2">
+        <p class="card-text"> {{ exercise().description }} </p>
       </div>
-    </div>
-    <div class="row">
-      <div class="col truncate-multiline">
-        <span class="fw-bold me-1"> Function&#8239;: </span>
-        {{ exercise().goal }}
-      </div>
-    </div>
-    <div class="row">
-      <div class="truncate-multiline col">
-        <span class="fw-bold me-1 now"> Used in &#8239;: </span>
-        <a *ngFor="let muscle of exercise().muscles"
-           class="link-dark m-1"
-           routerLink="muscleDetail/{{muscle.id}}">
-          {{ muscle.name }}
+      <div class="row justify-content-center">
+        <a class="mt-auto btn btn-outline-dark btn-sm w-50" routerLink="muscleDetail/{{exercise().id}}">
+          En savoir plus
         </a>
       </div>
     </div>
+    <div class="col-md-4">
+      @let image = `assets/exercise/${exercise().name.toLowerCase()}.png`;
+      <img
+        [ngSrc]="image"
+        alt="{{exercise().name.toLowerCase()}}"
+        class="img-card-thumbnail rounded"
+        height="1200"
+        width="1200">
+    </div>
   </div>
 </div>
+
