@@ -12,11 +12,13 @@
       </div>
     </div>
     <div class="col-md-4">
+      @let image = `assets/muscle/${muscle().latinName.split(' ').join('-')}.png`;
       <img
-        alt="Image du muscle"
+        [ngSrc]="image"
+        alt="{{muscle().latinName.split(' ').join('-')}}"
         class="img-card-thumbnail rounded"
         height="1200"
-        ngSrc="assets/muscle/latissimus-dorsi.png" width="1200">
+        width="1200">
     </div>
   </div>
 </div>
