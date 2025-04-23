@@ -6,29 +6,27 @@
         <h2>Muscles 💪</h2>
       </div>
       <div class="col-auto">
-        <app-muscle-modal (actionMuscle)="setMuscle($event)"
-                          [action]="action()"
-                          [modalTitle]="modalTitle()"
+        <app-modal-button
+          (onCLickModalButton)="muscle.set(undefined)"
+          *ngIf="isAdmin()"
+          [modalId]="muscleModalId"
+        >
+          Add new
+          <i class="fa-regular fa-square-plus"></i>
+        </app-modal-button>
+        <app-muscle-modal [action]="ActionType.create"
                           [muscleModalId]="muscleModalId"
                           [muscle]="muscle()"
+                          modalTitle="Add new muscle"
         />
       </div>
     </div>
     <div class="row">
       <app-search-bar (onInput)="searchMuscle($event)"/>
     </div>
-    <div [@collapseHeight]="!isAdmin()">
-      <div *ngIf="!isAdmin()" [@collapseHeight]="displayedMuscles()" class="container px-0">
-        <div *ngFor="let muscle of displayedMuscles()" class="container px-0">
-          <app-muscle-card [muscle]="muscle"/>
-        </div>
-      </div>
-    </div>
-    <div [@collapseHeight]="isAdmin()">
-      <div *ngIf="isAdmin()" class="container">
-        <app-muscles-array (actionMuscle)="setMuscle($event)"
-                           [modalId]="muscleModalId"
-                           [muscles]="displayedMuscles()"/>
+    <div [@collapseHeight]="displayedMuscles()" class="container px-0">
+      <div *ngFor="let muscle of displayedMuscles()" class="container px-0">
+        <app-muscle-card [muscle]="muscle"/>
       </div>
     </div>
   </div>

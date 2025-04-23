@@ -1,10 +1,8 @@
 import {Component, inject, OnDestroy, OnInit, signal} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {MusclesAdminArrayComponent} from "../muscles-array/muscles-admin-array.component";
 import {LoadingComponent} from "../../../../components/loading/loading.component";
-import {FormIndicator} from "../../../../interface/utils/form-indicator";
 import {ActionType} from "../../../../interface/enum/action-type";
-import {MuscleModalComponent} from "../muscle-modal/muscle-modal.component";
+import {MuscleModalComponent} from "../../../../components/modal-component/muscle-modal/muscle-modal.component";
 import {MuscleService} from "../../../../services/muscle/muscle.service";
 import {Muscle} from "../../../../interface/dto/muscle";
 import {SearchBarComponent} from "../../../../components/search-bar/search-bar.component";
@@ -14,16 +12,17 @@ import {UserLoggedService} from "../../../../services/user-logged/user-logged.se
 import {collapseHeight} from "../../../../animation/collapseHeigh";
 import {MuscleCardComponent} from "../../../../components/card/muscle-card/muscle-card.component";
 import {sortMuscleByName} from "../../../../utils/muscle-functions";
+import {ModalButtonComponent} from "../../../../components/modal/modal-button/modal-button.component";
 
 @Component({
   selector: 'app-muscles',
   imports: [
     CommonModule,
-    MusclesAdminArrayComponent,
     LoadingComponent,
     MuscleModalComponent,
     SearchBarComponent,
-    MuscleCardComponent
+    MuscleCardComponent,
+    ModalButtonComponent
   ],
   templateUrl: './muscles.component.html',
   animations: [collapseHeight]
@@ -31,13 +30,13 @@ import {sortMuscleByName} from "../../../../utils/muscle-functions";
 export class MusclesComponent implements OnInit, OnDestroy {
   isAdmin = signal<boolean>(false);
   loading = signal<boolean>(true);
-  displayedMuscles = signal<Muscle[]>([]);
+
   muscle = signal<Muscle | undefined>(undefined);
-  action = signal<ActionType>(ActionType.create);
-  modalTitle = signal<string>("");
+  displayedMuscles = signal<Muscle[]>([]);
 
   readonly muscleModalId: string = "muscleModal";
-  protected readonly alert = alert;
+  readonly ActionType = ActionType;
+
   private muscles: Muscle[] = [];
   private readonly unsubscribe$ = new Subject<void>();
   private readonly muscleService = inject(MuscleService);
@@ -61,15 +60,6 @@ export class MusclesComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.unsubscribe$.next();
     this.unsubscribe$.complete();
-  }
-
-  setMuscle(formIndicator: FormIndicator) {
-    this.muscle.set(formIndicator.object);
-    this.action.set(formIndicator.actionType);
-    if (formIndicator.object === undefined)
-      this.modalTitle.set("Add new muscle");
-    else
-      this.modalTitle.set(formIndicator.object.name);
   }
 
   searchMuscle(input: string) {
