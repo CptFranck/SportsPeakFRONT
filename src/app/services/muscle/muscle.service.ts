@@ -1,6 +1,12 @@
 import {inject, Injectable} from '@angular/core';
 import {MutationResult} from "apollo-angular";
-import {ADD_MUSCLE, DEL_MUSCLE, GET_MUSCLES, MOD_MUSCLE} from "../../graphql/operations/muscle.operations";
+import {
+  ADD_MUSCLE,
+  DEL_MUSCLE,
+  GET_MUSCLE_BY_ID,
+  GET_MUSCLES,
+  MOD_MUSCLE
+} from "../../graphql/operations/muscle.operations";
 import {FormGroup} from "@angular/forms";
 import {BehaviorSubject} from "rxjs";
 import {Muscle} from "../../interface/dto/muscle";
@@ -13,6 +19,7 @@ import {ApolloWrapperService} from "../apollo-wrapper/apollo-wrapper.service";
 })
 export class MuscleService {
 
+  muscle = new BehaviorSubject<Muscle | undefined>(undefined);
   muscles = new BehaviorSubject<Muscle[]>([]);
   isLoading = new BehaviorSubject<boolean>(true);
 
@@ -32,6 +39,22 @@ export class MuscleService {
         if (errors)
           this.alertService.graphQLErrorAlertHandler(errors);
         this.muscles.next(data.getMuscles);
+        this.isLoading.next(loading);
+      },
+      error: () => this.isLoading.next(false),
+    });
+  }
+
+  getMuscleById(id: number) {
+    this.isLoading.next(true);
+    this.apolloWrapperService.watchQuery({
+      query: GET_MUSCLE_BY_ID,
+      variables: {id: id}
+    }).valueChanges.subscribe({
+      next: ({data, errors, loading}: ApolloQueryResult<any>) => {
+        if (errors)
+          this.alertService.graphQLErrorAlertHandler(errors);
+        this.muscle.next(data.getMuscleById);
         this.isLoading.next(loading);
       },
       error: () => this.isLoading.next(false),
