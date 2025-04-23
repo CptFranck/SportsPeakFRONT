@@ -15,8 +15,3 @@
   overflow: hidden;
   text-overflow: ellipsis;
 }
-
-img {
-  width: 100%;
-  height: auto;
-}
