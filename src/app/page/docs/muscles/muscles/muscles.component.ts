@@ -43,13 +43,13 @@ export class MusclesComponent implements OnInit, OnDestroy {
   private readonly userLoggedService = inject(UserLoggedService);
 
   ngOnInit(): void {
-    this.muscleService.muscles
+    this.muscleService.allMuscle()
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe((muscles: Muscle[]) => {
         this.muscles = muscles;
         this.displayedMuscles.set(Array.from(muscles).sort(sortMuscleByName));
       });
-    this.muscleService.isLoading
+    this.muscleService.loading()
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe((isLoading: boolean) => this.loading.set(isLoading));
     this.userLoggedService.currentUser

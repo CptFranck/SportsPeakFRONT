@@ -32,7 +32,7 @@ export class MuscleDetailsComponent implements OnInit, OnDestroy {
   muscle = signal<Muscle | undefined>(undefined);
   action = signal<ActionType>(ActionType.read);
   modalTitle = signal<string>("");
-  
+
   readonly muscleModalId = "muscleModalId";
   readonly ActionType = ActionType;
 
@@ -42,12 +42,12 @@ export class MuscleDetailsComponent implements OnInit, OnDestroy {
   private readonly userLoggedService = inject(UserLoggedService);
 
   ngOnInit(): void {
-    this.muscleService.muscle
+    this.muscleService.detailsMuscle()
       .subscribe((muscle: Muscle | undefined) => this.muscle.set(muscle))
     this.activatedRoute.params
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe((params: Params) => params['id'] !== this.muscle()?.id ? this.muscleService.getMuscleById(params['id']) : null);
-    this.muscleService.isLoading
+    this.muscleService.loading()
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe((isLoading: boolean) => this.loading.set(isLoading));
     this.userLoggedService.currentUser

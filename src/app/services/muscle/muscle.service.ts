@@ -20,9 +20,9 @@ import {Router} from "@angular/router";
 })
 export class MuscleService {
 
-  muscle = new BehaviorSubject<Muscle | undefined>(undefined);
-  muscles = new BehaviorSubject<Muscle[]>([]);
-  isLoading = new BehaviorSubject<boolean>(true);
+  private isLoading = new BehaviorSubject<boolean>(true);
+  private muscle = new BehaviorSubject<Muscle | undefined>(undefined);
+  private muscles = new BehaviorSubject<Muscle[]>([]);
 
   private readonly router = inject(Router);
   private readonly apolloWrapperService = inject(ApolloWrapperService);
@@ -30,6 +30,18 @@ export class MuscleService {
 
   constructor() {
     this.getMuscles();
+  }
+
+  loading() {
+    return this.isLoading.asObservable();
+  }
+
+  detailsMuscle() {
+    return this.muscle.asObservable();
+  }
+
+  allMuscle() {
+    return this.muscles.asObservable();
   }
 
   getMuscles() {
