@@ -13,6 +13,7 @@ import {Muscle} from "../../interface/dto/muscle";
 import {AlertService} from "../alert/alert.service";
 import {ApolloQueryResult} from "@apollo/client";
 import {ApolloWrapperService} from "../apollo-wrapper/apollo-wrapper.service";
+import {Router} from "@angular/router";
 
 @Injectable({
   providedIn: 'root'
@@ -23,6 +24,7 @@ export class MuscleService {
   muscles = new BehaviorSubject<Muscle[]>([]);
   isLoading = new BehaviorSubject<boolean>(true);
 
+  private readonly router = inject(Router);
   private readonly apolloWrapperService = inject(ApolloWrapperService);
   private readonly alertService = inject(AlertService);
 
@@ -99,6 +101,7 @@ export class MuscleService {
       if (errors)
         this.alertService.graphQLErrorAlertHandler(errors);
       this.alertService.addSuccessAlert(`Muscle ${muscle.name} has been successfully deleted.`);
+      this.router.navigateByUrl('/docs/muscles');
     });
   }
 }
