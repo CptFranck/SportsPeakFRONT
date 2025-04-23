@@ -6,6 +6,9 @@ import {Muscle} from "../../../../interface/dto/muscle";
 import {MuscleService} from "../../../../services/muscle/muscle.service";
 import {LoadingComponent} from "../../../../components/loading/loading.component";
 import {UserLoggedService} from "../../../../services/user-logged/user-logged.service";
+import {ModalButtonComponent} from "../../../../components/modal/modal-button/modal-button.component";
+import {MuscleModalComponent} from "../../../../components/modal-component/muscle-modal/muscle-modal.component";
+import {ActionType} from "../../../../interface/enum/action-type";
 
 @Component({
   selector: 'app-muscle-details',
@@ -15,6 +18,8 @@ import {UserLoggedService} from "../../../../services/user-logged/user-logged.se
     LoadingComponent,
     NgOptimizedImage,
     RouterLink,
+    ModalButtonComponent,
+    MuscleModalComponent,
   ],
   templateUrl: './muscle-details.component.html',
   styleUrl: './muscle-details.component.css'
@@ -23,6 +28,12 @@ export class MuscleDetailsComponent implements OnInit, OnDestroy {
   isAdmin = signal<boolean>(false);
   loading = signal<boolean>(true);
   muscle = signal<Muscle | undefined>(undefined);
+  action = signal<ActionType>(ActionType.read);
+  modalTitle = signal<string>("");
+
+
+  readonly muscleModalId = "muscleModalId";
+  readonly ActionType = ActionType;
 
   private readonly unsubscribe$ = new Subject<void>();
   private readonly muscleService = inject(MuscleService);
@@ -46,5 +57,15 @@ export class MuscleDetailsComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.unsubscribe$.next();
     this.unsubscribe$.complete();
+  }
+
+  onModify() {
+    this.action.set(ActionType.update);
+    this.modalTitle.set(`Modify muscle ${this.muscle()?.name}`);
+  }
+
+  onDelete() {
+    this.action.set(ActionType.delete);
+    this.modalTitle.set(`Delete muscle ${this.muscle()?.name}`);
   }
 }
