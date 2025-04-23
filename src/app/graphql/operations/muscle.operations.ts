@@ -11,12 +11,29 @@ export const GET_MUSCLES = gql`
       exercises {
         id
         name
-        goal
-        description
       }
     }
   }
 `;
+
+export const GET_MUSCLE_BY_ID = gql`
+  query ($id : Int!) {
+    getMuscleById (id : $id) {
+      id
+      name
+      latinName
+      function
+      description
+      exercises {
+        id
+        name
+        description
+        goal
+      }
+    }
+  }
+`;
+
 
 export const ADD_MUSCLE = gql`
   mutation ($inputNewMuscle : InputNewMuscle!){
@@ -29,8 +46,6 @@ export const ADD_MUSCLE = gql`
       exercises {
         id
         name
-        goal
-        description
       }
     }
   }
@@ -47,8 +62,6 @@ export const MOD_MUSCLE = gql`
       exercises {
         id
         name
-        goal
-        description
       }
     }
   }
