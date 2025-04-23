@@ -2,9 +2,9 @@ import {
   AfterViewInit,
   Component,
   computed,
+  effect,
   ElementRef,
   input,
-  OnChanges,
   output,
   viewChild,
   viewChildren
@@ -30,7 +30,7 @@ import {
   templateUrl: './multi-select.component.html',
   styleUrl: './multi-select.component.css'
 })
-export class MultiSelectComponent implements OnChanges, AfterViewInit {
+export class MultiSelectComponent implements AfterViewInit {
   readonly selectedOptions = input.required<number[]>();
   readonly optionList = input.required<MultiSelectOption[]>();
   readonly isLoading = input.required<boolean>();
@@ -72,15 +72,26 @@ export class MultiSelectComponent implements OnChanges, AfterViewInit {
   readonly searchInput = viewChild.required<ElementRef>('searchInput');
   readonly options = viewChildren<ElementRef>('option');
 
-  ngOnChanges(): void {
-    if (this.options()) {
-      this.options().forEach((option: ElementRef) => option.nativeElement.classList.remove("active"));
-      this.setSelectedOptionActive();
-    }
+  constructor() {
+    effect(() => {
+      let allTagsUsed = true;
+      this.options().forEach((option: ElementRef) => {
+        if (!option.nativeElement.classList.contains("all-tags")) {
+          let isSelected: string | undefined = this.selectedOptions().find((id: number) =>
+            id.toString() === option.nativeElement.getAttribute("data-value")
+          )?.toString();
+          if (isSelected)
+            option.nativeElement.classList.toggle("active");
+          else
+            allTagsUsed = false;
+        }
+      });
+      if (allTagsUsed && this.options().length > 1)
+        this.allTagsOption().nativeElement.classList.toggle("active");
+    });
   }
 
   ngAfterViewInit() {
-    this.setSelectedOptionActive();
     document.addEventListener("click", (event: MouseEvent) => {
       if (!(event.target instanceof HTMLElement)) return;
       if (!event.target.closest(".custom-select")
@@ -88,22 +99,6 @@ export class MultiSelectComponent implements OnChanges, AfterViewInit {
         && !event.target.classList.contains("fa-close"))
         this.selectBox().nativeElement.parentNode.classList.remove("open");
     });
-  }
-
-  setSelectedOptionActive(): void {
-    let allTagsUsed = true;
-    this.options().forEach((option: ElementRef) => {
-      if (!option.nativeElement.classList.contains("all-tags")) {
-        let isSelected: string | undefined = this.selectedOptions().find((id: number) =>
-          id.toString() === option.nativeElement.getAttribute("data-value"))?.toString();
-        if (isSelected)
-          option.nativeElement.classList.toggle("active");
-        else
-          allTagsUsed = false;
-      }
-    });
-    if (allTagsUsed && this.options().length > 1)
-      this.allTagsOption().nativeElement.classList.toggle("active");
   }
 
   updateSelectedOptions() {
