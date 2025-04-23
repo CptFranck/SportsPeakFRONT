@@ -33,12 +33,17 @@ export class MuscleEntityFormComponent implements OnInit, OnDestroy {
 
     const muscle = this.muscle();
     const muscleName: string = muscle ? muscle.name : "";
+    const muscleLatinName: string = muscle ? muscle.latinName : "";
     const muscleDescription: string = muscle ? muscle.description : "";
     const muscleFunction: string = muscle ? muscle.function : "";
     const muscleExerciseIds: number[] = muscle?.exercises ? muscle.exercises?.map((ex: Exercise) => ex.id) : [];
 
     const muscleForm: FormGroup = new FormGroup({
       name: new FormControl(muscleName,
+        [Validators.required,
+          Validators.minLength(3),
+          Validators.maxLength(50)]),
+      latinName: new FormControl(muscleLatinName,
         [Validators.required,
           Validators.minLength(3),
           Validators.maxLength(50)]),
@@ -70,17 +75,13 @@ export class MuscleEntityFormComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.userLoggedService.currentUser
       .pipe(takeUntil(this.unsubscribe$))
-      .subscribe(() =>
-        this.isAdmin = this.userLoggedService.isAdmin());
+      .subscribe(() => this.isAdmin = this.userLoggedService.isAdmin());
     const submitEventActionType$ = this.submitEventActionType$();
     if (submitEventActionType$)
       submitEventActionType$
         .pipe(takeUntil(this.unsubscribe$))
-        .subscribe((actionType: ActionType) => {
-          if (actionType === ActionType.create || actionType === ActionType.update) {
-            this.onSubmit();
-          }
-        });
+        .subscribe((actionType: ActionType) =>
+          (actionType === ActionType.create || actionType === ActionType.update) ? this.onSubmit() : null);
   }
 
   ngOnDestroy() {

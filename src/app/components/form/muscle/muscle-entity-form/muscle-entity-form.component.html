@@ -1,13 +1,27 @@
 <form [formGroup]="muscleForm()" class="container-fluid">
   <div class="mb-3">
-    <span class="form-label">Name :</span>
-    <input class="form-control" formControlName="name" type="text">
-    <app-input-control
-      [formGroup]="muscleForm()"
-      [submitInvalid]="submitInvalidForm()"
-      formGroupFieldName="name"
-      rules="min : 3 ; max : 50"
-    />
+    <div class="row">
+      <div class="col">
+        <span class="form-label">Name :</span>
+        <input class="form-control" formControlName="name" type="text">
+        <app-input-control
+          [formGroup]="muscleForm()"
+          [submitInvalid]="submitInvalidForm()"
+          formGroupFieldName="name"
+          rules="min : 3 ; max : 50"
+        />
+      </div>
+      <div class="col">
+        <span class="form-label">Latin Name :</span>
+        <input class="form-control" formControlName="latinName" type="text">
+        <app-input-control
+          [formGroup]="muscleForm()"
+          [submitInvalid]="submitInvalidForm()"
+          formGroupFieldName="latinName"
+          rules="min : 3 ; max : 50"
+        />
+      </div>
+    </div>
   </div>
 
   <div class="mb-3">
