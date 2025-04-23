@@ -2,11 +2,4 @@
   text-align: justify;
 }
 
-.text-body {
-  color: inherit;
-  text-decoration: none;
-}
 
-td, th {
-  max-width: 550px;
-}

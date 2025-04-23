@@ -1,7 +1,7 @@
 import {Component, inject, OnDestroy, OnInit, signal} from '@angular/core';
-import {NgForOf, NgIf, NgOptimizedImage} from "@angular/common";
+import {NgIf, NgOptimizedImage} from "@angular/common";
 import {Subject, takeUntil} from "rxjs";
-import {ActivatedRoute, Params, RouterLink} from "@angular/router";
+import {ActivatedRoute, Params} from "@angular/router";
 import {Muscle} from "../../../../interface/dto/muscle";
 import {MuscleService} from "../../../../services/muscle/muscle.service";
 import {LoadingComponent} from "../../../../components/loading/loading.component";
@@ -9,17 +9,19 @@ import {UserLoggedService} from "../../../../services/user-logged/user-logged.se
 import {ModalButtonComponent} from "../../../../components/modal/modal-button/modal-button.component";
 import {MuscleModalComponent} from "../../../../components/modal-component/muscle-modal/muscle-modal.component";
 import {ActionType} from "../../../../interface/enum/action-type";
+import {
+  MuscleExercisesTableComponent
+} from "../../../../components/table/muscle-exercises-table/muscle-exercises-table.component";
 
 @Component({
   selector: 'app-muscle-details',
   imports: [
-    NgForOf,
     NgIf,
     LoadingComponent,
     NgOptimizedImage,
-    RouterLink,
     ModalButtonComponent,
     MuscleModalComponent,
+    MuscleExercisesTableComponent,
   ],
   templateUrl: './muscle-details.component.html',
   styleUrl: './muscle-details.component.css'
@@ -30,8 +32,7 @@ export class MuscleDetailsComponent implements OnInit, OnDestroy {
   muscle = signal<Muscle | undefined>(undefined);
   action = signal<ActionType>(ActionType.read);
   modalTitle = signal<string>("");
-
-
+  
   readonly muscleModalId = "muscleModalId";
   readonly ActionType = ActionType;
 
