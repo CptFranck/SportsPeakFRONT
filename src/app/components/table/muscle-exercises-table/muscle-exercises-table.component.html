@@ -1,0 +1,30 @@
+<div class="table-responsive">
+  <table class="table table-sm table-hover">
+    <thead class="text-muted">
+    <tr>
+      <th class="col-2" scope="col">Nom</th>
+      <th class="col-5" scope="col">Objectif</th>
+      <th class="col-5" scope="col">Description</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let exercise of muscle()?.exercises" class="table-row-clickable">
+      <td class="position-relative">
+        <a [routerLink]="['/exercises', exercise.id]" class="stretched-link text-table-body ">
+          {{ exercise.name }}
+        </a>
+      </td>
+      <td class="text-truncate position-relative ">
+        <a [routerLink]="['/exercises', exercise.id]" class="stretched-link text-table-body">
+          {{ exercise.goal }}
+        </a>
+      </td>
+      <td class="text-truncate position-relative">
+        <a [routerLink]="['/exercises', exercise.id]" class="stretched-link text-table-body">
+          {{ exercise.description }}
+        </a>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
