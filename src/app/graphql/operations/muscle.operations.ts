@@ -17,7 +17,7 @@ export const GET_MUSCLES = gql`
 `;
 
 export const GET_MUSCLE_BY_ID = gql`
-  query ($id : Int!) {
+  query ($id : ID!) {
     getMuscleById (id : $id) {
       id
       name
@@ -68,7 +68,7 @@ export const MOD_MUSCLE = gql`
 `;
 
 export const DEL_MUSCLE = gql`
-  mutation ($muscleId : Int!){
+  mutation ($muscleId : ID!){
     deleteMuscle(muscleId: $muscleId)
   }
 `;
