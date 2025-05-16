@@ -58,7 +58,7 @@ export const GET_PROG_EXERCISES = gql`
 `;
 
 export const GET_PROG_EXERCISE_BY_ID = gql`
-  query ($id : Int!){
+  query ($id : ID!){
     getProgExerciseById(id: $id) {
       id
       name
@@ -114,7 +114,7 @@ export const GET_PROG_EXERCISE_BY_ID = gql`
 `;
 
 export const GET_USER_PROG_EXERCISES = gql`
-  query ($userId : Int!){
+  query ($userId : ID!){
     getUserProgExercises(userId: $userId) {
       id
       name
@@ -346,7 +346,7 @@ export const MOD_PROG_EXERCISE_TRUST_LABEL = gql`
   }
 `;
 export const DEL_PROG_EXERCISE = gql`
-  mutation ($progExerciseId : Int!){
+  mutation ($progExerciseId : ID!){
     deleteProgExercise(progExerciseId: $progExerciseId)
   }
 `;

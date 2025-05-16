@@ -52,7 +52,7 @@ export const MOD_PRIVILEGE = gql`
 `;
 
 export const DEL_PRIVILEGE = gql`
-  mutation ($privilegeId : Int!){
+  mutation ($privilegeId : ID!){
     deletePrivilege(privilegeId: $privilegeId)
   }
 `;

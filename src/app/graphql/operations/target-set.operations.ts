@@ -1,7 +1,7 @@
 import {gql} from "apollo-angular";
 
 export const GET_TARGET_SET_BY_PROG_EXERCISE_ID = gql`
-  query ($id : Int!){
+  query ($id : ID!){
     getTargetSetsByProgExerciseId(id: $id) {
       id
       index
@@ -144,7 +144,7 @@ export const MOD_TARGET_SET_STATE = gql`
 `;
 
 export const DEL_TARGET_SET = gql`
-  mutation ($targetSetId : Int!){
+  mutation ($targetSetId : ID!){
     deleteTargetSet(targetSetId: $targetSetId)
   }
 `;

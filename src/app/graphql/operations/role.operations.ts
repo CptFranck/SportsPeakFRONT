@@ -14,7 +14,7 @@ export const GET_ROLES = gql`
 `;
 
 export const ADD_ROLE = gql`
-  mutation ($inputRole : InputRole!){
+  mutation ($inputNewRole : InputRole!){
     addRole(inputNewRole: $inputNewRole) {
       id
       name
@@ -40,7 +40,7 @@ export const MOD_ROLE = gql`
 `;
 
 export const DEL_ROLE = gql`
-  mutation ($roleId : Int!){
+  mutation ($roleId : ID!){
     deleteRole(roleId: $roleId)
   }
 `;

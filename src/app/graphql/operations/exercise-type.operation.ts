@@ -49,7 +49,7 @@ export const MOD_EXERCISE_TYPES = gql`
 `;
 
 export const DEL_EXERCISE_TYPES = gql`
-  mutation ($exerciseTypeId : Int!){
+  mutation ($exerciseTypeId : ID!){
     deleteExerciseType(exerciseTypeId: $exerciseTypeId)
   }
 `;

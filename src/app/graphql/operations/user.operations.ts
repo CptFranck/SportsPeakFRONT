@@ -120,7 +120,7 @@ export const MOD_USER_PASSWORD = gql`
   }`;
 
 export const DEL_USER = gql`
-  mutation ($userId : Int!){
+  mutation ($userId : ID!){
     deleteUser(userId: $userId)
   }
 `;

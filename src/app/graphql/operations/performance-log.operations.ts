@@ -27,7 +27,7 @@ export const MOD_PERFORMANCE_LOG = gql`
 `;
 
 export const DEL_PERFORMANCE_LOG = gql`
-  mutation ($performanceLogId : Int!){
+  mutation ($performanceLogId : ID!){
     deletePerformanceLog(performanceLogId: $performanceLogId)
   }
 `;

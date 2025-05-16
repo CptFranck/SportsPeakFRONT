@@ -66,7 +66,7 @@ export const MOD_EXERCISE = gql`
 `;
 
 export const DEL_EXERCISE = gql`
-  mutation ($exerciseId : Int!){
+  mutation ($exerciseId : ID!){
     deleteExercise(exerciseId: $exerciseId)
   }
 `;
