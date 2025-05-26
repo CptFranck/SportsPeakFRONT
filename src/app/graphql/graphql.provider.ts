@@ -9,7 +9,7 @@ import {TokenService} from "../services/token/token.service";
 import {AuthToken} from "../interface/dto/token";
 
 // URL of the GraphQL server here
-const uri: string = 'http://localhost:8080/service/api/graphql';
+const uri: string = 'https://localhost:8443/service/api/graphql';
 
 function apolloOptionsFactory(): ApolloClientOptions<any> {
   const httpLink: HttpLink = inject(HttpLink);
