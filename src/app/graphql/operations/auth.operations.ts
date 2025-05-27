@@ -4,8 +4,7 @@ export const LOGIN = gql`
   mutation ($inputCredentials: InputCredentials!){
     login(inputCredentials: $inputCredentials){
       tokenType
-      accessToken
-      expiration
+      token
       user {
         id
         email
@@ -25,11 +24,10 @@ export const LOGIN = gql`
   }`;
 
 export const REGISTER = gql`
-  mutation ($inputRegisterNewUser : InputRegisterNewUser!) {
-    register(inputRegisterNewUser: $inputRegisterNewUser){
+  mutation ($registerInput : RegisterInput!) {
+    register(registerInput: $registerInput){
       tokenType
-      accessToken
-      expiration
+      token
       user {
         id
         email
