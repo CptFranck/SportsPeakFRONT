@@ -7,9 +7,10 @@ import {ErrorResponse, onError} from "@apollo/client/link/error";
 import {setContext} from "@apollo/client/link/context";
 import {TokenService} from "../services/token/token.service";
 import {AuthToken} from "../interface/dto/token";
+import {environment} from "../environment/environment";
 
 // URL of the GraphQL server here
-const uri: string = 'https://localhost:8443/service/api/graphql';
+const uri: string = environment.graphqlEndPoint;
 
 function apolloOptionsFactory(): ApolloClientOptions<any> {
   const httpLink: HttpLink = inject(HttpLink);
