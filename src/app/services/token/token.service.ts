@@ -2,6 +2,7 @@ import {inject, Injectable} from '@angular/core';
 import {LocalStorageService} from "../local-storage/local-storage.service";
 import {AuthToken} from "../../interface/dto/token";
 import {Auth} from "../../interface/dto/auth";
+import {jwtDecode} from "jwt-decode";
 
 @Injectable({
   providedIn: 'root'
@@ -35,17 +36,18 @@ export class TokenService {
   }
 
   isTokenValid(authToken: AuthToken | null): boolean {
-    if (authToken !== null) {
-      return new Date(authToken.expiration) > new Date();
-    }
+    const currentTime = Date.now() / 1000;
+    if (authToken !== null && authToken.expiration)
+      return authToken.expiration < currentTime;
     return false;
   }
 
   private createAuthToken(data: Auth): AuthToken {
+    const decodedToken = jwtDecode(data.token);
     return {
       tokenType: data.tokenType,
-      accessToken: data.accessToken,
-      expiration: new Date(data.expiration)
+      accessToken: data.token,
+      expiration: decodedToken.exp
     };
   }
 
