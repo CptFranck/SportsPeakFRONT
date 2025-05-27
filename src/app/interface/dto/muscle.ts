@@ -6,5 +6,6 @@ export interface Muscle {
   latinName: string
   description: string
   function: string
+  illustrationPath: string
   exercises: Exercise[]
 }
