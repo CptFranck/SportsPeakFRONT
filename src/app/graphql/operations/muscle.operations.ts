@@ -8,6 +8,7 @@ export const GET_MUSCLES = gql`
       latinName
       description
       function
+      illustrationPath
       exercises {
         id
         name
@@ -24,6 +25,7 @@ export const GET_MUSCLE_BY_ID = gql`
       latinName
       function
       description
+      illustrationPath
       exercises {
         id
         name
@@ -43,6 +45,7 @@ export const ADD_MUSCLE = gql`
       latinName
       description
       function
+      illustrationPath
       exercises {
         id
         name
@@ -59,6 +62,7 @@ export const MOD_MUSCLE = gql`
       latinName
       function
       description
+      illustrationPath
       exercises {
         id
         name
