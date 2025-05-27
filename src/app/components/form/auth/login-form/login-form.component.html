@@ -3,11 +3,11 @@
   <p> {{ "admin@sportspeak.com // ChangeMeInProd1! " }} </p>
   <div class="mb-3">
     <span class="form-label">Email address</span>
-    <input aria-describedby="emailHelp" class="form-control" formControlName="email" type="email">
+    <input aria-describedby="loginHelp" class="form-control" formControlName="login" type="text">
     <app-input-control
       [formGroup]="loginForm()"
       [submitInvalid]="submitInvalidForm()"
-      formGroupFieldName="email"
+      formGroupFieldName="login"
     />
   </div>
   <div class="mb-3">

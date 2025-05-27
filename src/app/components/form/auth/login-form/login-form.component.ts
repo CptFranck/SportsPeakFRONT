@@ -13,11 +13,10 @@ import {InputControlComponent} from "../../../input-control/input-control.compon
 })
 export class LoginFormComponent {
   loginForm = signal<FormGroup>(new FormGroup({
-    email: new FormControl(
+    login: new FormControl(
       // "",
       "admin@sportspeak.com",
-      [Validators.required,
-        Validators.email]),
+      [Validators.required]),
     password: new FormControl(
       // "",
       "ChangeMeInProd1!",
