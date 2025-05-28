@@ -38,7 +38,7 @@ export class TokenService {
   isTokenValid(authToken: AuthToken | null): boolean {
     const currentTime = Date.now() / 1000;
     if (authToken !== null && authToken.expiration)
-      return authToken.expiration < currentTime;
+      return authToken.expiration > currentTime;
     return false;
   }
 
