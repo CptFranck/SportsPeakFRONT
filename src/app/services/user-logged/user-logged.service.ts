@@ -34,14 +34,14 @@ export class UserLoggedService {
   isStaff() {
     const user = this.currentUser.value;
     if (user)
-      return user.roles.some(role => role.name === "ROLE_STAFF" || role.name === "ROLE_ADMIN");
+      return user.roles.some(role => role.name === "STAFF" || role.name === "ADMIN");
     return false;
   }
 
   isAdmin() {
     const user = this.currentUser.value;
     if (user)
-      return user.roles.some(role => role.name === "ROLE_ADMIN");
+      return user.roles.some(role => role.name === "ADMIN");
     return false;
   }
 
