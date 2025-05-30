@@ -5,13 +5,15 @@
 >
 </app-modal>
 <ng-template #modalTemplate let-btnClose="btnClose" let-submitEventActionType$="submitEventActionType$">
-  <app-muscle-entity-form *ngIf="action() === ActionType.create || action() === ActionType.update"
-                          [btnCloseRef]="btnClose"
-                          [muscle]="muscle()"
-                          [submitEventActionType$]="submitEventActionType$"
+  @switch (action()) {
+    @case (ActionType.create || ActionType.update) {
+      <app-muscle-entity-form [btnCloseRef]="btnClose" [muscle]="muscle()"
+                              [submitEventActionType$]="submitEventActionType$"/>
+    }
+    @case (ActionType.delete) {
+      <app-muscle-delete-form [btnCloseRef]="btnClose" [muscle]="muscle()"
+                              [submitEventActionType$]="submitEventActionType$"/>
+    }
+  }
   />
-  <app-muscle-delete-form *ngIf="action() === ActionType.delete"
-                          [btnCloseRef]="btnClose"
-                          [muscle]="muscle()"
-                          [submitEventActionType$]="submitEventActionType$"/>
 </ng-template>

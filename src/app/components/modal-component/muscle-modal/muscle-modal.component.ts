@@ -2,7 +2,6 @@ import {Component, input} from '@angular/core';
 import {ActionType} from "../../../interface/enum/action-type";
 import {ModalComponent} from "../../modal/modal/modal.component";
 import {MuscleEntityFormComponent} from "../../form/muscle/muscle-entity-form/muscle-entity-form.component";
-import {NgIf} from "@angular/common";
 import {MuscleDeleteFormComponent} from "../../form/muscle/muscle-delete-form/muscle-delete-form.component";
 import {Muscle} from "../../../interface/dto/muscle";
 
@@ -11,7 +10,6 @@ import {Muscle} from "../../../interface/dto/muscle";
   imports: [
     ModalComponent,
     MuscleEntityFormComponent,
-    NgIf,
     MuscleDeleteFormComponent
   ],
   templateUrl: './muscle-modal.component.html'
