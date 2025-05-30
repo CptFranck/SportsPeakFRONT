@@ -1,24 +1,20 @@
-import {Component, inject, input, OnDestroy, OnInit, output, signal} from '@angular/core';
+import {Component, input, OnDestroy, OnInit, output, signal} from '@angular/core';
 import {FormIndicator} from "../../../../interface/utils/form-indicator";
 import {ActionType} from "../../../../interface/enum/action-type";
 import {ExerciseType} from "../../../../interface/dto/exercise-type";
-import {NgForOf, NgIf} from "@angular/common";
 import {ModalButtonComponent} from "../../../../components/modal/modal-button/modal-button.component";
-import {UserLoggedService} from "../../../../services/user-logged/user-logged.service";
 import {Dictionary} from "../../../../interface/utils/dictionary";
-import {Subject, takeUntil} from "rxjs";
+import {Subject} from "rxjs";
+import {Exercise} from "../../../../interface/dto/exercise";
 
 @Component({
   selector: 'app-exercise-type-array',
   imports: [
-    NgForOf,
-    NgIf,
     ModalButtonComponent
   ],
   templateUrl: './exercise-type-array.component.html'
 })
 export class ExerciseTypeArrayComponent implements OnInit, OnDestroy {
-  isAdmin = signal<boolean>(false);
   showDetails = signal<Dictionary<boolean>>({});
 
   readonly modalId = input.required<string>();
@@ -27,7 +23,6 @@ export class ExerciseTypeArrayComponent implements OnInit, OnDestroy {
   readonly actionExerciseType = output<FormIndicator>();
 
   private readonly unsubscribe$ = new Subject<void>();
-  private readonly userLoggedService = inject(UserLoggedService);
 
   ngOnInit(): void {
     this.exerciseTypes().forEach((exerciseType: ExerciseType) => this.showDetails.update(value =>
@@ -35,9 +30,6 @@ export class ExerciseTypeArrayComponent implements OnInit, OnDestroy {
         ...value,
         [exerciseType.id]: false
       })));
-    this.userLoggedService.currentUser
-      .pipe(takeUntil(this.unsubscribe$))
-      .subscribe(() => this.isAdmin.set(this.userLoggedService.isAdmin()));
   }
 
   ngOnDestroy() {
@@ -69,5 +61,14 @@ export class ExerciseTypeArrayComponent implements OnInit, OnDestroy {
       actionType: ActionType.delete,
       object: exerciseType
     });
+  }
+
+  getVisibleExercises(exerciseType: ExerciseType): Exercise[] {
+    const show = this.showDetails()[exerciseType.id];
+    return show ? exerciseType.exercises : exerciseType.exercises.slice(0, 2);
+  }
+
+  shouldShowEllipsis(exerciseType: ExerciseType): boolean {
+    return exerciseType.exercises.length > 3;
   }
 }
