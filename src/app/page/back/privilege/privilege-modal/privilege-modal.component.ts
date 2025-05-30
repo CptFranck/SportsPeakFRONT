@@ -1,7 +1,6 @@
 import {Component, input, output} from '@angular/core';
 import {ModalButtonComponent} from "../../../../components/modal/modal-button/modal-button.component";
 import {ModalComponent} from "../../../../components/modal/modal/modal.component";
-import {NgIf} from "@angular/common";
 import {
   PrivilegeDeleteFormComponent
 } from "../../../../components/form/privilege/privilege-delete-form/privilege-delete-form.component";
@@ -20,7 +19,6 @@ import {FormIndicator} from "../../../../interface/utils/form-indicator";
   imports: [
     ModalButtonComponent,
     ModalComponent,
-    NgIf,
     PrivilegeDeleteFormComponent,
     PrivilegeDetailDisplayComponent,
     PrivilegeEntityFormComponent
