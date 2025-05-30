@@ -1,4 +1,4 @@
-<div [hidden]="hidden()" [id]="collapseId()" class="pt-4 px-4 collapseBlock">
+<div #collapseBlock [hidden]="hidden()" [id]="collapseId()" class="pt-4 px-4 collapseBlock">
   <div class="border border-1 rounded">
     <div class="px-4 pt-4">
       <ng-container [ngTemplateOutletContext]="{submitEventActionType$: submitEventActionType$, btnClose:btnClose}"
