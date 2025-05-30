@@ -9,94 +9,96 @@
                       [contentTemplate]="performanceCollapseTemplate"
   />
   <ng-template #performanceCollapseTemplate let-btnClose="btnClose" let-submitEventActionType$="submitEventActionType$">
-    <h5 *ngIf="performanceLogDate" class="fw-bold"> {{ "Performance from " + performanceLogDate }} </h5>
-    <app-performance-log-entity-form *ngIf="action() === ActionType.update"
-                                     [btnCloseRef]="btnClose"
-                                     [performanceLog]="performanceLog()"
-                                     [submitEventActionType$]="submitEventActionType$"
-                                     [targetSet]="targetSet()"/>
-    <app-performance-log-delete-form *ngIf="action() === ActionType.delete"
-                                     [btnCloseRef]="btnClose"
-                                     [performanceLog]="performanceLog()"
-                                     [submitEventActionType$]="submitEventActionType$"/>
+    @if (performanceLogDate()) {
+      <h5 class="fw-bold"> {{ "Performance from " + performanceLogDate() }} </h5>
+    }
+    @switch (action()) {
+      @case (ActionType.update) {
+        <app-performance-log-entity-form [btnCloseRef]="btnClose" [performanceLog]="performanceLog()"
+                                         [submitEventActionType$]="submitEventActionType$"
+                                         [targetSet]="targetSet()"/>
+      }
+      @case (ActionType.delete) {
+        <app-performance-log-delete-form [btnCloseRef]="btnClose" [performanceLog]="performanceLog()"
+                                         [submitEventActionType$]="submitEventActionType$"/>
+      }
+    }
+
   </ng-template>
-  <div *ngIf="tabOptions()[0]" [id]="tabOptions()[0].id" class="tab-pane fade show active">
-    <div class="container">
-      <div class="container d-flex p-2">
-        <div class="p-2">
-          <app-check-box (actionPerformanceLog)="onCheckBoxClick()"
-                         [checked]="switchSortByDate()"
-                         labelCheck="sort by date"
-                         labelUnchecked="sort by set"
-          />
-        </div>
-        <div class="p-2">
-          <app-check-box (actionPerformanceLog)="onUseRelativeInformationOnlyClick()"
-                         [checked]="useRelativeInformationOnly()"
-                         labelCheck="see only performance logs of current version set"
-          />
-        </div>
-      </div>
-      <div *ngIf="Object.keys(performanceLogsSortedByLogDate()).length !== 0" class="container overflow-auto p-3"
-           style="max-height: calc(100vh - 50vh)"
-      >
-        <app-performance-log-sorted-by-log-date (actionPerformanceLog)="setPerformanceLog($event)"
-                                                [accordionParentIdDate]="accordionParentIdDate"
-                                                [collapseBlock]="collapseBlock"
-                                                [formCollapseId]="performanceLogFormCollapseId"
-                                                [hidden]="!switchSortByDate()"
-                                                [performanceLogsSortByDate]="performanceLogsSortedByLogDate()"
-        />
-        <app-performance-log-sorted-by-set (actionPerformanceLog)="setPerformanceLog($event)"
-                                           [accordionParentIdSet]="accordionParentIdSet"
-                                           [collapseBlock]="collapseBlock"
-                                           [formCollapseId]="performanceLogFormCollapseId"
-                                           [hidden]="switchSortByDate()"
-                                           [performanceLogsSortedBySet]="performanceLogsSortedBySet()"
-        />
-      </div>
-    </div>
-    <div *ngIf="Object.keys(performanceLogsSortedByLogDate()).length === 0" class="container p-2">
-      <div class="col-auto card m-3 shadow">
-        <div class="card-body ">
-          <div class="row">
-            <div class="col-auto">
-              No performanceLogs saved
-            </div>
+  @if (tabOptions()[0]) {
+    <div [id]="tabOptions()[0].id" class="tab-pane fade show active">
+      <div class="container">
+        <div class="container d-flex p-2">
+          <div class="p-2">
+            <app-check-box (actionPerformanceLog)="onCheckBoxClick()" [checked]="switchSortByDate()"
+                           labelCheck="sort by date" labelUnchecked="sort by set"/>
+          </div>
+          <div class="p-2">
+            <app-check-box (actionPerformanceLog)="onUseRelativeInformationOnlyClick()"
+                           [checked]="useRelativeInformationOnly()"
+                           labelCheck="see only performance logs of current version set"
+            />
           </div>
         </div>
-      </div>
-    </div>
-  </div>
-  <div *ngIf="tabOptions()[1]" [id]="tabOptions()[1].id" class="tab-pane fade">
-    <div class="container">
-      <div class="container d-flex p-2">
-        <div class="p-2">
-          <app-check-box (actionPerformanceLog)="onUseRelativeInformationOnlyClick()"
-                         [checked]="switchSortByDate()"
-                         labelCheck="see also old performance logs"
-          />
-        </div>
-      </div>
-      <div *ngIf="Object.keys(performanceLogsSortedByLogDate()).length !== 0" class="container overflow-auto p-3"
-           style="max-height: calc(100vh - 50vh)"
-      >
-        <app-performance-logs-charts (actionPerformanceLog)="setPerformanceLog($event)"
-                                     [accordionParentIdGraph]="accordionParentIdGraph"
-                                     [collapseBlock]="collapseBlock"
-                                     [performanceLogsInputSortedBySet]="performanceLogsSortedBySet()"/>
-      </div>
-    </div>
-    <div *ngIf="Object.keys(performanceLogsSortedByLogDate()).length === 0" class="container p-2">
-      <div class="col-auto card m-3 shadow">
-        <div class="card-body ">
-          <div class="row">
-            <div class="col-auto">
-              No performanceLogs saved
+
+        @if (Object.keys(performanceLogsSortedByLogDate()).length !== 0) {
+          <div class="container p-3">
+            <app-performance-log-sorted-by-log-date (actionPerformanceLog)="setPerformanceLog($event)"
+                                                    [accordionParentIdDate]="accordionParentIdDate"
+                                                    [collapseBlock]="collapseBlock"
+                                                    [formCollapseId]="performanceLogFormCollapseId"
+                                                    [hidden]="!switchSortByDate()"
+                                                    [performanceLogsSortByDate]="performanceLogsSortedByLogDate()"/>
+            <app-performance-log-sorted-by-set (actionPerformanceLog)="setPerformanceLog($event)"
+                                               [accordionParentIdSet]="accordionParentIdSet"
+                                               [collapseBlock]="collapseBlock"
+                                               [formCollapseId]="performanceLogFormCollapseId"
+                                               [hidden]="switchSortByDate()"
+                                               [performanceLogsSortedBySet]="performanceLogsSortedBySet()"/>
+          </div>
+        } @else {
+          <div class="container p-2">
+            <div class="col-auto card m-3 shadow">
+              <div class="card-body ">
+                <div class="row">
+                  <div class="col-auto">No performanceLogs saved</div>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
+        }
       </div>
     </div>
-  </div>
+  }
+  @if (tabOptions()[1]) {
+    <div [id]="tabOptions()[1].id" class="tab-pane fade">
+      <div class="container">
+        <div class="container d-flex p-2">
+          <div class="p-2">
+            <app-check-box (actionPerformanceLog)="onUseRelativeInformationOnlyClick()" [checked]="switchSortByDate()"
+                           labelCheck="see also old performance logs"
+            />
+          </div>
+        </div>
+        @if (Object.keys(performanceLogsSortedByLogDate()).length !== 0) {
+          <div class="container p-3">
+            <app-performance-logs-charts (actionPerformanceLog)="setPerformanceLog($event)"
+                                         [accordionParentIdGraph]="accordionParentIdGraph"
+                                         [collapseBlock]="collapseBlock"
+                                         [performanceLogsInputSortedBySet]="performanceLogsSortedBySet()"/>
+          </div>
+        } @else {
+          <div class="container p-2">
+            <div class="col-auto card m-3 shadow">
+              <div class="card-body ">
+                <div class="row">
+                  <div class="col-auto"> No performanceLogs saved</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        }
+      </div>
+    </div>
+  }
 </div>
