@@ -11,13 +11,17 @@
 >
 </app-modal>
 <ng-template #progExerciseModalTemplate let-btnClose="btnClose" let-submitEventActionType$="submitEventActionType$">
-  <app-my-prog-exercise-entity-form *ngIf="action() === ActionType.create"
-                                    [btnCloseRef]="btnClose"
-                                    [progExercise]="progExercise()"
-                                    [submitEventActionType$]="submitEventActionType$"/>
-  <app-my-prog-exercise-details-display *ngIf="action() === ActionType.read"
-                                        [progExercise]="progExercise()"/>
-  @let localProgExercise = progExercise();
-  <app-my-prog-exercise-performance *ngIf="action() === ActionType.checkPerformance && localProgExercise"
-                                    [progExercise]="localProgExercise"/>
+  @switch (action()) {
+    @case (ActionType.create) {
+      <app-my-prog-exercise-entity-form [btnCloseRef]="btnClose" [progExercise]="progExercise()"
+                                        [submitEventActionType$]="submitEventActionType$"/>
+    }
+    @case (ActionType.read) {
+      <app-my-prog-exercise-details-display [progExercise]="progExercise()"/>
+    }
+    @case (ActionType.checkPerformance) {
+      <app-my-prog-exercise-performance [progExercise]="progExercise()"/>
+    }
+  }
+
 </ng-template>
