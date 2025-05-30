@@ -2,7 +2,6 @@ import {Component, input} from '@angular/core';
 import {User} from "../../../interface/dto/user";
 import {ActionType} from "../../../interface/enum/action-type";
 import {ModalComponent} from "../../../components/modal/modal/modal.component";
-import {NgIf} from "@angular/common";
 import {ModificationField} from "../../../interface/enum/modification-field";
 import {UserEmailFormComponent} from "../../../components/form/user/user-email-form/user-email-form.component";
 import {UserUsernameFormComponent} from "../../../components/form/user/user-username-form/user-username-form.component";
@@ -14,7 +13,6 @@ import {UserDeleteFormComponent} from "../../../components/form/user/user-delete
   selector: 'app-user-modal',
   imports: [
     ModalComponent,
-    NgIf,
     UserEmailFormComponent,
     UserUsernameFormComponent,
     UserNameFormComponent,
