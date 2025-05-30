@@ -1,4 +1,4 @@
-import {Component, ElementRef, input, OnInit, output, signal} from '@angular/core';
+import {Component, ElementRef, input, OnInit, output, signal, viewChild} from '@angular/core';
 import {CollapseBlockComponent} from "../collapse-block/collapse-block.component";
 import {TargetSet} from "../../interface/dto/target-set";
 
@@ -19,8 +19,7 @@ export class CollapseButtonComponent implements OnInit {
 
   readonly onClickEvent = output<TargetSet>();
 
-  constructor(private readonly elementRef: ElementRef) {
-  }
+  readonly elementRef = viewChild.required<ElementRef>('collapseButton');
 
   ngOnInit(): void {
     if (this.allWidth())
@@ -32,8 +31,7 @@ export class CollapseButtonComponent implements OnInit {
   onClick() {
     this.onClickEvent.emit(this.value());
     const collapseBlockComponent = this.collapseBlockComponent();
-    if (collapseBlockComponent) {
-      collapseBlockComponent.toggle(this.elementRef)
-    }
+    if (collapseBlockComponent)
+      collapseBlockComponent.toggle(this.elementRef())
   }
 }
