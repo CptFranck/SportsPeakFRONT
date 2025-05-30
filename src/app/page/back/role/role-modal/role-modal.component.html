@@ -11,15 +11,16 @@
 >
 </app-modal>
 <ng-template #modalTemplate let-btnClose="btnClose" let-submitEventActionType$="submitEventActionType$">
-  <app-role-entity-form *ngIf="action() === ActionType.create || action() === ActionType.update"
-                        [btnCloseRef]="btnClose"
-                        [role]="role()"
-                        [submitEventActionType$]="submitEventActionType$"
-  />
-  <app-role-details-display *ngIf="action() === ActionType.read"
-                            [role]="role()"/>
-  <app-role-delete-form *ngIf="action() === ActionType.delete"
-                        [btnCloseRef]="btnClose"
-                        [role]="role()"
-                        [submitEventActionType$]="submitEventActionType$"/>
+  @switch (action()) {
+    @case (ActionType.create || ActionType.update) {
+      <app-role-entity-form [btnCloseRef]="btnClose" [role]="role()" [submitEventActionType$]="submitEventActionType$"/>
+    }
+    @case (ActionType.read) {
+      <app-role-details-display [role]="role()"/>
+    }
+    @case (ActionType.delete) {
+      <app-role-delete-form [btnCloseRef]="btnClose" [role]="role()" [submitEventActionType$]="submitEventActionType$"/>
+    }
+  }
+
 </ng-template>
