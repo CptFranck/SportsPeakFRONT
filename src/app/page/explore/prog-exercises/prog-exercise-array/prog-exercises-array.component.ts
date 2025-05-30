@@ -1,9 +1,8 @@
-import {Component, inject, input, OnChanges, OnDestroy, OnInit, signal, output} from '@angular/core';
+import {Component, inject, input, OnChanges, OnDestroy, OnInit, output, signal} from '@angular/core';
 import {FormIndicator} from "../../../../interface/utils/form-indicator";
 import {UserLoggedService} from "../../../../services/user-logged/user-logged.service";
 import {ActionType} from "../../../../interface/enum/action-type";
 import {ModalButtonComponent} from "../../../../components/modal/modal-button/modal-button.component";
-import {NgForOf, NgIf} from "@angular/common";
 import {ProgExercise} from "../../../../interface/dto/prog-exercise";
 import {User} from "../../../../interface/dto/user";
 import {ProgExerciseRowDetail} from "../../../../interface/utils/prog-exercise-row-detail";
@@ -14,8 +13,6 @@ import {Subject} from "rxjs";
   selector: 'app-prog-exercises-array',
   imports: [
     ModalButtonComponent,
-    NgForOf,
-    NgIf
   ],
   templateUrl: './prog-exercises-array.component.html'
 })
@@ -89,4 +86,16 @@ export class ProgExercisesArrayComponent implements OnInit, OnChanges, OnDestroy
   //     object: progExercise
   //   });
   // }
+
+  getDisplayedMuscles(progExercise: ProgExercise) {
+    const showAll = this.progExerciseDetails()[progExercise.id].show;
+    return showAll
+      ? progExercise.exercise.muscles
+      : progExercise.exercise.muscles.slice(0, 2);
+  }
+
+  shouldShowEllipsis(progExercise: ProgExercise) {
+    const showAll = this.progExerciseDetails()[progExercise.id].show;
+    return !showAll && progExercise.exercise.muscles.length > 3;
+  }
 }
