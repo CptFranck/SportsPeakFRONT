@@ -1,7 +1,6 @@
 import {Component, input, output} from '@angular/core';
 import {ActionType} from "../../../../../interface/enum/action-type";
 import {ModalComponent} from "../../../../../components/modal/modal/modal.component";
-import {NgIf} from "@angular/common";
 import {TargetSet} from "../../../../../interface/dto/target-set";
 import {ModalButtonComponent} from "../../../../../components/modal/modal-button/modal-button.component";
 import {
@@ -21,7 +20,6 @@ import {FormIndicator} from "../../../../../interface/utils/form-indicator";
   selector: 'app-target-set-modal',
   imports: [
     ModalComponent,
-    NgIf,
     ModalButtonComponent,
     TargetSetDeleteFormComponent,
     TargetSetEntityFormComponent,
