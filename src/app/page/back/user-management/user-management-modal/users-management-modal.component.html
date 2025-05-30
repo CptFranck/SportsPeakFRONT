@@ -5,14 +5,19 @@
 >
 </app-modal>
 <ng-template #modalTemplate let-btnClose="btnClose" let-submitEventActionType$="submitEventActionType$">
-  <app-user-roles-form *ngIf="action() === ActionType.create || action() === ActionType.update"
-                       [btnCloseRef]="btnClose"
-                       [submitEvents]="submitEventActionType$"
-                       [user]="user()"
-  />
-  <app-user-details-display *ngIf="action() === ActionType.read" [user]="user()"/>
+  @if (action() === ActionType.create || action() === ActionType.update) {
+    <app-user-roles-form [btnCloseRef]="btnClose"
+                         [submitEvents]="submitEventActionType$"
+                         [user]="user()"
+    />
+  }
+  @if (action() === ActionType.read) {
+    <app-user-details-display [user]="user()"/>
+  }
+  <!--  @if (action() === ActionType.delete) {-->
   <!--  <app-user-delete-form [btnCloseRef]="btnClose"-->
   <!--                        [submitEventActionType$]="submitEventActionType$"-->
   <!--                        [user]="user"-->
   <!--  />-->
+  <!--  }-->
 </ng-template>

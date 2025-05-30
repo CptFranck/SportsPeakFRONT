@@ -6,7 +6,6 @@ import {
   UserRolesFormComponent
 } from "../../../../components/form/user-management/user-entity-form/user-roles-form.component";
 import {ModalComponent} from "../../../../components/modal/modal/modal.component";
-import {NgIf} from "@angular/common";
 import {User} from "../../../../interface/dto/user";
 import {ActionType} from "../../../../interface/enum/action-type";
 
@@ -14,7 +13,6 @@ import {ActionType} from "../../../../interface/enum/action-type";
   selector: 'app-user-modal',
   imports: [
     ModalComponent,
-    NgIf,
     UserDetailsDisplayComponent,
     UserRolesFormComponent
   ],
