@@ -5,19 +5,20 @@
 >
 </app-modal>
 <ng-template #modalTemplate let-btnClose="btnClose" let-submitEventActionType$="submitEventActionType$">
-  @if (action() === ActionType.create || action() === ActionType.update) {
-    <app-user-roles-form [btnCloseRef]="btnClose"
-                         [submitEvents]="submitEventActionType$"
-                         [user]="user()"
-    />
+  @switch (action()) {
+    @case (ActionType.create || ActionType.update) {
+      <app-user-roles-form [btnCloseRef]="btnClose"
+                           [submitEvents]="submitEventActionType$"
+                           [user]="user()"/>
+    }
+    @case (ActionType.read) {
+      <app-user-details-display [user]="user()"/>
+    }
+    <!--  @case (action() === ActionType.delete) {-->
+      <!--  <app-user-delete-form [btnCloseRef]="btnClose"-->
+      <!--                        [submitEventActionType$]="submitEventActionType$"-->
+      <!--                        [user]="user"-->
+      <!--  />-->
+      <!--  }-->
   }
-  @if (action() === ActionType.read) {
-    <app-user-details-display [user]="user()"/>
-  }
-  <!--  @if (action() === ActionType.delete) {-->
-  <!--  <app-user-delete-form [btnCloseRef]="btnClose"-->
-  <!--                        [submitEventActionType$]="submitEventActionType$"-->
-  <!--                        [user]="user"-->
-  <!--  />-->
-  <!--  }-->
 </ng-template>
