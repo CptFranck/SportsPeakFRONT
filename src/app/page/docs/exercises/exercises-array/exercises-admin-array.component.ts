@@ -1,17 +1,15 @@
 import {Component, input, OnChanges, OnDestroy, output, signal} from '@angular/core';
-import {NgForOf, NgIf} from "@angular/common";
 import {FormIndicator} from "../../../../interface/utils/form-indicator";
 import {ActionType} from "../../../../interface/enum/action-type";
 import {Exercise} from "../../../../interface/dto/exercise";
 import {ModalButtonComponent} from "../../../../components/modal/modal-button/modal-button.component";
 import {Dictionary} from "../../../../interface/utils/dictionary";
 import {Subject} from "rxjs";
+import {Muscle} from "../../../../interface/dto/muscle";
 
 @Component({
   selector: 'app-exercises-array',
   imports: [
-    NgForOf,
-    NgIf,
     ModalButtonComponent
   ],
   templateUrl: './exercises-admin-array.component.html'
@@ -32,7 +30,6 @@ export class ExercisesAdminArrayComponent implements OnChanges, OnDestroy {
         ...value,
         [exercise.id]: false
       })));
-
   }
 
   ngOnDestroy() {
@@ -64,5 +61,15 @@ export class ExercisesAdminArrayComponent implements OnChanges, OnDestroy {
       actionType: ActionType.delete,
       object: exercise
     });
+  }
+
+  getVisibleMuscles(exercise: Exercise): Muscle[] {
+    const showAll = this.showDetails()[exercise.id];
+    return showAll ? exercise.muscles : exercise.muscles?.slice(0, 2) || [];
+  }
+
+  shouldShowEllipsis(exercise: Exercise): boolean {
+    const showAll = this.showDetails()[exercise.id];
+    return !showAll && exercise.muscles?.length > 3;
   }
 }
