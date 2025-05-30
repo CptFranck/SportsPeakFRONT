@@ -14,7 +14,6 @@ import {CollapseBlockComponent} from "../../../collapse-block/collapse-block.com
 import {
   PerformanceLogDeleteFormComponent
 } from "../../../form/performance-log/performance-log-delete-form/performance-log-delete-form.component";
-import {NgIf} from "@angular/common";
 import {
   PerformanceLogSortedBySetComponent
 } from "../performance-log-sorted-by-set/performance-log-sorted-by-set.component";
@@ -31,7 +30,6 @@ import {CheckBoxComponent} from "../../../input/check-box/check-box.component";
     PerformanceLogEntityFormComponent,
     CollapseBlockComponent,
     PerformanceLogDeleteFormComponent,
-    NgIf,
     PerformanceLogSortedBySetComponent,
     PerformanceLogsChartsComponent,
     TabHeaderComponent,

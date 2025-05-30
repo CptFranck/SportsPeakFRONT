@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, effect, ElementRef, input, viewChild} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, input, viewChild} from '@angular/core';
 import {Chart, registerables} from "chart.js";
 import zoomPlugin from 'chartjs-plugin-zoom';
 import {addDateTime, stringToDate} from "../../../utils/time-functions";
@@ -29,14 +29,14 @@ export class PerformanceLogsSetChartComponent implements AfterViewInit {
 
     this.refChart = this.chartRef().nativeElement.getContext('2d');
 
-    effect(() => {
-      if (this.chart)
-        this.chart.destroy();
-
-      this.defineData(this.performanceLogSet());
-      this.defineOption();
-      this.draw();
-    })
+    // effect(() => {
+    //   if (this.chart)
+    //     this.chart.destroy();
+    //
+    //   this.defineData(this.performanceLogSet());
+    //   this.defineOption();
+    //   this.draw();
+    // })
   }
 
   resetZoom() {
