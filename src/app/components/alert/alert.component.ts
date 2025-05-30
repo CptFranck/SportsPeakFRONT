@@ -1,14 +1,12 @@
 import {Component, input, OnInit, output, signal} from '@angular/core';
 import {Alert} from "../../interface/utils/alert";
-import {NgIf, NgStyle} from "@angular/common";
+import {NgStyle} from "@angular/common";
 import {Dictionary} from "../../interface/utils/dictionary";
 
 @Component({
   selector: 'app-alert',
   imports: [
-    NgIf,
     NgStyle,
-
   ],
   templateUrl: './alert.component.html',
 })

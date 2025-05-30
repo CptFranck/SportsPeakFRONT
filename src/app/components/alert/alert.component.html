@@ -7,23 +7,31 @@
       <h5 class="fw-bold">{{ alert().title }}</h5>
     </div>
   </div>
-  <div class="row ">
-    <div *ngIf="alert().errorInformation?.errorPath" class="col-auto m-0">
-      <span class="fw-bold">ErrorPath : </span> {{ alert().errorInformation?.errorPath }}
-    </div>
-    <div *ngIf="alert().errorInformation?.errorType" class="col-auto">
-      <span class="fw-bold">ErrorType : </span> {{ alert().errorInformation?.errorType }}
-    </div>
-    <div *ngIf="alert().errorInformation?.errorPath" class="col-auto">
-      <span class="fw-bold">ErrorLocation : </span>{{ alert().errorInformation?.errorLocation }}
-    </div>
-    <div *ngIf="alert().errorInformation?.errorExtension" class="col-auto">
-      <span class="fw-bold">ErrorExtension : </span> {{ alert().errorInformation?.errorExtension }}
-    </div>
+  <div class="row">
+    @if (alert().errorInformation?.errorPath) {
+      <div class="col-auto m-0">
+        <span class="fw-bold">ErrorPath : </span> {{ alert().errorInformation?.errorPath }}
+      </div>
+    }
+    @if (alert().errorInformation?.errorType) {
+      <div class="col-auto">
+        <span class="fw-bold">ErrorType : </span> {{ alert().errorInformation?.errorType }}
+      </div>
+    }
+    @if (alert().errorInformation?.errorPath) {
+      <div class="col-auto">
+        <span class="fw-bold">ErrorLocation : </span>{{ alert().errorInformation?.errorLocation }}
+      </div>
+    }
+    @if (alert().errorInformation?.errorExtension) {
+      <div class="col-auto">
+        <span class="fw-bold">ErrorExtension : </span> {{ alert().errorInformation?.errorExtension }}
+      </div>
+    }
   </div>
   <div class="row">
     <div class="col">
-      <span class="fw-bold">Message : </span>{{ alert().message }}
+      <span class="fw-bold">Message : </span> {{ alert().message }}
     </div>
   </div>
   <div class="col-1 align-items-center">
