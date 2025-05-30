@@ -1,7 +1,6 @@
 import {Component, inject, input, OnDestroy, OnInit, output, signal} from '@angular/core';
 import {ModalButtonComponent} from "../../../../components/modal/modal-button/modal-button.component";
 import {ModalComponent} from "../../../../components/modal/modal/modal.component";
-import {NgIf} from "@angular/common";
 import {ActionType} from "../../../../interface/enum/action-type";
 import {Exercise} from "../../../../interface/dto/exercise";
 import {
@@ -22,7 +21,6 @@ import {FormIndicator} from "../../../../interface/utils/form-indicator";
   imports: [
     ModalButtonComponent,
     ModalComponent,
-    NgIf,
     ExerciseEntityFormComponent,
     ExerciseDeleteFormComponent,
     ExerciseDetailsDisplayComponent
