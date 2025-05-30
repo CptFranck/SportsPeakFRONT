@@ -3,7 +3,6 @@ import {ActionType} from "../../../../../interface/enum/action-type";
 import {TargetSet} from "../../../../../interface/dto/target-set";
 import {PerformanceLog} from "../../../../../interface/dto/performance-log";
 import {ModalComponent} from "../../../../../components/modal/modal/modal.component";
-import {NgIf} from "@angular/common";
 import {
   PerformanceLogEntityFormComponent
 } from "../../../../../components/form/performance-log/performance-log-entity-form/performance-log-entity-form.component";
@@ -16,7 +15,6 @@ import {ProgExercise} from "../../../../../interface/dto/prog-exercise";
   selector: 'app-performance-log-modal',
   imports: [
     ModalComponent,
-    NgIf,
     PerformanceLogEntityFormComponent,
     PerformanceLogsComponent
   ],
