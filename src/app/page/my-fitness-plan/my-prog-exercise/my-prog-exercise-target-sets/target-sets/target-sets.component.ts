@@ -1,5 +1,4 @@
 import {Component, computed, input, output} from '@angular/core';
-import {NgForOf, NgIf} from "@angular/common";
 import {FormIndicator} from "../../../../../interface/utils/form-indicator";
 import {ProgExerciseTargetSets} from "../../../../../interface/utils/progExerciseTargetSets";
 import {ActionType} from "../../../../../interface/enum/action-type";
@@ -17,8 +16,6 @@ import {TargetSet} from "../../../../../interface/dto/target-set";
 @Component({
   selector: 'app-target-sets',
   imports: [
-    NgForOf,
-    NgIf,
     TargetSetCardComponent,
     TabHeaderComponent
   ],

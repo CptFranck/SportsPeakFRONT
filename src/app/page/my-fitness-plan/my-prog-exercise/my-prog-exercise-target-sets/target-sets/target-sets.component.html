@@ -4,37 +4,43 @@
   />
   <div [id]="tabId" class="tab-content border border-top-0 rounded-bottom border-1">
     <div [id]="targetSetUsedId" class="tab-pane fade show active p-1">
-      <p *ngIf=" progExerciseTargetSets().targetSetUsed.length === 0 ">No target set used</p>
-      <app-target-set-card (actionPerformanceLogs)="setPerformanceLog($event)"
-                           (actionTargetSets)="setTargetSet($event)"
-                           *ngFor="let targetSet of progExerciseTargetSets().targetSetUsed"
-                           [isLastTargetSet]="isLastTargetSetUsed()[targetSet.id]"
-                           [performanceLogModalId]="performanceLogModalId()"
-                           [targetSetModalId]="targetSetModalId()"
-                           [targetSet]="targetSet"
-      />
+      @if (progExerciseTargetSets().targetSetUsed.length === 0) {
+        <p>No target set used</p>
+      }
+      @for (targetSet of progExerciseTargetSets().targetSetUsed; track targetSet.id) {
+        <app-target-set-card (actionPerformanceLogs)="setPerformanceLog($event)"
+                             (actionTargetSets)="setTargetSet($event)"
+                             [isLastTargetSet]="isLastTargetSetUsed()[targetSet.id]"
+                             [performanceLogModalId]="performanceLogModalId()"
+                             [targetSetModalId]="targetSetModalId()"
+                             [targetSet]="targetSet"/>
+      }
     </div>
     <div [id]="targetSetUnusedId" class="tab-pane fade p-1">
-      <p *ngIf=" progExerciseTargetSets().targetSetUnused.length === 0 ">No set are unused</p>
-      <app-target-set-card (actionPerformanceLogs)="setPerformanceLog($event)"
-                           (actionTargetSets)="setTargetSet($event)"
-                           *ngFor="let targetSet of progExerciseTargetSets().targetSetUnused"
-                           [isLastTargetSet]="isLastTargetSetUsed()[targetSet.id]"
-                           [performanceLogModalId]="performanceLogModalId()"
-                           [targetSetModalId]="targetSetModalId()"
-                           [targetSet]="targetSet"
-      />
+      @if (progExerciseTargetSets().targetSetUnused.length === 0) {
+        <p>No target set unused</p>
+      }
+      @for (targetSet of progExerciseTargetSets().targetSetUnused; track targetSet.id) {
+        <app-target-set-card (actionPerformanceLogs)="setPerformanceLog($event)"
+                             (actionTargetSets)="setTargetSet($event)"
+                             [isLastTargetSet]="isLastTargetSetUsed()[targetSet.id]"
+                             [performanceLogModalId]="performanceLogModalId()"
+                             [targetSetModalId]="targetSetModalId()"
+                             [targetSet]="targetSet"/>
+      }
     </div>
     <div [id]="targetSetHiddenId" class="tab-pane fade p-1">
-      <p *ngIf=" progExerciseTargetSets().targetSetHidden.length === 0 ">No set are hidden</p>
-      <app-target-set-card (actionPerformanceLogs)="setPerformanceLog($event)"
-                           (actionTargetSets)="setTargetSet($event)"
-                           *ngFor="let targetSet of progExerciseTargetSets().targetSetHidden"
-                           [isLastTargetSet]="isLastTargetSetUsed()[targetSet.id]"
-                           [performanceLogModalId]="performanceLogModalId()"
-                           [targetSetModalId]="targetSetModalId()"
-                           [targetSet]="targetSet"
-      />
+      @if (progExerciseTargetSets().targetSetHidden.length === 0) {
+        <p>No target set hidden</p>
+      }
+      @for (targetSet of progExerciseTargetSets().targetSetHidden; track targetSet.id) {
+        <app-target-set-card (actionPerformanceLogs)="setPerformanceLog($event)"
+                             (actionTargetSets)="setTargetSet($event)"
+                             [isLastTargetSet]="isLastTargetSetUsed()[targetSet.id]"
+                             [performanceLogModalId]="performanceLogModalId()"
+                             [targetSetModalId]="targetSetModalId()"
+                             [targetSet]="targetSet"/>
+      }
     </div>
   </div>
 </div>
