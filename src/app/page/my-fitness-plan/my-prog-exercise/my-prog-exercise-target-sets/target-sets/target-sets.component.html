@@ -5,7 +5,9 @@
   <div [id]="tabId" class="tab-content border border-top-0 rounded-bottom border-1">
     <div [id]="targetSetUsedId" class="tab-pane fade show active p-1">
       @if (progExerciseTargetSets().targetSetUsed.length === 0) {
-        <p>No target set used</p>
+        <div class="container px-2 pt-2">
+          <p>No target set used</p>
+        </div>
       }
       @for (targetSet of progExerciseTargetSets().targetSetUsed; track targetSet.id) {
         <app-target-set-card (actionPerformanceLogs)="setPerformanceLog($event)"
@@ -18,7 +20,9 @@
     </div>
     <div [id]="targetSetUnusedId" class="tab-pane fade p-1">
       @if (progExerciseTargetSets().targetSetUnused.length === 0) {
-        <p>No target set unused</p>
+        <div class="container px-2 pt-2">
+          <p>No target set unused</p>
+        </div>
       }
       @for (targetSet of progExerciseTargetSets().targetSetUnused; track targetSet.id) {
         <app-target-set-card (actionPerformanceLogs)="setPerformanceLog($event)"
@@ -31,7 +35,9 @@
     </div>
     <div [id]="targetSetHiddenId" class="tab-pane fade p-1">
       @if (progExerciseTargetSets().targetSetHidden.length === 0) {
-        <p>No target set hidden</p>
+        <div class="container px-2 pt-2">
+          <p>No target set hidden</p>
+        </div>
       }
       @for (targetSet of progExerciseTargetSets().targetSetHidden; track targetSet.id) {
         <app-target-set-card (actionPerformanceLogs)="setPerformanceLog($event)"
