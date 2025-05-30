@@ -56,7 +56,7 @@ export class UserNameFormComponent implements OnInit, OnDestroy {
       submitEventActionType$
         .pipe(takeUntil(this.unsubscribe$))
         .subscribe((actionType: ActionType) => {
-          if (actionType === ActionType.update && this.modification() === ModificationField.name)
+          if (actionType === ActionType.update && this.modification() === ModificationField.identity)
             this.onSubmit();
         });
   }

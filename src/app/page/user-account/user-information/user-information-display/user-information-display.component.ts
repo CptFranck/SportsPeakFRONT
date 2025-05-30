@@ -40,7 +40,7 @@ export class UserInformationDisplayComponent {
   onChangeName() {
     this.actionUser.emit({
       actionType: ActionType.update,
-      modificationField: ModificationField.name,
+      modificationField: ModificationField.identity,
       object: this.user()
     });
   }

@@ -60,7 +60,7 @@ export class UserComponent implements OnInit, OnDestroy {
       case ModificationField.email:
         this.modalTitle = formIndicator.object.email;
         return;
-      case ModificationField.name:
+      case ModificationField.identity:
         this.modalTitle = formIndicator.object.firstName + " " + formIndicator.object.lastName;
         return;
       default:
