@@ -5,16 +5,17 @@
 >
 </app-modal>
 <ng-template #modalTemplate let-btnClose="btnClose" let-submitEventActionType$="submitEventActionType$">
-  <app-my-prog-exercise-performance *ngIf="action() === ActionType.checkPerformance"
-                                    [progExercise]="progExercise()"
-  />
-  <app-my-prog-exercise-entity-form *ngIf="action() === ActionType.update"
-                                    [btnCloseRef]="btnClose"
-                                    [progExercise]="progExercise()"
-                                    [submitEventActionType$]="submitEventActionType$"
-  />
-  <app-my-prog-exercise-delete-form *ngIf="action() === ActionType.delete"
-                                    [btnCloseRef]="btnClose"
-                                    [progExercise]="progExercise()"
-                                    [submitEventActionType$]="submitEventActionType$"/>
+  @switch (action()) {
+    @case (ActionType.checkPerformance) {
+      <app-my-prog-exercise-performance [progExercise]="progExercise()"/>
+    }
+    @case (ActionType.update) {
+      <app-my-prog-exercise-entity-form [btnCloseRef]="btnClose" [progExercise]="progExercise()"
+                                        [submitEventActionType$]="submitEventActionType$"/>
+    }
+    @case (ActionType.delete) {
+      <app-my-prog-exercise-delete-form [btnCloseRef]="btnClose" [progExercise]="progExercise()"
+                                        [submitEventActionType$]="submitEventActionType$"/>
+    }
+  }
 </ng-template>
