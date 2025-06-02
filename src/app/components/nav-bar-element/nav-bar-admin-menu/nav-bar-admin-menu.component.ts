@@ -1,7 +1,6 @@
 import {Component, inject, OnDestroy, OnInit, signal} from '@angular/core';
 import {UserLoggedService} from "../../../services/user-logged/user-logged.service";
 import {RouterLink, RouterLinkActive} from "@angular/router";
-import {NgIf} from "@angular/common";
 import {Subject, takeUntil} from "rxjs";
 
 @Component({
@@ -9,7 +8,6 @@ import {Subject, takeUntil} from "rxjs";
   imports: [
     RouterLink,
     RouterLinkActive,
-    NgIf
   ],
   templateUrl: './nav-bar-admin-menu.component.html'
 })
