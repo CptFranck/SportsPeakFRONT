@@ -1,5 +1,5 @@
 import {Component, computed, input, TemplateRef} from '@angular/core';
-import {NgIf, NgTemplateOutlet} from "@angular/common";
+import {NgTemplateOutlet} from "@angular/common";
 import {Subject} from "rxjs";
 import {ActionType} from "../../../interface/enum/action-type";
 
@@ -7,7 +7,6 @@ import {ActionType} from "../../../interface/enum/action-type";
   selector: 'app-modal',
   imports: [
     NgTemplateOutlet,
-    NgIf
   ],
   templateUrl: './modal.component.html',
   standalone: true

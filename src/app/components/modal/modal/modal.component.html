@@ -23,13 +23,11 @@
         <button #btnClose class="btn btn-secondary" data-bs-dismiss="modal" type="button">
           {{ closeButtonTitle() }}
         </button>
-        <button (click)="onSubmit()"
-                *ngIf="submitButton()"
-                [class]="'btn ' + validateButtonClass()"
-                type="button"
-        >
-          {{ validationButtonTitle() }}
-        </button>
+        @if (submitButton()) {
+          <button (click)="onSubmit()" [class]="'btn ' + validateButtonClass()" type="button">
+            {{ validationButtonTitle() }}
+          </button>
+        }
       </div>
     </div>
   </div>
