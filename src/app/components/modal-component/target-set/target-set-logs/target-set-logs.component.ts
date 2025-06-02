@@ -1,6 +1,5 @@
 import {Component, computed, input, output, signal} from '@angular/core';
 import {TargetSet} from "../../../../interface/dto/target-set";
-import {NgForOf, NgIf} from "@angular/common";
 import {TargetSetLogsCardComponent} from "../../../card/target-set/target-set-logs-card/target-set-logs-card.component";
 import {FormIndicator} from "../../../../interface/utils/form-indicator";
 import {getTargetSetLogs} from "../../../../utils/target-set-functions";
@@ -18,9 +17,7 @@ import {ProgExercise} from "../../../../interface/dto/prog-exercise";
 @Component({
   selector: 'app-target-set-logs',
   imports: [
-    NgForOf,
     TargetSetLogsCardComponent,
-    NgIf,
     CollapseBlockComponent,
     TargetSetEntityFormComponent,
     TargetSetDeleteFormComponent,
