@@ -1,7 +1,6 @@
 import {Component, inject, input, OnDestroy, OnInit, output, signal} from '@angular/core';
 import {ModalButtonComponent} from "../../../../components/modal/modal-button/modal-button.component";
 import {ModalComponent} from "../../../../components/modal/modal/modal.component";
-import {NgIf} from "@angular/common";
 import {ActionType} from "../../../../interface/enum/action-type";
 import {ExerciseType} from "../../../../interface/dto/exercise-type";
 import {
@@ -22,7 +21,6 @@ import {Subject, takeUntil} from "rxjs";
   imports: [
     ModalButtonComponent,
     ModalComponent,
-    NgIf,
     ExerciseTypeDetailsDisplayComponent,
     ExerciseTypeEntityFormComponent,
     ExerciseTypeDeleteFormComponent
