@@ -1,35 +1,38 @@
 <ul class="navbar-nav h4">
-  <li *ngIf="user" class="dropdown">
-    <a [id]="navbarDropdownId" aria-expanded="false" aria-haspopup="true" class="nav-link "
-       data-bs-toggle="dropdown"
-       role="button">
-      {{ user.username }}
-    </a>
-    <ul [attr.aria-labelledby]="navbarDropdownId" class="dropdown-menu">
-      <li>
-        <a class="nav-link" routerLink="/user" routerLinkActive="active">User Profile</a>
-      </li>
-      <li>
-        <a class="nav-link" routerLink="/user" routerLinkActive="active">Account settings</a>
-      </li>
-      <li>
-        <hr class="dropdown-divider">
-      </li>
-      <li>
-        <div class="nav-link disabled">
-          <p class="m-0"> Account : </p>
-          <p class="m-0">{{ user.firstName }} {{ user.lastName }} </p>
-        </div>
-      </li>
-      <li *ngIf="user?.roles && isAdmin">
-        <div class="nav-link disabled">
-          <p class="m-0 "> Role : </p>
-          <p *ngFor="let role of user?.roles"
-             class="m-0">
-            {{ role.name }}
-          </p>
-        </div>
-      </li>
-    </ul>
-  </li>
+  @let localUser = user();
+  @if (localUser) {
+    <li class="dropdown">
+      <a [id]="navbarDropdownId" aria-expanded="false" aria-haspopup="true" class="nav-link " data-bs-toggle="dropdown"
+         role="button">
+        {{ localUser.username }}
+      </a>
+      <ul [attr.aria-labelledby]="navbarDropdownId" class="dropdown-menu">
+        <li>
+          <a class="nav-link" routerLink="/user" routerLinkActive="active">User Profile</a>
+        </li>
+        <li>
+          <a class="nav-link" routerLink="/user" routerLinkActive="active">Account settings</a>
+        </li>
+        <li>
+          <hr class="dropdown-divider">
+        </li>
+        <li>
+          <div class="nav-link disabled">
+            <p class="m-0"> Account : </p>
+            <p class="m-0">{{ localUser.firstName }} {{ localUser.lastName }} </p>
+          </div>
+        </li>
+        @if (localUser?.roles && isAdmin()) {
+          <li>
+            <div class="nav-link disabled">
+              <p class="m-0 "> Role : </p>
+              @for (role of localUser?.roles; track role.id) {
+                <p class="m-0"> {{ role.name }} </p>
+              }
+            </div>
+          </li>
+        }
+      </ul>
+    </li>
+  }
 </ul>
