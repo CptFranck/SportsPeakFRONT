@@ -3,7 +3,6 @@ import 'chartjs-adapter-date-fns';
 
 import {DictionaryItem} from "../../../interface/utils/dictionary-item";
 import {PerformanceLog} from "../../../interface/dto/performance-log";
-import {NgForOf} from "@angular/common";
 import {PerformanceLogsSetChartComponent} from "../performance-logs-set-chart/performance-logs-set-chart.component";
 import {
   PerformanceLogsCardComponent
@@ -15,7 +14,6 @@ import {ifFirstShow, ifNotFirstCollapse} from "../../../utils/accordion-function
 @Component({
   selector: 'app-performance-logs-charts',
   imports: [
-    NgForOf,
     PerformanceLogsSetChartComponent,
     PerformanceLogsCardComponent
   ],
