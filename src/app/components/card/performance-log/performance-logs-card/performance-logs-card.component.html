@@ -22,36 +22,38 @@
             </div>
           </div>
         </div>
-        <div *ngIf="activeButton()" class="col-12 col-sm-12 col-md-12 col-lg-4">
-          <div class="row justify-content-center">
-            <div class="col py-1">
-              <app-collapse-button
-                (onClickEvent)="modPerformanceLog($event)"
-                [allWidth]="true"
-                [collapseBlockComponent]="collapseBlockComponent()"
-                [collapseId]="formCollapseId()"
-                [value]="performanceLog()"
-                btnClass="btn-secondary"
-              >
-                Modify
-                <i class="fa-solid fa-pen-to-square"></i>
-              </app-collapse-button>
-            </div>
-            <div class="col py-1">
-              <app-collapse-button
-                (onClickEvent)="delPerformanceLog($event)"
-                [allWidth]="true"
-                [collapseBlockComponent]="collapseBlockComponent()"
-                [collapseId]="formCollapseId()"
-                [value]="performanceLog()"
-                btnClass="btn-danger"
-              >
-                Delete
-                <i class="fa-solid fa-trash"></i>
-              </app-collapse-button>
+        @if (activeButton()) {
+          <div class="col-12 col-sm-12 col-md-12 col-lg-4">
+            <div class="row justify-content-center">
+              <div class="col py-1">
+                <app-collapse-button
+                  (onClickEvent)="modPerformanceLog($event)"
+                  [allWidth]="true"
+                  [collapseBlockComponent]="collapseBlockComponent()"
+                  [collapseId]="formCollapseId()"
+                  [value]="performanceLog()"
+                  btnClass="btn-secondary"
+                >
+                  Modify
+                  <i class="fa-solid fa-pen-to-square"></i>
+                </app-collapse-button>
+              </div>
+              <div class="col py-1">
+                <app-collapse-button
+                  (onClickEvent)="delPerformanceLog($event)"
+                  [allWidth]="true"
+                  [collapseBlockComponent]="collapseBlockComponent()"
+                  [collapseId]="formCollapseId()"
+                  [value]="performanceLog()"
+                  btnClass="btn-danger"
+                >
+                  Delete
+                  <i class="fa-solid fa-trash"></i>
+                </app-collapse-button>
+              </div>
             </div>
           </div>
-        </div>
+        }
       </div>
     </div>
   </div>

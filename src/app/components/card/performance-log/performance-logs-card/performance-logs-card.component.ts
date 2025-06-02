@@ -1,6 +1,6 @@
 import {Component, input, output} from '@angular/core';
 import {PerformanceLog} from "../../../../interface/dto/performance-log";
-import {DatePipe, NgIf} from "@angular/common";
+import {DatePipe} from "@angular/common";
 import {FormIndicator} from "../../../../interface/utils/form-indicator";
 import {ActionType} from "../../../../interface/enum/action-type";
 import {CollapseButtonComponent} from "../../../collapse-buton/collapse-button.component";
@@ -11,7 +11,6 @@ import {CollapseBlockComponent} from "../../../collapse-block/collapse-block.com
   imports: [
     DatePipe,
     CollapseButtonComponent,
-    NgIf
   ],
   templateUrl: './performance-logs-card.component.html'
 })
