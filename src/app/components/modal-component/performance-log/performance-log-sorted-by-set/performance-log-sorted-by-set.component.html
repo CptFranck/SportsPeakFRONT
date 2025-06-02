@@ -1,26 +1,22 @@
 <div [id]="accordionParentIdSet()" class="accordion p-2">
-  <div *ngFor="let performanceLogsSet of performanceLogsSortedBySet(), index as i" class="accordion-item">
-    <h2 class="accordion-header">
-      <button [attr.data-bs-target]='"#" + accordionParentIdSet() + performanceLogsSet.key'
-              [class]='"accordion-button fw-bold " + ifNotFirstCollapse(i)'
-              data-bs-toggle="collapse"
-              type="button"
-      >
-        {{ "Set N°" + performanceLogsSet.key }}
-      </button>
-    </h2>
-    <div [attr.data-bs-parent]='accordionParentIdSet()'
-         [class]='"accordion-collapse collapse " + ifFirstShow(i)'
-         [id]="accordionParentIdSet() + performanceLogsSet.key"
-    >
-      <div class="accordion-body p-0 overflow-auto" style="max-height: calc(100vh - 70vh)">
-        <app-performance-logs-card (actionPerformanceLog)="setPerformanceLog($event)"
-                                   *ngFor="let perfLog of performanceLogsSet.value"
-                                   [activeButton]="true"
-                                   [collapseBlockComponent]="collapseBlock()"
-                                   [formCollapseId]="formCollapseId()"
-                                   [performanceLog]="perfLog"/>
+  @for (performanceLogsSet of performanceLogsSortedBySet(); track performanceLogsSet; let i = $index) {
+    <div class="accordion-item">
+      <h2 class="accordion-header">
+        <button [attr.data-bs-target]='"#" + accordionParentIdSet() + performanceLogsSet.key'
+                [class]='"accordion-button fw-bold " + ifNotFirstCollapse(i)' data-bs-toggle="collapse" type="button">
+          {{ "Set N°" + performanceLogsSet.key }}
+        </button>
+      </h2>
+      <div [attr.data-bs-parent]='accordionParentIdSet()' [class]='"accordion-collapse collapse " + ifFirstShow(i)'
+           [id]="accordionParentIdSet() + performanceLogsSet.key">
+        <div class="accordion-body p-0 overflow-auto" style="max-height: calc(100vh - 70vh)">
+          @for (perfLog of performanceLogsSet.value; track perfLog.id) {
+            <app-performance-logs-card (actionPerformanceLog)="setPerformanceLog($event)" [activeButton]="true"
+                                       [collapseBlockComponent]="collapseBlock()" [formCollapseId]="formCollapseId()"
+                                       [performanceLog]="perfLog"/>
+          }
+        </div>
       </div>
     </div>
-  </div>
+  }
 </div>

@@ -1,5 +1,4 @@
 import {Component, input, output} from '@angular/core';
-import {NgForOf} from "@angular/common";
 import {
   PerformanceLogsCardComponent
 } from "../../../card/performance-log/performance-logs-card/performance-logs-card.component";
@@ -12,7 +11,6 @@ import {ifFirstShow, ifNotFirstCollapse} from "../../../../utils/accordion-funct
 @Component({
   selector: 'app-performance-log-sorted-by-set',
   imports: [
-    NgForOf,
     PerformanceLogsCardComponent
   ],
   templateUrl: './performance-log-sorted-by-set.component.html'
