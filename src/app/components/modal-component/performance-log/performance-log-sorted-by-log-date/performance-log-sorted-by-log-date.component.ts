@@ -1,5 +1,5 @@
 import {Component, input, output} from '@angular/core';
-import {DatePipe, NgForOf} from "@angular/common";
+import {DatePipe} from "@angular/common";
 import {
   PerformanceLogsCardComponent
 } from "../../../card/performance-log/performance-logs-card/performance-logs-card.component";
@@ -12,7 +12,6 @@ import {ifFirstShow, ifNotFirstCollapse} from "../../../../utils/accordion-funct
 @Component({
   selector: 'app-performance-log-sorted-by-log-date',
   imports: [
-    NgForOf,
     PerformanceLogsCardComponent,
     DatePipe
   ],

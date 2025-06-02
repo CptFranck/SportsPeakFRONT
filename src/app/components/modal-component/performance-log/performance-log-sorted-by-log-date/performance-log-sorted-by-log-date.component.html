@@ -1,28 +1,29 @@
 <div [id]="accordionParentIdDate()" class="accordion p-2">
-  <div *ngFor="let perfLogsOfDate of performanceLogsSortByDate(), index as i" class="accordion-item">
-    <h2 class="accordion-header">
-      <button [attr.data-bs-target]='"#" + accordionParentIdDate() + perfLogsOfDate.key'
-              [class]='"accordion-button fw-bold " + ifNotFirstCollapse(i)'
-              data-bs-toggle="collapse"
-              type="button"
+  @for (perfLogsOfDate of performanceLogsSortByDate(); track perfLogsOfDate; let i = $index) {
+    <div class="accordion-item">
+      <h2 class="accordion-header">
+        <button [attr.data-bs-target]='"#" + accordionParentIdDate() + perfLogsOfDate.key'
+                [class]='"accordion-button fw-bold " + ifNotFirstCollapse(i)'
+                data-bs-toggle="collapse"
+                type="button"
+        >
+          {{ perfLogsOfDate.key | date: 'dd/MM/yyyy' }}
+        </button>
+      </h2>
+      <div [attr.data-bs-parent]='accordionParentIdDate()'
+           [class]='"accordion-collapse collapse " + ifFirstShow(i)'
+           [id]="accordionParentIdDate() + perfLogsOfDate.key"
       >
-        {{ perfLogsOfDate.key | date: 'dd/MM/yyyy' }}
-      </button>
-    </h2>
-    <div [attr.data-bs-parent]='accordionParentIdDate()'
-         [class]='"accordion-collapse collapse " + ifFirstShow(i)'
-         [id]="accordionParentIdDate() + perfLogsOfDate.key"
-    >
-      <div class="accordion-body p-0 overflow-auto" style="max-height: calc(100vh - 70vh)">
-        <app-performance-logs-card (actionPerformanceLog)="setPerformanceLog($event)"
-                                   *ngFor="let perfLog of perfLogsOfDate.value"
-                                   [activeButton]="true"
-                                   [collapseBlockComponent]="collapseBlock()"
-                                   [formCollapseId]="formCollapseId()"
-                                   [performanceLog]="perfLog"/>
+        <div class="accordion-body p-0 overflow-auto" style="max-height: calc(100vh - 70vh)">
+          @for (perfLog of perfLogsOfDate.value; track perfLog.id) {
+            <app-performance-logs-card (actionPerformanceLog)="setPerformanceLog($event)" [activeButton]="true"
+                                       [collapseBlockComponent]="collapseBlock()" [formCollapseId]="formCollapseId()"
+                                       [performanceLog]="perfLog"/>
+          }
+        </div>
       </div>
     </div>
-  </div>
+  }
 </div>
 
 
