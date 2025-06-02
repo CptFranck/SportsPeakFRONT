@@ -1,8 +1,5 @@
 <div class="custom-select">
-  <div #selectBox
-       (click)="onCLickSelect($event)"
-       class="select-box form-control"
-  >
+  <div #selectBox (click)="onCLickSelect($event)" class="select-box form-control">
     <input class="tags_input" hidden name="tags" type="text"/>
     <app-multi-select-selected-options (onRemoveAllTag)="onCLickRemoveAllTag()"
                                        (onRemoveTag)="onCLickRemoveTag($event)"
@@ -11,40 +8,30 @@
   </div>
   <div class="options rounded">
     <app-loading [loading]="isLoading()"/>
-    <div *ngIf="!isLoading()">
+    @if (!isLoading()) {
       <div class="option-search-tags input-group">
-        <input
-          #searchInput
-          (input)="onInputSearch()"
-          class="search-tags form-control "
-          placeholder="Search tags..."
-          type="text"
-        />
+        <input #searchInput (input)="onInputSearch()" class="search-tags form-control"
+               placeholder="Search tags..." type="text"/>
         <button (click)="onClickClear()" class="btn border" type="button">
           <i class="fa fa-close"></i>
         </button>
       </div>
-      <div #allTagsOption
-           #option
-           (click)="onClickOption($event)"
-           class="option all-tags"
-           data-value="All"
-      >
+      <div #allTagsOption #option (click)="onClickOption($event)" class="option all-tags"
+           data-value="All">
         Select All
       </div>
-      <div #option
-           (click)="onClickOption($event)"
-           *ngFor="let option of optionList()"
-           [attr.data-value]="option.id"
-           class="option"
-      >
-        <div class="text-truncate"> {{ option.title }} {{ addDescriptionToOption() ? ":" : "" }}</div>
-        <div *ngIf="addDescriptionToOption()"> {{ option.description }}</div>
-      </div>
-      <div #noResultMessage class="no-result-message" style="display: none">
-        No result match
-      </div>
-    </div>
+      @for (option of optionList(); track option) {
+        <div #option (click)="onClickOption($event)" [attr.data-value]="option.id" class="option">
+          <div class="text-truncate"> {{ option.title }} {{ addDescriptionToOption() ? ":" : "" }}</div>
+          @if (addDescriptionToOption()) {
+            <div>{{ option.description }}</div>
+          }
+        </div>
+        <div #noResultMessage class="no-result-message" style="display: none">
+          No result match
+        </div>
+      }
+    }
   </div>
   <span class="tag_error_msg error"></span>
 </div>
