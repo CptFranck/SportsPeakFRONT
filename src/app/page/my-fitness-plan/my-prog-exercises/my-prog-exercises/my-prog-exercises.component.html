@@ -18,11 +18,10 @@
       <app-search-bar (onInput)="searchProgExercise($event)"/>
     </div>
     <div class="row p-2">
-      <app-prog-exercise-card (actionProgExercises)="setProgExercise($event)"
-                              *ngFor="let progExercise of displayedProgExercises()"
-                              [modalId]="progExerciseModalId"
-                              [progExercise]="progExercise"
-      />
+      @for (progExercise of displayedProgExercises(); track progExercise.id) {
+        <app-prog-exercise-card (actionProgExercises)="setProgExercise($event)" [modalId]="progExerciseModalId"
+                                [progExercise]="progExercise"/>
+      }
     </div>
   </div>
 </div>

@@ -7,7 +7,6 @@ import {LoadingComponent} from "../../../../components/loading/loading.component
 import {SearchBarComponent} from "../../../../components/search-bar/search-bar.component";
 import {Muscle} from "../../../../interface/dto/muscle";
 import {MyProgExercisesModalComponent} from "../my-prog-exercise-modal/my-prog-exercises-modal.component";
-import {NgForOf} from "@angular/common";
 import {
   ProgExerciseCardComponent
 } from "../../../../components/card/prog-exercise/prog-exercise-card/prog-exercise-card.component";
@@ -19,7 +18,6 @@ import {Subject, takeUntil} from "rxjs";
     LoadingComponent,
     SearchBarComponent,
     MyProgExercisesModalComponent,
-    NgForOf,
     ProgExerciseCardComponent,
   ],
   templateUrl: './my-prog-exercises.component.html'
