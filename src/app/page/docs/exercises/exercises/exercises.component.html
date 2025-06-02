@@ -18,19 +18,24 @@
       <app-search-bar (onInput)="searchExercise($event)"/>
     </div>
     <div [@collapseHeight]="!isAdmin()">
-      <div *ngIf="!isAdmin()" [@collapseHeight]="displayedExercises()" class="container px-0">
-        <div *ngFor="let exercise of displayedExercises()" class="container px-0">
-          <app-exercice-card [exercise]="exercise"/>
+      @if (!isAdmin()) {
+        <div [@collapseHeight]="displayedExercises()" class="container px-0">
+          @for (exercise of displayedExercises(); track exercise.id) {
+            <div class="container px-0">
+              <app-exercice-card [exercise]="exercise"/>
+            </div>
+          }
         </div>
-      </div>
+      }
     </div>
     <div [@collapseHeight]="isAdmin()">
-      <div *ngIf="isAdmin()" class="container">
-        <app-exercises-array (actionExercise)="setExercise($event)"
-                             [exercises]="displayedExercises()"
-                             [modalId]="exerciseModalId"/>
-      </div>
+      @if (isAdmin()) {
+        <div class="container">
+          <app-exercises-array (actionExercise)="setExercise($event)"
+                               [exercises]="displayedExercises()"
+                               [modalId]="exerciseModalId"/>
+        </div>
+      }
     </div>
-
   </div>
 </div>
