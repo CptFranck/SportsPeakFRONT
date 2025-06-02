@@ -1,5 +1,4 @@
 import {Component, computed, input} from '@angular/core';
-import {NgForOf, NgIf} from "@angular/common";
 import {User} from "../../../../interface/dto/user";
 import {Role} from "../../../../interface/dto/role";
 import {Privilege} from "../../../../interface/dto/privilege";
@@ -7,10 +6,6 @@ import {Dictionary} from "../../../../interface/utils/dictionary";
 
 @Component({
   selector: 'app-user-details-display',
-  imports: [
-    NgForOf,
-    NgIf
-  ],
   templateUrl: './user-details-display.component.html'
 })
 export class UserDetailsDisplayComponent {
