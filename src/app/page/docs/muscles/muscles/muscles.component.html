@@ -6,14 +6,12 @@
         <h2>Muscles 💪</h2>
       </div>
       <div class="col-auto">
-        <app-modal-button
-          (onCLickModalButton)="muscle.set(undefined)"
-          *ngIf="isAdmin()"
-          [modalId]="muscleModalId"
-        >
-          Add new
-          <i class="fa-regular fa-square-plus"></i>
-        </app-modal-button>
+        @if (isAdmin()) {
+          <app-modal-button (onCLickModalButton)="muscle.set(undefined)" [modalId]="muscleModalId">
+            Add new
+            <i class="fa-regular fa-square-plus"></i>
+          </app-modal-button>
+        }
         <app-muscle-modal [action]="ActionType.create"
                           [muscleModalId]="muscleModalId"
                           [muscle]="muscle()"
@@ -25,9 +23,11 @@
       <app-search-bar (onInput)="searchMuscle($event)"/>
     </div>
     <div [@collapseHeight]="displayedMuscles()" class="container px-0">
-      <div *ngFor="let muscle of displayedMuscles()" class="container px-0">
-        <app-muscle-card [muscle]="muscle"/>
-      </div>
+      @for (muscle of displayedMuscles(); track muscle.id) {
+        <div class="container px-0">
+          <app-muscle-card [muscle]="muscle"/>
+        </div>
+      }
     </div>
   </div>
 </div>
