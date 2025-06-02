@@ -1,5 +1,4 @@
 import {Component, computed, input, output} from '@angular/core';
-import {NgForOf, NgIf} from "@angular/common";
 import {ProgExercise} from "../../../../interface/dto/prog-exercise";
 import {ModalButtonComponent} from "../../../modal/modal-button/modal-button.component";
 import {ActionType} from "../../../../interface/enum/action-type";
@@ -11,9 +10,7 @@ import {getTargetSetsInformation} from "../../../../utils/target-set-functions";
 @Component({
   selector: 'app-prog-exercise-card',
   imports: [
-    NgForOf,
     ModalButtonComponent,
-    NgIf,
     RouterLink
   ],
   templateUrl: './prog-exercise-card.component.html'
