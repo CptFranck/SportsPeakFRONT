@@ -1,6 +1,5 @@
 import {Component, input} from '@angular/core';
 import {ModalComponent} from "../../../../components/modal/modal/modal.component";
-import {NgIf} from "@angular/common";
 import {ActionType} from "../../../../interface/enum/action-type";
 import {ProgExercise} from "../../../../interface/dto/prog-exercise";
 import {
@@ -11,7 +10,6 @@ import {
   selector: 'app-prog-exercise-modal',
   imports: [
     ModalComponent,
-    NgIf,
     MyProgExerciseDetailsDisplayComponent
   ],
   templateUrl: './prog-exercise-modal.component.html'
