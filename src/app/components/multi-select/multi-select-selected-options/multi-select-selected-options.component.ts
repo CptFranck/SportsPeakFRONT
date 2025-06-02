@@ -1,13 +1,8 @@
 import {Component, input, output} from '@angular/core';
-import {NgForOf, NgIf} from "@angular/common";
 import {MultiSelectOptionSelected} from "../../../interface/components/multi-select/multiSelectOptionSelected";
 
 @Component({
   selector: 'app-multi-select-selected-options',
-  imports: [
-    NgForOf,
-    NgIf
-  ],
   templateUrl: './multi-select-selected-options.component.html',
   styleUrl: './multi-select-selected-options.component.css'
 })
