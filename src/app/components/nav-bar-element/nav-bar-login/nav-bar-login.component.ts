@@ -1,5 +1,4 @@
 import {Component, inject, OnDestroy, OnInit} from '@angular/core';
-import {NgIf} from "@angular/common";
 import {Router, RouterLink} from "@angular/router";
 import {AuthService} from "../../../services/auth/auth.service";
 import {Subject, takeUntil} from "rxjs";
@@ -7,7 +6,6 @@ import {Subject, takeUntil} from "rxjs";
 @Component({
   selector: 'app-nav-bar-login',
   imports: [
-    NgIf,
     RouterLink
   ],
   templateUrl: './nav-bar-login.component.html'
