@@ -1,5 +1,4 @@
 import {Component, computed, input} from '@angular/core';
-import {NgForOf, NgIf} from "@angular/common";
 import {TargetSet} from "../../../../interface/dto/target-set";
 import {Dictionary} from "../../../../interface/utils/dictionary";
 import {TargetSetInformation} from "../../../../interface/utils/target-set-row-detail";
@@ -14,10 +13,6 @@ import {getStringTime} from "../../../../utils/duration-functions";
 
 @Component({
   selector: 'app-my-prog-exercise-details-display',
-  imports: [
-    NgForOf,
-    NgIf
-  ],
   templateUrl: './my-prog-exercise-details-display.component.html'
 })
 export class MyProgExerciseDetailsDisplayComponent {
