@@ -1,5 +1,4 @@
 import {Component, computed, inject, input, signal} from '@angular/core';
-import {NgIf} from "@angular/common";
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {
   TargetSetStateSelectComponent
@@ -10,7 +9,6 @@ import {TargetSetService} from "../../../../services/target-set/target-set.servi
 @Component({
   selector: 'app-target-set-state-form',
   imports: [
-    NgIf,
     TargetSetStateSelectComponent,
     ReactiveFormsModule
   ],
