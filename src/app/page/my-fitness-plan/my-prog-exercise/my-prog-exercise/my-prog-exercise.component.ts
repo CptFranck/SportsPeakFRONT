@@ -2,7 +2,6 @@ import {Component, inject, OnDestroy, OnInit, signal} from '@angular/core';
 import {ProgExercise} from "../../../../interface/dto/prog-exercise";
 import {ProgExerciseService} from "../../../../services/prog-exercise/prog-exercise.service";
 import {ActivatedRoute, Params} from "@angular/router";
-import {NgIf} from "@angular/common";
 import {FormIndicator} from "../../../../interface/utils/form-indicator";
 import {ActionType} from "../../../../interface/enum/action-type";
 import {LoadingComponent} from "../../../../components/loading/loading.component";
@@ -24,7 +23,6 @@ import {
 @Component({
   selector: 'app-my-prog-exercise',
   imports: [
-    NgIf,
     LoadingComponent,
     ProgExerciseCardDetailsComponent,
     MyProgExerciseEditorModalComponent,

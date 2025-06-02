@@ -15,11 +15,10 @@
     </div>
     <div class="row">
       @let localProgExercise = progExercise();
-      <app-prog-exercise-card-details (actionProgExercises)="setProgExercise($event)"
-                                      *ngIf="localProgExercise"
-                                      [modalId]="progExerciseModalId"
-                                      [progExercise]="localProgExercise"
-      />
+      @if (localProgExercise) {
+        <app-prog-exercise-card-details (actionProgExercises)="setProgExercise($event)" [modalId]="progExerciseModalId"
+                                        [progExercise]="localProgExercise"/>
+      }
     </div>
     <div class="row pt-4 pb-1">
       <div class="col">
