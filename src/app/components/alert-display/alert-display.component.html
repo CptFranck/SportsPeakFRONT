@@ -1,9 +1,13 @@
-<button (click)="createAlert()" *ngIf="displayMockAlertButton()" class="btn btn-secondary m-1" type="button">
-  generate mock alert
-</button>
+@if (displayMockAlertButton()) {
+  <button (click)="createAlert()" class="btn btn-secondary m-1" type="button">
+    generate mock alert
+  </button>
+}
 <div [@collapseHeight]="alerts()">
-  <div *ngFor="let alert of alerts()" class="container">
-    <app-alert (removedAlert)="removeAlert($event)" [alert]="alert"/>
-  </div>
+  @for (alert of alerts(); track alert.id) {
+    <div class="container">
+      <app-alert (removedAlert)="removeAlert($event)" [alert]="alert"/>
+    </div>
+  }
 </div>
 

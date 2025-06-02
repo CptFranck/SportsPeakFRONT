@@ -1,5 +1,4 @@
 import {Component, inject, input, OnDestroy, OnInit, signal} from '@angular/core';
-import {NgForOf, NgIf} from "@angular/common";
 import {Alert} from "../../interface/utils/alert";
 import {AlertService} from "../../services/alert/alert.service";
 import {Subject, takeUntil} from "rxjs";
@@ -9,9 +8,7 @@ import {collapseHeight} from "../../animation/collapseHeigh";
 @Component({
   selector: 'app-alert-display',
   imports: [
-    NgIf,
     AlertComponent,
-    NgForOf,
   ],
   templateUrl: './alert-display.component.html',
   animations: [collapseHeight]
