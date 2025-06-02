@@ -1,12 +1,8 @@
 import {Component, computed, input} from '@angular/core';
-import {NgIf} from "@angular/common";
 import {FormGroup} from "@angular/forms";
 
 @Component({
   selector: 'app-input-control',
-  imports: [
-    NgIf
-  ],
   templateUrl: './input-control.component.html'
 })
 export class InputControlComponent {
