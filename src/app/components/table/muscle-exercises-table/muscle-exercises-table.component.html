@@ -8,23 +8,25 @@
     </tr>
     </thead>
     <tbody>
-    <tr *ngFor="let exercise of muscle()?.exercises" class="table-row-clickable">
-      <td class="position-relative">
-        <a [routerLink]="['/exercises', exercise.id]" class="stretched-link text-table-body ">
-          {{ exercise.name }}
-        </a>
-      </td>
-      <td class="text-truncate position-relative ">
-        <a [routerLink]="['/exercises', exercise.id]" class="stretched-link text-table-body">
-          {{ exercise.goal }}
-        </a>
-      </td>
-      <td class="text-truncate position-relative">
-        <a [routerLink]="['/exercises', exercise.id]" class="stretched-link text-table-body">
-          {{ exercise.description }}
-        </a>
-      </td>
-    </tr>
+      @for (exercise of muscle()?.exercises; track exercise.id) {
+        <tr class="table-row-clickable">
+          <td class="position-relative">
+            <a [routerLink]="['/exercises', exercise.id]" class="stretched-link text-table-body ">
+              {{ exercise.name }}
+            </a>
+          </td>
+          <td class="text-truncate position-relative ">
+            <a [routerLink]="['/exercises', exercise.id]" class="stretched-link text-table-body">
+              {{ exercise.goal }}
+            </a>
+          </td>
+          <td class="text-truncate position-relative">
+            <a [routerLink]="['/exercises', exercise.id]" class="stretched-link text-table-body">
+              {{ exercise.description }}
+            </a>
+          </td>
+        </tr>
+      }
     </tbody>
   </table>
 </div>
