@@ -9,7 +9,6 @@ import {
 import {getTargetSetTimeToString} from "../../../../utils/target-set-functions";
 import {getStringTime} from "../../../../utils/duration-functions";
 import {TooltipComponent} from "../../../tooltip/tooltip.component";
-import {NgIf} from "@angular/common";
 
 @Component({
   selector: 'app-target-set-card',
@@ -17,7 +16,6 @@ import {NgIf} from "@angular/common";
     ModalButtonComponent,
     TargetSetStateFormComponent,
     TooltipComponent,
-    NgIf,
   ],
   templateUrl: './target-set-card.component.html'
 })
