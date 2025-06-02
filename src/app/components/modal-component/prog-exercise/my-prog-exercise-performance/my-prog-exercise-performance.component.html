@@ -1,37 +1,36 @@
 <div class="col-md-4">
-  <app-range-input (onChange)="changeRowColNumber($event)"
-                   [max]="5"
-                   [min]="1"
-                   [step]="1"
-                   [value]="rowColNumber()"
+  <app-range-input (onChange)="changeRowColNumber($event)" [max]="5" [min]="1" [step]="1" [value]="rowColNumber()"
                    label="Number of graphes per line"/>
 </div>
 <div [id]="accordionAllPerformance" class="accordion">
-  <div *ngFor="let targetSetPerformance of targetSetsPerformanceLogsSortedByLogDate(), index as i"
-       class="accordion-item">
-    <h2 class="accordion-header">
-      <button [attr.data-bs-target]='"#" + accordionAllPerformance + targetSetPerformance.key'
-              [class]='"accordion-button fw-bold " + ifNotFirstCollapse(i)'
-              data-bs-toggle="collapse"
-              type="button"
+  @for (targetSetPerformance of targetSetsPerformanceLogsSortedByLogDate(); track targetSetPerformance;
+    let i = $index) {
+    <div class="accordion-item">
+      <h2 class="accordion-header">
+        <button [attr.data-bs-target]='"#" + accordionAllPerformance + targetSetPerformance.key'
+                [class]='"accordion-button fw-bold " + ifNotFirstCollapse(i)'
+                data-bs-toggle="collapse" type="button"
+        >
+          Step N° {{ targetSetPerformance.key }}
+        </button>
+      </h2>
+      <div [attr.data-bs-parent]='accordionAllPerformance'
+           [class]='"accordion-collapse collapse " + ifFirstShow(i)'
+           [id]="accordionAllPerformance + targetSetPerformance.key"
       >
-        Step N° {{ targetSetPerformance.key }}
-      </button>
-    </h2>
-    <div [attr.data-bs-parent]='accordionAllPerformance'
-         [class]='"accordion-collapse collapse " + ifFirstShow(i)'
-         [id]="accordionAllPerformance + targetSetPerformance.key"
-    >
-      <div class="accordion-body p-0 ">
-        <div class="container py-1">
-          <div [class]='"row align-items-center " + rowColNumberClass()'>
-            <div *ngFor="let performanceLogsSet of targetSetPerformance.value" class="col p-2">
-              <p class="fw-bold"> Set N° {{ performanceLogsSet.key }} </p>
-              <app-performance-logs-set-chart [performanceLogSet]="performanceLogsSet.value"/>
+        <div class="accordion-body p-0 ">
+          <div class="container py-1">
+            <div [class]='"row align-items-center " + rowColNumberClass()'>
+              @for (performanceLogsSet of targetSetPerformance.value; track performanceLogsSet) {
+                <div class="col p-2">
+                  <p class="fw-bold"> Set N° {{ performanceLogsSet.key }} </p>
+                  <app-performance-logs-set-chart [performanceLogSet]="performanceLogsSet.value"/>
+                </div>
+              }
             </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
+  }
 </div>

@@ -1,7 +1,6 @@
 import {Component, computed, input, signal} from '@angular/core';
 import {ProgExercise} from "../../../../interface/dto/prog-exercise";
 import {ifFirstShow, ifNotFirstCollapse} from "../../../../utils/accordion-function";
-import {NgForOf} from "@angular/common";
 import {PerformanceLog} from "../../../../interface/dto/performance-log";
 import {DictionaryItem} from "../../../../interface/utils/dictionary-item";
 import {
@@ -16,7 +15,6 @@ import {sortPerformanceLogsBySet} from "../../../../utils/performance-log-functi
 @Component({
   selector: 'app-my-prog-exercise-performance',
   imports: [
-    NgForOf,
     PerformanceLogsSetChartComponent,
     RangeInputComponent
   ],
