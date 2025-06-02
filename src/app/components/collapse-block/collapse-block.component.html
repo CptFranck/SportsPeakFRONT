@@ -12,13 +12,11 @@
       <button #btnClose (click)="hide()" class="btn btn-secondary mx-2" type="button">
         {{ closeButtonTitle() }}
       </button>
-      <button (click)="onSubmit()"
-              *ngIf="submitButton()"
-              [class]="'btn mx-2 ' + validateButtonClass()"
-              type="button"
-      >
-        {{ validationButtonTitle() }}
-      </button>
+      @if (submitButton()) {
+        <button (click)="onSubmit()" [class]="'btn mx-2 ' + validateButtonClass()" type="button">
+          {{ validationButtonTitle() }}
+        </button>
+      }
     </div>
   </div>
 </div>

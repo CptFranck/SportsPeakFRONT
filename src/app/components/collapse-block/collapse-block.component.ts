@@ -1,5 +1,5 @@
 import {Component, computed, ElementRef, input, signal, TemplateRef, viewChild} from '@angular/core';
-import {NgIf, NgTemplateOutlet} from "@angular/common";
+import {NgTemplateOutlet} from "@angular/common";
 import {Subject} from "rxjs";
 import {ActionType} from "../../interface/enum/action-type";
 
@@ -7,7 +7,6 @@ import {ActionType} from "../../interface/enum/action-type";
   selector: 'app-collapse-block',
   imports: [
     NgTemplateOutlet,
-    NgIf,
   ],
   templateUrl: './collapse-block.component.html'
 })
