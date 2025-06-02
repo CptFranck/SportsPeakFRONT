@@ -1,5 +1,4 @@
 import {Component, input, output} from '@angular/core';
-import {NgForOf} from "@angular/common";
 import {ModalButtonComponent} from "../../../../components/modal/modal-button/modal-button.component";
 import {Privilege} from "../../../../interface/dto/privilege";
 import {FormIndicator} from "../../../../interface/utils/form-indicator";
@@ -9,7 +8,6 @@ import {ActionType} from "../../../../interface/enum/action-type";
   selector: 'app-privileges-array',
   imports: [
     ModalButtonComponent,
-    NgForOf,
   ],
   templateUrl: './privileges-array.component.html'
 })
