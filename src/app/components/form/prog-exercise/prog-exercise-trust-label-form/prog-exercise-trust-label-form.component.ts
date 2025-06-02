@@ -1,5 +1,4 @@
 import {Component, computed, inject, input, OnDestroy, OnInit, signal} from '@angular/core';
-import {NgIf} from "@angular/common";
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {ProgExercise} from "../../../../interface/dto/prog-exercise";
 import {ProgExerciseService} from "../../../../services/prog-exercise/prog-exercise.service";
@@ -12,7 +11,6 @@ import {Subject, takeUntil} from "rxjs";
 @Component({
   selector: 'app-prog-exercise-trust-label-form',
   imports: [
-    NgIf,
     ReactiveFormsModule,
     TrustLabelSelectComponent
   ],
