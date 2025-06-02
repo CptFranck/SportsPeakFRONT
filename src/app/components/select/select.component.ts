@@ -1,14 +1,11 @@
 import {Component, input, model, output} from '@angular/core';
 import {SelectOption} from "../../interface/components/select/selectOption";
-import {NgForOf, NgIf} from "@angular/common";
 import {FormsModule} from "@angular/forms";
 
 @Component({
   selector: 'app-select',
   imports: [
-    NgForOf,
     FormsModule,
-    NgIf
   ],
   templateUrl: './select.component.html'
 })
