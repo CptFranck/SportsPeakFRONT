@@ -8,10 +8,8 @@
       </div>
       @if (isAdmin()) {
         <div class="mb-2 d-flex flex-wrap align-items-center">
-          <app-modal-button
-            (onCLickModalButton)="onModify()"
-            [modalId]="muscleModalId"
-            btnClass="btn-outline-warning btn-sm me-2"
+          <app-modal-button (onCLickModalButton)="onModify()" [modalId]="muscleModalId"
+                            btnClass="btn-outline-warning btn-sm me-2"
           >
             Modify
             <i class="fa-solid fa-pen-to-square"></i>
@@ -45,11 +43,10 @@
         @if (localMuscle) {
           @let image = `assets/muscle/${localMuscle.latinName.split(' ').join('-')}.png`;
           <img [ngSrc]="image" alt="Muscle illustration" class="img-fluid" [width]="250" [height]="250"/>
+          <app-image-form [id]="localMuscle.id" type="muscle"/>
         }
-        <app-image-form/>
       </div>
     </div>
-
     <div class="mb-4">
       <h6 class="fw-bold text-dark mb-2">Function</h6>
       <p class="text-justify">
@@ -57,7 +54,6 @@
       </p>
     </div>
     <hr/>
-
     <div class="mb-4">
       <h5 class="fw-bold mb-3">Exercices utilisant ce muscle</h5>
       @if (muscle()?.exercises?.length === 0) {

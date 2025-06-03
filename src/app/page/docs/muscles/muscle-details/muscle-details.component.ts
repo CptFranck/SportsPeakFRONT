@@ -57,7 +57,6 @@ export class MuscleDetailsComponent implements OnInit, OnDestroy {
     this.userLoggedService.currentUser
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe(() => this.isAdmin.set(this.userLoggedService.isAdmin()));
-    console.log(this.userLoggedService.isAdmin())
   }
 
   ngOnDestroy() {
