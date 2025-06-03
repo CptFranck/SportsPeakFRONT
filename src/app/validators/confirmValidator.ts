@@ -10,9 +10,23 @@ export function confirmValidator(controlName: string, matchingControlName: strin
       const error: ValidationErrors = {confirmedValidator: 'Passwords do not match'};
       matchingControl!.setErrors(error);
       return error;
-    } else {
-      matchingControl!.setErrors(null);
-      return null;
     }
+    matchingControl!.setErrors(null);
+    return null;
   }
+}
+
+export function fileTypeValidator(type: string): ValidatorFn {
+  return (abstractControl: AbstractControl): ValidationErrors | null => {
+    const file: File | null = abstractControl.value;
+    if (file) {
+      const extension = file.name.split('.')[1].toLowerCase();
+      if (type.toLowerCase() !== extension.toLowerCase()) {
+        const error: ValidationErrors = {requiredFileType: 'filetype do not supported'}
+        abstractControl.setErrors(error);
+        return error;
+      }
+    }
+    return null;
+  };
 }
