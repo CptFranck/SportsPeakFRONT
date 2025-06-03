@@ -11,17 +11,15 @@
 >
 </app-modal>
 <ng-template #modalTemplate let-btnClose="btnClose" let-submitEventActionType$="submitEventActionType$">
-  @switch (action()) {
-    @case (ActionType.create || ActionType.update) {
-      <app-exercise-type-entity-form [btnCloseRef]="btnClose" [exerciseType]="exerciseType()"
-                                     [submitEventActionType$]="submitEventActionType$"/>
-    }
-    @case (ActionType.read) {
-      <app-exercise-type-details-display [exerciseType]="exerciseType()"/>
-    }
-    @case (ActionType.delete) {
-      <app-exercise-type-delete-form [btnCloseRef]="btnClose" [exerciseType]="exerciseType()"
-                                     [submitEventActionType$]="submitEventActionType$"/>
-    }
+  @if (this.action() == ActionType.create || this.action() == ActionType.update) {
+    <app-exercise-type-entity-form [btnCloseRef]="btnClose" [exerciseType]="exerciseType()"
+                                   [submitEventActionType$]="submitEventActionType$"/>
+  }
+  @if (this.action() == ActionType.read) {
+    <app-exercise-type-details-display [exerciseType]="exerciseType()"/>
+  }
+  @if (this.action() == ActionType.delete) {
+    <app-exercise-type-delete-form [btnCloseRef]="btnClose" [exerciseType]="exerciseType()"
+                                   [submitEventActionType$]="submitEventActionType$"/>
   }
 </ng-template>
