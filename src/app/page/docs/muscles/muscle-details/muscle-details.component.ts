@@ -1,5 +1,5 @@
 import {Component, inject, OnDestroy, OnInit, signal} from '@angular/core';
-import {NgIf, NgOptimizedImage} from "@angular/common";
+import {NgOptimizedImage} from "@angular/common";
 import {Subject, takeUntil} from "rxjs";
 import {ActivatedRoute, Params} from "@angular/router";
 import {Muscle} from "../../../../interface/dto/muscle";
@@ -12,16 +12,20 @@ import {ActionType} from "../../../../interface/enum/action-type";
 import {
   MuscleExercisesTableComponent
 } from "../../../../components/table/muscle-exercises-table/muscle-exercises-table.component";
+import {ReactiveFormsModule} from "@angular/forms";
+import {ImageFormComponent} from "../../../../components/form/image-form/image-form.component";
 
 @Component({
   selector: 'app-muscle-details',
   imports: [
-    NgIf,
     LoadingComponent,
     NgOptimizedImage,
     ModalButtonComponent,
     MuscleModalComponent,
     MuscleExercisesTableComponent,
+    ReactiveFormsModule,
+    ImageFormComponent,
+
   ],
   templateUrl: './muscle-details.component.html',
   styleUrl: './muscle-details.component.css'
@@ -53,6 +57,7 @@ export class MuscleDetailsComponent implements OnInit, OnDestroy {
     this.userLoggedService.currentUser
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe(() => this.isAdmin.set(this.userLoggedService.isAdmin()));
+    console.log(this.userLoggedService.isAdmin())
   }
 
   ngOnDestroy() {

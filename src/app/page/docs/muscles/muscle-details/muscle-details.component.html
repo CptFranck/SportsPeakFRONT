@@ -6,29 +6,31 @@
         <h2 class="mb-2">{{ muscle()?.name }}</h2>
         <h5 class="mb-2">{{ muscle()?.latinName }}</h5>
       </div>
-      <div *ngIf="isAdmin" class="mb-2 d-flex flex-wrap align-items-center">
-        <app-modal-button
-          (onCLickModalButton)="onModify()"
-          [modalId]="muscleModalId"
-          btnClass="btn-outline-warning btn-sm me-2"
-        >
-          Modify
-          <i class="fa-solid fa-pen-to-square"></i>
-        </app-modal-button>
-        <app-modal-button
-          (onCLickModalButton)="onDelete()"
-          [modalId]="muscleModalId"
-          btnClass="btn-outline-danger btn-sm me-2"
-        >
-          Delete
-          <i class="fa-solid fa-trash"></i>
-        </app-modal-button>
-        <app-muscle-modal [action]="action()"
-                          [modalTitle]="modalTitle()"
-                          [muscleModalId]="muscleModalId"
-                          [muscle]="muscle()"
-        />
-      </div>
+      @if (isAdmin()) {
+        <div class="mb-2 d-flex flex-wrap align-items-center">
+          <app-modal-button
+            (onCLickModalButton)="onModify()"
+            [modalId]="muscleModalId"
+            btnClass="btn-outline-warning btn-sm me-2"
+          >
+            Modify
+            <i class="fa-solid fa-pen-to-square"></i>
+          </app-modal-button>
+          <app-modal-button
+            (onCLickModalButton)="onDelete()"
+            [modalId]="muscleModalId"
+            btnClass="btn-outline-danger btn-sm me-2"
+          >
+            Delete
+            <i class="fa-solid fa-trash"></i>
+          </app-modal-button>
+          <app-muscle-modal [action]="action()"
+                            [modalTitle]="modalTitle()"
+                            [muscleModalId]="muscleModalId"
+                            [muscle]="muscle()"
+          />
+        </div>
+      }
     </div>
 
     <div class="row mb-4">
@@ -38,18 +40,13 @@
           {{ muscle()?.description }}
         </p>
       </div>
-      <div class="col-md-4 text-center">
+      <div class="col text-center">
         @let localMuscle = muscle();
         @if (localMuscle) {
           @let image = `assets/muscle/${localMuscle.latinName.split(' ').join('-')}.png`;
-          <img
-            [ngSrc]="image"
-            alt="Muscle illustration"
-            class="img-fluid"
-            [width]="200"
-            [height]="200"
-          />
+          <img [ngSrc]="image" alt="Muscle illustration" class="img-fluid" [width]="250" [height]="250"/>
         }
+        <app-image-form/>
       </div>
     </div>
 
@@ -63,12 +60,11 @@
 
     <div class="mb-4">
       <h5 class="fw-bold mb-3">Exercices utilisant ce muscle</h5>
-      <p *ngIf="!muscle()?.exercises?.length" class="text-muted fst-italic">
-        Aucun exercice associé pour ce muscle.
-      </p>
-      <div *ngIf="muscle()?.exercises?.length">
+      @if (muscle()?.exercises?.length === 0) {
+        <p class="text-muted fst-italic"> Aucun exercice associé pour ce muscle. </p>
+      } @else {
         <app-muscle-exercises-table [muscle]="muscle()"/>
-      </div>
+      }
     </div>
   </div>
 </div>
