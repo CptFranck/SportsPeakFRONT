@@ -5,9 +5,7 @@
 >
 </app-modal>
 <ng-template #modalTemplate let-btnClose="btnClose" let-submitEventActionType="submitEventActionType">
-  @switch (action()) {
-    @case (ActionType.read) {
-      <app-my-prog-exercise-details-display [progExercise]="progExercise()"/>
-    }
+  @if (this.action() == ActionType.read) {
+    <app-my-prog-exercise-details-display [progExercise]="progExercise()"/>
   }
 </ng-template>
