@@ -11,19 +11,17 @@
 >
 </app-modal>
 <ng-template #targetSetModalTemplate let-btnClose="btnClose" let-submitEventActionType$="submitEventActionType$">
-  @switch (action()) {
-    @case (ActionType.create || ActionType.update || ActionType.addEvolution) {
-      <app-target-set-entity-form [actionType]="action()" [btnCloseRef]="btnClose" [progExercise]="progExercise()"
-                                  [submitEventActionType$]="submitEventActionType$"
-                                  [targetSet]="targetSet()"/>
-    }
-    @case (ActionType.checkEvolution) {
-      <app-target-set-logs [modalId]="targetSetModalId()" [progExercise]="progExercise()" [targetSet]="targetSet()"/>
-    }
-    @case (ActionType.delete) {
-      <app-target-set-delete-form [btnCloseRef]="btnClose" [progExercise]="progExercise()"
-                                  [submitEventActionType$]="submitEventActionType$"
-                                  [targetSet]="targetSet()"/>
-    }
+  @if (this.action() == ActionType.create || this.action() == ActionType.update || this.action() == ActionType.addEvolution) {
+    <app-target-set-entity-form [actionType]="action()" [btnCloseRef]="btnClose" [progExercise]="progExercise()"
+                                [submitEventActionType$]="submitEventActionType$"
+                                [targetSet]="targetSet()"/>
+  }
+  @if (this.action() == ActionType.checkEvolution) {
+    <app-target-set-logs [modalId]="targetSetModalId()" [progExercise]="progExercise()" [targetSet]="targetSet()"/>
+  }
+  @if (this.action() == ActionType.delete) {
+    <app-target-set-delete-form [btnCloseRef]="btnClose" [progExercise]="progExercise()"
+                                [submitEventActionType$]="submitEventActionType$"
+                                [targetSet]="targetSet()"/>
   }
 </ng-template>
