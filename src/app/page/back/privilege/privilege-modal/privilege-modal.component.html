@@ -11,17 +11,15 @@
 >
 </app-modal>
 <ng-template #modalTemplate let-btnClose="btnClose" let-submitEventActionType$="submitEventActionType$">
-  @switch (action()) {
-    @case (ActionType.create || ActionType.update) {
-      <app-privilege-entity-form [btnCloseRef]="btnClose" [privilege]="privilege()"
-                                 [submitEventActionType$]="submitEventActionType$"/>
-    }
-    @case (ActionType.read) {
-      <app-privilege-details-display [privilege]="privilege()"/>
-    }
-    @case (ActionType.delete) {
-      <app-privilege-delete-forms [btnCloseRef]="btnClose" [privilege]="privilege()"
-                                  [submitEventActionType$]="submitEventActionType$"/>
-    }
+  @if (this.action() == ActionType.create || this.action() == ActionType.update) {
+    <app-privilege-entity-form [btnCloseRef]="btnClose" [privilege]="privilege()"
+                               [submitEventActionType$]="submitEventActionType$"/>
+  }
+  @if (this.action() == ActionType.read) {
+    <app-privilege-details-display [privilege]="privilege()"/>
+  }
+  @if (this.action() == ActionType.delete) {
+    <app-privilege-delete-forms [btnCloseRef]="btnClose" [privilege]="privilege()"
+                                [submitEventActionType$]="submitEventActionType$"/>
   }
 </ng-template>
