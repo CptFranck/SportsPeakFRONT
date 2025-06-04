@@ -2,12 +2,12 @@ import {Component, computed, inject, input, OnDestroy, OnInit, signal} from '@an
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {Observable, Subject, takeUntil} from "rxjs";
 import {InputControlComponent} from "../../../input-control/input-control.component";
-import {Privilege} from "../../../../interface/dto/privilege";
+import {Privilege} from "../../../../shared/model/dto/privilege";
 import {PrivilegeService} from "../../../../core/services/privilege/privilege.service";
-import {Role} from "../../../../interface/dto/role";
+import {Role} from "../../../../shared/model/dto/role";
 import {RoleSelectorComponent} from "../../../selectors/role-selector/role-selector.component";
 import {UserLoggedService} from "../../../../core/services/user-logged/user-logged.service";
-import {ActionType} from "../../../../interface/enum/action-type";
+import {ActionTypeEnum} from "../../../../shared/model/enum/action-type.enum";
 
 @Component({
   selector: 'app-privilege-entity-form',
@@ -22,7 +22,7 @@ export class PrivilegeEntityFormComponent implements OnInit, OnDestroy {
 
   readonly privilege = input.required<Privilege | undefined>();
   readonly btnCloseRef = input.required<HTMLButtonElement>();
-  readonly submitEventActionType$ = input.required<Observable<ActionType> | undefined>();
+  readonly submitEventActionType$ = input.required<Observable<ActionTypeEnum> | undefined>();
 
   submitInvalidForm = signal<boolean>(false);
 
@@ -63,8 +63,8 @@ export class PrivilegeEntityFormComponent implements OnInit, OnDestroy {
     if (submitEventActionType$)
       submitEventActionType$
         .pipe(takeUntil(this.unsubscribe$))
-        .subscribe((actionType: ActionType) => {
-          if (actionType === ActionType.create || actionType === ActionType.update)
+        .subscribe((actionType: ActionTypeEnum) => {
+          if (actionType === ActionTypeEnum.create || actionType === ActionTypeEnum.update)
             this.onSubmit();
         });
   }

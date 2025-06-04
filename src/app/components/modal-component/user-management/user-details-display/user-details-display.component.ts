@@ -1,8 +1,8 @@
 import {Component, computed, input} from '@angular/core';
-import {User} from "../../../../interface/dto/user";
-import {Role} from "../../../../interface/dto/role";
-import {Privilege} from "../../../../interface/dto/privilege";
-import {Dictionary} from "../../../../interface/utils/dictionary";
+import {User} from "../../../../shared/model/dto/user";
+import {Role} from "../../../../shared/model/dto/role";
+import {Privilege} from "../../../../shared/model/dto/privilege";
+import {Dictionary} from "../../../../shared/model/common/dictionary";
 
 @Component({
   selector: 'app-user-details-display',

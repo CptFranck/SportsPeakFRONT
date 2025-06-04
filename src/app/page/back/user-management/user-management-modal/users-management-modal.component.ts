@@ -6,8 +6,8 @@ import {
   UserRolesFormComponent
 } from "../../../../components/form/user-management/user-entity-form/user-roles-form.component";
 import {ModalComponent} from "../../../../components/modal/modal/modal.component";
-import {User} from "../../../../interface/dto/user";
-import {ActionType} from "../../../../interface/enum/action-type";
+import {User} from "../../../../shared/model/dto/user";
+import {ActionTypeEnum} from "../../../../shared/model/enum/action-type.enum";
 
 @Component({
   selector: 'app-user-modal',
@@ -22,7 +22,7 @@ export class UsersManagementModalComponent {
   readonly modalTitle = input.required<string>();
   readonly userModalId = input.required<string>();
   readonly user = input.required<User | undefined>();
-  readonly action = input.required<ActionType>();
+  readonly action = input.required<ActionTypeEnum>();
 
-  protected readonly ActionType = ActionType;
+  protected readonly ActionType = ActionTypeEnum;
 }

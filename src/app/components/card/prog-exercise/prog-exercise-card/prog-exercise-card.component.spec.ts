@@ -3,9 +3,9 @@ import {ComponentFixture, TestBed} from '@angular/core/testing';
 import {ProgExerciseCardComponent} from './prog-exercise-card.component';
 import {provideRouter} from "@angular/router";
 import {generateTestExercise, generateTestProgExercise, generateTestUser} from "../../../../utils/testFunctions";
-import {User} from "../../../../interface/dto/user";
-import {Exercise} from "../../../../interface/dto/exercise";
-import {ProgExercise} from "../../../../interface/dto/prog-exercise";
+import {User} from "../../../../shared/model/dto/user";
+import {Exercise} from "../../../../shared/model/dto/exercise";
+import {ProgExercise} from "../../../../shared/model/dto/prog-exercise";
 
 describe('ProgExerciseCardComponent', () => {
   let component: ProgExerciseCardComponent;

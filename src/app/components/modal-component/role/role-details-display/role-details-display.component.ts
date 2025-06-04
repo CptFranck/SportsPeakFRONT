@@ -1,5 +1,5 @@
 import {Component, input} from '@angular/core';
-import {Role} from "../../../../interface/dto/role";
+import {Role} from "../../../../shared/model/dto/role";
 
 @Component({
   selector: 'app-role-details-display',

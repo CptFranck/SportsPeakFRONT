@@ -2,10 +2,10 @@ import {Component, inject, OnDestroy, OnInit, signal} from '@angular/core';
 import {UsersManagementArrayComponent} from "../users-management-array/users-management-array.component";
 import {UsersManagementModalComponent} from "../user-management-modal/users-management-modal.component";
 import {LoadingComponent} from "../../../../components/loading/loading.component";
-import {User} from "../../../../interface/dto/user";
-import {ActionType} from "../../../../interface/enum/action-type";
+import {User} from "../../../../shared/model/dto/user";
+import {ActionTypeEnum} from "../../../../shared/model/enum/action-type.enum";
 import {UserService} from "../../../../core/services/user/user.service";
-import {FormIndicator} from "../../../../interface/utils/form-indicator";
+import {FormIndicator} from "../../../../shared/model/common/form-indicator";
 import {Subject, takeUntil} from "rxjs";
 import {SearchBarComponent} from "../../../../components/search-bar/search-bar.component";
 
@@ -22,7 +22,7 @@ import {SearchBarComponent} from "../../../../components/search-bar/search-bar.c
 export class UsersManagementComponent implements OnInit, OnDestroy {
   loading = signal<boolean>(true);
   displayedUsers = signal<User[]>([]);
-  action = signal<ActionType>(ActionType.create);
+  action = signal<ActionTypeEnum>(ActionTypeEnum.create);
   modalTitle = signal<string>("");
   user = signal<User | undefined>(undefined);
 

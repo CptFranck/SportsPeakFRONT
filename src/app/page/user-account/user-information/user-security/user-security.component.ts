@@ -1,9 +1,9 @@
 import {Component, input, output} from '@angular/core';
 import {ModalButtonComponent} from "../../../../components/modal/modal-button/modal-button.component";
-import {User} from "../../../../interface/dto/user";
-import {FormIndicator} from "../../../../interface/utils/form-indicator";
-import {ActionType} from "../../../../interface/enum/action-type";
-import {ModificationField} from "../../../../interface/enum/modification-field";
+import {User} from "../../../../shared/model/dto/user";
+import {FormIndicator} from "../../../../shared/model/common/form-indicator";
+import {ActionTypeEnum} from "../../../../shared/model/enum/action-type.enum";
+import {ModificationFieldEnum} from "../../../../shared/model/enum/modification-field.enum";
 
 @Component({
   selector: 'app-user-security',
@@ -22,15 +22,15 @@ export class UserSecurityComponent {
 
   onChangePassword() {
     this.actionUser.emit({
-      actionType: ActionType.update,
-      modificationField: ModificationField.password,
+      actionType: ActionTypeEnum.update,
+      modificationField: ModificationFieldEnum.password,
       object: this.user()
     });
   }
 
   onDeleteAccount() {
     this.actionUser.emit({
-      actionType: ActionType.delete,
+      actionType: ActionTypeEnum.delete,
       object: this.user()
     });
   }

@@ -1,14 +1,14 @@
 import {Component, inject, OnDestroy, OnInit, signal} from '@angular/core';
-import {FormIndicator} from "../../../../interface/utils/form-indicator";
-import {ActionType} from "../../../../interface/enum/action-type";
-import {ProgExercise} from "../../../../interface/dto/prog-exercise";
+import {FormIndicator} from "../../../../shared/model/common/form-indicator";
+import {ActionTypeEnum} from "../../../../shared/model/enum/action-type.enum";
+import {ProgExercise} from "../../../../shared/model/dto/prog-exercise";
 import {LoadingComponent} from "../../../../components/loading/loading.component";
 import {SearchBarComponent} from "../../../../components/search-bar/search-bar.component";
 import {ProgExerciseService} from "../../../../core/services/prog-exercise/prog-exercise.service";
-import {Visibility} from "../../../../interface/enum/visibility";
+import {VisibilityEnum} from "../../../../shared/model/enum/visibility.enum";
 import {ProgExercisesArrayComponent} from "../prog-exercise-array/prog-exercises-array.component";
 import {ProgExerciseModalComponent} from "../prog-exercise-modal/prog-exercise-modal.component";
-import {Muscle} from "../../../../interface/dto/muscle";
+import {Muscle} from "../../../../shared/model/dto/muscle";
 import {Subject, takeUntil} from "rxjs";
 
 @Component({
@@ -24,7 +24,7 @@ import {Subject, takeUntil} from "rxjs";
 export class ProgExercisesComponent implements OnInit, OnDestroy {
   loading = signal<boolean>(true);
   displayedProgExercises = signal<ProgExercise[]>([]);
-  action = signal<ActionType>(ActionType.create);
+  action = signal<ActionTypeEnum>(ActionTypeEnum.create);
   modalTitle = signal<string>("");
   progExercise = signal<ProgExercise | undefined>(undefined);
 
@@ -40,7 +40,7 @@ export class ProgExercisesComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe((progExercises: ProgExercise[]) => {
         let publicProgExercise: ProgExercise[] = progExercises.filter((progExercise: ProgExercise) =>
-          progExercise.visibility === Visibility.PUBLIC)
+          progExercise.visibility === VisibilityEnum.PUBLIC)
         this.progExercises = publicProgExercise;
         this.displayedProgExercises.set(publicProgExercise);
       });

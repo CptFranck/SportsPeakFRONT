@@ -1,8 +1,8 @@
 import {Component, input, output} from '@angular/core';
-import {User} from "../../../../interface/dto/user";
-import {FormIndicator} from "../../../../interface/utils/form-indicator";
-import {ActionType} from "../../../../interface/enum/action-type";
-import {ModificationField} from "../../../../interface/enum/modification-field";
+import {User} from "../../../../shared/model/dto/user";
+import {FormIndicator} from "../../../../shared/model/common/form-indicator";
+import {ActionTypeEnum} from "../../../../shared/model/enum/action-type.enum";
+import {ModificationFieldEnum} from "../../../../shared/model/enum/modification-field.enum";
 import {ModalButtonComponent} from "../../../../components/modal/modal-button/modal-button.component";
 
 @Component({
@@ -23,24 +23,24 @@ export class UserInformationDisplayComponent {
 
   onChangeEmail() {
     this.actionUser.emit({
-      actionType: ActionType.update,
-      modificationField: ModificationField.email,
+      actionType: ActionTypeEnum.update,
+      modificationField: ModificationFieldEnum.email,
       object: this.user()
     });
   }
 
   onChangeUsername() {
     this.actionUser.emit({
-      actionType: ActionType.update,
-      modificationField: ModificationField.username,
+      actionType: ActionTypeEnum.update,
+      modificationField: ModificationFieldEnum.username,
       object: this.user()
     });
   }
 
   onChangeName() {
     this.actionUser.emit({
-      actionType: ActionType.update,
-      modificationField: ModificationField.identity,
+      actionType: ActionTypeEnum.update,
+      modificationField: ModificationFieldEnum.identity,
       object: this.user()
     });
   }

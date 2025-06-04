@@ -3,9 +3,9 @@ import {ComponentFixture, TestBed} from '@angular/core/testing';
 import {UsersManagementComponent} from './users-management.component';
 import {BehaviorSubject} from "rxjs";
 import {UserService} from "../../../../core/services/user/user.service";
-import {User} from "../../../../interface/dto/user";
+import {User} from "../../../../shared/model/dto/user";
 import {RoleService} from "../../../../core/services/role/role.service";
-import {Role} from "../../../../interface/dto/role";
+import {Role} from "../../../../shared/model/dto/role";
 
 describe('UsersComponent', () => {
   let component: UsersManagementComponent;

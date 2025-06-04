@@ -1,5 +1,5 @@
 import {Component, input} from '@angular/core';
-import {TabOption} from "../../interface/components/tab/tabOption";
+import {TabOption} from "../../shared/model/component/tab/tabOption";
 
 @Component({
   selector: 'app-tab-header',

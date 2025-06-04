@@ -1,12 +1,12 @@
 import {Component, inject, input, OnChanges, OnDestroy, OnInit, output, signal} from '@angular/core';
-import {FormIndicator} from "../../../../interface/utils/form-indicator";
+import {FormIndicator} from "../../../../shared/model/common/form-indicator";
 import {UserLoggedService} from "../../../../core/services/user-logged/user-logged.service";
-import {ActionType} from "../../../../interface/enum/action-type";
+import {ActionTypeEnum} from "../../../../shared/model/enum/action-type.enum";
 import {ModalButtonComponent} from "../../../../components/modal/modal-button/modal-button.component";
-import {ProgExercise} from "../../../../interface/dto/prog-exercise";
-import {User} from "../../../../interface/dto/user";
-import {ProgExerciseRowDetail} from "../../../../interface/utils/prog-exercise-row-detail";
-import {Dictionary} from "../../../../interface/utils/dictionary";
+import {ProgExercise} from "../../../../shared/model/dto/prog-exercise";
+import {User} from "../../../../shared/model/dto/user";
+import {ProgExerciseRowDetail} from "../../../../shared/model/common/prog-exercise-row-detail";
+import {Dictionary} from "../../../../shared/model/common/dictionary";
 import {Subject, takeUntil} from "rxjs";
 
 @Component({
@@ -77,14 +77,14 @@ export class ProgExercisesArrayComponent implements OnInit, OnChanges, OnDestroy
 
   showMuscleDetails(progExercise: ProgExercise): void {
     this.actionMuscle.emit({
-      actionType: ActionType.read,
+      actionType: ActionTypeEnum.read,
       object: progExercise
     });
   }
 
   // subScribeToProgExercise(progExercise: ProgExercise): void {
   //   this.actionMuscle.emit({
-  //     actionType: ActionType.read,
+  //     actionType: ActionTypeEnum.read,
   //     object: progExercise
   //   });
   // }

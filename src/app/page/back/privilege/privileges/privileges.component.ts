@@ -2,10 +2,10 @@ import {Component, inject, OnDestroy, OnInit, signal} from '@angular/core';
 import {PrivilegesArrayComponent} from "../privileges-array/privileges-array.component";
 import {PrivilegeModalComponent} from "../privilege-modal/privilege-modal.component";
 import {LoadingComponent} from "../../../../components/loading/loading.component";
-import {Privilege} from "../../../../interface/dto/privilege";
-import {ActionType} from "../../../../interface/enum/action-type";
+import {Privilege} from "../../../../shared/model/dto/privilege";
+import {ActionTypeEnum} from "../../../../shared/model/enum/action-type.enum";
 import {PrivilegeService} from "../../../../core/services/privilege/privilege.service";
-import {FormIndicator} from "../../../../interface/utils/form-indicator";
+import {FormIndicator} from "../../../../shared/model/common/form-indicator";
 import {Subject, takeUntil} from "rxjs";
 
 @Component({
@@ -21,7 +21,7 @@ export class PrivilegesComponent implements OnInit, OnDestroy {
   loading = signal<boolean>(true);
   privileges: Privilege[] = [];
   privilege = signal<Privilege | undefined>(undefined);
-  action = signal<ActionType>(ActionType.create);
+  action = signal<ActionTypeEnum>(ActionTypeEnum.create);
   modalTitle = signal<string>("");
 
   readonly privilegeModalId: string = "privilegeModal";

@@ -1,17 +1,17 @@
 import {Component, computed, input, output} from '@angular/core';
-import {FormIndicator} from "../../../../../interface/utils/form-indicator";
-import {ProgExerciseTargetSets} from "../../../../../interface/utils/progExerciseTargetSets";
-import {ActionType} from "../../../../../interface/enum/action-type";
-import {ProgExercise} from "../../../../../interface/dto/prog-exercise";
+import {FormIndicator} from "../../../../../shared/model/common/form-indicator";
+import {ProgExerciseTargetSets} from "../../../../../shared/model/common/progExerciseTargetSets";
+import {ActionTypeEnum} from "../../../../../shared/model/enum/action-type.enum";
+import {ProgExercise} from "../../../../../shared/model/dto/prog-exercise";
 import {
   TargetSetCardComponent
 } from "../../../../../components/card/target-set/target-set-card/target-set-card.component";
 import {TabHeaderComponent} from "../../../../../components/tab-header/tab-header.component";
-import {TabOption} from "../../../../../interface/components/tab/tabOption";
+import {TabOption} from "../../../../../shared/model/component/tab/tabOption";
 import {getUpToDateTargetSets, sortLastTargetSetsByIndex} from "../../../../../utils/target-set-functions";
 import {getProgExerciseTargetSet} from "../../../../../utils/prog-exercise-functions";
-import {Dictionary} from "../../../../../interface/utils/dictionary";
-import {TargetSet} from "../../../../../interface/dto/target-set";
+import {Dictionary} from "../../../../../shared/model/common/dictionary";
+import {TargetSet} from "../../../../../shared/model/dto/target-set";
 
 @Component({
   selector: 'app-target-sets',
@@ -56,7 +56,7 @@ export class TargetSetsComponent {
   readonly actionTargetSets = output<FormIndicator>();
   readonly actionPerformanceLogs = output<FormIndicator>();
 
-  protected readonly ActionType = ActionType;
+  protected readonly ActionType = ActionTypeEnum;
 
   setTargetSet(event: FormIndicator) {
     this.actionTargetSets.emit(event)

@@ -4,7 +4,7 @@ import {MutationResult} from "apollo-angular";
 import {AlertService} from "../alert/alert.service";
 import {ApolloQueryResult} from "@apollo/client";
 import {FormGroup} from "@angular/forms";
-import {User} from "../../../interface/dto/user";
+import {User} from "../../../shared/model/dto/user";
 import {
   GET_USERS,
   MOD_USER_EMAIL,
@@ -15,7 +15,7 @@ import {
 } from "../../graphql/operations/user.operations";
 import {ApolloWrapperService} from "../apollo-wrapper/apollo-wrapper.service";
 import {UserLoggedService} from "../user-logged/user-logged.service";
-import {Auth} from "../../../interface/dto/auth";
+import {Auth} from "../../../shared/model/dto/auth";
 import {DEL_MUSCLE} from "../../graphql/operations/muscle.operations";
 import {AuthService} from "../auth/auth.service";
 

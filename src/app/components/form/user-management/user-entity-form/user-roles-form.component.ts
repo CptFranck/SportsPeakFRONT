@@ -2,11 +2,11 @@ import {Component, computed, inject, input, OnDestroy, OnInit, signal} from '@an
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {Observable, Subject, takeUntil} from "rxjs";
 import {InputControlComponent} from "../../../input-control/input-control.component";
-import {User} from "../../../../interface/dto/user";
+import {User} from "../../../../shared/model/dto/user";
 import {UserService} from "../../../../core/services/user/user.service";
 import {RoleSelectorComponent} from "../../../selectors/role-selector/role-selector.component";
-import {ActionType} from "../../../../interface/enum/action-type";
-import {Role} from "../../../../interface/dto/role";
+import {ActionTypeEnum} from "../../../../shared/model/enum/action-type.enum";
+import {Role} from "../../../../shared/model/dto/role";
 
 @Component({
   selector: 'app-user-roles-form',
@@ -39,7 +39,7 @@ export class UserRolesFormComponent implements OnInit, OnDestroy {
   submitInvalidForm = signal<boolean>(false);
 
   readonly btnCloseRef = input.required<HTMLButtonElement>();
-  readonly submitEvents = input.required<Observable<ActionType> | undefined>();
+  readonly submitEvents = input.required<Observable<ActionTypeEnum> | undefined>();
 
   private readonly unsubscribe$ = new Subject<void>();
   private readonly userService = inject(UserService);
@@ -49,8 +49,8 @@ export class UserRolesFormComponent implements OnInit, OnDestroy {
     if (submitEvents)
       submitEvents
         .pipe(takeUntil(this.unsubscribe$))
-        .subscribe((actionType: ActionType) => {
-          if (actionType === ActionType.update)
+        .subscribe((actionType: ActionTypeEnum) => {
+          if (actionType === ActionTypeEnum.update)
             this.onSubmit();
         });
   }

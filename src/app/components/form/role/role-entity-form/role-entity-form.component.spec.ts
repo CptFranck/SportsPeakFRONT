@@ -3,10 +3,10 @@ import {ComponentFixture, TestBed} from '@angular/core/testing';
 import {RoleEntityFormComponent} from './role-entity-form.component';
 import {BehaviorSubject} from "rxjs";
 import {UserLoggedService} from "../../../../core/services/user-logged/user-logged.service";
-import {User} from "../../../../interface/dto/user";
+import {User} from "../../../../shared/model/dto/user";
 import {RoleService} from "../../../../core/services/role/role.service";
 import {PrivilegeService} from "../../../../core/services/privilege/privilege.service";
-import {Privilege} from "../../../../interface/dto/privilege";
+import {Privilege} from "../../../../shared/model/dto/privilege";
 
 describe('RoleEntityFormComponent', () => {
   let component: RoleEntityFormComponent;

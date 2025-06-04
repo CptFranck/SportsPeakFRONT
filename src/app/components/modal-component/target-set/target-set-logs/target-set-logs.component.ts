@@ -1,9 +1,9 @@
 import {Component, computed, input, output, signal} from '@angular/core';
-import {TargetSet} from "../../../../interface/dto/target-set";
+import {TargetSet} from "../../../../shared/model/dto/target-set";
 import {TargetSetLogsCardComponent} from "../../../card/target-set/target-set-logs-card/target-set-logs-card.component";
-import {FormIndicator} from "../../../../interface/utils/form-indicator";
+import {FormIndicator} from "../../../../shared/model/common/form-indicator";
 import {getTargetSetLogs} from "../../../../utils/target-set-functions";
-import {ActionType} from "../../../../interface/enum/action-type";
+import {ActionTypeEnum} from "../../../../shared/model/enum/action-type.enum";
 import {CollapseBlockComponent} from "../../../collapse-block/collapse-block.component";
 import {
   TargetSetEntityFormComponent
@@ -12,7 +12,7 @@ import {
   TargetSetDeleteFormComponent
 } from "../../../form/target-set/target-set-delete-form/target-set-delete-form.component";
 import {PerformanceLogsComponent} from "../../performance-log/performance-logs/performance-logs.component";
-import {ProgExercise} from "../../../../interface/dto/prog-exercise";
+import {ProgExercise} from "../../../../shared/model/dto/prog-exercise";
 
 @Component({
   selector: 'app-target-set-logs',
@@ -41,18 +41,18 @@ export class TargetSetLogsComponent {
     return [];
   });
 
-  action = signal<ActionType>(ActionType.read);
+  action = signal<ActionTypeEnum>(ActionTypeEnum.read);
   blocTitle = signal<string | undefined>(undefined);
   targetSetLog = signal<TargetSet | undefined>(undefined);
 
   readonly actionTargetSets = output<FormIndicator>();
 
-  protected readonly ActionType = ActionType;
+  protected readonly ActionType = ActionTypeEnum;
 
   setTargetSet(formIndicator: FormIndicator) {
     this.action.set(formIndicator.actionType);
     this.targetSetLog.set(formIndicator.object);
-    if (this.action() === ActionType.checkPerformance)
+    if (this.action() === ActionTypeEnum.checkPerformance)
       this.blocTitle.set(undefined);
     else
       this.blocTitle.set("Set created on " + new Date(formIndicator.object?.creationDate).toLocaleDateString());

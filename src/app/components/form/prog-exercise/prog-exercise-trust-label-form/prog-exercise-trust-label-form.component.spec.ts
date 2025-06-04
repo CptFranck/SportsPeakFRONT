@@ -2,9 +2,9 @@ import {ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {ProgExerciseTrustLabelFormComponent} from './prog-exercise-trust-label-form.component';
 import {ProgExerciseService} from "../../../../core/services/prog-exercise/prog-exercise.service";
-import {User} from "../../../../interface/dto/user";
+import {User} from "../../../../shared/model/dto/user";
 import {generateTestExercise, generateTestProgExercise, generateTestUser} from "../../../../utils/testFunctions";
-import {Exercise} from "../../../../interface/dto/exercise";
+import {Exercise} from "../../../../shared/model/dto/exercise";
 
 describe('TargetTrustLabelFormComponent', () => {
   let component: ProgExerciseTrustLabelFormComponent;

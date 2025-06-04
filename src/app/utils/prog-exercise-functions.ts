@@ -1,8 +1,8 @@
-import {TargetSet} from "../interface/dto/target-set";
-import {ProgExercise} from "../interface/dto/prog-exercise";
-import {Duration} from "../interface/dto/duration";
-import {TargetSetState} from "../interface/enum/targetSetState";
-import {ProgExerciseTargetSets} from "../interface/utils/progExerciseTargetSets";
+import {TargetSet} from "../shared/model/dto/target-set";
+import {ProgExercise} from "../shared/model/dto/prog-exercise";
+import {Duration} from "../shared/model/dto/duration";
+import {TargetSetStateEnum} from "../shared/model/enum/targetSetState.enum";
+import {ProgExerciseTargetSets} from "../shared/model/common/progExerciseTargetSets";
 import {addDurationAmount, getStringTime} from "./duration-functions";
 import {getTargetSetTimeAmount, getUpToDateTargetSets, sortLastTargetSetsByIndex} from "./target-set-functions";
 
@@ -32,11 +32,11 @@ export function getProgExerciseTargetSet(targetSets: TargetSet[]): ProgExerciseT
   const targetSetHidden: TargetSet[] = [];
 
   targetSets.forEach((targetSet: TargetSet) => {
-    if (targetSet.state === TargetSetState.USED)
+    if (targetSet.state === TargetSetStateEnum.USED)
       targetSetUsed.push(targetSet);
-    else if (targetSet.state === TargetSetState.UNUSED)
+    else if (targetSet.state === TargetSetStateEnum.UNUSED)
       targetSetUnused.push(targetSet);
-    else if (targetSet.state === TargetSetState.HIDDEN)
+    else if (targetSet.state === TargetSetStateEnum.HIDDEN)
       targetSetHidden.push(targetSet);
   })
   return {

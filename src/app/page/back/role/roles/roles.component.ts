@@ -2,10 +2,10 @@ import {Component, inject, OnDestroy, OnInit, signal} from '@angular/core';
 import {RolesArrayComponent} from "../roles-array/roles-array.component";
 import {RoleModalComponent} from "../role-modal/role-modal.component";
 import {LoadingComponent} from "../../../../components/loading/loading.component";
-import {Role} from "../../../../interface/dto/role";
-import {ActionType} from "../../../../interface/enum/action-type";
+import {Role} from "../../../../shared/model/dto/role";
+import {ActionTypeEnum} from "../../../../shared/model/enum/action-type.enum";
 import {RoleService} from "../../../../core/services/role/role.service";
-import {FormIndicator} from "../../../../interface/utils/form-indicator";
+import {FormIndicator} from "../../../../shared/model/common/form-indicator";
 import {Subject, takeUntil} from "rxjs";
 
 @Component({
@@ -21,7 +21,7 @@ export class RolesComponent implements OnInit, OnDestroy {
   loading = signal<boolean>(true);
   roles: Role[] = [];
   role = signal<Role | undefined>(undefined);
-  action = signal<ActionType>(ActionType.create);
+  action = signal<ActionTypeEnum>(ActionTypeEnum.create);
   modalTitle = signal<string>("");
 
   readonly muscleModalId: string = "roleModal";

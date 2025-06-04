@@ -3,9 +3,9 @@ import {ComponentFixture, TestBed} from '@angular/core/testing';
 import {PrivilegesComponent} from './privileges.component';
 import {BehaviorSubject} from "rxjs";
 import {PrivilegeService} from "../../../../core/services/privilege/privilege.service";
-import {Privilege} from "../../../../interface/dto/privilege";
+import {Privilege} from "../../../../shared/model/dto/privilege";
 import {RoleService} from "../../../../core/services/role/role.service";
-import {Role} from "../../../../interface/dto/role";
+import {Role} from "../../../../shared/model/dto/role";
 
 describe('PrivilegesComponent', () => {
   let component: PrivilegesComponent;

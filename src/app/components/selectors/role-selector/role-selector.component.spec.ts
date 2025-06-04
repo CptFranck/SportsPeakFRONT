@@ -3,7 +3,7 @@ import {ComponentFixture, TestBed} from '@angular/core/testing';
 import {RoleSelectorComponent} from './role-selector.component';
 import {RoleService} from "../../../core/services/role/role.service";
 import {BehaviorSubject} from "rxjs";
-import {Role} from "../../../interface/dto/role";
+import {Role} from "../../../shared/model/dto/role";
 
 describe('RoleSelectorComponent', () => {
   let component: RoleSelectorComponent;

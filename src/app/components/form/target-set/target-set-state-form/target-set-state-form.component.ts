@@ -3,7 +3,7 @@ import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/
 import {
   TargetSetStateSelectComponent
 } from "../../../selects/target-set-state-select/target-set-state-select.component";
-import {TargetSet} from "../../../../interface/dto/target-set";
+import {TargetSet} from "../../../../shared/model/dto/target-set";
 import {TargetSetService} from "../../../../core/services/target-set/target-set.service";
 
 @Component({

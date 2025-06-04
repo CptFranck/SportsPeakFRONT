@@ -1,8 +1,8 @@
 import {Component, input} from '@angular/core';
-import {User} from "../../../interface/dto/user";
-import {ActionType} from "../../../interface/enum/action-type";
+import {User} from "../../../shared/model/dto/user";
+import {ActionTypeEnum} from "../../../shared/model/enum/action-type.enum";
 import {ModalComponent} from "../../../components/modal/modal/modal.component";
-import {ModificationField} from "../../../interface/enum/modification-field";
+import {ModificationFieldEnum} from "../../../shared/model/enum/modification-field.enum";
 import {UserEmailFormComponent} from "../../../components/form/user/user-email-form/user-email-form.component";
 import {UserUsernameFormComponent} from "../../../components/form/user/user-username-form/user-username-form.component";
 import {UserNameFormComponent} from "../../../components/form/user/user-name-form/user-name-form.component";
@@ -25,9 +25,9 @@ export class UserModalComponent {
   readonly modalTitle = input.required<string>();
   readonly userModalId = input.required<string>();
   readonly user = input.required<User | undefined>();
-  readonly action = input.required<ActionType>();
-  readonly modification = input.required<ModificationField>();
+  readonly action = input.required<ActionTypeEnum>();
+  readonly modification = input.required<ModificationFieldEnum>();
 
-  protected readonly ActionType = ActionType;
-  protected readonly ModificationField = ModificationField;
+  protected readonly ActionType = ActionTypeEnum;
+  protected readonly ModificationField = ModificationFieldEnum;
 }

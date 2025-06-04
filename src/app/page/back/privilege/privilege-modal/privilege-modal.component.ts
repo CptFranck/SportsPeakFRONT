@@ -10,9 +10,9 @@ import {
 import {
   PrivilegeEntityFormComponent
 } from "../../../../components/form/privilege/privilege-entity-form/privilege-entity-form.component";
-import {Privilege} from "../../../../interface/dto/privilege";
-import {ActionType} from "../../../../interface/enum/action-type";
-import {FormIndicator} from "../../../../interface/utils/form-indicator";
+import {Privilege} from "../../../../shared/model/dto/privilege";
+import {ActionTypeEnum} from "../../../../shared/model/enum/action-type.enum";
+import {FormIndicator} from "../../../../shared/model/common/form-indicator";
 
 @Component({
   selector: 'app-privilege-modal',
@@ -30,16 +30,16 @@ export class PrivilegeModalComponent {
   readonly modalTitle = input.required<string>();
   readonly privilegeModalId = input.required<string>();
   readonly privilege = input.required<Privilege | undefined>();
-  readonly action = input.required<ActionType>();
+  readonly action = input.required<ActionTypeEnum>();
 
   readonly actionPrivilege = output<FormIndicator>();
 
-  protected readonly ActionType = ActionType;
+  protected readonly ActionType = ActionTypeEnum;
 
   onClick() {
     this.actionPrivilege.emit({
       object: undefined,
-      actionType: ActionType.create
+      actionType: ActionTypeEnum.create
     })
   }
 }

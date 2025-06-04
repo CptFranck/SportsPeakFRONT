@@ -3,7 +3,7 @@ import {ComponentFixture, TestBed} from '@angular/core/testing';
 import {PrivilegeSelectorComponent} from './privilege-selector.component';
 import {PrivilegeService} from "../../../core/services/privilege/privilege.service";
 import {BehaviorSubject} from "rxjs";
-import {Privilege} from "../../../interface/dto/privilege";
+import {Privilege} from "../../../shared/model/dto/privilege";
 
 describe('PrivilegeSelectorComponent', () => {
   let component: PrivilegeSelectorComponent;

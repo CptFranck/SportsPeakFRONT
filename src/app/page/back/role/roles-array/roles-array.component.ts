@@ -1,9 +1,9 @@
 import {Component, input, output} from '@angular/core';
 import {ModalButtonComponent} from "../../../../components/modal/modal-button/modal-button.component";
-import {Role} from "../../../../interface/dto/role";
-import {FormIndicator} from "../../../../interface/utils/form-indicator";
-import {Muscle} from "../../../../interface/dto/muscle";
-import {ActionType} from "../../../../interface/enum/action-type";
+import {Role} from "../../../../shared/model/dto/role";
+import {FormIndicator} from "../../../../shared/model/common/form-indicator";
+import {Muscle} from "../../../../shared/model/dto/muscle";
+import {ActionTypeEnum} from "../../../../shared/model/enum/action-type.enum";
 
 @Component({
   selector: 'app-roles-array',
@@ -21,21 +21,21 @@ export class RolesArrayComponent {
 
   showRoleDetails(muscle: Muscle): void {
     this.actionRole.emit({
-      actionType: ActionType.read,
+      actionType: ActionTypeEnum.read,
       object: muscle
     });
   }
 
   modifyRole(role: Role) {
     this.actionRole.emit({
-      actionType: ActionType.update,
+      actionType: ActionTypeEnum.update,
       object: role
     });
   }
 
   delRole(role: Role) {
     this.actionRole.emit({
-      actionType: ActionType.delete,
+      actionType: ActionTypeEnum.delete,
       object: role
     });
   }

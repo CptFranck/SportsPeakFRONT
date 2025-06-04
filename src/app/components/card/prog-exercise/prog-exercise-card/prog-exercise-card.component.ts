@@ -1,8 +1,8 @@
 import {Component, computed, input, output} from '@angular/core';
-import {ProgExercise} from "../../../../interface/dto/prog-exercise";
+import {ProgExercise} from "../../../../shared/model/dto/prog-exercise";
 import {ModalButtonComponent} from "../../../modal/modal-button/modal-button.component";
-import {ActionType} from "../../../../interface/enum/action-type";
-import {FormIndicator} from "../../../../interface/utils/form-indicator";
+import {ActionTypeEnum} from "../../../../shared/model/enum/action-type.enum";
+import {FormIndicator} from "../../../../shared/model/common/form-indicator";
 import {getProgExerciseTime} from "../../../../utils/prog-exercise-functions";
 import {RouterLink} from "@angular/router";
 import {getTargetSetsInformation} from "../../../../utils/target-set-functions";
@@ -27,14 +27,14 @@ export class ProgExerciseCardComponent {
 
   showProgExercisePreview(progExercise: ProgExercise): void {
     this.actionProgExercises.emit({
-      actionType: ActionType.read,
+      actionType: ActionTypeEnum.read,
       object: progExercise
     });
   }
 
   showProgExercisePerformance(progExercise: ProgExercise): void {
     this.actionProgExercises.emit({
-      actionType: ActionType.checkPerformance,
+      actionType: ActionTypeEnum.checkPerformance,
       object: progExercise
     });
   }

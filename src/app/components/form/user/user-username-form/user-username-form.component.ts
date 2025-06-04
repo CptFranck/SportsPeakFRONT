@@ -2,9 +2,9 @@ import {Component, computed, inject, input, OnDestroy, OnInit, signal} from '@an
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {Observable, Subject, takeUntil} from "rxjs";
 import {InputControlComponent} from "../../../input-control/input-control.component";
-import {ActionType} from "../../../../interface/enum/action-type";
-import {ModificationField} from "../../../../interface/enum/modification-field";
-import {User} from "../../../../interface/dto/user";
+import {ActionTypeEnum} from "../../../../shared/model/enum/action-type.enum";
+import {ModificationFieldEnum} from "../../../../shared/model/enum/modification-field.enum";
+import {User} from "../../../../shared/model/dto/user";
 import {UserService} from "../../../../core/services/user/user.service";
 
 @Component({
@@ -18,8 +18,8 @@ import {UserService} from "../../../../core/services/user/user.service";
 export class UserUsernameFormComponent implements OnInit, OnDestroy {
   readonly userInput = input.required<User | undefined>();
   readonly btnCloseRef = input.required<HTMLButtonElement>();
-  readonly modification = input.required<ModificationField>();
-  readonly submitEventActionType$ = input.required<Observable<ActionType> | undefined>();
+  readonly modification = input.required<ModificationFieldEnum>();
+  readonly submitEventActionType$ = input.required<Observable<ActionTypeEnum> | undefined>();
 
   readonly userForm = computed<FormGroup>(() => {
     const userForm: FormGroup = new FormGroup({
@@ -47,8 +47,8 @@ export class UserUsernameFormComponent implements OnInit, OnDestroy {
     if (submitEventActionType$)
       submitEventActionType$
         .pipe(takeUntil(this.unsubscribe$))
-        .subscribe((actionType: ActionType) => {
-          if (actionType === ActionType.update && this.modification() === ModificationField.username)
+        .subscribe((actionType: ActionTypeEnum) => {
+          if (actionType === ActionTypeEnum.update && this.modification() === ModificationFieldEnum.username)
             this.onSubmit();
         });
   }

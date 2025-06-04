@@ -6,9 +6,9 @@ import {
 import {RoleEntityFormComponent} from "../../../../components/form/role/role-entity-form/role-entity-form.component";
 import {ModalButtonComponent} from "../../../../components/modal/modal-button/modal-button.component";
 import {ModalComponent} from "../../../../components/modal/modal/modal.component";
-import {Role} from "../../../../interface/dto/role";
-import {ActionType} from "../../../../interface/enum/action-type";
-import {FormIndicator} from "../../../../interface/utils/form-indicator";
+import {Role} from "../../../../shared/model/dto/role";
+import {ActionTypeEnum} from "../../../../shared/model/enum/action-type.enum";
+import {FormIndicator} from "../../../../shared/model/common/form-indicator";
 
 @Component({
   selector: 'app-role-modal',
@@ -25,16 +25,16 @@ export class RoleModalComponent {
   readonly modalTitle = input.required<string>();
   readonly roleModalId = input.required<string>();
   readonly role = input.required<Role | undefined>();
-  readonly action = input.required<ActionType>();
+  readonly action = input.required<ActionTypeEnum>();
 
   readonly actionRole = output<FormIndicator>();
 
-  protected readonly ActionType = ActionType;
+  protected readonly ActionType = ActionTypeEnum;
 
   onClick() {
     this.actionRole.emit({
       object: undefined,
-      actionType: ActionType.create
+      actionType: ActionTypeEnum.create
     })
   }
 }

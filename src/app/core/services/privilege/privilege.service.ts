@@ -4,7 +4,7 @@ import {MutationResult} from "apollo-angular";
 import {AlertService} from "../alert/alert.service";
 import {ApolloQueryResult} from "@apollo/client";
 import {FormGroup} from "@angular/forms";
-import {Privilege} from "../../../interface/dto/privilege";
+import {Privilege} from "../../../shared/model/dto/privilege";
 import {
   ADD_PRIVILEGE,
   DEL_PRIVILEGE,

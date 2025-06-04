@@ -4,7 +4,7 @@ import {UserRolesFormComponent} from './user-roles-form.component';
 import {UserService} from "../../../../core/services/user/user.service";
 import {BehaviorSubject} from "rxjs";
 import {RoleService} from "../../../../core/services/role/role.service";
-import {Role} from "../../../../interface/dto/role";
+import {Role} from "../../../../shared/model/dto/role";
 
 describe('UserRolesFormComponent', () => {
   let component: UserRolesFormComponent;

@@ -1,14 +1,14 @@
 import {Component, inject, OnDestroy, OnInit, TemplateRef} from '@angular/core';
 import {UserLoggedService} from "../../../core/services/user-logged/user-logged.service";
-import {User} from "../../../interface/dto/user";
-import {ActionType} from "../../../interface/enum/action-type";
-import {ModificationField} from "../../../interface/enum/modification-field";
+import {User} from "../../../shared/model/dto/user";
+import {ActionTypeEnum} from "../../../shared/model/enum/action-type.enum";
+import {ModificationFieldEnum} from "../../../shared/model/enum/modification-field.enum";
 import {UserSecurityComponent} from "../user-information/user-security/user-security.component";
 import {
   UserInformationDisplayComponent
 } from "../user-information/user-information-display/user-information-display.component";
 import {UserModalComponent} from "../user-modal/user-modal.component";
-import {FormIndicator} from "../../../interface/utils/form-indicator";
+import {FormIndicator} from "../../../shared/model/common/form-indicator";
 import {Subject, takeUntil} from "rxjs";
 
 @Component({
@@ -23,13 +23,13 @@ import {Subject, takeUntil} from "rxjs";
 export class UserComponent implements OnInit, OnDestroy {
 
   user: User | undefined = undefined;
-  action: ActionType = ActionType.update;
-  modificationField: ModificationField = ModificationField.username;
+  action: ActionTypeEnum = ActionTypeEnum.update;
+  modificationField: ModificationFieldEnum = ModificationFieldEnum.username;
   modalTemplate: TemplateRef<any> | undefined;
   userModalId: string = "userModal";
   modalTitle: string = "Update User";
 
-  protected readonly ActionType = ActionType;
+  protected readonly ActionType = ActionTypeEnum;
 
   private readonly unsubscribe$: Subject<void> = new Subject<void>();
   private readonly userLoggedService: UserLoggedService = inject(UserLoggedService);
@@ -54,13 +54,13 @@ export class UserComponent implements OnInit, OnDestroy {
       this.modificationField = formIndicator.modificationField;
 
     switch (formIndicator.modificationField) {
-      case ModificationField.username:
+      case ModificationFieldEnum.username:
         this.modalTitle = formIndicator.object.username;
         return;
-      case ModificationField.email:
+      case ModificationFieldEnum.email:
         this.modalTitle = formIndicator.object.email;
         return;
-      case ModificationField.identity:
+      case ModificationFieldEnum.identity:
         this.modalTitle = formIndicator.object.firstName + " " + formIndicator.object.lastName;
         return;
       default:

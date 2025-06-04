@@ -1,8 +1,8 @@
 import {Component, computed, input, output} from '@angular/core';
-import {ProgExercise} from "../../../../interface/dto/prog-exercise";
-import {FormIndicator} from "../../../../interface/utils/form-indicator";
+import {ProgExercise} from "../../../../shared/model/dto/prog-exercise";
+import {FormIndicator} from "../../../../shared/model/common/form-indicator";
 import {getProgExerciseTime} from "../../../../utils/prog-exercise-functions";
-import {ActionType} from "../../../../interface/enum/action-type";
+import {ActionTypeEnum} from "../../../../shared/model/enum/action-type.enum";
 import {ModalButtonComponent} from "../../../modal/modal-button/modal-button.component";
 import {
   ProgExerciseTrustLabelFormComponent
@@ -20,28 +20,28 @@ export class ProgExerciseCardDetailsComponent {
 
   readonly modalId = input.required<string>();
   readonly progExercise = input.required<ProgExercise>();
-  
+
   readonly exerciseTime = computed<string>(() => getProgExerciseTime(this.progExercise()));
 
   readonly actionProgExercises = output<FormIndicator>();
 
   showProgExercisePerformance(progExercise: ProgExercise): void {
     this.actionProgExercises.emit({
-      actionType: ActionType.checkPerformance,
+      actionType: ActionTypeEnum.checkPerformance,
       object: progExercise
     });
   }
 
   modifyProgExercise(progExercise: ProgExercise) {
     this.actionProgExercises.emit({
-      actionType: ActionType.update,
+      actionType: ActionTypeEnum.update,
       object: progExercise
     });
   }
 
   delProgExercise(progExercise: ProgExercise) {
     this.actionProgExercises.emit({
-      actionType: ActionType.delete,
+      actionType: ActionTypeEnum.delete,
       object: progExercise
     });
   }

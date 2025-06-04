@@ -1,8 +1,8 @@
 import {Component, computed, input, output} from '@angular/core';
 import {ModalButtonComponent} from "../../../modal/modal-button/modal-button.component";
-import {FormIndicator} from "../../../../interface/utils/form-indicator";
-import {ActionType} from "../../../../interface/enum/action-type";
-import {TargetSet} from "../../../../interface/dto/target-set";
+import {FormIndicator} from "../../../../shared/model/common/form-indicator";
+import {ActionTypeEnum} from "../../../../shared/model/enum/action-type.enum";
+import {TargetSet} from "../../../../shared/model/dto/target-set";
 import {
   TargetSetStateFormComponent
 } from "../../../form/target-set/target-set-state-form/target-set-state-form.component";
@@ -33,46 +33,46 @@ export class TargetSetCardComponent {
   readonly actionTargetSets = output<FormIndicator>();
   readonly actionPerformanceLogs = output<FormIndicator>();
 
-  protected readonly ActionType = ActionType;
+  protected readonly ActionType = ActionTypeEnum;
 
   addNewPerformance(targetSet: TargetSet) {
     this.actionPerformanceLogs.emit({
-      actionType: ActionType.create,
+      actionType: ActionTypeEnum.create,
       object: targetSet,
     });
   }
 
   checkPerformance(targetSet: TargetSet) {
     this.actionPerformanceLogs.emit({
-      actionType: ActionType.checkPerformance,
+      actionType: ActionTypeEnum.checkPerformance,
       object: targetSet,
     });
   }
 
   adjustTargetSet(targetSet: TargetSet): void {
     this.actionTargetSets.emit({
-      actionType: ActionType.addEvolution,
+      actionType: ActionTypeEnum.addEvolution,
       object: targetSet
     });
   }
 
   checkTargetSet(targetSet: TargetSet) {
     this.actionTargetSets.emit({
-      actionType: ActionType.checkEvolution,
+      actionType: ActionTypeEnum.checkEvolution,
       object: targetSet
     });
   }
 
   modifyTargetSet(targetSet: TargetSet) {
     this.actionTargetSets.emit({
-      actionType: ActionType.update,
+      actionType: ActionTypeEnum.update,
       object: targetSet
     });
   }
 
   delTargetSet(targetSet: TargetSet) {
     this.actionTargetSets.emit({
-      actionType: ActionType.delete,
+      actionType: ActionTypeEnum.delete,
       object: targetSet
     });
   }

@@ -3,10 +3,10 @@ import {ComponentFixture, TestBed} from '@angular/core/testing';
 import {ProgExerciseCardDetailsComponent} from './prog-exercise-card-details.component';
 import {ProgExerciseService} from "../../../../core/services/prog-exercise/prog-exercise.service";
 import {BehaviorSubject} from "rxjs";
-import {ProgExercise} from "../../../../interface/dto/prog-exercise";
+import {ProgExercise} from "../../../../shared/model/dto/prog-exercise";
 import {generateTestExercise, generateTestProgExercise, generateTestUser} from "../../../../utils/testFunctions";
-import {User} from "../../../../interface/dto/user";
-import {Exercise} from "../../../../interface/dto/exercise";
+import {User} from "../../../../shared/model/dto/user";
+import {Exercise} from "../../../../shared/model/dto/exercise";
 
 describe('ProgExerciseCardDetailsComponent', () => {
   let component: ProgExerciseCardDetailsComponent;

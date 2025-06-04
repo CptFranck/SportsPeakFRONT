@@ -2,12 +2,12 @@ import {Component, computed, inject, input, OnDestroy, OnInit, signal} from '@an
 import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
 import {Observable, Subject, takeUntil} from "rxjs";
 import {RoleService} from "../../../../core/services/role/role.service";
-import {Privilege} from "../../../../interface/dto/privilege";
+import {Privilege} from "../../../../shared/model/dto/privilege";
 import {InputControlComponent} from "../../../input-control/input-control.component";
 import {PrivilegeSelectorComponent} from "../../../selectors/privilege-selector/privilege-selector.component";
 import {UserLoggedService} from "../../../../core/services/user-logged/user-logged.service";
-import {ActionType} from "../../../../interface/enum/action-type";
-import {Role} from "../../../../interface/dto/role";
+import {ActionTypeEnum} from "../../../../shared/model/enum/action-type.enum";
+import {Role} from "../../../../shared/model/dto/role";
 
 @Component({
   selector: 'app-role-entity-form',
@@ -25,7 +25,7 @@ export class RoleEntityFormComponent implements OnInit, OnDestroy {
 
   readonly role = input.required<Role | undefined>();
   readonly btnCloseRef = input.required<HTMLButtonElement>();
-  readonly submitEventActionType$ = input.required<Observable<ActionType> | undefined>();
+  readonly submitEventActionType$ = input.required<Observable<ActionTypeEnum> | undefined>();
 
   roleForm = computed<FormGroup>(() => {
     const exerciseIdsValidator = this.isAdmin ? null : Validators.required;
@@ -64,8 +64,8 @@ export class RoleEntityFormComponent implements OnInit, OnDestroy {
     if (submitEventActionType$)
       submitEventActionType$
         .pipe(takeUntil(this.unsubscribe$))
-        .subscribe((actionType: ActionType) => {
-          if (actionType === ActionType.create || actionType === ActionType.update)
+        .subscribe((actionType: ActionTypeEnum) => {
+          if (actionType === ActionTypeEnum.create || actionType === ActionTypeEnum.update)
             this.onSubmit();
         });
   }

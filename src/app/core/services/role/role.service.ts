@@ -5,7 +5,7 @@ import {AlertService} from "../alert/alert.service";
 import {DEL_EXERCISE} from "../../graphql/operations/exercise.operations";
 import {ApolloQueryResult} from "@apollo/client";
 import {FormGroup} from "@angular/forms";
-import {Role} from "../../../interface/dto/role";
+import {Role} from "../../../shared/model/dto/role";
 import {ADD_ROLE, GET_ROLES, MOD_ROLE} from "../../graphql/operations/role.operations";
 import {UserLoggedService} from "../user-logged/user-logged.service";
 import {ApolloWrapperService} from "../apollo-wrapper/apollo-wrapper.service";

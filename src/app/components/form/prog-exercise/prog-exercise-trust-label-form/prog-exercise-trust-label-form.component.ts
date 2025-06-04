@@ -1,6 +1,6 @@
 import {Component, computed, inject, input, OnDestroy, OnInit, signal} from '@angular/core';
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
-import {ProgExercise} from "../../../../interface/dto/prog-exercise";
+import {ProgExercise} from "../../../../shared/model/dto/prog-exercise";
 import {ProgExerciseService} from "../../../../core/services/prog-exercise/prog-exercise.service";
 import {
   TrustLabelSelectComponent

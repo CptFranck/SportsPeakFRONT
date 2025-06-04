@@ -4,9 +4,9 @@ import {PrivilegeEntityFormComponent} from './privilege-entity-form.component';
 import {PrivilegeService} from "../../../../core/services/privilege/privilege.service";
 import {BehaviorSubject} from "rxjs";
 import {UserLoggedService} from "../../../../core/services/user-logged/user-logged.service";
-import {User} from "../../../../interface/dto/user";
+import {User} from "../../../../shared/model/dto/user";
 import {RoleService} from "../../../../core/services/role/role.service";
-import {Role} from "../../../../interface/dto/role";
+import {Role} from "../../../../shared/model/dto/role";
 
 describe('PrivilegeEntityFormComponent', () => {
   let component: PrivilegeEntityFormComponent;

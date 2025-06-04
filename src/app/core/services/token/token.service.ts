@@ -1,7 +1,7 @@
 import {inject, Injectable} from '@angular/core';
 import {LocalStorageService} from "../local-storage/local-storage.service";
-import {AuthToken} from "../../../interface/dto/token";
-import {Auth} from "../../../interface/dto/auth";
+import {AuthToken} from "../../../shared/model/dto/token";
+import {Auth} from "../../../shared/model/dto/auth";
 import {jwtDecode} from "jwt-decode";
 
 @Injectable({

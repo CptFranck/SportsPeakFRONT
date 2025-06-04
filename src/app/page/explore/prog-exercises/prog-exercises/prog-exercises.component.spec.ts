@@ -3,7 +3,7 @@ import {ComponentFixture, TestBed} from '@angular/core/testing';
 import {ProgExercisesComponent} from './prog-exercises.component';
 import {ProgExerciseService} from "../../../../core/services/prog-exercise/prog-exercise.service";
 import {BehaviorSubject} from "rxjs";
-import {ProgExercise} from "../../../../interface/dto/prog-exercise";
+import {ProgExercise} from "../../../../shared/model/dto/prog-exercise";
 
 describe('ProgExercisesComponent', () => {
   let component: ProgExercisesComponent;

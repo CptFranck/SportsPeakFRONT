@@ -1,8 +1,8 @@
 import {Component, forwardRef, signal} from '@angular/core';
 import {SelectComponent} from "../../select/select.component";
 import {ControlValueAccessor, NG_VALUE_ACCESSOR} from "@angular/forms";
-import {SelectOption} from "../../../interface/components/select/selectOption";
-import {TrustLabel} from "../../../interface/enum/trustLabel";
+import {SelectOption} from "../../../shared/model/component/select/selectOption";
+import {TrustLabelEnum} from "../../../shared/model/enum/trustLabel.enum";
 
 @Component({
   selector: 'app-prog-exercise-trust-label-select',
@@ -21,17 +21,17 @@ import {TrustLabel} from "../../../interface/enum/trustLabel";
 export class TrustLabelSelectComponent implements ControlValueAccessor {
 
   trustLabelOptions: SelectOption[] = [{
-    title: TrustLabel.UNVERIFIED,
-    value: TrustLabel.UNVERIFIED,
+    title: TrustLabelEnum.UNVERIFIED,
+    value: TrustLabelEnum.UNVERIFIED,
   }, {
-    title: TrustLabel.TRUSTED,
-    value: TrustLabel.TRUSTED,
+    title: TrustLabelEnum.TRUSTED,
+    value: TrustLabelEnum.TRUSTED,
   }, {
-    title: TrustLabel.EXPERT_APPROVED,
-    value: TrustLabel.EXPERT_APPROVED,
+    title: TrustLabelEnum.EXPERT_APPROVED,
+    value: TrustLabelEnum.EXPERT_APPROVED,
   }];
 
-  trustLabel = signal<string>(TrustLabel.UNVERIFIED);
+  trustLabel = signal<string>(TrustLabelEnum.UNVERIFIED);
 
   onChange: (value: string) => void = () => {
   };

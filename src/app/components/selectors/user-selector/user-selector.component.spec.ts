@@ -3,7 +3,7 @@ import {ComponentFixture, TestBed} from '@angular/core/testing';
 import {UserSelectorComponent} from './user-selector.component';
 import {BehaviorSubject} from "rxjs";
 import {UserService} from "../../../core/services/user/user.service";
-import {User} from "../../../interface/dto/user";
+import {User} from "../../../shared/model/dto/user";
 
 describe('UserSelectorComponent', () => {
   let component: UserSelectorComponent;

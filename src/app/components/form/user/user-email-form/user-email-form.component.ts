@@ -1,10 +1,10 @@
 import {Component, computed, inject, input, OnDestroy, OnInit, signal} from '@angular/core';
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {Observable, Subject, takeUntil} from "rxjs";
-import {User} from "../../../../interface/dto/user";
+import {User} from "../../../../shared/model/dto/user";
 import {InputControlComponent} from "../../../input-control/input-control.component";
-import {ModificationField} from "../../../../interface/enum/modification-field";
-import {ActionType} from "../../../../interface/enum/action-type";
+import {ModificationFieldEnum} from "../../../../shared/model/enum/modification-field.enum";
+import {ActionTypeEnum} from "../../../../shared/model/enum/action-type.enum";
 import {UserService} from "../../../../core/services/user/user.service";
 
 @Component({
@@ -38,8 +38,8 @@ export class UserEmailFormComponent implements OnInit, OnDestroy {
   submitInvalidForm = signal<boolean>(false);
 
   readonly btnCloseRef = input.required<HTMLButtonElement>();
-  readonly submitEventActionType$ = input.required<Observable<ActionType> | undefined>();
-  readonly modification = input.required<ModificationField>();
+  readonly submitEventActionType$ = input.required<Observable<ActionTypeEnum> | undefined>();
+  readonly modification = input.required<ModificationFieldEnum>();
 
   private readonly unsubscribe$ = new Subject<void>();
   private readonly userService = inject(UserService);
@@ -49,8 +49,8 @@ export class UserEmailFormComponent implements OnInit, OnDestroy {
     if (submitEventActionType$)
       submitEventActionType$
         .pipe(takeUntil(this.unsubscribe$))
-        .subscribe((actionType: ActionType) => {
-          if (actionType === ActionType.update && this.modification() === ModificationField.email)
+        .subscribe((actionType: ActionTypeEnum) => {
+          if (actionType === ActionTypeEnum.update && this.modification() === ModificationFieldEnum.email)
             this.onSubmit();
         });
   }

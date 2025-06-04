@@ -1,6 +1,6 @@
-import {TargetSet} from "../interface/dto/target-set";
-import {ProgExercise} from "../interface/dto/prog-exercise";
-import {Duration} from "../interface/dto/duration";
+import {TargetSet} from "../shared/model/dto/target-set";
+import {ProgExercise} from "../shared/model/dto/prog-exercise";
+import {Duration} from "../shared/model/dto/duration";
 import {getStringTime} from "./duration-functions";
 
 

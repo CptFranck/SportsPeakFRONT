@@ -1,8 +1,8 @@
 import {Component, forwardRef, signal} from '@angular/core';
 import {ControlValueAccessor, NG_VALUE_ACCESSOR} from "@angular/forms";
-import {SelectOption} from "../../../interface/components/select/selectOption";
+import {SelectOption} from "../../../shared/model/component/select/selectOption";
 import {SelectComponent} from "../../select/select.component";
-import {WeightUnit} from "../../../interface/enum/weightUnit";
+import {WeightUnitEnum} from "../../../shared/model/enum/weightUnit.enum";
 
 @Component({
   selector: 'app-weight-select',
@@ -21,14 +21,14 @@ import {WeightUnit} from "../../../interface/enum/weightUnit";
 export class WeightSelectComponent implements ControlValueAccessor {
 
   visibilityOptions: SelectOption[] = [{
-    title: WeightUnit.KILOGRAMME,
-    value: WeightUnit.KILOGRAMME,
+    title: WeightUnitEnum.KILOGRAMME,
+    value: WeightUnitEnum.KILOGRAMME,
   }, {
-    title: WeightUnit.POUND,
-    value: WeightUnit.POUND,
+    title: WeightUnitEnum.POUND,
+    value: WeightUnitEnum.POUND,
   }];
 
-  weightUnit = signal<string>(WeightUnit.KILOGRAMME);
+  weightUnit = signal<string>(WeightUnitEnum.KILOGRAMME);
 
   onChange: (value: string) => void = () => {
   };

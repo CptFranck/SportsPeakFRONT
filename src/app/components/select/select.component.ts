@@ -1,5 +1,5 @@
 import {Component, input, model, output} from '@angular/core';
-import {SelectOption} from "../../interface/components/select/selectOption";
+import {SelectOption} from "../../shared/model/component/select/selectOption";
 import {FormsModule} from "@angular/forms";
 
 @Component({

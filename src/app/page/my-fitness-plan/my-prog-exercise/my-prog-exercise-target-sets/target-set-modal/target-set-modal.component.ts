@@ -1,7 +1,7 @@
 import {Component, input, output} from '@angular/core';
-import {ActionType} from "../../../../../interface/enum/action-type";
+import {ActionTypeEnum} from "../../../../../shared/model/enum/action-type.enum";
 import {ModalComponent} from "../../../../../components/modal/modal/modal.component";
-import {TargetSet} from "../../../../../interface/dto/target-set";
+import {TargetSet} from "../../../../../shared/model/dto/target-set";
 import {ModalButtonComponent} from "../../../../../components/modal/modal-button/modal-button.component";
 import {
   TargetSetDeleteFormComponent
@@ -9,12 +9,12 @@ import {
 import {
   TargetSetEntityFormComponent
 } from "../../../../../components/form/target-set/target-set-entity-form/target-set-entity-form.component";
-import {ProgExercise} from "../../../../../interface/dto/prog-exercise";
+import {ProgExercise} from "../../../../../shared/model/dto/prog-exercise";
 import {
   TargetSetLogsComponent
 } from "../../../../../components/modal-component/target-set/target-set-logs/target-set-logs.component";
-import {PerformanceLog} from "../../../../../interface/dto/performance-log";
-import {FormIndicator} from "../../../../../interface/utils/form-indicator";
+import {PerformanceLog} from "../../../../../shared/model/dto/performance-log";
+import {FormIndicator} from "../../../../../shared/model/common/form-indicator";
 
 @Component({
   selector: 'app-target-set-modal',
@@ -34,16 +34,16 @@ export class TargetSetModalComponent {
   readonly targetSet = input.required<TargetSet | undefined>();
   readonly progExercise = input.required<ProgExercise | undefined>();
   readonly performanceLog = input.required<PerformanceLog | undefined>();
-  readonly action = input.required<ActionType>();
+  readonly action = input.required<ActionTypeEnum>();
 
   readonly actionTargetSet = output<FormIndicator>();
 
-  protected readonly ActionType = ActionType;
+  protected readonly ActionType = ActionTypeEnum;
 
   onClick() {
     this.actionTargetSet.emit({
       object: undefined,
-      actionType: ActionType.create
+      actionType: ActionTypeEnum.create
     })
   }
 }

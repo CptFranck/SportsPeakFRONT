@@ -1,4 +1,4 @@
-export enum ModificationField {
+export enum ModificationFieldEnum {
   username = "Username",
   email = "Email",
   password = "Password",

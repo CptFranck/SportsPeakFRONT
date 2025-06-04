@@ -1,8 +1,8 @@
 import {Component, forwardRef, signal} from '@angular/core';
 import {SelectComponent} from "../../select/select.component";
 import {ControlValueAccessor, NG_VALUE_ACCESSOR} from "@angular/forms";
-import {SelectOption} from "../../../interface/components/select/selectOption";
-import {TargetSetState} from "../../../interface/enum/targetSetState";
+import {SelectOption} from "../../../shared/model/component/select/selectOption";
+import {TargetSetStateEnum} from "../../../shared/model/enum/targetSetState.enum";
 
 @Component({
   selector: 'app-target-set-state-select',
@@ -21,17 +21,17 @@ import {TargetSetState} from "../../../interface/enum/targetSetState";
 export class TargetSetStateSelectComponent implements ControlValueAccessor {
 
   targetSetStateOptions: SelectOption[] = [{
-    title: TargetSetState.USED,
-    value: TargetSetState.USED,
+    title: TargetSetStateEnum.USED,
+    value: TargetSetStateEnum.USED,
   }, {
-    title: TargetSetState.UNUSED,
-    value: TargetSetState.UNUSED,
+    title: TargetSetStateEnum.UNUSED,
+    value: TargetSetStateEnum.UNUSED,
   }, {
-    title: TargetSetState.HIDDEN,
-    value: TargetSetState.HIDDEN,
+    title: TargetSetStateEnum.HIDDEN,
+    value: TargetSetStateEnum.HIDDEN,
   }];
 
-  targetSetState = signal<string>(TargetSetState.USED);
+  targetSetState = signal<string>(TargetSetStateEnum.USED);
 
   onChange: (value: string) => void = () => {
   };

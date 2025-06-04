@@ -1,8 +1,8 @@
 import {Component, input, output} from '@angular/core';
 import {ModalButtonComponent} from "../../../../components/modal/modal-button/modal-button.component";
-import {User} from "../../../../interface/dto/user";
-import {FormIndicator} from "../../../../interface/utils/form-indicator";
-import {ActionType} from "../../../../interface/enum/action-type";
+import {User} from "../../../../shared/model/dto/user";
+import {FormIndicator} from "../../../../shared/model/common/form-indicator";
+import {ActionTypeEnum} from "../../../../shared/model/enum/action-type.enum";
 
 @Component({
   selector: 'app-users-array',
@@ -19,14 +19,14 @@ export class UsersManagementArrayComponent {
 
   showUserDetails(user: User): void {
     this.actionUser.emit({
-      actionType: ActionType.read,
+      actionType: ActionTypeEnum.read,
       object: user
     });
   }
 
   modifyUser(user: User) {
     this.actionUser.emit({
-      actionType: ActionType.update,
+      actionType: ActionTypeEnum.update,
       object: user
     });
   }
