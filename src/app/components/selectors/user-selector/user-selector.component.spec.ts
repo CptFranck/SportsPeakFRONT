@@ -4,6 +4,7 @@ import {UserSelectorComponent} from './user-selector.component';
 import {BehaviorSubject} from "rxjs";
 import {UserService} from "../../../core/services/user/user.service";
 import {User} from "../../../shared/model/dto/user";
+import {provideAnimations} from "@angular/platform-browser/animations";
 
 describe('UserSelectorComponent', () => {
   let component: UserSelectorComponent;
@@ -15,7 +16,9 @@ describe('UserSelectorComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      providers: [{provide: UserService, useValue: mockUserService}],
+      providers: [
+        provideAnimations(),
+        {provide: UserService, useValue: mockUserService}],
       imports: [UserSelectorComponent]
     })
       .compileComponents();
