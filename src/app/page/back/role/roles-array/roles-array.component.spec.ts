@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { RolesArrayComponent } from './roles-array.component';
+import {RolesArrayComponent} from './roles-array.component';
 
 describe('RolesArrayComponent', () => {
   let component: RolesArrayComponent;
@@ -10,10 +10,14 @@ describe('RolesArrayComponent', () => {
     await TestBed.configureTestingModule({
       imports: [RolesArrayComponent]
     })
-    .compileComponents();
-    
+      .compileComponents();
+
     fixture = TestBed.createComponent(RolesArrayComponent);
     component = fixture.componentInstance;
+
+    fixture.componentRef.setInput('modalId', "Id");
+    fixture.componentRef.setInput('roles', []);
+
     fixture.detectChanges();
   });
 
