@@ -7,7 +7,7 @@ import {ProgExerciseService} from "../../../../core/services/prog-exercise/prog-
 import {ProgExercise} from "../../../../shared/model/dto/prog-exercise";
 import {ExerciseService} from "../../../../core/services/exercise/exercise.service";
 import {Exercise} from "../../../../shared/model/dto/exercise";
-import {TargetSetService} from "../../../../core/services/target-set/target-set.service";
+import {provideAnimations} from "@angular/platform-browser/animations";
 
 describe('MyProgExerciseComponent', () => {
   let component: MyProgExerciseComponent;
@@ -23,14 +23,15 @@ describe('MyProgExerciseComponent', () => {
   mockExerciseService.exercises = new BehaviorSubject<Exercise[]>([]);
   mockExerciseService.isLoading = new BehaviorSubject<boolean>(true);
 
-  let mockTargetSetService: jasmine.SpyObj<TargetSetService>;
+  // let mockTargetSetService: jasmine.SpyObj<TargetSetService>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       providers: [
         provideRouter([]),
+        provideAnimations(),
         {provide: ExerciseService, useValue: mockExerciseService},
-        {provide: TargetSetService, useValue: mockTargetSetService},
+        // {provide: TargetSetService, useValue: mockTargetSetService},
         {provide: ProgExerciseService, useValue: mockProgExerciseService},
       ],
       imports: [MyProgExerciseComponent],
