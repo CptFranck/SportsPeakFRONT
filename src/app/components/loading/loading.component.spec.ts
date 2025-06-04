@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { LoadingComponent } from './loading.component';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
+import {LoadingComponent} from './loading.component';
+import {provideAnimations} from "@angular/platform-browser/animations";
 
 describe('LoadingComponent', () => {
   let component: LoadingComponent;
@@ -8,12 +8,16 @@ describe('LoadingComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [LoadingComponent]
+      imports: [LoadingComponent],
+      providers: [provideAnimations()],
     })
-    .compileComponents();
-    
+      .compileComponents();
+
     fixture = TestBed.createComponent(LoadingComponent);
     component = fixture.componentInstance;
+
+    fixture.componentRef.setInput('loading', true);
+
     fixture.detectChanges();
   });
 
