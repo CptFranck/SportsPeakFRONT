@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { UserSecurityComponent } from './user-security.component';
+import {UserSecurityComponent} from './user-security.component';
 
 describe('UserSecurityComponent', () => {
   let component: UserSecurityComponent;
@@ -10,10 +10,14 @@ describe('UserSecurityComponent', () => {
     await TestBed.configureTestingModule({
       imports: [UserSecurityComponent]
     })
-    .compileComponents();
-    
+      .compileComponents();
+
     fixture = TestBed.createComponent(UserSecurityComponent);
     component = fixture.componentInstance;
+
+    fixture.componentRef.setInput('modalId', "Id");
+    fixture.componentRef.setInput('user', undefined);
+
     fixture.detectChanges();
   });
 
