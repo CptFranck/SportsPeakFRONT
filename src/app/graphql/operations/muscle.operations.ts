@@ -77,4 +77,8 @@ export const DEL_MUSCLE = gql`
   }
 `;
 
+export const FRAG_MUSCLE_ILLUSTRATION = gql`fragment MuscleIllustration on Muscle {
+  illustrationPath
+}`;
+
 
