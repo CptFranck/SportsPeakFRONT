@@ -1,6 +1,7 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { MuscleExercisesTableComponent } from './muscle-exercises-table.component';
+import {MuscleExercisesTableComponent} from './muscle-exercises-table.component';
+import {generateTestMuscle} from "../../../utils/testFunctions";
 
 describe('MuscleExercisesTableComponent', () => {
   let component: MuscleExercisesTableComponent;
@@ -10,10 +11,14 @@ describe('MuscleExercisesTableComponent', () => {
     await TestBed.configureTestingModule({
       imports: [MuscleExercisesTableComponent]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(MuscleExercisesTableComponent);
     component = fixture.componentInstance;
+
+    const muscle = generateTestMuscle();
+    fixture.componentRef.setInput('muscle', muscle);
+
     fixture.detectChanges();
   });
 
