@@ -6,8 +6,9 @@ import {UserService} from "../../../../core/services/user/user.service";
 import {User} from "../../../../shared/model/dto/user";
 import {RoleService} from "../../../../core/services/role/role.service";
 import {Role} from "../../../../shared/model/dto/role";
+import {provideAnimations} from "@angular/platform-browser/animations";
 
-describe('UsersComponent', () => {
+describe('UsersManagementComponent', () => {
   let component: UsersManagementComponent;
   let fixture: ComponentFixture<UsersManagementComponent>;
 
@@ -24,6 +25,7 @@ describe('UsersComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       providers: [
+        provideAnimations(),
         {provide: UserService, useValue: mockUserService},
         {provide: RoleService, useValue: mockRoleService},
       ],
