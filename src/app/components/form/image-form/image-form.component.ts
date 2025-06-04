@@ -2,10 +2,11 @@ import {Component, computed, inject, input, OnDestroy, OnInit, output, signal} f
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {UserLoggedService} from "../../../core/services/user-logged/user-logged.service";
 import {Subject, takeUntil} from "rxjs";
-import {fileTypeValidator, fileWeightValidator} from "../../../validators/confirmValidator";
 import {FileUploadComponent} from "../../input/file-upload/file-upload.component";
 import {InputControlComponent} from "../../input-control/input-control.component";
 import {IllustrationService} from "../../../core/services/illustration/illustration.service";
+import {fileTypeValidator} from "../../../validators/fileTypeValidator";
+import {fileWeightValidator} from "../../../validators/fileWeightValidator";
 
 @Component({
   selector: 'app-image-form',
