@@ -2,7 +2,7 @@ import {ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {TabHeaderComponent} from './tab-header.component';
 
-describe('TabComponent', () => {
+describe('TabHeaderComponent', () => {
   let component: TabHeaderComponent;
   let fixture: ComponentFixture<TabHeaderComponent>;
 
@@ -14,6 +14,10 @@ describe('TabComponent', () => {
 
     fixture = TestBed.createComponent(TabHeaderComponent);
     component = fixture.componentInstance;
+
+    fixture.componentRef.setInput('tabId', 'Id');
+    fixture.componentRef.setInput('tabOptions', []);
+
     fixture.detectChanges();
   });
 
