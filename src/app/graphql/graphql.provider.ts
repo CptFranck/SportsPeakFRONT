@@ -10,7 +10,7 @@ import {AuthToken} from "../interface/dto/token";
 import {environment} from "../environment/environment";
 
 // URL of the GraphQL server here
-const uri: string = environment.graphqlEndPoint;
+const uri: string = environment.apiHttpBaseUrl + environment.graphqlEndPoint;
 
 function apolloOptionsFactory(): ApolloClientOptions<any> {
   const httpLink: HttpLink = inject(HttpLink);
