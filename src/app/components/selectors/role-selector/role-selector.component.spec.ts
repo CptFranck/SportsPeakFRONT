@@ -4,6 +4,7 @@ import {RoleSelectorComponent} from './role-selector.component';
 import {RoleService} from "../../../core/services/role/role.service";
 import {BehaviorSubject} from "rxjs";
 import {Role} from "../../../shared/model/dto/role";
+import {provideAnimations} from "@angular/platform-browser/animations";
 
 describe('RoleSelectorComponent', () => {
   let component: RoleSelectorComponent;
@@ -17,6 +18,7 @@ describe('RoleSelectorComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       providers: [
+        provideAnimations(),
         {provide: RoleService, useValue: mockRoleService},
       ],
       imports: [RoleSelectorComponent]
