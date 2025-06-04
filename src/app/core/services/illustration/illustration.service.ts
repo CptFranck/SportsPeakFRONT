@@ -1,5 +1,5 @@
 import {inject, Injectable} from '@angular/core';
-import {environment} from "../../../environment/environment";
+import {environment} from "../../environment";
 import {FormGroup} from "@angular/forms";
 import {AlertService} from "../alert/alert.service";
 import {TokenService} from "../token/token.service";

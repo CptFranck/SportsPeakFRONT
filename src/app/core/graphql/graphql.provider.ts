@@ -7,7 +7,7 @@ import {ErrorResponse, onError} from "@apollo/client/link/error";
 import {setContext} from "@apollo/client/link/context";
 import {TokenService} from "../services/token/token.service";
 import {AuthToken} from "../../interface/dto/token";
-import {environment} from "../../environment/environment";
+import {environment} from "../environment";
 
 // URL of the GraphQL server here
 const uri: string = environment.apiHttpBaseUrl + environment.graphqlEndPoint;
