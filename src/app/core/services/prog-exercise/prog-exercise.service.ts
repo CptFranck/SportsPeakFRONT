@@ -4,7 +4,7 @@ import {MutationResult} from "apollo-angular";
 import {AlertService} from "../alert/alert.service";
 import {ApolloQueryResult} from "@apollo/client";
 import {FormGroup} from "@angular/forms";
-import {ProgExercise} from "../../interface/dto/prog-exercise";
+import {ProgExercise} from "../../../interface/dto/prog-exercise";
 import {
   ADD_PROG_EXERCISE,
   DEL_PROG_EXERCISE,
@@ -13,8 +13,8 @@ import {
   GET_USER_PROG_EXERCISES,
   MOD_PROG_EXERCISE,
   MOD_PROG_EXERCISE_TRUST_LABEL
-} from "../../graphql/operations/prog-exercise.operations";
-import {User} from "../../interface/dto/user";
+} from "../../../graphql/operations/prog-exercise.operations";
+import {User} from "../../../interface/dto/user";
 import {UserLoggedService} from "../user-logged/user-logged.service";
 import {Router} from "@angular/router";
 import {ApolloWrapperService} from "../apollo-wrapper/apollo-wrapper.service";

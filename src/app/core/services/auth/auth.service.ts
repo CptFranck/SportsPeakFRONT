@@ -1,14 +1,14 @@
 import {inject, Injectable} from '@angular/core';
 import {Apollo, MutationResult} from "apollo-angular";
 import {FormGroup} from "@angular/forms";
-import {LOGIN, REGISTER} from "../../graphql/operations/auth.operations";
+import {LOGIN, REGISTER} from "../../../graphql/operations/auth.operations";
 import {AlertService} from "../alert/alert.service";
 import {Router} from "@angular/router";
-import {Auth} from "../../interface/dto/auth";
+import {Auth} from "../../../interface/dto/auth";
 import {UserLoggedService} from "../user-logged/user-logged.service";
 import {TokenService} from "../token/token.service";
 import {BehaviorSubject} from "rxjs";
-import {User} from "../../interface/dto/user";
+import {User} from "../../../interface/dto/user";
 
 @Injectable({
   providedIn: 'root'

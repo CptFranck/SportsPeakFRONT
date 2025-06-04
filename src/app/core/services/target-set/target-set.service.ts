@@ -7,8 +7,8 @@ import {
   DEL_TARGET_SET,
   MOD_TARGET_SET,
   MOD_TARGET_SET_STATE
-} from "../../graphql/operations/target-set.operations";
-import {TargetSet} from "../../interface/dto/target-set";
+} from "../../../graphql/operations/target-set.operations";
+import {TargetSet} from "../../../interface/dto/target-set";
 import {ApolloWrapperService} from "../apollo-wrapper/apollo-wrapper.service";
 
 @Injectable({

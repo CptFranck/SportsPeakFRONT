@@ -6,9 +6,9 @@ import {
   DEL_EXERCISE_TYPES,
   GET_EXERCISE_TYPES,
   MOD_EXERCISE_TYPES
-} from "../../graphql/operations/exercise-type.operation";
+} from "../../../graphql/operations/exercise-type.operation";
 import {AlertService} from "../alert/alert.service";
-import {ExerciseType} from "../../interface/dto/exercise-type";
+import {ExerciseType} from "../../../interface/dto/exercise-type";
 import {ApolloQueryResult} from "@apollo/client";
 import {BehaviorSubject} from "rxjs";
 import {ApolloWrapperService} from "../apollo-wrapper/apollo-wrapper.service";

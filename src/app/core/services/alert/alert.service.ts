@@ -1,9 +1,9 @@
 import {Injectable} from '@angular/core';
-import {Alert} from "../../interface/utils/alert";
-import {AlertType} from "../../interface/enum/alert-type";
+import {Alert} from "../../../interface/utils/alert";
+import {AlertType} from "../../../interface/enum/alert-type";
 import {Subject} from "rxjs";
 import {GraphQLFormattedError} from "graphql/error";
-import {AlertErrorType} from "../../interface/enum/alert-error-type";
+import {AlertErrorType} from "../../../interface/enum/alert-error-type";
 import {NetworkError} from "@apollo/client/errors";
 
 @Injectable({

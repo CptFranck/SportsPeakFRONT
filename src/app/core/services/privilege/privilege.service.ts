@@ -4,13 +4,13 @@ import {MutationResult} from "apollo-angular";
 import {AlertService} from "../alert/alert.service";
 import {ApolloQueryResult} from "@apollo/client";
 import {FormGroup} from "@angular/forms";
-import {Privilege} from "../../interface/dto/privilege";
+import {Privilege} from "../../../interface/dto/privilege";
 import {
   ADD_PRIVILEGE,
   DEL_PRIVILEGE,
   GET_PRIVILEGES,
   MOD_PRIVILEGE
-} from "../../graphql/operations/privilege.operations";
+} from "../../../graphql/operations/privilege.operations";
 import {UserLoggedService} from "../user-logged/user-logged.service";
 import {ApolloWrapperService} from "../apollo-wrapper/apollo-wrapper.service";
 

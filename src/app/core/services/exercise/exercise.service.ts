@@ -1,10 +1,10 @@
 import {inject, Injectable} from '@angular/core';
 import {MutationResult} from "apollo-angular";
 import {FormGroup} from "@angular/forms";
-import {ADD_EXERCISE, DEL_EXERCISE, GET_EXERCISES, MOD_EXERCISE} from "../../graphql/operations/exercise.operations";
+import {ADD_EXERCISE, DEL_EXERCISE, GET_EXERCISES, MOD_EXERCISE} from "../../../graphql/operations/exercise.operations";
 import {BehaviorSubject} from "rxjs";
 import {AlertService} from "../alert/alert.service";
-import {Exercise} from "../../interface/dto/exercise";
+import {Exercise} from "../../../interface/dto/exercise";
 import {ApolloWrapperService} from "../apollo-wrapper/apollo-wrapper.service";
 import {ApolloQueryResult} from "@apollo/client";
 
