@@ -15,18 +15,14 @@
             <i class="fa-solid fa-pen-to-square"></i>
           </app-modal-button>
           <app-modal-button
-            (onCLickModalButton)="onDelete()"
-            [modalId]="muscleModalId"
+            (onCLickModalButton)="onDelete()" [modalId]="muscleModalId"
             btnClass="btn-outline-danger btn-sm me-2"
           >
             Delete
             <i class="fa-solid fa-trash"></i>
           </app-modal-button>
-          <app-muscle-modal [action]="action()"
-                            [modalTitle]="modalTitle()"
-                            [muscleModalId]="muscleModalId"
-                            [muscle]="muscle()"
-          />
+          <app-muscle-modal [action]="action()" [modalTitle]="modalTitle()" [muscleModalId]="muscleModalId"
+                            [muscle]="muscle()"/>
         </div>
       }
     </div>
@@ -34,24 +30,23 @@
     <div class="row mb-4">
       <div class="col-md-8">
         <h6 class="fw-bold text-dark mb-2">Description</h6>
-        <p class="text-justify">
-          {{ muscle()?.description }}
-        </p>
+        <p class="text-justify"> {{ muscle()?.description }} </p>
       </div>
       <div class="col text-center">
         @let localMuscle = muscle();
         @if (localMuscle) {
-          @let image = `assets/muscle/${localMuscle.latinName.split(' ').join('-')}.png`;
-          <img [ngSrc]="image" alt="Muscle illustration" class="img-fluid" [width]="250" [height]="250"/>
-          <app-image-form [id]="localMuscle.id" type="muscle"/>
+          @let alt = `${localMuscle.latinName.split(' ').join('-')}`;
+          @if (imageUrl() !== '') {
+            <img [ngSrc]="imageUrl()" [alt]="alt" class="img-fluid" [width]="250" [height]="250" priority/>
+          }
+          <app-image-form [id]="localMuscle.id" type="muscle" (refresh)="reloadMuscle($event)"/>
         }
       </div>
     </div>
+
     <div class="mb-4">
       <h6 class="fw-bold text-dark mb-2">Function</h6>
-      <p class="text-justify">
-        {{ muscle()?.function }}
-      </p>
+      <p class="text-justify"> {{ muscle()?.function }} </p>
     </div>
     <hr/>
     <div class="mb-4">

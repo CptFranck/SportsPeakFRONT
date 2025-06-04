@@ -1,4 +1,4 @@
-import {Component, inject, OnDestroy, OnInit, signal} from '@angular/core';
+import {Component, computed, inject, OnDestroy, OnInit, signal} from '@angular/core';
 import {NgOptimizedImage} from "@angular/common";
 import {Subject, takeUntil} from "rxjs";
 import {ActivatedRoute, Params} from "@angular/router";
@@ -14,6 +14,7 @@ import {
 } from "../../../../components/table/muscle-exercises-table/muscle-exercises-table.component";
 import {ReactiveFormsModule} from "@angular/forms";
 import {ImageFormComponent} from "../../../../components/form/image-form/image-form.component";
+import {IllustrationService} from "../../../../services/illustration/illustration.service";
 
 @Component({
   selector: 'app-muscle-details',
@@ -37,6 +38,7 @@ export class MuscleDetailsComponent implements OnInit, OnDestroy {
   action = signal<ActionType>(ActionType.read);
   modalTitle = signal<string>("");
 
+
   readonly muscleModalId = "muscleModalId";
   readonly ActionType = ActionType;
 
@@ -44,13 +46,22 @@ export class MuscleDetailsComponent implements OnInit, OnDestroy {
   private readonly muscleService = inject(MuscleService);
   private readonly activatedRoute = inject(ActivatedRoute);
   private readonly userLoggedService = inject(UserLoggedService);
+  private readonly illustrationService = inject(IllustrationService);
+
+  imageUrl = computed<string>(() => {
+    const localMuscle = this.muscle();
+    if (localMuscle) return this.illustrationService.getImageUrl(localMuscle.illustrationPath);
+    return "";
+  });
 
   ngOnInit(): void {
-    this.muscleService.detailsMuscle()
-      .subscribe((muscle: Muscle | undefined) => this.muscle.set(muscle))
     this.activatedRoute.params
       .pipe(takeUntil(this.unsubscribe$))
-      .subscribe((params: Params) => params['id'] !== this.muscle()?.id ? this.muscleService.getMuscleById(params['id']) : null);
+      .subscribe((params: Params) => params['id'] !== this.muscle()?.id ?
+        this.muscleService.getMuscleById(params['id']) : null);
+    this.muscleService.detailsMuscle()
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe((muscle: Muscle | undefined) => this.muscle.set(muscle));
     this.muscleService.loading()
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe((isLoading: boolean) => this.loading.set(isLoading));
@@ -72,5 +83,10 @@ export class MuscleDetailsComponent implements OnInit, OnDestroy {
   onDelete() {
     this.action.set(ActionType.delete);
     this.modalTitle.set(`Delete muscle ${this.muscle()?.name}`);
+  }
+
+  reloadMuscle(url: string) {
+    const muscle = this.muscle();
+    if (muscle) this.muscleService.updateIllustrationMuscle(muscle.id, url);
   }
 }
