@@ -16,7 +16,9 @@ describe('PerformanceLogsCardComponent', () => {
     fixture = TestBed.createComponent(PerformanceLogsCardComponent);
     component = fixture.componentInstance;
 
-    component.performanceLog = generateTestPerformanceLog();
+    fixture.componentRef.setInput('activeButton', true);
+    fixture.componentRef.setInput('performanceLog', generateTestPerformanceLog());
+
     fixture.detectChanges();
   });
 
