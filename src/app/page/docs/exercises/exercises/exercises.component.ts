@@ -1,15 +1,15 @@
 import {Component, inject, OnDestroy, OnInit, signal} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {ExercisesAdminArrayComponent} from "../exercises-array/exercises-admin-array.component";
-import {ActionType} from "../../../../interface/enum/action-type";
-import {Exercise} from "../../../../interface/dto/exercise";
+import {ActionTypeEnum} from "../../../../shared/model/enum/action-type.enum";
+import {Exercise} from "../../../../shared/model/dto/exercise";
 import {ExerciseService} from "../../../../core/services/exercise/exercise.service";
-import {FormIndicator} from "../../../../interface/utils/form-indicator";
+import {FormIndicator} from "../../../../shared/model/common/form-indicator";
 import {LoadingComponent} from "../../../../components/loading/loading.component";
 import {ExerciseModalComponent} from "../exercise-modal/exercise-modal.component";
 import {SearchBarComponent} from "../../../../components/search-bar/search-bar.component";
-import {Muscle} from "../../../../interface/dto/muscle";
-import {ExerciseType} from "../../../../interface/dto/exercise-type";
+import {Muscle} from "../../../../shared/model/dto/muscle";
+import {ExerciseType} from "../../../../shared/model/dto/exercise-type";
 import {Subject, takeUntil} from "rxjs";
 import {UserLoggedService} from "../../../../core/services/user-logged/user-logged.service";
 import {ExerciceCardComponent} from "../../../../components/card/exercice-card/exercice-card.component";
@@ -33,7 +33,7 @@ export class ExercisesComponent implements OnInit, OnDestroy {
   isAdmin = signal<boolean>(false);
   loading = signal<boolean>(true);
   displayedExercises = signal<Exercise[]>([]);
-  action = signal<ActionType>(ActionType.create);
+  action = signal<ActionTypeEnum>(ActionTypeEnum.create);
   modalTitle = signal<string>("");
   exercise = signal<Exercise | undefined>(undefined);
 

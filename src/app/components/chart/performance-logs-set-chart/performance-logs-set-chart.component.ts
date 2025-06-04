@@ -2,8 +2,8 @@ import {AfterViewInit, Component, effect, ElementRef, input, viewChild} from '@a
 import {Chart, registerables} from "chart.js";
 import zoomPlugin from 'chartjs-plugin-zoom';
 import {addDateTime, stringToDate} from "../../../utils/time-functions";
-import {PerformanceLog} from "../../../interface/dto/performance-log";
-import {DictionaryItem} from "../../../interface/utils/dictionary-item";
+import {PerformanceLog} from "../../../shared/model/dto/performance-log";
+import {DictionaryItem} from "../../../shared/model/common/dictionary-item";
 import {sortPerformanceLogsByDictionaryDate} from "../../../utils/performance-log-functions";
 
 @Component({

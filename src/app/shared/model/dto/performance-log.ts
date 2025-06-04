@@ -1,10 +1,10 @@
-import {WeightUnit} from "../enum/weightUnit";
+import {WeightUnitEnum} from "../enum/weightUnit.enum";
 
 export interface PerformanceLog {
   id: number
   setIndex: number
   repetitionNumber: number
   weight: number
-  weightUnit: WeightUnit
+  weightUnit: WeightUnitEnum
   logDate: string
 }

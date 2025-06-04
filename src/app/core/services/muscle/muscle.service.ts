@@ -10,7 +10,7 @@ import {
 } from "../../graphql/operations/muscle.operations";
 import {FormGroup} from "@angular/forms";
 import {BehaviorSubject} from "rxjs";
-import {Muscle} from "../../../interface/dto/muscle";
+import {Muscle} from "../../../shared/model/dto/muscle";
 import {AlertService} from "../alert/alert.service";
 import {ApolloQueryResult} from "@apollo/client";
 import {ApolloWrapperService} from "../apollo-wrapper/apollo-wrapper.service";

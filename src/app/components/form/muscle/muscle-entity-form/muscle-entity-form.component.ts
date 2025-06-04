@@ -1,13 +1,13 @@
 import {Component, computed, inject, input, OnDestroy, OnInit, signal} from '@angular/core';
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {InputControlComponent} from "../../../input-control/input-control.component";
-import {Muscle} from "../../../../interface/dto/muscle";
+import {Muscle} from "../../../../shared/model/dto/muscle";
 import {Subject, takeUntil} from "rxjs";
 import {MuscleService} from "../../../../core/services/muscle/muscle.service";
-import {Exercise} from "../../../../interface/dto/exercise";
+import {Exercise} from "../../../../shared/model/dto/exercise";
 import {ExerciseSelectorComponent} from "../../../selectors/exercise-selector/exercise-selector.component";
 import {UserLoggedService} from "../../../../core/services/user-logged/user-logged.service";
-import {ActionType} from "../../../../interface/enum/action-type";
+import {ActionTypeEnum} from "../../../../shared/model/enum/action-type.enum";
 
 @Component({
   selector: 'app-muscle-entity-form',
@@ -22,7 +22,7 @@ export class MuscleEntityFormComponent implements OnInit, OnDestroy {
 
   readonly muscle = input.required<Muscle | undefined>();
   readonly btnCloseRef = input.required<HTMLButtonElement>();
-  readonly submitEventActionType$ = input.required<Subject<ActionType> | undefined>();
+  readonly submitEventActionType$ = input.required<Subject<ActionTypeEnum> | undefined>();
 
   submitInvalidForm = signal<boolean>(false);
 
@@ -80,8 +80,8 @@ export class MuscleEntityFormComponent implements OnInit, OnDestroy {
     if (submitEventActionType$)
       submitEventActionType$
         .pipe(takeUntil(this.unsubscribe$))
-        .subscribe((actionType: ActionType) =>
-          (actionType === ActionType.create || actionType === ActionType.update) ? this.onSubmit() : null);
+        .subscribe((actionType: ActionTypeEnum) =>
+          (actionType === ActionTypeEnum.create || actionType === ActionTypeEnum.update) ? this.onSubmit() : null);
   }
 
   ngOnDestroy() {

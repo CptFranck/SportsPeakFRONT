@@ -6,7 +6,7 @@ import {AlertService} from "../services/alert/alert.service";
 import {ErrorResponse, onError} from "@apollo/client/link/error";
 import {setContext} from "@apollo/client/link/context";
 import {TokenService} from "../services/token/token.service";
-import {AuthToken} from "../../interface/dto/token";
+import {AuthToken} from "../../shared/model/dto/token";
 import {environment} from "../environment";
 
 // URL of the GraphQL server here

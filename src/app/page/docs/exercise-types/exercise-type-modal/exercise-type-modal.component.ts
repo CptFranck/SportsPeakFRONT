@@ -1,8 +1,8 @@
 import {Component, inject, input, OnDestroy, OnInit, output, signal} from '@angular/core';
 import {ModalButtonComponent} from "../../../../components/modal/modal-button/modal-button.component";
 import {ModalComponent} from "../../../../components/modal/modal/modal.component";
-import {ActionType} from "../../../../interface/enum/action-type";
-import {ExerciseType} from "../../../../interface/dto/exercise-type";
+import {ActionTypeEnum} from "../../../../shared/model/enum/action-type.enum";
+import {ExerciseType} from "../../../../shared/model/dto/exercise-type";
 import {
   ExerciseTypeDetailsDisplayComponent
 } from "../../../../components/modal-component/exercise-type/exercise-type-details-display/exercise-type-details-display.component";
@@ -13,7 +13,7 @@ import {
   ExerciseTypeDeleteFormComponent
 } from "../../../../components/form/exercise-type/exercise-type-delete-form/exercise-type-delete-form.component";
 import {UserLoggedService} from "../../../../core/services/user-logged/user-logged.service";
-import {FormIndicator} from "../../../../interface/utils/form-indicator";
+import {FormIndicator} from "../../../../shared/model/common/form-indicator";
 import {Subject, takeUntil} from "rxjs";
 
 @Component({
@@ -33,11 +33,11 @@ export class ExerciseTypeModalComponent implements OnInit, OnDestroy {
   readonly modalTitle = input.required<string>();
   readonly exerciseTypeModalId = input.required<string>();
   readonly exerciseType = input.required<ExerciseType | undefined>();
-  readonly action = input.required<ActionType>();
+  readonly action = input.required<ActionTypeEnum>();
 
   readonly exerciseTypeAction = output<FormIndicator>();
 
-  protected readonly ActionType = ActionType;
+  protected readonly ActionType = ActionTypeEnum;
 
   private readonly unsubscribe$ = new Subject<void>();
   private readonly userLoggedService = inject(UserLoggedService);
@@ -57,7 +57,7 @@ export class ExerciseTypeModalComponent implements OnInit, OnDestroy {
   onClick() {
     this.exerciseTypeAction.emit({
       object: undefined,
-      actionType: ActionType.create
+      actionType: ActionTypeEnum.create
     })
   }
 }

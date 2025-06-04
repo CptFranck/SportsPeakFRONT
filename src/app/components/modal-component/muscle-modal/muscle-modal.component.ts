@@ -1,9 +1,9 @@
 import {Component, input} from '@angular/core';
-import {ActionType} from "../../../interface/enum/action-type";
+import {ActionTypeEnum} from "../../../shared/model/enum/action-type.enum";
 import {ModalComponent} from "../../modal/modal/modal.component";
 import {MuscleEntityFormComponent} from "../../form/muscle/muscle-entity-form/muscle-entity-form.component";
 import {MuscleDeleteFormComponent} from "../../form/muscle/muscle-delete-form/muscle-delete-form.component";
-import {Muscle} from "../../../interface/dto/muscle";
+import {Muscle} from "../../../shared/model/dto/muscle";
 
 @Component({
   selector: 'app-muscle-modal',
@@ -19,7 +19,7 @@ export class MuscleModalComponent {
   readonly modalTitle = input.required<string>();
   readonly muscleModalId = input.required<string>();
   readonly muscle = input<Muscle>();
-  readonly action = input.required<ActionType>();
+  readonly action = input.required<ActionTypeEnum>();
 
-  protected readonly ActionType = ActionType;
+  protected readonly ActionType = ActionTypeEnum;
 }

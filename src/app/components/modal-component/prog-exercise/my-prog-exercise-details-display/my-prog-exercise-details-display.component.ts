@@ -1,8 +1,8 @@
 import {Component, computed, input} from '@angular/core';
-import {TargetSet} from "../../../../interface/dto/target-set";
-import {Dictionary} from "../../../../interface/utils/dictionary";
-import {TargetSetInformation} from "../../../../interface/utils/target-set-row-detail";
-import {ProgExercise} from "../../../../interface/dto/prog-exercise";
+import {TargetSet} from "../../../../shared/model/dto/target-set";
+import {Dictionary} from "../../../../shared/model/common/dictionary";
+import {TargetSetInformation} from "../../../../shared/model/common/target-set-row-detail";
+import {ProgExercise} from "../../../../shared/model/dto/prog-exercise";
 import {getProgExerciseTime} from "../../../../utils/prog-exercise-functions";
 import {
   getTargetSetTimeToString,

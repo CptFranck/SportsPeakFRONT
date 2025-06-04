@@ -1,13 +1,13 @@
 import {Component, input, output} from '@angular/core';
 import 'chartjs-adapter-date-fns';
 
-import {DictionaryItem} from "../../../interface/utils/dictionary-item";
-import {PerformanceLog} from "../../../interface/dto/performance-log";
+import {DictionaryItem} from "../../../shared/model/common/dictionary-item";
+import {PerformanceLog} from "../../../shared/model/dto/performance-log";
 import {PerformanceLogsSetChartComponent} from "../performance-logs-set-chart/performance-logs-set-chart.component";
 import {
   PerformanceLogsCardComponent
 } from "../../card/performance-log/performance-logs-card/performance-logs-card.component";
-import {FormIndicator} from "../../../interface/utils/form-indicator";
+import {FormIndicator} from "../../../shared/model/common/form-indicator";
 import {CollapseBlockComponent} from "../../collapse-block/collapse-block.component";
 import {ifFirstShow, ifNotFirstCollapse} from "../../../utils/accordion-function";
 

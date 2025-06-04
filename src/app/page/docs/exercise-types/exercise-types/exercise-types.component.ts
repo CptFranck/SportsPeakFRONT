@@ -1,14 +1,14 @@
 import {Component, inject, OnDestroy, OnInit, signal} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {ExerciseType} from "../../../../interface/dto/exercise-type";
-import {ActionType} from "../../../../interface/enum/action-type";
+import {ExerciseType} from "../../../../shared/model/dto/exercise-type";
+import {ActionTypeEnum} from "../../../../shared/model/enum/action-type.enum";
 import {ExerciseTypeService} from "../../../../core/services/exercise-type/exercise-type.service";
-import {FormIndicator} from "../../../../interface/utils/form-indicator";
+import {FormIndicator} from "../../../../shared/model/common/form-indicator";
 import {LoadingComponent} from "../../../../components/loading/loading.component";
 import {ExerciseTypeArrayComponent} from "../exercise-types-array/exercise-type-array.component";
 import {ExerciseTypeModalComponent} from "../exercise-type-modal/exercise-type-modal.component";
 import {SearchBarComponent} from "../../../../components/search-bar/search-bar.component";
-import {Exercise} from "../../../../interface/dto/exercise";
+import {Exercise} from "../../../../shared/model/dto/exercise";
 import {Subject, takeUntil} from "rxjs";
 import {UserLoggedService} from "../../../../core/services/user-logged/user-logged.service";
 import {collapseHeight} from "../../../../shared/animations/collapseHeigh";
@@ -32,7 +32,7 @@ export class ExerciseTypesComponent implements OnInit, OnDestroy {
   isAdmin = signal<boolean>(false);
   loading = signal<boolean>(true);
   displayedExerciseTypes = signal<ExerciseType[]>([]);
-  action = signal<ActionType>(ActionType.create);
+  action = signal<ActionTypeEnum>(ActionTypeEnum.create);
   modalTitle = signal<string>("");
   exerciseType = signal<ExerciseType | undefined>(undefined);
 

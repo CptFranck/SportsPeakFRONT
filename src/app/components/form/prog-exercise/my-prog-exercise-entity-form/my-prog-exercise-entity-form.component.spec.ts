@@ -4,9 +4,9 @@ import {MyProgExerciseEntityFormComponent} from './my-prog-exercise-entity-form.
 import {UserLoggedService} from "../../../../core/services/user-logged/user-logged.service";
 import {ProgExerciseService} from "../../../../core/services/prog-exercise/prog-exercise.service";
 import {BehaviorSubject} from "rxjs";
-import {User} from "../../../../interface/dto/user";
+import {User} from "../../../../shared/model/dto/user";
 import {ExerciseService} from "../../../../core/services/exercise/exercise.service";
-import {Exercise} from "../../../../interface/dto/exercise";
+import {Exercise} from "../../../../shared/model/dto/exercise";
 
 describe('MyProgExerciseEntityFormComponent', () => {
   let component: MyProgExerciseEntityFormComponent;

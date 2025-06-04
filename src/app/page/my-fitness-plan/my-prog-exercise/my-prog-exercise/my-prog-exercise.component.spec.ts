@@ -4,9 +4,9 @@ import {MyProgExerciseComponent} from './my-prog-exercise.component';
 import {provideRouter} from "@angular/router";
 import {BehaviorSubject} from "rxjs";
 import {ProgExerciseService} from "../../../../core/services/prog-exercise/prog-exercise.service";
-import {ProgExercise} from "../../../../interface/dto/prog-exercise";
+import {ProgExercise} from "../../../../shared/model/dto/prog-exercise";
 import {ExerciseService} from "../../../../core/services/exercise/exercise.service";
-import {Exercise} from "../../../../interface/dto/exercise";
+import {Exercise} from "../../../../shared/model/dto/exercise";
 import {TargetSetService} from "../../../../core/services/target-set/target-set.service";
 
 describe('MyProgExerciseComponent', () => {

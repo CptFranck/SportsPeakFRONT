@@ -3,7 +3,7 @@ import {ComponentFixture, TestBed} from '@angular/core/testing';
 import {MuscleEntityFormComponent} from './muscle-entity-form.component';
 import {ExerciseService} from "../../../../core/services/exercise/exercise.service";
 import {BehaviorSubject} from "rxjs";
-import {Exercise} from "../../../../interface/dto/exercise";
+import {Exercise} from "../../../../shared/model/dto/exercise";
 
 describe('MuscleFormComponent', () => {
   let component: MuscleEntityFormComponent;

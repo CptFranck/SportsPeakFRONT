@@ -3,7 +3,7 @@ import {ComponentFixture, TestBed} from '@angular/core/testing';
 import {ExerciseTypeSelectorComponent} from './exercise-type-selector.component';
 import {BehaviorSubject} from "rxjs";
 import {ExerciseTypeService} from "../../../core/services/exercise-type/exercise-type.service";
-import {ExerciseType} from "../../../interface/dto/exercise-type";
+import {ExerciseType} from "../../../shared/model/dto/exercise-type";
 
 describe('ExerciseTypeSelectorComponent', () => {
   let component: ExerciseTypeSelectorComponent;

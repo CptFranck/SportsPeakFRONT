@@ -3,9 +3,9 @@ import {ComponentFixture, TestBed} from '@angular/core/testing';
 import {MyProgExercisesComponent} from './my-prog-exercises.component';
 import {BehaviorSubject} from "rxjs";
 import {ProgExerciseService} from "../../../../core/services/prog-exercise/prog-exercise.service";
-import {ProgExercise} from "../../../../interface/dto/prog-exercise";
+import {ProgExercise} from "../../../../shared/model/dto/prog-exercise";
 import {ExerciseService} from "../../../../core/services/exercise/exercise.service";
-import {Exercise} from "../../../../interface/dto/exercise";
+import {Exercise} from "../../../../shared/model/dto/exercise";
 
 describe('MyProgExercisesComponent', () => {
   let component: MyProgExercisesComponent;

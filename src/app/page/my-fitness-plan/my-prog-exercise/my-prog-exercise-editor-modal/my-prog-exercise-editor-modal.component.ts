@@ -1,7 +1,7 @@
 import {Component, input} from '@angular/core';
 import {ModalComponent} from "../../../../components/modal/modal/modal.component";
-import {ProgExercise} from "../../../../interface/dto/prog-exercise";
-import {ActionType} from "../../../../interface/enum/action-type";
+import {ProgExercise} from "../../../../shared/model/dto/prog-exercise";
+import {ActionTypeEnum} from "../../../../shared/model/enum/action-type.enum";
 import {
   MyProgExerciseDeleteFormComponent
 } from "../../../../components/form/prog-exercise/my-prog-exercise-delete-form/my-prog-exercise-delete-form.component";
@@ -26,7 +26,7 @@ export class MyProgExerciseEditorModalComponent {
   readonly modalTitle = input.required<string>();
   readonly progExerciseModalId = input.required<string>();
   readonly progExercise = input.required<ProgExercise | undefined>();
-  readonly action = input.required<ActionType>();
+  readonly action = input.required<ActionTypeEnum>();
 
-  protected readonly ActionType = ActionType;
+  protected readonly ActionType = ActionTypeEnum;
 }

@@ -1,8 +1,8 @@
 import {Component, input, output} from '@angular/core';
-import {PerformanceLog} from "../../../../interface/dto/performance-log";
+import {PerformanceLog} from "../../../../shared/model/dto/performance-log";
 import {DatePipe} from "@angular/common";
-import {FormIndicator} from "../../../../interface/utils/form-indicator";
-import {ActionType} from "../../../../interface/enum/action-type";
+import {FormIndicator} from "../../../../shared/model/common/form-indicator";
+import {ActionTypeEnum} from "../../../../shared/model/enum/action-type.enum";
 import {CollapseButtonComponent} from "../../../collapse-buton/collapse-button.component";
 import {CollapseBlockComponent} from "../../../collapse-block/collapse-block.component";
 
@@ -25,14 +25,14 @@ export class PerformanceLogsCardComponent {
 
   modPerformanceLog($event: any) {
     this.actionPerformanceLog.emit({
-      actionType: ActionType.update,
+      actionType: ActionTypeEnum.update,
       object: $event
     });
   }
 
   delPerformanceLog($event: any) {
     this.actionPerformanceLog.emit({
-      actionType: ActionType.delete,
+      actionType: ActionTypeEnum.delete,
       object: $event
     });
   }

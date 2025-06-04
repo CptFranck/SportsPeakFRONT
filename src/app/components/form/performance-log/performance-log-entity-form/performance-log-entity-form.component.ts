@@ -1,10 +1,10 @@
 import {Component, computed, inject, input, OnDestroy, OnInit, signal} from '@angular/core';
-import {TargetSet} from "../../../../interface/dto/target-set";
+import {TargetSet} from "../../../../shared/model/dto/target-set";
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
-import {PerformanceLog} from "../../../../interface/dto/performance-log";
+import {PerformanceLog} from "../../../../shared/model/dto/performance-log";
 import {Observable, Subject, takeUntil} from "rxjs";
-import {ActionType} from "../../../../interface/enum/action-type";
-import {WeightUnit} from "../../../../interface/enum/weightUnit";
+import {ActionTypeEnum} from "../../../../shared/model/enum/action-type.enum";
+import {WeightUnitEnum} from "../../../../shared/model/enum/weightUnit.enum";
 import {InputControlComponent} from "../../../input-control/input-control.component";
 import {WeightSelectComponent} from "../../../selects/weight-select/weight-select.component";
 import {
@@ -29,7 +29,7 @@ export class PerformanceLogEntityFormComponent implements OnInit, OnDestroy {
   readonly targetSet = input.required<TargetSet | undefined>();
   readonly performanceLog = input.required<PerformanceLog | undefined>();
   readonly btnCloseRef = input.required<HTMLButtonElement>();
-  readonly submitEventActionType$ = input.required<Observable<ActionType> | undefined>();
+  readonly submitEventActionType$ = input.required<Observable<ActionTypeEnum> | undefined>();
 
   readonly performanceLogForm = computed<FormGroup>(() => {
     const targetSet = this.targetSet();
@@ -40,7 +40,7 @@ export class PerformanceLogEntityFormComponent implements OnInit, OnDestroy {
     let performanceLogRepetitionNumber: number = 1;
     let performanceLogWeight: number = 0;
     let targetSetId: number | undefined;
-    let performanceLogWeightUnit: string = WeightUnit.KILOGRAMME;
+    let performanceLogWeightUnit: string = WeightUnitEnum.KILOGRAMME;
 
     if (targetSet) {
       performanceLogRepetitionNumber = targetSet.repetitionNumber;
@@ -104,8 +104,8 @@ export class PerformanceLogEntityFormComponent implements OnInit, OnDestroy {
     if (submitEventActionType$)
       submitEventActionType$
         .pipe(takeUntil(this.unsubscribe$))
-        .subscribe((actionType: ActionType) => {
-          if (actionType === ActionType.create || actionType === ActionType.update) {
+        .subscribe((actionType: ActionTypeEnum) => {
+          if (actionType === ActionTypeEnum.create || actionType === ActionTypeEnum.update) {
             this.submit();
           }
         });

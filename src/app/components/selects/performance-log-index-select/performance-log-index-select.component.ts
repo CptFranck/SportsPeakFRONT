@@ -1,8 +1,8 @@
 import {Component, computed, forwardRef, input, signal} from '@angular/core';
-import {SelectOption} from "../../../interface/components/select/selectOption";
+import {SelectOption} from "../../../shared/model/component/select/selectOption";
 import {ControlValueAccessor, NG_VALUE_ACCESSOR} from "@angular/forms";
 import {SelectComponent} from "../../select/select.component";
-import {TargetSet} from "../../../interface/dto/target-set";
+import {TargetSet} from "../../../shared/model/dto/target-set";
 
 @Component({
   selector: 'app-performance-log-index-select',

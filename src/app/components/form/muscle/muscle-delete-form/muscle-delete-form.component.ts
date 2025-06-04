@@ -1,8 +1,8 @@
-import {Component, inject, OnDestroy, OnInit, input} from '@angular/core';
-import {Muscle} from "../../../../interface/dto/muscle";
+import {Component, inject, input, OnDestroy, OnInit} from '@angular/core';
+import {Muscle} from "../../../../shared/model/dto/muscle";
 import {Observable, Subject, takeUntil} from "rxjs";
 import {MuscleService} from "../../../../core/services/muscle/muscle.service";
-import {ActionType} from "../../../../interface/enum/action-type";
+import {ActionTypeEnum} from "../../../../shared/model/enum/action-type.enum";
 
 @Component({
   selector: 'app-muscle-delete-form',
@@ -12,7 +12,7 @@ export class MuscleDeleteFormComponent implements OnInit, OnDestroy {
 
   readonly muscle = input.required<Muscle | undefined>();
   readonly btnCloseRef = input.required<HTMLButtonElement>();
-  readonly submitEventActionType$ = input.required<Observable<ActionType> | undefined>();
+  readonly submitEventActionType$ = input.required<Observable<ActionTypeEnum> | undefined>();
 
   private readonly unsubscribe$: Subject<void> = new Subject<void>();
   private readonly muscleService: MuscleService = inject(MuscleService);
@@ -22,8 +22,8 @@ export class MuscleDeleteFormComponent implements OnInit, OnDestroy {
     if (submitEventActionType$)
       submitEventActionType$
         .pipe(takeUntil(this.unsubscribe$))
-        .subscribe((actionType: ActionType) => {
-          if (actionType === ActionType.delete)
+        .subscribe((actionType: ActionTypeEnum) => {
+          if (actionType === ActionTypeEnum.delete)
             this.onSubmit();
         });
   }

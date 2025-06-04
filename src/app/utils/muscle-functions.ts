@@ -1,4 +1,4 @@
-import {Muscle} from "../interface/dto/muscle";
+import {Muscle} from "../shared/model/dto/muscle";
 
 export function sortMuscleByName(a: Muscle, b: Muscle) {
   if (a.name < b.name) return -1;

@@ -1,12 +1,12 @@
 import {Component, computed, input, model, signal} from '@angular/core';
-import {TargetSet} from "../../../../interface/dto/target-set";
-import {ProgExercise} from "../../../../interface/dto/prog-exercise";
-import {PerformanceLog} from "../../../../interface/dto/performance-log";
+import {TargetSet} from "../../../../shared/model/dto/target-set";
+import {ProgExercise} from "../../../../shared/model/dto/prog-exercise";
+import {PerformanceLog} from "../../../../shared/model/dto/performance-log";
 import {sortPerformanceLogsByDate, sortPerformanceLogsBySet} from "../../../../utils/performance-log-functions";
-import {FormIndicator} from "../../../../interface/utils/form-indicator";
-import {DictionaryItem} from "../../../../interface/utils/dictionary-item";
-import {TabOption} from "../../../../interface/components/tab/tabOption";
-import {ActionType} from "../../../../interface/enum/action-type";
+import {FormIndicator} from "../../../../shared/model/common/form-indicator";
+import {DictionaryItem} from "../../../../shared/model/common/dictionary-item";
+import {TabOption} from "../../../../shared/model/component/tab/tabOption";
+import {ActionTypeEnum} from "../../../../shared/model/enum/action-type.enum";
 import {
   PerformanceLogEntityFormComponent
 } from "../../../form/performance-log/performance-log-entity-form/performance-log-entity-form.component";
@@ -78,11 +78,11 @@ export class PerformanceLogsComponent {
   });
 
   switchSortByDate = signal<boolean>(true);
-  action = signal<ActionType>(ActionType.read);
+  action = signal<ActionTypeEnum>(ActionTypeEnum.read);
   performanceLog = signal<PerformanceLog | undefined>(undefined);
   performanceLogDate = signal<string | undefined>(undefined);
 
-  protected readonly ActionType = ActionType;
+  protected readonly ActionType = ActionTypeEnum;
   protected readonly Object: ObjectConstructor = Object;
 
   setPerformanceLog(formIndicator: FormIndicator) {

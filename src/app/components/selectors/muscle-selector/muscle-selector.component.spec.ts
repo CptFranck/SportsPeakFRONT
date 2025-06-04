@@ -2,7 +2,7 @@ import {ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {MuscleSelectorComponent} from './muscle-selector.component';
 import {MuscleService} from "../../../core/services/muscle/muscle.service";
-import {Muscle} from "../../../interface/dto/muscle";
+import {Muscle} from "../../../shared/model/dto/muscle";
 import {BehaviorSubject} from "rxjs";
 
 describe('MuscleSelectorComponent', () => {

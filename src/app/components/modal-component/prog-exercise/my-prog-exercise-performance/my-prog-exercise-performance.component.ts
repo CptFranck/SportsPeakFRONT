@@ -1,15 +1,15 @@
 import {Component, computed, input, signal} from '@angular/core';
-import {ProgExercise} from "../../../../interface/dto/prog-exercise";
+import {ProgExercise} from "../../../../shared/model/dto/prog-exercise";
 import {ifFirstShow, ifNotFirstCollapse} from "../../../../utils/accordion-function";
-import {PerformanceLog} from "../../../../interface/dto/performance-log";
-import {DictionaryItem} from "../../../../interface/utils/dictionary-item";
+import {PerformanceLog} from "../../../../shared/model/dto/performance-log";
+import {DictionaryItem} from "../../../../shared/model/common/dictionary-item";
 import {
   PerformanceLogsSetChartComponent
 } from "../../../chart/performance-logs-set-chart/performance-logs-set-chart.component";
 import {RangeInputComponent} from "../../../input/range-input/range-input.component";
 import {getUpToDateTargetSets, sortLastTargetSetsByIndex} from "../../../../utils/target-set-functions";
-import {TargetSet} from "../../../../interface/dto/target-set";
-import {TargetSetState} from "../../../../interface/enum/targetSetState";
+import {TargetSet} from "../../../../shared/model/dto/target-set";
+import {TargetSetStateEnum} from "../../../../shared/model/enum/targetSetState.enum";
 import {sortPerformanceLogsBySet} from "../../../../utils/performance-log-functions";
 
 @Component({
@@ -29,7 +29,7 @@ export class MyProgExercisePerformanceComponent {
     if (progExercise) {
       let targetSets: TargetSet[] = getUpToDateTargetSets(progExercise)
         .sort(sortLastTargetSetsByIndex)
-        .filter((targetSets: TargetSet) => targetSets.state === TargetSetState.USED);
+        .filter((targetSets: TargetSet) => targetSets.state === TargetSetStateEnum.USED);
       targetSets.forEach((targetSet: TargetSet) => {
         targetSetsPerformanceLogsSortedByLogDate.push({
           key: targetSet.index.toString(),

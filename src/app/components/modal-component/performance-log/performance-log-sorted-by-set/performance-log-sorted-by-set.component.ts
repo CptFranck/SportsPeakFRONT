@@ -2,10 +2,10 @@ import {Component, input, output} from '@angular/core';
 import {
   PerformanceLogsCardComponent
 } from "../../../card/performance-log/performance-logs-card/performance-logs-card.component";
-import {DictionaryItem} from "../../../../interface/utils/dictionary-item";
-import {PerformanceLog} from "../../../../interface/dto/performance-log";
+import {DictionaryItem} from "../../../../shared/model/common/dictionary-item";
+import {PerformanceLog} from "../../../../shared/model/dto/performance-log";
 import {CollapseBlockComponent} from "../../../collapse-block/collapse-block.component";
-import {FormIndicator} from "../../../../interface/utils/form-indicator";
+import {FormIndicator} from "../../../../shared/model/common/form-indicator";
 import {ifFirstShow, ifNotFirstCollapse} from "../../../../utils/accordion-function";
 
 @Component({

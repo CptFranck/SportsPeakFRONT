@@ -1,9 +1,9 @@
 import {Component, inject, OnDestroy, OnInit, signal} from '@angular/core';
-import {ProgExercise} from "../../../../interface/dto/prog-exercise";
+import {ProgExercise} from "../../../../shared/model/dto/prog-exercise";
 import {ProgExerciseService} from "../../../../core/services/prog-exercise/prog-exercise.service";
 import {ActivatedRoute, Params} from "@angular/router";
-import {FormIndicator} from "../../../../interface/utils/form-indicator";
-import {ActionType} from "../../../../interface/enum/action-type";
+import {FormIndicator} from "../../../../shared/model/common/form-indicator";
+import {ActionTypeEnum} from "../../../../shared/model/enum/action-type.enum";
 import {LoadingComponent} from "../../../../components/loading/loading.component";
 import {
   ProgExerciseCardDetailsComponent
@@ -12,10 +12,10 @@ import {
   MyProgExerciseEditorModalComponent
 } from "../my-prog-exercise-editor-modal/my-prog-exercise-editor-modal.component";
 import {TargetSetModalComponent} from "../my-prog-exercise-target-sets/target-set-modal/target-set-modal.component";
-import {TargetSet} from "../../../../interface/dto/target-set";
+import {TargetSet} from "../../../../shared/model/dto/target-set";
 import {Subject, takeUntil} from "rxjs";
 import {TargetSetsComponent} from "../my-prog-exercise-target-sets/target-sets/target-sets.component";
-import {PerformanceLog} from "../../../../interface/dto/performance-log";
+import {PerformanceLog} from "../../../../shared/model/dto/performance-log";
 import {
   PerformanceLogModalComponent
 } from "../my-prog-exercise-performance-logs/performance-log-modal/performance-log-modal.component";
@@ -36,17 +36,17 @@ export class MyProgExerciseComponent implements OnInit, OnDestroy {
   loading = signal<boolean>(true);
 
   progExercise = signal<ProgExercise | undefined>(undefined);
-  progExerciseAction = signal<ActionType>(ActionType.update);
+  progExerciseAction = signal<ActionTypeEnum>(ActionTypeEnum.update);
   progExerciseModalTitle = signal<string>("");
   readonly progExerciseModalId = "progExerciseModal";
 
   targetSet = signal<TargetSet | undefined>(undefined);
-  targetSetAction = signal<ActionType>(ActionType.update);
+  targetSetAction = signal<ActionTypeEnum>(ActionTypeEnum.update);
   targetSetModalTitle = signal<string>("");
   readonly targetSetModalId = "targetSetModalId";
 
   performanceLog = signal<PerformanceLog | undefined>(undefined);
-  performanceLogAction = signal<ActionType>(ActionType.update);
+  performanceLogAction = signal<ActionTypeEnum>(ActionTypeEnum.update);
   performanceLogModalTitle = signal<string>("");
   readonly performanceLogModalId = "performanceLogModalId";
 
@@ -92,10 +92,10 @@ export class MyProgExerciseComponent implements OnInit, OnDestroy {
 
   setTargetSet(formIndicator: FormIndicator) {
     this.targetSetAction.set(formIndicator.actionType);
-    if (formIndicator.actionType === ActionType.create) {
+    if (formIndicator.actionType === ActionTypeEnum.create) {
       this.targetSetModalTitle.set("Add new set's step");
       this.targetSet.set(undefined);
-    } else if (formIndicator.actionType === ActionType.addEvolution) {
+    } else if (formIndicator.actionType === ActionTypeEnum.addEvolution) {
       this.targetSetModalTitle.set("Add evolution to set's step N°" + formIndicator.object.index);
       this.targetSet.set(formIndicator.object);
     } else {
@@ -106,11 +106,11 @@ export class MyProgExerciseComponent implements OnInit, OnDestroy {
 
   setPerformanceLog(formIndicator: FormIndicator) {
     this.performanceLogAction.set(formIndicator.actionType);
-    if (formIndicator.actionType === ActionType.create) {
+    if (formIndicator.actionType === ActionTypeEnum.create) {
       this.targetSet.set(formIndicator.object);
       this.performanceLog.set(undefined);
       this.performanceLogModalTitle.set("Add new performance log");
-    } else if (formIndicator.actionType === ActionType.checkPerformance) {
+    } else if (formIndicator.actionType === ActionTypeEnum.checkPerformance) {
       this.targetSet.set(formIndicator.object);
       this.performanceLog.set(undefined);
       this.performanceLogModalTitle.set("Check step N° " + this.targetSet()?.index + " performances");

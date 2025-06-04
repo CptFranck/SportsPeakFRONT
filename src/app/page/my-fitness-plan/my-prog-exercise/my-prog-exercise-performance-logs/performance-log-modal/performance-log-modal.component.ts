@@ -1,7 +1,7 @@
 import {Component, input} from '@angular/core';
-import {ActionType} from "../../../../../interface/enum/action-type";
-import {TargetSet} from "../../../../../interface/dto/target-set";
-import {PerformanceLog} from "../../../../../interface/dto/performance-log";
+import {ActionTypeEnum} from "../../../../../shared/model/enum/action-type.enum";
+import {TargetSet} from "../../../../../shared/model/dto/target-set";
+import {PerformanceLog} from "../../../../../shared/model/dto/performance-log";
 import {ModalComponent} from "../../../../../components/modal/modal/modal.component";
 import {
   PerformanceLogEntityFormComponent
@@ -9,7 +9,7 @@ import {
 import {
   PerformanceLogsComponent
 } from "../../../../../components/modal-component/performance-log/performance-logs/performance-logs.component";
-import {ProgExercise} from "../../../../../interface/dto/prog-exercise";
+import {ProgExercise} from "../../../../../shared/model/dto/prog-exercise";
 
 @Component({
   selector: 'app-performance-log-modal',
@@ -26,7 +26,7 @@ export class PerformanceLogModalComponent {
   readonly progExercise = input.required<ProgExercise | undefined>();
   readonly targetSet = input.required<TargetSet | undefined>();
   readonly performanceLog = input.required<PerformanceLog | undefined>();
-  readonly action = input.required<ActionType>();
+  readonly action = input.required<ActionTypeEnum>();
 
-  protected readonly ActionType = ActionType;
+  protected readonly ActionType = ActionTypeEnum;
 }

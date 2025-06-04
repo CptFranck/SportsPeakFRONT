@@ -1,5 +1,5 @@
 import {Component, input, output} from '@angular/core';
-import {MultiSelectOptionSelected} from "../../../interface/components/multi-select/multiSelectOptionSelected";
+import {MultiSelectOptionSelected} from "../../../shared/model/component/multi-select/multiSelectOptionSelected";
 
 @Component({
   selector: 'app-multi-select-selected-options',

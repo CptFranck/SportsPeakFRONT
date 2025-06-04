@@ -1,7 +1,7 @@
 import {Component, computed, input, TemplateRef} from '@angular/core';
 import {NgTemplateOutlet} from "@angular/common";
 import {Subject} from "rxjs";
-import {ActionType} from "../../../interface/enum/action-type";
+import {ActionTypeEnum} from "../../../shared/model/enum/action-type.enum";
 
 @Component({
   selector: 'app-modal',
@@ -15,46 +15,46 @@ export class ModalComponent {
 
   readonly title = input.required<string>();
   readonly modalId = input.required<string>();
-  readonly actionType = input.required<ActionType | undefined>();
+  readonly actionType = input.required<ActionTypeEnum | undefined>();
   readonly staticBackdrop = input<boolean>(true);
   readonly contentTemplate = input<TemplateRef<any>>();
 
   submitButton = computed(() => {
     const action = this.actionType();
-    return action === ActionType.create ||
-      action === ActionType.update ||
-      action === ActionType.delete ||
-      action === ActionType.addEvolution
+    return action === ActionTypeEnum.create ||
+      action === ActionTypeEnum.update ||
+      action === ActionTypeEnum.delete ||
+      action === ActionTypeEnum.addEvolution
   });
 
   closeButtonTitle = computed(() => {
     const action = this.actionType();
-    if (action !== ActionType.create && action !== ActionType.update && action !== ActionType.addEvolution && action !== ActionType.delete)
+    if (action !== ActionTypeEnum.create && action !== ActionTypeEnum.update && action !== ActionTypeEnum.addEvolution && action !== ActionTypeEnum.delete)
       return "Close";
     return 'Cancel';
   });
   validateButtonClass = computed(() => {
-    if (this.actionType() === ActionType.delete)
+    if (this.actionType() === ActionTypeEnum.delete)
       return "btn-danger";
     return "btn-success";
   });
   validationButtonTitle = computed<string>(() => {
     switch (this.actionType()) {
-      case ActionType.create:
+      case ActionTypeEnum.create:
         return "Create";
-      case ActionType.update:
+      case ActionTypeEnum.update:
         return "Update";
-      case ActionType.addEvolution:
+      case ActionTypeEnum.addEvolution:
         return "Add an updated objective";
-      case ActionType.delete:
+      case ActionTypeEnum.delete:
         return "Delete";
       default:
         return "Ok";
     }
   });
 
-  readonly ActionType = ActionType;
-  submitEventActionType$ = new Subject<ActionType>();
+  readonly ActionType = ActionTypeEnum;
+  submitEventActionType$ = new Subject<ActionTypeEnum>();
 
   onSubmit() {
     const action = this.actionType();

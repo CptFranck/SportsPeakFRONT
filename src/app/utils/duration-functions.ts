@@ -1,4 +1,4 @@
-import {Duration} from "../interface/dto/duration";
+import {Duration} from "../shared/model/dto/duration";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 
 export function createDurationForm(duration: Duration) {

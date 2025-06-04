@@ -1,11 +1,11 @@
 import {Component, inject, OnDestroy, OnInit, signal} from '@angular/core';
-import {ProgExercise} from "../../../../interface/dto/prog-exercise";
-import {ActionType} from "../../../../interface/enum/action-type";
+import {ProgExercise} from "../../../../shared/model/dto/prog-exercise";
+import {ActionTypeEnum} from "../../../../shared/model/enum/action-type.enum";
 import {ProgExerciseService} from "../../../../core/services/prog-exercise/prog-exercise.service";
-import {FormIndicator} from "../../../../interface/utils/form-indicator";
+import {FormIndicator} from "../../../../shared/model/common/form-indicator";
 import {LoadingComponent} from "../../../../components/loading/loading.component";
 import {SearchBarComponent} from "../../../../components/search-bar/search-bar.component";
-import {Muscle} from "../../../../interface/dto/muscle";
+import {Muscle} from "../../../../shared/model/dto/muscle";
 import {MyProgExercisesModalComponent} from "../my-prog-exercise-modal/my-prog-exercises-modal.component";
 import {
   ProgExerciseCardComponent
@@ -25,7 +25,7 @@ import {Subject, takeUntil} from "rxjs";
 export class MyProgExercisesComponent implements OnInit, OnDestroy {
   loading = signal<boolean>(true);
   displayedProgExercises = signal<ProgExercise[]>([]);
-  action = signal<ActionType>(ActionType.create);
+  action = signal<ActionTypeEnum>(ActionTypeEnum.create);
   modalTitle = signal<string>("");
   progExercise = signal<ProgExercise | undefined>(undefined);
 

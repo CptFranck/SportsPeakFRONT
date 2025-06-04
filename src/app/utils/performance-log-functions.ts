@@ -1,9 +1,9 @@
-import {TargetSet} from "../interface/dto/target-set";
-import {Dictionary} from "../interface/utils/dictionary";
-import {PerformanceLog} from "../interface/dto/performance-log";
+import {TargetSet} from "../shared/model/dto/target-set";
+import {Dictionary} from "../shared/model/common/dictionary";
+import {PerformanceLog} from "../shared/model/dto/performance-log";
 import {stringToDateString} from "./time-functions";
-import {DictionaryItem} from "../interface/utils/dictionary-item";
-import {ProgExercise} from "../interface/dto/prog-exercise";
+import {DictionaryItem} from "../shared/model/common/dictionary-item";
+import {ProgExercise} from "../shared/model/dto/prog-exercise";
 import {getTargetSetLogs} from "./target-set-functions";
 import {convertDictionaryToArray} from "./generic-function";
 

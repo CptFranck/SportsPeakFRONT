@@ -1,6 +1,6 @@
 import {Component, input} from '@angular/core';
 import {RouterLink} from "@angular/router";
-import {Muscle} from "../../../interface/dto/muscle";
+import {Muscle} from "../../../shared/model/dto/muscle";
 
 @Component({
   selector: 'app-muscle-exercises-table',

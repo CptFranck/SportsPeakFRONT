@@ -2,13 +2,13 @@ import {Component, computed, inject, OnDestroy, OnInit, signal} from '@angular/c
 import {NgOptimizedImage} from "@angular/common";
 import {Subject, takeUntil} from "rxjs";
 import {ActivatedRoute, Params} from "@angular/router";
-import {Muscle} from "../../../../interface/dto/muscle";
+import {Muscle} from "../../../../shared/model/dto/muscle";
 import {MuscleService} from "../../../../core/services/muscle/muscle.service";
 import {LoadingComponent} from "../../../../components/loading/loading.component";
 import {UserLoggedService} from "../../../../core/services/user-logged/user-logged.service";
 import {ModalButtonComponent} from "../../../../components/modal/modal-button/modal-button.component";
 import {MuscleModalComponent} from "../../../../components/modal-component/muscle-modal/muscle-modal.component";
-import {ActionType} from "../../../../interface/enum/action-type";
+import {ActionTypeEnum} from "../../../../shared/model/enum/action-type.enum";
 import {
   MuscleExercisesTableComponent
 } from "../../../../components/table/muscle-exercises-table/muscle-exercises-table.component";
@@ -35,12 +35,12 @@ export class MuscleDetailsComponent implements OnInit, OnDestroy {
   isAdmin = signal<boolean>(false);
   loading = signal<boolean>(true);
   muscle = signal<Muscle | undefined>(undefined);
-  action = signal<ActionType>(ActionType.read);
+  action = signal<ActionTypeEnum>(ActionTypeEnum.read);
   modalTitle = signal<string>("");
 
 
   readonly muscleModalId = "muscleModalId";
-  readonly ActionType = ActionType;
+  readonly ActionType = ActionTypeEnum;
 
   private readonly unsubscribe$ = new Subject<void>();
   private readonly muscleService = inject(MuscleService);
@@ -76,12 +76,12 @@ export class MuscleDetailsComponent implements OnInit, OnDestroy {
   }
 
   onModify() {
-    this.action.set(ActionType.update);
+    this.action.set(ActionTypeEnum.update);
     this.modalTitle.set(`Modify muscle ${this.muscle()?.name}`);
   }
 
   onDelete() {
-    this.action.set(ActionType.delete);
+    this.action.set(ActionTypeEnum.delete);
     this.modalTitle.set(`Delete muscle ${this.muscle()?.name}`);
   }
 

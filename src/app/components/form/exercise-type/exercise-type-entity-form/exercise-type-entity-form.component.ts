@@ -2,12 +2,12 @@ import {Component, computed, inject, input, OnDestroy, OnInit, signal} from '@an
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {Subject, takeUntil} from "rxjs";
 import {InputControlComponent} from "../../../input-control/input-control.component";
-import {ExerciseType} from "../../../../interface/dto/exercise-type";
+import {ExerciseType} from "../../../../shared/model/dto/exercise-type";
 import {ExerciseTypeService} from "../../../../core/services/exercise-type/exercise-type.service";
 import {ExerciseSelectorComponent} from "../../../selectors/exercise-selector/exercise-selector.component";
 import {UserLoggedService} from "../../../../core/services/user-logged/user-logged.service";
-import {ActionType} from "../../../../interface/enum/action-type";
-import {Exercise} from "../../../../interface/dto/exercise";
+import {ActionTypeEnum} from "../../../../shared/model/enum/action-type.enum";
+import {Exercise} from "../../../../shared/model/dto/exercise";
 
 @Component({
   selector: 'app-exercise-type-entity-form',
@@ -23,7 +23,7 @@ export class ExerciseTypeEntityFormComponent implements OnInit, OnDestroy {
 
   readonly btnCloseRef = input.required<HTMLButtonElement>();
   readonly exerciseType = input.required<ExerciseType | undefined>();
-  readonly submitEventActionType$ = input.required<Subject<ActionType> | undefined>();
+  readonly submitEventActionType$ = input.required<Subject<ActionTypeEnum> | undefined>();
 
   exerciseTypeForm = computed<FormGroup>(() => {
     const exerciseIdsValidator = this.isAdmin ? null : Validators.required;
@@ -69,8 +69,8 @@ export class ExerciseTypeEntityFormComponent implements OnInit, OnDestroy {
     if (submitEventActionType$)
       submitEventActionType$
         .pipe(takeUntil(this.unsubscribe$))
-        .subscribe((actionType: ActionType) => {
-          if (actionType === ActionType.create || actionType === ActionType.update)
+        .subscribe((actionType: ActionTypeEnum) => {
+          if (actionType === ActionTypeEnum.create || actionType === ActionTypeEnum.update)
             this.onSubmit();
         });
   }

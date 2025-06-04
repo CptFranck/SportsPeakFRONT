@@ -10,8 +10,8 @@ import {
   viewChildren
 } from '@angular/core';
 import {FormsModule} from "@angular/forms";
-import {MultiSelectOption} from "../../interface/components/multi-select/multiSelectOption";
-import {MultiSelectOptionSelected} from "../../interface/components/multi-select/multiSelectOptionSelected";
+import {MultiSelectOption} from "../../shared/model/component/multi-select/multiSelectOption";
+import {MultiSelectOptionSelected} from "../../shared/model/component/multi-select/multiSelectOptionSelected";
 import {LoadingComponent} from "../loading/loading.component";
 import {
   MultiSelectSelectedOptionsComponent
