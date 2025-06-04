@@ -4,6 +4,7 @@ import {PrivilegeSelectorComponent} from './privilege-selector.component';
 import {PrivilegeService} from "../../../core/services/privilege/privilege.service";
 import {BehaviorSubject} from "rxjs";
 import {Privilege} from "../../../shared/model/dto/privilege";
+import {provideAnimations} from "@angular/platform-browser/animations";
 
 describe('PrivilegeSelectorComponent', () => {
   let component: PrivilegeSelectorComponent;
@@ -17,6 +18,7 @@ describe('PrivilegeSelectorComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       providers: [
+        provideAnimations(),
         {provide: PrivilegeService, useValue: mockPrivilegeService},
       ],
       imports: [PrivilegeSelectorComponent]
