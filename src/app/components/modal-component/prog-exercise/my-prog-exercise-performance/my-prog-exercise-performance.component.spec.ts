@@ -1,6 +1,9 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { MyProgExercisePerformanceComponent } from './my-prog-exercise-performance.component';
+import {MyProgExercisePerformanceComponent} from './my-prog-exercise-performance.component';
+import {generateTestExercise, generateTestProgExercise, generateTestUser} from "../../../../utils/testFunctions";
+import {User} from "../../../../shared/model/dto/user";
+import {Exercise} from "../../../../shared/model/dto/exercise";
 
 describe('MyProgExercisePerformanceComponent', () => {
   let component: MyProgExercisePerformanceComponent;
@@ -10,10 +13,15 @@ describe('MyProgExercisePerformanceComponent', () => {
     await TestBed.configureTestingModule({
       imports: [MyProgExercisePerformanceComponent]
     })
-    .compileComponents();
-    
+      .compileComponents();
+
     fixture = TestBed.createComponent(MyProgExercisePerformanceComponent);
     component = fixture.componentInstance;
+
+    let mockUser: User = generateTestUser();
+    let mockExercise: Exercise = generateTestExercise();
+    fixture.componentRef.setInput('progExercise', generateTestProgExercise(mockUser, mockExercise))
+
     fixture.detectChanges();
   });
 
