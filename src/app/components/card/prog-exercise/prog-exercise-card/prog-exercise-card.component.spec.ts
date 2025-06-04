@@ -5,7 +5,6 @@ import {provideRouter} from "@angular/router";
 import {generateTestExercise, generateTestProgExercise, generateTestUser} from "../../../../utils/testFunctions";
 import {User} from "../../../../shared/model/dto/user";
 import {Exercise} from "../../../../shared/model/dto/exercise";
-import {ProgExercise} from "../../../../shared/model/dto/prog-exercise";
 
 describe('ProgExerciseCardComponent', () => {
   let component: ProgExerciseCardComponent;
@@ -18,14 +17,15 @@ describe('ProgExerciseCardComponent', () => {
     })
       .compileComponents();
 
-    const userMock: User = generateTestUser();
-    const exerciseMock: Exercise = generateTestExercise();
-    const mockProgExercise: ProgExercise = generateTestProgExercise(userMock, exerciseMock);
 
     fixture = TestBed.createComponent(ProgExerciseCardComponent);
     component = fixture.componentInstance;
 
-    component.progExercise = mockProgExercise
+    const userMock: User = generateTestUser();
+    const exerciseMock: Exercise = generateTestExercise();
+    fixture.componentRef.setInput('modalId', "Id");
+    fixture.componentRef.setInput('progExercise', generateTestProgExercise(userMock, exerciseMock))
+
     fixture.detectChanges();
   });
 
