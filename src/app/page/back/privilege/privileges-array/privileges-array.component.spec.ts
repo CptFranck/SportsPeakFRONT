@@ -1,6 +1,7 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { PrivilegesArrayComponent } from './privileges-array.component';
+import {PrivilegesArrayComponent} from './privileges-array.component';
+import {generateTestPrivileges} from "../../../../utils/testFunctions";
 
 describe('PrivilegesArrayComponent', () => {
   let component: PrivilegesArrayComponent;
@@ -10,10 +11,15 @@ describe('PrivilegesArrayComponent', () => {
     await TestBed.configureTestingModule({
       imports: [PrivilegesArrayComponent]
     })
-    .compileComponents();
-    
+      .compileComponents();
+
     fixture = TestBed.createComponent(PrivilegesArrayComponent);
     component = fixture.componentInstance;
+
+    const privileges = [generateTestPrivileges()];
+    fixture.componentRef.setInput('privileges', privileges);
+    fixture.componentRef.setInput('modalId', 'Id');
+
     fixture.detectChanges();
   });
 
