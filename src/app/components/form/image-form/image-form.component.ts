@@ -5,8 +5,8 @@ import {Subject, takeUntil} from "rxjs";
 import {FileUploadComponent} from "../../input/file-upload/file-upload.component";
 import {InputControlComponent} from "../../input-control/input-control.component";
 import {IllustrationService} from "../../../core/services/illustration/illustration.service";
-import {fileTypeValidator} from "../../../validators/fileTypeValidator";
-import {fileWeightValidator} from "../../../validators/fileWeightValidator";
+import {fileTypeValidator} from "../../../shared/validators/fileTypeValidator";
+import {fileWeightValidator} from "../../../shared/validators/fileWeightValidator";
 
 @Component({
   selector: 'app-image-form',
