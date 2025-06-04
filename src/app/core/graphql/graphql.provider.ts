@@ -2,12 +2,12 @@ import {Apollo, APOLLO_OPTIONS} from 'apollo-angular';
 import {HttpLink, HttpLinkHandler} from 'apollo-angular/http';
 import {ApplicationConfig, inject} from '@angular/core';
 import {ApolloClientOptions, ApolloLink, InMemoryCache} from '@apollo/client/core';
-import {AlertService} from "../core/services/alert/alert.service";
+import {AlertService} from "../services/alert/alert.service";
 import {ErrorResponse, onError} from "@apollo/client/link/error";
 import {setContext} from "@apollo/client/link/context";
-import {TokenService} from "../core/services/token/token.service";
-import {AuthToken} from "../interface/dto/token";
-import {environment} from "../environment/environment";
+import {TokenService} from "../services/token/token.service";
+import {AuthToken} from "../../interface/dto/token";
+import {environment} from "../../environment/environment";
 
 // URL of the GraphQL server here
 const uri: string = environment.apiHttpBaseUrl + environment.graphqlEndPoint;

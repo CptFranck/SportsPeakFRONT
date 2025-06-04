@@ -5,7 +5,7 @@ import {
   ADD_PERFORMANCE_LOG,
   DEL_PERFORMANCE_LOG,
   MOD_PERFORMANCE_LOG
-} from "../../../graphql/operations/performance-log.operations";
+} from "../../graphql/operations/performance-log.operations";
 import {AlertService} from "../alert/alert.service";
 import {PerformanceLog} from "../../../interface/dto/performance-log";
 import {ApolloWrapperService} from "../apollo-wrapper/apollo-wrapper.service";

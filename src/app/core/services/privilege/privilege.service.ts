@@ -10,7 +10,7 @@ import {
   DEL_PRIVILEGE,
   GET_PRIVILEGES,
   MOD_PRIVILEGE
-} from "../../../graphql/operations/privilege.operations";
+} from "../../graphql/operations/privilege.operations";
 import {UserLoggedService} from "../user-logged/user-logged.service";
 import {ApolloWrapperService} from "../apollo-wrapper/apollo-wrapper.service";
 

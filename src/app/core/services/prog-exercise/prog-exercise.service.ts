@@ -13,7 +13,7 @@ import {
   GET_USER_PROG_EXERCISES,
   MOD_PROG_EXERCISE,
   MOD_PROG_EXERCISE_TRUST_LABEL
-} from "../../../graphql/operations/prog-exercise.operations";
+} from "../../graphql/operations/prog-exercise.operations";
 import {User} from "../../../interface/dto/user";
 import {UserLoggedService} from "../user-logged/user-logged.service";
 import {Router} from "@angular/router";

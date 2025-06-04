@@ -2,7 +2,7 @@ import {Component, forwardRef, inject, OnDestroy, OnInit, signal} from '@angular
 import {ControlValueAccessor, NG_VALUE_ACCESSOR} from "@angular/forms";
 import {MultiSelectOption} from "../../../interface/components/multi-select/multiSelectOption";
 import {Privilege} from "../../../interface/dto/privilege";
-import {PrivilegeService} from "../../../services/privilege/privilege.service";
+import {PrivilegeService} from "../../../core/services/privilege/privilege.service";
 import {MultiSelectComponent} from "../../multi-select/multi-select.component";
 import {Subject, takeUntil} from "rxjs";
 

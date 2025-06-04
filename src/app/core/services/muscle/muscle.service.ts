@@ -7,7 +7,7 @@ import {
   GET_MUSCLE_BY_ID,
   GET_MUSCLES,
   MOD_MUSCLE
-} from "../../../graphql/operations/muscle.operations";
+} from "../../graphql/operations/muscle.operations";
 import {FormGroup} from "@angular/forms";
 import {BehaviorSubject} from "rxjs";
 import {Muscle} from "../../../interface/dto/muscle";

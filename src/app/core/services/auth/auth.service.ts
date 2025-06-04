@@ -1,7 +1,7 @@
 import {inject, Injectable} from '@angular/core';
 import {Apollo, MutationResult} from "apollo-angular";
 import {FormGroup} from "@angular/forms";
-import {LOGIN, REGISTER} from "../../../graphql/operations/auth.operations";
+import {LOGIN, REGISTER} from "../../graphql/operations/auth.operations";
 import {AlertService} from "../alert/alert.service";
 import {Router} from "@angular/router";
 import {Auth} from "../../../interface/dto/auth";

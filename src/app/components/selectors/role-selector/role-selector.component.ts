@@ -1,7 +1,7 @@
 import {Component, forwardRef, inject, OnDestroy, OnInit, signal} from '@angular/core';
 import {MultiSelectOption} from "../../../interface/components/multi-select/multiSelectOption";
 import {ControlValueAccessor, NG_VALUE_ACCESSOR} from "@angular/forms";
-import {RoleService} from "../../../services/role/role.service";
+import {RoleService} from "../../../core/services/role/role.service";
 import {Role} from "../../../interface/dto/role";
 import {Privilege} from "../../../interface/dto/privilege";
 import {MultiSelectComponent} from "../../multi-select/multi-select.component";
