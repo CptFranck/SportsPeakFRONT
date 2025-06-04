@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { UserInformationDisplayComponent } from './user-information-display.component';
+import {UserInformationDisplayComponent} from './user-information-display.component';
 
 describe('UserInformationDisplayComponent', () => {
   let component: UserInformationDisplayComponent;
@@ -10,10 +10,14 @@ describe('UserInformationDisplayComponent', () => {
     await TestBed.configureTestingModule({
       imports: [UserInformationDisplayComponent]
     })
-    .compileComponents();
-    
+      .compileComponents();
+
     fixture = TestBed.createComponent(UserInformationDisplayComponent);
     component = fixture.componentInstance;
+
+    fixture.componentRef.setInput('modalId', "Id");
+    fixture.componentRef.setInput('user', undefined);
+
     fixture.detectChanges();
   });
 
