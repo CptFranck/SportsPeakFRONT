@@ -2,7 +2,7 @@ import {ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {UsersManagementArrayComponent} from './users-management-array.component';
 
-describe('UsersArrayComponent', () => {
+describe('UsersManagementArrayComponent', () => {
   let component: UsersManagementArrayComponent;
   let fixture: ComponentFixture<UsersManagementArrayComponent>;
 
@@ -14,6 +14,10 @@ describe('UsersArrayComponent', () => {
 
     fixture = TestBed.createComponent(UsersManagementArrayComponent);
     component = fixture.componentInstance;
+
+    fixture.componentRef.setInput('users', []);
+    fixture.componentRef.setInput('modalId', 'Id');
+
     fixture.detectChanges();
   });
 
