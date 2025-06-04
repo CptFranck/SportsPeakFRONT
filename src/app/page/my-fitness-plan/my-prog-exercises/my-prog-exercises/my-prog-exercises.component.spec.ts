@@ -6,6 +6,7 @@ import {ProgExerciseService} from "../../../../core/services/prog-exercise/prog-
 import {ProgExercise} from "../../../../shared/model/dto/prog-exercise";
 import {ExerciseService} from "../../../../core/services/exercise/exercise.service";
 import {Exercise} from "../../../../shared/model/dto/exercise";
+import {provideAnimations} from "@angular/platform-browser/animations";
 
 describe('MyProgExercisesComponent', () => {
   let component: MyProgExercisesComponent;
@@ -24,6 +25,7 @@ describe('MyProgExercisesComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       providers: [
+        provideAnimations(),
         {provide: ExerciseService, useValue: mockExerciseService},
         {provide: ProgExerciseService, useValue: mockProgExerciseService}
       ],
