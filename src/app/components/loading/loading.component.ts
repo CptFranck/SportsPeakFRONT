@@ -1,5 +1,5 @@
 import {Component, input} from '@angular/core';
-import {collapseHeight} from "../../animation/collapseHeigh";
+import {collapseHeight} from "../../shared/animations/collapseHeigh";
 
 @Component({
   selector: 'app-loading',

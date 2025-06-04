@@ -3,7 +3,7 @@ import {Alert} from "../../interface/utils/alert";
 import {AlertService} from "../../core/services/alert/alert.service";
 import {Subject, takeUntil} from "rxjs";
 import {AlertComponent} from "../alert/alert.component";
-import {collapseHeight} from "../../animation/collapseHeigh";
+import {collapseHeight} from "../../shared/animations/collapseHeigh";
 
 @Component({
   selector: 'app-alert-display',

@@ -5,7 +5,7 @@ import {Observable, Subject, takeUntil} from "rxjs";
 import {InputControlComponent} from "../../../input-control/input-control.component";
 import {ModificationField} from "../../../../interface/enum/modification-field";
 import {ActionType} from "../../../../interface/enum/action-type";
-import {confirmValidator} from "../../../../validators/confirmValidator";
+import {confirmValidator} from "../../../../shared/validators/confirmValidator";
 import {UserService} from "../../../../core/services/user/user.service";
 
 @Component({

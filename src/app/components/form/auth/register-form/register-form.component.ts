@@ -2,7 +2,7 @@ import {Component, inject, signal} from '@angular/core';
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {AuthService} from "../../../../core/services/auth/auth.service";
 import {InputControlComponent} from "../../../input-control/input-control.component";
-import {confirmValidator} from "../../../../validators/confirmValidator";
+import {confirmValidator} from "../../../../shared/validators/confirmValidator";
 
 @Component({
   selector: 'app-register-form',

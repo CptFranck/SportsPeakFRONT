@@ -11,7 +11,7 @@ import {SearchBarComponent} from "../../../../components/search-bar/search-bar.c
 import {Exercise} from "../../../../interface/dto/exercise";
 import {Subject, takeUntil} from "rxjs";
 import {UserLoggedService} from "../../../../core/services/user-logged/user-logged.service";
-import {collapseHeight} from "../../../../animation/collapseHeigh";
+import {collapseHeight} from "../../../../shared/animations/collapseHeigh";
 import {ExerciseTypeCardComponent} from "../../../../components/card/exercise-type-card/exercise-type-card.component";
 import {sortExerciseTypeByName} from "../../../../utils/exercise-type-function";
 

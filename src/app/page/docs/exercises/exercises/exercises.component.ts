@@ -13,7 +13,7 @@ import {ExerciseType} from "../../../../interface/dto/exercise-type";
 import {Subject, takeUntil} from "rxjs";
 import {UserLoggedService} from "../../../../core/services/user-logged/user-logged.service";
 import {ExerciceCardComponent} from "../../../../components/card/exercice-card/exercice-card.component";
-import {collapseHeight} from "../../../../animation/collapseHeigh";
+import {collapseHeight} from "../../../../shared/animations/collapseHeigh";
 import {sortExerciseByName} from "../../../../utils/exercise-function";
 
 @Component({
