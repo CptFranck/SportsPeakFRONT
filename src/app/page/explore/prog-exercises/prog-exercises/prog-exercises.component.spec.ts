@@ -4,6 +4,7 @@ import {ProgExercisesComponent} from './prog-exercises.component';
 import {ProgExerciseService} from "../../../../core/services/prog-exercise/prog-exercise.service";
 import {BehaviorSubject} from "rxjs";
 import {ProgExercise} from "../../../../shared/model/dto/prog-exercise";
+import {provideAnimations} from "@angular/platform-browser/animations";
 
 describe('ProgExercisesComponent', () => {
   let component: ProgExercisesComponent;
@@ -16,6 +17,7 @@ describe('ProgExercisesComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       providers: [
+        provideAnimations(),
         {provide: ProgExerciseService, useValue: mockProgExerciseService}
       ],
       imports: [ProgExercisesComponent]
