@@ -1,8 +1,8 @@
 import {Routes} from '@angular/router';
 import {AuthComponent} from "./page/auth/auth/auth.component";
-import {AuthGuard} from "./guards/auth/auth.guard";
+import {AuthGuard} from "./core/guards/auth/auth.guard";
 import {UserComponent} from "./page/user-account/user/user.component";
-import {BackGuard} from "./guards/back/back.guard";
+import {BackGuard} from "./core/guards/back/back.guard";
 import {HomeComponent} from "./page/home/home.component";
 import {CommunityComponent} from "./page/community/community/community.component";
 
