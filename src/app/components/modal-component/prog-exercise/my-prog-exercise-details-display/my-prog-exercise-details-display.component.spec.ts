@@ -1,6 +1,10 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { MyProgExerciseDetailsDisplayComponent } from './my-prog-exercise-details-display.component';
+import {MyProgExerciseDetailsDisplayComponent} from './my-prog-exercise-details-display.component';
+import {generateTestExercise, generateTestProgExercise, generateTestUser} from "../../../../utils/testFunctions";
+import {User} from "../../../../shared/model/dto/user";
+import {Exercise} from "../../../../shared/model/dto/exercise";
+import {ProgExercise} from "../../../../shared/model/dto/prog-exercise";
 
 describe('MyProgExerciseDetailsDisplayComponent', () => {
   let component: MyProgExerciseDetailsDisplayComponent;
@@ -10,10 +14,16 @@ describe('MyProgExerciseDetailsDisplayComponent', () => {
     await TestBed.configureTestingModule({
       imports: [MyProgExerciseDetailsDisplayComponent]
     })
-    .compileComponents();
-    
+      .compileComponents();
+
     fixture = TestBed.createComponent(MyProgExerciseDetailsDisplayComponent);
     component = fixture.componentInstance;
+
+    const userMock: User = generateTestUser();
+    const exerciseMock: Exercise = generateTestExercise();
+    const mockProgExercise: ProgExercise = generateTestProgExercise(userMock, exerciseMock);
+    fixture.componentRef.setInput('progExercise', mockProgExercise);
+
     fixture.detectChanges();
   });
 
