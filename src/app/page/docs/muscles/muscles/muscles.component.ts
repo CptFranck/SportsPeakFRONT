@@ -1,7 +1,6 @@
 import {Component, inject, OnDestroy, OnInit, signal} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {LoadingComponent} from "../../../../components/loading/loading.component";
-import {ActionTypeEnum} from "../../../../shared/model/enum/action-type.enum";
 import {MuscleModalComponent} from "../../../../components/modal-component/muscle-modal/muscle-modal.component";
 import {MuscleService} from "../../../../core/services/muscle/muscle.service";
 import {Muscle} from "../../../../shared/model/dto/muscle";
@@ -13,6 +12,7 @@ import {collapseHeight} from "../../../../shared/animations/collapseHeigh";
 import {MuscleCardComponent} from "../../../../components/card/muscle-card/muscle-card.component";
 import {sortMuscleByName} from "../../../../utils/muscle-functions";
 import {ModalButtonComponent} from "../../../../components/modal/modal-button/modal-button.component";
+import {ActionEnum} from "../../../../shared/model/enum/action.enum";
 
 @Component({
   selector: 'app-muscles',
@@ -35,7 +35,7 @@ export class MusclesComponent implements OnInit, OnDestroy {
   displayedMuscles = signal<Muscle[]>([]);
 
   readonly muscleModalId: string = "muscleModal";
-  readonly ActionType = ActionTypeEnum;
+  readonly ActionType = ActionEnum;
 
   private muscles: Muscle[] = [];
   private readonly unsubscribe$ = new Subject<void>();

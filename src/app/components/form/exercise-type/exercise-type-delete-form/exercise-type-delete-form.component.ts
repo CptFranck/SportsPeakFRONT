@@ -2,7 +2,7 @@ import {Component, inject, input, OnDestroy, OnInit} from '@angular/core';
 import {Observable, Subject, takeUntil} from "rxjs";
 import {ExerciseType} from "../../../../shared/model/dto/exercise-type";
 import {ExerciseTypeService} from "../../../../core/services/exercise-type/exercise-type.service";
-import {ActionTypeEnum} from "../../../../shared/model/enum/action-type.enum";
+import {ActionEnum} from "../../../../shared/model/enum/action.enum";
 
 @Component({
   selector: 'app-exercise-type-delete-form',
@@ -12,7 +12,7 @@ export class ExerciseTypeDeleteFormComponent implements OnInit, OnDestroy {
 
   readonly exerciseType = input.required<ExerciseType | undefined>();
   readonly btnCloseRef = input.required<HTMLButtonElement>();
-  readonly submitEventActionType$ = input.required<Observable<ActionTypeEnum> | undefined>();
+  readonly submitEventActionType$ = input.required<Observable<ActionEnum> | undefined>();
 
   private readonly unsubscribe$ = new Subject<void>();
   private readonly exerciseTypeService = inject(ExerciseTypeService);
@@ -22,8 +22,8 @@ export class ExerciseTypeDeleteFormComponent implements OnInit, OnDestroy {
     if (submitEventActionType$)
       submitEventActionType$
         .pipe(takeUntil(this.unsubscribe$))
-        .subscribe((actionType: ActionTypeEnum) => {
-          if (actionType === ActionTypeEnum.delete)
+        .subscribe((actionType: ActionEnum) => {
+          if (actionType === ActionEnum.delete)
             this.onSubmit();
         });
   }

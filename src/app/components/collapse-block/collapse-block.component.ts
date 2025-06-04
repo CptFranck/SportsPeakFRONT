@@ -1,7 +1,7 @@
 import {Component, computed, ElementRef, input, signal, TemplateRef, viewChild} from '@angular/core';
 import {NgTemplateOutlet} from "@angular/common";
 import {Subject} from "rxjs";
-import {ActionTypeEnum} from "../../shared/model/enum/action-type.enum";
+import {ActionEnum} from "../../shared/model/enum/action.enum";
 
 @Component({
   selector: 'app-collapse-block',
@@ -11,19 +11,19 @@ import {ActionTypeEnum} from "../../shared/model/enum/action-type.enum";
   templateUrl: './collapse-block.component.html'
 })
 export class CollapseBlockComponent {
-  submitEventActionType$ = new Subject<ActionTypeEnum>();
+  submitEventActionType$ = new Subject<ActionEnum>();
   hidden = signal<boolean>(true);
 
   readonly collapseId = input.required<string>();
   readonly classArgs = input<string>("");
   readonly contentTemplate = input<TemplateRef<any>>();
-  readonly actionType = input.required<ActionTypeEnum | undefined>();
+  readonly actionType = input.required<ActionEnum | undefined>();
 
   readonly submitButton = computed<boolean>(() => {
-    return this.actionType() === ActionTypeEnum.update || this.actionType() === ActionTypeEnum.delete;
+    return this.actionType() === ActionEnum.update || this.actionType() === ActionEnum.delete;
   });
   readonly validateButtonClass = computed<string>(() => {
-    if (this.actionType() == ActionTypeEnum.delete) return "btn-danger"
+    if (this.actionType() == ActionEnum.delete) return "btn-danger"
     else return "btn-success"
   });
   readonly closeButtonTitle = computed<string>(() => {
@@ -32,11 +32,11 @@ export class CollapseBlockComponent {
   });
   readonly validationButtonTitle = computed<string>(() => {
     switch (this.actionType()) {
-      case ActionTypeEnum.create:
+      case ActionEnum.create:
         return 'Create';
-      case ActionTypeEnum.update:
+      case ActionEnum.update:
         return 'Update';
-      case ActionTypeEnum.delete:
+      case ActionEnum.delete:
         return 'Delete';
       default:
         return 'Submit';

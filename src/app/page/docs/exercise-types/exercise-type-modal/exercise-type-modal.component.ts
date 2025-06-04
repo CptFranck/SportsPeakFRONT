@@ -1,7 +1,6 @@
 import {Component, inject, input, OnDestroy, OnInit, output, signal} from '@angular/core';
 import {ModalButtonComponent} from "../../../../components/modal/modal-button/modal-button.component";
 import {ModalComponent} from "../../../../components/modal/modal/modal.component";
-import {ActionTypeEnum} from "../../../../shared/model/enum/action-type.enum";
 import {ExerciseType} from "../../../../shared/model/dto/exercise-type";
 import {
   ExerciseTypeDetailsDisplayComponent
@@ -15,6 +14,7 @@ import {
 import {UserLoggedService} from "../../../../core/services/user-logged/user-logged.service";
 import {FormIndicator} from "../../../../shared/model/common/form-indicator";
 import {Subject, takeUntil} from "rxjs";
+import {ActionEnum} from "../../../../shared/model/enum/action.enum";
 
 @Component({
   selector: 'app-exercise-type-modal',
@@ -33,11 +33,11 @@ export class ExerciseTypeModalComponent implements OnInit, OnDestroy {
   readonly modalTitle = input.required<string>();
   readonly exerciseTypeModalId = input.required<string>();
   readonly exerciseType = input.required<ExerciseType | undefined>();
-  readonly action = input.required<ActionTypeEnum>();
+  readonly action = input.required<ActionEnum>();
 
   readonly exerciseTypeAction = output<FormIndicator>();
 
-  protected readonly ActionType = ActionTypeEnum;
+  protected readonly ActionType = ActionEnum;
 
   private readonly unsubscribe$ = new Subject<void>();
   private readonly userLoggedService = inject(UserLoggedService);
@@ -57,7 +57,7 @@ export class ExerciseTypeModalComponent implements OnInit, OnDestroy {
   onClick() {
     this.exerciseTypeAction.emit({
       object: undefined,
-      actionType: ActionTypeEnum.create
+      actionType: ActionEnum.create
     })
   }
 }

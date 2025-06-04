@@ -1,8 +1,8 @@
-import {ActionTypeEnum} from "../enum/action-type.enum";
-import {ModificationFieldEnum} from "../enum/modification-field.enum";
+import {ModificationFieldEnum} from "../enum/user-modification-field.enum";
+import {ActionEnum} from "../enum/action.enum";
 
 export interface FormIndicator {
-  actionType: ActionTypeEnum,
+  actionType: ActionEnum,
   modificationField?: ModificationFieldEnum,
   object: any
 }

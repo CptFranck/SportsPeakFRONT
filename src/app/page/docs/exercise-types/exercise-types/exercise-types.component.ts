@@ -1,7 +1,6 @@
 import {Component, inject, OnDestroy, OnInit, signal} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {ExerciseType} from "../../../../shared/model/dto/exercise-type";
-import {ActionTypeEnum} from "../../../../shared/model/enum/action-type.enum";
 import {ExerciseTypeService} from "../../../../core/services/exercise-type/exercise-type.service";
 import {FormIndicator} from "../../../../shared/model/common/form-indicator";
 import {LoadingComponent} from "../../../../components/loading/loading.component";
@@ -14,6 +13,7 @@ import {UserLoggedService} from "../../../../core/services/user-logged/user-logg
 import {collapseHeight} from "../../../../shared/animations/collapseHeigh";
 import {ExerciseTypeCardComponent} from "../../../../components/card/exercise-type-card/exercise-type-card.component";
 import {sortExerciseTypeByName} from "../../../../utils/exercise-type-function";
+import {ActionEnum} from "../../../../shared/model/enum/action.enum";
 
 @Component({
   selector: 'app-exercise-types',
@@ -32,7 +32,7 @@ export class ExerciseTypesComponent implements OnInit, OnDestroy {
   isAdmin = signal<boolean>(false);
   loading = signal<boolean>(true);
   displayedExerciseTypes = signal<ExerciseType[]>([]);
-  action = signal<ActionTypeEnum>(ActionTypeEnum.create);
+  action = signal<ActionEnum>(ActionEnum.create);
   modalTitle = signal<string>("");
   exerciseType = signal<ExerciseType | undefined>(undefined);
 

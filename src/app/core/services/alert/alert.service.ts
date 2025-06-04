@@ -1,10 +1,10 @@
 import {Injectable} from '@angular/core';
 import {Alert} from "../../../shared/model/common/alert";
-import {AlertTypeEnum} from "../../../shared/model/enum/alert-type.enum";
 import {Subject} from "rxjs";
 import {GraphQLFormattedError} from "graphql/error";
-import {AlertErrorTypeEnum} from "../../../shared/model/enum/alert-error-type.enum";
 import {NetworkError} from "@apollo/client/errors";
+import {AlertTypeEnum} from "../../../shared/model/enum/alert.enum";
+import {AlertErrorEnum} from "../../../shared/model/enum/alert-error.enum";
 
 @Injectable({
   providedIn: 'root'
@@ -64,7 +64,7 @@ export class AlertService {
     if (lastAlert !== undefined && this.isSameAlertError(lastAlert, networkError)) return;
     const networkAlert: Alert = this.createErrorAlert(networkError, false);
     if (networkAlert.errorInformation)
-      networkAlert.errorInformation.errorType = AlertErrorTypeEnum.NetworkError;
+      networkAlert.errorInformation.errorType = AlertErrorEnum.NetworkError;
     this.alerts.push(networkAlert);
     this.updateAlert();
     this.alertId += 1;
@@ -90,7 +90,7 @@ export class AlertService {
   private createGraphQLErrorAlert(graphQLError: GraphQLFormattedError) {
     const graphQLAlert = this.createErrorAlert(graphQLError);
     if (graphQLAlert.errorInformation) {
-      graphQLAlert.errorInformation.errorType = AlertErrorTypeEnum.GraphQLError;
+      graphQLAlert.errorInformation.errorType = AlertErrorEnum.GraphQLError;
       graphQLAlert.errorInformation.errorLocation = graphQLError.locations;
       graphQLAlert.errorInformation.errorPath = graphQLError.path;
     }
