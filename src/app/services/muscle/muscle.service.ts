@@ -3,6 +3,7 @@ import {MutationResult} from "apollo-angular";
 import {
   ADD_MUSCLE,
   DEL_MUSCLE,
+  FRAG_MUSCLE_ILLUSTRATION,
   GET_MUSCLE_BY_ID,
   GET_MUSCLES,
   MOD_MUSCLE
@@ -115,5 +116,9 @@ export class MuscleService {
       this.alertService.addSuccessAlert(`Muscle ${muscle.name} has been successfully deleted.`);
       this.router.navigateByUrl('/docs/muscles');
     });
+  }
+
+  updateIllustrationMuscle(id: number, url: string) {
+    this.apolloWrapperService.updateCache(id, "Muscle", "illustrationPath", url, FRAG_MUSCLE_ILLUSTRATION)
   }
 }
