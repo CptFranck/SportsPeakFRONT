@@ -2,7 +2,7 @@ import {ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {ExercisesAdminArrayComponent} from './exercises-admin-array.component';
 
-describe('ExercisesArrayComponent', () => {
+describe('ExercisesAdminArrayComponent', () => {
   let component: ExercisesAdminArrayComponent;
   let fixture: ComponentFixture<ExercisesAdminArrayComponent>;
 
@@ -14,6 +14,10 @@ describe('ExercisesArrayComponent', () => {
 
     fixture = TestBed.createComponent(ExercisesAdminArrayComponent);
     component = fixture.componentInstance;
+
+    fixture.componentRef.setInput('modalId', 'Id');
+    fixture.componentRef.setInput('exercises', []);
+
     fixture.detectChanges();
   });
 
