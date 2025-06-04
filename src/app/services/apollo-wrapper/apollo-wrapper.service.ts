@@ -25,4 +25,12 @@ export class ApolloWrapperService {
       errorPolicy: options.errorPolicy || 'all',
     });
   }
+
+  updateCache(id: number, typename: string, field: string, value: any, fragment: any): void {
+    this.apollo.client.writeFragment({
+      id: this.apollo.client.cache.identify({__typename: typename, id}),
+      fragment: fragment,
+      data: {[field]: value}
+    });
+  }
 }
