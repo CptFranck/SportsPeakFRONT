@@ -4,6 +4,7 @@ import {ExerciseTypeSelectorComponent} from './exercise-type-selector.component'
 import {BehaviorSubject} from "rxjs";
 import {ExerciseTypeService} from "../../../core/services/exercise-type/exercise-type.service";
 import {ExerciseType} from "../../../shared/model/dto/exercise-type";
+import {provideAnimations} from "@angular/platform-browser/animations";
 
 describe('ExerciseTypeSelectorComponent', () => {
   let component: ExerciseTypeSelectorComponent;
@@ -15,8 +16,10 @@ describe('ExerciseTypeSelectorComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      providers: [{provide: ExerciseTypeService, useValue: mockExerciseTypeService}],
-
+      providers: [
+        provideAnimations(),
+        {provide: ExerciseTypeService, useValue: mockExerciseTypeService}
+      ],
       imports: [ExerciseTypeSelectorComponent]
     })
       .compileComponents();
