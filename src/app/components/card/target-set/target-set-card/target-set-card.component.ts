@@ -1,7 +1,6 @@
 import {Component, computed, input, output} from '@angular/core';
 import {ModalButtonComponent} from "../../../modal/modal-button/modal-button.component";
 import {FormIndicator} from "../../../../shared/model/common/form-indicator";
-import {ActionTypeEnum} from "../../../../shared/model/enum/action-type.enum";
 import {TargetSet} from "../../../../shared/model/dto/target-set";
 import {
   TargetSetStateFormComponent
@@ -9,6 +8,7 @@ import {
 import {getTargetSetTimeToString} from "../../../../utils/target-set-functions";
 import {getStringTime} from "../../../../utils/duration-functions";
 import {TooltipComponent} from "../../../tooltip/tooltip.component";
+import {ActionEnum} from "../../../../shared/model/enum/action.enum";
 
 @Component({
   selector: 'app-target-set-card',
@@ -33,46 +33,46 @@ export class TargetSetCardComponent {
   readonly actionTargetSets = output<FormIndicator>();
   readonly actionPerformanceLogs = output<FormIndicator>();
 
-  protected readonly ActionType = ActionTypeEnum;
+  protected readonly ActionType = ActionEnum;
 
   addNewPerformance(targetSet: TargetSet) {
     this.actionPerformanceLogs.emit({
-      actionType: ActionTypeEnum.create,
+      actionType: ActionEnum.create,
       object: targetSet,
     });
   }
 
   checkPerformance(targetSet: TargetSet) {
     this.actionPerformanceLogs.emit({
-      actionType: ActionTypeEnum.checkPerformance,
+      actionType: ActionEnum.checkPerformance,
       object: targetSet,
     });
   }
 
   adjustTargetSet(targetSet: TargetSet): void {
     this.actionTargetSets.emit({
-      actionType: ActionTypeEnum.addEvolution,
+      actionType: ActionEnum.addEvolution,
       object: targetSet
     });
   }
 
   checkTargetSet(targetSet: TargetSet) {
     this.actionTargetSets.emit({
-      actionType: ActionTypeEnum.checkEvolution,
+      actionType: ActionEnum.checkEvolution,
       object: targetSet
     });
   }
 
   modifyTargetSet(targetSet: TargetSet) {
     this.actionTargetSets.emit({
-      actionType: ActionTypeEnum.update,
+      actionType: ActionEnum.update,
       object: targetSet
     });
   }
 
   delTargetSet(targetSet: TargetSet) {
     this.actionTargetSets.emit({
-      actionType: ActionTypeEnum.delete,
+      actionType: ActionEnum.delete,
       object: targetSet
     });
   }

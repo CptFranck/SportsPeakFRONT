@@ -1,6 +1,5 @@
 import {Component, inject, OnDestroy, OnInit, signal} from '@angular/core';
 import {ProgExercise} from "../../../../shared/model/dto/prog-exercise";
-import {ActionTypeEnum} from "../../../../shared/model/enum/action-type.enum";
 import {ProgExerciseService} from "../../../../core/services/prog-exercise/prog-exercise.service";
 import {FormIndicator} from "../../../../shared/model/common/form-indicator";
 import {LoadingComponent} from "../../../../components/loading/loading.component";
@@ -11,6 +10,7 @@ import {
   ProgExerciseCardComponent
 } from "../../../../components/card/prog-exercise/prog-exercise-card/prog-exercise-card.component";
 import {Subject, takeUntil} from "rxjs";
+import {ActionEnum} from "../../../../shared/model/enum/action.enum";
 
 @Component({
   selector: 'app-my-prog-exercises',
@@ -25,7 +25,7 @@ import {Subject, takeUntil} from "rxjs";
 export class MyProgExercisesComponent implements OnInit, OnDestroy {
   loading = signal<boolean>(true);
   displayedProgExercises = signal<ProgExercise[]>([]);
-  action = signal<ActionTypeEnum>(ActionTypeEnum.create);
+  action = signal<ActionEnum>(ActionEnum.create);
   modalTitle = signal<string>("");
   progExercise = signal<ProgExercise | undefined>(undefined);
 

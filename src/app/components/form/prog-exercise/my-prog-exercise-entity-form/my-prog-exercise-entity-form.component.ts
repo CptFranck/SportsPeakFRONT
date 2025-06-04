@@ -8,8 +8,8 @@ import {InputControlComponent} from "../../../input-control/input-control.compon
 import {ExerciseSelectComponent} from "../../../selects/exercise-select/exercise-select.component";
 import {VisibilitySelectComponent} from "../../../selects/visibility-select/visibility-select.component";
 import {ProgExerciseService} from "../../../../core/services/prog-exercise/prog-exercise.service";
-import {ActionTypeEnum} from "../../../../shared/model/enum/action-type.enum";
 import {ProgExercise} from "../../../../shared/model/dto/prog-exercise";
+import {ActionEnum} from "../../../../shared/model/enum/action.enum";
 
 @Component({
   selector: 'app-my-prog-exercise-entity-form',
@@ -24,7 +24,7 @@ import {ProgExercise} from "../../../../shared/model/dto/prog-exercise";
 export class MyProgExerciseEntityFormComponent implements OnInit, OnDestroy {
   readonly progExercise = input.required<ProgExercise | undefined>();
   readonly btnCloseRef = input.required<HTMLButtonElement>();
-  readonly submitEventActionType$ = input.required<Observable<ActionTypeEnum> | undefined>();
+  readonly submitEventActionType$ = input.required<Observable<ActionEnum> | undefined>();
 
   submitInvalidForm = signal<boolean>(false);
 
@@ -79,8 +79,8 @@ export class MyProgExerciseEntityFormComponent implements OnInit, OnDestroy {
     if (submitEventActionType$)
       submitEventActionType$
         .pipe(takeUntil(this.unsubscribe$))
-        .subscribe((actionType: ActionTypeEnum) => {
-          if (actionType === ActionTypeEnum.create || actionType === ActionTypeEnum.update)
+        .subscribe((actionType: ActionEnum) => {
+          if (actionType === ActionEnum.create || actionType === ActionEnum.update)
             this.onSubmit();
         });
   }

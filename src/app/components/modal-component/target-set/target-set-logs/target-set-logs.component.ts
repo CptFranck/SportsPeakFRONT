@@ -3,7 +3,6 @@ import {TargetSet} from "../../../../shared/model/dto/target-set";
 import {TargetSetLogsCardComponent} from "../../../card/target-set/target-set-logs-card/target-set-logs-card.component";
 import {FormIndicator} from "../../../../shared/model/common/form-indicator";
 import {getTargetSetLogs} from "../../../../utils/target-set-functions";
-import {ActionTypeEnum} from "../../../../shared/model/enum/action-type.enum";
 import {CollapseBlockComponent} from "../../../collapse-block/collapse-block.component";
 import {
   TargetSetEntityFormComponent
@@ -13,6 +12,7 @@ import {
 } from "../../../form/target-set/target-set-delete-form/target-set-delete-form.component";
 import {PerformanceLogsComponent} from "../../performance-log/performance-logs/performance-logs.component";
 import {ProgExercise} from "../../../../shared/model/dto/prog-exercise";
+import {ActionEnum} from "../../../../shared/model/enum/action.enum";
 
 @Component({
   selector: 'app-target-set-logs',
@@ -41,18 +41,18 @@ export class TargetSetLogsComponent {
     return [];
   });
 
-  action = signal<ActionTypeEnum>(ActionTypeEnum.read);
+  action = signal<ActionEnum>(ActionEnum.read);
   blocTitle = signal<string | undefined>(undefined);
   targetSetLog = signal<TargetSet | undefined>(undefined);
 
   readonly actionTargetSets = output<FormIndicator>();
 
-  protected readonly ActionType = ActionTypeEnum;
+  protected readonly ActionType = ActionEnum;
 
   setTargetSet(formIndicator: FormIndicator) {
     this.action.set(formIndicator.actionType);
     this.targetSetLog.set(formIndicator.object);
-    if (this.action() === ActionTypeEnum.checkPerformance)
+    if (this.action() === ActionEnum.checkPerformance)
       this.blocTitle.set(undefined);
     else
       this.blocTitle.set("Set created on " + new Date(formIndicator.object?.creationDate).toLocaleDateString());

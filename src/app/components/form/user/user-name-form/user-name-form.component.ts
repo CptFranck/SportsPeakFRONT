@@ -3,9 +3,9 @@ import {InputControlComponent} from "../../../input-control/input-control.compon
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {User} from "../../../../shared/model/dto/user";
 import {Observable, Subject, takeUntil} from "rxjs";
-import {ModificationFieldEnum} from "../../../../shared/model/enum/modification-field.enum";
-import {ActionTypeEnum} from "../../../../shared/model/enum/action-type.enum";
 import {UserService} from "../../../../core/services/user/user.service";
+import {ModificationFieldEnum} from "../../../../shared/model/enum/user-modification-field.enum";
+import {ActionEnum} from "../../../../shared/model/enum/action.enum";
 
 @Component({
   selector: 'app-user-name-form',
@@ -44,7 +44,7 @@ export class UserNameFormComponent implements OnInit, OnDestroy {
   submitInvalidForm = signal<boolean>(false);
 
   readonly btnCloseRef = input.required<HTMLButtonElement>();
-  readonly submitEventActionType$ = input.required<Observable<ActionTypeEnum> | undefined>();
+  readonly submitEventActionType$ = input.required<Observable<ActionEnum> | undefined>();
   readonly modification = input.required<ModificationFieldEnum>();
 
   private readonly unsubscribe$ = new Subject<void>();
@@ -55,8 +55,8 @@ export class UserNameFormComponent implements OnInit, OnDestroy {
     if (submitEventActionType$)
       submitEventActionType$
         .pipe(takeUntil(this.unsubscribe$))
-        .subscribe((actionType: ActionTypeEnum) => {
-          if (actionType === ActionTypeEnum.update && this.modification() === ModificationFieldEnum.identity)
+        .subscribe((actionType: ActionEnum) => {
+          if (actionType === ActionEnum.update && this.modification() === ModificationFieldEnum.identity)
             this.onSubmit();
         });
   }

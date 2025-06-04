@@ -6,7 +6,6 @@ import {sortPerformanceLogsByDate, sortPerformanceLogsBySet} from "../../../../u
 import {FormIndicator} from "../../../../shared/model/common/form-indicator";
 import {DictionaryItem} from "../../../../shared/model/common/dictionary-item";
 import {TabOption} from "../../../../shared/model/component/tab/tabOption";
-import {ActionTypeEnum} from "../../../../shared/model/enum/action-type.enum";
 import {
   PerformanceLogEntityFormComponent
 } from "../../../form/performance-log/performance-log-entity-form/performance-log-entity-form.component";
@@ -23,6 +22,7 @@ import {
   PerformanceLogSortedByLogDateComponent
 } from "../performance-log-sorted-by-log-date/performance-log-sorted-by-log-date.component";
 import {CheckBoxComponent} from "../../../input/check-box/check-box.component";
+import {ActionEnum} from "../../../../shared/model/enum/action.enum";
 
 @Component({
   selector: 'app-performance-logs',
@@ -78,11 +78,11 @@ export class PerformanceLogsComponent {
   });
 
   switchSortByDate = signal<boolean>(true);
-  action = signal<ActionTypeEnum>(ActionTypeEnum.read);
+  action = signal<ActionEnum>(ActionEnum.read);
   performanceLog = signal<PerformanceLog | undefined>(undefined);
   performanceLogDate = signal<string | undefined>(undefined);
 
-  protected readonly ActionType = ActionTypeEnum;
+  protected readonly ActionType = ActionEnum;
   protected readonly Object: ObjectConstructor = Object;
 
   setPerformanceLog(formIndicator: FormIndicator) {

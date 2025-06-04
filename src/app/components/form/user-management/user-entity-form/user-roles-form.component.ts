@@ -5,8 +5,8 @@ import {InputControlComponent} from "../../../input-control/input-control.compon
 import {User} from "../../../../shared/model/dto/user";
 import {UserService} from "../../../../core/services/user/user.service";
 import {RoleSelectorComponent} from "../../../selectors/role-selector/role-selector.component";
-import {ActionTypeEnum} from "../../../../shared/model/enum/action-type.enum";
 import {Role} from "../../../../shared/model/dto/role";
+import {ActionEnum} from "../../../../shared/model/enum/action.enum";
 
 @Component({
   selector: 'app-user-roles-form',
@@ -39,7 +39,7 @@ export class UserRolesFormComponent implements OnInit, OnDestroy {
   submitInvalidForm = signal<boolean>(false);
 
   readonly btnCloseRef = input.required<HTMLButtonElement>();
-  readonly submitEvents = input.required<Observable<ActionTypeEnum> | undefined>();
+  readonly submitEvents = input.required<Observable<ActionEnum> | undefined>();
 
   private readonly unsubscribe$ = new Subject<void>();
   private readonly userService = inject(UserService);
@@ -49,8 +49,8 @@ export class UserRolesFormComponent implements OnInit, OnDestroy {
     if (submitEvents)
       submitEvents
         .pipe(takeUntil(this.unsubscribe$))
-        .subscribe((actionType: ActionTypeEnum) => {
-          if (actionType === ActionTypeEnum.update)
+        .subscribe((actionType: ActionEnum) => {
+          if (actionType === ActionEnum.update)
             this.onSubmit();
         });
   }

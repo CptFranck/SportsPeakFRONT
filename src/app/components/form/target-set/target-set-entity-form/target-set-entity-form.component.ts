@@ -6,12 +6,12 @@ import {WeightSelectComponent} from "../../../selects/weight-select/weight-selec
 import {DurationInputComponent} from "../../../input/duration-inputs/duration-input.component";
 import {TargetSet} from "../../../../shared/model/dto/target-set";
 import {ProgExercise} from "../../../../shared/model/dto/prog-exercise";
-import {ActionTypeEnum} from "../../../../shared/model/enum/action-type.enum";
 import {TargetSetService} from "../../../../core/services/target-set/target-set.service";
 import {Duration} from "../../../../shared/model/dto/duration";
 import {WeightUnitEnum} from "../../../../shared/model/enum/weightUnit.enum";
 import {createDurationForm} from "../../../../utils/duration-functions";
 import {getUpToDateTargetSets} from "../../../../utils/target-set-functions";
+import {ActionEnum} from "../../../../shared/model/enum/action.enum";
 
 @Component({
   selector: 'app-target-set-entity-form',
@@ -28,9 +28,9 @@ export class TargetSetEntityFormComponent implements OnInit, OnDestroy {
 
   readonly targetSet = input.required<TargetSet | undefined>();
   readonly progExercise = input.required<ProgExercise | undefined>();
-  readonly actionType = input.required<ActionTypeEnum>();
+  readonly actionType = input.required<ActionEnum>();
   readonly btnCloseRef = input.required<HTMLButtonElement>();
-  readonly submitEventActionType$ = input.required<Observable<ActionTypeEnum> | undefined>();
+  readonly submitEventActionType$ = input.required<Observable<ActionEnum> | undefined>();
 
   targetSetForm = computed<FormGroup>(() => {
     const targetSet = this.targetSet();
@@ -56,7 +56,7 @@ export class TargetSetEntityFormComponent implements OnInit, OnDestroy {
       targetSetWeightUnit = targetSet.weightUnit;
       targetSetPhysicalExertionUnitTime = targetSet.physicalExertionUnitTime;
       targetSetRestTime = targetSet.restTime;
-      if (this.actionType() === ActionTypeEnum.addEvolution)
+      if (this.actionType() === ActionEnum.addEvolution)
         targetSetUpdateId = targetSet.id;
     } else if (progExercise)
       targetSetIndex = getUpToDateTargetSets(progExercise).length + 1;
@@ -110,10 +110,10 @@ export class TargetSetEntityFormComponent implements OnInit, OnDestroy {
     if (submitEventActionType$)
       submitEventActionType$
         .pipe(takeUntil(this.unsubscribe$))
-        .subscribe((actionType: ActionTypeEnum) => {
-          if (actionType === ActionTypeEnum.create || actionType === ActionTypeEnum.addEvolution)
+        .subscribe((actionType: ActionEnum) => {
+          if (actionType === ActionEnum.create || actionType === ActionEnum.addEvolution)
             this.onCreateOrEvolutionSubmit();
-          else if (actionType === ActionTypeEnum.update)
+          else if (actionType === ActionEnum.update)
             this.onUpdateSubmit();
         });
   }

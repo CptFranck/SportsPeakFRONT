@@ -2,7 +2,7 @@ import {Component, inject, input, OnDestroy, OnInit} from '@angular/core';
 import {Observable, Subject, takeUntil} from "rxjs";
 import {Privilege} from "../../../../shared/model/dto/privilege";
 import {PrivilegeService} from "../../../../core/services/privilege/privilege.service";
-import {ActionTypeEnum} from "../../../../shared/model/enum/action-type.enum";
+import {ActionEnum} from "../../../../shared/model/enum/action.enum";
 
 @Component({
   selector: 'app-privilege-delete-forms',
@@ -12,7 +12,7 @@ export class PrivilegeDeleteFormComponent implements OnInit, OnDestroy {
 
   readonly privilege = input.required<Privilege | undefined>();
   readonly btnCloseRef = input.required<HTMLButtonElement>();
-  readonly submitEventActionType$ = input.required<Observable<ActionTypeEnum> | undefined>();
+  readonly submitEventActionType$ = input.required<Observable<ActionEnum> | undefined>();
 
   private readonly unsubscribe$ = new Subject<void>();
   private readonly privilegeService = inject(PrivilegeService);
@@ -22,8 +22,8 @@ export class PrivilegeDeleteFormComponent implements OnInit, OnDestroy {
     if (submitEventActionType$)
       submitEventActionType$
         .pipe(takeUntil(this.unsubscribe$))
-        .subscribe((actionType: ActionTypeEnum) => {
-          if (actionType === ActionTypeEnum.delete)
+        .subscribe((actionType: ActionEnum) => {
+          if (actionType === ActionEnum.delete)
             this.onSubmit();
         });
   }

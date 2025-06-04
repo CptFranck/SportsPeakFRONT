@@ -1,5 +1,4 @@
 import {Component, input, output} from '@angular/core';
-import {ActionTypeEnum} from "../../../../../shared/model/enum/action-type.enum";
 import {ModalComponent} from "../../../../../components/modal/modal/modal.component";
 import {TargetSet} from "../../../../../shared/model/dto/target-set";
 import {ModalButtonComponent} from "../../../../../components/modal/modal-button/modal-button.component";
@@ -15,6 +14,7 @@ import {
 } from "../../../../../components/modal-component/target-set/target-set-logs/target-set-logs.component";
 import {PerformanceLog} from "../../../../../shared/model/dto/performance-log";
 import {FormIndicator} from "../../../../../shared/model/common/form-indicator";
+import {ActionEnum} from "../../../../../shared/model/enum/action.enum";
 
 @Component({
   selector: 'app-target-set-modal',
@@ -34,16 +34,16 @@ export class TargetSetModalComponent {
   readonly targetSet = input.required<TargetSet | undefined>();
   readonly progExercise = input.required<ProgExercise | undefined>();
   readonly performanceLog = input.required<PerformanceLog | undefined>();
-  readonly action = input.required<ActionTypeEnum>();
+  readonly action = input.required<ActionEnum>();
 
   readonly actionTargetSet = output<FormIndicator>();
 
-  protected readonly ActionType = ActionTypeEnum;
+  protected readonly ActionType = ActionEnum;
 
   onClick() {
     this.actionTargetSet.emit({
       object: undefined,
-      actionType: ActionTypeEnum.create
+      actionType: ActionEnum.create
     })
   }
 }

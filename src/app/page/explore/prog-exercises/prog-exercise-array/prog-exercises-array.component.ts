@@ -1,13 +1,13 @@
 import {Component, inject, input, OnChanges, OnDestroy, OnInit, output, signal} from '@angular/core';
 import {FormIndicator} from "../../../../shared/model/common/form-indicator";
 import {UserLoggedService} from "../../../../core/services/user-logged/user-logged.service";
-import {ActionTypeEnum} from "../../../../shared/model/enum/action-type.enum";
 import {ModalButtonComponent} from "../../../../components/modal/modal-button/modal-button.component";
 import {ProgExercise} from "../../../../shared/model/dto/prog-exercise";
 import {User} from "../../../../shared/model/dto/user";
 import {ProgExerciseRowDetail} from "../../../../shared/model/common/prog-exercise-row-detail";
 import {Dictionary} from "../../../../shared/model/common/dictionary";
 import {Subject, takeUntil} from "rxjs";
+import {ActionEnum} from "../../../../shared/model/enum/action.enum";
 
 @Component({
   selector: 'app-prog-exercises-array',
@@ -77,14 +77,14 @@ export class ProgExercisesArrayComponent implements OnInit, OnChanges, OnDestroy
 
   showMuscleDetails(progExercise: ProgExercise): void {
     this.actionMuscle.emit({
-      actionType: ActionTypeEnum.read,
+      actionType: ActionEnum.read,
       object: progExercise
     });
   }
 
   // subScribeToProgExercise(progExercise: ProgExercise): void {
   //   this.actionMuscle.emit({
-  //     actionType: ActionTypeEnum.read,
+  //     actionType: ActionEnum.read,
   //     object: progExercise
   //   });
   // }

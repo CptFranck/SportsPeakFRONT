@@ -1,8 +1,6 @@
-import {Component, inject, OnDestroy, OnInit, TemplateRef} from '@angular/core';
+import {Component, inject, OnDestroy, OnInit} from '@angular/core';
 import {UserLoggedService} from "../../../core/services/user-logged/user-logged.service";
 import {User} from "../../../shared/model/dto/user";
-import {ActionTypeEnum} from "../../../shared/model/enum/action-type.enum";
-import {ModificationFieldEnum} from "../../../shared/model/enum/modification-field.enum";
 import {UserSecurityComponent} from "../user-information/user-security/user-security.component";
 import {
   UserInformationDisplayComponent
@@ -10,6 +8,8 @@ import {
 import {UserModalComponent} from "../user-modal/user-modal.component";
 import {FormIndicator} from "../../../shared/model/common/form-indicator";
 import {Subject, takeUntil} from "rxjs";
+import {ModificationFieldEnum} from "../../../shared/model/enum/user-modification-field.enum";
+import {ActionEnum} from "../../../shared/model/enum/action.enum";
 
 @Component({
   selector: 'app-user',
@@ -23,13 +23,12 @@ import {Subject, takeUntil} from "rxjs";
 export class UserComponent implements OnInit, OnDestroy {
 
   user: User | undefined = undefined;
-  action: ActionTypeEnum = ActionTypeEnum.update;
+  action: ActionEnum = ActionEnum.update;
   modificationField: ModificationFieldEnum = ModificationFieldEnum.username;
-  modalTemplate: TemplateRef<any> | undefined;
   userModalId: string = "userModal";
   modalTitle: string = "Update User";
 
-  protected readonly ActionType = ActionTypeEnum;
+  protected readonly ActionType = ActionEnum;
 
   private readonly unsubscribe$: Subject<void> = new Subject<void>();
   private readonly userLoggedService: UserLoggedService = inject(UserLoggedService);

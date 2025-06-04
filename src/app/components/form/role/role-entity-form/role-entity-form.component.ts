@@ -6,8 +6,8 @@ import {Privilege} from "../../../../shared/model/dto/privilege";
 import {InputControlComponent} from "../../../input-control/input-control.component";
 import {PrivilegeSelectorComponent} from "../../../selectors/privilege-selector/privilege-selector.component";
 import {UserLoggedService} from "../../../../core/services/user-logged/user-logged.service";
-import {ActionTypeEnum} from "../../../../shared/model/enum/action-type.enum";
 import {Role} from "../../../../shared/model/dto/role";
+import {ActionEnum} from "../../../../shared/model/enum/action.enum";
 
 @Component({
   selector: 'app-role-entity-form',
@@ -25,7 +25,7 @@ export class RoleEntityFormComponent implements OnInit, OnDestroy {
 
   readonly role = input.required<Role | undefined>();
   readonly btnCloseRef = input.required<HTMLButtonElement>();
-  readonly submitEventActionType$ = input.required<Observable<ActionTypeEnum> | undefined>();
+  readonly submitEventActionType$ = input.required<Observable<ActionEnum> | undefined>();
 
   roleForm = computed<FormGroup>(() => {
     const exerciseIdsValidator = this.isAdmin ? null : Validators.required;
@@ -64,8 +64,8 @@ export class RoleEntityFormComponent implements OnInit, OnDestroy {
     if (submitEventActionType$)
       submitEventActionType$
         .pipe(takeUntil(this.unsubscribe$))
-        .subscribe((actionType: ActionTypeEnum) => {
-          if (actionType === ActionTypeEnum.create || actionType === ActionTypeEnum.update)
+        .subscribe((actionType: ActionEnum) => {
+          if (actionType === ActionEnum.create || actionType === ActionEnum.update)
             this.onSubmit();
         });
   }

@@ -1,7 +1,6 @@
 import {Component, computed, input, output} from '@angular/core';
 import {FormIndicator} from "../../../../../shared/model/common/form-indicator";
 import {ProgExerciseTargetSets} from "../../../../../shared/model/common/progExerciseTargetSets";
-import {ActionTypeEnum} from "../../../../../shared/model/enum/action-type.enum";
 import {ProgExercise} from "../../../../../shared/model/dto/prog-exercise";
 import {
   TargetSetCardComponent
@@ -12,6 +11,7 @@ import {getUpToDateTargetSets, sortLastTargetSetsByIndex} from "../../../../../u
 import {getProgExerciseTargetSet} from "../../../../../utils/prog-exercise-functions";
 import {Dictionary} from "../../../../../shared/model/common/dictionary";
 import {TargetSet} from "../../../../../shared/model/dto/target-set";
+import {ActionEnum} from "../../../../../shared/model/enum/action.enum";
 
 @Component({
   selector: 'app-target-sets',
@@ -56,7 +56,7 @@ export class TargetSetsComponent {
   readonly actionTargetSets = output<FormIndicator>();
   readonly actionPerformanceLogs = output<FormIndicator>();
 
-  protected readonly ActionType = ActionTypeEnum;
+  protected readonly ActionType = ActionEnum;
 
   setTargetSet(event: FormIndicator) {
     this.actionTargetSets.emit(event)

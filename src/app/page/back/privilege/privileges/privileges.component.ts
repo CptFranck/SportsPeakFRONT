@@ -3,10 +3,10 @@ import {PrivilegesArrayComponent} from "../privileges-array/privileges-array.com
 import {PrivilegeModalComponent} from "../privilege-modal/privilege-modal.component";
 import {LoadingComponent} from "../../../../components/loading/loading.component";
 import {Privilege} from "../../../../shared/model/dto/privilege";
-import {ActionTypeEnum} from "../../../../shared/model/enum/action-type.enum";
 import {PrivilegeService} from "../../../../core/services/privilege/privilege.service";
 import {FormIndicator} from "../../../../shared/model/common/form-indicator";
 import {Subject, takeUntil} from "rxjs";
+import {ActionEnum} from "../../../../shared/model/enum/action.enum";
 
 @Component({
   selector: 'app-privileges',
@@ -21,7 +21,7 @@ export class PrivilegesComponent implements OnInit, OnDestroy {
   loading = signal<boolean>(true);
   privileges: Privilege[] = [];
   privilege = signal<Privilege | undefined>(undefined);
-  action = signal<ActionTypeEnum>(ActionTypeEnum.create);
+  action = signal<ActionEnum>(ActionEnum.create);
   modalTitle = signal<string>("");
 
   readonly privilegeModalId: string = "privilegeModal";

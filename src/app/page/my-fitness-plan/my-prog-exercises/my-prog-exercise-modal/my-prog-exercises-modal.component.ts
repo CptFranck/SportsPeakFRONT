@@ -2,7 +2,6 @@ import {Component, input, model, output} from '@angular/core';
 import {ModalButtonComponent} from "../../../../components/modal/modal-button/modal-button.component";
 import {ModalComponent} from "../../../../components/modal/modal/modal.component";
 import {ProgExercise} from "../../../../shared/model/dto/prog-exercise";
-import {ActionTypeEnum} from "../../../../shared/model/enum/action-type.enum";
 import {
   MyProgExerciseDetailsDisplayComponent
 } from "../../../../components/modal-component/prog-exercise/my-prog-exercise-details-display/my-prog-exercise-details-display.component";
@@ -13,6 +12,7 @@ import {
   MyProgExercisePerformanceComponent
 } from "../../../../components/modal-component/prog-exercise/my-prog-exercise-performance/my-prog-exercise-performance.component";
 import {FormIndicator} from "../../../../shared/model/common/form-indicator";
+import {ActionEnum} from "../../../../shared/model/enum/action.enum";
 
 @Component({
   selector: 'app-my-prog-exercise-modal',
@@ -29,16 +29,16 @@ export class MyProgExercisesModalComponent {
   readonly modalTitle = input.required<string>();
   readonly muscleModalId = input.required<string>();
   readonly progExercise = input.required<ProgExercise | undefined>();
-  readonly action = model.required<ActionTypeEnum>();
+  readonly action = model.required<ActionEnum>();
 
   readonly actionProgExercises = output<FormIndicator>();
 
-  protected readonly ActionType = ActionTypeEnum;
+  protected readonly ActionType = ActionEnum;
 
   onClick() {
     this.actionProgExercises.emit({
       object: undefined,
-      actionType: ActionTypeEnum.create
+      actionType: ActionEnum.create
     })
   }
 }

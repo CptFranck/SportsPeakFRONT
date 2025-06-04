@@ -7,7 +7,7 @@ import {MuscleService} from "../../../../core/services/muscle/muscle.service";
 import {Exercise} from "../../../../shared/model/dto/exercise";
 import {ExerciseSelectorComponent} from "../../../selectors/exercise-selector/exercise-selector.component";
 import {UserLoggedService} from "../../../../core/services/user-logged/user-logged.service";
-import {ActionTypeEnum} from "../../../../shared/model/enum/action-type.enum";
+import {ActionEnum} from "../../../../shared/model/enum/action.enum";
 
 @Component({
   selector: 'app-muscle-entity-form',
@@ -22,7 +22,7 @@ export class MuscleEntityFormComponent implements OnInit, OnDestroy {
 
   readonly muscle = input.required<Muscle | undefined>();
   readonly btnCloseRef = input.required<HTMLButtonElement>();
-  readonly submitEventActionType$ = input.required<Subject<ActionTypeEnum> | undefined>();
+  readonly submitEventActionType$ = input.required<Subject<ActionEnum> | undefined>();
 
   submitInvalidForm = signal<boolean>(false);
 
@@ -80,8 +80,8 @@ export class MuscleEntityFormComponent implements OnInit, OnDestroy {
     if (submitEventActionType$)
       submitEventActionType$
         .pipe(takeUntil(this.unsubscribe$))
-        .subscribe((actionType: ActionTypeEnum) =>
-          (actionType === ActionTypeEnum.create || actionType === ActionTypeEnum.update) ? this.onSubmit() : null);
+        .subscribe((actionType: ActionEnum) =>
+          (actionType === ActionEnum.create || actionType === ActionEnum.update) ? this.onSubmit() : null);
   }
 
   ngOnDestroy() {

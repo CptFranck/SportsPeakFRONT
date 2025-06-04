@@ -2,11 +2,11 @@ import {Component, computed, input, output} from '@angular/core';
 import {ProgExercise} from "../../../../shared/model/dto/prog-exercise";
 import {FormIndicator} from "../../../../shared/model/common/form-indicator";
 import {getProgExerciseTime} from "../../../../utils/prog-exercise-functions";
-import {ActionTypeEnum} from "../../../../shared/model/enum/action-type.enum";
 import {ModalButtonComponent} from "../../../modal/modal-button/modal-button.component";
 import {
   ProgExerciseTrustLabelFormComponent
 } from "../../../form/prog-exercise/prog-exercise-trust-label-form/prog-exercise-trust-label-form.component";
+import {ActionEnum} from "../../../../shared/model/enum/action.enum";
 
 @Component({
   selector: 'app-prog-exercise-card-details',
@@ -27,21 +27,21 @@ export class ProgExerciseCardDetailsComponent {
 
   showProgExercisePerformance(progExercise: ProgExercise): void {
     this.actionProgExercises.emit({
-      actionType: ActionTypeEnum.checkPerformance,
+      actionType: ActionEnum.checkPerformance,
       object: progExercise
     });
   }
 
   modifyProgExercise(progExercise: ProgExercise) {
     this.actionProgExercises.emit({
-      actionType: ActionTypeEnum.update,
+      actionType: ActionEnum.update,
       object: progExercise
     });
   }
 
   delProgExercise(progExercise: ProgExercise) {
     this.actionProgExercises.emit({
-      actionType: ActionTypeEnum.delete,
+      actionType: ActionEnum.delete,
       object: progExercise
     });
   }

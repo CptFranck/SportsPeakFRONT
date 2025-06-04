@@ -3,7 +3,6 @@ import {TargetSet} from "../../../../shared/model/dto/target-set";
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {PerformanceLog} from "../../../../shared/model/dto/performance-log";
 import {Observable, Subject, takeUntil} from "rxjs";
-import {ActionTypeEnum} from "../../../../shared/model/enum/action-type.enum";
 import {WeightUnitEnum} from "../../../../shared/model/enum/weightUnit.enum";
 import {InputControlComponent} from "../../../input-control/input-control.component";
 import {WeightSelectComponent} from "../../../selects/weight-select/weight-select.component";
@@ -13,6 +12,7 @@ import {
 import {PerformanceLogService} from "../../../../core/services/performance-log/performance-log.service";
 import {filterPerformanceLogByDate} from "../../../../utils/performance-log-functions";
 import {stringToDateString} from "../../../../utils/time-functions";
+import {ActionEnum} from "../../../../shared/model/enum/action.enum";
 
 @Component({
   selector: 'app-performance-log-entity-form',
@@ -29,7 +29,7 @@ export class PerformanceLogEntityFormComponent implements OnInit, OnDestroy {
   readonly targetSet = input.required<TargetSet | undefined>();
   readonly performanceLog = input.required<PerformanceLog | undefined>();
   readonly btnCloseRef = input.required<HTMLButtonElement>();
-  readonly submitEventActionType$ = input.required<Observable<ActionTypeEnum> | undefined>();
+  readonly submitEventActionType$ = input.required<Observable<ActionEnum> | undefined>();
 
   readonly performanceLogForm = computed<FormGroup>(() => {
     const targetSet = this.targetSet();
@@ -104,8 +104,8 @@ export class PerformanceLogEntityFormComponent implements OnInit, OnDestroy {
     if (submitEventActionType$)
       submitEventActionType$
         .pipe(takeUntil(this.unsubscribe$))
-        .subscribe((actionType: ActionTypeEnum) => {
-          if (actionType === ActionTypeEnum.create || actionType === ActionTypeEnum.update) {
+        .subscribe((actionType: ActionEnum) => {
+          if (actionType === ActionEnum.create || actionType === ActionEnum.update) {
             this.submit();
           }
         });

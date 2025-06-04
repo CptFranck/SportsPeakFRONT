@@ -1,6 +1,5 @@
 import {Component, inject, OnDestroy, OnInit, signal} from '@angular/core';
 import {FormIndicator} from "../../../../shared/model/common/form-indicator";
-import {ActionTypeEnum} from "../../../../shared/model/enum/action-type.enum";
 import {ProgExercise} from "../../../../shared/model/dto/prog-exercise";
 import {LoadingComponent} from "../../../../components/loading/loading.component";
 import {SearchBarComponent} from "../../../../components/search-bar/search-bar.component";
@@ -10,6 +9,7 @@ import {ProgExercisesArrayComponent} from "../prog-exercise-array/prog-exercises
 import {ProgExerciseModalComponent} from "../prog-exercise-modal/prog-exercise-modal.component";
 import {Muscle} from "../../../../shared/model/dto/muscle";
 import {Subject, takeUntil} from "rxjs";
+import {ActionEnum} from "../../../../shared/model/enum/action.enum";
 
 @Component({
   selector: 'app-prog-exercises',
@@ -24,7 +24,7 @@ import {Subject, takeUntil} from "rxjs";
 export class ProgExercisesComponent implements OnInit, OnDestroy {
   loading = signal<boolean>(true);
   displayedProgExercises = signal<ProgExercise[]>([]);
-  action = signal<ActionTypeEnum>(ActionTypeEnum.create);
+  action = signal<ActionEnum>(ActionEnum.create);
   modalTitle = signal<string>("");
   progExercise = signal<ProgExercise | undefined>(undefined);
 

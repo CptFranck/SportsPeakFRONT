@@ -3,11 +3,11 @@ import {UsersManagementArrayComponent} from "../users-management-array/users-man
 import {UsersManagementModalComponent} from "../user-management-modal/users-management-modal.component";
 import {LoadingComponent} from "../../../../components/loading/loading.component";
 import {User} from "../../../../shared/model/dto/user";
-import {ActionTypeEnum} from "../../../../shared/model/enum/action-type.enum";
 import {UserService} from "../../../../core/services/user/user.service";
 import {FormIndicator} from "../../../../shared/model/common/form-indicator";
 import {Subject, takeUntil} from "rxjs";
 import {SearchBarComponent} from "../../../../components/search-bar/search-bar.component";
+import {ActionEnum} from "../../../../shared/model/enum/action.enum";
 
 @Component({
   selector: 'app-users',
@@ -22,7 +22,7 @@ import {SearchBarComponent} from "../../../../components/search-bar/search-bar.c
 export class UsersManagementComponent implements OnInit, OnDestroy {
   loading = signal<boolean>(true);
   displayedUsers = signal<User[]>([]);
-  action = signal<ActionTypeEnum>(ActionTypeEnum.create);
+  action = signal<ActionEnum>(ActionEnum.create);
   modalTitle = signal<string>("");
   user = signal<User | undefined>(undefined);
 

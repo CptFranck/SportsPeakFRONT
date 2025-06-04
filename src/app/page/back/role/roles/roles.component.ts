@@ -3,10 +3,10 @@ import {RolesArrayComponent} from "../roles-array/roles-array.component";
 import {RoleModalComponent} from "../role-modal/role-modal.component";
 import {LoadingComponent} from "../../../../components/loading/loading.component";
 import {Role} from "../../../../shared/model/dto/role";
-import {ActionTypeEnum} from "../../../../shared/model/enum/action-type.enum";
 import {RoleService} from "../../../../core/services/role/role.service";
 import {FormIndicator} from "../../../../shared/model/common/form-indicator";
 import {Subject, takeUntil} from "rxjs";
+import {ActionEnum} from "../../../../shared/model/enum/action.enum";
 
 @Component({
   selector: 'app-roles',
@@ -21,7 +21,7 @@ export class RolesComponent implements OnInit, OnDestroy {
   loading = signal<boolean>(true);
   roles: Role[] = [];
   role = signal<Role | undefined>(undefined);
-  action = signal<ActionTypeEnum>(ActionTypeEnum.create);
+  action = signal<ActionEnum>(ActionEnum.create);
   modalTitle = signal<string>("");
 
   readonly muscleModalId: string = "roleModal";

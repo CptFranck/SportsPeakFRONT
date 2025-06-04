@@ -7,7 +7,7 @@ import {PrivilegeService} from "../../../../core/services/privilege/privilege.se
 import {Role} from "../../../../shared/model/dto/role";
 import {RoleSelectorComponent} from "../../../selectors/role-selector/role-selector.component";
 import {UserLoggedService} from "../../../../core/services/user-logged/user-logged.service";
-import {ActionTypeEnum} from "../../../../shared/model/enum/action-type.enum";
+import {ActionEnum} from "../../../../shared/model/enum/action.enum";
 
 @Component({
   selector: 'app-privilege-entity-form',
@@ -22,7 +22,7 @@ export class PrivilegeEntityFormComponent implements OnInit, OnDestroy {
 
   readonly privilege = input.required<Privilege | undefined>();
   readonly btnCloseRef = input.required<HTMLButtonElement>();
-  readonly submitEventActionType$ = input.required<Observable<ActionTypeEnum> | undefined>();
+  readonly submitEventActionType$ = input.required<Observable<ActionEnum> | undefined>();
 
   submitInvalidForm = signal<boolean>(false);
 
@@ -63,8 +63,8 @@ export class PrivilegeEntityFormComponent implements OnInit, OnDestroy {
     if (submitEventActionType$)
       submitEventActionType$
         .pipe(takeUntil(this.unsubscribe$))
-        .subscribe((actionType: ActionTypeEnum) => {
-          if (actionType === ActionTypeEnum.create || actionType === ActionTypeEnum.update)
+        .subscribe((actionType: ActionEnum) => {
+          if (actionType === ActionEnum.create || actionType === ActionEnum.update)
             this.onSubmit();
         });
   }

@@ -1,11 +1,11 @@
 import {Component, computed, input, output} from '@angular/core';
 import {TargetSet} from "../../../../shared/model/dto/target-set";
-import {ActionTypeEnum} from "../../../../shared/model/enum/action-type.enum";
 import {FormIndicator} from "../../../../shared/model/common/form-indicator";
 import {getTargetSetTimeToString} from "../../../../utils/target-set-functions";
 import {getStringTime} from "../../../../utils/duration-functions";
 import {CollapseBlockComponent} from "../../../collapse-block/collapse-block.component";
 import {CollapseButtonComponent} from "../../../collapse-buton/collapse-button.component";
+import {ActionEnum} from "../../../../shared/model/enum/action.enum";
 
 @Component({
   selector: 'app-target-set-logs-card',
@@ -30,21 +30,21 @@ export class TargetSetLogsCardComponent {
 
   checkPerformanceLogs(targetSet: TargetSet) {
     this.actionTargetSets.emit({
-      actionType: ActionTypeEnum.checkPerformance,
+      actionType: ActionEnum.checkPerformance,
       object: targetSet
     });
   }
 
   modifyTargetSet(targetSet: TargetSet) {
     this.actionTargetSets.emit({
-      actionType: ActionTypeEnum.update,
+      actionType: ActionEnum.update,
       object: targetSet
     });
   }
 
   delTargetSet(targetSet: TargetSet) {
     this.actionTargetSets.emit({
-      actionType: ActionTypeEnum.delete,
+      actionType: ActionEnum.delete,
       object: targetSet
     });
   }
