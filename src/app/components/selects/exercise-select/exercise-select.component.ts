@@ -1,7 +1,7 @@
 import {Component, forwardRef, inject, OnDestroy, OnInit, signal} from '@angular/core';
 import {ExerciseService} from "../../../core/services/exercise/exercise.service";
-import {Exercise} from "../../../interface/dto/exercise";
-import {SelectOption} from "../../../interface/components/select/selectOption";
+import {Exercise} from "../../../shared/model/dto/exercise";
+import {SelectOption} from "../../../shared/model/component/select/selectOption";
 import {SelectComponent} from "../../select/select.component";
 import {ControlValueAccessor, NG_VALUE_ACCESSOR} from "@angular/forms";
 import {Subject, takeUntil} from "rxjs";

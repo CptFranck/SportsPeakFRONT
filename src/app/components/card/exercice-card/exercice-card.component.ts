@@ -1,5 +1,5 @@
 import {Component, input} from '@angular/core';
-import {Exercise} from "../../../interface/dto/exercise";
+import {Exercise} from "../../../shared/model/dto/exercise";
 import {NgOptimizedImage} from "@angular/common";
 import {RouterLink} from "@angular/router";
 

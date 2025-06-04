@@ -4,7 +4,7 @@ import {ExerciseTypeEntityFormComponent} from './exercise-type-entity-form.compo
 import {ExerciseTypeService} from "../../../../core/services/exercise-type/exercise-type.service";
 import {BehaviorSubject} from "rxjs";
 import {ExerciseService} from "../../../../core/services/exercise/exercise.service";
-import {Exercise} from "../../../../interface/dto/exercise";
+import {Exercise} from "../../../../shared/model/dto/exercise";
 
 describe('ExerciseTypeEntityFormComponent', () => {
   let component: ExerciseTypeEntityFormComponent;

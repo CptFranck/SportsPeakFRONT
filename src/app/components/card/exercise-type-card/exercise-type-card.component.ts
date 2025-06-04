@@ -1,7 +1,7 @@
 import {Component, input} from '@angular/core';
 import {NgOptimizedImage} from "@angular/common";
 import {RouterLink} from "@angular/router";
-import {ExerciseType} from "../../../interface/dto/exercise-type";
+import {ExerciseType} from "../../../shared/model/dto/exercise-type";
 
 @Component({
   selector: 'app-exercise-type-card',

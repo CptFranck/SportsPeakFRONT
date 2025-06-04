@@ -1,11 +1,11 @@
 import {Component, input, OnDestroy, OnInit, output, signal} from '@angular/core';
-import {FormIndicator} from "../../../../interface/utils/form-indicator";
-import {ActionType} from "../../../../interface/enum/action-type";
-import {ExerciseType} from "../../../../interface/dto/exercise-type";
+import {FormIndicator} from "../../../../shared/model/common/form-indicator";
+import {ActionTypeEnum} from "../../../../shared/model/enum/action-type.enum";
+import {ExerciseType} from "../../../../shared/model/dto/exercise-type";
 import {ModalButtonComponent} from "../../../../components/modal/modal-button/modal-button.component";
-import {Dictionary} from "../../../../interface/utils/dictionary";
+import {Dictionary} from "../../../../shared/model/common/dictionary";
 import {Subject} from "rxjs";
-import {Exercise} from "../../../../interface/dto/exercise";
+import {Exercise} from "../../../../shared/model/dto/exercise";
 
 @Component({
   selector: 'app-exercise-type-array',
@@ -44,21 +44,21 @@ export class ExerciseTypeArrayComponent implements OnInit, OnDestroy {
 
   showExerciseTypeDetails(exerciseType: ExerciseType): void {
     this.actionExerciseType.emit({
-      actionType: ActionType.read,
+      actionType: ActionTypeEnum.read,
       object: exerciseType
     });
   }
 
   modifyExerciseType(exerciseType: ExerciseType) {
     this.actionExerciseType.emit({
-      actionType: ActionType.update,
+      actionType: ActionTypeEnum.update,
       object: exerciseType
     });
   }
 
   delExerciseType(exerciseType: ExerciseType) {
     this.actionExerciseType.emit({
-      actionType: ActionType.delete,
+      actionType: ActionTypeEnum.delete,
       object: exerciseType
     });
   }

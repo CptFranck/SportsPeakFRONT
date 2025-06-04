@@ -1,17 +1,17 @@
 import {Component, computed, inject, input, OnDestroy, OnInit, signal} from '@angular/core';
 import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
 import {Subject, takeUntil} from "rxjs";
-import {Exercise} from "../../../../interface/dto/exercise";
+import {Exercise} from "../../../../shared/model/dto/exercise";
 import {ExerciseService} from "../../../../core/services/exercise/exercise.service";
 import {InputControlComponent} from "../../../input-control/input-control.component";
-import {Muscle} from "../../../../interface/dto/muscle";
-import {ExerciseType} from "../../../../interface/dto/exercise-type";
+import {Muscle} from "../../../../shared/model/dto/muscle";
+import {ExerciseType} from "../../../../shared/model/dto/exercise-type";
 import {MuscleSelectorComponent} from "../../../selectors/muscle-selector/muscle-selector.component";
 import {
   ExerciseTypeSelectorComponent
 } from "../../../selectors/exercise-type-selector/exercise-type-selector.component";
 import {UserLoggedService} from "../../../../core/services/user-logged/user-logged.service";
-import {ActionType} from "../../../../interface/enum/action-type";
+import {ActionTypeEnum} from "../../../../shared/model/enum/action-type.enum";
 
 @Component({
   selector: 'app-exercise-entity-form',
@@ -29,7 +29,7 @@ export class ExerciseEntityFormComponent implements OnInit, OnDestroy {
 
   readonly exercise = input.required<Exercise | undefined>();
   readonly btnCloseRef = input.required<HTMLButtonElement>();
-  readonly submitEventActionType$ = input.required<Subject<ActionType> | undefined>();
+  readonly submitEventActionType$ = input.required<Subject<ActionTypeEnum> | undefined>();
 
   readonly exerciseForm = computed<FormGroup>(() => {
     const exerciseIdsValidator = this.isAdmin ? null : Validators.required;
@@ -85,8 +85,8 @@ export class ExerciseEntityFormComponent implements OnInit, OnDestroy {
     if (submitEventActionType$)
       submitEventActionType$
         .pipe(takeUntil(this.unsubscribe$))
-        .subscribe((actionType: ActionType) => {
-          if (actionType === ActionType.create || actionType === ActionType.update)
+        .subscribe((actionType: ActionTypeEnum) => {
+          if (actionType === ActionTypeEnum.create || actionType === ActionTypeEnum.update)
             this.onSubmit();
         });
   }

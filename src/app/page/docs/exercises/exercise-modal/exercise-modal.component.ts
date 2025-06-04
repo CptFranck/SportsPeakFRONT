@@ -1,8 +1,8 @@
 import {Component, inject, input, OnDestroy, OnInit, output, signal} from '@angular/core';
 import {ModalButtonComponent} from "../../../../components/modal/modal-button/modal-button.component";
 import {ModalComponent} from "../../../../components/modal/modal/modal.component";
-import {ActionType} from "../../../../interface/enum/action-type";
-import {Exercise} from "../../../../interface/dto/exercise";
+import {ActionTypeEnum} from "../../../../shared/model/enum/action-type.enum";
+import {Exercise} from "../../../../shared/model/dto/exercise";
 import {
   ExerciseEntityFormComponent
 } from "../../../../components/form/exercise/exercise-entity-form/exercise-entity-form.component";
@@ -14,7 +14,7 @@ import {
 } from "../../../../components/modal-component/exercise/exercise-details-display/exercise-details-display.component";
 import {UserLoggedService} from "../../../../core/services/user-logged/user-logged.service";
 import {Subject, takeUntil} from "rxjs";
-import {FormIndicator} from "../../../../interface/utils/form-indicator";
+import {FormIndicator} from "../../../../shared/model/common/form-indicator";
 
 @Component({
   selector: 'app-exercise-modal',
@@ -30,14 +30,14 @@ import {FormIndicator} from "../../../../interface/utils/form-indicator";
 export class ExerciseModalComponent implements OnInit, OnDestroy {
   isAdmin = signal<boolean>(false);
 
-  readonly action = input.required<ActionType>();
+  readonly action = input.required<ActionTypeEnum>();
   readonly exercise = input.required<Exercise | undefined>();
   readonly modalTitle = input.required<string>();
   readonly exerciseModalId = input.required<string>();
 
   readonly actionExercise = output<FormIndicator>();
 
-  protected readonly ActionType = ActionType;
+  protected readonly ActionType = ActionTypeEnum;
 
   private readonly unsubscribe$ = new Subject<void>();
   private readonly userLoggedService = inject(UserLoggedService);
@@ -57,7 +57,7 @@ export class ExerciseModalComponent implements OnInit, OnDestroy {
   onClick() {
     this.actionExercise.emit({
       object: undefined,
-      actionType: ActionType.create
+      actionType: ActionTypeEnum.create
     });
   }
 }

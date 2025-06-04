@@ -1,5 +1,5 @@
 import {Component, inject, input, OnDestroy, OnInit, signal} from '@angular/core';
-import {Alert} from "../../interface/utils/alert";
+import {Alert} from "../../shared/model/common/alert";
 import {AlertService} from "../../core/services/alert/alert.service";
 import {Subject, takeUntil} from "rxjs";
 import {AlertComponent} from "../alert/alert.component";

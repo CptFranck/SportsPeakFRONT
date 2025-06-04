@@ -1,4 +1,4 @@
-export enum AlertErrorType {
+export enum AlertErrorTypeEnum {
   GraphQLError = "GraphQLError",
   NetworkError = "NetworkError",
 }

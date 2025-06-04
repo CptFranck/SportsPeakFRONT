@@ -1,7 +1,7 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {AlertComponent} from './alert.component';
-import {AlertType} from "../../interface/enum/alert-type";
+import {AlertTypeEnum} from "../../shared/model/enum/alert-type.enum";
 
 describe('AlertComponent', () => {
   let component: AlertComponent;
@@ -20,7 +20,7 @@ describe('AlertComponent', () => {
       id: 0,
       title: "title",
       message: "message",
-      type: AlertType.success,
+      type: AlertTypeEnum.success,
       closed: false
     }
     fixture.detectChanges();

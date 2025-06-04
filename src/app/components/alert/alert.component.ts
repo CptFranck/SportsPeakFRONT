@@ -1,7 +1,7 @@
 import {Component, input, OnInit, output, signal} from '@angular/core';
-import {Alert} from "../../interface/utils/alert";
+import {Alert} from "../../shared/model/common/alert";
 import {NgStyle} from "@angular/common";
-import {Dictionary} from "../../interface/utils/dictionary";
+import {Dictionary} from "../../shared/model/common/dictionary";
 
 @Component({
   selector: 'app-alert',

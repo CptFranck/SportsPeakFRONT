@@ -1,6 +1,6 @@
 import {Component, ElementRef, input, OnInit, output, signal, viewChild} from '@angular/core';
 import {CollapseBlockComponent} from "../collapse-block/collapse-block.component";
-import {TargetSet} from "../../interface/dto/target-set";
+import {TargetSet} from "../../shared/model/dto/target-set";
 
 @Component({
   selector: 'app-collapse-button',

@@ -4,7 +4,7 @@ import {FormGroup} from "@angular/forms";
 import {ADD_EXERCISE, DEL_EXERCISE, GET_EXERCISES, MOD_EXERCISE} from "../../graphql/operations/exercise.operations";
 import {BehaviorSubject} from "rxjs";
 import {AlertService} from "../alert/alert.service";
-import {Exercise} from "../../../interface/dto/exercise";
+import {Exercise} from "../../../shared/model/dto/exercise";
 import {ApolloWrapperService} from "../apollo-wrapper/apollo-wrapper.service";
 import {ApolloQueryResult} from "@apollo/client";
 
