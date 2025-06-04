@@ -1,7 +1,7 @@
 import {Component, forwardRef, inject, OnDestroy, OnInit, signal} from '@angular/core';
 import {ControlValueAccessor, NG_VALUE_ACCESSOR} from "@angular/forms";
 import {MultiSelectOption} from "../../../interface/components/multi-select/multiSelectOption";
-import {ExerciseTypeService} from "../../../services/exercise-type/exercise-type.service";
+import {ExerciseTypeService} from "../../../core/services/exercise-type/exercise-type.service";
 import {ExerciseType} from "../../../interface/dto/exercise-type";
 import {MultiSelectComponent} from "../../multi-select/multi-select.component";
 import {Subject, takeUntil} from "rxjs";

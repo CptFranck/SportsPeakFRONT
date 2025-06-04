@@ -2,7 +2,7 @@ import {Component, inject, input, OnDestroy, OnInit} from '@angular/core';
 import {Observable, Subject, takeUntil} from "rxjs";
 import {ActionType} from "../../../../interface/enum/action-type";
 import {PerformanceLog} from "../../../../interface/dto/performance-log";
-import {PerformanceLogService} from "../../../../services/performance-log/performance-log.service";
+import {PerformanceLogService} from "../../../../core/services/performance-log/performance-log.service";
 
 @Component({
   selector: 'app-performance-log-delete-form',

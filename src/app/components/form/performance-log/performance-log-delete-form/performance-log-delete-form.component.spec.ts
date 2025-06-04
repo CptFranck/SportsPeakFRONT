@@ -1,8 +1,8 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {PerformanceLogDeleteFormComponent} from './performance-log-delete-form.component';
-import {MuscleService} from "../../../../services/muscle/muscle.service";
-import {PerformanceLogService} from "../../../../services/performance-log/performance-log.service";
+import {MuscleService} from "../../../../core/services/muscle/muscle.service";
+import {PerformanceLogService} from "../../../../core/services/performance-log/performance-log.service";
 
 describe('PerformanceLogDeleteFormComponent', () => {
   let component: PerformanceLogDeleteFormComponent;

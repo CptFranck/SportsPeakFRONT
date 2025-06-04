@@ -4,7 +4,7 @@ import {UsersManagementModalComponent} from "../user-management-modal/users-mana
 import {LoadingComponent} from "../../../../components/loading/loading.component";
 import {User} from "../../../../interface/dto/user";
 import {ActionType} from "../../../../interface/enum/action-type";
-import {UserService} from "../../../../services/user/user.service";
+import {UserService} from "../../../../core/services/user/user.service";
 import {FormIndicator} from "../../../../interface/utils/form-indicator";
 import {Subject, takeUntil} from "rxjs";
 import {SearchBarComponent} from "../../../../components/search-bar/search-bar.component";

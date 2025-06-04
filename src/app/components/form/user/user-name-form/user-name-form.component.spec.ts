@@ -1,7 +1,7 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {UserNameFormComponent} from './user-name-form.component';
-import {UserService} from "../../../../services/user/user.service";
+import {UserService} from "../../../../core/services/user/user.service";
 
 describe('UserNameFormComponent', () => {
   let component: UserNameFormComponent;

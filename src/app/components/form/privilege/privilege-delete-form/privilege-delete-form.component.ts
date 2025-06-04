@@ -1,7 +1,7 @@
 import {Component, inject, input, OnDestroy, OnInit} from '@angular/core';
 import {Observable, Subject, takeUntil} from "rxjs";
 import {Privilege} from "../../../../interface/dto/privilege";
-import {PrivilegeService} from "../../../../services/privilege/privilege.service";
+import {PrivilegeService} from "../../../../core/services/privilege/privilege.service";
 import {ActionType} from "../../../../interface/enum/action-type";
 
 @Component({

@@ -1,7 +1,7 @@
 import {Component, inject, OnDestroy, OnInit, input} from '@angular/core';
 import {Subject, takeUntil} from "rxjs";
 import {Exercise} from "../../../../interface/dto/exercise";
-import {ExerciseService} from "../../../../services/exercise/exercise.service";
+import {ExerciseService} from "../../../../core/services/exercise/exercise.service";
 import {ActionType} from "../../../../interface/enum/action-type";
 
 @Component({

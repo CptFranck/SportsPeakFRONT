@@ -3,7 +3,7 @@ import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/
 import {Observable, Subject, takeUntil} from "rxjs";
 import {InputControlComponent} from "../../../input-control/input-control.component";
 import {User} from "../../../../interface/dto/user";
-import {UserService} from "../../../../services/user/user.service";
+import {UserService} from "../../../../core/services/user/user.service";
 import {RoleSelectorComponent} from "../../../selectors/role-selector/role-selector.component";
 import {ActionType} from "../../../../interface/enum/action-type";
 import {Role} from "../../../../interface/dto/role";

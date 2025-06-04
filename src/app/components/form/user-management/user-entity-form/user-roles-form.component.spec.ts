@@ -1,9 +1,9 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {UserRolesFormComponent} from './user-roles-form.component';
-import {UserService} from "../../../../services/user/user.service";
+import {UserService} from "../../../../core/services/user/user.service";
 import {BehaviorSubject} from "rxjs";
-import {RoleService} from "../../../../services/role/role.service";
+import {RoleService} from "../../../../core/services/role/role.service";
 import {Role} from "../../../../interface/dto/role";
 
 describe('UserRolesFormComponent', () => {

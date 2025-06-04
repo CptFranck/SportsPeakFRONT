@@ -1,7 +1,7 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {ExerciseDeleteFormComponent} from './exercise-delete-form.component';
-import {ExerciseService} from "../../../../services/exercise/exercise.service";
+import {ExerciseService} from "../../../../core/services/exercise/exercise.service";
 
 describe('ExerciseDeleteFormComponent', () => {
   let component: ExerciseDeleteFormComponent;

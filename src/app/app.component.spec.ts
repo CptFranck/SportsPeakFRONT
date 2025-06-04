@@ -1,7 +1,7 @@
 import {TestBed} from '@angular/core/testing';
 import {AppComponent} from './app.component';
 import {provideRouter} from "@angular/router";
-import {AuthService} from "./services/auth/auth.service";
+import {AuthService} from "./core/services/auth/auth.service";
 import {BehaviorSubject} from "rxjs";
 
 describe('AppComponent', () => {

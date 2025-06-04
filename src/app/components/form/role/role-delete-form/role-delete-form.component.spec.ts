@@ -1,7 +1,7 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {RoleDeleteFormComponent} from './role-delete-form.component';
-import {RoleService} from "../../../../services/role/role.service";
+import {RoleService} from "../../../../core/services/role/role.service";
 
 describe('RoleDeleteFormComponent', () => {
   let component: RoleDeleteFormComponent;

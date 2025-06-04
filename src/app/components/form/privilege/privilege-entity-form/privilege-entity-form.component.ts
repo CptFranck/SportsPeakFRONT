@@ -3,10 +3,10 @@ import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/
 import {Observable, Subject, takeUntil} from "rxjs";
 import {InputControlComponent} from "../../../input-control/input-control.component";
 import {Privilege} from "../../../../interface/dto/privilege";
-import {PrivilegeService} from "../../../../services/privilege/privilege.service";
+import {PrivilegeService} from "../../../../core/services/privilege/privilege.service";
 import {Role} from "../../../../interface/dto/role";
 import {RoleSelectorComponent} from "../../../selectors/role-selector/role-selector.component";
-import {UserLoggedService} from "../../../../services/user-logged/user-logged.service";
+import {UserLoggedService} from "../../../../core/services/user-logged/user-logged.service";
 import {ActionType} from "../../../../interface/enum/action-type";
 
 @Component({
@@ -49,7 +49,7 @@ export class PrivilegeEntityFormComponent implements OnInit, OnDestroy {
       privilegeForm.addControl("id", new FormControl(privilege.id));
     return privilegeForm;
   });
-  
+
   private readonly unsubscribe$ = new Subject<void>();
   private readonly privilegeService = inject(PrivilegeService);
   private readonly userLoggedService = inject(UserLoggedService);

@@ -5,7 +5,7 @@ import {InputControlComponent} from "../../../input-control/input-control.compon
 import {ActionType} from "../../../../interface/enum/action-type";
 import {ModificationField} from "../../../../interface/enum/modification-field";
 import {User} from "../../../../interface/dto/user";
-import {UserService} from "../../../../services/user/user.service";
+import {UserService} from "../../../../core/services/user/user.service";
 
 @Component({
   selector: 'app-user-username-form',

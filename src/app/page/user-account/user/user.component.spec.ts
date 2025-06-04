@@ -1,7 +1,7 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {UserComponent} from './user.component';
-import {UserService} from "../../../services/user/user.service";
+import {UserService} from "../../../core/services/user/user.service";
 
 describe('UserComponent', () => {
   let component: UserComponent;

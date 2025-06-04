@@ -3,9 +3,9 @@ import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/
 import {Subject, takeUntil} from "rxjs";
 import {InputControlComponent} from "../../../input-control/input-control.component";
 import {ExerciseType} from "../../../../interface/dto/exercise-type";
-import {ExerciseTypeService} from "../../../../services/exercise-type/exercise-type.service";
+import {ExerciseTypeService} from "../../../../core/services/exercise-type/exercise-type.service";
 import {ExerciseSelectorComponent} from "../../../selectors/exercise-selector/exercise-selector.component";
-import {UserLoggedService} from "../../../../services/user-logged/user-logged.service";
+import {UserLoggedService} from "../../../../core/services/user-logged/user-logged.service";
 import {ActionType} from "../../../../interface/enum/action-type";
 import {Exercise} from "../../../../interface/dto/exercise";
 

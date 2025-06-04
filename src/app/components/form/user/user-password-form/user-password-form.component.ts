@@ -6,7 +6,7 @@ import {InputControlComponent} from "../../../input-control/input-control.compon
 import {ModificationField} from "../../../../interface/enum/modification-field";
 import {ActionType} from "../../../../interface/enum/action-type";
 import {confirmValidator} from "../../../../validators/confirmValidator";
-import {UserService} from "../../../../services/user/user.service";
+import {UserService} from "../../../../core/services/user/user.service";
 
 @Component({
   selector: 'app-user-password-form',

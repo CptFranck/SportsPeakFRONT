@@ -3,10 +3,10 @@ import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/
 import {InputControlComponent} from "../../../input-control/input-control.component";
 import {Muscle} from "../../../../interface/dto/muscle";
 import {Subject, takeUntil} from "rxjs";
-import {MuscleService} from "../../../../services/muscle/muscle.service";
+import {MuscleService} from "../../../../core/services/muscle/muscle.service";
 import {Exercise} from "../../../../interface/dto/exercise";
 import {ExerciseSelectorComponent} from "../../../selectors/exercise-selector/exercise-selector.component";
-import {UserLoggedService} from "../../../../services/user-logged/user-logged.service";
+import {UserLoggedService} from "../../../../core/services/user-logged/user-logged.service";
 import {ActionType} from "../../../../interface/enum/action-type";
 
 @Component({

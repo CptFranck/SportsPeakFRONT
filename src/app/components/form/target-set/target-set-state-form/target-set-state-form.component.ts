@@ -4,7 +4,7 @@ import {
   TargetSetStateSelectComponent
 } from "../../../selects/target-set-state-select/target-set-state-select.component";
 import {TargetSet} from "../../../../interface/dto/target-set";
-import {TargetSetService} from "../../../../services/target-set/target-set.service";
+import {TargetSetService} from "../../../../core/services/target-set/target-set.service";
 
 @Component({
   selector: 'app-target-set-state-form',

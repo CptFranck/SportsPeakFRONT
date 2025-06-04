@@ -1,7 +1,7 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {PerformanceLogEntityFormComponent} from './performance-log-entity-form.component';
-import {PerformanceLogService} from "../../../../services/performance-log/performance-log.service";
+import {PerformanceLogService} from "../../../../core/services/performance-log/performance-log.service";
 
 describe('PerformanceLogEntityFormComponent', () => {
   let component: PerformanceLogEntityFormComponent;

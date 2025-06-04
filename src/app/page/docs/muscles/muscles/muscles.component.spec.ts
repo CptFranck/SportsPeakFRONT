@@ -1,10 +1,10 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {MusclesComponent} from './muscles.component';
-import {MuscleService} from "../../../../services/muscle/muscle.service";
+import {MuscleService} from "../../../../core/services/muscle/muscle.service";
 import {BehaviorSubject} from "rxjs";
 import {Muscle} from "../../../../interface/dto/muscle";
-import {ExerciseService} from "../../../../services/exercise/exercise.service";
+import {ExerciseService} from "../../../../core/services/exercise/exercise.service";
 import {Exercise} from "../../../../interface/dto/exercise";
 
 describe('MusclesComponent', () => {

@@ -1,6 +1,6 @@
 import {Component, inject, signal} from '@angular/core';
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
-import {AuthService} from "../../../../services/auth/auth.service";
+import {AuthService} from "../../../../core/services/auth/auth.service";
 import {InputControlComponent} from "../../../input-control/input-control.component";
 import {confirmValidator} from "../../../../validators/confirmValidator";
 
@@ -65,7 +65,7 @@ export class RegisterFormComponent {
     {
       validators: confirmValidator('password', 'confirmPassword')
     }));
-  
+
   private readonly authService = inject(AuthService);
 
   onSubmitRegisterForm() {

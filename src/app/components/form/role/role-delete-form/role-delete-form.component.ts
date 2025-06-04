@@ -1,7 +1,7 @@
 import {Component, inject, input, OnDestroy, OnInit} from '@angular/core';
 import {Observable, Subject, takeUntil} from "rxjs";
 import {Role} from "../../../../interface/dto/role";
-import {RoleService} from "../../../../services/role/role.service";
+import {RoleService} from "../../../../core/services/role/role.service";
 import {ActionType} from "../../../../interface/enum/action-type";
 
 @Component({

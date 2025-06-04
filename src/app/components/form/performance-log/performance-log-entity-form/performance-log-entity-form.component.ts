@@ -10,7 +10,7 @@ import {WeightSelectComponent} from "../../../selects/weight-select/weight-selec
 import {
   PerformanceLogIndexSelectComponent
 } from "../../../selects/performance-log-index-select/performance-log-index-select.component";
-import {PerformanceLogService} from "../../../../services/performance-log/performance-log.service";
+import {PerformanceLogService} from "../../../../core/services/performance-log/performance-log.service";
 import {filterPerformanceLogByDate} from "../../../../utils/performance-log-functions";
 import {stringToDateString} from "../../../../utils/time-functions";
 

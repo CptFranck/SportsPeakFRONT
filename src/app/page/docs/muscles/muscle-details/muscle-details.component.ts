@@ -3,9 +3,9 @@ import {NgOptimizedImage} from "@angular/common";
 import {Subject, takeUntil} from "rxjs";
 import {ActivatedRoute, Params} from "@angular/router";
 import {Muscle} from "../../../../interface/dto/muscle";
-import {MuscleService} from "../../../../services/muscle/muscle.service";
+import {MuscleService} from "../../../../core/services/muscle/muscle.service";
 import {LoadingComponent} from "../../../../components/loading/loading.component";
-import {UserLoggedService} from "../../../../services/user-logged/user-logged.service";
+import {UserLoggedService} from "../../../../core/services/user-logged/user-logged.service";
 import {ModalButtonComponent} from "../../../../components/modal/modal-button/modal-button.component";
 import {MuscleModalComponent} from "../../../../components/modal-component/muscle-modal/muscle-modal.component";
 import {ActionType} from "../../../../interface/enum/action-type";
@@ -14,7 +14,7 @@ import {
 } from "../../../../components/table/muscle-exercises-table/muscle-exercises-table.component";
 import {ReactiveFormsModule} from "@angular/forms";
 import {ImageFormComponent} from "../../../../components/form/image-form/image-form.component";
-import {IllustrationService} from "../../../../services/illustration/illustration.service";
+import {IllustrationService} from "../../../../core/services/illustration/illustration.service";
 
 @Component({
   selector: 'app-muscle-details',

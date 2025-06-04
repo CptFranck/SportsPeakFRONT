@@ -1,7 +1,7 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {UserPasswordFormComponent} from './user-password-form.component';
-import {UserService} from "../../../../services/user/user.service";
+import {UserService} from "../../../../core/services/user/user.service";
 
 describe('UserPasswordFormComponent', () => {
   let component: UserPasswordFormComponent;

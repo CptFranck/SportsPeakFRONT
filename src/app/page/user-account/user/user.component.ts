@@ -1,5 +1,5 @@
 import {Component, inject, OnDestroy, OnInit, TemplateRef} from '@angular/core';
-import {UserLoggedService} from "../../../services/user-logged/user-logged.service";
+import {UserLoggedService} from "../../../core/services/user-logged/user-logged.service";
 import {User} from "../../../interface/dto/user";
 import {ActionType} from "../../../interface/enum/action-type";
 import {ModificationField} from "../../../interface/enum/modification-field";

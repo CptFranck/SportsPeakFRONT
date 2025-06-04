@@ -3,7 +3,7 @@ import {CommonModule} from '@angular/common';
 import {ExercisesAdminArrayComponent} from "../exercises-array/exercises-admin-array.component";
 import {ActionType} from "../../../../interface/enum/action-type";
 import {Exercise} from "../../../../interface/dto/exercise";
-import {ExerciseService} from "../../../../services/exercise/exercise.service";
+import {ExerciseService} from "../../../../core/services/exercise/exercise.service";
 import {FormIndicator} from "../../../../interface/utils/form-indicator";
 import {LoadingComponent} from "../../../../components/loading/loading.component";
 import {ExerciseModalComponent} from "../exercise-modal/exercise-modal.component";
@@ -11,7 +11,7 @@ import {SearchBarComponent} from "../../../../components/search-bar/search-bar.c
 import {Muscle} from "../../../../interface/dto/muscle";
 import {ExerciseType} from "../../../../interface/dto/exercise-type";
 import {Subject, takeUntil} from "rxjs";
-import {UserLoggedService} from "../../../../services/user-logged/user-logged.service";
+import {UserLoggedService} from "../../../../core/services/user-logged/user-logged.service";
 import {ExerciceCardComponent} from "../../../../components/card/exercice-card/exercice-card.component";
 import {collapseHeight} from "../../../../animation/collapseHeigh";
 import {sortExerciseByName} from "../../../../utils/exercise-function";

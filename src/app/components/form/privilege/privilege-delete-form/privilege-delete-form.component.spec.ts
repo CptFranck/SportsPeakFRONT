@@ -1,7 +1,7 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {PrivilegeDeleteFormComponent} from './privilege-delete-form.component';
-import {PrivilegeService} from "../../../../services/privilege/privilege.service";
+import {PrivilegeService} from "../../../../core/services/privilege/privilege.service";
 
 describe('PrivilegeDeleteFormsComponent', () => {
   let component: PrivilegeDeleteFormComponent;

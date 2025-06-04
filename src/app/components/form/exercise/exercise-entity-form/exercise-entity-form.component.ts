@@ -2,7 +2,7 @@ import {Component, computed, inject, input, OnDestroy, OnInit, signal} from '@an
 import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
 import {Subject, takeUntil} from "rxjs";
 import {Exercise} from "../../../../interface/dto/exercise";
-import {ExerciseService} from "../../../../services/exercise/exercise.service";
+import {ExerciseService} from "../../../../core/services/exercise/exercise.service";
 import {InputControlComponent} from "../../../input-control/input-control.component";
 import {Muscle} from "../../../../interface/dto/muscle";
 import {ExerciseType} from "../../../../interface/dto/exercise-type";
@@ -10,7 +10,7 @@ import {MuscleSelectorComponent} from "../../../selectors/muscle-selector/muscle
 import {
   ExerciseTypeSelectorComponent
 } from "../../../selectors/exercise-type-selector/exercise-type-selector.component";
-import {UserLoggedService} from "../../../../services/user-logged/user-logged.service";
+import {UserLoggedService} from "../../../../core/services/user-logged/user-logged.service";
 import {ActionType} from "../../../../interface/enum/action-type";
 
 @Component({

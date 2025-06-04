@@ -1,6 +1,6 @@
 import {Component, inject, OnDestroy, OnInit, signal} from '@angular/core';
 import {ProgExercise} from "../../../../interface/dto/prog-exercise";
-import {ProgExerciseService} from "../../../../services/prog-exercise/prog-exercise.service";
+import {ProgExerciseService} from "../../../../core/services/prog-exercise/prog-exercise.service";
 import {ActivatedRoute, Params} from "@angular/router";
 import {FormIndicator} from "../../../../interface/utils/form-indicator";
 import {ActionType} from "../../../../interface/enum/action-type";

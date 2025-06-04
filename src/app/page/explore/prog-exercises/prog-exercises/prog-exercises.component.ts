@@ -4,7 +4,7 @@ import {ActionType} from "../../../../interface/enum/action-type";
 import {ProgExercise} from "../../../../interface/dto/prog-exercise";
 import {LoadingComponent} from "../../../../components/loading/loading.component";
 import {SearchBarComponent} from "../../../../components/search-bar/search-bar.component";
-import {ProgExerciseService} from "../../../../services/prog-exercise/prog-exercise.service";
+import {ProgExerciseService} from "../../../../core/services/prog-exercise/prog-exercise.service";
 import {Visibility} from "../../../../interface/enum/visibility";
 import {ProgExercisesArrayComponent} from "../prog-exercise-array/prog-exercises-array.component";
 import {ProgExerciseModalComponent} from "../prog-exercise-modal/prog-exercise-modal.component";

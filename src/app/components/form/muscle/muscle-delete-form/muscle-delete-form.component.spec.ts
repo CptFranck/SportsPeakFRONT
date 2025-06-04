@@ -1,7 +1,7 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {MuscleDeleteFormComponent} from './muscle-delete-form.component';
-import {MuscleService} from "../../../../services/muscle/muscle.service";
+import {MuscleService} from "../../../../core/services/muscle/muscle.service";
 
 describe('DeleteMuscleComponent', () => {
   let component: MuscleDeleteFormComponent;

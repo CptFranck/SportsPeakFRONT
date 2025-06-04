@@ -1,7 +1,7 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {ProgExercisesComponent} from './prog-exercises.component';
-import {ProgExerciseService} from "../../../../services/prog-exercise/prog-exercise.service";
+import {ProgExerciseService} from "../../../../core/services/prog-exercise/prog-exercise.service";
 import {BehaviorSubject} from "rxjs";
 import {ProgExercise} from "../../../../interface/dto/prog-exercise";
 

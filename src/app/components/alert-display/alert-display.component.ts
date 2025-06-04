@@ -1,6 +1,6 @@
 import {Component, inject, input, OnDestroy, OnInit, signal} from '@angular/core';
 import {Alert} from "../../interface/utils/alert";
-import {AlertService} from "../../services/alert/alert.service";
+import {AlertService} from "../../core/services/alert/alert.service";
 import {Subject, takeUntil} from "rxjs";
 import {AlertComponent} from "../alert/alert.component";
 import {collapseHeight} from "../../animation/collapseHeigh";

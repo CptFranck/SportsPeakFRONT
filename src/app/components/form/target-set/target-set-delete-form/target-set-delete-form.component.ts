@@ -2,7 +2,7 @@ import {Component, inject, input, OnDestroy, OnInit} from '@angular/core';
 import {Observable, Subject, takeUntil} from "rxjs";
 import {TargetSet} from "../../../../interface/dto/target-set";
 import {ActionType} from "../../../../interface/enum/action-type";
-import {TargetSetService} from "../../../../services/target-set/target-set.service";
+import {TargetSetService} from "../../../../core/services/target-set/target-set.service";
 import {ProgExercise} from "../../../../interface/dto/prog-exercise";
 
 @Component({

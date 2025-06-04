@@ -1,7 +1,7 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {UserDeleteFormComponent} from './user-delete-form.component';
-import {UserService} from "../../../../services/user/user.service";
+import {UserService} from "../../../../core/services/user/user.service";
 
 describe('UserDeleteFormComponent', () => {
   let component: UserDeleteFormComponent;

@@ -1,6 +1,6 @@
 import {Component, inject, OnDestroy, OnInit, signal} from '@angular/core';
 import {User} from "../../../interface/dto/user";
-import {UserLoggedService} from "../../../services/user-logged/user-logged.service";
+import {UserLoggedService} from "../../../core/services/user-logged/user-logged.service";
 import {RouterLink, RouterLinkActive} from "@angular/router";
 import {Subject, takeUntil} from "rxjs";
 

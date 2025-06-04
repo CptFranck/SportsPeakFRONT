@@ -2,7 +2,7 @@ import {Component, inject, OnDestroy, OnInit, signal} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {ExerciseType} from "../../../../interface/dto/exercise-type";
 import {ActionType} from "../../../../interface/enum/action-type";
-import {ExerciseTypeService} from "../../../../services/exercise-type/exercise-type.service";
+import {ExerciseTypeService} from "../../../../core/services/exercise-type/exercise-type.service";
 import {FormIndicator} from "../../../../interface/utils/form-indicator";
 import {LoadingComponent} from "../../../../components/loading/loading.component";
 import {ExerciseTypeArrayComponent} from "../exercise-types-array/exercise-type-array.component";
@@ -10,7 +10,7 @@ import {ExerciseTypeModalComponent} from "../exercise-type-modal/exercise-type-m
 import {SearchBarComponent} from "../../../../components/search-bar/search-bar.component";
 import {Exercise} from "../../../../interface/dto/exercise";
 import {Subject, takeUntil} from "rxjs";
-import {UserLoggedService} from "../../../../services/user-logged/user-logged.service";
+import {UserLoggedService} from "../../../../core/services/user-logged/user-logged.service";
 import {collapseHeight} from "../../../../animation/collapseHeigh";
 import {ExerciseTypeCardComponent} from "../../../../components/card/exercise-type-card/exercise-type-card.component";
 import {sortExerciseTypeByName} from "../../../../utils/exercise-type-function";

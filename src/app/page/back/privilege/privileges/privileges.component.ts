@@ -4,7 +4,7 @@ import {PrivilegeModalComponent} from "../privilege-modal/privilege-modal.compon
 import {LoadingComponent} from "../../../../components/loading/loading.component";
 import {Privilege} from "../../../../interface/dto/privilege";
 import {ActionType} from "../../../../interface/enum/action-type";
-import {PrivilegeService} from "../../../../services/privilege/privilege.service";
+import {PrivilegeService} from "../../../../core/services/privilege/privilege.service";
 import {FormIndicator} from "../../../../interface/utils/form-indicator";
 import {Subject, takeUntil} from "rxjs";
 

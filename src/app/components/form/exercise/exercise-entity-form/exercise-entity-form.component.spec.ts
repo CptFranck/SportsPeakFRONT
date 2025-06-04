@@ -1,11 +1,11 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {ExerciseEntityFormComponent} from './exercise-entity-form.component';
-import {ExerciseService} from "../../../../services/exercise/exercise.service";
+import {ExerciseService} from "../../../../core/services/exercise/exercise.service";
 import {BehaviorSubject} from "rxjs";
-import {MuscleService} from "../../../../services/muscle/muscle.service";
+import {MuscleService} from "../../../../core/services/muscle/muscle.service";
 import {Muscle} from "../../../../interface/dto/muscle";
-import {ExerciseTypeService} from "../../../../services/exercise-type/exercise-type.service";
+import {ExerciseTypeService} from "../../../../core/services/exercise-type/exercise-type.service";
 import {ExerciseType} from "../../../../interface/dto/exercise-type";
 
 describe('ExerciseEntityFormComponent', () => {

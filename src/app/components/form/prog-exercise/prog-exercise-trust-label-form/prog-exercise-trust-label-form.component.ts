@@ -1,11 +1,11 @@
 import {Component, computed, inject, input, OnDestroy, OnInit, signal} from '@angular/core';
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {ProgExercise} from "../../../../interface/dto/prog-exercise";
-import {ProgExerciseService} from "../../../../services/prog-exercise/prog-exercise.service";
+import {ProgExerciseService} from "../../../../core/services/prog-exercise/prog-exercise.service";
 import {
   TrustLabelSelectComponent
 } from "../../../selects/prog-exercise-trust-label-select/trust-label-select.component";
-import {UserLoggedService} from "../../../../services/user-logged/user-logged.service";
+import {UserLoggedService} from "../../../../core/services/user-logged/user-logged.service";
 import {Subject, takeUntil} from "rxjs";
 
 @Component({

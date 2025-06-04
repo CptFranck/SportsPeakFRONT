@@ -1,7 +1,7 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {TargetSetCardComponent} from './target-set-card.component';
-import {TargetSetService} from "../../../../services/target-set/target-set.service";
+import {TargetSetService} from "../../../../core/services/target-set/target-set.service";
 import {generateTestTargetSet} from "../../../../utils/testFunctions";
 
 describe('TargetSetCardComponent', () => {

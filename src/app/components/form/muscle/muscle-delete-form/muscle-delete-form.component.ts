@@ -1,7 +1,7 @@
 import {Component, inject, OnDestroy, OnInit, input} from '@angular/core';
 import {Muscle} from "../../../../interface/dto/muscle";
 import {Observable, Subject, takeUntil} from "rxjs";
-import {MuscleService} from "../../../../services/muscle/muscle.service";
+import {MuscleService} from "../../../../core/services/muscle/muscle.service";
 import {ActionType} from "../../../../interface/enum/action-type";
 
 @Component({

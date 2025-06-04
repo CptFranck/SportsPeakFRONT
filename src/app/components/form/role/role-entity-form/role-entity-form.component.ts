@@ -1,11 +1,11 @@
 import {Component, computed, inject, input, OnDestroy, OnInit, signal} from '@angular/core';
 import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
 import {Observable, Subject, takeUntil} from "rxjs";
-import {RoleService} from "../../../../services/role/role.service";
+import {RoleService} from "../../../../core/services/role/role.service";
 import {Privilege} from "../../../../interface/dto/privilege";
 import {InputControlComponent} from "../../../input-control/input-control.component";
 import {PrivilegeSelectorComponent} from "../../../selectors/privilege-selector/privilege-selector.component";
-import {UserLoggedService} from "../../../../services/user-logged/user-logged.service";
+import {UserLoggedService} from "../../../../core/services/user-logged/user-logged.service";
 import {ActionType} from "../../../../interface/enum/action-type";
 import {Role} from "../../../../interface/dto/role";
 

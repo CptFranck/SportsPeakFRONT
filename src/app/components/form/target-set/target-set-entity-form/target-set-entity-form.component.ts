@@ -7,7 +7,7 @@ import {DurationInputComponent} from "../../../input/duration-inputs/duration-in
 import {TargetSet} from "../../../../interface/dto/target-set";
 import {ProgExercise} from "../../../../interface/dto/prog-exercise";
 import {ActionType} from "../../../../interface/enum/action-type";
-import {TargetSetService} from "../../../../services/target-set/target-set.service";
+import {TargetSetService} from "../../../../core/services/target-set/target-set.service";
 import {Duration} from "../../../../interface/dto/duration";
 import {WeightUnit} from "../../../../interface/enum/weightUnit";
 import {createDurationForm} from "../../../../utils/duration-functions";

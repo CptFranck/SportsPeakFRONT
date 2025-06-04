@@ -1,5 +1,5 @@
 import {Component, forwardRef, inject, OnDestroy, OnInit, signal} from '@angular/core';
-import {ExerciseService} from "../../../services/exercise/exercise.service";
+import {ExerciseService} from "../../../core/services/exercise/exercise.service";
 import {Exercise} from "../../../interface/dto/exercise";
 import {SelectOption} from "../../../interface/components/select/selectOption";
 import {SelectComponent} from "../../select/select.component";

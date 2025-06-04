@@ -4,7 +4,7 @@ import {RoleModalComponent} from "../role-modal/role-modal.component";
 import {LoadingComponent} from "../../../../components/loading/loading.component";
 import {Role} from "../../../../interface/dto/role";
 import {ActionType} from "../../../../interface/enum/action-type";
-import {RoleService} from "../../../../services/role/role.service";
+import {RoleService} from "../../../../core/services/role/role.service";
 import {FormIndicator} from "../../../../interface/utils/form-indicator";
 import {Subject, takeUntil} from "rxjs";
 

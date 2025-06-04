@@ -1,7 +1,7 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 import {ExerciseSelectComponent} from './exercise-select.component';
 import {BehaviorSubject} from "rxjs";
-import {ExerciseService} from "../../../services/exercise/exercise.service";
+import {ExerciseService} from "../../../core/services/exercise/exercise.service";
 import {Exercise} from "../../../interface/dto/exercise";
 
 describe('ExerciseSelectComponent', () => {

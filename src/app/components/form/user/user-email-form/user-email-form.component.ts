@@ -5,7 +5,7 @@ import {User} from "../../../../interface/dto/user";
 import {InputControlComponent} from "../../../input-control/input-control.component";
 import {ModificationField} from "../../../../interface/enum/modification-field";
 import {ActionType} from "../../../../interface/enum/action-type";
-import {UserService} from "../../../../services/user/user.service";
+import {UserService} from "../../../../core/services/user/user.service";
 
 @Component({
   selector: 'app-user-email-form',

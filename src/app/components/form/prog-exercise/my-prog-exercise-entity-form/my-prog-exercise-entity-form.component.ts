@@ -1,13 +1,13 @@
 import {Component, computed, inject, input, OnDestroy, OnInit, signal} from '@angular/core';
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {Observable, Subject, takeUntil} from "rxjs";
-import {UserLoggedService} from "../../../../services/user-logged/user-logged.service";
+import {UserLoggedService} from "../../../../core/services/user-logged/user-logged.service";
 import {User} from "../../../../interface/dto/user";
 import {Visibility} from "../../../../interface/enum/visibility";
 import {InputControlComponent} from "../../../input-control/input-control.component";
 import {ExerciseSelectComponent} from "../../../selects/exercise-select/exercise-select.component";
 import {VisibilitySelectComponent} from "../../../selects/visibility-select/visibility-select.component";
-import {ProgExerciseService} from "../../../../services/prog-exercise/prog-exercise.service";
+import {ProgExerciseService} from "../../../../core/services/prog-exercise/prog-exercise.service";
 import {ActionType} from "../../../../interface/enum/action-type";
 import {ProgExercise} from "../../../../interface/dto/prog-exercise";
 

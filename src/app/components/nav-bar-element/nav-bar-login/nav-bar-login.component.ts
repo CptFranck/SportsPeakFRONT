@@ -1,6 +1,6 @@
 import {Component, inject, OnDestroy, OnInit} from '@angular/core';
 import {Router, RouterLink} from "@angular/router";
-import {AuthService} from "../../../services/auth/auth.service";
+import {AuthService} from "../../../core/services/auth/auth.service";
 import {Subject, takeUntil} from "rxjs";
 
 @Component({

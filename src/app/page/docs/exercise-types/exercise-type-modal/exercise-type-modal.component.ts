@@ -12,7 +12,7 @@ import {
 import {
   ExerciseTypeDeleteFormComponent
 } from "../../../../components/form/exercise-type/exercise-type-delete-form/exercise-type-delete-form.component";
-import {UserLoggedService} from "../../../../services/user-logged/user-logged.service";
+import {UserLoggedService} from "../../../../core/services/user-logged/user-logged.service";
 import {FormIndicator} from "../../../../interface/utils/form-indicator";
 import {Subject, takeUntil} from "rxjs";
 

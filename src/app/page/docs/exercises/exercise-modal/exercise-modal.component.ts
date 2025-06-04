@@ -12,7 +12,7 @@ import {
 import {
   ExerciseDetailsDisplayComponent
 } from "../../../../components/modal-component/exercise/exercise-details-display/exercise-details-display.component";
-import {UserLoggedService} from "../../../../services/user-logged/user-logged.service";
+import {UserLoggedService} from "../../../../core/services/user-logged/user-logged.service";
 import {Subject, takeUntil} from "rxjs";
 import {FormIndicator} from "../../../../interface/utils/form-indicator";
 

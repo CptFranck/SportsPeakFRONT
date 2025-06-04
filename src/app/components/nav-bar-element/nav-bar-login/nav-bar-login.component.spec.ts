@@ -1,7 +1,7 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {NavBarLoginComponent} from './nav-bar-login.component';
-import {AuthService} from "../../../services/auth/auth.service";
+import {AuthService} from "../../../core/services/auth/auth.service";
 import {BehaviorSubject} from "rxjs";
 import {provideRouter} from "@angular/router";
 
