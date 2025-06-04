@@ -15,7 +15,9 @@ describe('MultiSelectSelectedOptionsComponent', () => {
     fixture = TestBed.createComponent(MultiSelectSelectedOptionsComponent);
     component = fixture.componentInstance;
 
-    component.selectedOptions = [];
+    fixture.componentRef.setInput('selectedOptions', []);
+    fixture.componentRef.setInput('displayedSelectedOptions', []);
+
     fixture.detectChanges();
   });
 
