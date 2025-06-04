@@ -6,6 +6,7 @@ import {RoleService} from "../../../../core/services/role/role.service";
 import {Role} from "../../../../shared/model/dto/role";
 import {PrivilegeService} from "../../../../core/services/privilege/privilege.service";
 import {Privilege} from "../../../../shared/model/dto/privilege";
+import {provideAnimations} from "@angular/platform-browser/animations";
 
 describe('RolesComponent', () => {
   let component: RolesComponent;
@@ -24,6 +25,7 @@ describe('RolesComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       providers: [
+        provideAnimations(),
         {provide: RoleService, useValue: mockRoleService},
         {provide: PrivilegeService, useValue: mockPrivilegeService},
       ],
