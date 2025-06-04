@@ -1,10 +1,11 @@
-import {Component, computed, inject, input, OnDestroy, OnInit, signal} from '@angular/core';
+import {Component, computed, inject, input, OnDestroy, OnInit, output, signal} from '@angular/core';
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {UserLoggedService} from "../../../services/user-logged/user-logged.service";
 import {Subject, takeUntil} from "rxjs";
 import {fileTypeValidator, fileWeightValidator} from "../../../validators/confirmValidator";
 import {FileUploadComponent} from "../../input/file-upload/file-upload.component";
 import {InputControlComponent} from "../../input-control/input-control.component";
+import {IllustrationService} from "../../../services/illustration/illustration.service";
 
 @Component({
   selector: 'app-image-form',
@@ -21,6 +22,8 @@ export class ImageFormComponent implements OnInit, OnDestroy {
 
   id = input.required<number>();
   type = input.required<String>();
+
+  refresh = output<string>();
 
   fileForm = computed<FormGroup>(() => new FormGroup({
     id: new FormControl(
@@ -40,6 +43,7 @@ export class ImageFormComponent implements OnInit, OnDestroy {
 
   private readonly unsubscribe$ = new Subject<void>();
   private readonly userLoggedService = inject(UserLoggedService);
+  private readonly illustrationService = inject(IllustrationService);
 
   ngOnInit() {
     this.userLoggedService.currentUser
@@ -47,6 +51,9 @@ export class ImageFormComponent implements OnInit, OnDestroy {
       .subscribe(() => {
         this.isAdmin.set(this.userLoggedService.isAdmin())
       });
+    this.illustrationService.refreshData()
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe((url: string) => this.refresh.emit(url));
   }
 
   ngOnDestroy() {
@@ -58,7 +65,7 @@ export class ImageFormComponent implements OnInit, OnDestroy {
     const fileForm = this.fileForm()
     if (fileForm.valid) {
       this.submitInvalidForm.set(false);
-      console.log(fileForm.value)
+      this.illustrationService.postImageUrl(fileForm);
     } else {
       this.submitInvalidForm.set(true);
     }
