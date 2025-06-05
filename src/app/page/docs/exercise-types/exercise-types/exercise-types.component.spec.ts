@@ -6,24 +6,26 @@ import {ExerciseTypeService} from "../../../../core/services/exercise-type/exerc
 import {ExerciseType} from "../../../../shared/model/dto/exercise-type";
 import {ExerciseService} from "../../../../core/services/exercise/exercise.service";
 import {Exercise} from "../../../../shared/model/dto/exercise";
+import {provideAnimations} from "@angular/platform-browser/animations";
 
 describe('ExerciseTypesComponent', () => {
   let component: ExerciseTypesComponent;
   let fixture: ComponentFixture<ExerciseTypesComponent>;
 
   let mockExerciseService: jasmine.SpyObj<ExerciseService> =
-    jasmine.createSpyObj('ExerciseService', ['exercises', 'isLoading']);
+    jasmine.createSpyObj('ExerciseService', ['']);
   mockExerciseService.exercises = new BehaviorSubject<Exercise[]>([]);
   mockExerciseService.isLoading = new BehaviorSubject<boolean>(true);
 
   let mockExerciseTypeService: jasmine.SpyObj<ExerciseTypeService> =
-    jasmine.createSpyObj('ExerciseTypeService', ['exerciseTypes', 'isLoading']);
+    jasmine.createSpyObj('ExerciseTypeService', ['getExerciseTypes']);
   mockExerciseTypeService.exerciseTypes = new BehaviorSubject<ExerciseType[]>([]);
   mockExerciseTypeService.isLoading = new BehaviorSubject<boolean>(true);
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       providers: [
+        provideAnimations(),
         {provide: ExerciseService, useValue: mockExerciseService},
         {provide: ExerciseTypeService, useValue: mockExerciseTypeService},
       ],
