@@ -1,14 +1,15 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {TargetSetStateFormComponent} from './target-set-state-form.component';
-import {TargetSetService} from "../../../../core/services/target-set/target-set.service";
 import {generateTestTargetSet} from "../../../../utils/testFunctions";
+import {TargetSetService} from "../../../../core/services/target-set/target-set.service";
 
 describe('TargetSetStateFormComponent', () => {
   let component: TargetSetStateFormComponent;
   let fixture: ComponentFixture<TargetSetStateFormComponent>;
 
-  let mockTargetSetService: jasmine.SpyObj<TargetSetService>;
+  let mockTargetSetService: jasmine.SpyObj<TargetSetService> =
+    jasmine.createSpyObj('TargetSetService', ['modifyTargetSetState']);
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -22,7 +23,7 @@ describe('TargetSetStateFormComponent', () => {
     fixture = TestBed.createComponent(TargetSetStateFormComponent);
     component = fixture.componentInstance;
 
-    component.targetSet = generateTestTargetSet();
+    fixture.componentRef.setInput('targetSet', generateTestTargetSet())
     fixture.detectChanges();
   });
 
