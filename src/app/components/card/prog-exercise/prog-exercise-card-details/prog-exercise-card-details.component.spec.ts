@@ -31,7 +31,9 @@ describe('ProgExerciseCardDetailsComponent', () => {
 
     let mockUser: User = generateTestUser();
     let mockExercise: Exercise = generateTestExercise();
-    component.progExercise = generateTestProgExercise(mockUser, mockExercise);
+    fixture.componentRef.setInput('modalId', "Id");
+    fixture.componentRef.setInput('progExercise', generateTestProgExercise(mockUser, mockExercise));
+
     fixture.detectChanges();
   });
 
