@@ -6,11 +6,12 @@ import {User} from "../../../../shared/model/dto/user";
 import {generateTestExercise, generateTestProgExercise, generateTestUser} from "../../../../utils/testFunctions";
 import {Exercise} from "../../../../shared/model/dto/exercise";
 
-describe('TargetTrustLabelFormComponent', () => {
+describe('ProgExerciseTrustLabelFormComponent', () => {
   let component: ProgExerciseTrustLabelFormComponent;
   let fixture: ComponentFixture<ProgExerciseTrustLabelFormComponent>;
 
-  let mockProgExerciseService: jasmine.SpyObj<ProgExerciseService>;
+  let mockProgExerciseService: jasmine.SpyObj<ProgExerciseService> =
+    jasmine.createSpyObj('MuscleService', ['modifyProgExerciseTrustLabel']);
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -26,7 +27,8 @@ describe('TargetTrustLabelFormComponent', () => {
 
     let mockUser: User = generateTestUser();
     let mockExercise: Exercise = generateTestExercise();
-    component.progExercise = generateTestProgExercise(mockUser, mockExercise);
+    fixture.componentRef.setInput('progExercise', generateTestProgExercise(mockUser, mockExercise))
+
     fixture.detectChanges();
   });
 
