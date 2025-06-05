@@ -7,7 +7,8 @@ describe('PerformanceLogEntityFormComponent', () => {
   let component: PerformanceLogEntityFormComponent;
   let fixture: ComponentFixture<PerformanceLogEntityFormComponent>;
 
-  let mockPerformanceLogService: jasmine.SpyObj<PerformanceLogService>;
+  let mockPerformanceLogService: jasmine.SpyObj<PerformanceLogService> =
+    jasmine.createSpyObj('PerformanceLogService', ['addPerformanceLog', 'modifyPerformanceLog', 'deletePerformanceLog']);
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -20,6 +21,11 @@ describe('PerformanceLogEntityFormComponent', () => {
 
     fixture = TestBed.createComponent(PerformanceLogEntityFormComponent);
     component = fixture.componentInstance;
+
+    fixture.componentRef.setInput('targetSet', undefined);
+    fixture.componentRef.setInput('performanceLog', undefined);
+    fixture.componentRef.setInput('submitEventActionType$', undefined);
+
     fixture.detectChanges();
   });
 
