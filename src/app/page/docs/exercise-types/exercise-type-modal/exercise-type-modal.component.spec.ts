@@ -1,6 +1,7 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { ExerciseTypeModalComponent } from './exercise-type-modal.component';
+import {ExerciseTypeModalComponent} from './exercise-type-modal.component';
+import {ActionEnum} from "../../../../shared/model/enum/action.enum";
 
 describe('ExerciseTypeModalComponent', () => {
   let component: ExerciseTypeModalComponent;
@@ -10,10 +11,16 @@ describe('ExerciseTypeModalComponent', () => {
     await TestBed.configureTestingModule({
       imports: [ExerciseTypeModalComponent]
     })
-    .compileComponents();
-    
+      .compileComponents();
+
     fixture = TestBed.createComponent(ExerciseTypeModalComponent);
     component = fixture.componentInstance;
+
+    fixture.componentRef.setInput('modalTitle', "title");
+    fixture.componentRef.setInput('exerciseTypeModalId', "Id");
+    fixture.componentRef.setInput('exerciseType', undefined);
+    fixture.componentRef.setInput('action', ActionEnum.read);
+
     fixture.detectChanges();
   });
 
