@@ -2,7 +2,7 @@ import {ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {ModalButtonComponent} from './modal-button.component';
 
-describe('ButtonComponent', () => {
+describe('ModalButtonComponent', () => {
   let component: ModalButtonComponent;
   let fixture: ComponentFixture<ModalButtonComponent>;
 
@@ -14,6 +14,9 @@ describe('ButtonComponent', () => {
 
     fixture = TestBed.createComponent(ModalButtonComponent);
     component = fixture.componentInstance;
+
+    fixture.componentRef.setInput('modalId', "Id");
+
     fixture.detectChanges();
   });
 
