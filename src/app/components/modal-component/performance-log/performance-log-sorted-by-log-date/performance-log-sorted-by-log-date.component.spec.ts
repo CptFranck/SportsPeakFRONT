@@ -1,6 +1,7 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { PerformanceLogSortedByLogDateComponent } from './performance-log-sorted-by-log-date.component';
+import {PerformanceLogSortedByLogDateComponent} from './performance-log-sorted-by-log-date.component';
+import {CollapseBlockComponent} from "../../../collapse-block/collapse-block.component";
 
 describe('PerformanceLogSortedByLogDateComponent', () => {
   let component: PerformanceLogSortedByLogDateComponent;
@@ -10,10 +11,16 @@ describe('PerformanceLogSortedByLogDateComponent', () => {
     await TestBed.configureTestingModule({
       imports: [PerformanceLogSortedByLogDateComponent]
     })
-    .compileComponents();
-    
+      .compileComponents();
+
     fixture = TestBed.createComponent(PerformanceLogSortedByLogDateComponent);
     component = fixture.componentInstance;
+
+    fixture.componentRef.setInput('formCollapseId', 'Id');
+    fixture.componentRef.setInput('accordionParentIdDate', 'IdBis');
+    fixture.componentRef.setInput('collapseBlock', CollapseBlockComponent);
+    fixture.componentRef.setInput('performanceLogsSortByDate', []);
+
     fixture.detectChanges();
   });
 
