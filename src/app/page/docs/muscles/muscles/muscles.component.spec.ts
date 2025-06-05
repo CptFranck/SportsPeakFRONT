@@ -1,11 +1,12 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {MusclesComponent} from './muscles.component';
-import {MuscleService} from "../../../../core/services/muscle/muscle.service";
 import {BehaviorSubject} from "rxjs";
-import {Muscle} from "../../../../shared/model/dto/muscle";
 import {ExerciseService} from "../../../../core/services/exercise/exercise.service";
 import {Exercise} from "../../../../shared/model/dto/exercise";
+import {MuscleService} from "../../../../core/services/muscle/muscle.service";
+import {Muscle} from "../../../../shared/model/dto/muscle";
+import {provideAnimations} from "@angular/platform-browser/animations";
 
 describe('MusclesComponent', () => {
   let component: MusclesComponent;
@@ -17,13 +18,14 @@ describe('MusclesComponent', () => {
   mockExerciseService.isLoading = new BehaviorSubject<boolean>(true);
 
   let mockMuscleService: jasmine.SpyObj<MuscleService> =
-    jasmine.createSpyObj('MuscleService', ['muscles', 'isLoading']);
-  mockMuscleService.muscles = new BehaviorSubject<Muscle[]>([]);
-  mockMuscleService.isLoading = new BehaviorSubject<boolean>(true);
+    jasmine.createSpyObj('MuscleService', ['allMuscle', 'loading']);
+  mockMuscleService.allMuscle.and.returnValues(new BehaviorSubject<Muscle[]>([]));
+  mockMuscleService.loading.and.returnValues(new BehaviorSubject<boolean>(true));
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       providers: [
+        provideAnimations(),
         {provide: MuscleService, useValue: mockMuscleService},
         {provide: ExerciseService, useValue: mockExerciseService},
       ],
