@@ -2,11 +2,11 @@ import {ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {MyProgExerciseEntityFormComponent} from './my-prog-exercise-entity-form.component';
 import {UserLoggedService} from "../../../../core/services/user-logged/user-logged.service";
-import {ProgExerciseService} from "../../../../core/services/prog-exercise/prog-exercise.service";
 import {BehaviorSubject} from "rxjs";
 import {User} from "../../../../shared/model/dto/user";
 import {ExerciseService} from "../../../../core/services/exercise/exercise.service";
 import {Exercise} from "../../../../shared/model/dto/exercise";
+import {ProgExerciseService} from "../../../../core/services/prog-exercise/prog-exercise.service";
 
 describe('MyProgExerciseEntityFormComponent', () => {
   let component: MyProgExerciseEntityFormComponent;
@@ -21,7 +21,9 @@ describe('MyProgExerciseEntityFormComponent', () => {
   mockExerciseService.exercises = new BehaviorSubject<Exercise[]>([]);
   mockExerciseService.isLoading = new BehaviorSubject<boolean>(true);
 
-  let mockProgExerciseService: jasmine.SpyObj<ProgExerciseService>
+  let mockProgExerciseService: jasmine.SpyObj<ProgExerciseService> =
+    jasmine.createSpyObj('ProgExerciseService', ['addProgExercise', 'modifyProgExercise', 'deleteProgExercises']);
+
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       providers: [
@@ -35,6 +37,10 @@ describe('MyProgExerciseEntityFormComponent', () => {
 
     fixture = TestBed.createComponent(MyProgExerciseEntityFormComponent);
     component = fixture.componentInstance;
+
+    fixture.componentRef.setInput('progExercise', undefined);
+    fixture.componentRef.setInput('submitEventActionType$', undefined);
+
     fixture.detectChanges();
   });
 
