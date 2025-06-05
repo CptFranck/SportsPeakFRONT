@@ -19,7 +19,6 @@ export class TargetSetService {
   private readonly alertService = inject(AlertService);
   private readonly apolloWrapperService = inject(ApolloWrapperService);
 
-
   addTargetSet(targetSetForm: FormGroup) {
     this.apolloWrapperService.mutate({
       mutation: ADD_TARGET_SET,
