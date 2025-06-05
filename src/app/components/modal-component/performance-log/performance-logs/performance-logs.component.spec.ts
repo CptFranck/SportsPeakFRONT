@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { PerformanceLogsComponent } from './performance-logs.component';
+import {PerformanceLogsComponent} from './performance-logs.component';
 
 describe('PerformanceLogsComponent', () => {
   let component: PerformanceLogsComponent;
@@ -10,10 +10,14 @@ describe('PerformanceLogsComponent', () => {
     await TestBed.configureTestingModule({
       imports: [PerformanceLogsComponent]
     })
-    .compileComponents();
-    
+      .compileComponents();
+
     fixture = TestBed.createComponent(PerformanceLogsComponent);
     component = fixture.componentInstance;
+
+    fixture.componentRef.setInput('targetSet', undefined);
+    fixture.componentRef.setInput('progExercise', undefined);
+
     fixture.detectChanges();
   });
 
