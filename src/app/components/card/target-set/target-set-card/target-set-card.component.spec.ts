@@ -8,7 +8,9 @@ describe('TargetSetCardComponent', () => {
   let component: TargetSetCardComponent;
   let fixture: ComponentFixture<TargetSetCardComponent>;
 
-  let mockTargetSetService: jasmine.SpyObj<TargetSetService>;
+  let mockTargetSetService: jasmine.SpyObj<TargetSetService> =
+    jasmine.createSpyObj('TargetSetService', ['modifyTargetSetState']);
+
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -22,7 +24,10 @@ describe('TargetSetCardComponent', () => {
     fixture = TestBed.createComponent(TargetSetCardComponent);
     component = fixture.componentInstance;
 
-    component.targetSet = generateTestTargetSet();
+    fixture.componentRef.setInput('targetSetModalId', 'Id');
+    fixture.componentRef.setInput('performanceLogModalId', 'IdBis');
+    fixture.componentRef.setInput('targetSet', generateTestTargetSet());
+
     fixture.detectChanges();
   });
 
