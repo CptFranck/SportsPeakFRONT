@@ -7,7 +7,8 @@ describe('TargetSetDeleteFormComponent', () => {
   let component: TargetSetDeleteFormComponent;
   let fixture: ComponentFixture<TargetSetDeleteFormComponent>;
 
-  let mockTargetSetService: jasmine.SpyObj<TargetSetService>;
+  let mockTargetSetService: jasmine.SpyObj<TargetSetService> =
+    jasmine.createSpyObj('TargetSetService', ['deleteTargetSet']);
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -20,6 +21,11 @@ describe('TargetSetDeleteFormComponent', () => {
 
     fixture = TestBed.createComponent(TargetSetDeleteFormComponent);
     component = fixture.componentInstance;
+
+    fixture.componentRef.setInput('targetSet', undefined);
+    fixture.componentRef.setInput('progExercise', undefined);
+    fixture.componentRef.setInput('submitEventActionType$', undefined);
+
     fixture.detectChanges();
   });
 
