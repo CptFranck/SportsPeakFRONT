@@ -14,8 +14,8 @@ describe('PerformanceLogIndexSelectComponent', () => {
 
     fixture = TestBed.createComponent(PerformanceLogIndexSelectComponent);
     component = fixture.componentInstance;
+    fixture.componentRef.setInput('targetSet', undefined)
 
-    component.index = 0;
     fixture.detectChanges();
   });
 
