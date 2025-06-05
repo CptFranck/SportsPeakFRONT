@@ -7,7 +7,8 @@ describe('RoleDeleteFormComponent', () => {
   let component: RoleDeleteFormComponent;
   let fixture: ComponentFixture<RoleDeleteFormComponent>;
 
-  let mockRoleService: jasmine.SpyObj<RoleService>;
+  let mockRoleService: jasmine.SpyObj<RoleService> =
+    jasmine.createSpyObj('RoleService', ['deleteRole']);
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -18,6 +19,10 @@ describe('RoleDeleteFormComponent', () => {
 
     fixture = TestBed.createComponent(RoleDeleteFormComponent);
     component = fixture.componentInstance;
+
+    fixture.componentRef.setInput('role', undefined);
+    fixture.componentRef.setInput('submitEventActionType$', undefined);
+
     fixture.detectChanges();
   });
 
