@@ -8,8 +8,7 @@
            [contentTemplate]="modalTemplate"
            [modalId]="roleModalId()"
            [title]="modalTitle()"
->
-</app-modal>
+/>
 <ng-template #modalTemplate let-btnClose="btnClose" let-submitEventActionType$="submitEventActionType$">
   @if (this.action() == ActionType.create || this.action() == ActionType.update) {
     <app-role-entity-form [btnCloseRef]="btnClose" [role]="role()" [submitEventActionType$]="submitEventActionType$"/>
