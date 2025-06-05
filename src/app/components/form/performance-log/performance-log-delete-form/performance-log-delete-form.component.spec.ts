@@ -1,13 +1,15 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {PerformanceLogDeleteFormComponent} from './performance-log-delete-form.component';
-import {MuscleService} from "../../../../core/services/muscle/muscle.service";
 import {PerformanceLogService} from "../../../../core/services/performance-log/performance-log.service";
 
 describe('PerformanceLogDeleteFormComponent', () => {
   let component: PerformanceLogDeleteFormComponent;
   let fixture: ComponentFixture<PerformanceLogDeleteFormComponent>;
-  let mockPerformanceLogService: jasmine.SpyObj<MuscleService>;
+
+  let mockPerformanceLogService: jasmine.SpyObj<PerformanceLogService> =
+    jasmine.createSpyObj('PerformanceLogService', ['deletePerformanceLog']);
+
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -20,6 +22,10 @@ describe('PerformanceLogDeleteFormComponent', () => {
 
     fixture = TestBed.createComponent(PerformanceLogDeleteFormComponent);
     component = fixture.componentInstance;
+
+    fixture.componentRef.setInput('performanceLog', undefined);
+    fixture.componentRef.setInput('submitEventActionType$', undefined);
+
     fixture.detectChanges();
   });
 
