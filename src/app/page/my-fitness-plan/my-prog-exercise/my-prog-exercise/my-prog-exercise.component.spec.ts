@@ -7,6 +7,7 @@ import {ProgExerciseService} from "../../../../core/services/prog-exercise/prog-
 import {ProgExercise} from "../../../../shared/model/dto/prog-exercise";
 import {ExerciseService} from "../../../../core/services/exercise/exercise.service";
 import {Exercise} from "../../../../shared/model/dto/exercise";
+import {TargetSetService} from "../../../../core/services/target-set/target-set.service";
 import {provideAnimations} from "@angular/platform-browser/animations";
 
 describe('MyProgExerciseComponent', () => {
@@ -14,24 +15,25 @@ describe('MyProgExerciseComponent', () => {
   let fixture: ComponentFixture<MyProgExerciseComponent>;
 
   let mockProgExerciseService: jasmine.SpyObj<ProgExerciseService> =
-    jasmine.createSpyObj('MuscleService', ['progExercise', 'isLoading']);
+    jasmine.createSpyObj('ProgExerciseService', ['modifyProgExerciseTrustLabel']);
   mockProgExerciseService.progExercise = new BehaviorSubject<ProgExercise | undefined>(undefined);
   mockProgExerciseService.isLoading = new BehaviorSubject<boolean>(true);
 
   let mockExerciseService: jasmine.SpyObj<ExerciseService> =
-    jasmine.createSpyObj('ExerciseService', ['exercises', 'isLoading']);
+    jasmine.createSpyObj('ExerciseService', ['']);
   mockExerciseService.exercises = new BehaviorSubject<Exercise[]>([]);
   mockExerciseService.isLoading = new BehaviorSubject<boolean>(true);
 
-  // let mockTargetSetService: jasmine.SpyObj<TargetSetService>;
+  let mockTargetSetService: jasmine.SpyObj<TargetSetService> =
+    jasmine.createSpyObj('TargetSetService', ['']);
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       providers: [
-        provideRouter([]),
         provideAnimations(),
+        provideRouter([]),
         {provide: ExerciseService, useValue: mockExerciseService},
-        // {provide: TargetSetService, useValue: mockTargetSetService},
+        {provide: TargetSetService, useValue: mockTargetSetService},
         {provide: ProgExerciseService, useValue: mockProgExerciseService},
       ],
       imports: [MyProgExerciseComponent],
