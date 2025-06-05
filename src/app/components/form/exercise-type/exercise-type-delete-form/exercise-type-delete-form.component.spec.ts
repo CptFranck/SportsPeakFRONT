@@ -7,7 +7,9 @@ describe('ExerciseTypeDeleteFormComponent', () => {
   let component: ExerciseTypeDeleteFormComponent;
   let fixture: ComponentFixture<ExerciseTypeDeleteFormComponent>;
 
-  let mockExerciseTypeService: jasmine.SpyObj<ExerciseTypeService>;
+  let mockExerciseTypeService: jasmine.SpyObj<ExerciseTypeService> =
+    jasmine.createSpyObj('ExerciseTypeService', ['deleteExerciseType']);
+
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -20,6 +22,10 @@ describe('ExerciseTypeDeleteFormComponent', () => {
 
     fixture = TestBed.createComponent(ExerciseTypeDeleteFormComponent);
     component = fixture.componentInstance;
+
+    fixture.componentRef.setInput('exerciseType', undefined);
+    fixture.componentRef.setInput('submitEventActionType$', undefined);
+
     fixture.detectChanges();
   });
 
