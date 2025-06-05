@@ -1,19 +1,46 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {UsersManagementModalComponent} from './users-management-modal.component';
+import {ActionEnum} from "../../../../shared/model/enum/action.enum";
+import {generateTestUser} from "../../../../utils/testFunctions";
+import {UserService} from "../../../../core/services/user/user.service";
+import {RoleService} from "../../../../core/services/role/role.service";
+import {BehaviorSubject} from "rxjs";
+import {Role} from "../../../../shared/model/dto/role";
+import {provideAnimations} from "@angular/platform-browser/animations";
 
-describe('UserModalComponent', () => {
+describe('UsersManagementModalComponent', () => {
   let component: UsersManagementModalComponent;
   let fixture: ComponentFixture<UsersManagementModalComponent>;
 
+  let mockRoleService: jasmine.SpyObj<RoleService> =
+    jasmine.createSpyObj('RoleService', ['modifyUserRoles']);
+  mockRoleService.roles = new BehaviorSubject<Role[]>([]);
+  mockRoleService.isLoading = new BehaviorSubject<boolean>(true);
+
+  let mockUserService: jasmine.SpyObj<UserService> =
+    jasmine.createSpyObj('UserService', ['deleteUser']);
+
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [UsersManagementModalComponent]
+      imports: [UsersManagementModalComponent],
+      providers: [
+        provideAnimations(),
+        {provide: UserService, useValue: mockUserService},
+        {provide: RoleService, useValue: mockRoleService},
+      ],
     })
       .compileComponents();
 
     fixture = TestBed.createComponent(UsersManagementModalComponent);
     component = fixture.componentInstance;
+
+    const user = generateTestUser();
+    fixture.componentRef.setInput('user', user);
+    fixture.componentRef.setInput('modalTitle', "Title");
+    fixture.componentRef.setInput('userModalId', "Id");
+    fixture.componentRef.setInput('action', ActionEnum.create);
+
     fixture.detectChanges();
   });
 
