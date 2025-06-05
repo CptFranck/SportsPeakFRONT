@@ -6,7 +6,10 @@ import {ExerciseService} from "../../../../core/services/exercise/exercise.servi
 describe('ExerciseDeleteFormComponent', () => {
   let component: ExerciseDeleteFormComponent;
   let fixture: ComponentFixture<ExerciseDeleteFormComponent>;
-  let mockExerciseService: jasmine.SpyObj<ExerciseService>;
+
+  let mockExerciseService: jasmine.SpyObj<ExerciseService> =
+    jasmine.createSpyObj('ExerciseService', ['deleteExercise']);
+
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       providers: [
@@ -18,6 +21,10 @@ describe('ExerciseDeleteFormComponent', () => {
 
     fixture = TestBed.createComponent(ExerciseDeleteFormComponent);
     component = fixture.componentInstance;
+
+    fixture.componentRef.setInput('exercise', undefined);
+    fixture.componentRef.setInput('submitEventActionType$', undefined);
+    
     fixture.detectChanges();
   });
 
