@@ -7,7 +7,8 @@ describe('LoginFormComponent', () => {
   let component: LoginFormComponent;
   let fixture: ComponentFixture<LoginFormComponent>;
 
-  let mockAuthService: jasmine.SpyObj<AuthService>;
+  let mockAuthService: jasmine.SpyObj<AuthService> =
+    jasmine.createSpyObj('AuthService', ['login']);
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
