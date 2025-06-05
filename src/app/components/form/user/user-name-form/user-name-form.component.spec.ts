@@ -2,12 +2,14 @@ import {ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {UserNameFormComponent} from './user-name-form.component';
 import {UserService} from "../../../../core/services/user/user.service";
+import {ModificationFieldEnum} from "../../../../shared/model/enum/user-modification-field.enum";
 
 describe('UserNameFormComponent', () => {
   let component: UserNameFormComponent;
   let fixture: ComponentFixture<UserNameFormComponent>;
 
-  let mockUserService: jasmine.SpyObj<UserService>;
+  let mockUserService: jasmine.SpyObj<UserService> =
+    jasmine.createSpyObj('UserService', ['modifyUserIdentity']);
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -20,6 +22,11 @@ describe('UserNameFormComponent', () => {
 
     fixture = TestBed.createComponent(UserNameFormComponent);
     component = fixture.componentInstance;
+
+    fixture.componentRef.setInput('user', undefined);
+    fixture.componentRef.setInput('submitEventActionType$', undefined);
+    fixture.componentRef.setInput('modification', ModificationFieldEnum.email);
+
     fixture.detectChanges();
   });
 
