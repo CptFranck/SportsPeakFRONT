@@ -7,7 +7,8 @@ describe('UserDeleteFormComponent', () => {
   let component: UserDeleteFormComponent;
   let fixture: ComponentFixture<UserDeleteFormComponent>;
 
-  let mockUserService: jasmine.SpyObj<UserService>;
+  let mockUserService: jasmine.SpyObj<UserService> =
+    jasmine.createSpyObj('UserService', ['deleteUser']);
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -20,6 +21,10 @@ describe('UserDeleteFormComponent', () => {
 
     fixture = TestBed.createComponent(UserDeleteFormComponent);
     component = fixture.componentInstance;
+
+    fixture.componentRef.setInput('user', undefined);
+    fixture.componentRef.setInput('submitEventActionType$', undefined);
+
     fixture.detectChanges();
   });
 
