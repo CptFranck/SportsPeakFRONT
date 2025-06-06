@@ -16,7 +16,7 @@ import {ActionEnum} from "../../../../shared/model/enum/action.enum";
   templateUrl: './user-username-form.component.html'
 })
 export class UserUsernameFormComponent implements OnInit, OnDestroy {
-  readonly userInput = input.required<User | undefined>();
+  readonly user = input.required<User | undefined>();
   readonly btnCloseRef = input.required<HTMLButtonElement>();
   readonly modification = input.required<ModificationFieldEnum>();
   readonly submitEventActionType$ = input.required<Observable<ActionEnum> | undefined>();
@@ -30,7 +30,7 @@ export class UserUsernameFormComponent implements OnInit, OnDestroy {
           Validators.pattern('([a-zA-Z0-9_]+)[^\\s\\t\\n\\r]{1,}')
         ])
     });
-    const user = this.userInput();
+    const user = this.user();
     if (user && userForm) {
       userForm.addControl("id", new FormControl(user.id));
     }

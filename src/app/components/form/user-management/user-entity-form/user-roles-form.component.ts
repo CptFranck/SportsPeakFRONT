@@ -18,8 +18,11 @@ import {ActionEnum} from "../../../../shared/model/enum/action.enum";
   templateUrl: './user-roles-form.component.html'
 })
 export class UserRolesFormComponent implements OnInit, OnDestroy {
+  submitInvalidForm = signal<boolean>(false);
 
   readonly user = input.required<User | undefined>();
+  readonly btnCloseRef = input.required<HTMLButtonElement>();
+  readonly submitEvents = input.required<Observable<ActionEnum> | undefined>();
 
   readonly userForm = computed<FormGroup>(() => {
     const user = this.user();
@@ -35,11 +38,6 @@ export class UserRolesFormComponent implements OnInit, OnDestroy {
       userForm.addControl("id", new FormControl(user.id));
     return userForm;
   })
-
-  submitInvalidForm = signal<boolean>(false);
-
-  readonly btnCloseRef = input.required<HTMLButtonElement>();
-  readonly submitEvents = input.required<Observable<ActionEnum> | undefined>();
 
   private readonly unsubscribe$ = new Subject<void>();
   private readonly userService = inject(UserService);
