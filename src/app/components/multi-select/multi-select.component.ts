@@ -1,187 +1,126 @@
-import {
-  AfterViewInit,
-  Component,
-  computed,
-  effect,
-  ElementRef,
-  input,
-  output,
-  viewChild,
-  viewChildren
-} from '@angular/core';
+import {Component, computed, HostListener, input, output, signal} from '@angular/core';
 import {FormsModule} from "@angular/forms";
 import {MultiSelectOption} from "../../shared/model/component/multi-select/multiSelectOption";
 import {MultiSelectOptionSelected} from "../../shared/model/component/multi-select/multiSelectOptionSelected";
-import {LoadingComponent} from "../loading/loading.component";
 import {
   MultiSelectSelectedOptionsComponent
 } from "./multi-select-selected-options/multi-select-selected-options.component";
+import {MultiSelectOptionsComponent} from "./multi-select-options/multi-select-options.component";
 
 @Component({
   selector: 'app-multi-select',
   imports: [
     FormsModule,
-    LoadingComponent,
     MultiSelectSelectedOptionsComponent,
+    MultiSelectOptionsComponent,
   ],
   templateUrl: './multi-select.component.html',
   styleUrl: './multi-select.component.css'
 })
-export class MultiSelectComponent implements AfterViewInit {
-  readonly selectedOptions = input.required<number[]>();
-  readonly optionList = input.required<MultiSelectOption[]>();
+export class MultiSelectComponent {
+  open = signal(false);
+  // searchInput = model<string>("");
+
   readonly isLoading = input.required<boolean>();
+  readonly optionList = input.required<MultiSelectOption[]>();
+  readonly selectedOptions = input.required<number[]>();
+
+  readonly displayLimit = input<number>(0);
   readonly addDescriptionToTag = input<boolean>(false);
   readonly addDescriptionToOption = input<boolean>(false);
-  readonly limitOfDisplayedSelectedOptions = input<number>(0);
+
+  // readonly displayedOptions = computed<MultiSelectOption[]>(() => {
+  //   const searchInput = this.searchInput().toLocaleLowerCase();
+  //   if (searchInput === "") return this.optionList();
+  //   return this.optionList().filter(opt => opt.title.toLocaleLowerCase().includes(searchInput) ||
+  //     opt.description?.toLocaleLowerCase().includes(searchInput));
+  // });
+
+  // readonly optionResult = computed<boolean>(() => {
+  //   return this.displayedOptions().length !== 0
+  // });
+
+  readonly optionMap = computed<Map<number, MultiSelectOption>>(() => {
+    return new Map(this.optionList().map(opt => [opt.id, opt]));
+  });
 
   readonly displayedSelectedOptions = computed<MultiSelectOptionSelected[]>(() => {
-    const limitOfDisplayedSelectedOptions = this.limitOfDisplayedSelectedOptions();
-    let displayedSelectedOptions = this.selectedOptions().map((id: number) => {
-      let option = this.optionList().find(opt => opt.id.toString() === id.toString())
-      return {id: id.toString(), title: option ? option.title : ""}
+    const optionMap = this.optionMap();
+    const displayLimit = this.displayLimit();
+    const selectedOptions = this.selectedOptions();
+
+    let displayedSelectedOptions = selectedOptions.map((id: number) => {
+      const option = optionMap.get(id);
+      return {id: id, title: option ? option.title : ""}
     });
-    if (limitOfDisplayedSelectedOptions !== 0) {
-      const length: number = this.selectedOptions().length;
-      displayedSelectedOptions = displayedSelectedOptions.slice(0, limitOfDisplayedSelectedOptions);
-      if (length > limitOfDisplayedSelectedOptions)
-        displayedSelectedOptions.push({
-          id: "more",
-          title: '+' + (length - limitOfDisplayedSelectedOptions).toString()
-        });
+
+    const length = selectedOptions.length;
+    if (displayLimit !== 0 && length > displayLimit) {
+      displayedSelectedOptions = displayedSelectedOptions.slice(0, displayLimit);
+      displayedSelectedOptions.push({id: -1, title: '+' + (length - displayLimit).toString()});
     }
 
     if (this.addDescriptionToTag())
       displayedSelectedOptions.forEach((option: MultiSelectOptionSelected) => {
-        let opt = this.optionList().find((opt: MultiSelectOption) => option.id === opt.id);
+        const opt = optionMap.get(option.id);
         if (opt?.description) option.title += " : " + opt.description;
       })
 
     return displayedSelectedOptions;
   });
 
-  readonly onTouched = output<boolean>();
+  readonly onTouched = output<void>();
   readonly onChange = output<number[]>();
 
-  readonly allTagsOption = viewChild.required<ElementRef>('allTagsOption');
-  readonly selectBox = viewChild.required<ElementRef>('selectBox');
-  readonly noResultMessage = viewChild.required<ElementRef>('noResultMessage');
-  readonly searchInput = viewChild.required<ElementRef>('searchInput');
-  readonly options = viewChildren<ElementRef>('option');
-
-  constructor() {
-    effect(() => {
-      let allTagsUsed = true;
-      this.options().forEach((option: ElementRef) => {
-        if (!option.nativeElement.classList.contains("all-tags")) {
-          let isSelected: string | undefined = this.selectedOptions().find((id: number) =>
-            id.toString() === option.nativeElement.getAttribute("data-value")
-          )?.toString();
-          if (isSelected)
-            option.nativeElement.classList.toggle("active");
-          else
-            allTagsUsed = false;
-        }
-      });
-      if (allTagsUsed && this.options().length > 1)
-        this.allTagsOption().nativeElement.classList.toggle("active");
-    });
+  @HostListener('document:click', ['$event'])
+  onDocumentClick(event: MouseEvent): void {
+    const target = event.target as HTMLElement;
+    if (!target.closest('.custom-select') &&
+      !target.classList.contains('remove-tag') &&
+      !target.classList.contains('fa-close'))
+      this.open.set(false);
   }
 
-  ngAfterViewInit() {
-    document.addEventListener("click", (event: MouseEvent) => {
-      if (!(event.target instanceof HTMLElement)) return;
-      if (!event.target.closest(".custom-select")
-        && !event.target.classList.contains("remove-tag")
-        && !event.target.classList.contains("fa-close"))
-        this.selectBox().nativeElement.parentNode.classList.remove("open");
-    });
-  }
-
-  updateSelectedOptions() {
-    let newSelectedOptions: any[] = Array.from(this.options())
-      .filter((option: ElementRef) => option.nativeElement.classList.contains("active"))
-      .filter((option: ElementRef) => !option.nativeElement.classList.contains("all-tags"))
-      .map((option: ElementRef) => {
-        return option.nativeElement.getAttribute("data-value");
-      });
-    this.onChange.emit(newSelectedOptions);
-    this.onTouched.emit(true)
-  }
-
-  onCLickSelect($event: MouseEvent) {
-    const selectBox: EventTarget | null = $event.target
-    if (!(selectBox instanceof Element)) return;
+  onCLickSelect(mouseEvent: MouseEvent) {
+    const selectBox: EventTarget | null = mouseEvent.target;
+    if (!(selectBox instanceof HTMLElement)) return;
     if (!selectBox.closest(".tag") && !selectBox.closest(".remove-all-tag")) {
-      this.selectBox().nativeElement.parentNode.classList.toggle("open");
-      this.onTouched.emit(true)
+      this.open.update(value => !value);
+      this.onTouched.emit()
     }
   }
 
-  onInputSearch() {
-    const searchTerm = this.searchInput().nativeElement.value.toLowerCase();
-    this.options().forEach((option: ElementRef) => {
-      if (option.nativeElement.textContent) {
-        const optionText = option.nativeElement.textContent.trim().toLocaleString().toLowerCase();
-        const shouldShow = optionText.includes(searchTerm);
-        option.nativeElement.style.display = shouldShow ? "block" : "none";
-      }
-    });
-
-    const anyOptionsMatch: boolean = Array.from(this.options()).some((option: ElementRef) =>
-      (option.nativeElement.style.display === "block"));
-    this.noResultMessage().nativeElement.style.display = anyOptionsMatch ? "none" : "block";
-
-    if (searchTerm.length !== 0)
-      this.allTagsOption().nativeElement.style.display = "none";
-    else
-      this.allTagsOption().nativeElement.style.display = "block";
-  }
-
-  onClickClear() {
-    this.searchInput().nativeElement.value = "";
-    this.options().forEach((option: ElementRef) => option.nativeElement.style.display = "block");
-    this.noResultMessage().nativeElement.style.display = "none";
-  }
+  // onClickClear() {
+  //   this.searchInput.set("");
+  // }
 
   onClickAllOption() {
-    const isActive = this.allTagsOption().nativeElement.classList.contains("active");
-    this.options().forEach((option: ElementRef) => {
-      if (option !== this.allTagsOption().nativeElement)
-        option.nativeElement.classList.toggle("active", isActive);
-    });
-    this.updateSelectedOptions();
+    let optionList = this.optionList();
+    let newSelectedOptions: number[] = [];
+    if (optionList.length !== this.selectedOptions().length)
+      newSelectedOptions = optionList.map(opt => opt.id);
+    this.onChange.emit(newSelectedOptions);
+    this.onTouched.emit()
   }
 
-  onClickOption(mouseEvent: MouseEvent) {
-    const option: EventTarget | null = mouseEvent.currentTarget;
-    if (!(option instanceof HTMLElement)) return;
-    option.classList.toggle("active");
-    if (option.classList.contains("all-tags"))
-      this.onClickAllOption();
-    this.updateSelectedOptions();
+  onClickOption(optionId: number) {
+    let newSelectedOptions = this.selectedOptions();
+    if (newSelectedOptions.includes(optionId))
+      newSelectedOptions = newSelectedOptions.filter(id => id !== optionId);
+    else
+      newSelectedOptions.push(optionId);
+    this.onChange.emit(newSelectedOptions);
+    this.onTouched.emit()
   }
 
-  onCLickRemoveTag(mouseEvent: MouseEvent) {
-    const target: EventTarget | null = mouseEvent.currentTarget;
-    if (!(target instanceof HTMLElement)) return;
-    const removeTag: Element | null = target.closest(".remove-tag");
-    if (removeTag === null) return;
-    const customSelect: Element | null = removeTag.closest(".custom-select");
-    const valueToRemove: string | null = removeTag.getAttribute("data-value");
-    if (customSelect === null || valueToRemove === null) return;
-    const optionToRemove: Element | null = customSelect.querySelector(".option[data-value='" + valueToRemove + "']");
-    if (optionToRemove === null) return;
-    optionToRemove.classList.remove("active");
-    const otherSelectedOptions: NodeList =
-      customSelect.querySelectorAll(".option.active:not(.all-tags)");
-    if (otherSelectedOptions.length === 0)
-      this.allTagsOption().nativeElement.classList.remove("active");
-    this.updateSelectedOptions();
+  onCLickRemoveTag(selectedOptionId: number) {
+    this.onChange.emit(this.selectedOptions().filter(id => id !== selectedOptionId));
+    this.onTouched.emit()
   }
 
   onCLickRemoveAllTag() {
     this.onChange.emit([]);
+    this.onTouched.emit()
   }
 }
 

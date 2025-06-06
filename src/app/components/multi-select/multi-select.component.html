@@ -1,37 +1,50 @@
 <div class="custom-select">
-  <div #selectBox (click)="onCLickSelect($event)" class="select-box form-control">
+  <div (click)="onCLickSelect($event)" class="select-box form-control">
     <input class="tags_input" hidden name="tags" type="text"/>
     <app-multi-select-selected-options (onRemoveAllTag)="onCLickRemoveAllTag()"
                                        (onRemoveTag)="onCLickRemoveTag($event)"
                                        [displayedSelectedOptions]="displayedSelectedOptions()"
                                        [selectedOptions]="selectedOptions()"/>
   </div>
-  <div class="options rounded">
-    <app-loading [loading]="isLoading()"/>
-    @if (!isLoading()) {
-      <div class="option-search-tags input-group">
-        <input #searchInput (input)="onInputSearch()" class="search-tags form-control"
-               placeholder="Search tags..." type="text"/>
-        <button (click)="onClickClear()" class="btn border" type="button">
-          <i class="fa fa-close"></i>
-        </button>
-      </div>
-      <div #allTagsOption #option (click)="onClickOption($event)" class="option all-tags"
-           data-value="All">
-        Select All
-      </div>
-      @for (option of optionList(); track option) {
-        <div #option (click)="onClickOption($event)" [attr.data-value]="option.id" class="option">
-          <div class="text-truncate"> {{ option.title }} {{ addDescriptionToOption() ? ":" : "" }}</div>
-          @if (addDescriptionToOption()) {
-            <div>{{ option.description }}</div>
-          }
-        </div>
-        <div #noResultMessage class="no-result-message" style="display: none">
-          No result match
-        </div>
-      }
-    }
-  </div>
+  @if (open()) {
+    <app-multi-select-options [isLoading]="isLoading()"
+                              [optionList]="optionList()"
+                              [selectedOptions]="selectedOptions()"
+                              [addDescriptionToOption]="addDescriptionToOption()"
+                              (onClickOption)="onClickOption($event)"
+                              (onClickAllOption)="onClickAllOption()"
+    />
+    <!--    <div class="options rounded">-->
+      <!--      <app-loading [loading]="isLoading()"/>-->
+      <!--      @if (!isLoading()) {-->
+      <!--        <div class="option-search-tags input-group">-->
+      <!--          <input [(ngModel)]="searchInput" class="search-tags form-control" type="text"/>-->
+      <!--          <button (click)="onClickClear()" class="btn border" type="button">-->
+      <!--            <i class="fa fa-close"></i>-->
+      <!--          </button>-->
+      <!--        </div>-->
+      <!--        @if (optionResult()) {-->
+      <!--          @if (searchInput() == "") {-->
+      <!--            <div (click)="onClickAllOption()" [class.active]="optionList().length === selectedOptions().length"-->
+      <!--                 class="option all-tags">-->
+      <!--              Select All-->
+      <!--            </div>-->
+      <!--          }-->
+      <!--          @for (option of displayedOptions(); track option.id) {-->
+      <!--            <div (click)="onClickOption(option.id)" [class.active]="selectedOptions().includes(option.id)"-->
+      <!--                 class="option"-->
+      <!--            >-->
+      <!--              <div class="text-truncate"> {{ option.title }}</div>-->
+      <!--              @if (addDescriptionToOption()) {-->
+      <!--                <div>{{ option.description }}</div>-->
+      <!--              }-->
+      <!--            </div>-->
+      <!--          }-->
+      <!--        } @else {-->
+      <!--          <div class="no-result-message"> No result match</div>-->
+      <!--        }-->
+      <!--      }-->
+      <!--    </div>-->
+  }
   <span class="tag_error_msg error"></span>
 </div>
