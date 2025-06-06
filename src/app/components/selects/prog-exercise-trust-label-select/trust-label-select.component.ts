@@ -54,6 +54,7 @@ export class TrustLabelSelectComponent implements ControlValueAccessor {
   setTargetSetId(targetSetState: string | null): void {
     if (targetSetState === null) return;
     this.trustLabel.set(targetSetState);
-    this.onChange(targetSetState)
+    this.onChange(targetSetState);
+    this.onTouched();
   }
 }

@@ -51,6 +51,7 @@ export class VisibilitySelectComponent implements ControlValueAccessor {
   setVisibilityId(visibility: string | null): void {
     if (visibility == null) return;
     this.visibility.set(visibility);
-    this.onChange(visibility)
+    this.onChange(visibility);
+    this.onTouched();
   }
 }

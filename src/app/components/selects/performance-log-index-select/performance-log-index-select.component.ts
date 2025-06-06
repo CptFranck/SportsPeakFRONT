@@ -64,5 +64,6 @@ export class PerformanceLogIndexSelectComponent implements ControlValueAccessor 
     if (stringIndex === null) return;
     this.index.set(stringIndex);
     this.onChange(parseInt(stringIndex));
+    this.onTouched();
   }
 }

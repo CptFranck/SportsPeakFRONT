@@ -71,8 +71,9 @@ export class ExerciseSelectComponent implements OnInit, OnDestroy, ControlValueA
   setExerciseId(exerciseId: string | null) {
     this.exerciseId.set(exerciseId);
     if (exerciseId !== null)
-      this.onChange(parseInt(exerciseId))
+      this.onChange(parseInt(exerciseId));
     else
-      this.onChange(exerciseId)
+      this.onChange(exerciseId);
+    this.onTouched();
   }
 }

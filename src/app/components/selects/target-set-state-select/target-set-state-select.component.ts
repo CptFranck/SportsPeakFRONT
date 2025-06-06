@@ -54,6 +54,7 @@ export class TargetSetStateSelectComponent implements ControlValueAccessor {
   setTargetSetId(targetSetState: string | null): void {
     if (targetSetState === null) return
     this.targetSetState.set(targetSetState);
-    this.onChange(targetSetState)
+    this.onChange(targetSetState);
+    this.onTouched();
   }
 }
