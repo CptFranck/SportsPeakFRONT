@@ -11,7 +11,6 @@ describe('TargetSetEntityFormComponent', () => {
   let mockTargetSetService: jasmine.SpyObj<TargetSetService> =
     jasmine.createSpyObj('TargetSetService',
       ['addTargetSet', 'modifyTargetSet', 'modifyTargetSetState', 'deleteTargetSet']);
-  ;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({

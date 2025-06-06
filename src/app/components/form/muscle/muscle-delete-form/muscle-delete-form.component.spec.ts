@@ -10,7 +10,6 @@ describe('MuscleDeleteFormComponent', () => {
   let mockMuscleService: jasmine.SpyObj<MuscleService> =
     jasmine.createSpyObj('MuscleService', ['deleteMuscle']);
 
-
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       providers: [

@@ -14,8 +14,8 @@ describe('ExerciseTypeArrayComponent', () => {
 
     fixture = TestBed.createComponent(ExerciseTypeArrayComponent);
     component = fixture.componentInstance;
+    fixture.componentRef.setInput('exerciseTypes', []);
 
-    component.exerciseTypes = [];
     fixture.detectChanges();
   });
 

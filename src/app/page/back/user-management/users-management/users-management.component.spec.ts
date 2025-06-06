@@ -13,7 +13,7 @@ describe('UsersManagementComponent', () => {
   let fixture: ComponentFixture<UsersManagementComponent>;
 
   let mockUserService: jasmine.SpyObj<UserService> =
-    jasmine.createSpyObj('UserService', ['users', 'isLoading']);
+    jasmine.createSpyObj('UserService', ['']);
   mockUserService.users = new BehaviorSubject<User[]>([]);
   mockUserService.isLoading = new BehaviorSubject<boolean>(true);
 

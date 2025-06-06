@@ -43,7 +43,6 @@ describe('RoleEntityFormComponent', () => {
     fixture.componentRef.setInput('role', undefined);
     fixture.componentRef.setInput('submitEventActionType$', undefined);
 
-
     fixture.detectChanges();
   });
 

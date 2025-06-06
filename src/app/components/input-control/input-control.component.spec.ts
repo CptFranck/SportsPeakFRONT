@@ -13,13 +13,15 @@ describe('InputControlComponent', () => {
     })
       .compileComponents();
 
-    fixture = TestBed.createComponent(InputControlComponent);
-    component = fixture.componentInstance;
-    
-    component.formGroup = new FormGroup({
+    const formGroup = new FormGroup({
       test: new FormControl(1, [])
     });
-    component.formGroupFieldName = "test";
+
+    fixture = TestBed.createComponent(InputControlComponent);
+    fixture.componentRef.setInput('formGroup', formGroup);
+    fixture.componentRef.setInput('formGroupFieldName', "test");
+
+    component = fixture.componentInstance;
     fixture.detectChanges();
   });
 

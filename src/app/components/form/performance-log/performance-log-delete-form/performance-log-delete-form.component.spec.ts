@@ -10,7 +10,6 @@ describe('PerformanceLogDeleteFormComponent', () => {
   let mockPerformanceLogService: jasmine.SpyObj<PerformanceLogService> =
     jasmine.createSpyObj('PerformanceLogService', ['deletePerformanceLog']);
 
-
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       providers: [
