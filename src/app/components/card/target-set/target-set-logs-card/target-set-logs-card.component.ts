@@ -17,8 +17,9 @@ import {ActionEnum} from "../../../../shared/model/enum/action.enum";
 export class TargetSetLogsCardComponent {
 
   readonly targetSet = input.required<TargetSet>();
-  readonly collapseBlockComponent = input.required<CollapseBlockComponent>();
   readonly formCollapseId = input.required<string>();
+  readonly collapseBlockComponent = input.required<CollapseBlockComponent>();
+
   readonly isLastTargetSet = input<boolean>(false);
 
   readonly targetSetTime = computed<string>(() => getTargetSetTimeToString(this.targetSet(), this.isLastTargetSet()));
