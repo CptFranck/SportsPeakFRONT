@@ -19,7 +19,6 @@ import {MultiSelectOptionsComponent} from "./multi-select-options/multi-select-o
 })
 export class MultiSelectComponent {
   open = signal(false);
-  // searchInput = model<string>("");
 
   readonly isLoading = input.required<boolean>();
   readonly optionList = input.required<MultiSelectOption[]>();
@@ -29,20 +28,8 @@ export class MultiSelectComponent {
   readonly addDescriptionToTag = input<boolean>(false);
   readonly addDescriptionToOption = input<boolean>(false);
 
-  // readonly displayedOptions = computed<MultiSelectOption[]>(() => {
-  //   const searchInput = this.searchInput().toLocaleLowerCase();
-  //   if (searchInput === "") return this.optionList();
-  //   return this.optionList().filter(opt => opt.title.toLocaleLowerCase().includes(searchInput) ||
-  //     opt.description?.toLocaleLowerCase().includes(searchInput));
-  // });
-
-  // readonly optionResult = computed<boolean>(() => {
-  //   return this.displayedOptions().length !== 0
-  // });
-
-  readonly optionMap = computed<Map<number, MultiSelectOption>>(() => {
-    return new Map(this.optionList().map(opt => [opt.id, opt]));
-  });
+  readonly optionMap = computed<Map<number, MultiSelectOption>>(() =>
+    new Map(this.optionList().map(opt => [opt.id, opt])));
 
   readonly displayedSelectedOptions = computed<MultiSelectOptionSelected[]>(() => {
     const optionMap = this.optionMap();
@@ -89,10 +76,6 @@ export class MultiSelectComponent {
       this.onTouched.emit()
     }
   }
-
-  // onClickClear() {
-  //   this.searchInput.set("");
-  // }
 
   onClickAllOption() {
     let optionList = this.optionList();
