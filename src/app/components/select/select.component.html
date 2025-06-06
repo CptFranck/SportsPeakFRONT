@@ -2,7 +2,7 @@
   @if (defaultOption()) {
     <option [value]="null" selected> ...</option>
   }
-  @for (option of options(); track option) {
+  @for (option of options(); track option.title) {
     <option [value]="option.value"> {{ option.title }}</option>
   }
 </select>
