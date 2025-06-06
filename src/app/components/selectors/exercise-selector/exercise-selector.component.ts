@@ -35,7 +35,7 @@ export class ExerciseSelectorComponent implements OnInit, OnDestroy, ControlValu
         let options: MultiSelectOption[] = []
         exercises.forEach((exercise: Exercise) => {
           options.push({
-            id: exercise.id.toString(),
+            id: exercise.id,
             title: exercise.name,
             value: exercise,
             description: exercise.description

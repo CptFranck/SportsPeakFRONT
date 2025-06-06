@@ -35,7 +35,7 @@ export class UserSelectorComponent implements OnInit, OnDestroy, ControlValueAcc
         let options: MultiSelectOption[] = []
         users.forEach((user: User) => {
           options.push({
-            id: user.id.toString(),
+            id: user.id,
             title: user.username,
             value: user,
             description: "First Name : " + user.firstName + " Last Name : " + user.lastName,

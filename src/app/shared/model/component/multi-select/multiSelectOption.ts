@@ -1,5 +1,5 @@
 export interface MultiSelectOption {
-  id: string,
+  id: number,
   title: string,
   description?: string,
   value: any,

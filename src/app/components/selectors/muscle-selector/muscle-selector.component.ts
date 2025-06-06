@@ -35,7 +35,7 @@ export class MuscleSelectorComponent implements OnInit, OnDestroy, ControlValueA
         let options: MultiSelectOption[] = []
         muscles.forEach((muscle: Muscle) => {
           options.push({
-            id: muscle.id.toString(),
+            id: muscle.id,
             title: muscle.name,
             value: muscle,
             description: muscle.description

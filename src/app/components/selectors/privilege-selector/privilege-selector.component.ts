@@ -35,7 +35,7 @@ export class PrivilegeSelectorComponent implements OnInit, OnDestroy, ControlVal
         let options: MultiSelectOption[] = []
         privileges.forEach((privilege: Privilege) => {
           options.push({
-            id: privilege.id.toString(),
+            id: privilege.id,
             title: privilege.name,
             value: privilege,
           });

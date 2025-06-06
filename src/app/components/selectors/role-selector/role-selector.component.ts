@@ -37,7 +37,7 @@ export class RoleSelectorComponent implements OnInit, OnDestroy, ControlValueAcc
         let options: MultiSelectOption[] = []
         roles.forEach((role: Role) => {
           options.push({
-            id: role.id.toString(),
+            id: role.id,
             title: role.name,
             value: role,
             description: "Privilege(s) included : " + role.privileges.map((privilege: Privilege) => privilege.name).join(", ")
