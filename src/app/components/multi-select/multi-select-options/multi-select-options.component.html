@@ -15,9 +15,7 @@
         </div>
       }
       @for (option of displayedOptions(); track option.id) {
-        <div (click)="onClickOption_(option.id)" [class.active]="selectedOptions().includes(option.id)"
-             class="option"
-        >
+        <div (click)="onClickOption_(option.id)" [class.active]="selectedOptions().includes(option.id)" class="option">
           <div class="text-truncate"> {{ option.title }}</div>
           @if (addDescriptionToOption()) {
             <div>{{ option.description }}</div>

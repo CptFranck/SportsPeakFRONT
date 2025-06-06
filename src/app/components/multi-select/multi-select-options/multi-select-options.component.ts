@@ -28,9 +28,7 @@ export class MultiSelectOptionsComponent {
       opt.description?.toLocaleLowerCase().includes(searchInput));
   });
 
-  readonly optionResult = computed<boolean>(() => {
-    return this.displayedOptions().length !== 0
-  });
+  readonly optionResult = computed<boolean>(() => this.displayedOptions().length !== 0);
 
   readonly onClickOption = output<number>();
   readonly onClickAllOption = output<void>();
