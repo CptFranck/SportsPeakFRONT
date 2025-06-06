@@ -8,13 +8,15 @@ import {
 import {ModalComponent} from "../../../../components/modal/modal/modal.component";
 import {User} from "../../../../shared/model/dto/user";
 import {ActionEnum} from "../../../../shared/model/enum/action.enum";
+import {UserDeleteFormComponent} from "../../../../components/form/user/user-delete-form/user-delete-form.component";
 
 @Component({
   selector: 'app-user-modal',
   imports: [
     ModalComponent,
     UserDetailsDisplayComponent,
-    UserRolesFormComponent
+    UserRolesFormComponent,
+    UserDeleteFormComponent
   ],
   templateUrl: './users-management-modal.component.html'
 })
