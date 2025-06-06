@@ -1,0 +1,31 @@
+<div class="options rounded">
+  <app-loading [loading]="isLoading()"/>
+  @if (!isLoading()) {
+    <div class="option-search-tags input-group">
+      <input [(ngModel)]="searchInput" class="search-tags form-control" type="text"/>
+      <button (click)="onClickClear()" class="btn border" type="button">
+        <i class="fa fa-close"></i>
+      </button>
+    </div>
+    @if (optionResult()) {
+      @if (searchInput() == "") {
+        <div (click)="onClickAllOption_()" [class.active]="optionList().length === selectedOptions().length"
+             class="option all-tags">
+          Select All
+        </div>
+      }
+      @for (option of displayedOptions(); track option.id) {
+        <div (click)="onClickOption_(option.id)" [class.active]="selectedOptions().includes(option.id)"
+             class="option"
+        >
+          <div class="text-truncate"> {{ option.title }}</div>
+          @if (addDescriptionToOption()) {
+            <div>{{ option.description }}</div>
+          }
+        </div>
+      }
+    } @else {
+      <div class="no-result-message"> No result match</div>
+    }
+  }
+</div>
