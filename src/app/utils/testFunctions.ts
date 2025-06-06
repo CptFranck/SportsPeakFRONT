@@ -10,9 +10,18 @@ import {TargetSet} from "../shared/model/dto/target-set";
 import {TargetSetStateEnum} from "../shared/model/enum/targetSetState.enum";
 import {WeightUnitEnum} from "../shared/model/enum/weightUnit.enum";
 import {PerformanceLog} from "../shared/model/dto/performance-log";
+import {Privilege} from "../shared/model/dto/privilege";
 
-export function generateTestUser(roles: Role[] = []) {
-  const mockUser: User = {
+export function generateTestPrivileges(roles: Role[] = []): Privilege {
+  return {
+    id: 1,
+    name: "name",
+    roles: roles,
+  };
+}
+
+export function generateTestUser(roles: Role[] = []): User {
+  return {
     id: 1,
     email: "test@example.com",
     firstName: "John",
@@ -20,40 +29,58 @@ export function generateTestUser(roles: Role[] = []) {
     username: "JohnDoe",
     roles: roles,
   };
-  return mockUser;
+}
+
+export function generateTestExerciseType(exercises: Exercise[] = []): ExerciseType {
+  return {
+    id: 1,
+    name: "name",
+    goal: "gaol",
+    exercises: exercises,
+  };
+}
+
+export function generateTestMuscle(exercises: Exercise[] = []): Muscle {
+  return {
+    id: 1,
+    name: "name",
+    latinName: "latinName",
+    description: "description",
+    function: "function",
+    illustrationPath: "illustrationPath",
+    exercises: exercises,
+  };
 }
 
 export function generateTestExercise(muscles: Muscle[] = [],
                                      exerciseTypes: ExerciseType[] = [],
-                                     progExercises: ProgExercise[] = []) {
-  const mockExercise: Exercise = {
+                                     progExercises: ProgExercise[] = []): Exercise {
+  return {
     id: 1,
-    name: "test",
-    goal: "test",
-    description: "test",
+    name: "name",
+    goal: "goal",
+    description: "description",
     muscles: muscles,
     exerciseTypes: exerciseTypes,
     progExercises: progExercises,
   };
-  return mockExercise;
 }
 
-export function generateTestProgExercise(user: User, exercise: Exercise) {
-  const mockProgExercise: ProgExercise = {
+export function generateTestProgExercise(user: User, exercise: Exercise): ProgExercise {
+  return {
     id: 1,
-    name: 'test',
-    note: 'test',
+    name: 'name',
+    note: 'note',
     visibility: VisibilityEnum.PRIVATE,
     trustLabel: TrustLabelEnum.UNVERIFIED,
     creator: user,
     exercise: exercise,
     targetSets: [],
   };
-  return mockProgExercise;
 }
 
-export function generateTestTargetSet(performanceLogs: PerformanceLog[] = []) {
-  const mockTargetSet: TargetSet = {
+export function generateTestTargetSet(performanceLogs: PerformanceLog[] = []): TargetSet {
+  return {
     id: 0,
     index: 0,
     setNumber: 0,
@@ -67,11 +94,10 @@ export function generateTestTargetSet(performanceLogs: PerformanceLog[] = []) {
     targetSetUpdate: null,
     performanceLogs: performanceLogs,
   };
-  return mockTargetSet;
 }
 
-export function generateTestPerformanceLog() {
-  const mockPerformanceLog: PerformanceLog = {
+export function generateTestPerformanceLog(): PerformanceLog {
+  return {
     id: 0,
     setIndex: 0,
     repetitionNumber: 0,
@@ -79,6 +105,5 @@ export function generateTestPerformanceLog() {
     weightUnit: WeightUnitEnum.KILOGRAMME,
     logDate: new Date().toISOString(),
   };
-  return mockPerformanceLog;
 }
 
