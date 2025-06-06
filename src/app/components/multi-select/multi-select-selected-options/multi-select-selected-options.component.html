@@ -5,9 +5,7 @@
     @for (selectedOption of displayedSelectedOptions(); track selectedOption.id) {
       <span class="tag">
         {{ selectedOption.title }}
-        <i (click)="onCLickRemoveTag($event)"
-           [attr.data-value]="selectedOption.id"
-           class="fa fa-close remove-tag"></i>
+        <i (click)="onCLickRemoveTag($event)" [attr.data-value]="selectedOption.id" class="fa fa-close remove-tag"></i>
       </span>
     }
     <span class="remove-all-tag">
