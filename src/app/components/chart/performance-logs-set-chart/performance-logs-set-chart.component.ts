@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, effect, ElementRef, input, viewChild} from '@angular/core';
+import {Component, effect, ElementRef, input, viewChild} from '@angular/core';
 import {Chart, registerables} from "chart.js";
 import zoomPlugin from 'chartjs-plugin-zoom';
 import {addDateTime, stringToDate} from "../../../utils/time-functions";
@@ -10,7 +10,7 @@ import {sortPerformanceLogsByDictionaryDate} from "../../../utils/performance-lo
   selector: 'app-performance-logs-set-chart',
   templateUrl: './performance-logs-set-chart.component.html'
 })
-export class PerformanceLogsSetChartComponent implements AfterViewInit {
+export class PerformanceLogsSetChartComponent {
 
   readonly chartRef = viewChild.required<ElementRef>('chartRef');
   readonly performanceLogSet = input.required<PerformanceLog[]>();
@@ -23,16 +23,14 @@ export class PerformanceLogsSetChartComponent implements AfterViewInit {
   private weights: number[] = [];
   private refChart: any;
 
-  ngAfterViewInit() {
+  constructor() {
     Chart.register(...registerables);
     Chart.register(zoomPlugin);
 
-    this.refChart = this.chartRef().nativeElement.getContext('2d');
-
     effect(() => {
+      this.refChart = this.chartRef().nativeElement.getContext('2d');
       if (this.chart)
         this.chart.destroy();
-
       this.defineData(this.performanceLogSet());
       this.defineOption();
       this.draw();
@@ -40,7 +38,7 @@ export class PerformanceLogsSetChartComponent implements AfterViewInit {
   }
 
   resetZoom() {
-    if (this.chart) this.chart.resetZoom()
+    if (this.chart) this.chart.resetZoom();
   }
 
   draw() {
