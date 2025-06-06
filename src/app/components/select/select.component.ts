@@ -10,23 +10,25 @@ import {FormsModule} from "@angular/forms";
   templateUrl: './select.component.html'
 })
 export class SelectComponent {
-  value = model<string | null>(null);
+  value = model<string | null>();
+
   readonly options = input.required<SelectOption[]>();
+
   readonly defaultOption = input<boolean>(false);
 
-  readonly onTouched = output<boolean>();
+  readonly onTouched = output<void>();
   readonly onChange = output<string | null>();
 
   onSelect(event: Event) {
     if (event.target instanceof HTMLSelectElement) {
       let value: string | null = event.target.value;
-      if (value === "null")
-        value = null;
+      if (value === "null") value = null;
       this.onChange.emit(value);
+      this.onTouched.emit();
     }
   }
 
   onClick() {
-    this.onTouched.emit(true);
+    this.onTouched.emit();
   }
 }

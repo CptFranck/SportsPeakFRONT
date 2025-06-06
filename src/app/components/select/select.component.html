@@ -1,4 +1,4 @@
-<select (change)="onSelect($event)" (click)="onClick()" [ngModel]="value()" class='form-select form-control'>
+<select (change)="onSelect($event)" (click)="onClick()" [(ngModel)]="value" class='form-select form-control'>
   @if (defaultOption()) {
     <option [value]="null" selected> ...</option>
   }
