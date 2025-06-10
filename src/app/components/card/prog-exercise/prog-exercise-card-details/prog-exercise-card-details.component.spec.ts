@@ -2,8 +2,7 @@ import {ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {ProgExerciseCardDetailsComponent} from './prog-exercise-card-details.component';
 import {ProgExerciseService} from "../../../../core/services/prog-exercise/prog-exercise.service";
-import {BehaviorSubject} from "rxjs";
-import {ProgExercise} from "../../../../shared/model/dto/prog-exercise";
+import {of} from "rxjs";
 import {generateTestExercise, generateTestProgExercise, generateTestUser} from "../../../../utils/testFunctions";
 import {User} from "../../../../shared/model/dto/user";
 import {Exercise} from "../../../../shared/model/dto/exercise";
@@ -12,10 +11,12 @@ describe('ProgExerciseCardDetailsComponent', () => {
   let component: ProgExerciseCardDetailsComponent;
   let fixture: ComponentFixture<ProgExerciseCardDetailsComponent>;
 
-  let mockProgExerciseService: jasmine.SpyObj<ProgExerciseService> =
-    jasmine.createSpyObj('MuscleService', ['progExercise', 'isLoading']);
-  mockProgExerciseService.progExercise = new BehaviorSubject<ProgExercise | undefined>(undefined);
-  mockProgExerciseService.isLoading = new BehaviorSubject<boolean>(true);
+  const mockProgExerciseService = {
+    isLoading$: of(true),
+    progExerciseList$: of([]),
+    progExerciseSelected$: of(undefined),
+    userProgExerciseList$: of([]),
+  };
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({

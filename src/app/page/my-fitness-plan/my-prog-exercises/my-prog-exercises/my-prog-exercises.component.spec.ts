@@ -1,9 +1,8 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {MyProgExercisesComponent} from './my-prog-exercises.component';
-import {BehaviorSubject, of} from "rxjs";
+import {of} from "rxjs";
 import {ProgExerciseService} from "../../../../core/services/prog-exercise/prog-exercise.service";
-import {ProgExercise} from "../../../../shared/model/dto/prog-exercise";
 import {ExerciseService} from "../../../../core/services/exercise/exercise.service";
 import {provideAnimations} from "@angular/platform-browser/animations";
 
@@ -17,10 +16,12 @@ describe('MyProgExercisesComponent', () => {
     selectedExercise$: of(undefined),
   };
 
-  let mockProgExerciseService: jasmine.SpyObj<ProgExerciseService> =
-    jasmine.createSpyObj('ProgExerciseService', ['progExercise', 'isLoading']);
-  mockProgExerciseService.userProgExercises = new BehaviorSubject<ProgExercise[]>([]);
-  mockProgExerciseService.isLoading = new BehaviorSubject<boolean>(true);
+  const mockProgExerciseService = {
+    isLoading$: of(true),
+    progExerciseList$: of([]),
+    progExerciseSelected$: of(undefined),
+    userProgExerciseList$: of([]),
+  };
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({

@@ -24,10 +24,10 @@ import {ApolloWrapperService} from "../apollo-wrapper/apollo-wrapper.service";
 })
 export class ProgExerciseService {
 
-  progExercise = new BehaviorSubject<ProgExercise | undefined>(undefined);
-  progExercises = new BehaviorSubject<ProgExercise[]>([]);
-  userProgExercises = new BehaviorSubject<ProgExercise[]>([]);
-  isLoading = new BehaviorSubject<boolean>(true);
+  private readonly isLoadingSubject = new BehaviorSubject<boolean>(true);
+  private readonly progExerciseListSubject = new BehaviorSubject<ProgExercise[]>([]);
+  private readonly progExerciseSelectedSubject = new BehaviorSubject<ProgExercise | undefined>(undefined);
+  private readonly userProgExerciseListSubject = new BehaviorSubject<ProgExercise[]>([]);
 
   private readonly router = inject(Router);
   private readonly alertService = inject(AlertService);
@@ -39,24 +39,40 @@ export class ProgExerciseService {
     this.userLoggedService.currentUser$.subscribe((user: User | undefined) => user && this.getUserProgExercises(user));
   }
 
+  get isLoading$() {
+    return this.isLoadingSubject.asObservable();
+  }
+
+  get progExerciseList$() {
+    return this.progExerciseListSubject.asObservable();
+  }
+
+  get progExerciseSelected$() {
+    return this.progExerciseSelectedSubject.asObservable();
+  }
+
+  get userProgExerciseList$() {
+    return this.userProgExerciseListSubject.asObservable();
+  }
+
   getProgExercises() {
-    this.isLoading.next(true);
+    this.isLoadingSubject.next(true);
     this.apolloWrapperService.watchQuery({
       query: GET_PROG_EXERCISES,
     }).valueChanges.subscribe({
       next: ({data, errors, loading}: ApolloQueryResult<any>) => {
         if (errors)
           this.alertService.graphQLErrorAlertHandler(errors);
-        this.progExercises.next(data.getProgExercises);
-        this.isLoading.next(loading);
+        this.progExerciseListSubject.next(data.getProgExercises);
+        this.isLoadingSubject.next(loading);
       },
-      error: () => this.isLoading.next(false),
+      error: () => this.isLoadingSubject.next(false),
     });
   }
 
   getProgExerciseById(progExerciseId: number) {
-    this.progExercise.next(undefined);
-    this.isLoading.next(true);
+    this.progExerciseSelectedSubject.next(undefined);
+    this.isLoadingSubject.next(true);
     this.apolloWrapperService.watchQuery({
       query: GET_PROG_EXERCISE_BY_ID,
       variables: {
@@ -65,13 +81,13 @@ export class ProgExerciseService {
     }).valueChanges.subscribe(({data, errors, loading}: ApolloQueryResult<any>) => {
       if (errors)
         this.alertService.graphQLErrorAlertHandler(errors);
-      this.progExercise.next(data.getProgExerciseById);
-      this.isLoading.next(loading);
+      this.progExerciseSelectedSubject.next(data.getProgExerciseById);
+      this.isLoadingSubject.next(loading);
     });
   }
 
   getUserProgExercises(user: User) {
-    this.isLoading.next(true);
+    this.isLoadingSubject.next(true);
     this.apolloWrapperService.watchQuery({
       query: GET_USER_PROG_EXERCISES,
       variables: {
@@ -80,8 +96,8 @@ export class ProgExerciseService {
     }).valueChanges.subscribe(({data, errors, loading}: ApolloQueryResult<any>) => {
       if (errors)
         this.alertService.graphQLErrorAlertHandler(errors);
-      this.userProgExercises.next(data.getUserProgExercises);
-      this.isLoading.next(loading);
+      this.userProgExerciseListSubject.next(data.getUserProgExercises);
+      this.isLoadingSubject.next(loading);
     });
   }
 

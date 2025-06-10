@@ -36,7 +36,10 @@ export class ProgExercisesComponent implements OnInit, OnDestroy {
   private readonly proExerciseService = inject(ProgExerciseService);
 
   ngOnInit(): void {
-    this.proExerciseService.progExercises
+    this.proExerciseService.isLoading$
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe((isLoading: boolean) => this.loading.set(isLoading));
+    this.proExerciseService.progExerciseList$
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe((progExercises: ProgExercise[]) => {
         let publicProgExercise: ProgExercise[] = progExercises.filter((progExercise: ProgExercise) =>
@@ -44,9 +47,6 @@ export class ProgExercisesComponent implements OnInit, OnDestroy {
         this.progExercises = publicProgExercise;
         this.displayedProgExercises.set(publicProgExercise);
       });
-    this.proExerciseService.isLoading
-      .pipe(takeUntil(this.unsubscribe$))
-      .subscribe((isLoading: boolean) => this.loading.set(isLoading));
   }
 
   ngOnDestroy() {

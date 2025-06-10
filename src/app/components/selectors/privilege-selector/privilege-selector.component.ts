@@ -35,7 +35,7 @@ export class PrivilegeSelectorComponent implements OnInit, OnDestroy, ControlVal
     this.privilegeService.privilegeList$
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe((privileges: Privilege[]) => {
-        let options: MultiSelectOption[] = []
+        let options: MultiSelectOption[] = [];
         privileges.forEach((privilege: Privilege) => options.push({
             id: privilege.id,
             title: privilege.name,
