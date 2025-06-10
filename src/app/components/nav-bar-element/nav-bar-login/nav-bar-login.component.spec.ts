@@ -2,22 +2,21 @@ import {ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {NavBarLoginComponent} from './nav-bar-login.component';
 import {AuthService} from "../../../core/services/auth/auth.service";
-import {BehaviorSubject} from "rxjs";
 import {provideRouter} from "@angular/router";
+import {of} from "rxjs";
 
 describe('NavBarLoginComponent', () => {
   let component: NavBarLoginComponent;
   let fixture: ComponentFixture<NavBarLoginComponent>;
 
-  let mockAuthService: jasmine.SpyObj<AuthService> =
-    jasmine.createSpyObj('AuthService', ['isAuthenticated']);
-  mockAuthService.isAuthenticated = new BehaviorSubject<boolean>(false);
-
+  const mockAuthService = {
+    isAuthenticated$: of(false),
+  };
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       providers: [
+        provideRouter([]),
         {provide: AuthService, useValue: mockAuthService},
-        provideRouter([])
       ],
       imports: [NavBarLoginComponent]
     })

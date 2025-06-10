@@ -2,12 +2,9 @@ import {TestBed} from '@angular/core/testing';
 import {AppComponent} from './app.component';
 import {provideRouter} from "@angular/router";
 import {AuthService} from "./core/services/auth/auth.service";
-import {BehaviorSubject} from "rxjs";
 
 describe('AppComponent', () => {
-  let mockAuthService: jasmine.SpyObj<AuthService> =
-    jasmine.createSpyObj('AuthService', ['isAuthenticated']);
-  mockAuthService.isAuthenticated = new BehaviorSubject<boolean>(false);
+  const mockAuthService = {};
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
