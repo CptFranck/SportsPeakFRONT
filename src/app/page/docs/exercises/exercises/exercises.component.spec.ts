@@ -2,22 +2,22 @@ import {ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {ExercisesComponent} from './exercises.component';
 import {ExerciseService} from "../../../../core/services/exercise/exercise.service";
-import {BehaviorSubject} from "rxjs";
+import {BehaviorSubject, of} from "rxjs";
 import {Exercise} from "../../../../shared/model/dto/exercise";
 import {ExerciseTypeService} from "../../../../core/services/exercise-type/exercise-type.service";
 import {ExerciseType} from "../../../../shared/model/dto/exercise-type";
 import {provideAnimations} from "@angular/platform-browser/animations";
 import {MuscleService} from "../../../../core/services/muscle/muscle.service";
-import {Muscle} from "../../../../shared/model/dto/muscle";
 
 describe('ExercisesComponent', () => {
   let component: ExercisesComponent;
   let fixture: ComponentFixture<ExercisesComponent>;
 
-  let mockMuscleService: jasmine.SpyObj<MuscleService> =
-    jasmine.createSpyObj('MuscleService', ['allMuscle', 'loading']);
-  mockMuscleService.allMuscle.and.returnValues(new BehaviorSubject<Muscle[]>([]));
-  mockMuscleService.loading.and.returnValues(new BehaviorSubject<boolean>(true));
+  const mockMuscleService = {
+    isLoading$: of(true),
+    muscleList$: of([]),
+    selectedMuscle$: of(undefined),
+  };
 
   let mockExerciseService: jasmine.SpyObj<ExerciseService> =
     jasmine.createSpyObj('ExerciseService', ['']);

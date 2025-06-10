@@ -29,7 +29,10 @@ export class MuscleSelectorComponent implements OnInit, OnDestroy, ControlValueA
   private readonly muscleService = inject(MuscleService);
 
   ngOnInit(): void {
-    this.muscleService.allMuscle()
+    this.muscleService.isLoading$
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe((loading: boolean) => this.loading.set(loading));
+    this.muscleService.muscleList$
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe((muscles: Muscle[]) => {
         let options: MultiSelectOption[] = []
@@ -43,9 +46,6 @@ export class MuscleSelectorComponent implements OnInit, OnDestroy, ControlValueA
         });
         this.muscleOptions.set([...options]);
       });
-    this.muscleService.loading()
-      .pipe(takeUntil(this.unsubscribe$))
-      .subscribe((loading: boolean) => this.loading.set(loading));
   }
 
   onChange: (value: number[]) => void = () => {

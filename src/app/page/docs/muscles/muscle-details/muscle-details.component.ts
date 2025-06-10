@@ -59,12 +59,12 @@ export class MuscleDetailsComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe((params: Params) => params['id'] !== this.muscle()?.id ?
         this.muscleService.getMuscleById(params['id']) : null);
-    this.muscleService.detailsMuscle()
-      .pipe(takeUntil(this.unsubscribe$))
-      .subscribe((muscle: Muscle | undefined) => this.muscle.set(muscle));
-    this.muscleService.loading()
+    this.muscleService.isLoading$
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe((isLoading: boolean) => this.loading.set(isLoading));
+    this.muscleService.selectedMuscle$
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe((muscle: Muscle | undefined) => this.muscle.set(muscle));
     this.userLoggedService.currentUser
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe(() => this.isAdmin.set(this.userLoggedService.isAdmin()));

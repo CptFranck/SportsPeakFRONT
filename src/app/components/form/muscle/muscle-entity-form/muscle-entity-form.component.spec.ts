@@ -2,20 +2,20 @@ import {ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {MuscleEntityFormComponent} from './muscle-entity-form.component';
 import {ExerciseService} from "../../../../core/services/exercise/exercise.service";
-import {BehaviorSubject} from "rxjs";
+import {BehaviorSubject, of} from "rxjs";
 import {Exercise} from "../../../../shared/model/dto/exercise";
 import {MuscleService} from "../../../../core/services/muscle/muscle.service";
-import {Muscle} from "../../../../shared/model/dto/muscle";
 import {provideAnimations} from "@angular/platform-browser/animations";
 
 describe('MuscleEntityFormComponent', () => {
   let component: MuscleEntityFormComponent;
   let fixture: ComponentFixture<MuscleEntityFormComponent>;
 
-  let mockMuscleService: jasmine.SpyObj<MuscleService> =
-    jasmine.createSpyObj('MuscleService', ['allMuscle', 'loading']);
-  mockMuscleService.allMuscle.and.returnValues(new BehaviorSubject<Muscle[]>([]));
-  mockMuscleService.loading.and.returnValues(new BehaviorSubject<boolean>(true));
+  const mockMuscleService = {
+    isLoading$: of(true),
+    muscleList$: of([]),
+    selectedMuscle$: of(undefined),
+  };
 
   let mockExerciseService: jasmine.SpyObj<ExerciseService> =
     jasmine.createSpyObj('ExerciseService', ['exercises', 'isLoading']);
