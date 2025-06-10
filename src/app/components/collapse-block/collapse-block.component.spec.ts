@@ -1,7 +1,7 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {CollapseBlockComponent} from './collapse-block.component';
-import {ActionEnum} from "../../shared/model/enum/action.enum";
+import {ActionType} from "../../shared/model/enum/action-type";
 
 describe('CollapseBlockComponent', () => {
   let component: CollapseBlockComponent;
@@ -17,7 +17,7 @@ describe('CollapseBlockComponent', () => {
     component = fixture.componentInstance;
 
     fixture.componentRef.setInput('collapseId', 'Id');
-    fixture.componentRef.setInput('actionType', ActionEnum.read);
+    fixture.componentRef.setInput('actionType', ActionType.read);
 
     fixture.detectChanges();
   });

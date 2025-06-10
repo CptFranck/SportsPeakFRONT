@@ -5,7 +5,7 @@ import {FormIndicator} from "../../../../shared/model/common/form-indicator";
 import {getProgExerciseTime} from "../../../../utils/prog-exercise-functions";
 import {RouterLink} from "@angular/router";
 import {getTargetSetsInformation} from "../../../../utils/target-set-functions";
-import {ActionEnum} from "../../../../shared/model/enum/action.enum";
+import {ActionType} from "../../../../shared/model/enum/action-type";
 
 @Component({
   selector: 'app-prog-exercise-card',
@@ -27,14 +27,14 @@ export class ProgExerciseCardComponent {
 
   showProgExercisePreview(progExercise: ProgExercise): void {
     this.actionProgExercises.emit({
-      actionType: ActionEnum.read,
+      actionType: ActionType.read,
       object: progExercise
     });
   }
 
   showProgExercisePerformance(progExercise: ProgExercise): void {
     this.actionProgExercises.emit({
-      actionType: ActionEnum.checkPerformance,
+      actionType: ActionType.checkPerformance,
       object: progExercise
     });
   }

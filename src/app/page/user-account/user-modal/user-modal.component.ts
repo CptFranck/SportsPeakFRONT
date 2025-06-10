@@ -6,8 +6,8 @@ import {UserUsernameFormComponent} from "../../../components/form/user/user-user
 import {UserNameFormComponent} from "../../../components/form/user/user-name-form/user-name-form.component";
 import {UserPasswordFormComponent} from "../../../components/form/user/user-password-form/user-password-form.component";
 import {UserDeleteFormComponent} from "../../../components/form/user/user-delete-form/user-delete-form.component";
-import {ModificationFieldEnum} from "../../../shared/model/enum/user-modification-field.enum";
-import {ActionEnum} from "../../../shared/model/enum/action.enum";
+import {ModificationFieldEnum} from "../../../shared/model/enum/user-modification-field";
+import {ActionType} from "../../../shared/model/enum/action-type";
 
 @Component({
   selector: 'app-user-modal',
@@ -25,9 +25,9 @@ export class UserModalComponent {
   readonly modalTitle = input.required<string>();
   readonly userModalId = input.required<string>();
   readonly user = input.required<User | undefined>();
-  readonly action = input.required<ActionEnum>();
+  readonly action = input.required<ActionType>();
   readonly modification = input.required<ModificationFieldEnum>();
 
-  protected readonly ActionType = ActionEnum;
+  protected readonly ActionType = ActionType;
   protected readonly ModificationField = ModificationFieldEnum;
 }

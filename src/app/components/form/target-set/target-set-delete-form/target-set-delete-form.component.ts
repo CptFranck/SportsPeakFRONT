@@ -3,7 +3,7 @@ import {Observable, Subject, takeUntil} from "rxjs";
 import {TargetSet} from "../../../../shared/model/dto/target-set";
 import {TargetSetService} from "../../../../core/services/target-set/target-set.service";
 import {ProgExercise} from "../../../../shared/model/dto/prog-exercise";
-import {ActionEnum} from "../../../../shared/model/enum/action.enum";
+import {ActionType} from "../../../../shared/model/enum/action-type";
 
 @Component({
   selector: 'app-target-set-delete-form',
@@ -14,7 +14,7 @@ export class TargetSetDeleteFormComponent implements OnInit, OnDestroy {
   readonly targetSet = input.required<TargetSet | undefined>();
   readonly progExercise = input.required<ProgExercise | undefined>();
   readonly btnCloseRef = input.required<HTMLButtonElement>();
-  readonly submitEventActionType$ = input.required<Observable<ActionEnum> | undefined>();
+  readonly submitEventActionType$ = input.required<Observable<ActionType> | undefined>();
 
   private readonly unsubscribe$ = new Subject<void>();
   private readonly targetSetService = inject(TargetSetService);
@@ -24,8 +24,8 @@ export class TargetSetDeleteFormComponent implements OnInit, OnDestroy {
     if (submitEventActionType$)
       submitEventActionType$
         .pipe(takeUntil(this.unsubscribe$))
-        .subscribe((actionType: ActionEnum) => {
-          if (actionType === ActionEnum.delete)
+        .subscribe((actionType: ActionType) => {
+          if (actionType === ActionType.delete)
             this.onSubmit();
         });
   }

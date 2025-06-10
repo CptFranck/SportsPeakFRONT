@@ -1,7 +1,7 @@
 import {TargetSet} from "../shared/model/dto/target-set";
 import {ProgExercise} from "../shared/model/dto/prog-exercise";
 import {Duration} from "../shared/model/dto/duration";
-import {TargetSetStateEnum} from "../shared/model/enum/targetSetState.enum";
+import {TargetSetState} from "../shared/model/enum/target-set-state";
 import {ProgExerciseTargetSets} from "../shared/model/common/progExerciseTargetSets";
 import {addDurationAmount, getStringTime} from "./duration-functions";
 import {getTargetSetTimeAmount, getUpToDateTargetSets, sortLastTargetSetsByIndex} from "./target-set-functions";
@@ -32,11 +32,11 @@ export function getProgExerciseTargetSet(targetSets: TargetSet[]): ProgExerciseT
   const targetSetHidden: TargetSet[] = [];
 
   targetSets.forEach((targetSet: TargetSet) => {
-    if (targetSet.state === TargetSetStateEnum.USED)
+    if (targetSet.state === TargetSetState.USED)
       targetSetUsed.push(targetSet);
-    else if (targetSet.state === TargetSetStateEnum.UNUSED)
+    else if (targetSet.state === TargetSetState.UNUSED)
       targetSetUnused.push(targetSet);
-    else if (targetSet.state === TargetSetStateEnum.HIDDEN)
+    else if (targetSet.state === TargetSetState.HIDDEN)
       targetSetHidden.push(targetSet);
   })
   return {

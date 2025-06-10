@@ -2,7 +2,7 @@ import {Component, input, output} from '@angular/core';
 import {ModalButtonComponent} from "../../../../components/modal/modal-button/modal-button.component";
 import {User} from "../../../../shared/model/dto/user";
 import {FormIndicator} from "../../../../shared/model/common/form-indicator";
-import {ActionEnum} from "../../../../shared/model/enum/action.enum";
+import {ActionType} from "../../../../shared/model/enum/action-type";
 
 @Component({
   selector: 'app-users-array',
@@ -19,14 +19,14 @@ export class UsersManagementArrayComponent {
 
   showUserDetails(user: User): void {
     this.actionUser.emit({
-      actionType: ActionEnum.read,
+      actionType: ActionType.read,
       object: user
     });
   }
 
   modifyUser(user: User) {
     this.actionUser.emit({
-      actionType: ActionEnum.update,
+      actionType: ActionType.update,
       object: user
     });
   }

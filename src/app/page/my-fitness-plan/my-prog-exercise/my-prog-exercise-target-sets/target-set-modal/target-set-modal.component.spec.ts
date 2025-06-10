@@ -1,7 +1,7 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {TargetSetModalComponent} from './target-set-modal.component';
-import {ActionEnum} from "../../../../../shared/model/enum/action.enum";
+import {ActionType} from "../../../../../shared/model/enum/action-type";
 
 describe('TargetSetModalComponent', () => {
   let component: TargetSetModalComponent;
@@ -21,7 +21,7 @@ describe('TargetSetModalComponent', () => {
     fixture.componentRef.setInput('targetSet', undefined);
     fixture.componentRef.setInput('progExercise', undefined);
     fixture.componentRef.setInput('performanceLog', undefined);
-    fixture.componentRef.setInput('action', ActionEnum.read);
+    fixture.componentRef.setInput('action', ActionType.read);
 
     fixture.detectChanges();
   });

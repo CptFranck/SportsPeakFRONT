@@ -12,7 +12,7 @@ import {
   MyProgExercisePerformanceComponent
 } from "../../../../components/modal-component/prog-exercise/my-prog-exercise-performance/my-prog-exercise-performance.component";
 import {FormIndicator} from "../../../../shared/model/common/form-indicator";
-import {ActionEnum} from "../../../../shared/model/enum/action.enum";
+import {ActionType} from "../../../../shared/model/enum/action-type";
 
 @Component({
   selector: 'app-my-prog-exercise-modal',
@@ -29,16 +29,16 @@ export class MyProgExercisesModalComponent {
   readonly modalTitle = input.required<string>();
   readonly progExerciseModalId = input.required<string>();
   readonly progExercise = input.required<ProgExercise | undefined>();
-  readonly action = model.required<ActionEnum>();
+  readonly action = model.required<ActionType>();
 
   readonly actionProgExercises = output<FormIndicator>();
 
-  protected readonly ActionType = ActionEnum;
+  protected readonly ActionType = ActionType;
 
   onClick() {
     this.actionProgExercises.emit({
       object: undefined,
-      actionType: ActionEnum.create
+      actionType: ActionType.create
     })
   }
 }

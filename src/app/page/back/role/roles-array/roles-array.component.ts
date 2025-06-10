@@ -3,7 +3,7 @@ import {ModalButtonComponent} from "../../../../components/modal/modal-button/mo
 import {Role} from "../../../../shared/model/dto/role";
 import {FormIndicator} from "../../../../shared/model/common/form-indicator";
 import {Muscle} from "../../../../shared/model/dto/muscle";
-import {ActionEnum} from "../../../../shared/model/enum/action.enum";
+import {ActionType} from "../../../../shared/model/enum/action-type";
 
 @Component({
   selector: 'app-roles-array',
@@ -21,21 +21,21 @@ export class RolesArrayComponent {
 
   showRoleDetails(muscle: Muscle): void {
     this.actionRole.emit({
-      actionType: ActionEnum.read,
+      actionType: ActionType.read,
       object: muscle
     });
   }
 
   modifyRole(role: Role) {
     this.actionRole.emit({
-      actionType: ActionEnum.update,
+      actionType: ActionType.update,
       object: role
     });
   }
 
   delRole(role: Role) {
     this.actionRole.emit({
-      actionType: ActionEnum.delete,
+      actionType: ActionType.delete,
       object: role
     });
   }

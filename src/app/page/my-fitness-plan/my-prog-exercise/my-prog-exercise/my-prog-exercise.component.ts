@@ -18,7 +18,7 @@ import {PerformanceLog} from "../../../../shared/model/dto/performance-log";
 import {
   PerformanceLogModalComponent
 } from "../my-prog-exercise-performance-logs/performance-log-modal/performance-log-modal.component";
-import {ActionEnum} from "../../../../shared/model/enum/action.enum";
+import {ActionType} from "../../../../shared/model/enum/action-type";
 
 @Component({
   selector: 'app-my-prog-exercise',
@@ -36,17 +36,17 @@ export class MyProgExerciseComponent implements OnInit, OnDestroy {
   loading = signal<boolean>(true);
 
   progExercise = signal<ProgExercise | undefined>(undefined);
-  progExerciseAction = signal<ActionEnum>(ActionEnum.update);
+  progExerciseAction = signal<ActionType>(ActionType.update);
   progExerciseModalTitle = signal<string>("");
   readonly progExerciseModalId = "progExerciseModal";
 
   targetSet = signal<TargetSet | undefined>(undefined);
-  targetSetAction = signal<ActionEnum>(ActionEnum.update);
+  targetSetAction = signal<ActionType>(ActionType.update);
   targetSetModalTitle = signal<string>("");
   readonly targetSetModalId = "targetSetModalId";
 
   performanceLog = signal<PerformanceLog | undefined>(undefined);
-  performanceLogAction = signal<ActionEnum>(ActionEnum.update);
+  performanceLogAction = signal<ActionType>(ActionType.update);
   performanceLogModalTitle = signal<string>("");
   readonly performanceLogModalId = "performanceLogModalId";
 
@@ -92,10 +92,10 @@ export class MyProgExerciseComponent implements OnInit, OnDestroy {
 
   setTargetSet(formIndicator: FormIndicator) {
     this.targetSetAction.set(formIndicator.actionType);
-    if (formIndicator.actionType === ActionEnum.create) {
+    if (formIndicator.actionType === ActionType.create) {
       this.targetSetModalTitle.set("Add new set's step");
       this.targetSet.set(undefined);
-    } else if (formIndicator.actionType === ActionEnum.addEvolution) {
+    } else if (formIndicator.actionType === ActionType.addEvolution) {
       this.targetSetModalTitle.set("Add evolution to set's step N°" + formIndicator.object.index);
       this.targetSet.set(formIndicator.object);
     } else {
@@ -106,11 +106,11 @@ export class MyProgExerciseComponent implements OnInit, OnDestroy {
 
   setPerformanceLog(formIndicator: FormIndicator) {
     this.performanceLogAction.set(formIndicator.actionType);
-    if (formIndicator.actionType === ActionEnum.create) {
+    if (formIndicator.actionType === ActionType.create) {
       this.targetSet.set(formIndicator.object);
       this.performanceLog.set(undefined);
       this.performanceLogModalTitle.set("Add new performance log");
-    } else if (formIndicator.actionType === ActionEnum.checkPerformance) {
+    } else if (formIndicator.actionType === ActionType.checkPerformance) {
       this.targetSet.set(formIndicator.object);
       this.performanceLog.set(undefined);
       this.performanceLogModalTitle.set("Check step N° " + this.targetSet()?.index + " performances");

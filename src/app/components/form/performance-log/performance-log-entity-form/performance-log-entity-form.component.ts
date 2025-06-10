@@ -3,7 +3,7 @@ import {TargetSet} from "../../../../shared/model/dto/target-set";
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {PerformanceLog} from "../../../../shared/model/dto/performance-log";
 import {Observable, Subject, takeUntil} from "rxjs";
-import {WeightUnitEnum} from "../../../../shared/model/enum/weightUnit.enum";
+import {WeightUnit} from "../../../../shared/model/enum/weight-unit";
 import {InputControlComponent} from "../../../input-control/input-control.component";
 import {WeightSelectComponent} from "../../../selects/weight-select/weight-select.component";
 import {
@@ -12,7 +12,7 @@ import {
 import {PerformanceLogService} from "../../../../core/services/performance-log/performance-log.service";
 import {filterPerformanceLogByDate} from "../../../../utils/performance-log-functions";
 import {stringToDateString} from "../../../../utils/time-functions";
-import {ActionEnum} from "../../../../shared/model/enum/action.enum";
+import {ActionType} from "../../../../shared/model/enum/action-type";
 
 @Component({
   selector: 'app-performance-log-entity-form',
@@ -29,7 +29,7 @@ export class PerformanceLogEntityFormComponent implements OnInit, OnDestroy {
   readonly targetSet = input.required<TargetSet | undefined>();
   readonly performanceLog = input.required<PerformanceLog | undefined>();
   readonly btnCloseRef = input.required<HTMLButtonElement>();
-  readonly submitEventActionType$ = input.required<Observable<ActionEnum> | undefined>();
+  readonly submitEventActionType$ = input.required<Observable<ActionType> | undefined>();
 
   readonly performanceLogForm = computed<FormGroup>(() => {
     const targetSet = this.targetSet();
@@ -40,7 +40,7 @@ export class PerformanceLogEntityFormComponent implements OnInit, OnDestroy {
     let performanceLogRepetitionNumber: number = 1;
     let performanceLogWeight: number = 0;
     let targetSetId: number | undefined;
-    let performanceLogWeightUnit: string = WeightUnitEnum.KILOGRAMME;
+    let performanceLogWeightUnit: string = WeightUnit.KILOGRAMME;
 
     if (targetSet) {
       performanceLogRepetitionNumber = targetSet.repetitionNumber;
@@ -104,8 +104,8 @@ export class PerformanceLogEntityFormComponent implements OnInit, OnDestroy {
     if (submitEventActionType$)
       submitEventActionType$
         .pipe(takeUntil(this.unsubscribe$))
-        .subscribe((actionType: ActionEnum) => {
-          if (actionType === ActionEnum.create || actionType === ActionEnum.update) {
+        .subscribe((actionType: ActionType) => {
+          if (actionType === ActionType.create || actionType === ActionType.update) {
             this.submit();
           }
         });

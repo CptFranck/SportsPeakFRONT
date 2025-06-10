@@ -4,12 +4,12 @@ import {ProgExercise} from "../../../../shared/model/dto/prog-exercise";
 import {LoadingComponent} from "../../../../components/loading/loading.component";
 import {SearchBarComponent} from "../../../../components/search-bar/search-bar.component";
 import {ProgExerciseService} from "../../../../core/services/prog-exercise/prog-exercise.service";
-import {VisibilityEnum} from "../../../../shared/model/enum/visibility.enum";
+import {Visibility} from "../../../../shared/model/enum/visibility";
 import {ProgExercisesArrayComponent} from "../prog-exercise-array/prog-exercises-array.component";
 import {ProgExerciseModalComponent} from "../prog-exercise-modal/prog-exercise-modal.component";
 import {Muscle} from "../../../../shared/model/dto/muscle";
 import {Subject, takeUntil} from "rxjs";
-import {ActionEnum} from "../../../../shared/model/enum/action.enum";
+import {ActionType} from "../../../../shared/model/enum/action-type";
 
 @Component({
   selector: 'app-prog-exercises',
@@ -24,7 +24,7 @@ import {ActionEnum} from "../../../../shared/model/enum/action.enum";
 export class ProgExercisesComponent implements OnInit, OnDestroy {
   loading = signal<boolean>(true);
   displayedProgExercises = signal<ProgExercise[]>([]);
-  action = signal<ActionEnum>(ActionEnum.create);
+  action = signal<ActionType>(ActionType.create);
   modalTitle = signal<string>("");
   progExercise = signal<ProgExercise | undefined>(undefined);
 
@@ -43,7 +43,7 @@ export class ProgExercisesComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe((progExercises: ProgExercise[]) => {
         let publicProgExercise: ProgExercise[] = progExercises.filter((progExercise: ProgExercise) =>
-          progExercise.visibility === VisibilityEnum.PUBLIC)
+          progExercise.visibility === Visibility.PUBLIC)
         this.progExercises = publicProgExercise;
         this.displayedProgExercises.set(publicProgExercise);
       });

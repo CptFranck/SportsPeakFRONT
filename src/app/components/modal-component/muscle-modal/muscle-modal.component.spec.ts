@@ -1,7 +1,7 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {MuscleModalComponent} from './muscle-modal.component';
-import {ActionEnum} from "../../../shared/model/enum/action.enum";
+import {ActionType} from "../../../shared/model/enum/action-type";
 import {MuscleService} from "../../../core/services/muscle/muscle.service";
 import {ExerciseService} from "../../../core/services/exercise/exercise.service";
 import {provideAnimations} from "@angular/platform-browser/animations";
@@ -36,7 +36,7 @@ describe('MuscleModalComponent', () => {
 
     fixture.componentRef.setInput('modalTitle', "Title")
     fixture.componentRef.setInput('muscleModalId', "Id")
-    fixture.componentRef.setInput('action', ActionEnum.create)
+    fixture.componentRef.setInput('action', ActionType.create)
 
     fixture.detectChanges();
   });

@@ -14,7 +14,7 @@ import {
 import {ReactiveFormsModule} from "@angular/forms";
 import {ImageFormComponent} from "../../../../components/form/image-form/image-form.component";
 import {IllustrationService} from "../../../../core/services/illustration/illustration.service";
-import {ActionEnum} from "../../../../shared/model/enum/action.enum";
+import {ActionType} from "../../../../shared/model/enum/action-type";
 
 @Component({
   selector: 'app-muscle-details',
@@ -35,12 +35,12 @@ export class MuscleDetailsComponent implements OnInit, OnDestroy {
   isAdmin = signal<boolean>(false);
   loading = signal<boolean>(true);
   muscle = signal<Muscle | undefined>(undefined);
-  action = signal<ActionEnum>(ActionEnum.read);
+  action = signal<ActionType>(ActionType.read);
   modalTitle = signal<string>("");
 
 
   readonly muscleModalId = "muscleModalId";
-  readonly ActionType = ActionEnum;
+  readonly ActionType = ActionType;
 
   private readonly unsubscribe$ = new Subject<void>();
   private readonly muscleService = inject(MuscleService);
@@ -76,12 +76,12 @@ export class MuscleDetailsComponent implements OnInit, OnDestroy {
   }
 
   onModify() {
-    this.action.set(ActionEnum.update);
+    this.action.set(ActionType.update);
     this.modalTitle.set(`Modify muscle ${this.muscle()?.name}`);
   }
 
   onDelete() {
-    this.action.set(ActionEnum.delete);
+    this.action.set(ActionType.delete);
     this.modalTitle.set(`Delete muscle ${this.muscle()?.name}`);
   }
 

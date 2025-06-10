@@ -7,7 +7,7 @@ import {ExerciseTypeService} from "../../../../core/services/exercise-type/exerc
 import {ExerciseSelectorComponent} from "../../../selectors/exercise-selector/exercise-selector.component";
 import {UserLoggedService} from "../../../../core/services/user-logged/user-logged.service";
 import {Exercise} from "../../../../shared/model/dto/exercise";
-import {ActionEnum} from "../../../../shared/model/enum/action.enum";
+import {ActionType} from "../../../../shared/model/enum/action-type";
 
 @Component({
   selector: 'app-exercise-type-entity-form',
@@ -23,7 +23,7 @@ export class ExerciseTypeEntityFormComponent implements OnInit, OnDestroy {
 
   readonly btnCloseRef = input.required<HTMLButtonElement>();
   readonly exerciseType = input.required<ExerciseType | undefined>();
-  readonly submitEventActionType$ = input.required<Subject<ActionEnum> | undefined>();
+  readonly submitEventActionType$ = input.required<Subject<ActionType> | undefined>();
 
   exerciseTypeForm = computed<FormGroup>(() => {
     const exerciseIdsValidator = this.isAdmin ? null : Validators.required;
@@ -68,8 +68,8 @@ export class ExerciseTypeEntityFormComponent implements OnInit, OnDestroy {
     if (submitEventActionType$)
       submitEventActionType$
         .pipe(takeUntil(this.unsubscribe$))
-        .subscribe((actionType: ActionEnum) => {
-          if (actionType === ActionEnum.create || actionType === ActionEnum.update)
+        .subscribe((actionType: ActionType) => {
+          if (actionType === ActionType.create || actionType === ActionType.update)
             this.onSubmit();
         });
   }

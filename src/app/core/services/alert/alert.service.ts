@@ -3,15 +3,15 @@ import {Alert} from "../../../shared/model/common/alert";
 import {Subject} from "rxjs";
 import {GraphQLFormattedError} from "graphql/error";
 import {NetworkError} from "@apollo/client/errors";
-import {AlertTypeEnum} from "../../../shared/model/enum/alert.enum";
-import {AlertErrorEnum} from "../../../shared/model/enum/alert-error.enum";
+import {AlertType} from "../../../shared/model/enum/alert-type";
+import {AlertErrorType} from "../../../shared/model/enum/alert-error-type";
 
 @Injectable({
   providedIn: 'root'
 })
 export class AlertService {
   private alertId = 0;
-  
+
   private readonly alertList: Alert[] = [];
   private readonly alertListSubject = new Subject<Alert[]>();
 
@@ -24,19 +24,19 @@ export class AlertService {
   }
 
   addSuccessAlert(message: string) {
-    const successAlert: Alert = this.createBaseAlert("Successful operation :D", message, AlertTypeEnum.success);
+    const successAlert: Alert = this.createBaseAlert("Successful operation :D", message, AlertType.success);
     this.alertList.push(successAlert);
     this.updateAlert();
   }
 
   addWarningAlert(message: string) {
-    const successAlert: Alert = this.createBaseAlert("Warning :/", message, AlertTypeEnum.warning);
+    const successAlert: Alert = this.createBaseAlert("Warning :/", message, AlertType.warning);
     this.alertList.push(successAlert);
     this.updateAlert();
   }
 
   addErrorAlert(message: string) {
-    const successAlert: Alert = this.createBaseAlert("Unsuccessful operation :(", message, AlertTypeEnum.error);
+    const successAlert: Alert = this.createBaseAlert("Unsuccessful operation :(", message, AlertType.error);
     this.alertList.push(successAlert);
     this.updateAlert();
   }
@@ -61,7 +61,7 @@ export class AlertService {
     if (lastAlert !== undefined && this.isSameAlertError(lastAlert, networkError)) return;
     const networkAlert: Alert = this.createErrorAlert(networkError, false);
     if (networkAlert.errorInformation)
-      networkAlert.errorInformation.errorType = AlertErrorEnum.NetworkError;
+      networkAlert.errorInformation.errorType = AlertErrorType.NetworkError;
     this.alertList.push(networkAlert);
     this.updateAlert();
     this.alertId += 1;
@@ -70,7 +70,7 @@ export class AlertService {
   private createGraphQLErrorAlert(graphQLError: GraphQLFormattedError) {
     const graphQLAlert = this.createErrorAlert(graphQLError);
     if (graphQLAlert.errorInformation) {
-      graphQLAlert.errorInformation.errorType = AlertErrorEnum.GraphQLError;
+      graphQLAlert.errorInformation.errorType = AlertErrorType.GraphQLError;
       graphQLAlert.errorInformation.errorLocation = graphQLError.locations;
       graphQLAlert.errorInformation.errorPath = graphQLError.path;
     }
@@ -84,7 +84,7 @@ export class AlertService {
   }
 
   private createErrorAlert(error: GraphQLFormattedError, autoClose = true): Alert {
-    const errorAlert = this.createBaseAlert("Unsuccessful operation :(", error.message, AlertTypeEnum.error, autoClose);
+    const errorAlert = this.createBaseAlert("Unsuccessful operation :(", error.message, AlertType.error, autoClose);
     errorAlert.errorInformation = {
       errorExtension: error.extensions,
       errorLocation: error.locations,
@@ -93,7 +93,7 @@ export class AlertService {
     return errorAlert;
   }
 
-  private createBaseAlert(title: string, message: string, alertType: AlertTypeEnum, autoClose: boolean = true): Alert {
+  private createBaseAlert(title: string, message: string, alertType: AlertType, autoClose: boolean = true): Alert {
     const alert = {
       id: this.alertId,
       title: title,

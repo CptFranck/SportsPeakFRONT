@@ -2,7 +2,7 @@ import {Component, forwardRef, signal} from '@angular/core';
 import {SelectComponent} from "../../select/select.component";
 import {ControlValueAccessor, NG_VALUE_ACCESSOR} from "@angular/forms";
 import {SelectOption} from "../../../shared/model/component/select/selectOption";
-import {VisibilityEnum} from "../../../shared/model/enum/visibility.enum";
+import {Visibility} from "../../../shared/model/enum/visibility";
 
 @Component({
   selector: 'app-visibility-select',
@@ -21,14 +21,14 @@ import {VisibilityEnum} from "../../../shared/model/enum/visibility.enum";
 export class VisibilitySelectComponent implements ControlValueAccessor {
 
   visibilityOptions: SelectOption[] = [{
-    title: VisibilityEnum.PRIVATE,
-    value: VisibilityEnum.PRIVATE,
+    title: Visibility.PRIVATE,
+    value: Visibility.PRIVATE,
   }, {
-    title: VisibilityEnum.PUBLIC,
-    value: VisibilityEnum.PUBLIC,
+    title: Visibility.PUBLIC,
+    value: Visibility.PUBLIC,
   }];
 
-  visibility = signal<string>(VisibilityEnum.PRIVATE);
+  visibility = signal<string>(Visibility.PRIVATE);
 
   onChange: (value: string) => void = () => {
   };

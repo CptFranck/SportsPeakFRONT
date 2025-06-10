@@ -2,8 +2,8 @@ import {Component, input, output} from '@angular/core';
 import {User} from "../../../../shared/model/dto/user";
 import {FormIndicator} from "../../../../shared/model/common/form-indicator";
 import {ModalButtonComponent} from "../../../../components/modal/modal-button/modal-button.component";
-import {ModificationFieldEnum} from "../../../../shared/model/enum/user-modification-field.enum";
-import {ActionEnum} from "../../../../shared/model/enum/action.enum";
+import {ModificationFieldEnum} from "../../../../shared/model/enum/user-modification-field";
+import {ActionType} from "../../../../shared/model/enum/action-type";
 
 @Component({
   selector: 'app-user-information-display',
@@ -23,7 +23,7 @@ export class UserInformationDisplayComponent {
 
   onChangeEmail() {
     this.actionUser.emit({
-      actionType: ActionEnum.update,
+      actionType: ActionType.update,
       modificationField: ModificationFieldEnum.email,
       object: this.user()
     });
@@ -31,7 +31,7 @@ export class UserInformationDisplayComponent {
 
   onChangeUsername() {
     this.actionUser.emit({
-      actionType: ActionEnum.update,
+      actionType: ActionType.update,
       modificationField: ModificationFieldEnum.username,
       object: this.user()
     });
@@ -39,7 +39,7 @@ export class UserInformationDisplayComponent {
 
   onChangeName() {
     this.actionUser.emit({
-      actionType: ActionEnum.update,
+      actionType: ActionType.update,
       modificationField: ModificationFieldEnum.identity,
       object: this.user()
     });

@@ -13,11 +13,25 @@ export class TokenService {
   private readonly localStorageService = inject(LocalStorageService);
 
   constructor() {
-    let token: AuthToken | null = this.getSavedToken();
-    if (this.isTokenValid(token))
-      this.authToken = token;
-    else
-      this.removeCurrentToken();
+    const testToken = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkBzcG9ydHNwZWFrLmNvbSIsImlhdCI6MTc0OTAzMDMyNiwiZXhwIjoxNzQ5MDMzOTI2fQ.56DYTr_aHJZfb8pEaywbHaaUaRveCpogo_-PNMRAZh0";
+    const auth: Auth = {
+      user: {
+        id: 4,
+        email: "admin@sportspeak.com",
+        firstName: "Admin",
+        lastName: "Admin",
+        roles: [{id: 4, name: "ADMIN", privileges: [],}],
+        username: "Admin_"
+      },
+      tokenType: 'Bearer',
+      token: testToken,
+    }
+    this.setCurrentToken(auth);
+    // let token: AuthToken | null = this.getSavedToken();
+    // if (this.isTokenValid(token))
+    //   this.authToken = token;
+    // else
+    //   this.removeCurrentToken();
   }
 
   getCurrentToken() {

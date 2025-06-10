@@ -1,4 +1,4 @@
-export enum AlertTypeEnum {
+export enum AlertType {
   success = "alert-success",
   warning = "alert-warning",
   error = "alert-danger",

@@ -4,8 +4,8 @@ import {Observable, Subject, takeUntil} from "rxjs";
 import {InputControlComponent} from "../../../input-control/input-control.component";
 import {User} from "../../../../shared/model/dto/user";
 import {UserService} from "../../../../core/services/user/user.service";
-import {ModificationFieldEnum} from "../../../../shared/model/enum/user-modification-field.enum";
-import {ActionEnum} from "../../../../shared/model/enum/action.enum";
+import {ModificationFieldEnum} from "../../../../shared/model/enum/user-modification-field";
+import {ActionType} from "../../../../shared/model/enum/action-type";
 
 @Component({
   selector: 'app-user-username-form',
@@ -19,7 +19,7 @@ export class UserUsernameFormComponent implements OnInit, OnDestroy {
   readonly user = input.required<User | undefined>();
   readonly btnCloseRef = input.required<HTMLButtonElement>();
   readonly modification = input.required<ModificationFieldEnum>();
-  readonly submitEventActionType$ = input.required<Observable<ActionEnum> | undefined>();
+  readonly submitEventActionType$ = input.required<Observable<ActionType> | undefined>();
 
   readonly userForm = computed<FormGroup>(() => {
     const userForm: FormGroup = new FormGroup({
@@ -47,8 +47,8 @@ export class UserUsernameFormComponent implements OnInit, OnDestroy {
     if (submitEventActionType$)
       submitEventActionType$
         .pipe(takeUntil(this.unsubscribe$))
-        .subscribe((actionType: ActionEnum) => {
-          if (actionType === ActionEnum.update && this.modification() === ModificationFieldEnum.username)
+        .subscribe((actionType: ActionType) => {
+          if (actionType === ActionType.update && this.modification() === ModificationFieldEnum.username)
             this.onSubmit();
         });
   }

@@ -6,7 +6,7 @@ import {ModalButtonComponent} from "../../../modal/modal-button/modal-button.com
 import {
   ProgExerciseTrustLabelFormComponent
 } from "../../../form/prog-exercise/prog-exercise-trust-label-form/prog-exercise-trust-label-form.component";
-import {ActionEnum} from "../../../../shared/model/enum/action.enum";
+import {ActionType} from "../../../../shared/model/enum/action-type";
 
 @Component({
   selector: 'app-prog-exercise-card-details',
@@ -27,21 +27,21 @@ export class ProgExerciseCardDetailsComponent {
 
   showProgExercisePerformance(progExercise: ProgExercise): void {
     this.actionProgExercises.emit({
-      actionType: ActionEnum.checkPerformance,
+      actionType: ActionType.checkPerformance,
       object: progExercise
     });
   }
 
   modifyProgExercise(progExercise: ProgExercise) {
     this.actionProgExercises.emit({
-      actionType: ActionEnum.update,
+      actionType: ActionType.update,
       object: progExercise
     });
   }
 
   delProgExercise(progExercise: ProgExercise) {
     this.actionProgExercises.emit({
-      actionType: ActionEnum.delete,
+      actionType: ActionType.delete,
       object: progExercise
     });
   }

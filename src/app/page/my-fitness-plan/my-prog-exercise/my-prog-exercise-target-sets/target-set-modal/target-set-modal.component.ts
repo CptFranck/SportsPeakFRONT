@@ -14,7 +14,7 @@ import {
 } from "../../../../../components/modal-component/target-set/target-set-logs/target-set-logs.component";
 import {PerformanceLog} from "../../../../../shared/model/dto/performance-log";
 import {FormIndicator} from "../../../../../shared/model/common/form-indicator";
-import {ActionEnum} from "../../../../../shared/model/enum/action.enum";
+import {ActionType} from "../../../../../shared/model/enum/action-type";
 
 @Component({
   selector: 'app-target-set-modal',
@@ -34,16 +34,16 @@ export class TargetSetModalComponent {
   readonly targetSet = input.required<TargetSet | undefined>();
   readonly progExercise = input.required<ProgExercise | undefined>();
   readonly performanceLog = input.required<PerformanceLog | undefined>();
-  readonly action = input.required<ActionEnum>();
+  readonly action = input.required<ActionType>();
 
   readonly actionTargetSet = output<FormIndicator>();
 
-  protected readonly ActionType = ActionEnum;
+  protected readonly ActionType = ActionType;
 
   onClick() {
     this.actionTargetSet.emit({
       object: undefined,
-      actionType: ActionEnum.create
+      actionType: ActionType.create
     })
   }
 }

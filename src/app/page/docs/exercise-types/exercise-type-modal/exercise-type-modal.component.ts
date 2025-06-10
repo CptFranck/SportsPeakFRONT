@@ -14,7 +14,7 @@ import {
 import {UserLoggedService} from "../../../../core/services/user-logged/user-logged.service";
 import {FormIndicator} from "../../../../shared/model/common/form-indicator";
 import {Subject, takeUntil} from "rxjs";
-import {ActionEnum} from "../../../../shared/model/enum/action.enum";
+import {ActionType} from "../../../../shared/model/enum/action-type";
 
 @Component({
   selector: 'app-exercise-type-modal',
@@ -33,11 +33,11 @@ export class ExerciseTypeModalComponent implements OnInit, OnDestroy {
   readonly modalTitle = input.required<string>();
   readonly exerciseTypeModalId = input.required<string>();
   readonly exerciseType = input.required<ExerciseType | undefined>();
-  readonly action = input.required<ActionEnum>();
+  readonly action = input.required<ActionType>();
 
   readonly exerciseTypeAction = output<FormIndicator>();
 
-  protected readonly ActionType = ActionEnum;
+  protected readonly ActionType = ActionType;
 
   private readonly unsubscribe$ = new Subject<void>();
   private readonly userLoggedService = inject(UserLoggedService);
@@ -56,7 +56,7 @@ export class ExerciseTypeModalComponent implements OnInit, OnDestroy {
   onClick() {
     this.exerciseTypeAction.emit({
       object: undefined,
-      actionType: ActionEnum.create
+      actionType: ActionType.create
     })
   }
 }

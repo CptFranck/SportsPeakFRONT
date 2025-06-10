@@ -1,7 +1,7 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {ExerciseModalComponent} from './exercise-modal.component';
-import {ActionEnum} from "../../../../shared/model/enum/action.enum";
+import {ActionType} from "../../../../shared/model/enum/action-type";
 import {generateTestExercise} from "../../../../utils/testFunctions";
 import {ExerciseService} from "../../../../core/services/exercise/exercise.service";
 import {provideAnimations} from "@angular/platform-browser/animations";
@@ -27,7 +27,7 @@ describe('ExerciseModalComponent', () => {
     exerciseTypeList$: of([]),
     selectedExerciseType$: of(undefined),
   };
-  
+
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       providers: [
@@ -44,7 +44,7 @@ describe('ExerciseModalComponent', () => {
     component = fixture.componentInstance;
 
     const exercise = generateTestExercise();
-    fixture.componentRef.setInput('action', ActionEnum.create)
+    fixture.componentRef.setInput('action', ActionType.create)
     fixture.componentRef.setInput('exercise', exercise)
     fixture.componentRef.setInput('modalTitle', "Title")
     fixture.componentRef.setInput('exerciseModalId', "Id")

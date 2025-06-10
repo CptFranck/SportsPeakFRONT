@@ -2,7 +2,7 @@ import {ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {TargetSetEntityFormComponent} from './target-set-entity-form.component';
 import {TargetSetService} from "../../../../core/services/target-set/target-set.service";
-import {ActionEnum} from "../../../../shared/model/enum/action.enum";
+import {ActionType} from "../../../../shared/model/enum/action-type";
 
 describe('TargetSetEntityFormComponent', () => {
   let component: TargetSetEntityFormComponent;
@@ -26,7 +26,7 @@ describe('TargetSetEntityFormComponent', () => {
 
     fixture.componentRef.setInput('targetSet', undefined);
     fixture.componentRef.setInput('progExercise', undefined);
-    fixture.componentRef.setInput('actionType', ActionEnum.read);
+    fixture.componentRef.setInput('actionType', ActionType.read);
     fixture.componentRef.setInput('submitEventActionType$', undefined);
 
     fixture.detectChanges();

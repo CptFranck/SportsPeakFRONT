@@ -3,7 +3,7 @@ import {ModalComponent} from "../../modal/modal/modal.component";
 import {MuscleEntityFormComponent} from "../../form/muscle/muscle-entity-form/muscle-entity-form.component";
 import {MuscleDeleteFormComponent} from "../../form/muscle/muscle-delete-form/muscle-delete-form.component";
 import {Muscle} from "../../../shared/model/dto/muscle";
-import {ActionEnum} from "../../../shared/model/enum/action.enum";
+import {ActionType} from "../../../shared/model/enum/action-type";
 
 @Component({
   selector: 'app-muscle-modal',
@@ -19,7 +19,7 @@ export class MuscleModalComponent {
   readonly modalTitle = input.required<string>();
   readonly muscleModalId = input.required<string>();
   readonly muscle = input<Muscle>();
-  readonly action = input.required<ActionEnum>();
+  readonly action = input.required<ActionType>();
 
-  protected readonly ActionType = ActionEnum;
+  protected readonly ActionType = ActionType;
 }

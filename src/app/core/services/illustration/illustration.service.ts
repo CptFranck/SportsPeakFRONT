@@ -49,7 +49,7 @@ export class IllustrationService {
 
     this.http.post<{ url: string }>(url, formData, {
       headers: {
-        'Authorization': `Bearer ${this.tokenService.getCurrentToken()?.accessToken}`
+        'Authorization': `Bearer ${token}`
       }
     }).subscribe({
       next: (res) => {

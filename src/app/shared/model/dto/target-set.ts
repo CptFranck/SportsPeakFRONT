@@ -1,7 +1,7 @@
 import {Duration} from "./duration";
 import {PerformanceLog} from "./performance-log";
-import {TargetSetStateEnum} from "../enum/targetSetState.enum";
-import {WeightUnitEnum} from "../enum/weightUnit.enum";
+import {TargetSetState} from "../enum/target-set-state";
+import {WeightUnit} from "../enum/weight-unit";
 
 export interface TargetSet {
   id: number
@@ -9,11 +9,11 @@ export interface TargetSet {
   setNumber: number
   repetitionNumber: number
   weight: number
-  weightUnit: WeightUnitEnum
+  weightUnit: WeightUnit
   physicalExertionUnitTime: Duration
   restTime: Duration
   creationDate: string
-  state: TargetSetStateEnum
+  state: TargetSetState
   targetSetUpdate: TargetSet | null
   performanceLogs: PerformanceLog[]
 }

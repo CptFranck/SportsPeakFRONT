@@ -9,7 +9,7 @@ import {
 import {RangeInputComponent} from "../../../input/range-input/range-input.component";
 import {getUpToDateTargetSets, sortLastTargetSetsByIndex} from "../../../../utils/target-set-functions";
 import {TargetSet} from "../../../../shared/model/dto/target-set";
-import {TargetSetStateEnum} from "../../../../shared/model/enum/targetSetState.enum";
+import {TargetSetState} from "../../../../shared/model/enum/target-set-state";
 import {sortPerformanceLogsBySet} from "../../../../utils/performance-log-functions";
 
 @Component({
@@ -29,7 +29,7 @@ export class MyProgExercisePerformanceComponent {
     if (progExercise) {
       let targetSets: TargetSet[] = getUpToDateTargetSets(progExercise)
         .sort(sortLastTargetSetsByIndex)
-        .filter((targetSets: TargetSet) => targetSets.state === TargetSetStateEnum.USED);
+        .filter((targetSets: TargetSet) => targetSets.state === TargetSetState.USED);
       targetSets.forEach((targetSet: TargetSet) => {
         targetSetsPerformanceLogsSortedByLogDate.push({
           key: targetSet.index.toString(),

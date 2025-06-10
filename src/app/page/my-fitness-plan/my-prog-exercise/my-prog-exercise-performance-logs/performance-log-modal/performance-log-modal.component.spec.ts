@@ -1,7 +1,7 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {PerformanceLogModalComponent} from './performance-log-modal.component';
-import {ActionEnum} from "../../../../../shared/model/enum/action.enum";
+import {ActionType} from "../../../../../shared/model/enum/action-type";
 import {generateTestExercise, generateTestProgExercise, generateTestUser} from "../../../../../utils/testFunctions";
 import {User} from "../../../../../shared/model/dto/user";
 import {Exercise} from "../../../../../shared/model/dto/exercise";
@@ -33,7 +33,7 @@ describe('PerformanceLogModalComponent', () => {
     fixture.componentRef.setInput('progExercise', generateTestProgExercise(mockUser, mockExercise));
     fixture.componentRef.setInput('targetSet', undefined);
     fixture.componentRef.setInput('performanceLog', undefined);
-    fixture.componentRef.setInput('action', ActionEnum.create);
+    fixture.componentRef.setInput('action', ActionType.create);
 
     fixture.detectChanges();
   });

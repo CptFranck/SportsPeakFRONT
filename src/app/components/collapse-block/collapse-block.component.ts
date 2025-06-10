@@ -1,7 +1,7 @@
 import {Component, computed, ElementRef, input, signal, TemplateRef, viewChild} from '@angular/core';
 import {NgTemplateOutlet} from "@angular/common";
 import {Subject} from "rxjs";
-import {ActionEnum} from "../../shared/model/enum/action.enum";
+import {ActionType} from "../../shared/model/enum/action-type";
 
 @Component({
   selector: 'app-collapse-block',
@@ -11,19 +11,19 @@ import {ActionEnum} from "../../shared/model/enum/action.enum";
   templateUrl: './collapse-block.component.html'
 })
 export class CollapseBlockComponent {
-  submitEventActionType$ = new Subject<ActionEnum>();
+  submitEventActionType$ = new Subject<ActionType>();
   hidden = signal<boolean>(true);
 
   readonly collapseId = input.required<string>();
   readonly classArgs = input<string>("");
   readonly contentTemplate = input<TemplateRef<any>>();
-  readonly actionType = input.required<ActionEnum | undefined>();
+  readonly actionType = input.required<ActionType | undefined>();
 
   readonly submitButton = computed<boolean>(() => {
-    return this.actionType() === ActionEnum.update || this.actionType() === ActionEnum.delete;
+    return this.actionType() === ActionType.update || this.actionType() === ActionType.delete;
   });
   readonly validateButtonClass = computed<string>(() => {
-    if (this.actionType() == ActionEnum.delete) return "btn-danger"
+    if (this.actionType() == ActionType.delete) return "btn-danger"
     else return "btn-success"
   });
   readonly closeButtonTitle = computed<string>(() => {
@@ -32,11 +32,11 @@ export class CollapseBlockComponent {
   });
   readonly validationButtonTitle = computed<string>(() => {
     switch (this.actionType()) {
-      case ActionEnum.create:
+      case ActionType.create:
         return 'Create';
-      case ActionEnum.update:
+      case ActionType.update:
         return 'Update';
-      case ActionEnum.delete:
+      case ActionType.delete:
         return 'Delete';
       default:
         return 'Submit';

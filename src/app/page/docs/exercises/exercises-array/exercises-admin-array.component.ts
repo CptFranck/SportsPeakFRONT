@@ -5,7 +5,7 @@ import {ModalButtonComponent} from "../../../../components/modal/modal-button/mo
 import {Dictionary} from "../../../../shared/model/common/dictionary";
 import {Subject} from "rxjs";
 import {Muscle} from "../../../../shared/model/dto/muscle";
-import {ActionEnum} from "../../../../shared/model/enum/action.enum";
+import {ActionType} from "../../../../shared/model/enum/action-type";
 
 @Component({
   selector: 'app-exercises-array',
@@ -44,21 +44,21 @@ export class ExercisesAdminArrayComponent implements OnChanges, OnDestroy {
 
   showExerciseDetails(exercise: Exercise): void {
     this.actionExercise.emit({
-      actionType: ActionEnum.read,
+      actionType: ActionType.read,
       object: exercise
     });
   }
 
   modifyExercise(exercise: Exercise) {
     this.actionExercise.emit({
-      actionType: ActionEnum.update,
+      actionType: ActionType.update,
       object: exercise
     });
   }
 
   delExercise(exercise: Exercise) {
     this.actionExercise.emit({
-      actionType: ActionEnum.delete,
+      actionType: ActionType.delete,
       object: exercise
     });
   }

@@ -1,7 +1,7 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {UsersManagementModalComponent} from './users-management-modal.component';
-import {ActionEnum} from "../../../../shared/model/enum/action.enum";
+import {ActionType} from "../../../../shared/model/enum/action-type";
 import {generateTestUser} from "../../../../utils/testFunctions";
 import {UserService} from "../../../../core/services/user/user.service";
 import {RoleService} from "../../../../core/services/role/role.service";
@@ -39,7 +39,7 @@ describe('UsersManagementModalComponent', () => {
     fixture.componentRef.setInput('user', user);
     fixture.componentRef.setInput('modalTitle', "Title");
     fixture.componentRef.setInput('userModalId', "Id");
-    fixture.componentRef.setInput('action', ActionEnum.create);
+    fixture.componentRef.setInput('action', ActionType.create);
 
     fixture.detectChanges();
   });

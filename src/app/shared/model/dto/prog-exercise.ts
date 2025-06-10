@@ -1,15 +1,15 @@
 import {User} from "./user";
 import {Exercise} from "./exercise";
 import {TargetSet} from "./target-set";
-import {VisibilityEnum} from "../enum/visibility.enum";
-import {TrustLabelEnum} from "../enum/trustLabel.enum";
+import {Visibility} from "../enum/visibility";
+import {TrustLabel} from "../enum/trust-label";
 
 export interface ProgExercise {
   id: number
   name: string
   note: string
-  visibility: VisibilityEnum
-  trustLabel: TrustLabelEnum
+  visibility: Visibility
+  trustLabel: TrustLabel
   creator: User
   exercise: Exercise
   targetSets: TargetSet[]

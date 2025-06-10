@@ -3,13 +3,13 @@ import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/
 import {Observable, Subject, takeUntil} from "rxjs";
 import {UserLoggedService} from "../../../../core/services/user-logged/user-logged.service";
 import {User} from "../../../../shared/model/dto/user";
-import {VisibilityEnum} from "../../../../shared/model/enum/visibility.enum";
+import {Visibility} from "../../../../shared/model/enum/visibility";
 import {InputControlComponent} from "../../../input-control/input-control.component";
 import {ExerciseSelectComponent} from "../../../selects/exercise-select/exercise-select.component";
 import {VisibilitySelectComponent} from "../../../selects/visibility-select/visibility-select.component";
 import {ProgExerciseService} from "../../../../core/services/prog-exercise/prog-exercise.service";
 import {ProgExercise} from "../../../../shared/model/dto/prog-exercise";
-import {ActionEnum} from "../../../../shared/model/enum/action.enum";
+import {ActionType} from "../../../../shared/model/enum/action-type";
 
 @Component({
   selector: 'app-my-prog-exercise-entity-form',
@@ -24,7 +24,7 @@ import {ActionEnum} from "../../../../shared/model/enum/action.enum";
 export class MyProgExerciseEntityFormComponent implements OnInit, OnDestroy {
   readonly progExercise = input.required<ProgExercise | undefined>();
   readonly btnCloseRef = input.required<HTMLButtonElement>();
-  readonly submitEventActionType$ = input.required<Observable<ActionEnum> | undefined>();
+  readonly submitEventActionType$ = input.required<Observable<ActionType> | undefined>();
 
   submitInvalidForm = signal<boolean>(false);
 
@@ -36,7 +36,7 @@ export class MyProgExerciseEntityFormComponent implements OnInit, OnDestroy {
     const creatorId: number | undefined = this.user ? this.user.id : undefined;
     const progExerciseName: string = progExercise ? progExercise.name : "";
     const progExerciseNote: string = progExercise ? progExercise.note : "";
-    const progExerciseVisibility: string = progExercise ? progExercise.visibility : VisibilityEnum.PRIVATE;
+    const progExerciseVisibility: string = progExercise ? progExercise.visibility : Visibility.PRIVATE;
     const progExerciseExerciseId: number | undefined = progExercise ? progExercise.exercise.id : undefined;
 
     const progExerciseForm: FormGroup = new FormGroup({
@@ -78,8 +78,8 @@ export class MyProgExerciseEntityFormComponent implements OnInit, OnDestroy {
     if (submitEventActionType$)
       submitEventActionType$
         .pipe(takeUntil(this.unsubscribe$))
-        .subscribe((actionType: ActionEnum) => {
-          if (actionType === ActionEnum.create || actionType === ActionEnum.update)
+        .subscribe((actionType: ActionType) => {
+          if (actionType === ActionType.create || actionType === ActionType.update)
             this.onSubmit();
         });
   }

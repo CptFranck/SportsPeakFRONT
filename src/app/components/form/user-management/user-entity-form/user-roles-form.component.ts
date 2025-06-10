@@ -6,7 +6,7 @@ import {User} from "../../../../shared/model/dto/user";
 import {UserService} from "../../../../core/services/user/user.service";
 import {RoleSelectorComponent} from "../../../selectors/role-selector/role-selector.component";
 import {Role} from "../../../../shared/model/dto/role";
-import {ActionEnum} from "../../../../shared/model/enum/action.enum";
+import {ActionType} from "../../../../shared/model/enum/action-type";
 
 @Component({
   selector: 'app-user-roles-form',
@@ -22,7 +22,7 @@ export class UserRolesFormComponent implements OnInit, OnDestroy {
 
   readonly user = input.required<User | undefined>();
   readonly btnCloseRef = input.required<HTMLButtonElement>();
-  readonly submitEvents = input.required<Observable<ActionEnum> | undefined>();
+  readonly submitEvents = input.required<Observable<ActionType> | undefined>();
 
   readonly userForm = computed<FormGroup>(() => {
     const user = this.user();
@@ -47,8 +47,8 @@ export class UserRolesFormComponent implements OnInit, OnDestroy {
     if (submitEvents)
       submitEvents
         .pipe(takeUntil(this.unsubscribe$))
-        .subscribe((actionType: ActionEnum) => {
-          if (actionType === ActionEnum.update)
+        .subscribe((actionType: ActionType) => {
+          if (actionType === ActionType.update)
             this.onSubmit();
         });
   }

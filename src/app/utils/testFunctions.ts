@@ -1,14 +1,14 @@
 import {User} from "../shared/model/dto/user";
 import {Exercise} from "../shared/model/dto/exercise";
 import {ProgExercise} from "../shared/model/dto/prog-exercise";
-import {VisibilityEnum} from "../shared/model/enum/visibility.enum";
-import {TrustLabelEnum} from "../shared/model/enum/trustLabel.enum";
+import {Visibility} from "../shared/model/enum/visibility";
+import {TrustLabel} from "../shared/model/enum/trust-label";
 import {Role} from "../shared/model/dto/role";
 import {Muscle} from "../shared/model/dto/muscle";
 import {ExerciseType} from "../shared/model/dto/exercise-type";
 import {TargetSet} from "../shared/model/dto/target-set";
-import {TargetSetStateEnum} from "../shared/model/enum/targetSetState.enum";
-import {WeightUnitEnum} from "../shared/model/enum/weightUnit.enum";
+import {TargetSetState} from "../shared/model/enum/target-set-state";
+import {WeightUnit} from "../shared/model/enum/weight-unit";
 import {PerformanceLog} from "../shared/model/dto/performance-log";
 import {Privilege} from "../shared/model/dto/privilege";
 
@@ -71,8 +71,8 @@ export function generateTestProgExercise(user: User, exercise: Exercise): ProgEx
     id: 1,
     name: 'name',
     note: 'note',
-    visibility: VisibilityEnum.PRIVATE,
-    trustLabel: TrustLabelEnum.UNVERIFIED,
+    visibility: Visibility.PRIVATE,
+    trustLabel: TrustLabel.UNVERIFIED,
     creator: user,
     exercise: exercise,
     targetSets: [],
@@ -86,11 +86,11 @@ export function generateTestTargetSet(performanceLogs: PerformanceLog[] = []): T
     setNumber: 0,
     repetitionNumber: 0,
     weight: 0,
-    weightUnit: WeightUnitEnum.KILOGRAMME,
+    weightUnit: WeightUnit.KILOGRAMME,
     physicalExertionUnitTime: {seconds: 0, minutes: 0, hours: 0},
     restTime: {seconds: 0, minutes: 0, hours: 0},
     creationDate: new Date().toISOString(),
-    state: TargetSetStateEnum.USED,
+    state: TargetSetState.USED,
     targetSetUpdate: null,
     performanceLogs: performanceLogs,
   };
@@ -102,7 +102,7 @@ export function generateTestPerformanceLog(): PerformanceLog {
     setIndex: 0,
     repetitionNumber: 0,
     weight: 0,
-    weightUnit: WeightUnitEnum.KILOGRAMME,
+    weightUnit: WeightUnit.KILOGRAMME,
     logDate: new Date().toISOString(),
   };
 }

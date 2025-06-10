@@ -2,7 +2,7 @@ import {Component, forwardRef, signal} from '@angular/core';
 import {SelectComponent} from "../../select/select.component";
 import {ControlValueAccessor, NG_VALUE_ACCESSOR} from "@angular/forms";
 import {SelectOption} from "../../../shared/model/component/select/selectOption";
-import {TrustLabelEnum} from "../../../shared/model/enum/trustLabel.enum";
+import {TrustLabel} from "../../../shared/model/enum/trust-label";
 
 @Component({
   selector: 'app-prog-exercise-trust-label-select',
@@ -21,17 +21,17 @@ import {TrustLabelEnum} from "../../../shared/model/enum/trustLabel.enum";
 export class TrustLabelSelectComponent implements ControlValueAccessor {
 
   trustLabelOptions: SelectOption[] = [{
-    title: TrustLabelEnum.UNVERIFIED,
-    value: TrustLabelEnum.UNVERIFIED,
+    title: TrustLabel.UNVERIFIED,
+    value: TrustLabel.UNVERIFIED,
   }, {
-    title: TrustLabelEnum.TRUSTED,
-    value: TrustLabelEnum.TRUSTED,
+    title: TrustLabel.TRUSTED,
+    value: TrustLabel.TRUSTED,
   }, {
-    title: TrustLabelEnum.EXPERT_APPROVED,
-    value: TrustLabelEnum.EXPERT_APPROVED,
+    title: TrustLabel.EXPERT_APPROVED,
+    value: TrustLabel.EXPERT_APPROVED,
   }];
 
-  trustLabel = signal<string>(TrustLabelEnum.UNVERIFIED);
+  trustLabel = signal<string>(TrustLabel.UNVERIFIED);
 
   onChange: (value: string) => void = () => {
   };

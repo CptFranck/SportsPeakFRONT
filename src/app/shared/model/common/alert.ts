@@ -1,16 +1,16 @@
 import {SourceLocation} from "graphql/language/location";
-import {AlertTypeEnum} from "../enum/alert.enum";
-import {AlertErrorEnum} from "../enum/alert-error.enum";
+import {AlertType} from "../enum/alert-type";
+import {AlertErrorType} from "../enum/alert-error-type";
 
 export interface Alert {
   id: number;
   title: string;
   message: string;
-  type: AlertTypeEnum;
+  type: AlertType;
   closed: boolean;
   autoClose: boolean;
   errorInformation?: {
-    errorType?: AlertErrorEnum;
+    errorType?: AlertErrorType;
     errorExtension?: { [key: string]: unknown },
     errorLocation?: ReadonlyArray<SourceLocation>,
     errorPath?: ReadonlyArray<string | number>,

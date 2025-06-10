@@ -14,7 +14,7 @@ import {UserLoggedService} from "../../../../core/services/user-logged/user-logg
 import {ExerciceCardComponent} from "../../../../components/card/exercice-card/exercice-card.component";
 import {collapseHeight} from "../../../../shared/animations/collapseHeigh";
 import {sortExerciseByName} from "../../../../utils/exercise-function";
-import {ActionEnum} from "../../../../shared/model/enum/action.enum";
+import {ActionType} from "../../../../shared/model/enum/action-type";
 
 @Component({
   selector: 'app-exercises',
@@ -33,7 +33,7 @@ export class ExercisesComponent implements OnInit, OnDestroy {
   isAdmin = signal<boolean>(false);
   loading = signal<boolean>(true);
   displayedExercises = signal<Exercise[]>([]);
-  action = signal<ActionEnum>(ActionEnum.create);
+  action = signal<ActionType>(ActionType.create);
   modalTitle = signal<string>("");
   exercise = signal<Exercise | undefined>(undefined);
 

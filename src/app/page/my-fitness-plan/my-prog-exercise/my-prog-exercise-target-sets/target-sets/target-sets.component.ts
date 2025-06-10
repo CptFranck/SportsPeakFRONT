@@ -11,7 +11,7 @@ import {getUpToDateTargetSets, sortLastTargetSetsByIndex} from "../../../../../u
 import {getProgExerciseTargetSet} from "../../../../../utils/prog-exercise-functions";
 import {Dictionary} from "../../../../../shared/model/common/dictionary";
 import {TargetSet} from "../../../../../shared/model/dto/target-set";
-import {ActionEnum} from "../../../../../shared/model/enum/action.enum";
+import {ActionType} from "../../../../../shared/model/enum/action-type";
 
 @Component({
   selector: 'app-target-sets',
@@ -56,7 +56,7 @@ export class TargetSetsComponent {
   readonly actionTargetSets = output<FormIndicator>();
   readonly actionPerformanceLogs = output<FormIndicator>();
 
-  protected readonly ActionType = ActionEnum;
+  protected readonly ActionType = ActionType;
 
   setTargetSet(event: FormIndicator) {
     this.actionTargetSets.emit(event)

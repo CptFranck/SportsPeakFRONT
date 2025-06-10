@@ -1,7 +1,7 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {ProgExerciseModalComponent} from './prog-exercise-modal.component';
-import {ActionEnum} from "../../../../shared/model/enum/action.enum";
+import {ActionType} from "../../../../shared/model/enum/action-type";
 
 describe('ProgExerciseModalComponent', () => {
   let component: ProgExerciseModalComponent;
@@ -19,7 +19,7 @@ describe('ProgExerciseModalComponent', () => {
     fixture.componentRef.setInput('modalTitle', "title");
     fixture.componentRef.setInput('progExerciseModalId', "Id");
     fixture.componentRef.setInput('progExercise', undefined);
-    fixture.componentRef.setInput('action', ActionEnum.read);
+    fixture.componentRef.setInput('action', ActionType.read);
 
     fixture.detectChanges();
   });

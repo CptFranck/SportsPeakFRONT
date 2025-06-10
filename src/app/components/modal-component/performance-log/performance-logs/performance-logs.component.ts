@@ -22,7 +22,7 @@ import {
   PerformanceLogSortedByLogDateComponent
 } from "../performance-log-sorted-by-log-date/performance-log-sorted-by-log-date.component";
 import {CheckBoxComponent} from "../../../input/check-box/check-box.component";
-import {ActionEnum} from "../../../../shared/model/enum/action.enum";
+import {ActionType} from "../../../../shared/model/enum/action-type";
 
 @Component({
   selector: 'app-performance-logs',
@@ -78,11 +78,11 @@ export class PerformanceLogsComponent {
   });
 
   switchSortByDate = signal<boolean>(true);
-  action = signal<ActionEnum>(ActionEnum.read);
+  action = signal<ActionType>(ActionType.read);
   performanceLog = signal<PerformanceLog | undefined>(undefined);
   performanceLogDate = signal<string | undefined>(undefined);
 
-  protected readonly ActionType = ActionEnum;
+  protected readonly ActionType = ActionType;
   protected readonly Object: ObjectConstructor = Object;
 
   setPerformanceLog(formIndicator: FormIndicator) {

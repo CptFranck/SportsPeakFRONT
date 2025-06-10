@@ -9,7 +9,7 @@ import {
   PerformanceLogsComponent
 } from "../../../../../components/modal-component/performance-log/performance-logs/performance-logs.component";
 import {ProgExercise} from "../../../../../shared/model/dto/prog-exercise";
-import {ActionEnum} from "../../../../../shared/model/enum/action.enum";
+import {ActionType} from "../../../../../shared/model/enum/action-type";
 
 @Component({
   selector: 'app-performance-log-modal',
@@ -26,7 +26,7 @@ export class PerformanceLogModalComponent {
   readonly progExercise = input.required<ProgExercise | undefined>();
   readonly targetSet = input.required<TargetSet | undefined>();
   readonly performanceLog = input.required<PerformanceLog | undefined>();
-  readonly action = input.required<ActionEnum>();
+  readonly action = input.required<ActionType>();
 
-  protected readonly ActionType = ActionEnum;
+  protected readonly ActionType = ActionType;
 }

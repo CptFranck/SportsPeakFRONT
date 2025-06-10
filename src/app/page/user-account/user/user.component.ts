@@ -8,8 +8,8 @@ import {
 import {UserModalComponent} from "../user-modal/user-modal.component";
 import {FormIndicator} from "../../../shared/model/common/form-indicator";
 import {Subject, takeUntil} from "rxjs";
-import {ModificationFieldEnum} from "../../../shared/model/enum/user-modification-field.enum";
-import {ActionEnum} from "../../../shared/model/enum/action.enum";
+import {ModificationFieldEnum} from "../../../shared/model/enum/user-modification-field";
+import {ActionType} from "../../../shared/model/enum/action-type";
 
 @Component({
   selector: 'app-user',
@@ -23,12 +23,12 @@ import {ActionEnum} from "../../../shared/model/enum/action.enum";
 export class UserComponent implements OnInit, OnDestroy {
 
   user: User | undefined = undefined;
-  action: ActionEnum = ActionEnum.update;
+  action: ActionType = ActionType.update;
   modificationField: ModificationFieldEnum = ModificationFieldEnum.username;
   userModalId: string = "userModal";
   modalTitle: string = "Update User";
 
-  protected readonly ActionType = ActionEnum;
+  protected readonly ActionType = ActionType;
 
   private readonly unsubscribe$: Subject<void> = new Subject<void>();
   private readonly userLoggedService: UserLoggedService = inject(UserLoggedService);

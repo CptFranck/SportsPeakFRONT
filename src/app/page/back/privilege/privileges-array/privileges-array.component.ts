@@ -2,7 +2,7 @@ import {Component, input, output} from '@angular/core';
 import {ModalButtonComponent} from "../../../../components/modal/modal-button/modal-button.component";
 import {Privilege} from "../../../../shared/model/dto/privilege";
 import {FormIndicator} from "../../../../shared/model/common/form-indicator";
-import {ActionEnum} from "../../../../shared/model/enum/action.enum";
+import {ActionType} from "../../../../shared/model/enum/action-type";
 
 @Component({
   selector: 'app-privileges-array',
@@ -20,21 +20,21 @@ export class PrivilegesArrayComponent {
 
   showPrivilegeDetails(privilege: Privilege): void {
     this.actionPrivilege.emit({
-      actionType: ActionEnum.read,
+      actionType: ActionType.read,
       object: privilege
     });
   }
 
   modifyPrivilege(privilege: Privilege) {
     this.actionPrivilege.emit({
-      actionType: ActionEnum.update,
+      actionType: ActionType.update,
       object: privilege
     });
   }
 
   delPrivilege(privilege: Privilege) {
     this.actionPrivilege.emit({
-      actionType: ActionEnum.delete,
+      actionType: ActionType.delete,
       object: privilege
     });
   }

@@ -8,7 +8,7 @@ import {
 import {getTargetSetTimeToString} from "../../../../utils/target-set-functions";
 import {getStringTime} from "../../../../utils/duration-functions";
 import {TooltipComponent} from "../../../tooltip/tooltip.component";
-import {ActionEnum} from "../../../../shared/model/enum/action.enum";
+import {ActionType} from "../../../../shared/model/enum/action-type";
 
 @Component({
   selector: 'app-target-set-card',
@@ -33,46 +33,46 @@ export class TargetSetCardComponent {
   readonly actionTargetSets = output<FormIndicator>();
   readonly actionPerformanceLogs = output<FormIndicator>();
 
-  protected readonly ActionType = ActionEnum;
+  protected readonly ActionType = ActionType;
 
   addNewPerformance(targetSet: TargetSet) {
     this.actionPerformanceLogs.emit({
-      actionType: ActionEnum.create,
+      actionType: ActionType.create,
       object: targetSet,
     });
   }
 
   checkPerformance(targetSet: TargetSet) {
     this.actionPerformanceLogs.emit({
-      actionType: ActionEnum.checkPerformance,
+      actionType: ActionType.checkPerformance,
       object: targetSet,
     });
   }
 
   adjustTargetSet(targetSet: TargetSet): void {
     this.actionTargetSets.emit({
-      actionType: ActionEnum.addEvolution,
+      actionType: ActionType.addEvolution,
       object: targetSet
     });
   }
 
   checkTargetSet(targetSet: TargetSet) {
     this.actionTargetSets.emit({
-      actionType: ActionEnum.checkEvolution,
+      actionType: ActionType.checkEvolution,
       object: targetSet
     });
   }
 
   modifyTargetSet(targetSet: TargetSet) {
     this.actionTargetSets.emit({
-      actionType: ActionEnum.update,
+      actionType: ActionType.update,
       object: targetSet
     });
   }
 
   delTargetSet(targetSet: TargetSet) {
     this.actionTargetSets.emit({
-      actionType: ActionEnum.delete,
+      actionType: ActionType.delete,
       object: targetSet
     });
   }

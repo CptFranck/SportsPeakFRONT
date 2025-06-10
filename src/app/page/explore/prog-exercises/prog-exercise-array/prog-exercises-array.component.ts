@@ -7,7 +7,7 @@ import {User} from "../../../../shared/model/dto/user";
 import {ProgExerciseRowDetail} from "../../../../shared/model/common/prog-exercise-row-detail";
 import {Dictionary} from "../../../../shared/model/common/dictionary";
 import {Subject, takeUntil} from "rxjs";
-import {ActionEnum} from "../../../../shared/model/enum/action.enum";
+import {ActionType} from "../../../../shared/model/enum/action-type";
 
 @Component({
   selector: 'app-prog-exercises-array',
@@ -77,7 +77,7 @@ export class ProgExercisesArrayComponent implements OnInit, OnChanges, OnDestroy
 
   showMuscleDetails(progExercise: ProgExercise): void {
     this.actionMuscle.emit({
-      actionType: ActionEnum.read,
+      actionType: ActionType.read,
       object: progExercise
     });
   }

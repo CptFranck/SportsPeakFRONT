@@ -12,7 +12,7 @@ import {collapseHeight} from "../../../../shared/animations/collapseHeigh";
 import {MuscleCardComponent} from "../../../../components/card/muscle-card/muscle-card.component";
 import {sortMuscleByName} from "../../../../utils/muscle-functions";
 import {ModalButtonComponent} from "../../../../components/modal/modal-button/modal-button.component";
-import {ActionEnum} from "../../../../shared/model/enum/action.enum";
+import {ActionType} from "../../../../shared/model/enum/action-type";
 
 @Component({
   selector: 'app-muscles',
@@ -35,7 +35,7 @@ export class MusclesComponent implements OnInit, OnDestroy {
   displayedMuscles = signal<Muscle[]>([]);
 
   readonly muscleModalId: string = "muscleModal";
-  readonly ActionType = ActionEnum;
+  readonly ActionType = ActionType;
 
   private muscles: Muscle[] = [];
   private readonly unsubscribe$ = new Subject<void>();

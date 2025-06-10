@@ -12,7 +12,7 @@ import {
 } from "../../../form/target-set/target-set-delete-form/target-set-delete-form.component";
 import {PerformanceLogsComponent} from "../../performance-log/performance-logs/performance-logs.component";
 import {ProgExercise} from "../../../../shared/model/dto/prog-exercise";
-import {ActionEnum} from "../../../../shared/model/enum/action.enum";
+import {ActionType} from "../../../../shared/model/enum/action-type";
 
 @Component({
   selector: 'app-target-set-logs',
@@ -41,18 +41,18 @@ export class TargetSetLogsComponent {
     return [];
   });
 
-  action = signal<ActionEnum>(ActionEnum.read);
+  action = signal<ActionType>(ActionType.read);
   blocTitle = signal<string | undefined>(undefined);
   targetSetLog = signal<TargetSet | undefined>(undefined);
 
   readonly actionTargetSets = output<FormIndicator>();
 
-  protected readonly ActionType = ActionEnum;
+  protected readonly ActionType = ActionType;
 
   setTargetSet(formIndicator: FormIndicator) {
     this.action.set(formIndicator.actionType);
     this.targetSetLog.set(formIndicator.object);
-    if (this.action() === ActionEnum.checkPerformance)
+    if (this.action() === ActionType.checkPerformance)
       this.blocTitle.set(undefined);
     else
       this.blocTitle.set("Set created on " + new Date(formIndicator.object?.creationDate).toLocaleDateString());

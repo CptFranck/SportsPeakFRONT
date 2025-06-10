@@ -5,7 +5,7 @@ import {getTargetSetTimeToString} from "../../../../utils/target-set-functions";
 import {getStringTime} from "../../../../utils/duration-functions";
 import {CollapseBlockComponent} from "../../../collapse-block/collapse-block.component";
 import {CollapseButtonComponent} from "../../../collapse-buton/collapse-button.component";
-import {ActionEnum} from "../../../../shared/model/enum/action.enum";
+import {ActionType} from "../../../../shared/model/enum/action-type";
 
 @Component({
   selector: 'app-target-set-logs-card',
@@ -31,21 +31,21 @@ export class TargetSetLogsCardComponent {
 
   checkPerformanceLogs(targetSet: TargetSet) {
     this.actionTargetSets.emit({
-      actionType: ActionEnum.checkPerformance,
+      actionType: ActionType.checkPerformance,
       object: targetSet
     });
   }
 
   modifyTargetSet(targetSet: TargetSet) {
     this.actionTargetSets.emit({
-      actionType: ActionEnum.update,
+      actionType: ActionType.update,
       object: targetSet
     });
   }
 
   delTargetSet(targetSet: TargetSet) {
     this.actionTargetSets.emit({
-      actionType: ActionEnum.delete,
+      actionType: ActionType.delete,
       object: targetSet
     });
   }

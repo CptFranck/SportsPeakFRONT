@@ -10,7 +10,7 @@ import {
 import {
   MyProgExercisePerformanceComponent
 } from "../../../../components/modal-component/prog-exercise/my-prog-exercise-performance/my-prog-exercise-performance.component";
-import {ActionEnum} from "../../../../shared/model/enum/action.enum";
+import {ActionType} from "../../../../shared/model/enum/action-type";
 
 @Component({
   selector: 'app-my-prog-exercise-details-modal',
@@ -26,7 +26,7 @@ export class MyProgExerciseEditorModalComponent {
   readonly modalTitle = input.required<string>();
   readonly progExerciseModalId = input.required<string>();
   readonly progExercise = input.required<ProgExercise | undefined>();
-  readonly action = input.required<ActionEnum>();
+  readonly action = input.required<ActionType>();
 
-  protected readonly ActionType = ActionEnum;
+  protected readonly ActionType = ActionType;
 }

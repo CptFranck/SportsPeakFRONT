@@ -1,7 +1,7 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {AlertComponent} from './alert.component';
-import {AlertTypeEnum} from "../../shared/model/enum/alert.enum";
+import {AlertType} from "../../shared/model/enum/alert-type";
 import {Alert} from "../../shared/model/common/alert";
 
 describe('AlertComponent', () => {
@@ -16,12 +16,12 @@ describe('AlertComponent', () => {
 
     fixture = TestBed.createComponent(AlertComponent);
     component = fixture.componentInstance;
-    
+
     const alert: Alert = {
       id: 0,
       title: "title",
       message: "message",
-      type: AlertTypeEnum.success,
+      type: AlertType.success,
       closed: false,
       autoClose: false
     }

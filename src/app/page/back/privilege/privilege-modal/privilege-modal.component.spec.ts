@@ -1,7 +1,7 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {PrivilegeModalComponent} from './privilege-modal.component';
-import {ActionEnum} from "../../../../shared/model/enum/action.enum";
+import {ActionType} from "../../../../shared/model/enum/action-type";
 
 describe('PrivilegeModalComponent', () => {
   let component: PrivilegeModalComponent;
@@ -19,7 +19,7 @@ describe('PrivilegeModalComponent', () => {
     fixture.componentRef.setInput('modalTitle', "title");
     fixture.componentRef.setInput('privilegeModalId', "Id");
     fixture.componentRef.setInput('privilege', undefined);
-    fixture.componentRef.setInput('action', ActionEnum.read);
+    fixture.componentRef.setInput('action', ActionType.read);
 
     fixture.detectChanges();
   });

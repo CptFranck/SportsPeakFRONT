@@ -8,7 +8,7 @@ import {ModalButtonComponent} from "../../../../components/modal/modal-button/mo
 import {ModalComponent} from "../../../../components/modal/modal/modal.component";
 import {Role} from "../../../../shared/model/dto/role";
 import {FormIndicator} from "../../../../shared/model/common/form-indicator";
-import {ActionEnum} from "../../../../shared/model/enum/action.enum";
+import {ActionType} from "../../../../shared/model/enum/action-type";
 
 @Component({
   selector: 'app-role-modal',
@@ -25,16 +25,16 @@ export class RoleModalComponent {
   readonly modalTitle = input.required<string>();
   readonly roleModalId = input.required<string>();
   readonly role = input.required<Role | undefined>();
-  readonly action = input.required<ActionEnum>();
+  readonly action = input.required<ActionType>();
 
   readonly actionRole = output<FormIndicator>();
 
-  protected readonly ActionType = ActionEnum;
+  protected readonly ActionType = ActionType;
 
   onClick() {
     this.actionRole.emit({
       object: undefined,
-      actionType: ActionEnum.create
+      actionType: ActionType.create
     })
   }
 }

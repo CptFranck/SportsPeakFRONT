@@ -10,7 +10,7 @@ import {
   ProgExerciseCardComponent
 } from "../../../../components/card/prog-exercise/prog-exercise-card/prog-exercise-card.component";
 import {Subject, takeUntil} from "rxjs";
-import {ActionEnum} from "../../../../shared/model/enum/action.enum";
+import {ActionType} from "../../../../shared/model/enum/action-type";
 
 @Component({
   selector: 'app-my-prog-exercises',
@@ -25,7 +25,7 @@ import {ActionEnum} from "../../../../shared/model/enum/action.enum";
 export class MyProgExercisesComponent implements OnInit, OnDestroy {
   loading = signal<boolean>(true);
   displayedProgExercises = signal<ProgExercise[]>([]);
-  action = signal<ActionEnum>(ActionEnum.create);
+  action = signal<ActionType>(ActionType.create);
   modalTitle = signal<string>("");
   progExercise = signal<ProgExercise | undefined>(undefined);
 

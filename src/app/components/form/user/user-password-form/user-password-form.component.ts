@@ -5,8 +5,8 @@ import {Observable, Subject, takeUntil} from "rxjs";
 import {InputControlComponent} from "../../../input-control/input-control.component";
 import {confirmValidator} from "../../../../shared/validators/confirmValidator";
 import {UserService} from "../../../../core/services/user/user.service";
-import {ModificationFieldEnum} from "../../../../shared/model/enum/user-modification-field.enum";
-import {ActionEnum} from "../../../../shared/model/enum/action.enum";
+import {ModificationFieldEnum} from "../../../../shared/model/enum/user-modification-field";
+import {ActionType} from "../../../../shared/model/enum/action-type";
 
 @Component({
   selector: 'app-user-password-form',
@@ -18,11 +18,11 @@ import {ActionEnum} from "../../../../shared/model/enum/action.enum";
 })
 export class UserPasswordFormComponent implements OnInit, OnDestroy {
   submitInvalidForm = signal<boolean>(false);
-  
+
   readonly user = input.required<User | undefined>();
   readonly btnCloseRef = input.required<HTMLButtonElement>();
   readonly modification = input.required<ModificationFieldEnum>();
-  readonly submitEventActionType$ = input.required<Observable<ActionEnum> | undefined>();
+  readonly submitEventActionType$ = input.required<Observable<ActionType> | undefined>();
 
   readonly userForm = computed<FormGroup>(() => {
     const userForm: FormGroup = new FormGroup({
@@ -60,8 +60,8 @@ export class UserPasswordFormComponent implements OnInit, OnDestroy {
     if (submitEventActionType$)
       submitEventActionType$
         .pipe(takeUntil(this.unsubscribe$))
-        .subscribe((actionType: ActionEnum) => {
-          if (actionType === ActionEnum.update && this.modification() === ModificationFieldEnum.password)
+        .subscribe((actionType: ActionType) => {
+          if (actionType === ActionType.update && this.modification() === ModificationFieldEnum.password)
             this.onSubmit();
         });
   }
