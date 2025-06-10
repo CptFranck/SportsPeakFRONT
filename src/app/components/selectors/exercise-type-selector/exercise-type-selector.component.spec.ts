@@ -1,18 +1,19 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {ExerciseTypeSelectorComponent} from './exercise-type-selector.component';
-import {BehaviorSubject} from "rxjs";
+import {of} from "rxjs";
 import {ExerciseTypeService} from "../../../core/services/exercise-type/exercise-type.service";
-import {ExerciseType} from "../../../shared/model/dto/exercise-type";
 import {provideAnimations} from "@angular/platform-browser/animations";
 
 describe('ExerciseTypeSelectorComponent', () => {
   let component: ExerciseTypeSelectorComponent;
   let fixture: ComponentFixture<ExerciseTypeSelectorComponent>;
-  let mockExerciseTypeService: jasmine.SpyObj<ExerciseTypeService> =
-    jasmine.createSpyObj('MuscleService', ['muscles', 'isLoading']);
-  mockExerciseTypeService.exerciseTypes = new BehaviorSubject<ExerciseType[]>([]);
-  mockExerciseTypeService.isLoading = new BehaviorSubject<boolean>(true);
+
+  const mockExerciseTypeService = {
+    isLoading$: of(true),
+    exerciseTypeList$: of([]),
+    selectedExerciseType$: of(undefined),
+  };
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({

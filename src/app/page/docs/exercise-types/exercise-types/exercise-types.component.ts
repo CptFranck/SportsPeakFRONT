@@ -46,16 +46,15 @@ export class ExerciseTypesComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.exerciseTypeService.getExerciseTypes();
-
-    this.exerciseTypeService.exerciseTypes
+    this.exerciseTypeService.isLoading$
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe((loading: boolean) => this.loading.set(loading));
+    this.exerciseTypeService.exerciseTypeList$
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe((exerciseType: ExerciseType[]) => {
         this.exerciseTypes = exerciseType;
         this.displayedExerciseTypes.set(Array.from(exerciseType).sort(sortExerciseTypeByName));
       });
-    this.exerciseTypeService.isLoading
-      .pipe(takeUntil(this.unsubscribe$))
-      .subscribe((loading: boolean) => this.loading.set(loading));
     this.userLoggedService.currentUser
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe(() => this.isAdmin.set(this.userLoggedService.isAdmin()));

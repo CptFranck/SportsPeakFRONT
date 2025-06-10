@@ -16,6 +16,21 @@ export const GET_EXERCISE_TYPES = gql`
   }
 `;
 
+export const GET_EXERCISE_TYPES_BY_ID = gql`
+  query ($id : ID!){
+    getExerciseTypeById (id : $id){
+      id
+      exercises {
+        id
+        name
+        goal
+      }
+      name
+      goal
+    }
+  }
+`;
+
 export const ADD_EXERCISE_TYPES = gql`
   mutation ($inputNewExerciseType : InputNewExerciseType!){
     addExerciseType(inputNewExerciseType: $inputNewExerciseType) {

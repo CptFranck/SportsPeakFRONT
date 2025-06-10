@@ -5,6 +5,7 @@ import {
   ADD_EXERCISE_TYPES,
   DEL_EXERCISE_TYPES,
   GET_EXERCISE_TYPES,
+  GET_EXERCISE_TYPES_BY_ID,
   MOD_EXERCISE_TYPES
 } from "../../graphql/operations/exercise-type.operation";
 import {AlertService} from "../alert/alert.service";
@@ -18,8 +19,9 @@ import {ApolloWrapperService} from "../apollo-wrapper/apollo-wrapper.service";
 })
 export class ExerciseTypeService {
 
-  exerciseTypes = new BehaviorSubject<ExerciseType[]>([]);
-  isLoading = new BehaviorSubject<boolean>(true);
+  private readonly isLoadingSubject = new BehaviorSubject<boolean>(true);
+  private readonly exerciseTypeListSubject = new BehaviorSubject<ExerciseType[]>([]);
+  private readonly selectedExerciseTypeSubject = new BehaviorSubject<ExerciseType | undefined>(undefined);
 
   private readonly alertService = inject(AlertService);
   private readonly apolloWrapperService = inject(ApolloWrapperService);
@@ -28,18 +30,46 @@ export class ExerciseTypeService {
     this.getExerciseTypes();
   }
 
+  get isLoading$() {
+    return this.isLoadingSubject.asObservable();
+  }
+
+  get exerciseTypeList$() {
+    return this.exerciseTypeListSubject.asObservable();
+  }
+
+  get selectedExerciseType$() {
+    return this.selectedExerciseTypeSubject.asObservable();
+  }
+
   getExerciseTypes() {
-    this.isLoading.next(true);
+    this.isLoadingSubject.next(true);
     this.apolloWrapperService.watchQuery({
       query: GET_EXERCISE_TYPES,
     }).valueChanges.subscribe({
       next: ({data, errors, loading}: ApolloQueryResult<any>) => {
         if (errors)
           this.alertService.graphQLErrorAlertHandler(errors);
-        this.exerciseTypes.next(data.getExerciseTypes);
-        this.isLoading.next(loading);
+        this.exerciseTypeListSubject.next(data.getExerciseTypes);
+        this.isLoadingSubject.next(loading);
       },
-      error: () => this.isLoading.next(false),
+      error: () => this.isLoadingSubject.next(false),
+    });
+  }
+
+  getExerciseTypeById(id: number) {
+    this.isLoadingSubject.next(true);
+    this.apolloWrapperService.watchQuery({
+      query: GET_EXERCISE_TYPES_BY_ID,
+      variables: {id: id}
+    }).valueChanges.subscribe({
+      next: ({data, errors, loading}: ApolloQueryResult<any>) => {
+        if (errors)
+          this.alertService.graphQLErrorAlertHandler(errors);
+        this.selectedExerciseTypeSubject.next(data.getExerciseTypeById);
+        this.isLoadingSubject.next(loading);
+      },
+      error: () => this.isLoadingSubject.next(false),
     });
   }
 

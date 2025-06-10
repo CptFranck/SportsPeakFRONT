@@ -1,9 +1,8 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {ExerciseTypesComponent} from './exercise-types.component';
-import {BehaviorSubject, of} from "rxjs";
+import {of} from "rxjs";
 import {ExerciseTypeService} from "../../../../core/services/exercise-type/exercise-type.service";
-import {ExerciseType} from "../../../../shared/model/dto/exercise-type";
 import {ExerciseService} from "../../../../core/services/exercise/exercise.service";
 import {provideAnimations} from "@angular/platform-browser/animations";
 
@@ -17,10 +16,17 @@ describe('ExerciseTypesComponent', () => {
     selectedExercise$: of(undefined),
   };
 
-  let mockExerciseTypeService: jasmine.SpyObj<ExerciseTypeService> =
+  const mockExerciseTypeService: jasmine.SpyObj<ExerciseTypeService> =
     jasmine.createSpyObj('ExerciseTypeService', ['getExerciseTypes']);
-  mockExerciseTypeService.exerciseTypes = new BehaviorSubject<ExerciseType[]>([]);
-  mockExerciseTypeService.isLoading = new BehaviorSubject<boolean>(true);
+  mockExerciseTypeService.getExerciseTypes.and.returnValues();
+
+  Object.defineProperty(mockExerciseTypeService, 'isLoading$', {
+    get: () => of(true),
+  });
+
+  Object.defineProperty(mockExerciseTypeService, 'exerciseTypeList$', {
+    get: () => of(undefined),
+  });
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({

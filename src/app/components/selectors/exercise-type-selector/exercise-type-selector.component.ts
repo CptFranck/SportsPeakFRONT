@@ -25,12 +25,14 @@ export class ExerciseTypeSelectorComponent implements OnInit, OnDestroy, Control
   exerciseTypeIds = signal<number[]>([]);
   exerciseTypesOptions = signal<MultiSelectOption[]>([]);
 
-
   private readonly unsubscribe$ = new Subject<void>();
   private readonly exerciseTypeService = inject(ExerciseTypeService);
 
   ngOnInit(): void {
-    this.exerciseTypeService.exerciseTypes
+    this.exerciseTypeService.isLoading$
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe((loading: boolean) => this.loading.set(loading));
+    this.exerciseTypeService.exerciseTypeList$
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe((exerciseTypes: ExerciseType[]): void => {
         let options: MultiSelectOption[] = []
@@ -44,9 +46,6 @@ export class ExerciseTypeSelectorComponent implements OnInit, OnDestroy, Control
         });
         this.exerciseTypesOptions.set([...options]);
       });
-    this.exerciseTypeService.isLoading
-      .pipe(takeUntil(this.unsubscribe$))
-      .subscribe((loading: boolean) => this.loading.set(loading));
   }
 
   ngOnDestroy() {
