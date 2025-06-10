@@ -1,5 +1,6 @@
 <app-select (onChange)="setIndex($event)"
             (onTouched)="onTouched()"
+            [isLoading]="targetSet() === undefined"
             [options]="indexOptions()"
             [value]="index()"
 />

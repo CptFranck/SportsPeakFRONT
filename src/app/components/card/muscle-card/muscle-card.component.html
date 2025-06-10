@@ -12,14 +12,10 @@
       </div>
     </div>
     <div class="col-md-auto col">
-      @let image = `assets/muscle/${muscle().latinName.split(' ').join('-')}.png`;
       @let alt = `${muscle().latinName.split(' ').join('-')}`;
-      <img
-        [alt]="alt"
-        [ngSrc]="image"
-        class="rounded mx-auto d-block"
-        height="150"
-        width="150">
+      @if (imageUrl !== '') {
+        <img [alt]="alt" [ngSrc]="imageUrl" class="rounded mx-auto d-block" height="150" width="150">
+      }
     </div>
   </div>
 </div>
