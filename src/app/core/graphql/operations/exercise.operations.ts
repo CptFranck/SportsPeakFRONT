@@ -22,6 +22,34 @@ export const GET_EXERCISES = gql`
   }
 `;
 
+export const GET_EXERCISE_BY_ID = gql`
+  query ($id : ID!){
+    getExerciseById(id: $id) {
+      id
+      exerciseTypes {
+        id
+        name
+        goal
+      }
+      muscles {
+        id
+        name
+        function
+      }
+      progExercises {
+        id
+        name
+        note
+        trustLabel
+        visibility
+      }
+      name
+      description
+      goal
+    }
+  }
+`;
+
 export const ADD_EXERCISE = gql`
   mutation ($inputNewExercise : InputNewExercise!){
     addExercise(inputNewExercise: $inputNewExercise) {

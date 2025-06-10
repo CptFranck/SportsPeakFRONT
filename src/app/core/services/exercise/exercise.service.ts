@@ -1,7 +1,13 @@
 import {inject, Injectable} from '@angular/core';
 import {MutationResult} from "apollo-angular";
 import {FormGroup} from "@angular/forms";
-import {ADD_EXERCISE, DEL_EXERCISE, GET_EXERCISES, MOD_EXERCISE} from "../../graphql/operations/exercise.operations";
+import {
+  ADD_EXERCISE,
+  DEL_EXERCISE,
+  GET_EXERCISE_BY_ID,
+  GET_EXERCISES,
+  MOD_EXERCISE
+} from "../../graphql/operations/exercise.operations";
 import {BehaviorSubject} from "rxjs";
 import {AlertService} from "../alert/alert.service";
 import {Exercise} from "../../../shared/model/dto/exercise";
@@ -50,6 +56,22 @@ export class ExerciseService {
         error: () => this.isLoadingSubject.next(false),
       }
     );
+  }
+
+  getExerciseById(id: number) {
+    this.isLoadingSubject.next(true);
+    this.apolloWrapperService.watchQuery({
+      query: GET_EXERCISE_BY_ID,
+      variables: {id: id}
+    }).valueChanges.subscribe({
+      next: ({data, errors, loading}: ApolloQueryResult<any>) => {
+        if (errors)
+          this.alertService.graphQLErrorAlertHandler(errors);
+        this.selectedExerciseSubject.next(data.getExerciseById);
+        this.isLoadingSubject.next(loading);
+      },
+      error: () => this.isLoadingSubject.next(false),
+    });
   }
 
   addExercise(exerciseForm: FormGroup) {
