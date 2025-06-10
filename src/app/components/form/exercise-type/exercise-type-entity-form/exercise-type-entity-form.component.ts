@@ -61,10 +61,9 @@ export class ExerciseTypeEntityFormComponent implements OnInit, OnDestroy {
 
 
   ngOnInit() {
-    this.userLoggedService.currentUser
+    this.userLoggedService.currentUser$
       .pipe(takeUntil(this.unsubscribe$))
-      .subscribe(() =>
-        this.isAdmin = this.userLoggedService.isAdmin());
+      .subscribe(() => this.isAdmin = this.userLoggedService.isAdmin());
     const submitEventActionType$ = this.submitEventActionType$();
     if (submitEventActionType$)
       submitEventActionType$

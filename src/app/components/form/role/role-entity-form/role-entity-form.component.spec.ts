@@ -1,9 +1,8 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {RoleEntityFormComponent} from './role-entity-form.component';
-import {BehaviorSubject} from "rxjs";
+import {BehaviorSubject, of} from "rxjs";
 import {UserLoggedService} from "../../../../core/services/user-logged/user-logged.service";
-import {User} from "../../../../shared/model/dto/user";
 import {PrivilegeService} from "../../../../core/services/privilege/privilege.service";
 import {Privilege} from "../../../../shared/model/dto/privilege";
 import {RoleService} from "../../../../core/services/role/role.service";
@@ -16,9 +15,9 @@ describe('RoleEntityFormComponent', () => {
   let mockRoleService: jasmine.SpyObj<RoleService> =
     jasmine.createSpyObj('RoleService', ['addRole', 'modifyRole']);
 
-  let mockUserLoggedService: jasmine.SpyObj<UserLoggedService> =
-    jasmine.createSpyObj('UserLoggedService', ['currentUser']);
-  mockUserLoggedService.currentUser = new BehaviorSubject<User | undefined>(undefined);
+  const mockUserLoggedService = {
+    currentUser$: of(undefined),
+  };
 
   let mockPrivilegeService: jasmine.SpyObj<PrivilegeService> =
     jasmine.createSpyObj('UserLoggedService', ['currentUser']);

@@ -19,11 +19,9 @@ export class NavBarAdminMenuComponent implements OnInit, OnDestroy {
   private readonly userLoggedService: UserLoggedService = inject(UserLoggedService);
 
   ngOnInit() {
-    this.userLoggedService.currentUser
+    this.userLoggedService.currentUser$
       .pipe(takeUntil(this.unsubscribe$))
-      .subscribe(() => {
-        this.isAdmin.set(this.userLoggedService.isAdmin());
-      })
+      .subscribe(() => this.isAdmin.set(this.userLoggedService.isAdmin()));
   }
 
   ngOnDestroy() {

@@ -65,7 +65,7 @@ export class MuscleDetailsComponent implements OnInit, OnDestroy {
     this.muscleService.selectedMuscle$
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe((muscle: Muscle | undefined) => this.muscle.set(muscle));
-    this.userLoggedService.currentUser
+    this.userLoggedService.currentUser$
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe(() => this.isAdmin.set(this.userLoggedService.isAdmin()));
   }

@@ -21,7 +21,7 @@ export class NavBarUserMenuComponent implements OnInit, OnDestroy {
   private readonly userService: UserLoggedService = inject(UserLoggedService);
 
   ngOnInit() {
-    this.userService.currentUser
+    this.userService.currentUser$
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe((user: User | undefined) => {
         this.user.set(user);

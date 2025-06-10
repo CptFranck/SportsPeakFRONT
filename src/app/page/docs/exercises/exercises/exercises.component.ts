@@ -55,7 +55,7 @@ export class ExercisesComponent implements OnInit, OnDestroy {
         this.exercises = exercises;
         this.displayedExercises.set(Array.from(exercises).sort(sortExerciseByName));
       });
-    this.userLoggedService.currentUser
+    this.userLoggedService.currentUser$
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe(() => this.isAdmin.set(this.userLoggedService.isAdmin()));
   }

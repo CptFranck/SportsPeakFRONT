@@ -53,7 +53,7 @@ export class MusclesComponent implements OnInit, OnDestroy {
         this.muscles = muscles;
         this.displayedMuscles.set(Array.from(muscles).sort(sortMuscleByName));
       });
-    this.userLoggedService.currentUser
+    this.userLoggedService.currentUser$
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe(() => this.isAdmin.set(this.userLoggedService.isAdmin()));
   }

@@ -35,7 +35,7 @@ export class ProgExercisesArrayComponent implements OnInit, OnChanges, OnDestroy
   private readonly userLoggedService = inject(UserLoggedService);
 
   ngOnInit() {
-    this.userLoggedService.currentUser
+    this.userLoggedService.currentUser$
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe((user: User | undefined) => {
         this.userLogged.set(user);

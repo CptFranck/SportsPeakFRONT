@@ -71,10 +71,9 @@ export class MyProgExerciseEntityFormComponent implements OnInit, OnDestroy {
   private readonly progExerciseService = inject(ProgExerciseService);
 
   ngOnInit() {
-    this.userLoggedService.currentUser
+    this.userLoggedService.currentUser$
       .pipe(takeUntil(this.unsubscribe$))
-      .subscribe((user: User | undefined) =>
-        this.user = user);
+      .subscribe((user: User | undefined) => this.user = user);
     const submitEventActionType$ = this.submitEventActionType$();
     if (submitEventActionType$)
       submitEventActionType$

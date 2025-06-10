@@ -78,7 +78,7 @@ export class ExerciseEntityFormComponent implements OnInit, OnDestroy {
   private readonly userLoggedService = inject(UserLoggedService);
 
   ngOnInit() {
-    this.userLoggedService.currentUser
+    this.userLoggedService.currentUser$
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe(() => this.isAdmin = this.userLoggedService.isAdmin());
     const submitEventActionType$ = this.submitEventActionType$();

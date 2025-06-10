@@ -8,38 +8,42 @@ import {BehaviorSubject} from "rxjs";
 })
 export class UserLoggedService {
 
-  currentUser = new BehaviorSubject<User | undefined>(undefined);
+  private readonly currentUserSubject = new BehaviorSubject<User | undefined>(undefined);
 
   private readonly localStorageService = inject(LocalStorageService);
 
   constructor() {
     let user: User | null = this.getSavedUser();
-    if (user) this.currentUser.next(user);
+    if (user) this.currentUserSubject.next(user);
+  }
+
+  get currentUser$() {
+    return this.currentUserSubject.asObservable();
   }
 
   getCurrentUser() {
-    return this.currentUser.value;
+    return this.currentUserSubject.value;
   }
 
   setCurrentUser(user: User) {
-    this.currentUser.next(user);
+    this.currentUserSubject.next(user);
     this.localStorageService.saveData("user", user);
   }
 
   removeCurrentUser() {
-    this.currentUser.next(undefined);
+    this.currentUserSubject.next(undefined);
     this.localStorageService.removeData("user");
   }
 
   isStaff() {
-    const user = this.currentUser.value;
+    const user = this.currentUserSubject.value;
     if (user)
       return user.roles.some(role => role.name === "STAFF" || role.name === "ADMIN");
     return false;
   }
 
   isAdmin() {
-    const user = this.currentUser.value;
+    const user = this.currentUserSubject.value;
     if (user)
       return user.roles.some(role => role.name === "ADMIN");
     return false;

@@ -73,15 +73,17 @@ export class MuscleEntityFormComponent implements OnInit, OnDestroy {
   private readonly userLoggedService: UserLoggedService = inject(UserLoggedService);
 
   ngOnInit() {
-    this.userLoggedService.currentUser
+    this.userLoggedService.currentUser$
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe(() => this.isAdmin = this.userLoggedService.isAdmin());
     const submitEventActionType$ = this.submitEventActionType$();
     if (submitEventActionType$)
       submitEventActionType$
         .pipe(takeUntil(this.unsubscribe$))
-        .subscribe((actionType: ActionEnum) =>
-          (actionType === ActionEnum.create || actionType === ActionEnum.update) ? this.onSubmit() : null);
+        .subscribe((actionType: ActionEnum) => {
+          if (actionType === ActionEnum.create || actionType === ActionEnum.update)
+            this.onSubmit();
+        });
   }
 
   ngOnDestroy() {

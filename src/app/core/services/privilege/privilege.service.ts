@@ -27,7 +27,7 @@ export class PrivilegeService {
   private readonly apolloWrapperService = inject(ApolloWrapperService);
 
   constructor() {
-    this.userLoggedService.currentUser.subscribe(() => this.userLoggedService.isAdmin() ? this.getPrivileges() : null)
+    this.userLoggedService.currentUser$.subscribe(() => this.userLoggedService.isAdmin() && this.getPrivileges());
   }
 
   getPrivileges() {

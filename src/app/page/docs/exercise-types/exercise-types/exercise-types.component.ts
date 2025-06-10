@@ -55,7 +55,7 @@ export class ExerciseTypesComponent implements OnInit, OnDestroy {
         this.exerciseTypes = exerciseType;
         this.displayedExerciseTypes.set(Array.from(exerciseType).sort(sortExerciseTypeByName));
       });
-    this.userLoggedService.currentUser
+    this.userLoggedService.currentUser$
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe(() => this.isAdmin.set(this.userLoggedService.isAdmin()));
   }

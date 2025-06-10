@@ -57,7 +57,7 @@ export class RoleEntityFormComponent implements OnInit, OnDestroy {
   private readonly userLoggedService = inject(UserLoggedService);
 
   ngOnInit() {
-    this.userLoggedService.currentUser
+    this.userLoggedService.currentUser$
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe(() => this.isAdmin = this.userLoggedService.isAdmin());
     const submitEventActionType$ = this.submitEventActionType$();
@@ -65,8 +65,7 @@ export class RoleEntityFormComponent implements OnInit, OnDestroy {
       submitEventActionType$
         .pipe(takeUntil(this.unsubscribe$))
         .subscribe((actionType: ActionEnum) => {
-          if (actionType === ActionEnum.create || actionType === ActionEnum.update)
-            this.onSubmit();
+          (actionType === ActionEnum.create || actionType === ActionEnum.update) && this.onSubmit();
         });
   }
 

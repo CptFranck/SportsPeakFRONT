@@ -34,11 +34,9 @@ export class UserComponent implements OnInit, OnDestroy {
   private readonly userLoggedService: UserLoggedService = inject(UserLoggedService);
 
   ngOnInit() {
-    this.userLoggedService.currentUser
+    this.userLoggedService.currentUser$
       .pipe(takeUntil(this.unsubscribe$))
-      .subscribe((user: User | undefined) => {
-        this.user = user;
-      })
+      .subscribe((user: User | undefined) => this.user = user);
   }
 
   ngOnDestroy() {

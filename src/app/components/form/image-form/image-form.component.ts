@@ -47,11 +47,9 @@ export class ImageFormComponent implements OnInit, OnDestroy {
   private readonly illustrationService = inject(IllustrationService);
 
   ngOnInit() {
-    this.userLoggedService.currentUser
+    this.userLoggedService.currentUser$
       .pipe(takeUntil(this.unsubscribe$))
-      .subscribe(() => {
-        this.isAdmin.set(this.userLoggedService.isAdmin())
-      });
+      .subscribe(() => this.isAdmin.set(this.userLoggedService.isAdmin()));
     this.illustrationService.refreshData()
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe((url: string) => this.refresh.emit(url));

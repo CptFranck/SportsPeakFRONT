@@ -33,7 +33,7 @@ export class UserService {
   private readonly apolloWrapperService = inject(ApolloWrapperService);
 
   constructor() {
-    this.userLoggedService.currentUser.subscribe(() => this.userLoggedService.isAdmin() ? this.getUsers() : null)
+    this.userLoggedService.currentUser$.subscribe(() => this.userLoggedService.isAdmin() && this.getUsers());
   }
 
   getUsers() {

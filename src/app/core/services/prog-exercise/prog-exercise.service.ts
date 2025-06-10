@@ -36,7 +36,7 @@ export class ProgExerciseService {
 
   constructor() {
     this.getProgExercises();
-    this.userLoggedService.currentUser.subscribe((user: User | undefined) => user ? this.getUserProgExercises(user) : null)
+    this.userLoggedService.currentUser$.subscribe((user: User | undefined) => user && this.getUserProgExercises(user));
   }
 
   getProgExercises() {

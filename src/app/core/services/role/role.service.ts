@@ -23,7 +23,7 @@ export class RoleService {
   private readonly apolloWrapperService = inject(ApolloWrapperService);
 
   constructor() {
-    this.userLoggedService.currentUser.subscribe(() => this.userLoggedService.isAdmin() ? this.getRoles() : null);
+    this.userLoggedService.currentUser$.subscribe(() => this.userLoggedService.isAdmin() && this.getRoles());
   }
 
   getRoles() {
