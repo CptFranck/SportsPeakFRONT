@@ -21,47 +21,47 @@ import {Router} from "@angular/router";
 })
 export class MuscleService {
 
-  private isLoading = new BehaviorSubject<boolean>(true);
-  private muscle = new BehaviorSubject<Muscle | undefined>(undefined);
-  private muscles = new BehaviorSubject<Muscle[]>([]);
+  private isLoadingSubject = new BehaviorSubject<boolean>(true);
+  private muscleListSubject = new BehaviorSubject<Muscle[]>([]);
+  private selectedMuscleSubject = new BehaviorSubject<Muscle | undefined>(undefined);
 
   private readonly router = inject(Router);
-  private readonly apolloWrapperService = inject(ApolloWrapperService);
   private readonly alertService = inject(AlertService);
+  private readonly apolloWrapperService = inject(ApolloWrapperService);
 
   constructor() {
     this.getMuscles();
   }
 
-  loading() {
-    return this.isLoading.asObservable();
+  get isLoading$() {
+    return this.isLoadingSubject.asObservable();
   }
 
-  detailsMuscle() {
-    return this.muscle.asObservable();
+  get muscleList$() {
+    return this.muscleListSubject.asObservable();
   }
 
-  allMuscle() {
-    return this.muscles.asObservable();
+  get selectedMuscle$() {
+    return this.selectedMuscleSubject.asObservable();
   }
 
   getMuscles() {
-    this.isLoading.next(true);
+    this.isLoadingSubject.next(true);
     this.apolloWrapperService.watchQuery({
       query: GET_MUSCLES,
     }).valueChanges.subscribe({
       next: ({data, errors, loading}: ApolloQueryResult<any>) => {
         if (errors)
           this.alertService.graphQLErrorAlertHandler(errors);
-        this.muscles.next(data.getMuscles);
-        this.isLoading.next(loading);
+        this.muscleListSubject.next(data.getMuscles);
+        this.isLoadingSubject.next(loading);
       },
-      error: () => this.isLoading.next(false),
+      error: () => this.isLoadingSubject.next(false),
     });
   }
 
   getMuscleById(id: number) {
-    this.isLoading.next(true);
+    this.isLoadingSubject.next(true);
     this.apolloWrapperService.watchQuery({
       query: GET_MUSCLE_BY_ID,
       variables: {id: id}
@@ -69,10 +69,10 @@ export class MuscleService {
       next: ({data, errors, loading}: ApolloQueryResult<any>) => {
         if (errors)
           this.alertService.graphQLErrorAlertHandler(errors);
-        this.muscle.next(data.getMuscleById);
-        this.isLoading.next(loading);
+        this.selectedMuscleSubject.next(data.getMuscleById);
+        this.isLoadingSubject.next(loading);
       },
-      error: () => this.isLoading.next(false),
+      error: () => this.isLoadingSubject.next(false),
     });
   }
 
