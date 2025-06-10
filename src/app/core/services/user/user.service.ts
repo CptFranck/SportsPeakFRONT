@@ -24,8 +24,8 @@ import {AuthService} from "../auth/auth.service";
 })
 export class UserService {
 
-  users = new BehaviorSubject<User[]>([]);
-  isLoading = new BehaviorSubject<boolean>(true);
+  private readonly userListSubject = new BehaviorSubject<User[]>([]);
+  private readonly isLoadingSubject = new BehaviorSubject<boolean>(true);
 
   private readonly authService = inject(AuthService);
   private readonly alertService = inject(AlertService);
@@ -36,21 +36,26 @@ export class UserService {
     this.userLoggedService.currentUser$.subscribe(() => this.userLoggedService.isAdmin() && this.getUsers());
   }
 
+  get userList$() {
+    return this.userListSubject.asObservable();
+  }
+
+  get isLoading$() {
+    return this.isLoadingSubject.asObservable();
+  }
+
   getUsers() {
-    this.isLoading.next(true);
+    this.isLoadingSubject.next(true);
     this.apolloWrapperService.watchQuery({
       query: GET_USERS,
     }).valueChanges.subscribe({
-      next: ({data, errors, loading}
-             :
-             ApolloQueryResult<any>
-      ) => {
+      next: ({data, errors, loading}: ApolloQueryResult<any>) => {
         if (errors)
           this.alertService.graphQLErrorAlertHandler(errors);
-        this.users.next(data.getUsers);
-        this.isLoading.next(loading);
+        this.userListSubject.next(data.getUsers);
+        this.isLoadingSubject.next(loading);
       },
-      error: () => this.isLoading.next(false),
+      error: () => this.isLoadingSubject.next(false),
     });
   }
 

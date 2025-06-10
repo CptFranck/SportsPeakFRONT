@@ -29,7 +29,7 @@ export class UserSelectorComponent implements OnInit, OnDestroy, ControlValueAcc
   private readonly userService = inject(UserService);
 
   ngOnInit(): void {
-    this.userService.users
+    this.userService.userList$
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe((users: User[]) => {
         let options: MultiSelectOption[] = []
@@ -43,7 +43,7 @@ export class UserSelectorComponent implements OnInit, OnDestroy, ControlValueAcc
         });
         this.userOptions.set([...options]);
       });
-    this.userService.isLoading
+    this.userService.isLoading$
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe((loading: boolean) => this.loading.set(loading));
   }

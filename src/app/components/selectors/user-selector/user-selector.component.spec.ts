@@ -1,18 +1,18 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {UserSelectorComponent} from './user-selector.component';
-import {BehaviorSubject} from "rxjs";
+import {of} from "rxjs";
 import {UserService} from "../../../core/services/user/user.service";
-import {User} from "../../../shared/model/dto/user";
 import {provideAnimations} from "@angular/platform-browser/animations";
 
 describe('UserSelectorComponent', () => {
   let component: UserSelectorComponent;
   let fixture: ComponentFixture<UserSelectorComponent>;
-  let mockUserService: jasmine.SpyObj<UserService> =
-    jasmine.createSpyObj('UserService', ['users', 'isLoading']);
-  mockUserService.users = new BehaviorSubject<User[]>([]);
-  mockUserService.isLoading = new BehaviorSubject<boolean>(true);
+
+  const mockUserService = {
+    isLoading$: of(true),
+    userList$: of([]),
+  };
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({

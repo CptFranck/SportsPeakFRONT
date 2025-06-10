@@ -1,9 +1,8 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {UsersManagementComponent} from './users-management.component';
-import {BehaviorSubject} from "rxjs";
+import {BehaviorSubject, of} from "rxjs";
 import {UserService} from "../../../../core/services/user/user.service";
-import {User} from "../../../../shared/model/dto/user";
 import {RoleService} from "../../../../core/services/role/role.service";
 import {Role} from "../../../../shared/model/dto/role";
 import {provideAnimations} from "@angular/platform-browser/animations";
@@ -12,10 +11,10 @@ describe('UsersManagementComponent', () => {
   let component: UsersManagementComponent;
   let fixture: ComponentFixture<UsersManagementComponent>;
 
-  let mockUserService: jasmine.SpyObj<UserService> =
-    jasmine.createSpyObj('UserService', ['']);
-  mockUserService.users = new BehaviorSubject<User[]>([]);
-  mockUserService.isLoading = new BehaviorSubject<boolean>(true);
+  const mockUserService = {
+    isLoading$: of(true),
+    userList$: of([]),
+  };
 
   let mockRoleService: jasmine.SpyObj<RoleService> =
     jasmine.createSpyObj('RoleService', ['roles', 'isLoading']);

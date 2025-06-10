@@ -34,13 +34,13 @@ export class UsersManagementComponent implements OnInit, OnDestroy {
   private readonly userService = inject(UserService);
 
   ngOnInit(): void {
-    this.userService.users
+    this.userService.userList$
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe((users: User[]) => {
         this.users = users;
         this.displayedUsers.set(users);
       });
-    this.userService.isLoading
+    this.userService.isLoading$
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe((isLoading: boolean) => this.loading.set(isLoading));
   }
