@@ -43,6 +43,7 @@ export class MusclesComponent implements OnInit, OnDestroy {
   private readonly userLoggedService = inject(UserLoggedService);
 
   ngOnInit(): void {
+    this.muscleService.getMuscles();
     this.muscleService.isLoading$
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe((isLoading: boolean) => this.loading.set(isLoading));

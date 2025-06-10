@@ -21,9 +21,9 @@ import {Router} from "@angular/router";
 })
 export class MuscleService {
 
-  private isLoadingSubject = new BehaviorSubject<boolean>(true);
-  private muscleListSubject = new BehaviorSubject<Muscle[]>([]);
-  private selectedMuscleSubject = new BehaviorSubject<Muscle | undefined>(undefined);
+  private readonly isLoadingSubject = new BehaviorSubject<boolean>(true);
+  private readonly muscleListSubject = new BehaviorSubject<Muscle[]>([]);
+  private readonly selectedMuscleSubject = new BehaviorSubject<Muscle | undefined>(undefined);
 
   private readonly router = inject(Router);
   private readonly alertService = inject(AlertService);

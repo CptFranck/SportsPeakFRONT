@@ -16,11 +16,17 @@ describe('MusclesComponent', () => {
     selectedExercise$: of(undefined),
   };
 
-  const mockMuscleService = {
-    isLoading$: of(true),
-    muscleList$: of([]),
-    selectedMuscle$: of(undefined),
-  };
+  const mockMuscleService: jasmine.SpyObj<MuscleService> =
+    jasmine.createSpyObj('ExerciseTypeService', ['getMuscles']);
+  mockMuscleService.getMuscles.and.returnValues();
+
+  Object.defineProperty(mockMuscleService, 'isLoading$', {
+    get: () => of(true),
+  });
+
+  Object.defineProperty(mockMuscleService, 'muscleList$', {
+    get: () => of(undefined),
+  });
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
