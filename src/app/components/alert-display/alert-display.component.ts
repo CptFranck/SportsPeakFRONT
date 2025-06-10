@@ -18,12 +18,11 @@ export class AlertDisplayComponent implements OnInit, OnDestroy {
 
   displayMockAlertButton = input<boolean>(false);
 
-  protected readonly alert = alert;
   private readonly unsubscribe$ = new Subject<void>();
   private readonly alertService = inject(AlertService);
 
   ngOnInit() {
-    this.alertService.getAlertsSubject()
+    this.alertService.alertList$
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe((alerts: Alert[]) => {
         this.alerts.set(alerts);

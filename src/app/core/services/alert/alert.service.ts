@@ -11,41 +11,37 @@ import {AlertErrorEnum} from "../../../shared/model/enum/alert-error.enum";
 })
 export class AlertService {
   private alertId = 0;
-  private readonly alerts: Alert[] = [];
-  private readonly alertsSubject = new Subject<Alert[]>();
+  private readonly alertList: Alert[] = [];
+  private readonly alertListSubject = new Subject<Alert[]>();
 
   constructor() {
     this.updateAlert();
   }
 
-  getAlertsSubject(): Subject<Alert[]> {
-    return this.alertsSubject;
-  }
-
-  getAllAlert() {
-    return this.alerts;
+  get alertList$() {
+    return this.alertListSubject.asObservable();
   }
 
   addSuccessAlert(message: string) {
-    const successAlert: Alert = this.createAlert("Successful operation :D", message, AlertTypeEnum.success);
-    this.alerts.push(successAlert);
+    const successAlert: Alert = this.createBaseAlert("Successful operation :D", message, AlertTypeEnum.success);
+    this.alertList.push(successAlert);
     this.updateAlert();
   }
 
   addWarningAlert(message: string) {
-    const successAlert: Alert = this.createAlert("Warning :/", message, AlertTypeEnum.warning);
-    this.alerts.push(successAlert);
+    const successAlert: Alert = this.createBaseAlert("Warning :/", message, AlertTypeEnum.warning);
+    this.alertList.push(successAlert);
     this.updateAlert();
   }
 
   addErrorAlert(message: string) {
-    const successAlert: Alert = this.createAlert("Unsuccessful operation :(", message, AlertTypeEnum.error);
-    this.alerts.push(successAlert);
+    const successAlert: Alert = this.createBaseAlert("Unsuccessful operation :(", message, AlertTypeEnum.error);
+    this.alertList.push(successAlert);
     this.updateAlert();
   }
 
   closeAlert(alert: Alert) {
-    let localAlert: Alert | undefined = this.alerts.find((al: Alert) => alert.id === al.id);
+    let localAlert: Alert | undefined = this.alertList.find((al: Alert) => alert.id === al.id);
     if (localAlert) {
       localAlert.closed = true;
       this.updateAlert();
@@ -59,22 +55,44 @@ export class AlertService {
   }
 
   createNetWorkErrorAlert(networkError: NetworkError) {
-    const lastAlert = this.alerts.at(-1);
+    const lastAlert = this.alertList.at(-1);
     if (!networkError) return;
     if (lastAlert !== undefined && this.isSameAlertError(lastAlert, networkError)) return;
     const networkAlert: Alert = this.createErrorAlert(networkError, false);
     if (networkAlert.errorInformation)
       networkAlert.errorInformation.errorType = AlertErrorEnum.NetworkError;
-    this.alerts.push(networkAlert);
+    this.alertList.push(networkAlert);
+    this.updateAlert();
+    this.alertId += 1;
+  }
+
+  private createGraphQLErrorAlert(graphQLError: GraphQLFormattedError) {
+    const graphQLAlert = this.createErrorAlert(graphQLError);
+    if (graphQLAlert.errorInformation) {
+      graphQLAlert.errorInformation.errorType = AlertErrorEnum.GraphQLError;
+      graphQLAlert.errorInformation.errorLocation = graphQLError.locations;
+      graphQLAlert.errorInformation.errorPath = graphQLError.path;
+    }
+    this.alertList.push(graphQLAlert);
     this.updateAlert();
     this.alertId += 1;
   }
 
   private updateAlert() {
-    this.alertsSubject.next(this.alerts.filter((alert: Alert) => !alert.closed));
+    this.alertListSubject.next(this.alertList.filter((alert: Alert) => !alert.closed));
   }
 
-  private createAlert(title: string, message: string, alertType: AlertTypeEnum, autoClose: boolean = true): Alert {
+  private createErrorAlert(error: GraphQLFormattedError, autoClose = true): Alert {
+    const errorAlert = this.createBaseAlert("Unsuccessful operation :(", error.message, AlertTypeEnum.error, autoClose);
+    errorAlert.errorInformation = {
+      errorExtension: error.extensions,
+      errorLocation: error.locations,
+      errorPath: error.path,
+    }
+    return errorAlert;
+  }
+
+  private createBaseAlert(title: string, message: string, alertType: AlertTypeEnum, autoClose: boolean = true): Alert {
     const alert = {
       id: this.alertId,
       title: title,
@@ -85,28 +103,6 @@ export class AlertService {
     }
     this.alertId += 1;
     return alert;
-  }
-
-  private createGraphQLErrorAlert(graphQLError: GraphQLFormattedError) {
-    const graphQLAlert = this.createErrorAlert(graphQLError);
-    if (graphQLAlert.errorInformation) {
-      graphQLAlert.errorInformation.errorType = AlertErrorEnum.GraphQLError;
-      graphQLAlert.errorInformation.errorLocation = graphQLError.locations;
-      graphQLAlert.errorInformation.errorPath = graphQLError.path;
-    }
-    this.alerts.push(graphQLAlert);
-    this.updateAlert();
-    this.alertId += 1;
-  }
-
-  private createErrorAlert(error: GraphQLFormattedError, autoClose = true): Alert {
-    const errorAlert = this.createAlert("Unsuccessful operation :(", error.message, AlertTypeEnum.error, autoClose);
-    errorAlert.errorInformation = {
-      errorExtension: error.extensions,
-      errorLocation: error.locations,
-      errorPath: error.path,
-    }
-    return errorAlert;
   }
 
   private isSameAlertError(alert: Alert, error: GraphQLFormattedError): boolean {
