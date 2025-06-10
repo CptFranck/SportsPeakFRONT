@@ -16,6 +16,7 @@ describe('SelectComponent', () => {
     component = fixture.componentInstance;
 
     fixture.componentRef.setInput('options', []);
+    fixture.componentRef.setInput('isLoading', false);
 
     fixture.detectChanges();
   });

@@ -13,6 +13,7 @@ export class SelectComponent {
   value = model<string | null>();
 
   readonly options = input.required<SelectOption[]>();
+  readonly isLoading = input.required<boolean>();
 
   readonly defaultOption = input<boolean>(false);
 
