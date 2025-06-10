@@ -1,5 +1,5 @@
 <div class="options rounded">
-  <app-loading [loading]="isLoading()"/>
+  <app-loading [isLoading]="isLoading()"/>
   @if (!isLoading()) {
     <div class="option-search-tags input-group">
       <input [(ngModel)]="searchInput" class="search-tags form-control" type="text"/>

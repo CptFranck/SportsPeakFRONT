@@ -16,7 +16,7 @@ describe('LoadingComponent', () => {
     fixture = TestBed.createComponent(LoadingComponent);
     component = fixture.componentInstance;
 
-    fixture.componentRef.setInput('loading', true);
+    fixture.componentRef.setInput('isLoading', true);
 
     fixture.detectChanges();
   });

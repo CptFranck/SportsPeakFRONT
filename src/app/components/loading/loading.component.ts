@@ -7,5 +7,5 @@ import {collapseHeight} from "../../shared/animations/collapseHeigh";
   animations: [collapseHeight]
 })
 export class LoadingComponent {
-  readonly loading = input.required<boolean>();
+  readonly isLoading = input.required<boolean>();
 }
