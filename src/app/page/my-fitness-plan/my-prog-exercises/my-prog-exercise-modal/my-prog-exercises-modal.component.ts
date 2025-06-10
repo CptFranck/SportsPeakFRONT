@@ -1,16 +1,16 @@
 import {Component, input, model, output} from '@angular/core';
-import {ModalButtonComponent} from "../../../../components/modal/modal-button/modal-button.component";
-import {ModalComponent} from "../../../../components/modal/modal/modal.component";
+import {ModalButtonComponent} from "../../../../shared/components/modal-button/modal-button.component";
+import {ModalComponent} from "../../../../shared/components/modal/modal.component";
 import {ProgExercise} from "../../../../shared/model/dto/prog-exercise";
 import {
   MyProgExerciseDetailsDisplayComponent
-} from "../../../../components/modal-component/prog-exercise/my-prog-exercise-details-display/my-prog-exercise-details-display.component";
+} from "../../../../shared/components/modal-components/my-prog-exercise-details-display/my-prog-exercise-details-display.component";
 import {
   MyProgExerciseEntityFormComponent
-} from "../../../../components/form/prog-exercise/my-prog-exercise-entity-form/my-prog-exercise-entity-form.component";
+} from "../../../../shared/components/forms/prog-exercise/my-prog-exercise-entity-form/my-prog-exercise-entity-form.component";
 import {
   MyProgExercisePerformanceComponent
-} from "../../../../components/modal-component/prog-exercise/my-prog-exercise-performance/my-prog-exercise-performance.component";
+} from "../../../../shared/components/modal-components/my-prog-exercise-performance/my-prog-exercise-performance.component";
 import {FormIndicator} from "../../../../shared/model/common/form-indicator";
 import {ActionType} from "../../../../shared/model/enum/action-type";
 

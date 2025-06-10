@@ -1,5 +1,5 @@
 import {Component, input, output} from '@angular/core';
-import {ModalButtonComponent} from "../../../../components/modal/modal-button/modal-button.component";
+import {ModalButtonComponent} from "../../../../shared/components/modal-button/modal-button.component";
 import {Role} from "../../../../shared/model/dto/role";
 import {FormIndicator} from "../../../../shared/model/common/form-indicator";
 import {Muscle} from "../../../../shared/model/dto/muscle";

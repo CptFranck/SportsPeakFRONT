@@ -4,15 +4,15 @@ import {Subject, takeUntil} from "rxjs";
 import {ActivatedRoute, Params} from "@angular/router";
 import {Muscle} from "../../../../shared/model/dto/muscle";
 import {MuscleService} from "../../../../core/services/muscle/muscle.service";
-import {LoadingComponent} from "../../../../components/loading/loading.component";
+import {LoadingComponent} from "../../../../shared/components/loading/loading.component";
 import {UserLoggedService} from "../../../../core/services/user-logged/user-logged.service";
-import {ModalButtonComponent} from "../../../../components/modal/modal-button/modal-button.component";
-import {MuscleModalComponent} from "../../../../components/modal-component/muscle-modal/muscle-modal.component";
+import {ModalButtonComponent} from "../../../../shared/components/modal-button/modal-button.component";
+import {MuscleModalComponent} from "../../../../shared/components/modal-components/muscle-modal/muscle-modal.component";
 import {
   MuscleExercisesTableComponent
-} from "../../../../components/table/muscle-exercises-table/muscle-exercises-table.component";
+} from "../../../../shared/components/tables/muscle-exercises-table/muscle-exercises-table.component";
 import {ReactiveFormsModule} from "@angular/forms";
-import {ImageFormComponent} from "../../../../components/form/image-form/image-form.component";
+import {ImageFormComponent} from "../../../../shared/components/forms/image-form/image-form.component";
 import {IllustrationService} from "../../../../core/services/illustration/illustration.service";
 import {ActionType} from "../../../../shared/model/enum/action-type";
 

@@ -1,7 +1,7 @@
 import {Component, input, OnDestroy, OnInit, output, signal} from '@angular/core';
 import {FormIndicator} from "../../../../shared/model/common/form-indicator";
 import {ExerciseType} from "../../../../shared/model/dto/exercise-type";
-import {ModalButtonComponent} from "../../../../components/modal/modal-button/modal-button.component";
+import {ModalButtonComponent} from "../../../../shared/components/modal-button/modal-button.component";
 import {Dictionary} from "../../../../shared/model/common/dictionary";
 import {Subject} from "rxjs";
 import {Exercise} from "../../../../shared/model/dto/exercise";

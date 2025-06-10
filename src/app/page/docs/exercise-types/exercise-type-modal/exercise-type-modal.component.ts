@@ -1,16 +1,16 @@
 import {Component, inject, input, OnDestroy, OnInit, output, signal} from '@angular/core';
-import {ModalButtonComponent} from "../../../../components/modal/modal-button/modal-button.component";
-import {ModalComponent} from "../../../../components/modal/modal/modal.component";
+import {ModalButtonComponent} from "../../../../shared/components/modal-button/modal-button.component";
+import {ModalComponent} from "../../../../shared/components/modal/modal.component";
 import {ExerciseType} from "../../../../shared/model/dto/exercise-type";
 import {
   ExerciseTypeDetailsDisplayComponent
-} from "../../../../components/modal-component/exercise-type/exercise-type-details-display/exercise-type-details-display.component";
+} from "../../../../shared/components/modal-components/exercise-type-details-display/exercise-type-details-display.component";
 import {
   ExerciseTypeEntityFormComponent
-} from "../../../../components/form/exercise-type/exercise-type-entity-form/exercise-type-entity-form.component";
+} from "../../../../shared/components/forms/exercise-type/exercise-type-entity-form/exercise-type-entity-form.component";
 import {
   ExerciseTypeDeleteFormComponent
-} from "../../../../components/form/exercise-type/exercise-type-delete-form/exercise-type-delete-form.component";
+} from "../../../../shared/components/forms/exercise-type/exercise-type-delete-form/exercise-type-delete-form.component";
 import {UserLoggedService} from "../../../../core/services/user-logged/user-logged.service";
 import {FormIndicator} from "../../../../shared/model/common/form-indicator";
 import {Subject, takeUntil} from "rxjs";

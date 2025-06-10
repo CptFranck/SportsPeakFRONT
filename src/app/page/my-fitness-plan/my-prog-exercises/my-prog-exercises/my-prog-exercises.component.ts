@@ -2,15 +2,15 @@ import {Component, inject, OnDestroy, OnInit, signal} from '@angular/core';
 import {ProgExercise} from "../../../../shared/model/dto/prog-exercise";
 import {ProgExerciseService} from "../../../../core/services/prog-exercise/prog-exercise.service";
 import {FormIndicator} from "../../../../shared/model/common/form-indicator";
-import {LoadingComponent} from "../../../../components/loading/loading.component";
-import {SearchBarComponent} from "../../../../components/search-bar/search-bar.component";
+import {LoadingComponent} from "../../../../shared/components/loading/loading.component";
 import {Muscle} from "../../../../shared/model/dto/muscle";
 import {MyProgExercisesModalComponent} from "../my-prog-exercise-modal/my-prog-exercises-modal.component";
 import {
   ProgExerciseCardComponent
-} from "../../../../components/card/prog-exercise/prog-exercise-card/prog-exercise-card.component";
+} from "../../../../shared/components/cards/prog-exercise-card/prog-exercise-card.component";
 import {Subject, takeUntil} from "rxjs";
 import {ActionType} from "../../../../shared/model/enum/action-type";
+import {SearchBarComponent} from "../../../../shared/components/search-bar/search-bar.component";
 
 @Component({
   selector: 'app-my-prog-exercises',

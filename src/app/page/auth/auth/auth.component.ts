@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {LoginFormComponent} from "../../../components/form/auth/login-form/login-form.component";
-import {RegisterFormComponent} from "../../../components/form/auth/register-form/register-form.component";
-import {TabHeaderComponent} from "../../../components/tab-header/tab-header.component";
+import {LoginFormComponent} from "../../../shared/components/forms/auth/login-form/login-form.component";
+import {RegisterFormComponent} from "../../../shared/components/forms/auth/register-form/register-form.component";
+import {TabHeaderComponent} from "../../../shared/components/tab-header/tab-header.component";
 import {TabOption} from "../../../shared/model/component/tab/tabOption";
 
 @Component({

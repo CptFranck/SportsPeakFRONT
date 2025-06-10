@@ -1,9 +1,9 @@
 import {Component, input} from '@angular/core';
-import {ModalComponent} from "../../../../components/modal/modal/modal.component";
+import {ModalComponent} from "../../../../shared/components/modal/modal.component";
 import {ProgExercise} from "../../../../shared/model/dto/prog-exercise";
 import {
   MyProgExerciseDetailsDisplayComponent
-} from "../../../../components/modal-component/prog-exercise/my-prog-exercise-details-display/my-prog-exercise-details-display.component";
+} from "../../../../shared/components/modal-components/my-prog-exercise-details-display/my-prog-exercise-details-display.component";
 import {ActionType} from "../../../../shared/model/enum/action-type";
 
 @Component({

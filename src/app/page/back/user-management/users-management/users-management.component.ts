@@ -1,13 +1,13 @@
 import {Component, inject, OnDestroy, OnInit, signal} from '@angular/core';
 import {UsersManagementArrayComponent} from "../users-management-array/users-management-array.component";
 import {UsersManagementModalComponent} from "../user-management-modal/users-management-modal.component";
-import {LoadingComponent} from "../../../../components/loading/loading.component";
+import {LoadingComponent} from "../../../../shared/components/loading/loading.component";
 import {User} from "../../../../shared/model/dto/user";
 import {UserService} from "../../../../core/services/user/user.service";
 import {FormIndicator} from "../../../../shared/model/common/form-indicator";
 import {Subject, takeUntil} from "rxjs";
-import {SearchBarComponent} from "../../../../components/search-bar/search-bar.component";
 import {ActionType} from "../../../../shared/model/enum/action-type";
+import {SearchBarComponent} from "../../../../shared/components/search-bar/search-bar.component";
 
 @Component({
   selector: 'app-users',

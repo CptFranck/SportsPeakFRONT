@@ -1,18 +1,18 @@
 import {Component, inject, OnDestroy, OnInit, signal} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {LoadingComponent} from "../../../../components/loading/loading.component";
-import {MuscleModalComponent} from "../../../../components/modal-component/muscle-modal/muscle-modal.component";
+import {LoadingComponent} from "../../../../shared/components/loading/loading.component";
+import {MuscleModalComponent} from "../../../../shared/components/modal-components/muscle-modal/muscle-modal.component";
 import {MuscleService} from "../../../../core/services/muscle/muscle.service";
 import {Muscle} from "../../../../shared/model/dto/muscle";
-import {SearchBarComponent} from "../../../../components/search-bar/search-bar.component";
 import {Exercise} from "../../../../shared/model/dto/exercise";
 import {Subject, takeUntil} from "rxjs";
 import {UserLoggedService} from "../../../../core/services/user-logged/user-logged.service";
 import {collapseHeight} from "../../../../shared/animations/collapseHeigh";
-import {MuscleCardComponent} from "../../../../components/card/muscle-card/muscle-card.component";
 import {sortMuscleByName} from "../../../../utils/muscle-functions";
-import {ModalButtonComponent} from "../../../../components/modal/modal-button/modal-button.component";
+import {ModalButtonComponent} from "../../../../shared/components/modal-button/modal-button.component";
 import {ActionType} from "../../../../shared/model/enum/action-type";
+import {SearchBarComponent} from "../../../../shared/components/search-bar/search-bar.component";
+import {MuscleCardComponent} from "../../../../shared/components/cards/muscle-card/muscle-card.component";
 
 @Component({
   selector: 'app-muscles',

@@ -3,10 +3,10 @@ import {ProgExercise} from "../../../../shared/model/dto/prog-exercise";
 import {ProgExerciseService} from "../../../../core/services/prog-exercise/prog-exercise.service";
 import {ActivatedRoute, Params} from "@angular/router";
 import {FormIndicator} from "../../../../shared/model/common/form-indicator";
-import {LoadingComponent} from "../../../../components/loading/loading.component";
+import {LoadingComponent} from "../../../../shared/components/loading/loading.component";
 import {
   ProgExerciseCardDetailsComponent
-} from "../../../../components/card/prog-exercise/prog-exercise-card-details/prog-exercise-card-details.component";
+} from "../../../../shared/components/cards/prog-exercise-card-details/prog-exercise-card-details.component";
 import {
   MyProgExerciseEditorModalComponent
 } from "../my-prog-exercise-editor-modal/my-prog-exercise-editor-modal.component";

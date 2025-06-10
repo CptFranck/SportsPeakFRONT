@@ -1,16 +1,16 @@
 import {Component, inject, input, OnDestroy, OnInit, output, signal} from '@angular/core';
-import {ModalButtonComponent} from "../../../../components/modal/modal-button/modal-button.component";
-import {ModalComponent} from "../../../../components/modal/modal/modal.component";
+import {ModalButtonComponent} from "../../../../shared/components/modal-button/modal-button.component";
+import {ModalComponent} from "../../../../shared/components/modal/modal.component";
 import {Exercise} from "../../../../shared/model/dto/exercise";
 import {
   ExerciseEntityFormComponent
-} from "../../../../components/form/exercise/exercise-entity-form/exercise-entity-form.component";
+} from "../../../../shared/components/forms/exercise/exercise-entity-form/exercise-entity-form.component";
 import {
   ExerciseDeleteFormComponent
-} from "../../../../components/form/exercise/exercise-delete-form/exercise-delete-form.component";
+} from "../../../../shared/components/forms/exercise/exercise-delete-form/exercise-delete-form.component";
 import {
   ExerciseDetailsDisplayComponent
-} from "../../../../components/modal-component/exercise/exercise-details-display/exercise-details-display.component";
+} from "../../../../shared/components/modal-components/exercise-details-display/exercise-details-display.component";
 import {UserLoggedService} from "../../../../core/services/user-logged/user-logged.service";
 import {Subject, takeUntil} from "rxjs";
 import {FormIndicator} from "../../../../shared/model/common/form-indicator";

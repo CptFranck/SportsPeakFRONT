@@ -1,7 +1,7 @@
 import {Component, inject, input, OnChanges, OnDestroy, OnInit, output, signal} from '@angular/core';
 import {FormIndicator} from "../../../../shared/model/common/form-indicator";
 import {UserLoggedService} from "../../../../core/services/user-logged/user-logged.service";
-import {ModalButtonComponent} from "../../../../components/modal/modal-button/modal-button.component";
+import {ModalButtonComponent} from "../../../../shared/components/modal-button/modal-button.component";
 import {ProgExercise} from "../../../../shared/model/dto/prog-exercise";
 import {User} from "../../../../shared/model/dto/user";
 import {ProgExerciseRowDetail} from "../../../../shared/model/common/prog-exercise-row-detail";

@@ -1,7 +1,7 @@
 import {Component, inject, OnDestroy, OnInit, signal} from '@angular/core';
 import {RolesArrayComponent} from "../roles-array/roles-array.component";
 import {RoleModalComponent} from "../role-modal/role-modal.component";
-import {LoadingComponent} from "../../../../components/loading/loading.component";
+import {LoadingComponent} from "../../../../shared/components/loading/loading.component";
 import {Role} from "../../../../shared/model/dto/role";
 import {RoleService} from "../../../../core/services/role/role.service";
 import {FormIndicator} from "../../../../shared/model/common/form-indicator";

@@ -4,8 +4,8 @@ import {ProgExerciseTargetSets} from "../../../../../shared/model/common/progExe
 import {ProgExercise} from "../../../../../shared/model/dto/prog-exercise";
 import {
   TargetSetCardComponent
-} from "../../../../../components/card/target-set/target-set-card/target-set-card.component";
-import {TabHeaderComponent} from "../../../../../components/tab-header/tab-header.component";
+} from "../../../../../shared/components/cards/target-set-card/target-set-card.component";
+import {TabHeaderComponent} from "../../../../../shared/components/tab-header/tab-header.component";
 import {TabOption} from "../../../../../shared/model/component/tab/tabOption";
 import {getUpToDateTargetSets, sortLastTargetSetsByIndex} from "../../../../../utils/target-set-functions";
 import {getProgExerciseTargetSet} from "../../../../../utils/prog-exercise-functions";

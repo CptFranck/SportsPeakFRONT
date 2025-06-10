@@ -1,7 +1,7 @@
 import {Component, input, output} from '@angular/core';
 import {User} from "../../../../shared/model/dto/user";
 import {FormIndicator} from "../../../../shared/model/common/form-indicator";
-import {ModalButtonComponent} from "../../../../components/modal/modal-button/modal-button.component";
+import {ModalButtonComponent} from "../../../../shared/components/modal-button/modal-button.component";
 import {ModificationFieldEnum} from "../../../../shared/model/enum/user-modification-field";
 import {ActionType} from "../../../../shared/model/enum/action-type";
 

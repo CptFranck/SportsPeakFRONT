@@ -3,17 +3,19 @@ import {CommonModule} from '@angular/common';
 import {ExerciseType} from "../../../../shared/model/dto/exercise-type";
 import {ExerciseTypeService} from "../../../../core/services/exercise-type/exercise-type.service";
 import {FormIndicator} from "../../../../shared/model/common/form-indicator";
-import {LoadingComponent} from "../../../../components/loading/loading.component";
+import {LoadingComponent} from "../../../../shared/components/loading/loading.component";
 import {ExerciseTypeArrayComponent} from "../exercise-types-array/exercise-type-array.component";
 import {ExerciseTypeModalComponent} from "../exercise-type-modal/exercise-type-modal.component";
-import {SearchBarComponent} from "../../../../components/search-bar/search-bar.component";
 import {Exercise} from "../../../../shared/model/dto/exercise";
 import {Subject, takeUntil} from "rxjs";
 import {UserLoggedService} from "../../../../core/services/user-logged/user-logged.service";
 import {collapseHeight} from "../../../../shared/animations/collapseHeigh";
-import {ExerciseTypeCardComponent} from "../../../../components/card/exercise-type-card/exercise-type-card.component";
 import {sortExerciseTypeByName} from "../../../../utils/exercise-type-function";
 import {ActionType} from "../../../../shared/model/enum/action-type";
+import {SearchBarComponent} from "../../../../shared/components/search-bar/search-bar.component";
+import {
+  ExerciseTypeCardComponent
+} from "../../../../shared/components/cards/exercise-type-card/exercise-type-card.component";
 
 @Component({
   selector: 'app-exercise-types',

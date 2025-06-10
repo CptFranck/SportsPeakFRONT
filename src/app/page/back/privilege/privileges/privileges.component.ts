@@ -1,7 +1,7 @@
 import {Component, inject, OnDestroy, OnInit, signal} from '@angular/core';
 import {PrivilegesArrayComponent} from "../privileges-array/privileges-array.component";
 import {PrivilegeModalComponent} from "../privilege-modal/privilege-modal.component";
-import {LoadingComponent} from "../../../../components/loading/loading.component";
+import {LoadingComponent} from "../../../../shared/components/loading/loading.component";
 import {Privilege} from "../../../../shared/model/dto/privilege";
 import {PrivilegeService} from "../../../../core/services/privilege/privilege.service";
 import {FormIndicator} from "../../../../shared/model/common/form-indicator";

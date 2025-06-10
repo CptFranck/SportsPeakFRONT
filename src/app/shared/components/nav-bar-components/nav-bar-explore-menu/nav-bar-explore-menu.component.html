@@ -1,0 +1,18 @@
+<li class="dropdown">
+  <a [id]="navbarDropdownId" aria-expanded="false" aria-haspopup="true" class="nav-link"
+     data-bs-toggle="dropdown"
+     role="button">
+    Explore
+  </a>
+  <ul [attr.aria-labelledby]="navbarDropdownId" class="dropdown-menu">
+    <li class="nav-item my-auto">
+      <a class="nav-link" routerLink="explore/programs" routerLinkActive="active">Programs </a>
+    </li>
+    <li class="nav-item my-auto">
+      <a class="nav-link" routerLink="explore/sessions" routerLinkActive="active">Sessions </a>
+    </li>
+    <li class="nav-item my-auto">
+      <a class="nav-link" routerLink="explore/prog-exercises" routerLinkActive="active">Programed Exercises </a>
+    </li>
+  </ul>
+</li>

@@ -1,11 +1,15 @@
 import {Component, input, output} from '@angular/core';
-import {RoleDeleteFormComponent} from "../../../../components/form/role/role-delete-form/role-delete-form.component";
+import {
+  RoleDeleteFormComponent
+} from "../../../../shared/components/forms/role/role-delete-form/role-delete-form.component";
 import {
   RoleDetailsDisplayComponent
-} from "../../../../components/modal-component/role/role-details-display/role-details-display.component";
-import {RoleEntityFormComponent} from "../../../../components/form/role/role-entity-form/role-entity-form.component";
-import {ModalButtonComponent} from "../../../../components/modal/modal-button/modal-button.component";
-import {ModalComponent} from "../../../../components/modal/modal/modal.component";
+} from "../../../../shared/components/modal-components/role-details-display/role-details-display.component";
+import {
+  RoleEntityFormComponent
+} from "../../../../shared/components/forms/role/role-entity-form/role-entity-form.component";
+import {ModalButtonComponent} from "../../../../shared/components/modal-button/modal-button.component";
+import {ModalComponent} from "../../../../shared/components/modal/modal.component";
 import {Role} from "../../../../shared/model/dto/role";
 import {FormIndicator} from "../../../../shared/model/common/form-indicator";
 import {ActionType} from "../../../../shared/model/enum/action-type";

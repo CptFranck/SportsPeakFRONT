@@ -1,15 +1,15 @@
 import {Component, input, output} from '@angular/core';
-import {ModalButtonComponent} from "../../../../components/modal/modal-button/modal-button.component";
-import {ModalComponent} from "../../../../components/modal/modal/modal.component";
+import {ModalButtonComponent} from "../../../../shared/components/modal-button/modal-button.component";
+import {ModalComponent} from "../../../../shared/components/modal/modal.component";
 import {
   PrivilegeDeleteFormComponent
-} from "../../../../components/form/privilege/privilege-delete-form/privilege-delete-form.component";
+} from "../../../../shared/components/forms/privilege/privilege-delete-form/privilege-delete-form.component";
 import {
   PrivilegeDetailDisplayComponent
-} from "../../../../components/modal-component/privilege/privilege-detail-display/privilege-detail-display.component";
+} from "../../../../shared/components/modal-components/privilege-detail-display/privilege-detail-display.component";
 import {
   PrivilegeEntityFormComponent
-} from "../../../../components/form/privilege/privilege-entity-form/privilege-entity-form.component";
+} from "../../../../shared/components/forms/privilege/privilege-entity-form/privilege-entity-form.component";
 import {Privilege} from "../../../../shared/model/dto/privilege";
 import {FormIndicator} from "../../../../shared/model/common/form-indicator";
 import {ActionType} from "../../../../shared/model/enum/action-type";

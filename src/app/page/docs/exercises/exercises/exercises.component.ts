@@ -4,17 +4,17 @@ import {ExercisesAdminArrayComponent} from "../exercises-array/exercises-admin-a
 import {Exercise} from "../../../../shared/model/dto/exercise";
 import {ExerciseService} from "../../../../core/services/exercise/exercise.service";
 import {FormIndicator} from "../../../../shared/model/common/form-indicator";
-import {LoadingComponent} from "../../../../components/loading/loading.component";
+import {LoadingComponent} from "../../../../shared/components/loading/loading.component";
 import {ExerciseModalComponent} from "../exercise-modal/exercise-modal.component";
-import {SearchBarComponent} from "../../../../components/search-bar/search-bar.component";
 import {Muscle} from "../../../../shared/model/dto/muscle";
 import {ExerciseType} from "../../../../shared/model/dto/exercise-type";
 import {Subject, takeUntil} from "rxjs";
 import {UserLoggedService} from "../../../../core/services/user-logged/user-logged.service";
-import {ExerciceCardComponent} from "../../../../components/card/exercice-card/exercice-card.component";
 import {collapseHeight} from "../../../../shared/animations/collapseHeigh";
 import {sortExerciseByName} from "../../../../utils/exercise-function";
 import {ActionType} from "../../../../shared/model/enum/action-type";
+import {SearchBarComponent} from "../../../../shared/components/search-bar/search-bar.component";
+import {ExerciceCardComponent} from "../../../../shared/components/cards/exercice-card/exercice-card.component";
 
 @Component({
   selector: 'app-exercises',
