@@ -27,7 +27,7 @@ import {ActionEnum} from "../../../../shared/model/enum/action.enum";
 })
 export class MyProgExercisesModalComponent {
   readonly modalTitle = input.required<string>();
-  readonly muscleModalId = input.required<string>();
+  readonly progExerciseModalId = input.required<string>();
   readonly progExercise = input.required<ProgExercise | undefined>();
   readonly action = model.required<ActionEnum>();
 

@@ -1,12 +1,12 @@
 <app-modal-button (onCLickModalButton)="onClick()"
-                  [modalId]="muscleModalId()"
+                  [modalId]="progExerciseModalId()"
 >
   Add new
   <i class="fa-regular fa-square-plus"></i>
 </app-modal-button>
 <app-modal [actionType]="action()"
            [contentTemplate]="progExerciseModalTemplate"
-           [modalId]="muscleModalId()"
+           [modalId]="progExerciseModalId()"
            [title]="modalTitle()"
 >
 </app-modal>
