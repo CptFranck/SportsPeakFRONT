@@ -4,8 +4,7 @@ import {MyProgExercisesModalComponent} from './my-prog-exercises-modal.component
 import {ActionEnum} from "../../../../shared/model/enum/action.enum";
 import {ProgExerciseService} from "../../../../core/services/prog-exercise/prog-exercise.service";
 import {ExerciseService} from "../../../../core/services/exercise/exercise.service";
-import {BehaviorSubject} from "rxjs";
-import {Exercise} from "../../../../shared/model/dto/exercise";
+import {of} from "rxjs";
 
 describe('MyProgExercisesModalComponent', () => {
   let component: MyProgExercisesModalComponent;
@@ -14,10 +13,11 @@ describe('MyProgExercisesModalComponent', () => {
   let mockProgExerciseService: jasmine.SpyObj<ProgExerciseService> =
     jasmine.createSpyObj('ProgExerciseService', ['progExercise', 'isLoading']);
 
-  let mockExerciseService: jasmine.SpyObj<ExerciseService> =
-    jasmine.createSpyObj('ExerciseService', ['exercises', 'isLoading']);
-  mockExerciseService.exercises = new BehaviorSubject<Exercise[]>([]);
-  mockExerciseService.isLoading = new BehaviorSubject<boolean>(true);
+  const mockExerciseService = {
+    isLoading$: of(true),
+    exerciseList$: of([]),
+    selectedExercise$: of(undefined),
+  };
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({

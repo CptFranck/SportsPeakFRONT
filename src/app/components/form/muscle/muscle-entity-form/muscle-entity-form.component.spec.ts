@@ -2,8 +2,7 @@ import {ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {MuscleEntityFormComponent} from './muscle-entity-form.component';
 import {ExerciseService} from "../../../../core/services/exercise/exercise.service";
-import {BehaviorSubject, of} from "rxjs";
-import {Exercise} from "../../../../shared/model/dto/exercise";
+import {of} from "rxjs";
 import {MuscleService} from "../../../../core/services/muscle/muscle.service";
 import {provideAnimations} from "@angular/platform-browser/animations";
 
@@ -17,11 +16,12 @@ describe('MuscleEntityFormComponent', () => {
     selectedMuscle$: of(undefined),
   };
 
-  let mockExerciseService: jasmine.SpyObj<ExerciseService> =
-    jasmine.createSpyObj('ExerciseService', ['exercises', 'isLoading']);
-  mockExerciseService.exercises = new BehaviorSubject<Exercise[]>([]);
-  mockExerciseService.isLoading = new BehaviorSubject<boolean>(true);
-
+  const mockExerciseService = {
+    isLoading$: of(true),
+    exerciseList$: of([]),
+    selectedExercise$: of(undefined),
+  };
+  
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       providers: [

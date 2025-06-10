@@ -46,15 +46,15 @@ export class ExercisesComponent implements OnInit, OnDestroy {
   private readonly userLoggedService = inject(UserLoggedService);
 
   ngOnInit(): void {
-    this.exerciseService.exercises
+    this.exerciseService.isLoading$
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe((isLoading: boolean) => this.loading.set(isLoading));
+    this.exerciseService.exerciseList$
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe((exercises: Exercise[]) => {
         this.exercises = exercises;
         this.displayedExercises.set(Array.from(exercises).sort(sortExerciseByName));
       });
-    this.exerciseService.isLoading
-      .pipe(takeUntil(this.unsubscribe$))
-      .subscribe((isLoading: boolean) => this.loading.set(isLoading));
     this.userLoggedService.currentUser
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe(() => this.isAdmin.set(this.userLoggedService.isAdmin()));

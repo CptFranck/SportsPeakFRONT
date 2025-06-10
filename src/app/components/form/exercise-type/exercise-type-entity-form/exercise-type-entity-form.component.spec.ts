@@ -1,11 +1,10 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {ExerciseTypeEntityFormComponent} from './exercise-type-entity-form.component';
-import {BehaviorSubject} from "rxjs";
 import {ExerciseService} from "../../../../core/services/exercise/exercise.service";
-import {Exercise} from "../../../../shared/model/dto/exercise";
 import {ExerciseTypeService} from "../../../../core/services/exercise-type/exercise-type.service";
 import {provideAnimations} from "@angular/platform-browser/animations";
+import {of} from "rxjs";
 
 describe('ExerciseTypeEntityFormComponent', () => {
   let component: ExerciseTypeEntityFormComponent;
@@ -14,10 +13,11 @@ describe('ExerciseTypeEntityFormComponent', () => {
   let mockExerciseTypeService: jasmine.SpyObj<ExerciseTypeService> =
     jasmine.createSpyObj('ExerciseTypeService', ['addExerciseType', 'modifyExerciseType']);
 
-  let mockExerciseService: jasmine.SpyObj<ExerciseService> =
-    jasmine.createSpyObj('ExerciseService', ['exercises', 'isLoading']);
-  mockExerciseService.exercises = new BehaviorSubject<Exercise[]>([]);
-  mockExerciseService.isLoading = new BehaviorSubject<boolean>(true);
+  const mockExerciseService = {
+    isLoading$: of(true),
+    exerciseList$: of([]),
+    selectedExercise$: of(undefined),
+  };
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({

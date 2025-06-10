@@ -2,11 +2,10 @@ import {ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {MyProgExerciseComponent} from './my-prog-exercise.component';
 import {provideRouter} from "@angular/router";
-import {BehaviorSubject} from "rxjs";
+import {BehaviorSubject, of} from "rxjs";
 import {ProgExerciseService} from "../../../../core/services/prog-exercise/prog-exercise.service";
 import {ProgExercise} from "../../../../shared/model/dto/prog-exercise";
 import {ExerciseService} from "../../../../core/services/exercise/exercise.service";
-import {Exercise} from "../../../../shared/model/dto/exercise";
 import {TargetSetService} from "../../../../core/services/target-set/target-set.service";
 import {provideAnimations} from "@angular/platform-browser/animations";
 
@@ -19,10 +18,11 @@ describe('MyProgExerciseComponent', () => {
   mockProgExerciseService.progExercise = new BehaviorSubject<ProgExercise | undefined>(undefined);
   mockProgExerciseService.isLoading = new BehaviorSubject<boolean>(true);
 
-  let mockExerciseService: jasmine.SpyObj<ExerciseService> =
-    jasmine.createSpyObj('ExerciseService', ['']);
-  mockExerciseService.exercises = new BehaviorSubject<Exercise[]>([]);
-  mockExerciseService.isLoading = new BehaviorSubject<boolean>(true);
+  const mockExerciseService = {
+    isLoading$: of(true),
+    exerciseList$: of([]),
+    selectedExercise$: of(undefined),
+  };
 
   let mockTargetSetService: jasmine.SpyObj<TargetSetService> =
     jasmine.createSpyObj('TargetSetService', ['']);

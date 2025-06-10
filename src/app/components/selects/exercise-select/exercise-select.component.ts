@@ -1,10 +1,10 @@
 import {Component, forwardRef, inject, OnDestroy, OnInit, signal} from '@angular/core';
 import {ExerciseService} from "../../../core/services/exercise/exercise.service";
-import {Exercise} from "../../../shared/model/dto/exercise";
 import {SelectOption} from "../../../shared/model/component/select/selectOption";
 import {SelectComponent} from "../../select/select.component";
 import {ControlValueAccessor, NG_VALUE_ACCESSOR} from "@angular/forms";
 import {Subject, takeUntil} from "rxjs";
+import {Exercise} from "../../../shared/model/dto/exercise";
 
 @Component({
   selector: 'app-exercise-select',
@@ -22,15 +22,18 @@ import {Subject, takeUntil} from "rxjs";
 })
 export class ExerciseSelectComponent implements OnInit, OnDestroy, ControlValueAccessor {
 
-  exerciseOptions = signal<SelectOption[]>([]);
-
+  loading = signal<boolean>(true);
   exerciseId = signal<string | null>(null);
+  exerciseOptions = signal<SelectOption[]>([]);
 
   private readonly unsubscribe$ = new Subject<void>();
   private readonly exerciseService = inject(ExerciseService)
 
   ngOnInit(): void {
-    this.exerciseService.exercises
+    this.exerciseService.isLoading$
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe((value) => this.loading.set(value));
+    this.exerciseService.exerciseList$
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe((exercises: Exercise[]) => {
         this.exerciseOptions.set(exercises.map((exercise: Exercise) => {
@@ -39,7 +42,7 @@ export class ExerciseSelectComponent implements OnInit, OnDestroy, ControlValueA
             value: exercise.id.toString(),
           };
         }))
-      })
+      });
   }
 
   ngOnDestroy() {

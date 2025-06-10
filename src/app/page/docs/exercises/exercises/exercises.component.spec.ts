@@ -3,7 +3,6 @@ import {ComponentFixture, TestBed} from '@angular/core/testing';
 import {ExercisesComponent} from './exercises.component';
 import {ExerciseService} from "../../../../core/services/exercise/exercise.service";
 import {BehaviorSubject, of} from "rxjs";
-import {Exercise} from "../../../../shared/model/dto/exercise";
 import {ExerciseTypeService} from "../../../../core/services/exercise-type/exercise-type.service";
 import {ExerciseType} from "../../../../shared/model/dto/exercise-type";
 import {provideAnimations} from "@angular/platform-browser/animations";
@@ -19,10 +18,11 @@ describe('ExercisesComponent', () => {
     selectedMuscle$: of(undefined),
   };
 
-  let mockExerciseService: jasmine.SpyObj<ExerciseService> =
-    jasmine.createSpyObj('ExerciseService', ['']);
-  mockExerciseService.exercises = new BehaviorSubject<Exercise[]>([]);
-  mockExerciseService.isLoading = new BehaviorSubject<boolean>(true);
+  const mockExerciseService = {
+    isLoading$: of(true),
+    exerciseList$: of([]),
+    selectedExercise$: of(undefined),
+  };
 
   let mockExerciseTypeService: jasmine.SpyObj<ExerciseTypeService> =
     jasmine.createSpyObj('ExerciseTypeService', ['']);

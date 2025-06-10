@@ -13,8 +13,9 @@ import {ApolloQueryResult} from "@apollo/client";
 })
 export class ExerciseService {
 
-  exercises = new BehaviorSubject<Exercise[]>([]);
-  isLoading = new BehaviorSubject<boolean>(true);
+  private isLoadingSubject = new BehaviorSubject<boolean>(true);
+  private exerciseListSubject = new BehaviorSubject<Exercise[]>([]);
+  private selectedExerciseSubject = new BehaviorSubject<Exercise | undefined>(undefined);
 
   private readonly alertService = inject(AlertService);
   private readonly apolloWrapperService = inject(ApolloWrapperService);
@@ -23,18 +24,30 @@ export class ExerciseService {
     this.getExercises();
   }
 
+  get isLoading$() {
+    return this.isLoadingSubject.asObservable();
+  }
+
+  get exerciseList$() {
+    return this.exerciseListSubject.asObservable();
+  }
+
+  get selectedExercise$() {
+    return this.selectedExerciseSubject.asObservable();
+  }
+
   getExercises() {
-    this.isLoading.next(true);
+    this.isLoadingSubject.next(true);
     this.apolloWrapperService.watchQuery({
       query: GET_EXERCISES,
     }).valueChanges.subscribe({
         next: ({data, errors, loading}: ApolloQueryResult<any>) => {
           if (errors)
             this.alertService.graphQLErrorAlertHandler(errors);
-          this.exercises.next(data?.getExercises ?? []);
-          this.isLoading.next(loading);
+          this.exerciseListSubject.next(data?.getExercises ?? []);
+          this.isLoadingSubject.next(loading);
         },
-        error: () => this.isLoading.next(false),
+        error: () => this.isLoadingSubject.next(false),
       }
     );
   }

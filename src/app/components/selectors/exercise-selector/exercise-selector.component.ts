@@ -29,7 +29,10 @@ export class ExerciseSelectorComponent implements OnInit, OnDestroy, ControlValu
   private readonly exerciseService = inject(ExerciseService);
 
   ngOnInit(): void {
-    this.exerciseService.exercises
+    this.exerciseService.isLoading$
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe((loading: boolean) => this.loading.set(loading));
+    this.exerciseService.exerciseList$
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe((exercises: Exercise[]) => {
         let options: MultiSelectOption[] = []
@@ -43,9 +46,6 @@ export class ExerciseSelectorComponent implements OnInit, OnDestroy, ControlValu
         });
         this.exerciseOptions.set([...options]);
       });
-    this.exerciseService.isLoading
-      .pipe(takeUntil(this.unsubscribe$))
-      .subscribe((loading: boolean) => this.loading.set(loading));
   }
 
   ngOnDestroy() {

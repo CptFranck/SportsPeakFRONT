@@ -4,9 +4,8 @@ import {MuscleModalComponent} from './muscle-modal.component';
 import {ActionEnum} from "../../../shared/model/enum/action.enum";
 import {MuscleService} from "../../../core/services/muscle/muscle.service";
 import {ExerciseService} from "../../../core/services/exercise/exercise.service";
-import {BehaviorSubject} from "rxjs";
-import {Exercise} from "../../../shared/model/dto/exercise";
 import {provideAnimations} from "@angular/platform-browser/animations";
+import {of} from "rxjs";
 
 describe('MuscleModalComponent', () => {
   let component: MuscleModalComponent;
@@ -15,10 +14,11 @@ describe('MuscleModalComponent', () => {
   let mockMuscleService: jasmine.SpyObj<MuscleService> =
     jasmine.createSpyObj('MuscleService', ['addMuscle', 'modifyMuscle', 'deleteMuscle']);
 
-  let mockExerciseService: jasmine.SpyObj<ExerciseService> =
-    jasmine.createSpyObj('ExerciseService', ['']);
-  mockExerciseService.exercises = new BehaviorSubject<Exercise[]>([]);
-  mockExerciseService.isLoading = new BehaviorSubject<boolean>(true);
+  const mockExerciseService = {
+    isLoading$: of(true),
+    exerciseList$: of([]),
+    selectedExercise$: of(undefined),
+  };
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({

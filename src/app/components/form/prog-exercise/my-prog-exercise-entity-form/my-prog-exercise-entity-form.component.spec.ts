@@ -2,10 +2,9 @@ import {ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {MyProgExerciseEntityFormComponent} from './my-prog-exercise-entity-form.component';
 import {UserLoggedService} from "../../../../core/services/user-logged/user-logged.service";
-import {BehaviorSubject} from "rxjs";
+import {BehaviorSubject, of} from "rxjs";
 import {User} from "../../../../shared/model/dto/user";
 import {ExerciseService} from "../../../../core/services/exercise/exercise.service";
-import {Exercise} from "../../../../shared/model/dto/exercise";
 import {ProgExerciseService} from "../../../../core/services/prog-exercise/prog-exercise.service";
 
 describe('MyProgExerciseEntityFormComponent', () => {
@@ -16,10 +15,11 @@ describe('MyProgExerciseEntityFormComponent', () => {
     jasmine.createSpyObj('UserLoggedService', ['currentUser']);
   mockUserLoggedService.currentUser = new BehaviorSubject<User | undefined>(undefined);
 
-  let mockExerciseService: jasmine.SpyObj<ExerciseService> =
-    jasmine.createSpyObj('ExerciseService', ['exercises', 'isLoading']);
-  mockExerciseService.exercises = new BehaviorSubject<Exercise[]>([]);
-  mockExerciseService.isLoading = new BehaviorSubject<boolean>(true);
+  const mockExerciseService = {
+    isLoading$: of(true),
+    exerciseList$: of([]),
+    selectedExercise$: of(undefined),
+  };
 
   let mockProgExerciseService: jasmine.SpyObj<ProgExerciseService> =
     jasmine.createSpyObj('ProgExerciseService', ['addProgExercise', 'modifyProgExercise', 'deleteProgExercises']);

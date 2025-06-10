@@ -1,16 +1,17 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 import {ExerciseSelectComponent} from './exercise-select.component';
-import {BehaviorSubject} from "rxjs";
 import {ExerciseService} from "../../../core/services/exercise/exercise.service";
-import {Exercise} from "../../../shared/model/dto/exercise";
+import {of} from "rxjs";
 
 describe('ExerciseSelectComponent', () => {
   let component: ExerciseSelectComponent;
   let fixture: ComponentFixture<ExerciseSelectComponent>;
-  let mockExerciseService: jasmine.SpyObj<ExerciseService> =
-    jasmine.createSpyObj('ExerciseService', ['exercises', 'isLoading']);
-  mockExerciseService.exercises = new BehaviorSubject<Exercise[]>([]);
-  mockExerciseService.isLoading = new BehaviorSubject<boolean>(true);
+  
+  const mockExerciseService = {
+    isLoading$: of(true),
+    exerciseList$: of([]),
+    selectedExercise$: of(undefined),
+  };
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({

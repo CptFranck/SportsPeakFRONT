@@ -1,6 +1,7 @@
 <app-select (onChange)="setExerciseId($event)"
             (onTouched)="onTouched()"
             [defaultOption]="true"
+            [isLoading]="loading()"
             [options]="exerciseOptions()"
             [value]="exerciseId()"
 />
