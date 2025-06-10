@@ -2,17 +2,16 @@ import {ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {PrivilegeDeleteFormComponent} from './privilege-delete-form.component';
 import {PrivilegeService} from "../../../../core/services/privilege/privilege.service";
-import {BehaviorSubject} from "rxjs";
-import {Privilege} from "../../../../shared/model/dto/privilege";
+import {of} from "rxjs";
 
 describe('PrivilegeDeleteFormComponent', () => {
   let component: PrivilegeDeleteFormComponent;
   let fixture: ComponentFixture<PrivilegeDeleteFormComponent>;
 
-  let mockPrivilegeService: jasmine.SpyObj<PrivilegeService> =
-    jasmine.createSpyObj('PrivilegeService', ['']);
-  mockPrivilegeService.privileges = new BehaviorSubject<Privilege[]>([]);
-  mockPrivilegeService.isLoading = new BehaviorSubject<boolean>(true);
+  const mockPrivilegeService = {
+    isLoading$: of(true),
+    privilegeList$: of([]),
+  };
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({

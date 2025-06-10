@@ -19,8 +19,8 @@ import {ApolloWrapperService} from "../apollo-wrapper/apollo-wrapper.service";
 })
 export class PrivilegeService {
 
-  privileges = new BehaviorSubject<Privilege[]>([]);
-  isLoading = new BehaviorSubject<boolean>(true);
+  private readonly isLoadingSubject = new BehaviorSubject<boolean>(true);
+  private readonly privilegeListSubject = new BehaviorSubject<Privilege[]>([]);
 
   private readonly alertService = inject(AlertService);
   private readonly userLoggedService = inject(UserLoggedService);
@@ -30,18 +30,26 @@ export class PrivilegeService {
     this.userLoggedService.currentUser$.subscribe(() => this.userLoggedService.isAdmin() && this.getPrivileges());
   }
 
+  get isLoading$() {
+    return this.isLoadingSubject.asObservable();
+  }
+
+  get privilegeList$() {
+    return this.privilegeListSubject.asObservable();
+  }
+
   getPrivileges() {
-    this.isLoading.next(true)
+    this.isLoadingSubject.next(true)
     this.apolloWrapperService.watchQuery({
       query: GET_PRIVILEGES,
     }).valueChanges.subscribe({
       next: ({data, errors, loading}: ApolloQueryResult<any>) => {
         if (errors)
           this.alertService.graphQLErrorAlertHandler(errors);
-        this.privileges.next(data.getPrivileges);
-        this.isLoading.next(loading);
+        this.privilegeListSubject.next(data.getPrivileges);
+        this.isLoadingSubject.next(loading);
       },
-      error: () => this.isLoading.next(false),
+      error: () => this.isLoadingSubject.next(false),
     });
   }
 

@@ -11,6 +11,7 @@ import {AlertErrorEnum} from "../../../shared/model/enum/alert-error.enum";
 })
 export class AlertService {
   private alertId = 0;
+  
   private readonly alertList: Alert[] = [];
   private readonly alertListSubject = new Subject<Alert[]>();
 

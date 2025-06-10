@@ -30,13 +30,13 @@ export class PrivilegesComponent implements OnInit, OnDestroy {
   private readonly privilegeService: PrivilegeService = inject(PrivilegeService);
 
   ngOnInit(): void {
-    this.privilegeService.privileges
+    this.privilegeService.isLoading$
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe((isLoading: boolean) => this.loading.set(isLoading));
+    this.privilegeService.privilegeList$
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe((privileges: Privilege[]) =>
         this.privileges = privileges);
-    this.privilegeService.isLoading
-      .pipe(takeUntil(this.unsubscribe$))
-      .subscribe((isLoading: boolean) => this.loading.set(isLoading));
   }
 
   ngOnDestroy() {

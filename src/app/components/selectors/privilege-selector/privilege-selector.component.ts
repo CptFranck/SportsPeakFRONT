@@ -29,22 +29,21 @@ export class PrivilegeSelectorComponent implements OnInit, OnDestroy, ControlVal
   private readonly privilegeService = inject(PrivilegeService);
 
   ngOnInit(): void {
-    this.privilegeService.privileges
+    this.privilegeService.isLoading$
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe((loading: boolean) => this.loading.set(loading));
+    this.privilegeService.privilegeList$
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe((privileges: Privilege[]) => {
         let options: MultiSelectOption[] = []
-        privileges.forEach((privilege: Privilege) => {
-          options.push({
+        privileges.forEach((privilege: Privilege) => options.push({
             id: privilege.id,
             title: privilege.name,
             value: privilege,
-          });
-        });
+          })
+        );
         this.privilegeOptions.set([...options]);
       });
-    this.privilegeService.isLoading
-      .pipe(takeUntil(this.unsubscribe$))
-      .subscribe((loading: boolean) => this.loading.set(loading));
   }
 
   ngOnDestroy() {

@@ -4,8 +4,7 @@ import {RoleModalComponent} from './role-modal.component';
 import {ActionEnum} from "../../../../shared/model/enum/action.enum";
 import {RoleService} from "../../../../core/services/role/role.service";
 import {PrivilegeService} from "../../../../core/services/privilege/privilege.service";
-import {BehaviorSubject} from "rxjs";
-import {Privilege} from "../../../../shared/model/dto/privilege";
+import {of} from "rxjs";
 import {provideAnimations} from "@angular/platform-browser/animations";
 
 describe('RoleModalComponent', () => {
@@ -14,10 +13,11 @@ describe('RoleModalComponent', () => {
 
   let mockRoleService: jasmine.SpyObj<RoleService> =
     jasmine.createSpyObj('RoleService', ['addRole', 'modifyRole']);
-  let mockPrivilegeService: jasmine.SpyObj<PrivilegeService> =
-    jasmine.createSpyObj('UserLoggedService', ['currentUser']);
-  mockPrivilegeService.privileges = new BehaviorSubject<Privilege[]>([]);
-  mockPrivilegeService.isLoading = new BehaviorSubject<boolean>(true);
+
+  const mockPrivilegeService = {
+    isLoading$: of(true),
+    privilegeList$: of([]),
+  };
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
