@@ -19,7 +19,7 @@ export class NavBarLoginComponent implements OnInit, OnDestroy {
 
 
   ngOnInit() {
-    this.authService.isAuthenticated
+    this.authService.isAuthenticated$
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe((isLogged: boolean) => {
         this.isLogged = isLogged;

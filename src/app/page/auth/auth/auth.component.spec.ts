@@ -2,15 +2,12 @@ import {ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {AuthComponent} from './auth.component';
 import {AuthService} from "../../../core/services/auth/auth.service";
-import {BehaviorSubject} from "rxjs";
 
 describe('LoginComponent', () => {
   let component: AuthComponent;
   let fixture: ComponentFixture<AuthComponent>;
 
-  let mockAuthService: jasmine.SpyObj<AuthService> =
-    jasmine.createSpyObj('AuthService', ['isAuthenticated']);
-  mockAuthService.isAuthenticated = new BehaviorSubject<boolean>(false);
+  let mockAuthService = {}
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({

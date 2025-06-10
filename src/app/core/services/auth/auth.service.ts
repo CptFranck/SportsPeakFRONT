@@ -8,16 +8,14 @@ import {Auth} from "../../../shared/model/dto/auth";
 import {UserLoggedService} from "../user-logged/user-logged.service";
 import {TokenService} from "../token/token.service";
 import {BehaviorSubject} from "rxjs";
-import {User} from "../../../shared/model/dto/user";
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  currentUser = new BehaviorSubject<User | undefined>(undefined);
-  isAuthenticated = new BehaviorSubject(false);
-
   private redirectUrl = "/";
+  private readonly isAuthenticated = new BehaviorSubject(false);
+
   private readonly router = inject(Router);
   private readonly apollo = inject(Apollo);
   private readonly alertService = inject(AlertService);
@@ -31,6 +29,10 @@ export class AuthService {
       this.isAuthenticated.next(true);
     else
       this.removeDataAuth();
+  }
+
+  get isAuthenticated$() {
+    return this.isAuthenticated.asObservable();
   }
 
   register(registerFormGroup: FormGroup) {
