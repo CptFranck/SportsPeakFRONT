@@ -35,14 +35,12 @@ export class ExerciseSelectComponent implements OnInit, OnDestroy, ControlValueA
       .subscribe((value) => this.loading.set(value));
     this.exerciseService.exerciseList$
       .pipe(takeUntil(this.unsubscribe$))
-      .subscribe((exercises: Exercise[]) => {
-        this.exerciseOptions.set(exercises.map((exercise: Exercise) => {
-          return {
-            title: exercise.name,
-            value: exercise.id.toString(),
-          };
-        }))
-      });
+      .subscribe((exercises: Exercise[]) =>
+        this.exerciseOptions.set(exercises.map((exercise: Exercise) => ({
+          title: exercise.name,
+          value: exercise.id.toString(),
+        })))
+      );
   }
 
   ngOnDestroy() {
