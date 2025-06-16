@@ -51,10 +51,6 @@ export class AlertService {
 
   ///////////// APOLLO / GRAPHQL /////////////
 
-  graphQLErrorAlertHandler(graphQLErrors: ReadonlyArray<GraphQLFormattedError>) {
-    graphQLErrors.map((err: GraphQLFormattedError) => this.createGraphQLErrorAlert(err));
-  }
-
   createNetWorkErrorAlert(networkError: NetworkError) {
     const lastAlert = this.alertList.at(-1);
     if (!networkError) return;
@@ -67,7 +63,7 @@ export class AlertService {
     this.alertId += 1;
   }
 
-  private createGraphQLErrorAlert(graphQLError: GraphQLFormattedError) {
+  createGraphQLErrorAlert(graphQLError: GraphQLFormattedError) {
     const graphQLAlert = this.createErrorAlert(graphQLError);
     if (graphQLAlert.errorInformation) {
       graphQLAlert.errorInformation.errorType = AlertErrorType.GraphQLError;
