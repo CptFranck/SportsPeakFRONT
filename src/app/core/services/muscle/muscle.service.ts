@@ -50,9 +50,7 @@ export class MuscleService {
     this.apolloWrapperService.watchQuery({
       query: GET_MUSCLES,
     }).valueChanges.subscribe({
-      next: ({data, errors, loading}: ApolloQueryResult<any>) => {
-        if (errors)
-          this.alertService.graphQLErrorAlertHandler(errors);
+      next: ({data, loading}: ApolloQueryResult<any>) => {
         this.muscleListSubject.next(data.getMuscles);
         this.isLoadingSubject.next(loading);
       },
@@ -66,9 +64,7 @@ export class MuscleService {
       query: GET_MUSCLE_BY_ID,
       variables: {id: id}
     }).valueChanges.subscribe({
-      next: ({data, errors, loading}: ApolloQueryResult<any>) => {
-        if (errors)
-          this.alertService.graphQLErrorAlertHandler(errors);
+      next: ({data, loading}: ApolloQueryResult<any>) => {
         this.selectedMuscleSubject.next(data.getMuscleById);
         this.isLoadingSubject.next(loading);
       },
@@ -82,12 +78,8 @@ export class MuscleService {
       variables: {
         inputNewMuscle: muscleForm.value,
       }
-    }).subscribe(({errors, data}: MutationResult) => {
-      if (errors)
-        this.alertService.graphQLErrorAlertHandler(errors);
-      const message: string = "Muscle " + data.addMuscle.name + " been successfully created.";
-      this.alertService.addSuccessAlert(message);
-    });
+    }).subscribe(({data}: MutationResult) =>
+      this.alertService.addSuccessAlert("Muscle " + data.addMuscle.name + " been successfully created."));
   }
 
   modifyMuscle(muscleForm: FormGroup) {
@@ -96,12 +88,8 @@ export class MuscleService {
       variables: {
         inputMuscle: muscleForm.value,
       }
-    }).subscribe(({errors, data}: MutationResult) => {
-      if (errors)
-        this.alertService.graphQLErrorAlertHandler(errors);
-      const message: string = "Muscle " + data.modifyMuscle.name + " been successfully updated.";
-      this.alertService.addSuccessAlert(message);
-    });
+    }).subscribe(({data}: MutationResult) =>
+      this.alertService.addSuccessAlert("Muscle " + data.modifyMuscle.name + " been successfully updated."));
   }
 
   deleteMuscle(muscle: Muscle) {
@@ -110,11 +98,9 @@ export class MuscleService {
       variables: {
         muscleId: muscle.id,
       }
-    }).subscribe(({errors}: MutationResult) => {
-      if (errors)
-        this.alertService.graphQLErrorAlertHandler(errors);
-      this.alertService.addSuccessAlert(`Muscle ${muscle.name} has been successfully deleted.`);
+    }).subscribe(() => {
       this.router.navigateByUrl('/docs/muscles');
+      this.alertService.addSuccessAlert(`Muscle ${muscle.name} has been successfully deleted.`);
     });
   }
 
