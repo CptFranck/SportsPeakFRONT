@@ -31,9 +31,7 @@ export class RoleService {
     this.apolloWrapperService.watchQuery({
       query: GET_ROLES,
     }).valueChanges.subscribe({
-      next: ({data, errors, loading}: ApolloQueryResult<any>) => {
-        if (errors)
-          this.alertService.graphQLErrorAlertHandler(errors);
+      next: ({data, loading}: ApolloQueryResult<any>) => {
         this.roles.next(data.getRoles);
         this.isLoading.next(loading);
       },
@@ -47,11 +45,8 @@ export class RoleService {
       variables: {
         inputNewRole: roleForm.value,
       }
-    }).subscribe(({data, errors}: MutationResult) => {
-      if (errors)
-        this.alertService.graphQLErrorAlertHandler(errors);
-      this.alertService.addSuccessAlert(`Role ${data.addRole.name} has been successfully created.`);
-    });
+    }).subscribe(({data}: MutationResult) =>
+      this.alertService.addSuccessAlert(`Role ${data.addRole.name} has been successfully created.`));
   }
 
   modifyRole(roleForm: FormGroup) {
@@ -60,11 +55,8 @@ export class RoleService {
       variables: {
         inputRole: roleForm.value,
       }
-    }).subscribe(({data, errors}: MutationResult) => {
-      if (errors)
-        this.alertService.graphQLErrorAlertHandler(errors);
-      this.alertService.addSuccessAlert(`Role ${data.modifyRole.name} has been successfully updated.`);
-    });
+    }).subscribe(({data}: MutationResult) =>
+      this.alertService.addSuccessAlert(`Role ${data.modifyRole.name} has been successfully updated.`));
   }
 
   deleteRole(role: Role) {
@@ -73,10 +65,7 @@ export class RoleService {
       variables: {
         roleId: role.id,
       }
-    }).subscribe(({errors}: MutationResult) => {
-      if (errors)
-        this.alertService.graphQLErrorAlertHandler(errors);
-      this.alertService.addSuccessAlert(`Role ${role.name} has been successfully deleted.`);
-    });
+    }).subscribe(() =>
+      this.alertService.addSuccessAlert(`Role ${role.name} has been successfully deleted.`));
   }
 }
