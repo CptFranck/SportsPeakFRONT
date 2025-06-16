@@ -1,5 +1,5 @@
 import {Component, inject, OnDestroy, OnInit} from '@angular/core';
-import {UserLoggedService} from "../../../core/services/user-logged/user-logged.service";
+import {CurrentUserService} from "../../../core/services/current-user/current-user.service";
 import {User} from "../../../shared/model/dto/user";
 import {UserSecurityComponent} from "../user-information/user-security/user-security.component";
 import {
@@ -31,10 +31,10 @@ export class UserComponent implements OnInit, OnDestroy {
   protected readonly ActionType = ActionType;
 
   private readonly unsubscribe$: Subject<void> = new Subject<void>();
-  private readonly userLoggedService: UserLoggedService = inject(UserLoggedService);
+  private readonly currentUserService: CurrentUserService = inject(CurrentUserService);
 
   ngOnInit() {
-    this.userLoggedService.currentUser$
+    this.currentUserService.currentUser$
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe((user: User | undefined) => this.user = user);
   }
