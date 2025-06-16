@@ -35,11 +35,11 @@ export class AlertService {
     this.updateAlert();
   }
 
-  addErrorAlert(message: string) {
-    const successAlert: Alert = this.createBaseAlert("Unsuccessful operation :(", message, AlertType.error);
-    this.alertList.push(successAlert);
-    this.updateAlert();
-  }
+  // addErrorAlert(message: string) {
+  //   const successAlert: Alert = this.createBaseAlert("Unsuccessful operation :(", message, AlertType.error);
+  //   this.alertList.push(successAlert);
+  //   this.updateAlert();
+  // }
 
   closeAlert(alert: Alert) {
     let localAlert: Alert | undefined = this.alertList.find((al: Alert) => alert.id === al.id);
