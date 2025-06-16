@@ -1,19 +1,17 @@
-import {inject, Injectable} from '@angular/core';
-import {LocalStorageService} from "../local-storage/local-storage.service";
-import {AuthToken} from "../../../shared/model/dto/token";
+import {Injectable} from '@angular/core';
+import {AuthToken} from "../../../shared/model/dto/authToken";
 import {Auth} from "../../../shared/model/dto/auth";
-import {jwtDecode} from "jwt-decode";
+import {jwtDecode, JwtPayload} from "jwt-decode";
 
 @Injectable({
   providedIn: 'root'
 })
 export class TokenService {
 
-  authToken: AuthToken | null = null;
-  private readonly localStorageService = inject(LocalStorageService);
+  private authToken: AuthToken | null = null;
 
   constructor() {
-    const testToken = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkBzcG9ydHNwZWFrLmNvbSIsImlhdCI6MTc0OTAzMDMyNiwiZXhwIjoxNzQ5MDMzOTI2fQ.56DYTr_aHJZfb8pEaywbHaaUaRveCpogo_-PNMRAZh0";
+    // Test
     const auth: Auth = {
       user: {
         id: 4,
@@ -24,29 +22,21 @@ export class TokenService {
         username: "Admin_"
       },
       tokenType: 'Bearer',
-      token: testToken,
+      accessToken: "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkBzcG9ydHNwZWFrLmNvbSIsImlhdCI6MTc0OTAzMDMyNiwiZXhwIjoxNzQ5MDMzOTI2fQ.56DYTr_aHJZfb8pEaywbHaaUaRveCpogo_-PNMRAZh0",
     }
-    this.setCurrentToken(auth);
-    // let token: AuthToken | null = this.getSavedToken();
-    // if (this.isTokenValid(token))
-    //   this.authToken = token;
-    // else
-    //   this.removeCurrentToken();
+    this.setAuthToken(auth);
   }
 
-  getCurrentToken() {
+  setAuthToken(data: Auth) {
+    this.authToken = this.createAuthToken(data);
+  }
+
+  getAuthToken() {
     return this.authToken;
-  }
-
-  setCurrentToken(data: Auth) {
-    const authToken = this.createAuthToken(data);
-    this.authToken = authToken;
-    this.localStorageService.saveData("authToken", authToken);
   }
 
   removeCurrentToken() {
     this.authToken = null;
-    this.localStorageService.removeData("authToken");
   }
 
   isTokenValid(authToken: AuthToken | null): boolean {
@@ -57,15 +47,11 @@ export class TokenService {
   }
 
   private createAuthToken(data: Auth): AuthToken {
-    const decodedToken = jwtDecode(data.token);
+    const decodedToken: JwtPayload = jwtDecode(data.accessToken);
     return {
       tokenType: data.tokenType,
-      accessToken: data.token,
+      accessToken: data.accessToken,
       expiration: decodedToken.exp
     };
-  }
-
-  private getSavedToken(): AuthToken | null {
-    return this.localStorageService.getData("authToken");
   }
 }
