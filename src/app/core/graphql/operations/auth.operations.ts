@@ -45,3 +45,31 @@ export const REGISTER = gql`
       }
     }
   }`;
+
+export const REFRESH_TOKEN = gql`
+  mutation refreshToken{
+    refreshToken{
+      tokenType
+      accessToken
+      user{
+        id
+        email
+        firstName
+        lastName
+        username
+        roles {
+          id
+          name
+          privileges {
+            id
+            name
+          }
+        }
+      }
+    }
+  }`;
+
+export const LOGOUT = gql`
+  mutation logout{
+    logout
+  }`;
