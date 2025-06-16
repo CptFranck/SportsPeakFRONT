@@ -43,9 +43,7 @@ export class PrivilegeService {
     this.apolloWrapperService.watchQuery({
       query: GET_PRIVILEGES,
     }).valueChanges.subscribe({
-      next: ({data, errors, loading}: ApolloQueryResult<any>) => {
-        if (errors)
-          this.alertService.graphQLErrorAlertHandler(errors);
+      next: ({data, loading}: ApolloQueryResult<any>) => {
         this.privilegeListSubject.next(data.getPrivileges);
         this.isLoadingSubject.next(loading);
       },
@@ -59,11 +57,8 @@ export class PrivilegeService {
       variables: {
         inputNewPrivilege: privilegeForm.value,
       }
-    }).subscribe(({data, errors}: MutationResult) => {
-      if (errors)
-        this.alertService.graphQLErrorAlertHandler(errors);
-      this.alertService.addSuccessAlert(`Privilege ${data.addPrivilege.name} created successfully.`);
-    });
+    }).subscribe(({data}: MutationResult) =>
+      this.alertService.addSuccessAlert(`Privilege ${data.addPrivilege.name} created successfully.`));
   }
 
   modifyPrivilege(privilegeForm: FormGroup) {
@@ -72,11 +67,8 @@ export class PrivilegeService {
       variables: {
         inputPrivilege: privilegeForm.value,
       }
-    }).subscribe(({data, errors}: MutationResult) => {
-      if (errors)
-        this.alertService.graphQLErrorAlertHandler(errors);
-      this.alertService.addSuccessAlert(`Privilege ${data.modifyPrivilege.name} has been successfully updated.`);
-    });
+    }).subscribe(({data}: MutationResult) =>
+      this.alertService.addSuccessAlert(`Privilege ${data.modifyPrivilege.name} has been successfully updated.`));
   }
 
   deletePrivilege(privilege: Privilege) {
@@ -85,10 +77,7 @@ export class PrivilegeService {
       variables: {
         privilegeId: privilege.id,
       }
-    }).subscribe(({errors}: MutationResult) => {
-      if (errors)
-        this.alertService.graphQLErrorAlertHandler(errors);
-      this.alertService.addSuccessAlert(`Privilege ${privilege.name} has been successfully deleted.`);
-    });
+    }).subscribe(() =>
+      this.alertService.addSuccessAlert(`Privilege ${privilege.name} has been successfully deleted.`));
   }
 }
