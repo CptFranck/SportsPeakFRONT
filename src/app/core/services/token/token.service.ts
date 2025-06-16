@@ -10,23 +10,6 @@ export class TokenService {
 
   private authToken: AuthToken | null = null;
 
-  constructor() {
-    // Test
-    const auth: Auth = {
-      user: {
-        id: 4,
-        email: "admin@sportspeak.com",
-        firstName: "Admin",
-        lastName: "Admin",
-        roles: [{id: 4, name: "ADMIN", privileges: [],}],
-        username: "Admin_"
-      },
-      tokenType: 'Bearer',
-      accessToken: "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkBzcG9ydHNwZWFrLmNvbSIsImlhdCI6MTc0OTAzMDMyNiwiZXhwIjoxNzQ5MDMzOTI2fQ.56DYTr_aHJZfb8pEaywbHaaUaRveCpogo_-PNMRAZh0",
-    }
-    this.setAuthToken(auth);
-  }
-
   setAuthToken(data: Auth) {
     this.authToken = this.createAuthToken(data);
   }
