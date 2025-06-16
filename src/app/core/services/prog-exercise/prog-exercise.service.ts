@@ -60,9 +60,7 @@ export class ProgExerciseService {
     this.apolloWrapperService.watchQuery({
       query: GET_PROG_EXERCISES,
     }).valueChanges.subscribe({
-      next: ({data, errors, loading}: ApolloQueryResult<any>) => {
-        if (errors)
-          this.alertService.graphQLErrorAlertHandler(errors);
+      next: ({data, loading}: ApolloQueryResult<any>) => {
         this.progExerciseListSubject.next(data.getProgExercises);
         this.isLoadingSubject.next(loading);
       },
@@ -78,11 +76,9 @@ export class ProgExerciseService {
       variables: {
         id: progExerciseId
       }
-    }).valueChanges.subscribe(({data, errors, loading}: ApolloQueryResult<any>) => {
-      if (errors)
-        this.alertService.graphQLErrorAlertHandler(errors);
-      this.progExerciseSelectedSubject.next(data.getProgExerciseById);
+    }).valueChanges.subscribe(({data, loading}: ApolloQueryResult<any>) => {
       this.isLoadingSubject.next(loading);
+      this.progExerciseSelectedSubject.next(data.getProgExerciseById);
     });
   }
 
@@ -93,11 +89,9 @@ export class ProgExerciseService {
       variables: {
         userId: user.id
       }
-    }).valueChanges.subscribe(({data, errors, loading}: ApolloQueryResult<any>) => {
-      if (errors)
-        this.alertService.graphQLErrorAlertHandler(errors);
-      this.userProgExerciseListSubject.next(data.getUserProgExercises);
+    }).valueChanges.subscribe(({data, loading}: ApolloQueryResult<any>) => {
       this.isLoadingSubject.next(loading);
+      this.userProgExerciseListSubject.next(data.getUserProgExercises);
     });
   }
 
@@ -107,11 +101,8 @@ export class ProgExerciseService {
       variables: {
         inputNewProgExercise: progExercisesForm.value,
       }
-    }).subscribe(({data, errors}: MutationResult): void => {
-      if (errors)
-        this.alertService.graphQLErrorAlertHandler(errors);
-      this.alertService.addSuccessAlert(`Programed exercise ${data.addProgExercise.name} has been successfully created.`);
-    });
+    }).subscribe(({data}: MutationResult) =>
+      this.alertService.addSuccessAlert(`Programed exercise ${data.addProgExercise.name} has been successfully created.`));
   }
 
   modifyProgExercise(progExercisesForm: FormGroup) {
@@ -120,11 +111,8 @@ export class ProgExerciseService {
       variables: {
         inputProgExercise: progExercisesForm.value,
       }
-    }).subscribe(({data, errors}: MutationResult): void => {
-      if (errors)
-        this.alertService.graphQLErrorAlertHandler(errors);
-      this.alertService.addSuccessAlert(`Programed exercise ${data.modifyProgExercise.name} has been successfully updated.`);
-    });
+    }).subscribe(({data}: MutationResult) =>
+      this.alertService.addSuccessAlert(`Programed exercise ${data.modifyProgExercise.name} has been successfully updated.`));
   }
 
   modifyProgExerciseTrustLabel(progExercisesForm: FormGroup) {
@@ -133,11 +121,8 @@ export class ProgExerciseService {
       variables: {
         inputProgExerciseTrustLabel: progExercisesForm.value,
       }
-    }).subscribe(({data, errors}: MutationResult): void => {
-      if (errors)
-        this.alertService.graphQLErrorAlertHandler(errors);
-      this.alertService.addSuccessAlert(`Programed exercise ${data.modifyProgExerciseTrustLabel.name} has been successfully updated.`);
-    });
+    }).subscribe(({data}: MutationResult) =>
+      this.alertService.addSuccessAlert(`Programed exercise ${data.modifyProgExerciseTrustLabel.name} has been successfully updated.`));
   }
 
   deleteProgExercises(progExercise: ProgExercise) {
@@ -146,11 +131,9 @@ export class ProgExerciseService {
       variables: {
         progExerciseId: progExercise.id,
       }
-    }).subscribe(({errors}: MutationResult): void => {
-      if (errors)
-        this.alertService.graphQLErrorAlertHandler(errors);
-      this.alertService.addSuccessAlert(`Programed exercise ${progExercise.name} has been successfully deleted.`);
+    }).subscribe(() => {
       this.router.navigateByUrl('/my-fitness-plan/my-programed-exercises')
+      this.alertService.addSuccessAlert(`Programed exercise ${progExercise.name} has been successfully deleted.`);
     });
   }
 }
