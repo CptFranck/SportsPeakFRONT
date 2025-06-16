@@ -1,38 +1,24 @@
-import {inject, Injectable} from '@angular/core';
-import {LocalStorageService} from "../local-storage/local-storage.service";
+import {Injectable} from '@angular/core';
 import {User} from "../../../shared/model/dto/user";
 import {BehaviorSubject} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
 })
-export class UserLoggedService {
+export class CurrentUserService {
 
   private readonly currentUserSubject = new BehaviorSubject<User | undefined>(undefined);
-
-  private readonly localStorageService = inject(LocalStorageService);
-
-  constructor() {
-    let user: User | null = this.getSavedUser();
-    if (user) this.currentUserSubject.next(user);
-  }
 
   get currentUser$() {
     return this.currentUserSubject.asObservable();
   }
 
-  getCurrentUser() {
-    return this.currentUserSubject.value;
-  }
-
   setCurrentUser(user: User) {
     this.currentUserSubject.next(user);
-    this.localStorageService.saveData("user", user);
   }
 
   removeCurrentUser() {
     this.currentUserSubject.next(undefined);
-    this.localStorageService.removeData("user");
   }
 
   isStaff() {
@@ -47,9 +33,5 @@ export class UserLoggedService {
     if (user)
       return user.roles.some(role => role.name === "ADMIN");
     return false;
-  }
-
-  private getSavedUser(): User | null {
-    return this.localStorageService.getData("user");
   }
 }
