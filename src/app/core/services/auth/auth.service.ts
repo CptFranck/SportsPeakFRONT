@@ -1,11 +1,11 @@
 import {inject, Injectable} from '@angular/core';
 import {Apollo, MutationResult} from "apollo-angular";
 import {FormGroup} from "@angular/forms";
-import {LOGIN, REGISTER} from "../../graphql/operations/auth.operations";
+import {LOGIN, REFRESH_TOKEN, REGISTER} from "../../graphql/operations/auth.operations";
 import {AlertService} from "../alert/alert.service";
 import {Router} from "@angular/router";
 import {Auth} from "../../../shared/model/dto/auth";
-import {UserLoggedService} from "../user-logged/user-logged.service";
+import {CurrentUserService} from "../current-user/current-user.service";
 import {TokenService} from "../token/token.service";
 import {BehaviorSubject} from "rxjs";
 
@@ -20,23 +20,14 @@ export class AuthService {
   private readonly apollo = inject(Apollo);
   private readonly alertService = inject(AlertService);
   private readonly tokenService = inject(TokenService);
-  private readonly userLoggedService = inject(UserLoggedService);
-
-  constructor() {
-    let isValidTokenSaved: boolean = !!this.tokenService.getCurrentToken();
-    let isUserSaved: boolean = !!this.userLoggedService.getCurrentUser();
-    if (isValidTokenSaved && isUserSaved)
-      this.isAuthenticated.next(true);
-    else
-      this.removeDataAuth();
-  }
+  private readonly currentUserService = inject(CurrentUserService);
 
   get isAuthenticated$() {
     return this.isAuthenticated.asObservable();
   }
 
-  register(registerFormGroup: FormGroup) {
-    const inputNewUser = registerFormGroup.value;
+  register(registerForm: FormGroup) {
+    const inputNewUser = registerForm.value;
     delete inputNewUser.confirmPassword;
     this.apollo.mutate({
       mutation: REGISTER,
@@ -65,7 +56,23 @@ export class AuthService {
     });
   }
 
+  refreshToken() {
+    this.apollo.mutate({
+      mutation: REFRESH_TOKEN
+    }).subscribe(({data, errors}: MutationResult) => {
+      if (errors)
+        this.alertService.graphQLErrorAlertHandler(errors);
+      else
+        this.setDataAuth(data.refreshToken, true);
+    });
+  }
+
   logout() {
+    this.apollo.mutate({
+      mutation: REFRESH_TOKEN
+    }).subscribe(({errors}: MutationResult) => errors &&
+      this.alertService.graphQLErrorAlertHandler(errors));
+    // Reset apollo cache
     this.apollo.client.resetStore().then(() => {
       this.removeDataAuth();
       this.isAuthenticated.next(false);
@@ -74,8 +81,8 @@ export class AuthService {
 
   setDataAuth(auth: Auth, redirect = false) {
     this.isAuthenticated.next(true);
-    this.userLoggedService.setCurrentUser(auth.user);
-    this.tokenService.setCurrentToken(auth);
+    this.currentUserService.setCurrentUser(auth.user);
+    this.tokenService.setAuthToken(auth);
     if (redirect)
       this.router.navigateByUrl(this.redirectUrl).then(() => this.setRedirectUrl('/'));
   }
@@ -85,17 +92,19 @@ export class AuthService {
   }
 
   isAuthenticationValid() {
-    const currentToken = this.tokenService.getCurrentToken();
+    const currentToken = this.tokenService.getAuthToken();
     const isTokenValid = this.tokenService.isTokenValid(currentToken);
-    if (!isTokenValid)
-      this.removeDataAuth();
     this.isAuthenticated.next(isTokenValid);
+    if (isTokenValid)
+      return true
+    this.refreshToken()
+    this.removeDataAuth();
     return isTokenValid;
   }
 
   private removeDataAuth(redirect = false) {
-    this.userLoggedService.removeCurrentUser();
-    this.tokenService.removeCurrentToken();
+    this.currentUserService.removeCurrentUser();
+    this.tokenService.removeAuthToken();
     if (redirect)
       this.router.navigateByUrl('/');
   }
