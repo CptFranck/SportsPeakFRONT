@@ -26,11 +26,8 @@ export class PerformanceLogService {
       variables: {
         inputNewPerformanceLog: inputValue,
       }
-    }).subscribe(({errors, data}: MutationResult) => {
-      if (errors)
-        this.alertService.graphQLErrorAlertHandler(errors);
-      this.alertService.addSuccessAlert(`This performance log ${data.addPerformanceLog.id} has been successfully created.`);
-    });
+    }).subscribe(({data}: MutationResult) =>
+      this.alertService.addSuccessAlert(`This performance log ${data.addPerformanceLog.id} has been successfully created.`));
   }
 
   modifyPerformanceLog(performanceLogForm: FormGroup) {
@@ -41,11 +38,8 @@ export class PerformanceLogService {
       variables: {
         inputPerformanceLog: inputValue,
       }
-    }).subscribe(({errors, data}: MutationResult) => {
-      if (errors)
-        this.alertService.graphQLErrorAlertHandler(errors);
-      this.alertService.addSuccessAlert(`This performance log ${data.modifyPerformanceLog.id} has been successfully updated.`);
-    });
+    }).subscribe(({data}: MutationResult) =>
+      this.alertService.addSuccessAlert(`This performance log ${data.modifyPerformanceLog.id} has been successfully updated.`));
   }
 
   deletePerformanceLog(performanceLog: PerformanceLog) {
@@ -54,10 +48,7 @@ export class PerformanceLogService {
       variables: {
         performanceLogId: performanceLog.id,
       }
-    }).subscribe(({errors}: MutationResult) => {
-      if (errors)
-        this.alertService.graphQLErrorAlertHandler(errors);
-      this.alertService.addSuccessAlert(`This performance log ${performanceLog.id} has been successfully deleted.`);
-    });
+    }).subscribe(() =>
+      this.alertService.addSuccessAlert(`This performance log ${performanceLog.id} has been successfully deleted.`));
   }
 }
