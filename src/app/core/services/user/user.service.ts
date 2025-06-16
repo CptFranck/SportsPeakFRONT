@@ -14,7 +14,7 @@ import {
   MOD_USER_USERNAME
 } from "../../graphql/operations/user.operations";
 import {ApolloWrapperService} from "../apollo-wrapper/apollo-wrapper.service";
-import {UserLoggedService} from "../user-logged/user-logged.service";
+import {CurrentUserService} from "../current-user/current-user.service";
 import {Auth} from "../../../shared/model/dto/auth";
 import {DEL_MUSCLE} from "../../graphql/operations/muscle.operations";
 import {AuthService} from "../auth/auth.service";
@@ -29,11 +29,11 @@ export class UserService {
 
   private readonly authService = inject(AuthService);
   private readonly alertService = inject(AlertService);
-  private readonly userLoggedService = inject(UserLoggedService);
+  private readonly currentUserService = inject(CurrentUserService);
   private readonly apolloWrapperService = inject(ApolloWrapperService);
 
   constructor() {
-    this.userLoggedService.currentUser$.subscribe(() => this.userLoggedService.isAdmin() && this.getUsers());
+    this.currentUserService.currentUser$.subscribe(() => this.currentUserService.isAdmin() && this.getUsers());
   }
 
   get userList$() {
@@ -86,7 +86,6 @@ export class UserService {
       const auth: Auth = data.modifyUserEmail;
       this.alertService.addSuccessAlert(`User ${auth.user.username} been successfully updated.`);
       this.authService.setDataAuth(auth)
-      this.userLoggedService.setCurrentUser(auth.user);
     });
   }
 
@@ -100,7 +99,7 @@ export class UserService {
       if (errors)
         this.alertService.graphQLErrorAlertHandler(errors);
       this.alertService.addSuccessAlert(`User ${data.modifyUserUsername.username} been successfully updated.`);
-      this.userLoggedService.setCurrentUser(data.modifyUserUsername);
+      this.currentUserService.setCurrentUser(data.modifyUserUsername);
     });
   }
 
@@ -116,7 +115,7 @@ export class UserService {
       if (errors)
         this.alertService.graphQLErrorAlertHandler(errors);
       this.alertService.addSuccessAlert(`User ${data.modifyUserPassword.username} been successfully updated.`);
-      this.userLoggedService.setCurrentUser(data.modifyUserPassword);
+      this.currentUserService.setCurrentUser(data.modifyUserPassword);
     });
   }
 
@@ -130,7 +129,7 @@ export class UserService {
       if (errors)
         this.alertService.graphQLErrorAlertHandler(errors);
       this.alertService.addSuccessAlert(`User ${data.modifyUserIdentity.username} been successfully updated.`);
-      this.userLoggedService.setCurrentUser(data.modifyUserIdentity);
+      this.currentUserService.setCurrentUser(data.modifyUserIdentity);
     });
   }
 
