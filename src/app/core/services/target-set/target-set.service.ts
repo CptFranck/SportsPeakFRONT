@@ -25,11 +25,8 @@ export class TargetSetService {
       variables: {
         inputNewTargetSet: targetSetForm.value,
       }
-    }).subscribe(({data, errors}: MutationResult) => {
-      if (errors)
-        this.alertService.graphQLErrorAlertHandler(errors);
-      this.alertService.addSuccessAlert(`Set ${data.addTargetSet.index} has been successfully created.`);
-    });
+    }).subscribe(({data}: MutationResult) =>
+      this.alertService.addSuccessAlert(`Set ${data.addTargetSet.index} has been successfully created.`));
   }
 
   modifyTargetSet(targetSetForm: FormGroup) {
@@ -38,11 +35,8 @@ export class TargetSetService {
       variables: {
         inputTargetSet: targetSetForm.value,
       }
-    }).subscribe(({data, errors}: MutationResult) => {
-      if (errors)
-        this.alertService.graphQLErrorAlertHandler(errors);
-      this.alertService.addSuccessAlert(`Set ${data.modifyTargetSet.index} has been successfully updated.`);
-    });
+    }).subscribe(({data}: MutationResult) =>
+      this.alertService.addSuccessAlert(`Set ${data.modifyTargetSet.index} has been successfully updated.`));
   }
 
   modifyTargetSetState(targetSetStateForm: FormGroup) {
@@ -51,11 +45,7 @@ export class TargetSetService {
       variables: {
         inputTargetSetState: targetSetStateForm.value,
       }
-    }).subscribe(({errors}: MutationResult) => {
-      if (errors)
-        this.alertService.graphQLErrorAlertHandler(errors);
-      this.alertService.addSuccessAlert("Set state been successfully updated.");
-    });
+    }).subscribe(() => this.alertService.addSuccessAlert("Set state been successfully updated."));
   }
 
   deleteTargetSet(targetSet: TargetSet) {
@@ -64,10 +54,6 @@ export class TargetSetService {
       variables: {
         targetSetId: targetSet.id,
       }
-    }).subscribe(({errors}: MutationResult) => {
-      if (errors)
-        this.alertService.graphQLErrorAlertHandler(errors);
-      this.alertService.addSuccessAlert(`Set ${targetSet.index} has been successfully deleted.`);
-    });
+    }).subscribe(() => this.alertService.addSuccessAlert(`Set ${targetSet.index} has been successfully deleted.`));
   }
 }
