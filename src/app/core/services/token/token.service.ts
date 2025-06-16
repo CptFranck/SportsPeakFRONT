@@ -35,7 +35,7 @@ export class TokenService {
     return this.authToken;
   }
 
-  removeCurrentToken() {
+  removeAuthToken() {
     this.authToken = null;
   }
 
