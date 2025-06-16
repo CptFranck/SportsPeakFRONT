@@ -47,11 +47,9 @@ export class ExerciseTypeService {
     this.apolloWrapperService.watchQuery({
       query: GET_EXERCISE_TYPES,
     }).valueChanges.subscribe({
-      next: ({data, errors, loading}: ApolloQueryResult<any>) => {
-        if (errors)
-          this.alertService.graphQLErrorAlertHandler(errors);
-        this.exerciseTypeListSubject.next(data.getExerciseTypes);
+      next: ({data, loading}: ApolloQueryResult<any>) => {
         this.isLoadingSubject.next(loading);
+        this.exerciseTypeListSubject.next(data.getExerciseTypes);
       },
       error: () => this.isLoadingSubject.next(false),
     });
@@ -63,11 +61,9 @@ export class ExerciseTypeService {
       query: GET_EXERCISE_TYPES_BY_ID,
       variables: {id: id}
     }).valueChanges.subscribe({
-      next: ({data, errors, loading}: ApolloQueryResult<any>) => {
-        if (errors)
-          this.alertService.graphQLErrorAlertHandler(errors);
-        this.selectedExerciseTypeSubject.next(data.getExerciseTypeById);
+      next: ({data, loading}: ApolloQueryResult<any>) => {
         this.isLoadingSubject.next(loading);
+        this.selectedExerciseTypeSubject.next(data.getExerciseTypeById);
       },
       error: () => this.isLoadingSubject.next(false),
     });
@@ -79,11 +75,8 @@ export class ExerciseTypeService {
       variables: {
         inputNewExerciseType: exerciseTypeForm.value,
       }
-    }).subscribe(({errors, data}: MutationResult) => {
-      if (errors)
-        this.alertService.graphQLErrorAlertHandler(errors);
-      this.alertService.addSuccessAlert(`ExerciseType ${data.addExerciseType.name} has been successfully created.`);
-    });
+    }).subscribe(({data}: MutationResult) =>
+      this.alertService.addSuccessAlert(`ExerciseType ${data.addExerciseType.name} has been successfully created.`));
   }
 
   modifyExerciseType(exerciseTypeForm: FormGroup) {
@@ -92,20 +85,15 @@ export class ExerciseTypeService {
       variables: {
         inputExerciseType: exerciseTypeForm.value,
       },
-    }).subscribe(({errors, data}: MutationResult) => {
-      if (errors)
-        this.alertService.graphQLErrorAlertHandler(errors);
-      this.alertService.addSuccessAlert(`ExerciseType ${data.modifyExerciseType.name} has been successfully updated.`);
-    });
+    }).subscribe(({data}: MutationResult) =>
+      this.alertService.addSuccessAlert(`ExerciseType ${data.modifyExerciseType.name} has been successfully updated.`));
   }
 
   deleteExerciseType(exerciseType: ExerciseType) {
     this.apolloWrapperService.mutate({
       mutation: DEL_EXERCISE_TYPES,
       variables: {exerciseTypeId: exerciseType.id},
-    }).subscribe(({errors}: MutationResult) => {
-      if (errors)
-        this.alertService.graphQLErrorAlertHandler(errors);
+    }).subscribe(() => {
       this.alertService.addSuccessAlert(`ExerciseType ${exerciseType.name} has been successfully deleted.`);
     });
   }
