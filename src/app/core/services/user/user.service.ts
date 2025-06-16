@@ -49,9 +49,7 @@ export class UserService {
     this.apolloWrapperService.watchQuery({
       query: GET_USERS,
     }).valueChanges.subscribe({
-      next: ({data, errors, loading}: ApolloQueryResult<any>) => {
-        if (errors)
-          this.alertService.graphQLErrorAlertHandler(errors);
+      next: ({data, loading}: ApolloQueryResult<any>) => {
         this.userListSubject.next(data.getUsers);
         this.isLoadingSubject.next(loading);
       },
@@ -65,11 +63,8 @@ export class UserService {
       variables: {
         inputUserRoles: userForm.value,
       }
-    }).subscribe(({data, errors}: MutationResult) => {
-      if (errors)
-        this.alertService.graphQLErrorAlertHandler(errors);
-      this.alertService.addSuccessAlert(`User ${data.modifyUserRoles.username} been successfully updated.`);
-    });
+    }).subscribe(({data}: MutationResult) =>
+      this.alertService.addSuccessAlert(`User ${data.modifyUserRoles.username} been successfully updated.`));
   }
 
   //////////////////// CurrentUser  ///////////////////////
@@ -80,9 +75,7 @@ export class UserService {
       variables: {
         inputUserEmail: userForm.value,
       },
-    }).subscribe(({data, errors}: MutationResult) => {
-      if (errors)
-        this.alertService.graphQLErrorAlertHandler(errors);
+    }).subscribe(({data}: MutationResult) => {
       const auth: Auth = data.modifyUserEmail;
       this.alertService.addSuccessAlert(`User ${auth.user.username} been successfully updated.`);
       this.authService.setDataAuth(auth)
@@ -95,9 +88,7 @@ export class UserService {
       variables: {
         inputUserUsername: userForm.value,
       },
-    }).subscribe(({data, errors}: MutationResult) => {
-      if (errors)
-        this.alertService.graphQLErrorAlertHandler(errors);
+    }).subscribe(({data}: MutationResult) => {
       this.alertService.addSuccessAlert(`User ${data.modifyUserUsername.username} been successfully updated.`);
       this.currentUserService.setCurrentUser(data.modifyUserUsername);
     });
@@ -111,9 +102,7 @@ export class UserService {
       variables: {
         inputUserPassword: inputUserPassword,
       },
-    }).subscribe(({data, errors}: MutationResult) => {
-      if (errors)
-        this.alertService.graphQLErrorAlertHandler(errors);
+    }).subscribe(({data}: MutationResult) => {
       this.alertService.addSuccessAlert(`User ${data.modifyUserPassword.username} been successfully updated.`);
       this.currentUserService.setCurrentUser(data.modifyUserPassword);
     });
@@ -125,9 +114,7 @@ export class UserService {
       variables: {
         inputUserIdentity: userForm.value,
       }
-    }).subscribe(({data, errors}: MutationResult) => {
-      if (errors)
-        this.alertService.graphQLErrorAlertHandler(errors);
+    }).subscribe(({data}: MutationResult) => {
       this.alertService.addSuccessAlert(`User ${data.modifyUserIdentity.username} been successfully updated.`);
       this.currentUserService.setCurrentUser(data.modifyUserIdentity);
     });
@@ -139,9 +126,7 @@ export class UserService {
       variables: {
         userId: user.id,
       },
-    }).subscribe(({errors}: MutationResult) => {
-      if (errors)
-        this.alertService.graphQLErrorAlertHandler(errors);
+    }).subscribe(() => {
       this.alertService.addSuccessAlert(`User ${user.username} been successfully deleted.`);
       this.authService.logout();
     });
