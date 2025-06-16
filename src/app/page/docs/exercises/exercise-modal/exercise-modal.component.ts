@@ -11,7 +11,7 @@ import {
 import {
   ExerciseDetailsDisplayComponent
 } from "../../../../shared/components/modal-components/exercise-details-display/exercise-details-display.component";
-import {UserLoggedService} from "../../../../core/services/user-logged/user-logged.service";
+import {CurrentUserService} from "../../../../core/services/current-user/current-user.service";
 import {Subject, takeUntil} from "rxjs";
 import {FormIndicator} from "../../../../shared/model/common/form-indicator";
 import {ActionType} from "../../../../shared/model/enum/action-type";
@@ -40,12 +40,12 @@ export class ExerciseModalComponent implements OnInit, OnDestroy {
   protected readonly ActionType = ActionType;
 
   private readonly unsubscribe$ = new Subject<void>();
-  private readonly userLoggedService = inject(UserLoggedService);
+  private readonly currentUserService = inject(CurrentUserService);
 
   ngOnInit(): void {
-    this.userLoggedService.currentUser$
+    this.currentUserService.currentUser$
       .pipe(takeUntil(this.unsubscribe$))
-      .subscribe(() => this.isAdmin.set(this.userLoggedService.isAdmin()));
+      .subscribe(() => this.isAdmin.set(this.currentUserService.isAdmin()));
   }
 
   ngOnDestroy() {

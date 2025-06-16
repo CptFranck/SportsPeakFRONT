@@ -8,7 +8,7 @@ import {ExerciseTypeArrayComponent} from "../exercise-types-array/exercise-type-
 import {ExerciseTypeModalComponent} from "../exercise-type-modal/exercise-type-modal.component";
 import {Exercise} from "../../../../shared/model/dto/exercise";
 import {Subject, takeUntil} from "rxjs";
-import {UserLoggedService} from "../../../../core/services/user-logged/user-logged.service";
+import {CurrentUserService} from "../../../../core/services/current-user/current-user.service";
 import {collapseHeight} from "../../../../shared/animations/collapseHeigh";
 import {sortExerciseTypeByName} from "../../../../utils/exercise-type-function";
 import {ActionType} from "../../../../shared/model/enum/action-type";
@@ -43,7 +43,7 @@ export class ExerciseTypesComponent implements OnInit, OnDestroy {
   private exerciseTypes: ExerciseType[] = [];
 
   private readonly unsubscribe$ = new Subject<void>();
-  private readonly userLoggedService = inject(UserLoggedService);
+  private readonly currentUserService = inject(CurrentUserService);
   private readonly exerciseTypeService = inject(ExerciseTypeService);
 
   ngOnInit(): void {
@@ -57,9 +57,9 @@ export class ExerciseTypesComponent implements OnInit, OnDestroy {
         this.exerciseTypes = exerciseType;
         this.displayedExerciseTypes.set(Array.from(exerciseType).sort(sortExerciseTypeByName));
       });
-    this.userLoggedService.currentUser$
+    this.currentUserService.currentUser$
       .pipe(takeUntil(this.unsubscribe$))
-      .subscribe(() => this.isAdmin.set(this.userLoggedService.isAdmin()));
+      .subscribe(() => this.isAdmin.set(this.currentUserService.isAdmin()));
   }
 
   ngOnDestroy() {

@@ -6,7 +6,7 @@ import {Privilege} from "../../../../model/dto/privilege";
 import {PrivilegeService} from "../../../../../core/services/privilege/privilege.service";
 import {Role} from "../../../../model/dto/role";
 import {RoleSelectorComponent} from "../../../multi-select-components/role-selector/role-selector.component";
-import {UserLoggedService} from "../../../../../core/services/user-logged/user-logged.service";
+import {CurrentUserService} from "../../../../../core/services/current-user/current-user.service";
 import {ActionType} from "../../../../model/enum/action-type";
 
 @Component({
@@ -52,12 +52,12 @@ export class PrivilegeEntityFormComponent implements OnInit, OnDestroy {
 
   private readonly unsubscribe$ = new Subject<void>();
   private readonly privilegeService = inject(PrivilegeService);
-  private readonly userLoggedService = inject(UserLoggedService);
+  private readonly currentUserService = inject(CurrentUserService);
 
   ngOnInit() {
-    this.userLoggedService.currentUser$
+    this.currentUserService.currentUser$
       .pipe(takeUntil(this.unsubscribe$))
-      .subscribe(() => this.isAdmin = this.userLoggedService.isAdmin());
+      .subscribe(() => this.isAdmin = this.currentUserService.isAdmin());
     const submitEventActionType$ = this.submitEventActionType$();
     if (submitEventActionType$)
       submitEventActionType$

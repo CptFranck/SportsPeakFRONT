@@ -1,7 +1,7 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {MyProgExerciseEntityFormComponent} from './my-prog-exercise-entity-form.component';
-import {UserLoggedService} from "../../../../../core/services/user-logged/user-logged.service";
+import {CurrentUserService} from "../../../../../core/services/current-user/current-user.service";
 import {of} from "rxjs";
 import {ExerciseService} from "../../../../../core/services/exercise/exercise.service";
 import {ProgExerciseService} from "../../../../../core/services/prog-exercise/prog-exercise.service";
@@ -10,7 +10,7 @@ describe('MyProgExerciseEntityFormComponent', () => {
   let component: MyProgExerciseEntityFormComponent;
   let fixture: ComponentFixture<MyProgExerciseEntityFormComponent>;
 
-  const mockUserLoggedService = {
+  const mockCurrentUserService = {
     currentUser$: of(undefined),
   };
 
@@ -27,7 +27,7 @@ describe('MyProgExerciseEntityFormComponent', () => {
     await TestBed.configureTestingModule({
       providers: [
         {provide: ExerciseService, useValue: mockExerciseService},
-        {provide: UserLoggedService, useValue: mockUserLoggedService},
+        {provide: CurrentUserService, useValue: mockCurrentUserService},
         {provide: ProgExerciseService, useValue: mockProgExerciseService}
       ],
       imports: [MyProgExerciseEntityFormComponent]

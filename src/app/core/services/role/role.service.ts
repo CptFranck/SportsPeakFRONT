@@ -7,7 +7,7 @@ import {ApolloQueryResult} from "@apollo/client";
 import {FormGroup} from "@angular/forms";
 import {Role} from "../../../shared/model/dto/role";
 import {ADD_ROLE, GET_ROLES, MOD_ROLE} from "../../graphql/operations/role.operations";
-import {UserLoggedService} from "../user-logged/user-logged.service";
+import {CurrentUserService} from "../current-user/current-user.service";
 import {ApolloWrapperService} from "../apollo-wrapper/apollo-wrapper.service";
 
 @Injectable({
@@ -19,11 +19,11 @@ export class RoleService {
   isLoading = new BehaviorSubject<boolean>(true);
 
   private readonly alertService = inject(AlertService);
-  private readonly userLoggedService = inject(UserLoggedService);
+  private readonly currentUserService = inject(CurrentUserService);
   private readonly apolloWrapperService = inject(ApolloWrapperService);
 
   constructor() {
-    this.userLoggedService.currentUser$.subscribe(() => this.userLoggedService.isAdmin() && this.getRoles());
+    this.currentUserService.currentUser$.subscribe(() => this.currentUserService.isAdmin() && this.getRoles());
   }
 
   getRoles() {

@@ -7,7 +7,7 @@ import {ExerciseTypeService} from "../../../../../core/services/exercise-type/ex
 import {
   ExerciseSelectorComponent
 } from "../../../multi-select-components/exercise-selector/exercise-selector.component";
-import {UserLoggedService} from "../../../../../core/services/user-logged/user-logged.service";
+import {CurrentUserService} from "../../../../../core/services/current-user/current-user.service";
 import {Exercise} from "../../../../model/dto/exercise";
 import {ActionType} from "../../../../model/enum/action-type";
 
@@ -58,14 +58,14 @@ export class ExerciseTypeEntityFormComponent implements OnInit, OnDestroy {
   submitInvalidForm = signal<boolean>(false);
 
   private readonly unsubscribe$ = new Subject<void>();
-  private readonly userLoggedService = inject(UserLoggedService);
+  private readonly currentUserService = inject(CurrentUserService);
   private readonly exerciseTypeService = inject(ExerciseTypeService);
 
 
   ngOnInit() {
-    this.userLoggedService.currentUser$
+    this.currentUserService.currentUser$
       .pipe(takeUntil(this.unsubscribe$))
-      .subscribe(() => this.isAdmin = this.userLoggedService.isAdmin());
+      .subscribe(() => this.isAdmin = this.currentUserService.isAdmin());
     const submitEventActionType$ = this.submitEventActionType$();
     if (submitEventActionType$)
       submitEventActionType$

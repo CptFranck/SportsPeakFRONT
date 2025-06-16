@@ -15,7 +15,7 @@ import {
   MOD_PROG_EXERCISE_TRUST_LABEL
 } from "../../graphql/operations/prog-exercise.operations";
 import {User} from "../../../shared/model/dto/user";
-import {UserLoggedService} from "../user-logged/user-logged.service";
+import {CurrentUserService} from "../current-user/current-user.service";
 import {Router} from "@angular/router";
 import {ApolloWrapperService} from "../apollo-wrapper/apollo-wrapper.service";
 
@@ -31,12 +31,12 @@ export class ProgExerciseService {
 
   private readonly router = inject(Router);
   private readonly alertService = inject(AlertService);
-  private readonly userLoggedService = inject(UserLoggedService);
+  private readonly currentUserService = inject(CurrentUserService);
   private readonly apolloWrapperService = inject(ApolloWrapperService);
 
   constructor() {
     this.getProgExercises();
-    this.userLoggedService.currentUser$.subscribe((user: User | undefined) => user && this.getUserProgExercises(user));
+    this.currentUserService.currentUser$.subscribe((user: User | undefined) => user && this.getUserProgExercises(user));
   }
 
   get isLoading$() {

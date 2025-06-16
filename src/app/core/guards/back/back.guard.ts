@@ -1,12 +1,12 @@
 import {CanActivateFn, Router} from '@angular/router';
 import {inject} from "@angular/core";
-import {UserLoggedService} from "../../services/user-logged/user-logged.service";
+import {CurrentUserService} from "../../services/current-user/current-user.service";
 
 export const BackGuard: CanActivateFn = () => {
   const router: Router = inject(Router);
-  const userLoggedService: UserLoggedService = inject(UserLoggedService)
+  const currentUserService: CurrentUserService = inject(CurrentUserService)
 
-  if (userLoggedService.isStaff())
+  if (currentUserService.isStaff())
     return true;
 
   router.navigate(['/error/access-denied']);

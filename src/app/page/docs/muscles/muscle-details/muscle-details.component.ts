@@ -5,7 +5,7 @@ import {ActivatedRoute, Params} from "@angular/router";
 import {Muscle} from "../../../../shared/model/dto/muscle";
 import {MuscleService} from "../../../../core/services/muscle/muscle.service";
 import {LoadingComponent} from "../../../../shared/components/loading/loading.component";
-import {UserLoggedService} from "../../../../core/services/user-logged/user-logged.service";
+import {CurrentUserService} from "../../../../core/services/current-user/current-user.service";
 import {ModalButtonComponent} from "../../../../shared/components/modal-button/modal-button.component";
 import {MuscleModalComponent} from "../../../../shared/components/modal-components/muscle-modal/muscle-modal.component";
 import {
@@ -45,7 +45,7 @@ export class MuscleDetailsComponent implements OnInit, OnDestroy {
   private readonly unsubscribe$ = new Subject<void>();
   private readonly muscleService = inject(MuscleService);
   private readonly activatedRoute = inject(ActivatedRoute);
-  private readonly userLoggedService = inject(UserLoggedService);
+  private readonly currentUserService = inject(CurrentUserService);
   private readonly illustrationService = inject(IllustrationService);
 
   imageUrl = computed<string>(() => {
@@ -65,9 +65,9 @@ export class MuscleDetailsComponent implements OnInit, OnDestroy {
     this.muscleService.selectedMuscle$
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe((muscle: Muscle | undefined) => this.muscle.set(muscle));
-    this.userLoggedService.currentUser$
+    this.currentUserService.currentUser$
       .pipe(takeUntil(this.unsubscribe$))
-      .subscribe(() => this.isAdmin.set(this.userLoggedService.isAdmin()));
+      .subscribe(() => this.isAdmin.set(this.currentUserService.isAdmin()));
   }
 
   ngOnDestroy() {

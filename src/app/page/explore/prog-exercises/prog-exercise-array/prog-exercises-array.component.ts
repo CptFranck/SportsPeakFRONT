@@ -1,6 +1,6 @@
 import {Component, inject, input, OnChanges, OnDestroy, OnInit, output, signal} from '@angular/core';
 import {FormIndicator} from "../../../../shared/model/common/form-indicator";
-import {UserLoggedService} from "../../../../core/services/user-logged/user-logged.service";
+import {CurrentUserService} from "../../../../core/services/current-user/current-user.service";
 import {ModalButtonComponent} from "../../../../shared/components/modal-button/modal-button.component";
 import {ProgExercise} from "../../../../shared/model/dto/prog-exercise";
 import {User} from "../../../../shared/model/dto/user";
@@ -32,14 +32,14 @@ export class ProgExercisesArrayComponent implements OnInit, OnChanges, OnDestroy
   readonly actionMuscle = output<FormIndicator>();
 
   private readonly unsubscribe$ = new Subject<void>();
-  private readonly userLoggedService = inject(UserLoggedService);
+  private readonly currentUserService = inject(CurrentUserService);
 
   ngOnInit() {
-    this.userLoggedService.currentUser$
+    this.currentUserService.currentUser$
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe((user: User | undefined) => {
         this.userLogged.set(user);
-        this.isAdmin.set(this.userLoggedService.isAdmin())
+        this.isAdmin.set(this.currentUserService.isAdmin())
       });
   }
 

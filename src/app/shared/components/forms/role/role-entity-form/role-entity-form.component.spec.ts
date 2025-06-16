@@ -2,7 +2,7 @@ import {ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {RoleEntityFormComponent} from './role-entity-form.component';
 import {of} from "rxjs";
-import {UserLoggedService} from "../../../../../core/services/user-logged/user-logged.service";
+import {CurrentUserService} from "../../../../../core/services/current-user/current-user.service";
 import {PrivilegeService} from "../../../../../core/services/privilege/privilege.service";
 import {RoleService} from "../../../../../core/services/role/role.service";
 import {provideAnimations} from "@angular/platform-browser/animations";
@@ -14,7 +14,7 @@ describe('RoleEntityFormComponent', () => {
   let mockRoleService: jasmine.SpyObj<RoleService> =
     jasmine.createSpyObj('RoleService', ['addRole', 'modifyRole']);
 
-  const mockUserLoggedService = {
+  const mockCurrentUserService = {
     currentUser$: of(undefined),
   };
 
@@ -29,7 +29,7 @@ describe('RoleEntityFormComponent', () => {
         provideAnimations(),
         {provide: RoleService, useValue: mockRoleService},
         {provide: PrivilegeService, useValue: mockPrivilegeService},
-        {provide: UserLoggedService, useValue: mockUserLoggedService},
+        {provide: CurrentUserService, useValue: mockCurrentUserService},
       ],
       imports: [RoleEntityFormComponent]
     })

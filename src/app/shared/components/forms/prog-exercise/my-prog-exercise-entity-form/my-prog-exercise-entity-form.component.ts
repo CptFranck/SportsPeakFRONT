@@ -1,14 +1,12 @@
 import {Component, computed, inject, input, OnDestroy, OnInit, signal} from '@angular/core';
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {Observable, Subject, takeUntil} from "rxjs";
-import {UserLoggedService} from "../../../../../core/services/user-logged/user-logged.service";
+import {CurrentUserService} from "../../../../../core/services/current-user/current-user.service";
 import {User} from "../../../../model/dto/user";
 import {Visibility} from "../../../../model/enum/visibility";
 import {InputControlComponent} from "../../../input-control/input-control.component";
 import {ExerciseSelectComponent} from "../../../selects/exercise-select/exercise-select.component";
-import {
-  VisibilitySelectComponent
-} from "../../../selects/visibility-select/visibility-select.component";
+import {VisibilitySelectComponent} from "../../../selects/visibility-select/visibility-select.component";
 import {ProgExerciseService} from "../../../../../core/services/prog-exercise/prog-exercise.service";
 import {ProgExercise} from "../../../../model/dto/prog-exercise";
 import {ActionType} from "../../../../model/enum/action-type";
@@ -69,11 +67,11 @@ export class MyProgExerciseEntityFormComponent implements OnInit, OnDestroy {
   });
 
   private readonly unsubscribe$ = new Subject<void>();
-  private readonly userLoggedService = inject(UserLoggedService);
+  private readonly currentUserService = inject(CurrentUserService);
   private readonly progExerciseService = inject(ProgExerciseService);
 
   ngOnInit() {
-    this.userLoggedService.currentUser$
+    this.currentUserService.currentUser$
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe((user: User | undefined) => this.user = user);
     const submitEventActionType$ = this.submitEventActionType$();

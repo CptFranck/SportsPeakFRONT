@@ -5,7 +5,7 @@ import {ProgExerciseService} from "../../../../../core/services/prog-exercise/pr
 import {
   TrustLabelSelectComponent
 } from "../../../selects/prog-exercise-trust-label-select/trust-label-select.component";
-import {UserLoggedService} from "../../../../../core/services/user-logged/user-logged.service";
+import {CurrentUserService} from "../../../../../core/services/current-user/current-user.service";
 import {Subject, takeUntil} from "rxjs";
 
 @Component({
@@ -32,13 +32,13 @@ export class ProgExerciseTrustLabelFormComponent implements OnInit, OnDestroy {
   });
 
   private readonly unsubscribe$ = new Subject<void>();
-  private readonly userLoggedService = inject(UserLoggedService);
+  private readonly currentUserService = inject(CurrentUserService);
   private readonly progExerciseService = inject(ProgExerciseService);
 
   ngOnInit() {
-    this.userLoggedService.currentUser$
+    this.currentUserService.currentUser$
       .pipe(takeUntil(this.unsubscribe$))
-      .subscribe(() => this.isStaff.set(this.userLoggedService.isStaff()));
+      .subscribe(() => this.isStaff.set(this.currentUserService.isStaff()));
   }
 
   ngOnDestroy() {

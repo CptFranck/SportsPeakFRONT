@@ -10,7 +10,7 @@ import {MuscleSelectorComponent} from "../../../multi-select-components/muscle-s
 import {
   ExerciseTypeSelectorComponent
 } from "../../../multi-select-components/exercise-type-selector/exercise-type-selector.component";
-import {UserLoggedService} from "../../../../../core/services/user-logged/user-logged.service";
+import {CurrentUserService} from "../../../../../core/services/current-user/current-user.service";
 import {ActionType} from "../../../../model/enum/action-type";
 
 @Component({
@@ -75,12 +75,12 @@ export class ExerciseEntityFormComponent implements OnInit, OnDestroy {
 
   private readonly unsubscribe$ = new Subject<void>();
   private readonly exerciseService = inject(ExerciseService);
-  private readonly userLoggedService = inject(UserLoggedService);
+  private readonly currentUserService = inject(CurrentUserService);
 
   ngOnInit() {
-    this.userLoggedService.currentUser$
+    this.currentUserService.currentUser$
       .pipe(takeUntil(this.unsubscribe$))
-      .subscribe(() => this.isAdmin = this.userLoggedService.isAdmin());
+      .subscribe(() => this.isAdmin = this.currentUserService.isAdmin());
     const submitEventActionType$ = this.submitEventActionType$();
     if (submitEventActionType$)
       submitEventActionType$

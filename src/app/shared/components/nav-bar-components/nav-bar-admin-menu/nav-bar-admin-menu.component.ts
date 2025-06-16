@@ -1,7 +1,7 @@
 import {Component, inject, OnDestroy, OnInit, signal} from '@angular/core';
 import {RouterLink, RouterLinkActive} from "@angular/router";
 import {Subject, takeUntil} from "rxjs";
-import {UserLoggedService} from "../../../../core/services/user-logged/user-logged.service";
+import {CurrentUserService} from "../../../../core/services/current-user/current-user.service";
 
 @Component({
   selector: 'app-nav-bar-admin-menu',
@@ -16,12 +16,12 @@ export class NavBarAdminMenuComponent implements OnInit, OnDestroy {
   navbarDropdownId: string = "NavBarAdminMenu";
 
   private readonly unsubscribe$: Subject<void> = new Subject<void>();
-  private readonly userLoggedService: UserLoggedService = inject(UserLoggedService);
+  private readonly currentUserService: CurrentUserService = inject(CurrentUserService);
 
   ngOnInit() {
-    this.userLoggedService.currentUser$
+    this.currentUserService.currentUser$
       .pipe(takeUntil(this.unsubscribe$))
-      .subscribe(() => this.isAdmin.set(this.userLoggedService.isAdmin()));
+      .subscribe(() => this.isAdmin.set(this.currentUserService.isAdmin()));
   }
 
   ngOnDestroy() {

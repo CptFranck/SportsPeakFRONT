@@ -11,7 +11,7 @@ import {
 import {
   ExerciseTypeDeleteFormComponent
 } from "../../../../shared/components/forms/exercise-type/exercise-type-delete-form/exercise-type-delete-form.component";
-import {UserLoggedService} from "../../../../core/services/user-logged/user-logged.service";
+import {CurrentUserService} from "../../../../core/services/current-user/current-user.service";
 import {FormIndicator} from "../../../../shared/model/common/form-indicator";
 import {Subject, takeUntil} from "rxjs";
 import {ActionType} from "../../../../shared/model/enum/action-type";
@@ -40,12 +40,12 @@ export class ExerciseTypeModalComponent implements OnInit, OnDestroy {
   protected readonly ActionType = ActionType;
 
   private readonly unsubscribe$ = new Subject<void>();
-  private readonly userLoggedService = inject(UserLoggedService);
+  private readonly currentUserService = inject(CurrentUserService);
 
   ngOnInit(): void {
-    this.userLoggedService.currentUser$
+    this.currentUserService.currentUser$
       .pipe(takeUntil(this.unsubscribe$))
-      .subscribe(() => this.isAdmin.set(this.userLoggedService.isAdmin()));
+      .subscribe(() => this.isAdmin.set(this.currentUserService.isAdmin()));
   }
 
   ngOnDestroy() {

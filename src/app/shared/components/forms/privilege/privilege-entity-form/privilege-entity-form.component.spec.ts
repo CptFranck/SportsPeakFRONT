@@ -3,7 +3,7 @@ import {ComponentFixture, TestBed} from '@angular/core/testing';
 import {PrivilegeEntityFormComponent} from './privilege-entity-form.component';
 import {PrivilegeService} from "../../../../../core/services/privilege/privilege.service";
 import {BehaviorSubject, of} from "rxjs";
-import {UserLoggedService} from "../../../../../core/services/user-logged/user-logged.service";
+import {CurrentUserService} from "../../../../../core/services/current-user/current-user.service";
 import {RoleService} from "../../../../../core/services/role/role.service";
 import {Role} from "../../../../model/dto/role";
 import {provideAnimations} from "@angular/platform-browser/animations";
@@ -30,7 +30,7 @@ describe('PrivilegeEntityFormComponent', () => {
         provideAnimations(),
         {provide: RoleService, useValue: mockRoleService},
         {provide: PrivilegeService, useValue: mockPrivilegeService},
-        {provide: UserLoggedService, useValue: mockUserLoggedService},
+        {provide: CurrentUserService, useValue: mockUserLoggedService},
       ],
       imports: [PrivilegeEntityFormComponent]
     })

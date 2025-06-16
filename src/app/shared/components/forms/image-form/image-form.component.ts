@@ -1,6 +1,6 @@
 import {Component, computed, inject, input, OnDestroy, OnInit, output, signal} from '@angular/core';
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
-import {UserLoggedService} from "../../../../core/services/user-logged/user-logged.service";
+import {CurrentUserService} from "../../../../core/services/current-user/current-user.service";
 import {Subject, takeUntil} from "rxjs";
 import {FileUploadComponent} from "../../inputs/file-upload/file-upload.component";
 import {InputControlComponent} from "../../input-control/input-control.component";
@@ -43,13 +43,13 @@ export class ImageFormComponent implements OnInit, OnDestroy {
   }));
 
   private readonly unsubscribe$ = new Subject<void>();
-  private readonly userLoggedService = inject(UserLoggedService);
+  private readonly currentUserService = inject(CurrentUserService);
   private readonly illustrationService = inject(IllustrationService);
 
   ngOnInit() {
-    this.userLoggedService.currentUser$
+    this.currentUserService.currentUser$
       .pipe(takeUntil(this.unsubscribe$))
-      .subscribe(() => this.isAdmin.set(this.userLoggedService.isAdmin()));
+      .subscribe(() => this.isAdmin.set(this.currentUserService.isAdmin()));
     this.illustrationService.refreshData()
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe((url: string) => this.refresh.emit(url));

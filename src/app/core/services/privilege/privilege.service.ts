@@ -11,7 +11,7 @@ import {
   GET_PRIVILEGES,
   MOD_PRIVILEGE
 } from "../../graphql/operations/privilege.operations";
-import {UserLoggedService} from "../user-logged/user-logged.service";
+import {CurrentUserService} from "../current-user/current-user.service";
 import {ApolloWrapperService} from "../apollo-wrapper/apollo-wrapper.service";
 
 @Injectable({
@@ -23,11 +23,11 @@ export class PrivilegeService {
   private readonly privilegeListSubject = new BehaviorSubject<Privilege[]>([]);
 
   private readonly alertService = inject(AlertService);
-  private readonly userLoggedService = inject(UserLoggedService);
+  private readonly currentUserService = inject(CurrentUserService);
   private readonly apolloWrapperService = inject(ApolloWrapperService);
 
   constructor() {
-    this.userLoggedService.currentUser$.subscribe(() => this.userLoggedService.isAdmin() && this.getPrivileges());
+    this.currentUserService.currentUser$.subscribe(() => this.currentUserService.isAdmin() && this.getPrivileges());
   }
 
   get isLoading$() {

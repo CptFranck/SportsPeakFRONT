@@ -6,7 +6,7 @@ import {MuscleService} from "../../../../core/services/muscle/muscle.service";
 import {Muscle} from "../../../../shared/model/dto/muscle";
 import {Exercise} from "../../../../shared/model/dto/exercise";
 import {Subject, takeUntil} from "rxjs";
-import {UserLoggedService} from "../../../../core/services/user-logged/user-logged.service";
+import {CurrentUserService} from "../../../../core/services/current-user/current-user.service";
 import {collapseHeight} from "../../../../shared/animations/collapseHeigh";
 import {sortMuscleByName} from "../../../../utils/muscle-functions";
 import {ModalButtonComponent} from "../../../../shared/components/modal-button/modal-button.component";
@@ -40,7 +40,7 @@ export class MusclesComponent implements OnInit, OnDestroy {
   private muscles: Muscle[] = [];
   private readonly unsubscribe$ = new Subject<void>();
   private readonly muscleService = inject(MuscleService);
-  private readonly userLoggedService = inject(UserLoggedService);
+  private readonly currentUserService = inject(CurrentUserService);
 
   ngOnInit(): void {
     this.muscleService.getMuscles();
@@ -53,9 +53,9 @@ export class MusclesComponent implements OnInit, OnDestroy {
         this.muscles = muscles;
         this.displayedMuscles.set(Array.from(muscles).sort(sortMuscleByName));
       });
-    this.userLoggedService.currentUser$
+    this.currentUserService.currentUser$
       .pipe(takeUntil(this.unsubscribe$))
-      .subscribe(() => this.isAdmin.set(this.userLoggedService.isAdmin()));
+      .subscribe(() => this.isAdmin.set(this.currentUserService.isAdmin()));
   }
 
   ngOnDestroy() {
