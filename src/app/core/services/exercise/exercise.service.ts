@@ -47,9 +47,7 @@ export class ExerciseService {
     this.apolloWrapperService.watchQuery({
       query: GET_EXERCISES,
     }).valueChanges.subscribe({
-        next: ({data, errors, loading}: ApolloQueryResult<any>) => {
-          if (errors)
-            this.alertService.graphQLErrorAlertHandler(errors);
+        next: ({data, loading}: ApolloQueryResult<any>) => {
           this.exerciseListSubject.next(data?.getExercises ?? []);
           this.isLoadingSubject.next(loading);
         },
@@ -64,9 +62,7 @@ export class ExerciseService {
       query: GET_EXERCISE_BY_ID,
       variables: {id: id}
     }).valueChanges.subscribe({
-      next: ({data, errors, loading}: ApolloQueryResult<any>) => {
-        if (errors)
-          this.alertService.graphQLErrorAlertHandler(errors);
+      next: ({data, loading}: ApolloQueryResult<any>) => {
         this.selectedExerciseSubject.next(data.getExerciseById);
         this.isLoadingSubject.next(loading);
       },
@@ -80,11 +76,8 @@ export class ExerciseService {
       variables: {
         inputNewExercise: exerciseForm.value,
       },
-    }).subscribe(({errors, data}: MutationResult) => {
-      if (errors)
-        this.alertService.graphQLErrorAlertHandler(errors);
-      this.alertService.addSuccessAlert(`Exercise ${data.addExercise.name} has been successfully created.`);
-    });
+    }).subscribe(({data}: MutationResult) =>
+      this.alertService.addSuccessAlert(`Exercise ${data.addExercise.name} has been successfully created.`));
   }
 
   modifyExercise(exerciseForm: FormGroup) {
@@ -93,11 +86,8 @@ export class ExerciseService {
       variables: {
         inputExercise: exerciseForm.value,
       }
-    }).subscribe(({errors, data}: MutationResult) => {
-      if (errors)
-        this.alertService.graphQLErrorAlertHandler(errors);
-      this.alertService.addSuccessAlert(`Exercise ${data.modifyExercise.name} has been successfully updated.`);
-    });
+    }).subscribe(({data}: MutationResult) =>
+      this.alertService.addSuccessAlert(`Exercise ${data.modifyExercise.name} has been successfully updated.`));
   }
 
   deleteExercise(exercise: Exercise) {
@@ -106,10 +96,7 @@ export class ExerciseService {
       variables: {
         exerciseId: exercise.id,
       }
-    }).subscribe(({errors}: MutationResult) => {
-      if (errors)
-        this.alertService.graphQLErrorAlertHandler(errors);
-      this.alertService.addSuccessAlert(`Exercise ${exercise.name} has been successfully deleted.`);
-    });
+    }).subscribe(() =>
+      this.alertService.addSuccessAlert(`Exercise ${exercise.name} has been successfully deleted.`));
   }
 }
