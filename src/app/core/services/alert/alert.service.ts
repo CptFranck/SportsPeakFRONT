@@ -29,6 +29,12 @@ export class AlertService {
     this.updateAlert();
   }
 
+  addInfoAlert(message: string) {
+    const successAlert: Alert = this.createBaseAlert("Info :", message, AlertType.info);
+    this.alertList.push(successAlert);
+    this.updateAlert();
+  }
+
   addWarningAlert(message: string) {
     const successAlert: Alert = this.createBaseAlert("Warning :/", message, AlertType.warning);
     this.alertList.push(successAlert);
