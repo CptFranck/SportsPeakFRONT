@@ -13,7 +13,8 @@ import {BehaviorSubject} from "rxjs";
 })
 export class AuthService {
   private redirectUrl = "/";
-  private readonly isAuthenticatedSubject = new BehaviorSubject(false);
+  private redirectNeeded = false;
+  private readonly isAuthenticatedSubject = new BehaviorSubject<boolean>(false);
 
   private readonly router = inject(Router);
   private readonly apollo = inject(Apollo);
@@ -22,10 +23,6 @@ export class AuthService {
 
   constructor() {
     this.tokenService.isAuthTokenExpired$.subscribe((isExpired) => isExpired && this.refreshToken());
-  }
-
-  get isAuthenticated() {
-    return this.isAuthenticatedSubject.value;
   }
 
   get isAuthenticated$() {
@@ -53,7 +50,6 @@ export class AuthService {
   }
 
   refreshToken() {
-    console.log("Refresh Token");
     this.apollo.mutate({
       mutation: REFRESH_TOKEN
     }).subscribe({
@@ -80,12 +76,15 @@ export class AuthService {
     this.tokenService.setAuthToken(auth);
     this.currentUserService.setCurrentUser(auth.user);
     this.isAuthenticatedSubject.next(true);
-    if (redirect)
+    if (redirect && redirect) {
       this.router.navigateByUrl(this.redirectUrl);
+      this.redirectNeeded = true;
+    }
   }
 
   setRedirectUrl(redirectUrl: string) {
     this.redirectUrl = redirectUrl;
+    this.redirectNeeded = true;
   }
 
   private removeDataAuth(redirect = false) {
