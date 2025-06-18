@@ -21,23 +21,19 @@ export const graphqlProvider: ApplicationConfig['providers'] = [
 ];
 
 function apolloOptionsFactory(): ApolloClientOptions<any> {
-  return {
-    link: createApolloLink(),
-    cache: new InMemoryCache(),
-  };
-}
-
-function createApolloLink(): ApolloLink {
   const httpLink = inject(HttpLink);
 
-  return ApolloLink.from([
-    setAuthHeaders(),
-    handleErrors(),
-    httpLink.create({
-      uri: GRAPHQL_API_URI,
-      withCredentials: true,
-    }),
-  ]);
+  return {
+    link: ApolloLink.from([
+      setAuthHeaders(),
+      handleErrors(),
+      httpLink.create({
+        uri: GRAPHQL_API_URI,
+        withCredentials: true,
+      }),
+    ]),
+    cache: new InMemoryCache(),
+  };
 }
 
 function setAuthHeaders(): ApolloLink {
@@ -45,9 +41,7 @@ function setAuthHeaders(): ApolloLink {
 
   return setContext(() => {
     const authToken = tokenService.getAuthToken();
-    if (!authToken) {
-      return {};
-    }
+    if (!authToken) return {};
     return {
       headers: {
         Authorization: `${authToken.tokenType} ${authToken.accessToken}`,
@@ -70,34 +64,51 @@ function handleErrors(): ApolloLink {
 
     if (graphQLErrors)
       for (let err of graphQLErrors) {
-        if (err.extensions?.['code'] === "UNAUTHENTICATED") {
-          return new Observable<FetchResult>((observer) => {
-            authService.refreshToken();
+        switch (err.extensions?.['code']) {
+          case 'UNAUTHENTICATED':
+            console.log("UNAUTHENTICATED", err);
+            if (tokenService.isAuthTokenExpired)
+              return new Observable<FetchResult>((observer) => {
+                authService.refreshToken();
 
-            const sub = authService.isAuthenticated$.subscribe((isAuth) => {
-              if (isAuth) {
-                const newToken = tokenService.getAuthToken();
-                operation.setContext({
-                  headers: {
-                    Authorization: `${newToken?.tokenType} ${newToken?.accessToken}`,
-                  },
+                const sub = authService.isAuthenticated$.subscribe((isAuth) => {
+                  if (isAuth) {
+                    const newToken = tokenService.getAuthToken();
+                    operation.setContext({
+                      headers: {
+                        Authorization: `${newToken?.tokenType} ${newToken?.accessToken}`,
+                      },
+                    });
+
+                    forward(operation).subscribe({
+                      next: (result) => observer.next(result),
+                      error: (err) => observer.error(err),
+                      complete: () => observer.complete(),
+                    });
+
+                    sub.unsubscribe();
+                  } else {
+                    observer.error(err);
+                    sub.unsubscribe();
+                  }
                 });
+              });
+            else
+              alertService.createGraphQLErrorAlert(err);
+            break;
+          case 'REFRESH_TOKEN_EXPIRED':
+            console.log("REFRESH_TOKEN_EXPIRED");
+            alertService.addInfoAlert("Session has expired");
+            break;
 
-                forward(operation).subscribe({
-                  next: (result) => observer.next(result),
-                  error: (err) => observer.error(err),
-                  complete: () => observer.complete(),
-                });
+          case 'REFRESH_TOKEN_MISSING':
+            console.log("REFRESH_TOKEN_MISSING");
+            break;
 
-                sub.unsubscribe();
-              } else {
-                observer.error(err);
-                sub.unsubscribe();
-              }
-            });
-          });
-        } else {
-          alertService.createGraphQLErrorAlert(err);
+          default :
+            console.log("Erreur:", err)
+            alertService.createGraphQLErrorAlert(err);
+            break;
         }
       }
     return undefined;
