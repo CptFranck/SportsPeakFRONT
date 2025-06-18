@@ -6,7 +6,7 @@ import {Router} from "@angular/router";
 import {Auth} from "../../../shared/model/dto/auth";
 import {CurrentUserService} from "../current-user/current-user.service";
 import {TokenService} from "../token/token.service";
-import {BehaviorSubject, Observable, of, take} from "rxjs";
+import {BehaviorSubject} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -21,7 +21,11 @@ export class AuthService {
   private readonly currentUserService = inject(CurrentUserService);
 
   constructor() {
-    this.refreshToken();
+    this.tokenService.isAuthTokenExpired$.subscribe((isExpired) => isExpired && this.refreshToken());
+  }
+
+  get isAuthenticated() {
+    return this.isAuthenticatedSubject.value;
   }
 
   get isAuthenticated$() {
@@ -49,6 +53,7 @@ export class AuthService {
   }
 
   refreshToken() {
+    console.log("Refresh Token");
     this.apollo.mutate({
       mutation: REFRESH_TOKEN
     }).subscribe({
@@ -62,9 +67,9 @@ export class AuthService {
     });
   }
 
-
   logout() {
-    this.apollo.mutate({mutation: LOGOUT});
+    this.apollo.mutate({mutation: LOGOUT})
+      .subscribe(({data}: MutationResult) => null);
     // Reset apollo cache
     this.apollo.client.resetStore().then(() => {
       this.removeDataAuth();
@@ -76,29 +81,16 @@ export class AuthService {
     this.currentUserService.setCurrentUser(auth.user);
     this.isAuthenticatedSubject.next(true);
     if (redirect)
-      this.router.navigateByUrl(this.redirectUrl).then(() => this.setRedirectUrl('/'));
+      this.router.navigateByUrl(this.redirectUrl);
   }
 
   setRedirectUrl(redirectUrl: string) {
     this.redirectUrl = redirectUrl;
   }
 
-  isAuthenticationValid(): Observable<boolean> {
-    const currentToken = this.tokenService.getAuthToken();
-    const isValid = this.tokenService.isTokenValid(currentToken);
-
-    if (isValid) {
-      this.isAuthenticatedSubject.next(true);
-      return of(true);
-    }
-    return this.isAuthenticated$.pipe(take(1));
-  }
-
   private removeDataAuth(redirect = false) {
-    this.tokenService.removeAuthToken();
     this.currentUserService.removeCurrentUser();
     this.isAuthenticatedSubject.next(false);
-    if (redirect)
-      this.router.navigateByUrl('/');
+    if (redirect) this.router.navigateByUrl('/');
   }
 }
