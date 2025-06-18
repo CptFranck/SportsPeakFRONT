@@ -11,10 +11,14 @@ export class TokenService {
 
   private authToken: AuthToken | null = null;
   private expirationTimeout: ReturnType<typeof setTimeout> | undefined;
-  private readonly authTokenExpiredSubject = new BehaviorSubject<void>(undefined);
+  private readonly isAuthTokenExpiredSubject = new BehaviorSubject<boolean>(true);
 
-  get authTokenExpired$() {
-    return this.authTokenExpiredSubject.asObservable();
+  get isAuthTokenExpired() {
+    return this.isAuthTokenExpiredSubject.value;
+  }
+
+  get isAuthTokenExpired$() {
+    return this.isAuthTokenExpiredSubject.asObservable();
   }
 
   getAuthToken() {
@@ -42,13 +46,16 @@ export class TokenService {
     const expiresInSec = this.authToken.expiration - currentTime;
 
     if (expiresInSec <= 0) {
-      this.authTokenExpiredSubject.next();
+      this.isAuthTokenExpiredSubject.next(true);
       return;
     }
+
     if (this.expirationTimeout) clearTimeout(this.expirationTimeout);
+    this.isAuthTokenExpiredSubject.next(false);
+
     this.expirationTimeout = setTimeout(() => {
       this.authToken = null;
-      this.authTokenExpiredSubject.next();
+      this.isAuthTokenExpiredSubject.next(true);
     }, expiresInSec * 1000);
   }
 }
