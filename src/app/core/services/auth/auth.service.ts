@@ -7,6 +7,7 @@ import {Auth} from "../../../shared/model/dto/auth";
 import {CurrentUserService} from "../current-user/current-user.service";
 import {TokenService} from "../token/token.service";
 import {BehaviorSubject} from "rxjs";
+import {AuthState} from "../../../shared/model/enum/authState";
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,8 @@ import {BehaviorSubject} from "rxjs";
 export class AuthService {
   private redirectUrl = "/";
   private redirectNeeded = false;
-  private readonly isAuthenticatedSubject = new BehaviorSubject<boolean>(false);
+
+  private readonly isAuthenticatedSubject = new BehaviorSubject<AuthState>(AuthState.unknown);
 
   private readonly router = inject(Router);
   private readonly apollo = inject(Apollo);
@@ -22,6 +24,7 @@ export class AuthService {
   private readonly currentUserService = inject(CurrentUserService);
 
   constructor() {
+    this.refreshToken();
     this.tokenService.isAuthTokenExpired$.subscribe((isExpired) => isExpired && this.refreshToken());
   }
 
@@ -75,8 +78,8 @@ export class AuthService {
   setDataAuth(auth: Auth, redirect = false) {
     this.tokenService.setAuthToken(auth);
     this.currentUserService.setCurrentUser(auth.user);
-    this.isAuthenticatedSubject.next(true);
-    if (redirect && redirect) {
+    this.isAuthenticatedSubject.next(AuthState.authenticated);
+    if (redirect && this.redirectNeeded) {
       this.router.navigateByUrl(this.redirectUrl);
       this.redirectNeeded = true;
     }
@@ -89,7 +92,7 @@ export class AuthService {
 
   private removeDataAuth(redirect = false) {
     this.currentUserService.removeCurrentUser();
-    this.isAuthenticatedSubject.next(false);
+    this.isAuthenticatedSubject.next(AuthState.unauthenticated);
     if (redirect) this.router.navigateByUrl('/');
   }
 }
