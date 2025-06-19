@@ -18,9 +18,9 @@ import {ActionType} from "../../../../shared/model/enum/action-type";
   templateUrl: './roles.component.html'
 })
 export class RolesComponent implements OnInit, OnDestroy {
-  loading = signal<boolean>(true);
-  roles: Role[] = [];
   role = signal<Role | undefined>(undefined);
+  roles = signal<Role[]>([]);
+  loading = signal<boolean>(true);
   action = signal<ActionType>(ActionType.create);
   modalTitle = signal<string>("");
 
@@ -30,12 +30,12 @@ export class RolesComponent implements OnInit, OnDestroy {
   private readonly roleService = inject(RoleService);
 
   ngOnInit(): void {
-    this.roleService.roles
-      .pipe(takeUntil(this.unsubscribe$))
-      .subscribe((roles: Role[]) => this.roles = roles);
-    this.roleService.isLoading
+    this.roleService.isLoading$
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe((isLoading: boolean) => this.loading.set(isLoading));
+    this.roleService.roleList$
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe((roles: Role[]) => this.roles.set(roles));
   }
 
   ngOnDestroy() {

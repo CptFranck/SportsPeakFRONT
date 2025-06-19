@@ -15,8 +15,8 @@ import {ApolloWrapperService} from "../apollo-wrapper/apollo-wrapper.service";
 })
 export class RoleService {
 
-  roles = new BehaviorSubject<Role[]>([]);
-  isLoading = new BehaviorSubject<boolean>(true);
+  private readonly roleListSubject = new BehaviorSubject<Role[]>([]);
+  private readonly isLoadingSubject = new BehaviorSubject<boolean>(true);
 
   private readonly alertService = inject(AlertService);
   private readonly currentUserService = inject(CurrentUserService);
@@ -26,16 +26,24 @@ export class RoleService {
     this.currentUserService.currentUser$.subscribe(() => this.currentUserService.isAdmin() && this.getRoles());
   }
 
+  get isLoading$() {
+    return this.isLoadingSubject.asObservable();
+  }
+
+  get roleList$() {
+    return this.roleListSubject.asObservable();
+  }
+
   getRoles() {
-    this.isLoading.next(true);
+    this.isLoadingSubject.next(true);
     this.apolloWrapperService.watchQuery({
       query: GET_ROLES,
     }).valueChanges.subscribe({
       next: ({data, loading}: ApolloQueryResult<any>) => {
-        this.roles.next(data.getRoles);
-        this.isLoading.next(loading);
+        this.roleListSubject.next(data.getRoles);
+        this.isLoadingSubject.next(loading);
       },
-      error: () => this.isLoading.next(false),
+      error: () => this.isLoadingSubject.next(false),
     });
   }
 

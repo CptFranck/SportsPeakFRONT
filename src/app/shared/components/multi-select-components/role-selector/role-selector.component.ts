@@ -31,7 +31,10 @@ export class RoleSelectorComponent implements OnInit, OnDestroy, ControlValueAcc
 
 
   ngOnInit(): void {
-    this.roleService.roles
+    this.roleService.isLoading$
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe((loading: boolean) => this.loading.set(loading));
+    this.roleService.roleList$
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe((roles: Role[]) => {
         let options: MultiSelectOption[] = []
@@ -45,9 +48,6 @@ export class RoleSelectorComponent implements OnInit, OnDestroy, ControlValueAcc
         });
         this.roleOptions.set([...options]);
       });
-    this.roleService.isLoading
-      .pipe(takeUntil(this.unsubscribe$))
-      .subscribe((loading: boolean) => this.loading.set(loading));
   }
 
   ngOnDestroy() {
