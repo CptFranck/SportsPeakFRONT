@@ -2,7 +2,6 @@ import {ActivatedRouteSnapshot, CanActivateFn, Router, RouterStateSnapshot} from
 import {AuthService} from "../../services/auth/auth.service";
 import {inject} from "@angular/core";
 import {from, map, take} from "rxjs";
-import {AuthState} from "../../../shared/model/enum/authState";
 
 export const AuthGuard: CanActivateFn = (route: ActivatedRouteSnapshot, state: RouterStateSnapshot) => {
   const router = inject(Router);
@@ -11,8 +10,8 @@ export const AuthGuard: CanActivateFn = (route: ActivatedRouteSnapshot, state: R
   return authService.isAuthenticated$
     .pipe(
       take(1),
-      map(authState => {
-        if (authState === AuthState.authenticated)
+      map(isAuth => {
+        if (isAuth)
           return true;
         authService.setRedirectUrl(state.url);
         from(router.navigate(['auth']))
