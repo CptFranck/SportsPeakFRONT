@@ -40,6 +40,7 @@ export class UsersManagementComponent implements OnInit, OnDestroy {
         this.users = users;
         this.displayedUsers.set(users);
       });
+
     this.userService.isLoading$
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe((isLoading: boolean) => this.loading.set(isLoading));

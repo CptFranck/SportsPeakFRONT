@@ -13,7 +13,6 @@ import {BehaviorSubject} from "rxjs";
 })
 export class AuthService {
   private redirectUrl = "/";
-
   private readonly isAuthenticatedSubject = new BehaviorSubject<boolean>(false);
 
   private readonly router = inject(Router);

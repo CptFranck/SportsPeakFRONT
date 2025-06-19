@@ -66,7 +66,7 @@ function handleErrors(): ApolloLink {
       for (let err of graphQLErrors) {
         switch (err.extensions?.['code']) {
           case 'UNAUTHENTICATED':
-            console.log("UNAUTHENTICATED", err);
+            console.log("UNAUTHENTICATED");
             if (tokenService.isAuthTokenExpired)
               return new Observable<FetchResult>((observer) => {
                 authService.refreshToken();
