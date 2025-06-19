@@ -2,7 +2,7 @@ import {ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {ExerciseTypeCardComponent} from './exercise-type-card.component';
 import {provideRouter} from "@angular/router";
-import {generateTestExerciseType} from "../../../utils/testFunctions";
+import {generateTestExerciseType} from "../../../../utils/testFunctions";
 
 describe('ExerciseTypeCardComponent', () => {
   let component: ExerciseTypeCardComponent;

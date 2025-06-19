@@ -2,10 +2,9 @@ import {ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {PrivilegeEntityFormComponent} from './privilege-entity-form.component';
 import {PrivilegeService} from "../../../../../core/services/privilege/privilege.service";
-import {BehaviorSubject, of} from "rxjs";
+import {of} from "rxjs";
 import {CurrentUserService} from "../../../../../core/services/current-user/current-user.service";
 import {RoleService} from "../../../../../core/services/role/role.service";
-import {Role} from "../../../../model/dto/role";
 import {provideAnimations} from "@angular/platform-browser/animations";
 
 describe('PrivilegeEntityFormComponent', () => {
@@ -15,10 +14,10 @@ describe('PrivilegeEntityFormComponent', () => {
   let mockPrivilegeService: jasmine.SpyObj<PrivilegeService> =
     jasmine.createSpyObj('PrivilegeService', ['addPrivilege', 'modifyPrivilege']);
 
-  let mockRoleService: jasmine.SpyObj<RoleService> =
-    jasmine.createSpyObj('RoleService', ['']);
-  mockRoleService.roles = new BehaviorSubject<Role[]>([]);
-  mockRoleService.isLoading = new BehaviorSubject<boolean>(true);
+  const mockRoleService = {
+    isLoading$: of(true),
+    roleList$: of([]),
+  };
 
   const mockUserLoggedService = {
     currentUser$: of(undefined),

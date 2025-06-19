@@ -1,10 +1,9 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {UsersManagementComponent} from './users-management.component';
-import {BehaviorSubject, of} from "rxjs";
+import {of} from "rxjs";
 import {UserService} from "../../../../core/services/user/user.service";
 import {RoleService} from "../../../../core/services/role/role.service";
-import {Role} from "../../../../shared/model/dto/role";
 import {provideAnimations} from "@angular/platform-browser/animations";
 
 describe('UsersManagementComponent', () => {
@@ -16,10 +15,10 @@ describe('UsersManagementComponent', () => {
     userList$: of([]),
   };
 
-  let mockRoleService: jasmine.SpyObj<RoleService> =
-    jasmine.createSpyObj('RoleService', ['roles', 'isLoading']);
-  mockRoleService.roles = new BehaviorSubject<Role[]>([]);
-  mockRoleService.isLoading = new BehaviorSubject<boolean>(true);
+  const mockRoleService = {
+    isLoading$: of(true),
+    roleList$: of([]),
+  };
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({

@@ -2,7 +2,7 @@ import {ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {ExerciceCardComponent} from './exercice-card.component';
 import {provideRouter} from "@angular/router";
-import {generateTestExercise} from "../../../utils/testFunctions";
+import {generateTestExercise} from "../../../../utils/testFunctions";
 
 describe('ExerciceCardComponent', () => {
   let component: ExerciceCardComponent;

@@ -1,9 +1,8 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {UserRolesFormComponent} from './user-roles-form.component';
-import {BehaviorSubject} from "rxjs";
+import {of} from "rxjs";
 import {RoleService} from "../../../../../core/services/role/role.service";
-import {Role} from "../../../../model/dto/role";
 import {UserService} from "../../../../../core/services/user/user.service";
 import {provideAnimations} from "@angular/platform-browser/animations";
 
@@ -14,11 +13,10 @@ describe('UserRolesFormComponent', () => {
   let mockUserService: jasmine.SpyObj<UserService> =
     jasmine.createSpyObj('UserService', ['modifyUserRoles']);
 
-
-  let mockRoleService: jasmine.SpyObj<RoleService> =
-    jasmine.createSpyObj('RoleService', ['roles', 'isLoading']);
-  mockRoleService.roles = new BehaviorSubject<Role[]>([]);
-  mockRoleService.isLoading = new BehaviorSubject<boolean>(true);
+  const mockRoleService = {
+    isLoading$: of(true),
+    roleList$: of([]),
+  };
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({

@@ -1,10 +1,10 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {MuscleCardComponent} from './muscle-card.component';
-import {MuscleService} from "../../../core/services/muscle/muscle.service";
-import {generateTestMuscle} from "../../../utils/testFunctions";
-import {IllustrationService} from "../../../core/services/illustration/illustration.service";
 import {provideRouter} from "@angular/router";
+import {MuscleService} from "../../../../core/services/muscle/muscle.service";
+import {IllustrationService} from "../../../../core/services/illustration/illustration.service";
+import {generateTestMuscle} from "../../../../utils/testFunctions";
 
 describe('MuscleCardComponent', () => {
   let component: MuscleCardComponent;

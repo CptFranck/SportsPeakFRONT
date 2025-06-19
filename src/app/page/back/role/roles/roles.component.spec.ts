@@ -1,9 +1,8 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {RolesComponent} from './roles.component';
-import {BehaviorSubject, of} from "rxjs";
+import {of} from "rxjs";
 import {RoleService} from "../../../../core/services/role/role.service";
-import {Role} from "../../../../shared/model/dto/role";
 import {PrivilegeService} from "../../../../core/services/privilege/privilege.service";
 import {provideAnimations} from "@angular/platform-browser/animations";
 
@@ -11,10 +10,10 @@ describe('RolesComponent', () => {
   let component: RolesComponent;
   let fixture: ComponentFixture<RolesComponent>;
 
-  let mockRoleService: jasmine.SpyObj<RoleService> =
-    jasmine.createSpyObj('RoleService', ['roles', 'isLoading']);
-  mockRoleService.roles = new BehaviorSubject<Role[]>([]);
-  mockRoleService.isLoading = new BehaviorSubject<boolean>(true);
+  const mockRoleService = {
+    isLoading$: of(true),
+    roleList$: of([]),
+  };
 
   const mockPrivilegeService = {
     isLoading$: of(true),

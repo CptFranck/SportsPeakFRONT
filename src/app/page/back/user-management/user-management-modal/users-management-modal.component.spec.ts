@@ -5,18 +5,17 @@ import {ActionType} from "../../../../shared/model/enum/action-type";
 import {generateTestUser} from "../../../../utils/testFunctions";
 import {UserService} from "../../../../core/services/user/user.service";
 import {RoleService} from "../../../../core/services/role/role.service";
-import {BehaviorSubject} from "rxjs";
-import {Role} from "../../../../shared/model/dto/role";
+import {of} from "rxjs";
 import {provideAnimations} from "@angular/platform-browser/animations";
 
 describe('UsersManagementModalComponent', () => {
   let component: UsersManagementModalComponent;
   let fixture: ComponentFixture<UsersManagementModalComponent>;
 
-  let mockRoleService: jasmine.SpyObj<RoleService> =
-    jasmine.createSpyObj('RoleService', ['modifyUserRoles']);
-  mockRoleService.roles = new BehaviorSubject<Role[]>([]);
-  mockRoleService.isLoading = new BehaviorSubject<boolean>(true);
+  const mockRoleService = {
+    isLoading$: of(true),
+    roleList$: of([]),
+  };
 
   let mockUserService: jasmine.SpyObj<UserService> =
     jasmine.createSpyObj('UserService', ['deleteUser']);
