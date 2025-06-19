@@ -66,9 +66,7 @@ export class AuthService {
 
   logout() {
     this.apollo.mutate({mutation: LOGOUT})
-      .subscribe(() => this.removeDataAuth(true));
-    // Reset apollo cache
-    this.apollo.client.resetStore().then(() => null);
+      .subscribe(() => this.apollo.client.clearStore().then(() => this.removeDataAuth(true)));
   }
 
   setDataAuth(auth: Auth, redirect = false) {
