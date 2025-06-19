@@ -14,7 +14,6 @@ import {AuthState} from "../../../shared/model/enum/authState";
 })
 export class AuthService {
   private redirectUrl = "/";
-  private redirectNeeded = false;
 
   private readonly isAuthenticatedSubject = new BehaviorSubject<AuthState>(AuthState.unknown);
 
@@ -58,7 +57,7 @@ export class AuthService {
     }).subscribe({
       next: ({data}: MutationResult) => {
         if (data?.refreshToken)
-          this.setDataAuth(data.refreshToken, true);
+          this.setDataAuth(data.refreshToken);
         else
           this.removeDataAuth();
       },
@@ -68,26 +67,24 @@ export class AuthService {
 
   logout() {
     this.apollo.mutate({mutation: LOGOUT})
-      .subscribe(({data}: MutationResult) => null);
+      .subscribe(() => this.removeDataAuth(true));
     // Reset apollo cache
-    this.apollo.client.resetStore().then(() => {
-      this.removeDataAuth();
-    });
+    this.apollo.client.resetStore().then(() => null);
   }
 
   setDataAuth(auth: Auth, redirect = false) {
     this.tokenService.setAuthToken(auth);
     this.currentUserService.setCurrentUser(auth.user);
     this.isAuthenticatedSubject.next(AuthState.authenticated);
-    if (redirect && this.redirectNeeded) {
+    if (redirect)
       this.router.navigateByUrl(this.redirectUrl);
-      this.redirectNeeded = true;
-    }
   }
 
   setRedirectUrl(redirectUrl: string) {
-    this.redirectUrl = redirectUrl;
-    this.redirectNeeded = true;
+    if (redirectUrl.includes('/error'))
+      this.redirectUrl = '/home';
+    else
+      this.redirectUrl = redirectUrl;
   }
 
   private removeDataAuth(redirect = false) {
