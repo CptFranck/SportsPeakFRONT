@@ -2,7 +2,6 @@ import {Component, inject, OnDestroy, OnInit} from '@angular/core';
 import {Router, RouterLink} from "@angular/router";
 import {Subject, takeUntil} from "rxjs";
 import {AuthService} from "../../../../core/services/auth/auth.service";
-import {AuthState} from "../../../model/enum/authState";
 
 @Component({
   selector: 'app-nav-bar-login',
@@ -22,7 +21,7 @@ export class NavBarLoginComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.authService.isAuthenticated$
       .pipe(takeUntil(this.unsubscribe$))
-      .subscribe((isLogged: AuthState) => this.isLogged = isLogged === AuthState.authenticated);
+      .subscribe((isLogged: boolean) => this.isLogged = isLogged);
   }
 
   ngOnDestroy() {
