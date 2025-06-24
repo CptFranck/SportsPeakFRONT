@@ -46,6 +46,7 @@ export class TokenService {
     const expiresInSec = this.authToken.expiration - currentTime;
 
     if (expiresInSec <= 0) {
+      this.authToken = null;
       this.isAuthTokenExpiredSubject.next(true);
       return;
     }
