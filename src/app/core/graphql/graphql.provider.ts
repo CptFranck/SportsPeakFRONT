@@ -1,6 +1,14 @@
 import {Apollo, APOLLO_OPTIONS} from 'apollo-angular';
 import {ApplicationConfig, inject, Injector} from '@angular/core';
-import {ApolloClientOptions, ApolloLink, FetchResult, InMemoryCache, Observable} from '@apollo/client/core';
+import {
+  ApolloClientOptions,
+  ApolloLink,
+  FetchResult,
+  InMemoryCache,
+  NextLink,
+  Observable,
+  Operation
+} from '@apollo/client/core';
 import {AlertService} from "../services/alert/alert.service";
 import {ErrorResponse, onError} from "@apollo/client/link/error";
 import {setContext} from "@apollo/client/link/context";
@@ -53,49 +61,26 @@ function setAuthHeaders(): ApolloLink {
 
 function handleErrors(): ApolloLink {
   const alertService = inject(AlertService)
-  const tokenService = inject(TokenService);
+  // const tokenService = inject(TokenService);
   const injector = inject(Injector);
 
   return onError(({graphQLErrors, networkError, operation, forward}: ErrorResponse) => {
     // lazy loading (circular dependency)
-    const authService = injector.get(AuthService);
+    // const authService = injector.get(AuthService);
 
     handleGraphQLErrors(graphQLErrors, alertService);
 
-    if (networkError) {
-      const httpErrRes = networkError as HttpErrorResponse;
-      if (httpErrRes.status === 401 && tokenService.isAuthTokenExpired) {
-        if (operation.operationName !== 'refreshToken') {
-          return new Observable<FetchResult>((observer) => {
-            authService.refreshToken();
-            const sub = authService.isAuthenticated$.subscribe((isAuth) => {
-              if (isAuth) {
-                const newToken = tokenService.getAuthToken();
-                operation.setContext({
-                  headers: {
-                    Authorization: `${newToken?.tokenType} ${newToken?.accessToken}`,
-                  },
-                });
-                forward(operation).subscribe({
-                  next: (result) => observer.next(result),
-                  error: (err) => observer.error(err),
-                  complete: () => observer.complete(),
-                });
-                sub.unsubscribe();
-              } else {
-                observer.error(httpErrRes);
-                sub.unsubscribe();
-              }
-            });
-          });
-        } else {
-          console.log("Erreur (refresh impossible):", httpErrRes)
-          alertService.createGraphQLErrorAlert(httpErrRes);
-        }
-      } else {
-        alertService.createNetWorkErrorAlert(httpErrRes);
-      }
-    }
+    const httpErr = networkError as HttpErrorResponse;
+    // if (httpErr?.status === 401 && tokenService.isAuthTokenExpired) {
+    //   tokenService.setAuthToken(null);
+    //   if (operation.operationName !== 'refreshToken') {
+    //     return retryAfterRefresh(authService, tokenService, operation, forward, httpErr)
+    //   } else {
+    //     alertService.createGraphQLErrorAlert(httpErr);
+    //   }
+    // } else {
+    alertService.createNetWorkErrorAlert(httpErr);
+    // }
 
     return undefined;
   });
@@ -111,11 +96,42 @@ function handleGraphQLErrors(errors: readonly GraphQLFormattedError[] | undefine
         alertService.addInfoAlert("Session has expired");
         break;
       case 'TOKEN_MISSING':
-        console.warn("TOKEN_MISSING");
+        console.log("TOKEN_MISSING");
         break;
       default:
         alertService.createGraphQLErrorAlert(err);
         break;
     }
   }
+}
+
+function retryAfterRefresh(
+  authService: AuthService,
+  tokenService: TokenService,
+  operation: Operation,
+  forward: NextLink,
+  httpErrRes: HttpErrorResponse
+): Observable<FetchResult> {
+  return new Observable<FetchResult>((observer) => {
+    authService.refreshToken();
+    const sub = authService.isAuthenticated$.subscribe((isAuth) => {
+      if (isAuth) {
+        const newToken = tokenService.getAuthToken();
+        operation.setContext({
+          headers: {
+            Authorization: `${newToken?.tokenType} ${newToken?.accessToken}`,
+          },
+        });
+        forward(operation).subscribe({
+          next: (result) => observer.next(result),
+          error: (err) => observer.error(err),
+          complete: () => observer.complete(),
+        });
+        sub.unsubscribe();
+      } else {
+        observer.error(httpErrRes);
+        sub.unsubscribe();
+      }
+    });
+  });
 }
